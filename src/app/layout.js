@@ -3,6 +3,7 @@ import './globals.css'
 
 import localFont from 'next/font/local'
 import Header from './components/sections/header'
+import Footer from './components/sections/footer'
 const Satoshi = localFont({ src: '../assets/fonts/satoshi.woff2' })
 
 
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
       <body className={`body ${Satoshi.className}`}>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   )

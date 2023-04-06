@@ -1,0 +1,36 @@
+.footer {
+  margin-top: clamp(64px, calc(96vw/7.68), 180px);
+  padding: 50px 80px;
+  max-width: 1440px;
+  margin: auto;
+
+  @media (max-width: 1439px) {
+    padding: 50px clamp(16px, calc(32vw/7.68), 80px);
+  }
+}
+
+.inform {
+  margin-top: 80px;
+  display: flex;
+  gap: 20px 64px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+
+  h4 {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 320%;
+    letter-spacing: -0.01em;
+    color: #194574;
+  }
+}
+
+.flex{
+  display: flex;
+  gap: 48px;
+}
+
+.logo{
+  max-width: 100%;
+}
