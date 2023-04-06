@@ -1,0 +1,103 @@
+.title {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.text {
+  text-align: center;
+}
+
+.wrapper {
+  padding: 30px;
+  margin: -30px;
+  overflow: hidden;
+}
+.slide {
+  max-width: 1280px;
+  width: calc(100vw - 160px - 30px);
+  margin: 0 15px;
+
+  @media (max-width: 1439px) {
+    width: calc(100vw - clamp(32px, calc(64vw/7.68), 160px)  - 30px);
+  }
+
+  padding: 40px 48px;
+  background: #FFFFFF;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-gap: 32px;
+  grid-template-rows: 1fr auto;
+
+  grid-template-areas: 'info images'
+  'link images';
+
+  .slideContent {
+    grid-area: info;
+    max-width: 532px;
+  }
+
+  .slideLink {
+    grid-area: link;
+    height: fit-content;
+  }
+
+  .slideImages {
+    grid-area: images;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 24px;
+    width: fit-content;
+  }
+
+  .image {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+
+  .after {
+    margin-bottom: 120px;
+  }
+
+  .before {
+    margin-top: 120px;
+  }
+
+  .slideAuthor {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    margin-bottom: 28px;
+
+    .slideAuthorName {
+      font-size: 32rem;
+      line-height: 124%;
+      font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
+      color: #194574;
+    }
+
+    .slideAuthorImage{
+      width: auto;
+    }
+
+    .svg {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+}
+
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+}
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}

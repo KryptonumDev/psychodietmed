@@ -1,0 +1,16 @@
+.wrapper {
+  background: #F1F6FB;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  padding: clamp(36px, calc(36vw/7.68), 64px) 24px;
+
+  h2 {
+    font-size: clamp(32rem, calc(36vw / 7.68), 48rem);
+    line-height: 124%;
+    text-align: center;
+  }
+}
+
+.link {
+  margin: 36px auto 0 auto;
+}

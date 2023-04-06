@@ -1,0 +1,19 @@
+.wrapper {
+  .link {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.text {
+  margin: 0 auto clamp(32px, calc(48vw/7.68), 48px) auto;
+  max-width: clamp(574px, calc(574vw/7.68), 912px);
+
+  * {
+    font-size: clamp(32rem, calc(36vw/7.68), 48rem);
+    line-height: 124%;
+    text-align: center;
+    font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
+    color: #194574;
+  }
+}

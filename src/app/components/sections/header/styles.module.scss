@@ -1,0 +1,39 @@
+.header {
+  background-color: #fff;
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  right: 0;
+
+}
+
+.content {
+  padding: clamp(10px, calc(20vw/7.68), 64px) 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1440px;
+  margin: auto;
+  
+  @media (max-width: 1439px) {
+    header {
+      padding: clamp(10px, calc(20vw/7.68), 64px) clamp(16px, calc(32vw/7.68), 80px);
+    }
+  }
+}
+
+
+.logo {
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.brain {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
