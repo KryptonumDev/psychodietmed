@@ -12,10 +12,12 @@ export default function Specialisations({ data, specialisations }) {
       <div className={styles.grid}>
         {specialisations?.map(({ title, specialisation: { specialisationCard } }, index) => (
           <div key={index} className={styles.item}>
-            <Image src={specialisationCard.icon.mediaItemUrl} alt={specialisationCard.icon.altText} width={specialisationCard.icon.mediaDetails.width} height={specialisationCard.icon.mediaDetails.height} />
-            <div>
-              <h3>{title}</h3>
-              <p>{specialisationCard.zajawkaSpecjalizacji}</p>
+            <div className={styles.itemContent}>
+              <Image src={specialisationCard.icon.mediaItemUrl} alt={specialisationCard.icon.altText} width={specialisationCard.icon.mediaDetails.width} height={specialisationCard.icon.mediaDetails.height} />
+              <div>
+                <h3>{title}</h3>
+                <p>{specialisationCard.zajawkaSpecjalizacji}</p>
+              </div>
             </div>
           </div>
         ))}

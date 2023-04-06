@@ -11,9 +11,6 @@ import ReviewsSlider from "./components/sections/reviews-slider";
 import StatisticsFlex from "./components/sections/statistics-flex";
 import Citate from "./components/sections/citate";
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";  
-
 export default async function Home() {
   const { hero, flex, specialisationsSection, specialisations, cta, specialists, stepsToConsultation, ctaGray, reviews, statistics, citate } = await getData()
   return (
@@ -25,7 +22,7 @@ export default async function Home() {
       {/* <Specialists data={specialists} /> */}
       {/* <StepsToConsultation data={stepsToConsultation} /> */}
       <CallToActionGray data={ctaGray} />
-      {/* <ReviewsSlider data={reviews} /> */}
+      <ReviewsSlider data={reviews} />
       <StatisticsFlex data={statistics} />
       <Citate data={citate} />
       {/* akademia */}
