@@ -98,7 +98,7 @@ async function getData() {
         }
         page(id: "cG9zdDo5") {
           id
-          slug
+          title
           homepage {
             hero : sekcjaPowitalnaKopia {
               pageTitle
