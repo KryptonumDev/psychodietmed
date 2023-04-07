@@ -40,13 +40,18 @@
   display: grid;
   grid-template-columns: 156fr 262fr;
   gap: 32px;
+  max-width: 600px;
 
   @media (max-width: 720px) {
     grid-template-columns: 1fr;
     width: fit-content;
   }
 
-  padding: 24px 36px;
+  @media (max-width: 380px) {
+    max-width: 275px;
+  }
+
+  padding: clamp(20px, calc(20vw/7.68), 24px) 28px;
   background: #FFFFFF;
   box-shadow: 0px 3px 7px rgba(179, 179, 179, 0.4);
   border-radius: 20px;
@@ -73,6 +78,7 @@
   margin-top: -29px;
   max-width: calc(100% - 48px);
   @media (max-width: 1120px) {
+    border-radius: 20px 0px 20px 20px;
     position: relative;
     overflow: hidden;
     width: calc(100% - 68px);
@@ -82,10 +88,15 @@
     }
   }
   @media (max-width: 680px) {
+    width: calc(100% - 46px);
     height: unset;
     .image{
       position: relative;
     }
+  }
+
+  @media (max-width: 380px) {
+    width: calc(100% - 33px);
   }
 
 }
@@ -101,11 +112,12 @@
 
   p {
     color: #194574;
+    font-size: clamp(16rem, calc(20vw/7.68), 20rem);
   }
 
   span {
     font-weight: 500;
-    font-size: 48rem;
+    font-size: clamp(36rem, calc(36vw/7.68), 48rem);
     line-height: 124%;
     font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
     color: #194574;

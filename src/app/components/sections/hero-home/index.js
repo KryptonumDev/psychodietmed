@@ -22,8 +22,10 @@ export default function Hero({ data }) {
         <Image loading="eager" className={styles.image} src={image.mediaItemUrl} alt={image.altText} width={image.mediaDetails.width} height={image.mediaDetails.height} />
       </div>
       <motion.div dragConstraints={constraintsRef} drag="x" className={styles.logos_wrapper}>
-        {logos.map(({ logo }, index) => (
-          <Image key={index} className={styles.logo} src={logo.mediaItemUrl} alt={logo.altText} width={logo.mediaDetails.width} height={logo.mediaDetails.height} />
+        {logos.map(({ logo, link }, index) => (
+          <a target="__blank" rel='noreferer noopener' href={link} aria-label="prowadzi do artykuła nowostnego o Psycho diet med" key={index} >
+            <Image className={styles.logo} src={logo.mediaItemUrl} alt={logo.altText} width={logo.mediaDetails.width} height={logo.mediaDetails.height} />
+          </a>
         ))}
       </motion.div>
     </section>

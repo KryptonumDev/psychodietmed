@@ -19,7 +19,7 @@ export default function ReviewsSlider({ data }) {
       if (direction === 1) {
         nextSlide = activeSlide + direction < comments.length ? activeSlide + direction : 0
       } else if (direction === -1) {
-        nextSlide = activeSlide + direction >= 0 ? activeSlide + direction : comments.length-1
+        nextSlide = activeSlide + direction >= 0 ? activeSlide + direction : comments.length - 1
       }
       setActiveSlide(nextSlide)
     }
@@ -28,17 +28,16 @@ export default function ReviewsSlider({ data }) {
     <section className={styles.wrapper}>
       <h2 className={styles.title} dangerouslySetInnerHTML={{ __html: removeWrap(title) }} />
       <div className={styles.text} dangerouslySetInnerHTML={{ __html: text }} />
-      <motion.div dragConstraints={{left: 0, right: 0}} drag="x" onDragEnd={dragEndHandler}>
+      <motion.div dragConstraints={{ left: 0, right: 0 }} drag="x" onDragEnd={dragEndHandler}>
         <AnimatePresence mode='popLayout'>
-          {comments.map(({ text, author, after, before }, index) => {
+          {comments.map(({ text, author, after, before, boldText }, index) => {
             if (index !== activeSlide) {
               return null
             }
             return (
-              <motion.div key={author.name + index} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className={activeSlide === index ? `${styles.active} ${styles.slide}` : `${styles.slide}`} >
-                <div className={styles.slideContent}>
+              <motion.div key={author.name + index} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className={(after?.mediaItemUrl && before?.mediaItemUrl) ? `${styles.slide}` : `${styles.wide} ${styles.slide}`} >
                   <div className={styles.slideAuthor}>
-                    <Image src={author.avatar.mediaItemUrl} alt={author.avatar.altText} width={author.avatar.mediaDetails.width} height={author.avatar.mediaDetails.height} className={styles.slideAuthorImage} />
+                    <Image  quality='90' src={author.avatar.mediaItemUrl} alt={author.avatar.altText} width={author.avatar.mediaDetails.width} height={author.avatar.mediaDetails.height} className={styles.slideAuthorImage} />
                     <div className={styles.slideAuthorName}>{author.name}</div>
                     <svg className={styles.svg} width="59" height="58" viewBox="0 0 59 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <g clipPath="url(#clip0_578_1245)">
@@ -48,12 +47,16 @@ export default function ReviewsSlider({ data }) {
                     </svg>
                   </div>
                   <div className={styles.slideText} dangerouslySetInnerHTML={{ __html: text }} />
-                </div>
                 {/* <Link href='#' className={styles.slideLink}>Placeholder</Link> */}
-                <div className={styles.slideImages}>
-                  <Image src={after.mediaItemUrl} alt={after.altText} width={after.mediaDetails.width} height={after.mediaDetails.height} className={`${styles.after} ${styles.image}`} />
-                  <Image src={before.mediaItemUrl} alt={before.altText} width={before.mediaDetails.width} height={before.mediaDetails.height} className={`${styles.before} ${styles.image}`} />
-                </div>
+                {after?.mediaItemUrl && before?.mediaItemUrl ? (
+                  <div className={styles.slideImages}>
+                    <Image quality='90' src={after.mediaItemUrl} alt={after.altText} width={after.mediaDetails.width} height={after.mediaDetails.height} className={`${styles.after} ${styles.image}`} />
+                    <Image quality='90' src={before.mediaItemUrl} alt={before.altText} width={before.mediaDetails.width} height={before.mediaDetails.height} className={`${styles.before} ${styles.image}`} />
+                  </div>
+                ) : (
+                  <div className={styles.slideBoldText} dangerouslySetInnerHTML={{ __html: removeWrap(boldText) }} />
+                )}
+
               </motion.div>
             )
           })}

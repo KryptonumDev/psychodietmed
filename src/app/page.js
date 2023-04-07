@@ -98,6 +98,7 @@ async function getData() {
         }
         page(id: "cG9zdDo5") {
           id
+          slug
           homepage {
             hero : sekcjaPowitalnaKopia {
               pageTitle
@@ -115,6 +116,7 @@ async function getData() {
                 }
               }
               logos {
+                link
                 logo {
                   altText
                   mediaItemUrl
@@ -185,6 +187,7 @@ async function getData() {
                     }
                   }
                 }
+                boldText
                 after {
                   altText
                   mediaItemUrl

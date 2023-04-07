@@ -23,8 +23,21 @@ body {
   list-style: none;
 }
 
-.slick-list{
-  overflow: visible !important; 
+button{
+  cursor: pointer;
+}
+
+*:focus{
+  outline: none;
+}
+
+*:focus-visible{
+  outline: 2px solid #A0636F;
+  outline-offset: 2px;
+}
+
+.slick-list {
+  overflow: visible !important;
 }
 
 main {
@@ -78,15 +91,28 @@ p {
 
 h1 em {
   font-style: normal;
-  text-decoration: underline;
-  text-decoration-color: #DEAFB8;
 }
+
+.underline-first{
+  position: relative;
+
+  
+}
+.underline-first::after{
+    content: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTc3IiBoZWlnaHQ9IjE1IiB2aWV3Qm94PSIwIDAgMTc3IDE1IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMi4yMDM3NiAxMi45MjIzQzI2LjkwMDUgNy40NzYxMiAxMTkuMjYyIDAuNzM1MTY5IDE3NS4xNDEgMi4xNzgzNiIgc3Ryb2tlPSIjREVBRkI4IiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K');
+    position: absolute;
+    bottom: -20px;
+    left: -15px;
+    right: 0;
+}
+
 
 p em {
   font-style: normal;
   position: relative;
   white-space: nowrap;
   color: #194574;
+  font-weight: 700;
 }
 
 p em::before {
@@ -106,9 +132,19 @@ p em::before {
   font-size: clamp(16rem, calc(20vw / 7.68), 20rem);
   line-height: 25rem;
   color: #181818;
-  padding: 14rem 36rem 16rem 36rem;
-  background: #DEAFB8;
+  padding: clamp(10px, calc(10vw/7.68), 14px) clamp(28px, calc(28vw/7.68), 36px) clamp(12px, calc(10vw/7.68), 16px) clamp(28px, calc(28vw/7.68), 36px);
+  background-color: #DEAFB8;
   border-radius: 50rem;
   display: block;
   width: fit-content;
+  transition: background-color .2s ease-out;
+}
+
+.link:hover{
+  background-color: #C996A0;
+}
+
+.link:focus-visible{
+  outline: 2px solid #A0636F;
+  outline-offset: 8px;
 }

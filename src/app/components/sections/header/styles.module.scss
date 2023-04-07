@@ -8,7 +8,7 @@
 }
 
 .content {
-  padding: clamp(10px, calc(20vw/7.68), 64px) 80px;
+  padding: clamp(10px, calc(20vw/7.68), 64px) 80px clamp(10px, calc(20vw/7.68), 64px) 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,7 +16,7 @@
   margin: auto;
 
   @media (max-width: 1439px) {
-    padding: clamp(10px, calc(20vw/7.68), 64px) clamp(16px, calc(32vw/7.68), 80px);
+    padding: clamp(20px, calc(30vw/7.68), 64px) clamp(16px, calc(32vw/7.68), 80px) clamp(10px, calc(20vw/7.68), 64px) clamp(16px, calc(32vw/7.68), 80px);
   }
 }
 
