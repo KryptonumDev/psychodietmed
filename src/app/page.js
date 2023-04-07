@@ -11,6 +11,13 @@ import ReviewsSlider from "./components/sections/reviews-slider";
 import StatisticsFlex from "./components/sections/statistics-flex";
 import Citate from "./components/sections/citate";
 
+// export async function generateMetadata(props) {
+//   console.log(props)
+//   return {
+//     title: '...',
+//   };
+// }
+
 export default async function Home() {
   const { hero, flex, specialisationsSection, specialisations, cta, specialists, stepsToConsultation, ctaGray, reviews, statistics, citate } = await getData()
   return (
@@ -19,7 +26,7 @@ export default async function Home() {
       <Flex data={flex} />
       <Specialisations data={specialisationsSection} specialisations={specialisations} />
       <CallToActionTransparent data={cta} />
-      {/* <Specialists data={specialists} /> */}
+      <Specialists data={specialists} />
       {/* <StepsToConsultation data={stepsToConsultation} /> */}
       <CallToActionGray data={ctaGray} />
       <ReviewsSlider data={reviews} />
@@ -31,6 +38,19 @@ export default async function Home() {
     </main>
   )
 }
+
+// async function getSeo() {
+//   const { data } = await client.query({
+//     query: gql`
+//       query Seo {
+//       }
+//     `,
+//   }, { pollInterval: 500 })
+
+//   return {
+//     ''
+//   }
+// }
 
 async function getData() {
   const { data: { specjalizacje, specjalisci, page: { homepage } } } = await client.query({
@@ -244,7 +264,7 @@ async function getData() {
       }
     `,
   }, { pollInterval: 500 })
-  
+
   return {
     hero: homepage.hero,
     flex: homepage.casestudie,

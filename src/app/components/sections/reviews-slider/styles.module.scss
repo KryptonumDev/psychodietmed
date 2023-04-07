@@ -5,26 +5,30 @@
 
 .text {
   text-align: center;
+  padding-bottom: clamp(20px, calc(36vw/7.68), 48px);
 }
 
 .wrapper {
   padding: 30px;
   margin: -30px;
   overflow: hidden;
+
+  
+  img{
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+  }
 }
 
 .slide {
-  max-width: 1280px;
-  width: calc(100vw - 160px - 30px);
-  margin: 0 15px;
+  width: 100%;
   display: none;
 
   &.active {
     display: grid;
-  }
-
-  @media (max-width: 1439px) {
-    width: calc(100vw - clamp(32px, calc(64vw/7.68), 160px) - 30px);
   }
 
   padding: clamp(28px, calc(40vw/7.68), 40px) clamp(28px, calc(28vw/7.68), 48px);
@@ -40,6 +44,11 @@
     grid-template-columns: 286fr 321fr;
   }
 
+  @media (max-width: 740px) {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'info' 'images' 'link';
+  }
+
   grid-template-areas: 'info images'
   'link images';
 
@@ -51,6 +60,10 @@
   .slideLink {
     grid-area: link;
     height: fit-content;
+
+    @media (max-width: 740px) {
+      margin: 0 auto;
+    }
   }
 
   .slideImages {
@@ -69,10 +82,18 @@
 
   .after {
     margin-bottom: 120px;
+
+    @media (max-width: 740px) {
+      margin-bottom: 0;
+    }
   }
 
   .before {
     margin-top: 120px;
+
+    @media (max-width: 740px) {
+      margin-top: 0;
+    }
   }
 
   .slideAuthor {
@@ -83,20 +104,22 @@
     margin-bottom: 28px;
 
     .slideAuthorName {
-      font-size: 32rem;
+      font-size: clamp(20rem, calc(24vw/7.68), 32rem);
       line-height: 124%;
       font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
       color: #194574;
     }
 
     .slideAuthorImage {
-      width: auto;
+      width: clamp(64px, calc(70vw/7.68), 76px);
+      height: clamp(64px, calc(70vw/7.68), 76px);
     }
 
     .svg {
       position: absolute;
       top: 0;
       right: 0;
+      width: clamp(32px, calc(50vw/7.68), 58px);
     }
   }
 }
@@ -112,4 +135,28 @@
 .embla__slide {
   flex: 0 0 100%;
   min-width: 0;
+}
+
+.control{
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 36px;
+
+  button{
+    border: none;
+    background-color: transparent;
+  }
+
+  .dot{
+    height: 5px;
+    width: 80px;
+    background: #F5E7EA;
+    border-radius: 50px;
+
+    &.active{
+      background: #DEAFB8;
+    }
+  }
 }

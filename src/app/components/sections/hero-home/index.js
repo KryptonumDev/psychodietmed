@@ -13,9 +13,9 @@ export default function Hero({ data }) {
     <section ref={constraintsRef} className={styles.wrapper}>
       <div className={styles.flex}>
         <div className={styles.info_content}>
-          <h1 dangerouslySetInnerHTML={{ __html: removeWrap(pageTitle) }} />
-          <div dangerouslySetInnerHTML={{ __html: content }} />
-          <Link className="link" href={link.url}>
+          <h1 className={styles.title} dangerouslySetInnerHTML={{ __html: removeWrap(pageTitle) }} />
+          <div className={styles.text} dangerouslySetInnerHTML={{ __html: content }} />
+          <Link className={styles.link + " link"} href={link.url}>
             {link.title}
           </Link>
         </div>
