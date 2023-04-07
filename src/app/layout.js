@@ -19,7 +19,7 @@ export const metadata = {
     type: 'website',
   },
   robots: {
-    index: false,
+    index: true,
   }
 }
 
