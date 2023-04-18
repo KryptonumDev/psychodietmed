@@ -7,7 +7,13 @@
   right: 0;
 
   a{
+    width: fit-content;
+    margin-left: 60px;
+    white-space: nowrap;
     @media (max-width: 768px) {
+      margin-left: 16px;
+    }
+    @media (max-width: 420px) {
       display: none;
     }
   }
@@ -30,12 +36,11 @@
 }
 
 .logo{
-  margin-right: 80px;
   @media (max-width: 768px) {
     max-width: 284px;
   }
   @media (max-width: 420px) {
     margin-top: 0;
-    max-width: 164px;
+    min-width: 165px;
   }
 }

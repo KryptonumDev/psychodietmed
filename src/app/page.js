@@ -59,6 +59,7 @@ async function getData() {
       query Pages {
         specjalizacje {
           nodes {
+            id
             title
             uri
             specialisation {

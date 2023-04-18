@@ -90,7 +90,7 @@
 
   .slideBoldText{
     grid-area: images;
-    font-size: clamp(32rem, calc(32vw/7.680), 64rem);
+    font-size: clamp(32rem, calc(36vw/7.680), 48rem);
     line-height: 124%;
     font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
     color: #194574;
