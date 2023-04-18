@@ -8,10 +8,10 @@ const Satoshi = localFont({ src: '../assets/fonts/satoshi.woff2' })
 
 
 export const metadata = {
-  title: 'Psychodietetyka i Psychoterapia: Zdrowe Relacje z Żywnością – Psychodietmed',
+  title: 'Psychodietetyka i Psychoterapia: Zdrowe Relacje z Jedzeniem – Psychodietmed',
   description: 'Odkryj, jak poprawić swoje relacje z jedzeniem dzięki psychodietetyce i psychoterapii. Zdrowa dieta i zdrowe podejście do jedzenia dzięki PsychoDietMed.',
   openGraph: {
-    title: 'Psychodietetyka i Psychoterapia: Zdrowe Relacje z Żywnością – Psychodietmed',
+    title: 'Psychodietetyka i Psychoterapia: Zdrowe Relacje z Jedzeniem – Psychodietmed',
     description: 'Odkryj, jak poprawić swoje relacje z jedzeniem dzięki psychodietetyce i psychoterapii. Zdrowa dieta i zdrowe podejście do jedzenia dzięki PsychoDietMed.',
     url: 'https://nextjs.org',
     siteName: 'Psychodietmed',
