@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef } from "react"
+import React, { useEffect, useRef } from "react"
 import Link from "next/link"
 import styles from './styles.module.scss';
 import Image from "next/image";
@@ -9,6 +9,21 @@ import { motion } from "framer-motion";
 export default function Hero({ data }) {
   const { pageTitle, link, content, image, logos } = data
   const constraintsRef = useRef(null)
+
+  useEffect(() => {
+    const orphans = ['a', 'i', 'o', 'u', 'w', 'z', 'np.'];
+    const orphansRegex = new RegExp(` (${orphans.join('|')}) `, 'gi');
+    
+    if (typeof window !== 'undefined') {
+      const paragraphs = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, li, a, button'));
+      paragraphs.forEach(paragraph =>
+        paragraph.childNodes.forEach(node =>
+          node?.nodeType === Node.TEXT_NODE && (node.textContent = node.textContent.replace(orphansRegex, ` $1\u00A0`))
+        )
+      );
+    }
+  }, [])
+
   return (
     <section ref={constraintsRef} className={styles.wrapper}>
       <div className={styles.flex}>

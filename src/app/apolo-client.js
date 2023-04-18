@@ -13,7 +13,7 @@ import { ApolloClient, InMemoryCache } from "@apollo/client";
 
 const client = new ApolloClient({
   uri: "https://psychodietmed.headlesshub.com/graphql",
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({ resultCaching: false }),
   // defaultOptions: defaultOptions,
 });
 

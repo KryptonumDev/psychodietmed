@@ -20,6 +20,7 @@ import Citate from "./components/sections/citate";
 
 export default async function Home() {
   const { hero, flex, specialisationsSection, specialisations, cta, specialists, stepsToConsultation, ctaGray, reviews, statistics, citate } = await getData()
+
   return (
     <main>
       <Hero data={hero} />
@@ -63,6 +64,7 @@ async function getData() {
             specialisation {
               specialisationCard { 
                 zajawkaSpecjalizacji
+                number
                 icon {
                   altText
                   mediaItemUrl

@@ -24,7 +24,7 @@ export default function Footer({ data }) {
         </svg>
       </div>
       <div className={styles.inform}>
-        <h3>Ⓒ Stworzone przez Kryptonum</h3>
+        <h3>Ⓒ Stworzone przez <a href="https://kryptonum.eu" target="_blank">Kryptonum</a></h3>
         <div className={styles.flex}>
           <a href="https://www.instagram.com/psychodietmed/" aria-label="instagram">
             <svg width="41" height="38" viewBox="0 0 41 38" fill="none" xmlns="http://www.w3.org/2000/svg">
