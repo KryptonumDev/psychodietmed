@@ -59,8 +59,9 @@ async function getData() {
       query Pages {
         specjalizacje {
           nodes {
-            id
             title
+            id
+            slug
             uri
             specialisation {
               specialisationCard { 

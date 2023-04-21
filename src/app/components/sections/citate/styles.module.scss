@@ -28,13 +28,16 @@
     }
 
     * {
-      font-size: clamp(24rem, calc(36vw/7.68), 48rem);
+      font-size: clamp(24rem, calc(28vw/7.68), 36rem);
       line-height: 125%;
       text-align: center;
       color: #194574;
 
       @media (max-width: 768px) {
         text-align: left;
+      }
+      @media (max-width: 370px) {
+        font-size: clamp(0rem, calc(24vw/3.7), 24rem);
       }
     }
   }

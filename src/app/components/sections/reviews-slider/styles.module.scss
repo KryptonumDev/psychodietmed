@@ -90,11 +90,18 @@
 
   .slideBoldText{
     grid-area: images;
-    font-size: clamp(28rem, calc(36vw/7.680), 48rem);
+    font-size: clamp(28rem, calc(36vw/7.68), 48rem);
     line-height: 124%;
     font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
     color: #194574;
     padding-bottom: 80px;
+
+    @media (max-width: 380px)  {
+      padding-bottom: 0;
+    }
+    @media (max-width: 370px)  {
+      font-size: clamp(0rem, calc(28vw/3.7), 28rem);
+    }
   }
 
   .slideLink {
@@ -190,7 +197,8 @@
 
   .dot{
     height: 5px;
-    width: 80px;
+    max-width: 80px;
+    width: 100%;
     background: #F5E7EA;
     border-radius: 50px;
 

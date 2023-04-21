@@ -43,7 +43,7 @@ button {
 main {
   max-width: 1440px;
   padding: 0 80px;
-  margin: clamp(125px, calc(125vw/7.68), 215px) auto 120px auto;
+  margin: clamp(100px, calc(140vw/7.68), 215px) auto 120px auto;
 
   display: grid !important;
   grid-template-columns: 100%;
@@ -65,12 +65,24 @@ h1 {
   color: #194574;
 }
 
+@media (max-width: 370px) {
+  h1{
+    font-size: clamp(0rem, calc(32vw / 3.7), 32rem);
+  }
+}
+
 h2 {
   font-weight: 500;
   font-size: clamp(32rem, calc(32vw / 7.68), 64rem);
   line-height: 124%;
   font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
   color: #194574;
+}
+
+@media (max-width: 370px) {
+  h2{
+    font-size: clamp(0rem, calc(32vw / 3.7), 32rem);
+  }
 }
 
 h3 {
@@ -81,12 +93,24 @@ h3 {
   color: #194574;
 }
 
+@media (max-width: 370px) {
+  h3{
+    font-size: clamp(0rem, calc(20vw / 3.7), 20rem);
+  }
+}
+
 p {
   font-weight: 500;
   font-size: clamp(16rem, calc(20vw / 7.68), 24rem);
   line-height: 140.5%;
   font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
   color: #181818;
+}
+
+@media (max-width: 370px) {
+  p{
+  font-size: clamp(0rem, calc(16vw / 3.7), 16rem);
+  }
 }
 
 h1 em {
@@ -150,17 +174,11 @@ h1 em {
   background-repeat: no-repeat;
   background-position: center;
   position: absolute;
-  bottom: 0;
+  bottom: -3px;
   height: 10px;
   right: -5px;
   left: -5px;
   z-index: -1;
-}
-
-@media (max-width: 480px) {
-  .underline-third::after {
-    bottom: -3px;
-  }
 }
 
 p em {

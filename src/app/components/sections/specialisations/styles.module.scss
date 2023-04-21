@@ -11,6 +11,11 @@
   }
 }
 
+.icon{
+  width: clamp(0px, calc(36vw /3.7), 36px);
+  height: auto;
+}
+
 .grid {
   margin-top: clamp(36px, calc(36vw/7.68), 64px);
   display: grid;
@@ -44,7 +49,7 @@
     }
 
     display: grid;
-    grid-template-columns: 36px 1fr;
+    grid-template-columns: clamp(0px, calc(36vw /3.7), 36px) 1fr;
     grid-gap: clamp(8px, calc(12vw/7.68), 16px);
 
     p {

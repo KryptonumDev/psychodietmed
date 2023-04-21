@@ -19,7 +19,7 @@ export default function Specialisations({ data, specialisations }) {
         {sortedSpecialisations?.map(({ title, specialisation: { specialisationCard } }, index) => (
           <div key={index} className={styles.item}>
             <div className={styles.itemContent}>
-              <Image src={specialisationCard.icon.mediaItemUrl} alt={specialisationCard.icon.altText} width={specialisationCard.icon.mediaDetails.width} height={specialisationCard.icon.mediaDetails.height} />
+              <Image className={styles.icon} src={specialisationCard.icon.mediaItemUrl} alt={specialisationCard.icon.altText} width={specialisationCard.icon.mediaDetails.width} height={specialisationCard.icon.mediaDetails.height} />
               <div>
                 <h3>{title}</h3>
                 <p>{specialisationCard.zajawkaSpecjalizacji}</p>

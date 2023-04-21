@@ -13,7 +13,7 @@ export default function Hero({ data }) {
   useEffect(() => {
     const orphans = ['a', 'i', 'o', 'u', 'w', 'z', 'np.'];
     const orphansRegex = new RegExp(` (${orphans.join('|')}) `, 'gi');
-    
+
     if (typeof window !== 'undefined') {
       const paragraphs = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, li, a, button'));
       paragraphs.forEach(paragraph =>
