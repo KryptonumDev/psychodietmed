@@ -194,7 +194,7 @@ p em::before {
   position: absolute;
   z-index: -1;
   background: #F1F6FB;
-  border-radius: 20rem;
+  border-radius: 20px;
   top: 50%;
   bottom: 0;
   left: 0;
@@ -204,11 +204,11 @@ p em::before {
 .link {
   font-weight: 500;
   font-size: clamp(16rem, calc(20vw / 7.68), 20rem);
-  line-height: 25rem;
+  line-height: 25px;
   color: #181818;
   padding: clamp(12px, calc(10vw/7.68), 16px) clamp(28px, calc(28vw/7.68), 36px) clamp(10px, calc(10vw/7.68), 14px) clamp(28px, calc(28vw/7.68), 36px);
   background-color: #DEAFB8;
-  border-radius: 50rem;
+  border-radius: 50px;
   display: block;
   width: fit-content;
   transition: background-color .2s ease-out;
