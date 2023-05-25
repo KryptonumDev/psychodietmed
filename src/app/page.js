@@ -1,15 +1,14 @@
-import Hero from "./components/sections/hero-home";
 import { gql } from "@apollo/client";
-import client from "./apolo-client";
-import Flex from "./components/sections/case-studies-flex";
-import Specialisations from "./components/sections/specialisations";
-import Specialists from "./components/sections/specialists";
-import StepsToConsultation from "./components/sections/steps-to-consultation";
-import CallToActionTransparent from "./components/sections/call-to-action-tranparent";
-import CallToActionGray from "./components/sections/call-to-action-gray";
-import ReviewsSlider from "./components/sections/reviews-slider";
-import StatisticsFlex from "./components/sections/statistics-flex";
-import Citate from "./components/sections/citate";
+import client from "../apollo/apolo-client";
+import Hero from "@/components/sections/hero-home";
+import Flex from "@/components/sections/case-studies-flex";
+import Specialisations from "@/components/sections/specialisations";
+import CallToActionTransparent from "@/components/sections/call-to-action-tranparent";
+import Specialists from "@/components/sections/specialists";
+import CallToActionGray from "@/components/sections/call-to-action-gray";
+import ReviewsSlider from "@/components/sections/reviews-slider";
+import StatisticsFlex from "@/components/sections/statistics-flex";
+import Citate from "@/components/sections/citate";
 
 // export async function generateMetadata(props) {
 //   console.log(props)

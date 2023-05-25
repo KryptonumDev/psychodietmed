@@ -2,8 +2,11 @@ import './normalize.css'
 import './globals.css'
 
 import localFont from 'next/font/local'
-import Header from './components/sections/header'
-import Footer from './components/sections/footer'
+import Header from '@/components/sections/header'
+import Footer from '@/components/sections/footer'
+import { AppProvider } from '../context/app-context'
+// import { ApolloProvider } from '@apollo/client'
+// import client from '../apollo/apolo-client'
 const Satoshi = localFont({ src: '../assets/fonts/satoshi.woff2' })
 
 
@@ -26,11 +29,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="pl">
-      <body className={`body ${Satoshi.className}`}>
-        <Header />
-        {children}
-        <Footer />
-      </body>
+      <AppProvider>
+        {/* <ApolloProvider client={client}> */}
+          <body className={`body ${Satoshi.className}`}>
+            <Header />
+            {children}
+            <Footer />
+          </body>
+        {/* </ApolloProvider> */}
+      </AppProvider>
     </html>
   )
 }

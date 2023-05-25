@@ -1,7 +1,7 @@
 'use client'
 import React, { useMemo } from "react"
 import styles from './styles.module.scss';
-import { removeWrap } from "@/app/helpers/title-modification";
+import { removeWrap } from "../../../utils/title-modification";
 import Image from "next/image";
 
 export default function Specialisations({ data, specialisations }) {
@@ -9,7 +9,7 @@ export default function Specialisations({ data, specialisations }) {
 
   const sortedSpecialisations = useMemo(() => {
     return specialisations.sort((a, b) => a.specialisation.specialisationCard.number - b.specialisation.specialisationCard.number)
-  }, [])
+  }, [specialisations])
 
   return (
     <section className={styles.wrapper}>

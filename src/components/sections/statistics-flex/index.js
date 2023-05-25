@@ -1,7 +1,7 @@
 import React from "react"
 import styles from './styles.module.scss';
 import Image from "next/image";
-import { removeWrap } from "@/app/helpers/title-modification";
+import { removeWrap } from "../../../utils/title-modification";
 
 export default function StatisticsFlex({ data }) {
 

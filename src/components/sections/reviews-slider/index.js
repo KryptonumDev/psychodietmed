@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from "react"
 import styles from './styles.module.scss'
-import { removeWrap } from "@/app/helpers/title-modification";
+import { removeWrap } from "../../../utils/title-modification"; 
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 
