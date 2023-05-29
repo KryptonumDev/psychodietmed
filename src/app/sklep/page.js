@@ -1,4 +1,4 @@
-import { Card } from "@/components/moleculas/product-card.js";
+import { Card } from "@/components/moleculas/product-card/index.js";
 import client from "../../apollo/apolo-client";
 import PRODUCTS_AND_CATEGORIES_QUERY from "../../queries/product-and-categories";
 

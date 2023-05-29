@@ -27,6 +27,10 @@ button {
   cursor: pointer;
 }
 
+.swiper-slide {
+  height: auto !important;
+}
+
 *:focus {
   outline: none;
 }
@@ -66,7 +70,7 @@ h1 {
 }
 
 @media (max-width: 370px) {
-  h1{
+  h1 {
     font-size: clamp(0rem, calc(32vw / 3.7), 32rem);
   }
 }
@@ -80,7 +84,7 @@ h2 {
 }
 
 @media (max-width: 370px) {
-  h2{
+  h2 {
     font-size: clamp(0rem, calc(32vw / 3.7), 32rem);
   }
 }
@@ -94,7 +98,7 @@ h3 {
 }
 
 @media (max-width: 370px) {
-  h3{
+  h3 {
     font-size: clamp(0rem, calc(20vw / 3.7), 20rem);
   }
 }
@@ -108,8 +112,8 @@ p {
 }
 
 @media (max-width: 370px) {
-  p{
-  font-size: clamp(0rem, calc(16vw / 3.7), 16rem);
+  p {
+    font-size: clamp(0rem, calc(16vw / 3.7), 16rem);
   }
 }
 

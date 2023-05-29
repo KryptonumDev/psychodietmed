@@ -23,6 +23,7 @@ export default function ReviewsSlider({ data }) {
       setActiveSlide(nextSlide)
     }
   }
+  
   return (
     <section className={styles.wrapper}>
       <h2 className={styles.title} dangerouslySetInnerHTML={{ __html: removeWrap(title) }} />

@@ -1,5 +1,7 @@
+'use client'
 import { gql } from "@apollo/client";
-import client from "../apollo/apolo-client";
+import client from "../../../apollo/apolo-client";
+import { InlineWidget } from "react-calendly";
 
 // export async function generateMetadata(props) {
 //   console.log(props)
@@ -8,11 +10,12 @@ import client from "../apollo/apolo-client";
 //   };
 // }
 
-export default async function Cart() {
-  const { hero } = await getData()
+export default async function Specialist() {
+  const posts = await getData()
 
   return (
     <main>
+      <InlineWidget url="https://calendly.com/d/y6h-z7h-sg3/30min" />
     </main>
   )
 }
@@ -34,10 +37,14 @@ async function getData() {
   const { data } = await client.query({
     query: gql`
       query Pages {
+        posts{
+          nodes{
+            id
+          }
+        }
       }
     `,
   }, { pollInterval: 500 })
 
-  return {
-  }
+  return null
 }
