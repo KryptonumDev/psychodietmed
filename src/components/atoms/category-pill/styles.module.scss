@@ -1,0 +1,9 @@
+.category {
+  padding: 10px 16px 12px 16px;
+  color: #194574;
+  border: 2px solid #194574;
+  border-radius: 50px;
+  position: relative;
+  z-index: 4;
+  font-size: clamp(14rem, calc(16vw/7.68), 16rem);
+}

@@ -1,0 +1,26 @@
+.title {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: clamp(32rem, calc(36vw/7.68), 48rem);
+
+  @media (max-width: 370px) {
+    font-size: clamp(0rem, calc(32vw/3.7), 32rem);
+  }
+
+  span {
+    color: #535353;
+    font-size: clamp(16rem, calc(20vw/7.68), 24rem);
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+    }
+  }
+}
+
+.categories {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: clamp(28px, calc(28vw/7.68), 48px);
+}

@@ -1,0 +1,39 @@
+.control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 48px;
+
+  @media (max-width: 640px) {
+    justify-content: space-between;
+  }
+
+  button{
+    border: none;
+    background-color: transparent;
+  }
+}
+
+.dots {
+  display: flex;
+  gap: 24px;
+
+  @media (max-width: 640px) {
+    display: none;
+  }
+
+  .dot {
+    width: 80px;
+    height: 5px;
+    border-radius: 50px;
+    background: #C4C4C4;
+    cursor: pointer;
+    background-color: #F5E7EA;
+    transition: background-color var(--transition);
+
+    &.active {
+      background-color: #DEAFB8;
+    }
+  }
+}

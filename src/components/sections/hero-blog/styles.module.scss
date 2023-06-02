@@ -11,7 +11,7 @@
   .sub_title{
     margin-top: 64px;
     margin-bottom: 48px;
-    font-size: 48rem;
+    font-size: clamp(32rem, calc(36vw / 7.68), 48rem);
   }
 
 }
