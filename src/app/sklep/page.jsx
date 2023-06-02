@@ -1,6 +1,7 @@
 import { Card } from "@/components/moleculas/product-card/index.js";
 import client from "../../apollo/apolo-client";
 import PRODUCTS_AND_CATEGORIES_QUERY from "../../queries/product-and-categories";
+import Hero from "@/components/sections/hero-product";
 
 // export async function generateMetadata(props) {
 //   console.log(props)
@@ -14,6 +15,7 @@ export default async function Shop() {
 
   return (
     <main>
+      <Hero data={products[1]}/>
       {products?.map(product => (
         <Card key={product.id} product={product} />
       ))}

@@ -1,0 +1,25 @@
+.wrapper{
+}
+
+.product{
+  margin-top: 20px;
+  padding: 48px;
+  background: #F1F6FB;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+
+  gap: 36px;
+  display: flex;
+}
+
+.name{
+  color: #194574;
+  font-size: clamp(24rem, calc(28vw/7.68), 40rem);
+}
+
+.rating{
+  gap: 8px;
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+}
