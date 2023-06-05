@@ -1,0 +1,59 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  gap: 32px;
+
+  @media (max-width: 540px) {
+    flex-direction: column;
+  }
+}
+
+.content_wrap {
+  max-width: 731px;
+
+}
+
+.content {
+  img {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+  }
+
+  >*+* {
+    margin-top: 20px;
+  }
+
+  h2 {
+    margin-bottom: 36px;
+    font-size: clamp(32rem, calc(36vw / 7.68), 48rem);
+  }
+
+  figure {
+    img {
+      width: 100%;
+      height: fit-content;
+    }
+  }
+
+  blockquote {
+    padding: 28px 90px 28px 28px;
+    background: #F1F6FB;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    position: relative;
+
+    &::after {
+      content: url('/quote.png');
+      position: absolute;
+      right: 36px;
+      top: 28px;
+    }
+
+    p {
+      font-size: 32rem;
+      color: #194574;
+      font-weight: 500;
+    }
+  }
+}

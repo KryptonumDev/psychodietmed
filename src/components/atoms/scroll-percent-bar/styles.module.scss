@@ -1,0 +1,21 @@
+.bar{
+  position: relative;
+  background: #F5E7EA;
+  border-radius: 20px;
+  width: 100%;
+  height: 4px;
+  margin-bottom: 20px;
+
+  .percent{
+    background: #DEAFB8;
+    border-radius: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+  }
+
+  @media (max-width: 540px) {
+    display: none;
+  }
+}

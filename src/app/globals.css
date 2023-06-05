@@ -1,12 +1,12 @@
 html {
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 body {
   font-size: 16rem;
   font-weight: 500;
   background: #FFFEFE;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 :root {
@@ -61,7 +61,7 @@ main {
 }
 
 /* calc((36vw / 7.68) * 1rem) */
-h1 {
+h1, legend {
   font-weight: 500;
   font-size: clamp(32rem, calc(36vw / 7.68), 48rem);
   line-height: 124%;
@@ -70,7 +70,7 @@ h1 {
 }
 
 @media (max-width: 370px) {
-  h1 {
+  h1, legend {
     font-size: clamp(0rem, calc(32vw / 3.7), 32rem);
   }
 }

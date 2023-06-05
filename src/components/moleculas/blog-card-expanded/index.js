@@ -14,7 +14,7 @@ export default function Card({ data }) {
 
   return (
     <div className={styles.card}>
-      <Link className={styles.wrap_link} href={`/blog/artykul/${data.slug}`} />
+      <Link className={styles.wrap_link} href={`/blog/${data.slug}`} />
       <Image
         className={styles.image}
         src={data?.featuredImage?.node.mediaItemUrl}

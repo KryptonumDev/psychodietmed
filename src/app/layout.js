@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
       <AppProvider>
         {/* <ApolloProvider client={client}> */}
           <body className={`body ${Satoshi.className}`}>
-            <Header />
+            {/* <Header /> */}
             {children}
             <Footer />
           </body>
