@@ -1,5 +1,9 @@
 .wrapper {
   width: 100%;
+  overflow: hidden;
+  padding: 16px clamp(16px, calc(32vw/7.68), 80px);
+  margin: -16px calc(-1 * clamp(16px, calc(32vw/7.68), 80px));
+  box-sizing: content-box;
 
   img {
     -webkit-user-drag: none;
@@ -26,38 +30,40 @@
 }
 
 .grid {
-  margin-top: 32px;
   display: flex;
   gap: clamp(16px, calc(32vw/7.68), 48px);
   width: max-content;
+  margin-top: 32px;
+  padding: 0 clamp(16px, calc(32vw/7.68), 80px);
 
   .item {
     // START TIME BLOCK
-    
+
     background: #FFFEFE;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
     align-items: center;
 
-    svg{
+    svg {
       margin: 0 auto 36px auto;
       max-width: calc(100% - 24px);
       display: block;
       height: fit-content;
     }
 
-    h3{
+    h3 {
       text-align: center;
       max-width: 380px;
       margin: 0 auto clamp(0px, calc(50vw / 4.8), 50px) auto !important;
       padding: 0 12px;
     }
 
-    a{
+    a {
       display: block;
       width: fit-content;
       margin: 0 auto;
     }
+
     @media (max-width: 1180px) {
       padding: 20px !important;
     }

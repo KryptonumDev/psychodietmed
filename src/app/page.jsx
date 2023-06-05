@@ -9,6 +9,7 @@ import CallToActionGray from "@/components/sections/call-to-action-gray";
 import ReviewsSlider from "@/components/sections/reviews-slider";
 import StatisticsFlex from "@/components/sections/statistics-flex";
 import Citate from "@/components/sections/citate";
+import OtherPosts from "@/components/sections/other-posts";
 
 // export async function generateMetadata(props) {
 //   console.log(props)
@@ -18,7 +19,7 @@ import Citate from "@/components/sections/citate";
 // }
 
 export default async function Home() {
-  const { hero, flex, specialisationsSection, specialisations, cta, specialists, stepsToConsultation, ctaGray, reviews, statistics, citate } = await getData()
+  const { hero, flex, specialisationsSection, specialisations, cta, specialists, stepsToConsultation, ctaGray, reviews, statistics, citate, blog, posts } = await getData()
 
   return (
     <main>
@@ -33,7 +34,7 @@ export default async function Home() {
       <StatisticsFlex data={statistics} />
       <Citate data={citate} />
       {/* akademia */}
-      {/* blog */}
+      <OtherPosts data={posts} title={blog.title} text={blog.text} />
       {/* newsletter */}
     </main>
   )
@@ -53,9 +54,35 @@ export default async function Home() {
 // }
 
 async function getData() {
-  const { data: { specjalizacje, specjalisci, page: { homepage } } } = await client.query({
+  const { data: { posts, specjalizacje, specjalisci, page: { homepage } } } = await client.query({
     query: gql`
       query Pages {
+        posts(first: 3) {
+          nodes {
+            id
+            dateGmt
+            featuredImage {
+              node {
+                altText
+                mediaItemUrl
+                mediaDetails {
+                  height
+                  width
+                }
+              }
+            }
+            slug
+            title
+            excerpt
+            categories {
+              nodes {
+                name
+                slug
+                id
+              }
+            }
+          }
+        }
         specjalizacje {
           nodes {
             title
@@ -103,6 +130,10 @@ async function getData() {
           id
           title
           homepage {
+            blog : sekcjaZBlogiemKopia{
+              title
+              text
+            }
             hero : sekcjaPowitalnaKopia {
               pageTitle
               link {
@@ -282,6 +313,8 @@ async function getData() {
     specialisations: specjalizacje.nodes,
     reviews: homepage.sekcjaZOpiniamiKopia,
     statistics: homepage.sekcjaStatystykiKopia,
-    citate: homepage.sekcjaZCytatemKopia
+    citate: homepage.sekcjaZCytatemKopia,
+    blog: homepage.blog,
+    posts: posts.nodes,
   }
 }

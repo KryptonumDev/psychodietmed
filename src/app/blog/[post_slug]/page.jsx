@@ -1,9 +1,9 @@
+import { notFound } from "next/navigation"
 import { gql } from "@apollo/client"
 import client from "../../../apollo/apolo-client"
-import { notFound } from "next/navigation"
 import Hero from "@/components/sections/hero-post"
 import Content from "@/components/sections/content-post"
-import Head from "next/head"
+import OtherPosts from "@/components/sections/other-posts"
 
 // export async function generateMetadata(props) {
 //   console.log(props)
@@ -13,15 +13,13 @@ import Head from "next/head"
 // }
 
 export default async function Post({ params }) {
-  const { data } = await getData(params)
+  const { data, posts } = await getData(params)
   return (
     <>
       <main>
-        {data.enqueuedStylesheets.nodes.map((style, index) => (
-          <link rel='stylesheet' href={style.src} />
-        ))}
         <Hero data={data} />
         <Content next={data.next} prev={data.previous} author={data.postAuthor.author} data={data.content} />
+        <OtherPosts data={posts} />
       </main>
     </>
   )
@@ -29,9 +27,35 @@ export default async function Post({ params }) {
 
 async function getData(params) {
   try {
-    const { data: { postBy } } = await client.query({
+    const { data: { postBy, posts } } = await client.query({
       query: gql`
       query Pages($slug: String) {
+        posts(first: 3) {
+          nodes {
+            id
+            dateGmt
+            featuredImage {
+              node {
+                altText
+                mediaItemUrl
+                mediaDetails {
+                  height
+                  width
+                }
+              }
+            }
+            slug
+            title
+            excerpt
+            categories {
+              nodes {
+                name
+                slug
+                id
+              }
+            }
+          }
+        }
         postBy(slug: $slug){
           dateGmt
           readingTime
@@ -71,12 +95,6 @@ async function getData(params) {
               }
             }
           }
-          enqueuedStylesheets {
-            nodes {
-              handle
-              src
-            }
-          }
           next {
             title
             slug
@@ -97,7 +115,8 @@ async function getData(params) {
       notFound()
 
     return {
-      data: postBy
+      data: postBy,
+      posts: posts.nodes
     }
   } catch (error) {
     console.log(error)
