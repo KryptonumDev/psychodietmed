@@ -82,7 +82,7 @@ export default function Header({ data }) {
         </Link>
         <ul className={styles.top_nav}>
           {urlSystem.map((item, index) => (
-            <li className={styles.top_nav_item}>
+            <li key={index} className={styles.top_nav_item}>
               {item.url ? (
                 <Link href={item.url}>
                   {item.name}
@@ -95,7 +95,7 @@ export default function Header({ data }) {
               {item.subpages && (
                 <ul className={styles.bottom_nav}>
                   {item.subpages?.map(el => (
-                    <li className={styles.bottom_nav_item}>
+                    <li key={el.url} className={styles.bottom_nav_item}>
                       <Link href={el.url}>
                         {el.name}
                       </Link>
@@ -119,7 +119,7 @@ export default function Header({ data }) {
       <div onClick={() => { setIsMenuOpened(false); setItemOpened(false) }} className={`${styles.overlay} ${isMenuOpened ? styles.active : ''}`} />
       <div className={`${styles.mobile_menu} ${isMenuOpened ? styles.active : ''}`}>
         {urlSystem.map((item, index) => (
-          <>
+          <React.Fragment key={index} >
             {item.url ? (
               <Link href={item.url}>
                 {item.name}
@@ -130,12 +130,12 @@ export default function Header({ data }) {
                 <AngleRight />
               </button>
             )}
-          </>
+          </React.Fragment>
         ))}
       </div>
 
       {urlSystem.map((item, index) => (
-        <>
+        <React.Fragment key={index}>
           {item.subpages && (
             <div className={`${itemOpened === index ? styles.active : ''} ${styles.mobile_menu_sub}`}>
               <button onClick={() => { setItemOpened(false) }}>
@@ -143,11 +143,11 @@ export default function Header({ data }) {
                 {item.name}
               </button>
               {item.subpages?.map(el => (
-                <Link href={el.url}>{el.name}</Link>
+                <Link key={el.url} href={el.url}>{el.name}</Link>
               ))}
             </div>
           )}
-        </>
+        </React.Fragment>
       ))}
     </header>
   )
