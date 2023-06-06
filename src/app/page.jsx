@@ -10,6 +10,7 @@ import ReviewsSlider from "@/components/sections/reviews-slider";
 import StatisticsFlex from "@/components/sections/statistics-flex";
 import Citate from "@/components/sections/citate";
 import OtherPosts from "@/components/sections/other-posts";
+import Newsletter from "@/components/sections/newsletter";
 
 // export async function generateMetadata(props) {
 //   console.log(props)
@@ -19,10 +20,10 @@ import OtherPosts from "@/components/sections/other-posts";
 // }
 
 export default async function Home() {
-  const { hero, flex, specialisationsSection, specialisations, cta, specialists, stepsToConsultation, ctaGray, reviews, statistics, citate, blog, posts } = await getData()
+  const { hero, flex, specialisationsSection, specialisations, cta, specialists, stepsToConsultation, newsletter, ctaGray, reviews, statistics, citate, blog, posts } = await getData()
 
   return (
-    <main>
+    <main className="overflow">
       <Hero data={hero} />
       <Flex data={flex} />
       <Specialisations data={specialisationsSection} specialisations={specialisations} />
@@ -35,7 +36,7 @@ export default async function Home() {
       <Citate data={citate} />
       {/* akademia */}
       <OtherPosts data={posts} title={blog.title} text={blog.text} />
-      {/* newsletter */}
+      <Newsletter data={newsletter} />
     </main>
   )
 }
@@ -296,6 +297,11 @@ async function getData() {
                 }
               }
             }
+            newsletter : sekcjaZNewsletteremCopy{
+              title
+              text
+              consent
+            }
           }
         }
       }
@@ -316,5 +322,6 @@ async function getData() {
     citate: homepage.sekcjaZCytatemKopia,
     blog: homepage.blog,
     posts: posts.nodes,
+    newsletter: homepage.newsletter
   }
 }

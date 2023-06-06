@@ -129,6 +129,13 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
+"@mailerlite/mailerlite-nodejs@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@mailerlite/mailerlite-nodejs/-/mailerlite-nodejs-1.0.1.tgz#175b96e684a2f3f81fce82e821b7ff98bda31a91"
+  integrity sha512-kogHC/7x5YtR3lwDs2yzNryg9+LaSaeUJtE/rixMIxUGOylpVU2sZF8qJIf6YrRt6Rg8tBHytQpakicxqWlu4Q==
+  dependencies:
+    axios "^1.2.0"
+
 "@next/env@13.4.4":
   version "13.4.4"
   resolved "https://registry.yarnpkg.com/@next/env/-/env-13.4.4.tgz#46b620f6bef97fe67a1566bf570dbb791d40c50a"
@@ -428,7 +435,7 @@ axe-core@^4.6.2:
   resolved "https://registry.npmjs.org/axe-core/-/axe-core-4.6.3.tgz"
   integrity sha512-/BQzOX780JhsxDnPpH4ZiyrJAzcd8AfzFPkv+89veFSr1rcMjuq2JDCwypKaPeB6ljHp9KjXhPpjgCvQlWYuqg==
 
-axios@^1.4.0:
+axios@^1.2.0, axios@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/axios/-/axios-1.4.0.tgz#38a7bf1224cd308de271146038b551d725f0be1f"
   integrity sha512-S4XCWMEmzvo64T9GfvQDOXgYRDJ/wsSZc7Jvdgx5u1sd0JwsuPLqb3SYmusag+edF6ziyMensPVqLTSc1PiSEA==

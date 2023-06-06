@@ -1,5 +1,6 @@
 html {
   /* overflow-x: hidden; */
+  max-width: 100%;
 }
 
 body {
@@ -52,6 +53,10 @@ main {
   display: grid !important;
   grid-template-columns: 100%;
   grid-gap: clamp(64px, calc(64vw/7.68), 180px);
+}
+
+.overflow{
+  overflow: hidden;
 }
 
 @media (max-width: 1439px) {

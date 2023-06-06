@@ -14,7 +14,7 @@ export default function OtherPosts({ data, text, title }) {
             <div dangerouslySetInnerHTML={{ __html: text }} />
           )}
         </div>
-        <Link className={`link ${styles.link}`} href='/kontakt'>Umów wizytę</Link>
+        <Link className={`link ${styles.link}`} href='/blog'>Przejdź do bloga</Link>
       </div>
       <Slider data={data} />
       <Link className={`link ${styles.blog}`} href='/blog'>Przejdź na bloga</Link>
