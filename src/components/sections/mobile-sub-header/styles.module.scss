@@ -1,0 +1,16 @@
+.wrapper{
+  position: fixed;
+  z-index: 4;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px 16px;
+  background: #FFFEFE;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.link{
+  width: fit-content !important;
+}

@@ -5,6 +5,7 @@ import localFont from 'next/font/local'
 import Header from '@/components/sections/header'
 import Footer from '@/components/sections/footer'
 import { AppProvider } from '../context/app-context'
+import SubHeader from '@/components/sections/mobile-sub-header'
 // import { ApolloProvider } from '@apollo/client'
 // import client from '../apollo/apolo-client'
 const Satoshi = localFont({ src: '../assets/fonts/satoshi.woff2' })
@@ -31,11 +32,12 @@ export default function RootLayout({ children }) {
     <html lang="pl">
       <AppProvider>
         {/* <ApolloProvider client={client}> */}
-          <body className={`body ${Satoshi.className}`}>
-            {/* <Header /> */}
-            {children}
-            <Footer />
-          </body>
+        <body className={`body ${Satoshi.className}`}>
+          <Header />
+          <SubHeader />
+          {children}
+          <Footer />
+        </body>
         {/* </ApolloProvider> */}
       </AppProvider>
     </html>
