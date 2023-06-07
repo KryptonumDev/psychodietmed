@@ -1,0 +1,111 @@
+.problems_grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin-top: 12px;
+  position: relative;
+
+  button {
+    color: #6085B1;
+    padding: 10px 24px 12px 24px;
+    border: 2px solid #6085B1;
+    border-radius: 50px;
+    background-color: transparent;
+    font-weight: 500;
+    font-size: clamp(14rem, calc(16vw/7.68), 20rem);
+    transition: color .2s cubic-bezier(0.785, 0.135, 0.15, 0.86), border-color .2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
+
+    @media (max-width: 640px) {
+      padding: 10px 12px 12px 12px;
+    }
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(14vw/3.7), 14rem);
+    }
+
+    &:hover,
+    &.active {
+      border-color: #194574;
+      color: #194574;
+    }
+  }
+}
+
+.popup_wrap {
+  @media (max-width: 1024px) {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transform: translateY(100%) !important;
+    max-width: 506px;
+    width: 100%;
+  }
+}
+
+.popup {
+  margin-top: 16px;
+  padding: clamp(28px, calc(28vw/7.68), 32px) clamp(20px, calc(24vw/7.68), 32px);
+  background: #FFFFFF;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  position: relative;
+
+  .title {
+    font-size: clamp(16rem, calc(20vw/7.68), 24rem);
+    color: #194574;
+    margin-bottom: 16px;
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+    }
+  }
+
+}
+
+.finger {
+  position: absolute;
+  right: 25px;
+  top: -33px;
+  background: #F1F6FB;
+  border-radius: 50%;
+  width: 66px;
+  height: 66px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 420px) {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+.control {
+  margin-top: 36px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+
+  @media (max-width: 420px) {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    border: none;
+    background-color: transparent;
+    color: #194574;
+    font-size: 16rem;
+    font-weight: 500;
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+    }
+  }
+}

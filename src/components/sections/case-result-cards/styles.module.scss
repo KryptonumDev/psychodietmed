@@ -1,0 +1,8 @@
+.wrapper {
+  h2 {
+    text-align: center;
+    font-size: clamp(24rem, calc(32vw/7.68), 40rem);
+    max-width: 804px;
+    margin: 0 auto;
+  }
+}

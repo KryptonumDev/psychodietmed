@@ -67,6 +67,7 @@ export default function Form({ subjects }) {
         <textarea rows='5' placeholder='Twoja wiadomość' {...register("name", { required: true, pattern: namePattern })} />
         {errors.name && <div className={styles.error}>Proszę poprawnie uzupełnić to pole</div>}
       </label>
+      <button className={`${styles.submit} link`}>Wyślij wiadomość</button>
     </form>
   )
 }
