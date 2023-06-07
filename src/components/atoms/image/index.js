@@ -2,7 +2,7 @@ import React from "react"
 import styles from './styles.module.scss'
 import NextImage from "next/image"
 
-export const Image = ({ width, height, src, alt, className, aspectRatio = false }) => (
+export const Image = ({ quality, width, height, src, alt, className, aspectRatio = false }) => (
   <div
     style={{
       width: `${width}px`,
@@ -13,6 +13,6 @@ export const Image = ({ width, height, src, alt, className, aspectRatio = false 
     }}
     className={`${styles.wrapper} ${className}`}
   >
-    <NextImage src={src} alt={alt} width={width} height={height} />
+    <NextImage quality={quality} src={src} alt={alt} width={width} height={height} />
   </div>
 )

@@ -3,6 +3,7 @@ import { gql } from "@apollo/client"
 import client from "../../../apollo/apolo-client"
 import Hero from "@/components/sections/case-hero"
 import Cards from "@/components/sections/case-result-cards"
+import ReviewsSlider from "@/components/sections/reviews-slider"
 
 // export async function generateMetadata(props) {
 //   console.log(props)
@@ -12,12 +13,13 @@ import Cards from "@/components/sections/case-result-cards"
 // }
 
 export default async function Post({ params }) {
-  const { data } = await getData(params)
+  const { data, other } = await getData(params)
   return (
     <>
       <main>
         <Hero data={data.histori.information} />
-        <Cards data={data.histori.resultsSection}/>
+        <Cards data={data.histori.resultsSection} />
+        <ReviewsSlider data={{ title: 'Poznaj inne historie', text: 'Dowiedz się, jaka zmiana zaszła w życiu naszych pacjentek', comments: other }} />
       </main>
     </>
   )
@@ -25,9 +27,48 @@ export default async function Post({ params }) {
 
 async function getData(params) {
   try {
-    const { data: { podopiecznaBy } } = await client.query({
+    const { data: { podopiecznaBy, podopieczni } } = await client.query({
       query: gql`
       query Pages($uri: String) {
+        podopieczni(first: 5) {
+          nodes {
+            id
+            slug
+            histori {
+              information {
+                beforeImage {
+                  altText
+                  mediaItemUrl
+                  mediaDetails {
+                    height
+                    width
+                  }
+                }
+                afterImage {
+                  altText
+                  mediaItemUrl
+                  mediaDetails {
+                    height
+                    width
+                  }
+                }
+              }
+              caseStudyCard {
+                name
+                linkText
+                comment
+                avatar {
+                  altText
+                  mediaItemUrl
+                  mediaDetails {
+                    height
+                    width
+                  }
+                }
+              }
+            }
+          }
+        }
         podopiecznaBy(uri: $uri) {
           id
           histori {
@@ -90,6 +131,7 @@ async function getData(params) {
 
     return {
       data: podopiecznaBy,
+      other: podopieczni.nodes.filter(el => el.id !== podopiecznaBy.id)
     }
   } catch (error) {
     notFound()

@@ -1,0 +1,162 @@
+.slide {
+  width: 100%;
+  display: grid;
+  cursor: grab;
+  height: 100%;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  padding: clamp(28px, calc(40vw/7.68), 40px) clamp(28px, calc(28vw/7.68), 48px);
+  background: #FFFFFF;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+
+  grid-template-columns: 532fr 480fr;
+  grid-gap: 32px;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: 'info images'
+  'text images'
+  'link images';
+
+  &.wide {
+    grid-template-areas:
+      'info info'
+      'text images'
+      'link images';
+  }
+
+
+  @media (max-width: 1120px) {
+    grid-template-columns: 286fr 321fr;
+
+    &.wide {
+      grid-template-columns: 377fr 243fr;
+    }
+  }
+
+  @media (max-width: 740px) {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'info' 'text' 'images' 'link';
+
+    &.wide {
+      grid-template-columns: 1fr;
+      grid-template-areas: 'info' 'text' 'images' 'link';
+    }
+  }
+
+  .slideAuthor {
+    grid-area: info;
+    max-width: 532px;
+
+    &.slideAuthorWide {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+  }
+
+  &.wide {
+    .slideAuthor {
+      max-width: unset;
+    }
+  }
+
+  .slideText {
+    grid-area: text;
+    max-width: 532px;
+  }
+
+  .slideBoldText {
+    grid-area: images;
+    font-size: clamp(28rem, calc(36vw/7.68), 48rem);
+    line-height: 124%;
+    font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
+    color: #194574;
+    padding-bottom: 80px;
+
+    @media (max-width: 380px) {
+      padding-bottom: 0;
+    }
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(28vw/3.7), 28rem);
+    }
+  }
+
+  .slideLink {
+    grid-area: link;
+    height: fit-content;
+    color: #194574;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+
+    svg{
+      margin-top: 4px;
+    }
+
+    @media (max-width: 740px) {
+      margin: 0 auto;
+    }
+  }
+
+  .slideImages {
+    grid-area: images;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 24px;
+  }
+
+  .image {
+    img {
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .after {
+    margin-bottom: 120px;
+
+    @media (max-width: 740px) {
+      margin-bottom: 0;
+    }
+  }
+
+  .before {
+    margin-top: 120px;
+
+    @media (max-width: 740px) {
+      margin-top: 0;
+    }
+  }
+
+  .slideAuthor {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+
+    .slideAuthorName {
+      font-size: clamp(20rem, calc(24vw/7.68), 32rem);
+      line-height: 124%;
+      font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
+      color: #194574;
+    }
+
+    .slideAuthorImage {
+      width: clamp(64px, calc(70vw/7.68), 76px);
+      height: clamp(64px, calc(70vw/7.68), 76px);
+    }
+
+    .svg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: clamp(32px, calc(50vw/7.68), 58px);
+    }
+  }
+}

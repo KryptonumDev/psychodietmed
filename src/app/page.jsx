@@ -31,7 +31,7 @@ export default async function Home() {
       <Specialists data={specialists} />
       {/* <StepsToConsultation data={stepsToConsultation} /> */}
       <CallToActionGray data={ctaGray} />
-      <ReviewsSlider data={reviews} />
+      {/* <ReviewsSlider data={reviews} /> */}
       <StatisticsFlex data={statistics} />
       <Citate data={citate} />
       {/* akademia */}
