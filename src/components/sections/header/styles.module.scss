@@ -201,6 +201,11 @@
     opacity: 1;
   }
 
+  &.overlayed{
+    opacity: 0;
+    pointer-events: none;
+  }
+
   width: 300px;
   background-color: #fff;
   position: fixed;
@@ -234,6 +239,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-left: 0 !important;
   }
 }
 

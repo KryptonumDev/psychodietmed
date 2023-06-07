@@ -1,5 +1,38 @@
-.wrapper{
+.wrapper {
   display: grid;
   grid-template-columns: 657fr 547fr;
-  gap: 64px;
+  gap: clamp(24px, calc(24vw/7.68), 64px);
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 431fr 248fr;
+    
+  }
+
+  @media (max-width: 640px) {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  h2{
+    margin-bottom: clamp(20px, calc(28vw/7.68), 28px);
+  }
+}
+
+.image {
+  height: auto !important;
+  width: 100% !important;
+  min-width: 248px;
+  img{
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+  }
+
+  @media (max-width: 640px){
+    height: 340px !important;
+    width: 100% !important;
+
+    img{
+      object-position: top;
+    }
+  }
 }

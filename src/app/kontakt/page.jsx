@@ -39,6 +39,9 @@ async function getData() {
         page(id: "cG9zdDo3MjQ=") {
           kontakt {
             form : contactFormGroup {
+              subjects{
+                subject
+              }
               title
               text
               image {

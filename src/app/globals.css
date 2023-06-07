@@ -55,7 +55,7 @@ main {
   grid-gap: clamp(64px, calc(64vw/7.68), 180px);
 }
 
-.overflow{
+.overflow {
   overflow: hidden;
 }
 
@@ -66,7 +66,8 @@ main {
 }
 
 /* calc((36vw / 7.68) * 1rem) */
-h1, legend {
+h1,
+legend {
   font-weight: 500;
   font-size: clamp(32rem, calc(36vw / 7.68), 48rem);
   line-height: 124%;
@@ -75,7 +76,9 @@ h1, legend {
 }
 
 @media (max-width: 370px) {
-  h1, legend {
+
+  h1,
+  legend {
     font-size: clamp(0rem, calc(32vw / 3.7), 32rem);
   }
 }
@@ -237,4 +240,84 @@ p em::before {
 .link:focus-visible {
   outline: 2px solid #A0636F;
   outline-offset: 8px;
+}
+
+
+.input .react-select__control {
+  padding: 14px 28px;
+  background: #FFFFFF;
+  border: 2px solid #DEAFB8;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 50px;
+  width: 100%;
+  min-height: 33px;
+  line-height: 160%;
+  font-size: clamp(16rem, calc(20vw/7.68), 24rem);
+  font-weight: 500;
+}
+
+@media (max-width: 370px) {
+  .input .react-select__control {
+    font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+  }
+}
+
+.input .react-select__input-container {
+  margin: 0;
+}
+
+.input .react-select__input-container {
+  padding: 0;
+}
+
+.input .react-select__value-container {
+  padding: 0;
+}
+
+.input .react-select__indicator {
+  padding: 5px;
+}
+
+.input .react-select__option--is-focused {
+  background-color: #FCF7F8;
+}
+
+.input .react-select__option--is-selected {
+  background-color: #F2DFE3;
+  color: #000;
+}
+
+.input .react-select__option {
+  font-size: clamp(16rem, calc(16vw/7.68), 20rem);
+  min-height: 33px;
+  line-height: 160%;
+  font-weight: 500;
+}
+
+@media (max-width: 370px) {
+  .input .react-select__option {
+    font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+  }
+}
+
+.input .react-select__option:first-child {
+  border-radius: 20px 20px 0 0;
+}
+
+.input .react-select__option:last-child {
+  border-radius: 0 0 20px 20px;
+}
+
+.input .react-select__menu {
+  border-radius: 20px;
+  padding: 0;
+}
+
+.input .react-select__menu-list {
+  padding: 0;
+}
+
+.react-select__input{
+  box-shadow: none !important;
+  border-radius: 0 !important;
 }

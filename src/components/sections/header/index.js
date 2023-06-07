@@ -117,7 +117,7 @@ export default function Header({ data }) {
         </button>
       </div>
       <div onClick={() => { setIsMenuOpened(false); setItemOpened(false) }} className={`${styles.overlay} ${isMenuOpened ? styles.active : ''}`} />
-      <div className={`${styles.mobile_menu} ${isMenuOpened ? styles.active : ''}`}>
+      <div className={`${styles.mobile_menu} ${isMenuOpened ? styles.active : ''} ${itemOpened ? styles.overlayed : ''}`}>
         {urlSystem.map((item, index) => (
           <React.Fragment key={index} >
             {item.url ? (
