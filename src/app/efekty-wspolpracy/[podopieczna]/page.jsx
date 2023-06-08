@@ -122,7 +122,7 @@ async function getData(params) {
       }
     `,
       variables: {
-        uri: `/podopieczni/${params.podopieczna}/`,
+        uri: `${params.podopieczna}`,
       }
     }, { pollInterval: 500 })
 
@@ -134,6 +134,7 @@ async function getData(params) {
       other: podopieczni.nodes.filter(el => el.id !== podopiecznaBy.id)
     }
   } catch (error) {
+    console.log(error)
     notFound()
   }
 }

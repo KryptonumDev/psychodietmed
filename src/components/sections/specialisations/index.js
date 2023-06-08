@@ -4,19 +4,19 @@ import styles from './styles.module.scss';
 import { removeWrap } from "../../../utils/title-modification";
 import Image from "next/image";
 
-export default function Specialisations({ data, specialisations }) {
+export default function Specialisations({ data, activities }) {
   const { text, title } = data
 
-  const sortedSpecialisations = useMemo(() => {
-    return specialisations.sort((a, b) => a.specialisation.specialisationCard.number - b.specialisation.specialisationCard.number)
-  }, [specialisations])
+  const sortedActivities = useMemo(() => {
+    return activities.sort((a, b) => a.obszar_dzialania.specialisationCard.number - b.obszar_dzialania.specialisationCard.number)
+  }, [activities])
 
   return (
     <section className={styles.wrapper}>
       <h2 dangerouslySetInnerHTML={{ __html: removeWrap(title) }} />
       <div className={styles.text} dangerouslySetInnerHTML={{ __html: text }} />
       <div className={styles.grid}>
-        {sortedSpecialisations?.map(({ title, specialisation: { specialisationCard } }, index) => (
+        {sortedActivities?.map(({ title, obszar_dzialania: { specialisationCard } }, index) => (
           <div key={index} className={styles.item}>
             <div className={styles.itemContent}>
               <Image className={styles.icon} src={specialisationCard.icon.mediaItemUrl} alt={specialisationCard.icon.altText} width={specialisationCard.icon.mediaDetails.width} height={specialisationCard.icon.mediaDetails.height} />

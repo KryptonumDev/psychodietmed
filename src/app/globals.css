@@ -224,6 +224,7 @@ p em::before {
   display: block;
   width: fit-content;
   transition: background-color .2s ease-out;
+  border: none;
 }
 
 @media (max-width: 420px) {
@@ -320,4 +321,20 @@ p em::before {
 .react-select__input{
   box-shadow: none !important;
   border-radius: 0 !important;
+}
+
+.lg-react-element {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 12px;
+  margin-top: 20px;
+
+}
+.lg-react-element img{
+  border-radius: 20px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.lg-backdrop{
+  background-color: #000000dc !important;
 }

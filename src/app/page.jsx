@@ -21,7 +21,7 @@ import StepsToConsultation from "@/components/sections/steps-to-consultation";
 // }
 
 export default async function Home() {
-  const { hero, flex, specialisationsSection, specialisations, cta, specialists, stepsToConsultation, newsletter, ctaGray, reviews, newReviews, statistics, citate, blog, posts } = await getData()
+  const { hero, flex, specialisationsSection, activities, cta, specialists, stepsToConsultation, newsletter, ctaGray, reviews, newReviews, statistics, citate, blog, posts } = await getData()
 
   const locReviews = { ...reviews }
 
@@ -37,7 +37,7 @@ export default async function Home() {
     <main className="overflow">
       <Hero data={hero} />
       <Flex data={flex} />
-      <Specialisations data={specialisationsSection} specialisations={specialisations} />
+      <Specialisations data={specialisationsSection} activities={activities} />
       <CallToActionTransparent data={cta} />
       <Specialists data={specialists} />
       {/* <StepsToConsultation data={stepsToConsultation} /> */}
@@ -66,7 +66,7 @@ export default async function Home() {
 // }
 
 async function getData() {
-  const { data: { podopieczni, posts, specjalizacje, specjalisci, page: { homepage } } } = await client.query({
+  const { data: { podopieczni, posts, obszaryDzialania, specjalisci, page: { homepage } } } = await client.query({
     query: gql`
       query Pages {
         podopieczni(first: 4) {
@@ -134,14 +134,14 @@ async function getData() {
             }
           }
         }
-        specjalizacje {
+        obszaryDzialania {
           nodes {
             title
             id
             slug
             uri
-            specialisation {
-              specialisationCard { 
+            obszar_dzialania {
+              specialisationCard {
                 zajawkaSpecjalizacji
                 number
                 icon {
@@ -154,16 +154,12 @@ async function getData() {
                 }
               }
             }
+            
           }
         }
         specjalisci {
           nodes {
             title
-            profesje {
-              nodes {
-                name
-              }
-            }
             proffesional {
               proffesion
               personImage {
@@ -374,7 +370,7 @@ async function getData() {
     stepsToConsultation: homepage.sekcjaJakUmowicKonsultacjeKopia,
     ctaGray: homepage.wezwanieDoDzialaniaZSzarymTlemKopia,
     specialists: specjalisci.nodes,
-    specialisations: specjalizacje.nodes,
+    activities: obszaryDzialania.nodes,
     reviews: homepage.sekcjaZOpiniamiKopia,
     newReviews: podopieczni.nodes,
     statistics: homepage.sekcjaStatystykiKopia,

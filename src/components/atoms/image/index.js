@@ -13,6 +13,6 @@ export const Image = ({ quality, width, height, src, alt, className, aspectRatio
     }}
     className={`${styles.wrapper} ${className}`}
   >
-    <NextImage quality={quality} src={src} alt={alt} width={width} height={height} />
+    <NextImage quality={quality ? quality : '70'} src={src} alt={alt} width={width} height={height} />
   </div>
 )
