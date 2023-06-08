@@ -11,6 +11,7 @@ import StatisticsFlex from "@/components/sections/statistics-flex";
 import Citate from "@/components/sections/citate";
 import OtherPosts from "@/components/sections/other-posts";
 import Newsletter from "@/components/sections/newsletter";
+import StepsToConsultation from "@/components/sections/steps-to-consultation";
 
 // export async function generateMetadata(props) {
 //   console.log(props)
@@ -20,7 +21,17 @@ import Newsletter from "@/components/sections/newsletter";
 // }
 
 export default async function Home() {
-  const { hero, flex, specialisationsSection, specialisations, cta, specialists, stepsToConsultation, newsletter, ctaGray, reviews, statistics, citate, blog, posts } = await getData()
+  const { hero, flex, specialisationsSection, specialisations, cta, specialists, stepsToConsultation, newsletter, ctaGray, reviews, newReviews, statistics, citate, blog, posts } = await getData()
+
+  const locReviews = { ...reviews }
+
+  if (locReviews.comments.length < 4) {
+    newReviews.forEach(podopieczny => {
+      if (!locReviews.comments.find(comment => comment.id === podopieczny.id) && locReviews.comments.length < 4) {
+        locReviews.comments = [...locReviews.comments, podopieczny]
+      }
+    })
+  }
 
   return (
     <main className="overflow">
@@ -31,7 +42,7 @@ export default async function Home() {
       <Specialists data={specialists} />
       {/* <StepsToConsultation data={stepsToConsultation} /> */}
       <CallToActionGray data={ctaGray} />
-      {/* <ReviewsSlider data={reviews} /> */}
+      <ReviewsSlider data={locReviews} />
       <StatisticsFlex data={statistics} />
       <Citate data={citate} />
       {/* akademia */}
@@ -55,9 +66,48 @@ export default async function Home() {
 // }
 
 async function getData() {
-  const { data: { posts, specjalizacje, specjalisci, page: { homepage } } } = await client.query({
+  const { data: { podopieczni, posts, specjalizacje, specjalisci, page: { homepage } } } = await client.query({
     query: gql`
       query Pages {
+        podopieczni(first: 4) {
+          nodes {
+            id
+            slug
+            histori {
+              information {
+                beforeImage {
+                  altText
+                  mediaItemUrl
+                  mediaDetails {
+                    height
+                    width
+                  }
+                }
+                afterImage {
+                  altText
+                  mediaItemUrl
+                  mediaDetails {
+                    height
+                    width
+                  }
+                }
+              }
+              caseStudyCard {
+                name
+                linkText
+                comment
+                avatar {
+                  altText
+                  mediaItemUrl
+                  mediaDetails {
+                    height
+                    width
+                  }
+                }
+              }
+            }
+          }
+        }
         posts(first: 3) {
           nodes {
             id
@@ -210,33 +260,41 @@ async function getData() {
               title
               text
               comments {
-                text
-                author {
-                  name
-                  avatar {
-                    altText
-                    mediaItemUrl
-                    mediaDetails {
-                      height
-                      width
+                ... on Podopieczna {
+                  id
+                  slug
+                  histori {
+                    information {
+                      beforeImage {
+                        altText
+                        mediaItemUrl
+                        mediaDetails {
+                          height
+                          width
+                        }
+                      }
+                      afterImage {
+                        altText
+                        mediaItemUrl
+                        mediaDetails {
+                          height
+                          width
+                        }
+                      }
                     }
-                  }
-                }
-                boldText
-                after {
-                  altText
-                  mediaItemUrl
-                  mediaDetails {
-                    height
-                    width
-                  }
-                }
-                before {
-                  altText
-                  mediaItemUrl
-                  mediaDetails {
-                    height
-                    width
+                    caseStudyCard {
+                      name
+                      linkText
+                      comment
+                      avatar {
+                        altText
+                        mediaItemUrl
+                        mediaDetails {
+                          height
+                          width
+                        }
+                      }
+                    }
                   }
                 }
               }
@@ -318,6 +376,7 @@ async function getData() {
     specialists: specjalisci.nodes,
     specialisations: specjalizacje.nodes,
     reviews: homepage.sekcjaZOpiniamiKopia,
+    newReviews: podopieczni.nodes,
     statistics: homepage.sekcjaStatystykiKopia,
     citate: homepage.sekcjaZCytatemKopia,
     blog: homepage.blog,
