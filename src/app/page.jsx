@@ -4,7 +4,7 @@ import Hero from "@/components/sections/hero-home";
 import Flex from "@/components/sections/case-studies-flex";
 import Specialisations from "@/components/sections/specialisations";
 import CallToActionTransparent from "@/components/sections/call-to-action-tranparent";
-import Specialists from "@/components/sections/specialists";
+import Specialists from "@/components/sections/specialists-slider";
 import CallToActionGray from "@/components/sections/call-to-action-gray";
 import ReviewsSlider from "@/components/sections/reviews-slider";
 import StatisticsFlex from "@/components/sections/statistics-flex";
@@ -160,6 +160,7 @@ async function getData() {
         specjalisci {
           nodes {
             title
+            slug
             proffesional {
               proffesion
               personImage {
@@ -168,6 +169,12 @@ async function getData() {
                 mediaDetails {
                   height
                   width
+                }
+              }
+              specialisations {
+                ... on Specjalizacja {
+                  id
+                  title
                 }
               }
             }

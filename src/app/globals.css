@@ -47,8 +47,8 @@ button {
 
 main {
   max-width: 1440px;
-  padding: 0 80px;
-  margin: clamp(100px, calc(140vw/7.68), 215px) auto 120px auto;
+  padding: 20px 80px;
+  margin: clamp(80px, calc(120vw/7.68), 195px) auto 100px auto;
 
   display: grid !important;
   grid-template-columns: 100%;

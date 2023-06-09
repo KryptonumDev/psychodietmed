@@ -1,0 +1,48 @@
+.wrapper {
+  width: 100%;
+  box-sizing: content-box;
+  overflow: visible !important;
+
+  img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+  }
+
+  h2{
+    @media (max-width: 840px) {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.control {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  width: fit-content;
+  margin-bottom: 32px;
+  margin-left: auto;
+
+  &.mobile{
+    display: none;
+  }
+
+  @media (max-width: 840px) {
+    display: none;
+
+    &.mobile{
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 45px;
+    }
+  }
+  button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}

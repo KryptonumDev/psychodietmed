@@ -5,7 +5,8 @@ import Hero from "@/components/sections/hero-specialist"
 import Flex from "@/components/sections/specialist-flex"
 import FAQ from "@/components/sections/faq"
 import Reviews from "@/components/sections/specialist-reviews"
-// import { InlineWidget } from "react-calendly"
+import Specialists from "@/components/sections/specialists-slider"
+import Calendar from "@/components/sections/calendar-widget"
 
 // export async function generateMetadata(props) {
 //   console.log(props)
@@ -15,10 +16,10 @@ import Reviews from "@/components/sections/specialist-reviews"
 // }
 
 export default async function Specjalista({ params }) {
-  const { data, faq } = await getData(params)
+  const { data, faq, other } = await getData(params)
   return (
     <>
-      <main>
+      <main className="overflow">
         <Hero data={data} />
         <Flex
           content={data.proffesional.excerpt}
@@ -26,9 +27,9 @@ export default async function Specjalista({ params }) {
           courses={data.proffesional.courses}
           certificates={data.proffesional.certificates}
         />
-        {/* <InlineWidget url="https://calendly.com/d/y6h-z7h-sg3/30min" /> */}
+        <Calendar calendlyUrl="https://calendly.com/d/y6h-z7h-sg3/30min"/>
         <Reviews data={data.proffesional.reviews} />
-        {/* other specialists */}
+        <Specialists data={other} title={'Podobni specjaliści'}/>
         <FAQ data={faq} />
       </main>
     </>
@@ -37,9 +38,32 @@ export default async function Specjalista({ params }) {
 
 async function getData(params) {
   try {
-    const { data: { specjalistaBy, page } } = await client.query({
+    const { data: { specjalisci, specjalistaBy, page } } = await client.query({
       query: gql`
       query Pages($uri: String) {
+        specjalisci {
+          nodes {
+            title
+            slug
+            proffesional {
+              proffesion
+              personImage {
+                altText
+                mediaItemUrl
+                mediaDetails {
+                  height
+                  width
+                }
+              }
+              specialisations {
+                ... on Specjalizacja {
+                  id
+                  title
+                }
+              }
+            }
+          }
+        }
         page(id: "cG9zdDo3Nzk=") {
           id
           global {
@@ -118,6 +142,7 @@ async function getData(params) {
     return {
       data: specjalistaBy,
       faq: page.global.faq,
+      other: specjalisci.nodes.filter(item => item.slug !== params.specjalista)
     }
   } catch (error) {
     notFound()
