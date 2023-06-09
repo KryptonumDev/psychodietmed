@@ -1,0 +1,19 @@
+.wrapper {
+  padding: 28px 36px;
+  background: #FFFFFF;
+  border: 2px solid #DEAFB8;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+
+  h3 {
+    margin: 24px 0;
+  }
+
+  .flex {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    color: #194574;
+    font-size: clamp(24rem, calc(28vw/7.68), 32rem);
+  }
+}

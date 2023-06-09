@@ -4,8 +4,8 @@ import client from "../../../apollo/apolo-client"
 import Hero from "@/components/sections/hero-specialist"
 import Flex from "@/components/sections/specialist-flex"
 import FAQ from "@/components/sections/faq"
+import Reviews from "@/components/sections/specialist-reviews"
 // import { InlineWidget } from "react-calendly"
-
 
 // export async function generateMetadata(props) {
 //   console.log(props)
@@ -26,8 +26,9 @@ export default async function Specjalista({ params }) {
           courses={data.proffesional.courses}
           certificates={data.proffesional.certificates}
         />
-        {/* data.proffesional.reviews */}
         {/* <InlineWidget url="https://calendly.com/d/y6h-z7h-sg3/30min" /> */}
+        <Reviews data={data.proffesional.reviews} />
+        {/* other specialists */}
         <FAQ data={faq} />
       </main>
     </>
@@ -71,6 +72,11 @@ async function getData(params) {
               authorName
               authorAvatar {
                 altText
+                mediaItemUrl
+                mediaDetails {
+                  height
+                  width
+                }
               }
             }
             certificates {

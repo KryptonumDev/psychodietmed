@@ -8,12 +8,10 @@ import styles from './styles.module.scss';
 import 'swiper/scss';
 
 export default function Slider({ items }) {
-  const sliderRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
     <Swiper
-      ref={sliderRef}
       modules={[A11y]}
       className={styles.wrapper}
       spaceBetween={50}
@@ -28,7 +26,7 @@ export default function Slider({ items }) {
           <Card data={el} />
         </SwiperSlide>
       ))}
-      <Control items={items} sliderRef={sliderRef} activeIndex={activeIndex} />
+      <Control items={items} activeIndex={activeIndex} />
     </Swiper >
   )
 }

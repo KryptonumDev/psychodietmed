@@ -1,17 +1,7 @@
-.wrapper {
-  padding: 20px;
-  margin: -20px;
-  margin: 0 70px;
 
-  .grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 16px;
-  }
 
-  .certificate{
-    width: 100%;
-    height: fit-content;
-    border-radius: 20px;
-  }
+.certificate{
+  width: 100%;
+  height: fit-content;
+  border-radius: 20px;
 }

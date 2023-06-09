@@ -1,0 +1,13 @@
+.wrapper {
+
+  .buttons {
+
+    button {
+      @media (min-width: 972px) {
+        &:last-child {
+          display: none;
+        }
+      }
+    }
+  }
+}

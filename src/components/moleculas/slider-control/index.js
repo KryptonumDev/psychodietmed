@@ -1,29 +1,31 @@
-import React, { useCallback } from "react"
+import React, { useCallback, useEffect, useMemo } from "react"
 import { LeftArrow } from "../../../assets/left-arrow"
 import { RightArrow } from "../../../assets/right-arrow"
 import styles from './styles.module.scss'
+import { useSwiper } from "swiper/react";
 
-export default function Control({ sliderRef, activeIndex, items }) {
+export default function Control({ className = '', activeIndex, items }) {
+  const swiper = useSwiper();
 
   const handlePrev = useCallback(() => {
-    if (!sliderRef.current) return;
-    sliderRef.current.swiper.slidePrev();
+    if (!swiper) return;
+    swiper.slidePrev();
   }, []);
 
   const handleNext = useCallback(() => {
-    if (!sliderRef.current) return;
-    sliderRef.current.swiper.slideNext();
+    if (!swiper) return;
+    swiper.slideNext();
   }, []);
 
   const handleDotClick = useCallback((index) => {
-    if (!sliderRef.current) return;
-    sliderRef.current.swiper.slideTo(index);
+    if (!swiper) return;
+    swiper.slideTo(index);
   }, []);
 
   return (
-    <div className={styles.control} >
+    <div className={`${styles.control}`} >
       <button onClick={handlePrev} ><LeftArrow /></button>
-      <div className={styles.dots}>
+      <div className={`${styles.dots} ${className}`}>
         {items.map((el, index) => (
           <button className={activeIndex !== index ? styles.dot : `${styles.dot} ${styles.active}`} key={index} onClick={() => handleDotClick(index)} />
         ))}
