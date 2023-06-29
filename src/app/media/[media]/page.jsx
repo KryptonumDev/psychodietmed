@@ -6,6 +6,7 @@ import Flex from "@/components/sections/medium-flex"
 import Video from "@/components/sections/medium-video"
 import OtherMedia from "@/components/sections/other-media"
 import Contact from "@/components/sections/medium-contact"
+import Interview from "@/components/sections/media-interview"
 
 // export async function generateMetadata(props) {
 //   console.log(props)
@@ -25,6 +26,9 @@ export default async function Post({ params }) {
         )}
         {data.media?.mediaVideo?.oembed && (
           <Video data={data.media.mediaVideo} />
+        )}
+        {data.media?.interviewSection.length > 0 && (
+          <Interview data={data.media.interviewSection} />
         )}
         <Contact prev={data.previous} next={data.next} currPage={data.title} />
         <OtherMedia data={otherMedia} />
@@ -79,6 +83,31 @@ async function getData(params) {
             }
           }
           media {
+            interviewSection {
+              ... on Medium_Media_InterviewSection_QuestionAndTwoColumnAnswer {
+                fieldGroupName
+                qaRepeater {
+                  question
+                  answer
+                }
+              }
+              ... on Medium_Media_InterviewSection_QuestionAndImage {
+                fieldGroupName
+                imageSide
+                image {
+                  altText
+                  mediaItemUrl
+                  mediaDetails {
+                    height
+                    width
+                  }
+                }
+                qaRepeater {
+                  answer
+                  question
+                }
+              }
+            }
             mediaVideo {
               oembed
               title

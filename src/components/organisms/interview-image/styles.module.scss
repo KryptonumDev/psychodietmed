@@ -1,0 +1,92 @@
+.wrapper{
+  display: grid;
+  gap: clamp(0px, calc(60vw/14.4), 60px);
+  grid-template-columns: 450fr 767fr;
+  grid-template-areas: 
+  'image content';
+
+  &.reverse{
+    grid-template-columns: 767fr 450fr;
+    grid-template-areas: 
+    'content image';
+  }
+
+  @media (max-width: 1024px) {
+    display: block;
+  }
+
+  .image{
+    width: 100% !important;
+    height: 100% !important;
+    grid-area: image;
+
+    @media (max-width: 1024px) {
+      height: 300px !important;
+      margin-top: 24px;
+    }
+
+    img{
+      box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+      border-radius: 20px;
+    }
+  }
+
+  h3{
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+    margin-bottom: 28px;
+    font-size: clamp(20rem, calc(36vw/7.68), 36rem);
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(20vw/3.7), 20rem);
+    }
+
+    span{
+      font-size: clamp(20rem, calc(28vw/7.68), 32rem);
+      margin-top: -8px;
+      width: clamp(50px, calc(55vw/7.68), 61px);
+      height: clamp(50px, calc(55vw/7.68), 61px);
+      min-width: clamp(50px, calc(55vw/7.68), 61px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #194574;
+      border-radius: 50%;
+      color: #F1F6FB;
+      padding-left: 4px;
+    }
+  }
+
+  .answer{
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+    font-size: clamp(16rem, calc(20vw/7.68), 24rem);
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+    }
+
+    span{
+      font-size: clamp(14rem, calc(16vw/7.68), 20rem);
+      margin-top: -10px;
+      width: clamp(44px, calc(49vw/7.68), 54px);
+      height: clamp(44px, calc(49vw/7.68), 54px);
+      min-width: clamp(44px, calc(49vw/7.68), 54px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #F1F6FB;
+      border-radius: 50%;
+      color: #194574;
+      padding-left: 4px;
+    }
+  }
+}
+
+.repeater{
+  display: grid;
+  gap: 60px;
+  grid-area: content;
+}

@@ -196,12 +196,17 @@ h1 em {
 p em {
   font-style: normal;
   position: relative;
-  white-space: nowrap;
   color: #194574;
   font-weight: 700;
+  
+  /* transition: background-size 0.3s cubic-bezier(0.39, 0.575, 0.565, 1) 0s; */
+  /* background-repeat: no-repeat;
+  background-position: left 100%; */
+  background: linear-gradient(#F1F6FB, #F1F6FB);
+  /* background-size: 100% 6px; */
 }
 
-p em::before {
+/* p em::before {
   content: "";
   position: absolute;
   z-index: -1;
@@ -211,7 +216,7 @@ p em::before {
   bottom: 0;
   left: 0;
   right: 0;
-}
+} */
 
 .link {
   font-weight: 500;
