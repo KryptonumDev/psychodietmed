@@ -24,8 +24,9 @@ export default async function Blog({ params }) {
 }
 
 async function getData(currentPage) {
-  const { data: { categories, newPosts, posts, page: { blog } } } = await client.query({
-    query: gql`
+  try {
+    const { data: { categories, newPosts, posts, page: { blog } } } = await client.query({
+      query: gql`
       query Pages($offset: Int, $size: Int) {
         categories(first: 100) {
           nodes {
@@ -101,21 +102,25 @@ async function getData(currentPage) {
         }
       }
     `,
-    variables: {
-      offset: currentPage * PAGE_ITEM_COUNT,
-      size: PAGE_ITEM_COUNT,
-    },
-  }, { pollInterval: 500 })
+      variables: {
+        offset: (currentPage - 1) * PAGE_ITEM_COUNT,
+        size: PAGE_ITEM_COUNT,
+      },
+    }, { pollInterval: 500 })
 
-  if (!posts.nodes.length)
-    return notFound()
+    if (!posts.nodes.length)
+      return notFound()
 
-  return {
-    posts: posts.nodes,
-    postsTotalCount: posts.pageInfo.offsetPagination.total,
-    hero: blog.hero,
-    newPosts: newPosts.nodes,
-    categories: categories.nodes,
+    return {
+      posts: posts.nodes,
+      postsTotalCount: posts.pageInfo.offsetPagination.total,
+      hero: blog.hero,
+      newPosts: newPosts.nodes,
+      categories: categories.nodes,
+    }
+  } catch (error) {
+    console.log(error)
+    notFound()
   }
 }
 
@@ -135,8 +140,7 @@ export async function generateStaticParams() {
   })
 
   const pagesCount = (() => {
-    let count = posts.pageInfo.offsetPagination.total - PAGE_ITEM_COUNT
-    return (Math.ceil(count / PAGE_ITEM_COUNT))
+    return (Math.ceil(posts.pageInfo.offsetPagination.total / PAGE_ITEM_COUNT))
   })()
 
   const buttons = (() => {

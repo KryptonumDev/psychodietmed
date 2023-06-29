@@ -1,0 +1,16 @@
+.form{
+  display: grid;
+  gap: 32px;
+  max-width: clamp(520px, calc(520vw/7.68), 840px);
+  width: 100%;
+  margin: 0 auto;
+
+  @media (max-width: 580px) {
+    max-width: calc(100% - clamp(16px, calc(16vw/3.7), 36px) - clamp(16px, calc(16vw/3.7), 36px));
+    margin: 0 clamp(16px, calc(16vw/3.7), 36px);
+  }
+}
+
+.submit{
+  margin: 0 auto;
+}

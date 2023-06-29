@@ -1,9 +1,9 @@
-'use client'
 import React from "react"
 import styles from './styles.module.scss'
-import Grid from "@/components/organisms/blog-grid"
-import Pagination from "@/components/organisms/blog-pagination"
+import Grid from "@/components/organisms/post-grid"
+import Pagination from "@/components/organisms/pagination"
 import Category from "@/components/atoms/category-pill"
+import Card from "@/components/moleculas/blog-card"
 
 export default function Content({ categories, data, totalCount, page = '1' }) {
   return (
@@ -15,7 +15,11 @@ export default function Content({ categories, data, totalCount, page = '1' }) {
           <Category key={el.id} name={el.name} href={`/blog/kategoria/${el.slug}`} />
         ))}
       </div>
-      <Grid data={data} />
+      <Grid>
+        {data.map((el, index) => (
+          <Card key={index} data={el} />
+        ))}
+      </Grid>
       <Pagination itemCount={totalCount} currentPage={Number(page)} urlBasis='/blog' />
     </section>
   )

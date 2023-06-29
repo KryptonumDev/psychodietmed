@@ -22,5 +22,6 @@
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin-top: clamp(28px, calc(28vw/7.68), 48px);
+  margin-top: clamp(36px, calc(36vw/7.68), 64px);
+  margin-bottom: clamp(28px, calc(28vw/7.68), 48px);
 }

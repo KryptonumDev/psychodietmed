@@ -1,0 +1,118 @@
+import { notFound } from "next/navigation"
+import { gql } from "@apollo/client"
+import client from "../../../apollo/apolo-client"
+import Hero from "@/components/sections/hero-medium"
+import Flex from "@/components/sections/medium-flex"
+import Video from "@/components/sections/medium-video"
+import OtherMedia from "@/components/sections/other-media"
+import Contact from "@/components/sections/medium-contact"
+
+// export async function generateMetadata(props) {
+//   console.log(props)
+//   return {
+//     title: '...',
+//   };
+// }
+
+export default async function Post({ params }) {
+  const { data, otherMedia } = await getData(params)
+  return (
+    <>
+      <main>
+        <Hero title={data.title} excerpt={data.excerpt} dateGmt={data.dateGmt} image={data.featuredImage.node} />
+        {data.media?.twoColumnFlexMedia?.image && (
+          <Flex data={data.media.twoColumnFlexMedia} />
+        )}
+        {data.media?.mediaVideo?.oembed && (
+          <Video data={data.media.mediaVideo} />
+        )}
+        <Contact prev={data.previous} next={data.next} currPage={data.title} />
+        <OtherMedia data={otherMedia} />
+      </main>
+    </>
+  )
+}
+
+async function getData(params) {
+  try {
+    const { data: { medium, mediums } } = await client.query({
+      query: gql`
+      query Pages($uri: ID!) {
+        mediums(first: 7) {
+          nodes {
+            id
+            title
+            slug
+            featuredImage {
+              node {
+                altText
+                mediaItemUrl
+                mediaDetails {
+                  height
+                  width
+                }
+              }
+            }
+          }
+        }
+        medium(id: $uri, idType: URI) {
+          id
+          excerpt
+          dateGmt
+          title
+          previous {
+            title
+            slug
+          }
+          next {
+            title
+            slug
+          }
+          featuredImage {
+            node {
+              altText
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
+            }
+          }
+          media {
+            mediaVideo {
+              oembed
+              title
+            }
+            twoColumnFlexMedia {
+              title
+              text
+              image {
+                altText
+                mediaItemUrl
+                mediaDetails {
+                  height
+                  width
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+      variables: {
+        uri: `${params.media}`,
+      }
+    }, { pollInterval: 500 })
+
+    if (!medium.id)
+      notFound()
+
+    return {
+      data: medium,
+      otherMedia: mediums.nodes.filter(item => item.id !== medium.id)
+    }
+  } catch (error) {
+    console.log(error)
+    notFound()
+  }
+}

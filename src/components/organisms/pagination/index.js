@@ -1,16 +1,15 @@
 'use client'
 import Link from "next/link"
-import React from "react"
+import React, { useMemo } from "react"
 import { PAGE_ITEM_COUNT } from "../../../constants/blog"
 import styles from './styles.module.scss'
 import { LeftArrow } from "../../../assets/left-arrow"
 import { RightArrow } from "../../../assets/right-arrow"
 
 export default function Pagination({ currentPage, itemCount, urlBasis }) {
-  const pagesCount = (() => {
-    let count = itemCount - PAGE_ITEM_COUNT
-    return (Math.ceil(count / PAGE_ITEM_COUNT))
-  })()
+  const pagesCount = useMemo(() => {
+    return (Math.ceil(itemCount / PAGE_ITEM_COUNT))
+  }, [itemCount])
 
   const buttons = (() => {
     let arr = []
@@ -27,7 +26,7 @@ export default function Pagination({ currentPage, itemCount, urlBasis }) {
   return (
     <div className={styles.wrapper}>
       <Link href={
-        currentPage > 1
+        currentPage >= 3
           ? `${urlBasis}/strona/${currentPage - 1}`
           : `${urlBasis}`
       }
@@ -35,10 +34,17 @@ export default function Pagination({ currentPage, itemCount, urlBasis }) {
         <LeftArrow />
       </Link>
       <div className={styles.center}>
-        {itemCount < 51 ? (
+        {pagesCount < 6 ? (
           <>
             {buttons.map(el => (
-              <Link className={currentPage === el ? styles.active : ''} key={el} href={`${urlBasis}/strona/${el}`}>
+              <Link
+                className={currentPage === el ? styles.active : ''}
+                key={el}
+                href={
+                  el !== 1
+                    ? `${urlBasis}/strona/${el}`
+                    : `${urlBasis}`}
+              >
                 {el}
               </Link>
             ))}

@@ -1,0 +1,7 @@
+.wrapper {
+  h2 {
+    margin-bottom: 36px;
+    text-align: center;
+    font-size: clamp(32px, calc(36vw/7.68), 48px);
+  }
+}

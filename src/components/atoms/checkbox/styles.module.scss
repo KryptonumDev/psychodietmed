@@ -1,0 +1,78 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  gap: 12px;
+  background: var(--neutral-900);
+  border: 1px solid var(--neutral-800);
+  border-radius: 2px;
+  transition: border-color .3s var(--easing);
+  cursor: pointer;
+
+  &.errored {
+    border-color: #EE6470;
+  }
+
+  .error {
+    position: absolute;
+    left: 0;
+    top: -2px;
+    transform: translateY(-100%);
+    color: #EE6470;
+    font-size: 1rem;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+
+  input:focus-visible~.checkbox {
+    outline: 2px solid #DEAFB8;
+    outline-offset: 5px;
+  }
+
+  input:checked~.checkbox {
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  .text {
+    font-size: clamp(16rem, calc(16vw/7.68), 24rem);
+    line-height: 140%;
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+    }
+
+    a {
+      text-decoration: underline;
+    }
+  }
+
+  .checkbox {
+    border: 2px solid #DEAFB8;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    position: relative;
+    min-width: 30px;
+
+    &::after {
+      content: url('/check-mark.png');
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 22px;
+      height: 22px;
+      opacity: 0;
+      transition: opacity 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    }
+  }
+}

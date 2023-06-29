@@ -1,3 +1,4 @@
 export const removeWrap = (text) => {
-  return text.replace(/^<p>/, '').replace(/<\/p>$/, '');
+  if(!text) return ''
+  return text?.replace(/^<p>/, '')?.replace(/<\/p>$/, '');
 }

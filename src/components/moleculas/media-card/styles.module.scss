@@ -1,0 +1,20 @@
+.wrapper {
+  display: block;
+
+  .image {
+    aspect-ratio: 405/328 !important;
+    margin-bottom: 20px;
+    width: 100% !important;
+    height: auto !important;
+
+    img {
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 20px;
+    }
+  }
+
+  p {
+    font-size: clamp(24rem, calc(28vw/7.68), 36rem);
+    color: #194574;
+  }
+}
