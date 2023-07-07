@@ -25,7 +25,7 @@ export default function Hero({ data: { title, proffesional: { personImage, proff
           <p>Specjalizuję się w:</p>
           <div>
             {specialisations.map(el => (
-              <span>
+              <span key={el.title}>
                 {el.title}
               </span>
             ))}

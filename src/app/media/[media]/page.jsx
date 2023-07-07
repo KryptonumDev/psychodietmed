@@ -20,7 +20,7 @@ export default async function Post({ params }) {
   return (
     <>
       <main>
-        <Hero title={data.title} excerpt={data.excerpt} dateGmt={data.dateGmt} image={data.featuredImage.node} />
+        <Hero title={data.title} excerpt={data.content} dateGmt={data.dateGmt} image={data.featuredImage.node} />
         {data.media?.twoColumnFlexMedia?.image && (
           <Flex data={data.media.twoColumnFlexMedia} />
         )}
@@ -31,7 +31,9 @@ export default async function Post({ params }) {
           <Interview data={data.media.interviewSection} />
         )}
         <Contact prev={data.previous} next={data.next} currPage={data.title} />
-        <OtherMedia data={otherMedia} />
+        {otherMedia.length > 0 && (
+          <OtherMedia data={otherMedia} />
+        )}
       </main>
     </>
   )
@@ -46,6 +48,7 @@ async function getData(params) {
           nodes {
             id
             title
+            excerpt
             slug
             featuredImage {
               node {
@@ -61,6 +64,7 @@ async function getData(params) {
         }
         medium(id: $uri, idType: URI) {
           id
+          content
           excerpt
           dateGmt
           title

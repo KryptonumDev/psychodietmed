@@ -1,0 +1,29 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 483fr 731fr;
+  justify-content: space-between;
+  align-items: center;
+  gap: clamp(16px, calc(36vw/7.68), 64px);
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+
+  p+p {
+    margin-top: clamp(12px, calc(16vw/7.68), 20px);
+  }
+
+  h2 {
+    margin-bottom: clamp(20px, calc(24vw/7.68), 28px);
+  }
+
+  .image {
+    width: 100% !important;
+    height: auto !important;
+
+    @media (max-width: 640px) {
+      max-width: 483px;
+      margin: 0 auto;
+    }
+  }
+}

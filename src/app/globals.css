@@ -7,7 +7,10 @@ body {
   font-size: 16rem;
   font-weight: 500;
   background: #FFFEFE;
+  max-width: 100%;
   /* overflow-x: hidden; */
+
+  font-family: var(--font-satoshi), sans-serif;
 }
 
 :root {
@@ -60,6 +63,8 @@ main {
 }
 
 @media (max-width: 1439px) {
+
+
   main {
     padding: 0 clamp(16px, calc(32vw/7.68), 80px);
   }

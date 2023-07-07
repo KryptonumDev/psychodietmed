@@ -43,6 +43,7 @@ async function getData() {
           nodes {
             id
             title
+            excerpt
             slug
             featuredImage {
               node {

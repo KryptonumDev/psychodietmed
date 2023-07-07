@@ -1,0 +1,233 @@
+.slide {
+  width: 100%;
+  height: auto;
+  position: relative;
+
+  .svg {
+    position: absolute;
+    top: clamp(28px, 5.2083333333vw, 40px); 
+    right: clamp(28px, 3.6458333333vw, 48px);
+    width: clamp(32px, calc(50vw/7.68), 58px);
+    @media (max-width: 976px) {
+      display: none;
+    }
+  }
+
+  .content{
+    @media (max-width: 976px) {
+      max-height: 440px;
+      overflow: auto;
+    }
+  }
+
+  .middle{
+    margin-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+
+    @media (max-width: 976px) {
+      flex-direction: column;
+    }
+  }
+
+  .bottom{
+    margin-top: 32px;
+    display: grid;
+    gap: 32px;
+    align-items: center;
+    grid-template-columns: auto 686fr;
+
+    @media (max-width: 976px) {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: flex-start;
+    }
+  }
+
+  padding: clamp(16px, calc(32vw/7.68), 36px) clamp(16px, calc(32vw/7.68), 48px);
+  background: #FFFFFF;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+
+  .slideAuthor {
+    max-width: 532px;
+  }
+
+  .slideText {
+    max-width: 584px;
+    max-height: 400px;
+    padding-right: 32px;
+    overflow: auto;
+    margin: 0 auto;
+
+    @media (max-width: 976px) {
+      margin: unset;
+    }
+  }
+
+  .info{
+    p{
+      display: flex;
+      gap: 12px;
+      font-weight: 500;
+      color: #194574;
+      margin-top: 16px;
+      font-size: clamp(14rem, calc(16vw/7.68), 20rem);
+  
+      @media (max-width: 370px) {
+        font-size: clamp(0rem, calc(14vw/3.7), 14rem);
+      }
+
+      &:first-child{
+        margin-top: 0;
+      }
+    }
+
+    .illnes{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      margin-top: 12px;
+    }
+  }
+
+  .slideImages {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 24px;
+    max-height: 400px;
+
+    @media (max-width: 976px) {
+      width: 100%;
+      max-height: unset;
+      max-width: 600px;
+    }
+  }
+
+  .slideBoldText {
+    font-size: clamp(28rem, calc(36vw/7.68), 48rem);
+    line-height: 124%;
+    font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
+    color: #194574;
+    padding-bottom: 80px;
+
+    @media (max-width: 380px) {
+      padding-bottom: 0;
+    }
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(28vw/3.7), 28rem);
+    }
+  }
+
+  .differences{
+    svg{
+      width: 26px;
+      min-width: 26px;
+      height: 26px;
+    }
+
+    .differences_title{
+      color: #194574;
+      font-size: clamp(14rem, calc(16vw/7.68), 20rem);
+  
+      @media (max-width: 370px) {
+        font-size: clamp(0rem, calc(14vw/3.7), 14rem);
+      }
+    }
+
+    p{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 16px;
+      font-size: clamp(16rem, calc(20vw/7.68), 24rem);
+  
+      @media (max-width: 370px) {
+        font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+      }
+    }
+  }
+
+  .slideLink {
+    height: fit-content;
+    color: #194574;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    justify-content: flex-end;
+    width: fit-content;
+    margin-left: auto;
+    margin-top: 8px;
+    font-size: clamp(16rem, calc(20vw/7.68), 20rem);
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+    }
+
+    @media (max-width: 976px) {
+      margin: unset;
+      margin-top: 32px;
+    }
+
+    svg{
+      margin-top: 4px;
+    }
+  }
+
+  .image {
+    img {
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    width: 100% !important;
+    height: 336px !important;
+
+    @media (max-width: 976px) {
+      width: 100%;
+      height: 100% !important;
+    }
+  }
+
+  .after {
+    margin-bottom: 64px;
+
+    @media (max-width: 740px) {
+      margin-bottom: 0;
+    }
+  }
+
+  .before {
+    margin-top: 64px;
+
+
+    @media (max-width: 740px) {
+      margin-top: 0;
+    }
+  }
+
+  .slideAuthor {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+
+    .slideAuthorName {
+      line-height: 124%;
+      font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
+      color: #194574;
+      font-size: clamp(20rem, calc(24vw/7.68), 32rem);
+
+      @media (max-width: 370px) {
+        font-size: clamp(0rem, calc(20vw/3.7), 20rem);
+      }
+    }
+
+    .slideAuthorImage {
+      width: clamp(64px, calc(88vw/7.68), 96px) !important;
+      height: clamp(64px, calc(88vw/7.68), 96px) !important;
+    }
+  }
+}

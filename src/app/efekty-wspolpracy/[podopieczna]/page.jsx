@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation"
 import { gql } from "@apollo/client"
 import client from "../../../apollo/apolo-client"
-import Hero from "@/components/sections/case-hero"
+import Hero from "@/components/sections/hero-case"
 import Cards from "@/components/sections/case-result-cards"
 import ReviewsSlider from "@/components/sections/reviews-slider"
 
@@ -15,13 +15,11 @@ import ReviewsSlider from "@/components/sections/reviews-slider"
 export default async function Post({ params }) {
   const { data, other } = await getData(params)
   return (
-    <>
-      <main>
-        <Hero data={data.histori.information} />
-        <Cards data={data.histori.resultsSection} />
-        <ReviewsSlider data={{ title: 'Poznaj inne historie', text: 'Dowiedz się, jaka zmiana zaszła w życiu naszych pacjentek', comments: other }} />
-      </main>
-    </>
+    <main>
+      <Hero data={data.histori.information} />
+      <Cards data={data.histori.resultsSection} />
+      <ReviewsSlider data={{ title: 'Poznaj inne historie', text: 'Dowiedz się, jaka zmiana zaszła w życiu naszych pacjentek', comments: other }} />
+    </main>
   )
 }
 

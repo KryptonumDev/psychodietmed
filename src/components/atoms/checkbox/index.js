@@ -8,7 +8,7 @@ export default function Checkbox({ text, name, register, errors, error }) {
       <span className={styles.checkbox} />
       <div className={styles.text} dangerouslySetInnerHTML={{ __html: text }} />
       {error && (
-        <>{errors[name] && <span className={styles.error}><Error /> {error}</span>}</>
+        <>{errors[name] && <span className={styles.error}>{error}</span>}</>
       )}
     </label>
   )

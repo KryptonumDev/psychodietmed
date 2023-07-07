@@ -13,8 +13,21 @@
     }
   }
 
-  p {
+  .title {
     font-size: clamp(24rem, calc(28vw/7.68), 36rem);
     color: #194574;
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(24vw/3.7), 24rem);
+    }
+  }
+
+  .text{
+    font-size: clamp(14rem, calc(16vw/7.68), 20rem);
+    margin-top: 16px;
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(14vw/3.7), 14rem);
+    }
   }
 }

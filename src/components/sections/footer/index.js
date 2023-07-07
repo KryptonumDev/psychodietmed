@@ -72,7 +72,7 @@ export default function Footer() {
             <div key={index} className={styles.link_wrap}>
               <Link href={item.url}>{item.name}</Link>
               {item.subpages.map(el => (
-                <Link href={el.url}>{el.name}</Link>
+                <Link key={el.url} href={el.url}>{el.name}</Link>
               ))}
             </div>
           ))}

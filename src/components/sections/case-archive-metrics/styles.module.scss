@@ -1,0 +1,124 @@
+.wrapper {
+  background: linear-gradient(44deg, #E4EEF7 0%, #FFFEFD 65.45%);
+  padding: clamp(24px, calc(48vw/7.68), 48px) clamp(16px, calc(36vw/7.68), 80px);
+  margin: 0 -80px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 36px;
+
+  @media (max-width: 340px) {
+    gap: 30px;
+  }
+
+  @media (max-width: 1439px) {
+    border-radius: 0px;
+    margin: 0 calc(-1 * clamp(16px, calc(32vw/7.68), 80px));
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    width: 250px;
+
+    @media (max-width: 680px) {
+      width: 200px;
+    }
+
+    @media (max-width: 550px) {
+      width: 150px;
+    }
+
+    @media (max-width: 380px) {
+      width: 130px;
+    }
+
+    @media (max-width: 340px) {
+      width: 118px;
+    }
+
+    p {
+      color: #194574;
+      font-size: clamp(16rem, calc(24vw/7.68), 32rem);
+
+      @media (max-width: 370px) {
+        font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+      }
+    }
+
+    strong {
+      font-size: clamp(24rem, calc(40vw/7.68), 64rem);
+      line-height: 124%;
+      display: block;
+      margin-bottom: 8px;
+
+      @media (max-width: 370px) {
+        font-size: clamp(0rem, calc(24vw/3.7), 24rem);
+      }
+    }
+
+    svg {
+      margin: 12px auto;
+    }
+
+    &.clock {
+      svg {
+        width: clamp(35px, calc(72vw/7.68), 85px);
+        height: clamp(35px, calc(72vw/7.68), 85px);
+        
+        path {
+          fill: #DEAFB8;
+        }
+      }
+    }
+
+    &.pie {
+      justify-content: flex-end;
+    }
+
+    &.stars {
+      svg {
+        width: clamp(118px, calc(178vw/7.68), 227px);
+      }
+    }
+  }
+}
+
+.graph {
+  --size: clamp(96px, calc(150vw/7.68), 231px);
+  --border: clamp(6px, calc(12vw/7.68), 18px);
+  margin: 0 auto 21px auto;
+  width: var(--size);
+  aspect-ratio: 1;
+  display: inline-grid;
+  position: relative;
+  place-content: center;
+  border-radius: 50%;
+  animation: fillGraph 2s ease-in-out forwards;
+  font-size: clamp(24rem, calc(36vw/7.68), 48rem);
+
+  @media (max-width: 370px) {
+    font-size: clamp(0rem, calc(24vw/3.7), 24rem);
+  }
+
+  border: var(--border) solid #FCF7F8;
+  color: #194574;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  &::before {
+    inset: calc(-1 * var(--border));
+    background:
+      conic-gradient(#DEAFB8 calc(96 *1%), #0000 0);
+    -webkit-mask: radial-gradient(farthest-side, #0000 calc(99% - var(--border)), #000 calc(100% - var(--border)));
+    mask: radial-gradient(farthest-side, #0000 calc(99% - var(--border)), #000 calc(100% - var(--border)));
+  }
+}

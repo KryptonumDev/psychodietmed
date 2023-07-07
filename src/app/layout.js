@@ -8,7 +8,12 @@ import { AppProvider } from '../context/app-context'
 import SubHeader from '@/components/sections/mobile-sub-header'
 // import { ApolloProvider } from '@apollo/client'
 // import client from '../apollo/apolo-client'
-const Satoshi = localFont({ src: '../assets/fonts/satoshi.woff2' })
+const Satoshi = localFont({
+  src: '../assets/fonts/satoshi.woff2',
+  variable: '--font-satoshi',
+  display: 'swap',
+  fallback: ["sans-serif"]
+})
 
 
 export const metadata = {
@@ -32,7 +37,7 @@ export default function RootLayout({ children }) {
     <html lang="pl">
       <AppProvider>
         {/* <ApolloProvider client={client}> */}
-        <body className={`body ${Satoshi.className}`}>
+        <body className={`body ${Satoshi.variable}`}>
           <Header />
           <SubHeader />
           {children}

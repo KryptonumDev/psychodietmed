@@ -1,0 +1,77 @@
+.wrapper {
+  display: flex;
+
+  @media (max-width: 640px) {
+    flex-direction: column-reverse;
+    align-items: flex-end;
+  }
+}
+
+.image {
+  width: calc(50% - 33px);
+  position: relative;
+  z-index: 3;
+
+  height: fit-content;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  @media (max-width: 640px){
+    width: calc(100% - 32px);
+    margin-left: 32px;
+  }
+}
+
+.content {
+  width: calc(50% + 101px);
+  padding: 
+  clamp(28px, calc(28vw/7.68), 48px) 
+  clamp(24px, calc(90vw/7.68), 100px)
+  clamp(28px, calc(28vw/7.68), 48px) 
+  clamp(24px, calc(32vw/7.68), 80px)
+  ;
+  height: fit-content;
+  margin-top: 80px;
+  margin-right: -80px;
+  position: relative;
+  z-index: 2;
+
+  @media (max-width: 640px){
+    margin: 0;
+    width: auto;
+    margin-right: 33px;
+    margin-top: -16px;
+  }
+
+  @media (max-width: 370px) {
+    margin-right: 13px;
+  }
+  background: linear-gradient(44deg, #E4EEF7 0%, #FFFEFD 65.45%);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px 20px 20px 0px;
+
+  @media (max-width: 768px) {
+    border-radius: 20px 0px 20px 20px;
+  }
+  
+  strong {
+    display: block;
+    margin: clamp(8px, calc(12vw/7.68), 16px) 0 clamp(16px, calc(20vw/7.68), 24px) 0;
+
+    font-weight: 500;
+    font-size: clamp(20rem, calc(24vw/7.68), 32rem);
+    line-height: 124%;
+    font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
+    color: #194574;
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(20vw / 3.7), 20rem);
+    }
+  }
+
+  p{
+    font-size: clamp(16rem, calc(20vw/7.68), 24rem);
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(16vw / 3.7), 16rem);
+    }
+  }
+}

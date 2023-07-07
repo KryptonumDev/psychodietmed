@@ -1,8 +1,6 @@
-import Link from 'next/link';
 import { useContext, useState } from 'react';
 import { AppContext } from "../../context/AppContext";
 import { getUpdatedItems } from '../../../functions';
-import CartItem from "./CartItem";
 import { v4 } from 'uuid';
 import { useMutation, useQuery } from '@apollo/client';
 import UPDATE_CART from "../../../mutations/update-cart";

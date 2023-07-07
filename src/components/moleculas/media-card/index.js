@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 import { Image } from "@/components/atoms/image"
 import Link from "next/link"
 
-export default function Card({ data: { slug, title, featuredImage } }) {
+export default function Card({ data: { slug, title, excerpt, featuredImage } }) {
   return (
     <Link href={`/media/${slug}`} className={styles.wrapper}>
       <Image
@@ -13,7 +13,8 @@ export default function Card({ data: { slug, title, featuredImage } }) {
         width={featuredImage.node.mediaDetails.width}
         height={featuredImage.node.mediaDetails.height}
       />
-      <p>{title}</p>
+      <p className={styles.title}>{title}</p>
+      <div className={styles.text} dangerouslySetInnerHTML={{__html: excerpt}}/>
     </Link>
   )
 }
