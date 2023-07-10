@@ -66,9 +66,19 @@ export default async function Home() {
 // }
 
 async function getData() {
-  const { data: { podopieczni, posts, obszaryDzialania, specjalisci, page: { homepage } } } = await client.query({
+  const { data: { global, podopieczni, posts, obszaryDzialania, specjalisci, page: { homepage } } } = await client.query({
     query: gql`
       query Pages {
+        global : page(id: "cG9zdDo3Nzk=") {
+          id
+          global {
+            newsletterGlobal{
+              title
+              text
+              consent
+            }
+          }
+        }
         podopieczni(first: 4) {
           nodes {
             id
@@ -358,11 +368,6 @@ async function getData() {
                 }
               }
             }
-            newsletter : sekcjaZNewsletteremCopy{
-              title
-              text
-              consent
-            }
           }
         }
       }
@@ -384,6 +389,6 @@ async function getData() {
     citate: homepage.sekcjaZCytatemKopia,
     blog: homepage.blog,
     posts: posts.nodes,
-    newsletter: homepage.newsletter
+    newsletter: global.global.newsletterGlobal
   }
 }

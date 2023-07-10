@@ -17,11 +17,11 @@ import { PAGE_ITEM_COUNT } from "../../constants/case"
 // }
 
 export default async function Archive(props) {
-  const { data, faq, podopieczni } = await getData(props)
+  const { data, faq, metrics, podopieczni } = await getData(props)
   return (
     <main>
       <Hero data={data.historyArchive.heroHistoryArchive} />
-      <Metrics data={data.historyArchive.metricsHistoryArchive} />
+      <Metrics data={metrics} />
       <Tiles data={data.historyArchive.servicesHistoryArchive} />
       <CallToActionTransparent data={data.historyArchive.ctaHistoryArchive} />
       <Content currentPage={props?.searchParams?.strona || 1} podopieczni={podopieczni} />
@@ -96,6 +96,11 @@ async function getData(props) {
         global : page(id: "cG9zdDo3Nzk=") {
           id
           global {
+            metricsGlobal{
+              terapyTime
+              happyPacientPercent
+              goopReviewsCount
+            }
             faq {
               title
               text
@@ -143,11 +148,6 @@ async function getData(props) {
                 word
               }
             }
-            metricsHistoryArchive{
-              terapyTime
-              happyPacientPercent
-              goopReviewsCount
-            }
             servicesHistoryArchive{
               title
               text
@@ -179,6 +179,7 @@ async function getData(props) {
     return {
       data: page,
       faq: global.global.faq,
+      metrics: global.global.metricsGlobal,
       podopieczni: podopieczni
     }
   } catch (error) {
