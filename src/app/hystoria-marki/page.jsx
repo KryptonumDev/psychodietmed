@@ -21,7 +21,7 @@ import TwoColumnFlexWithGrid from "@/components/sections/brand-flex-and-grid"
 // }
 
 export default async function Archive() {
-  const { data, metrics, newsletter, posts } = await getData()
+  const { data, metrics, newsletter, posts, blog } = await getData()
   return (
     <main>
       <Hero data={data.brandHistory.heroBrand} />
@@ -35,7 +35,7 @@ export default async function Archive() {
       <TwoColumnFlexWithGrid data={data.brandHistory.flexSecondBrand}/>
 
       <Newsletter data={newsletter}/>
-      <OtherPosts data={posts}/>
+      <OtherPosts data={posts} title={blog.title} text={blog.text}/>
     </main>
   )
 }
@@ -84,6 +84,10 @@ async function getData() {
               title
               text
               consent
+            }
+            blogGlobal{
+              title
+              text
             }
           }
         }
@@ -251,7 +255,8 @@ async function getData() {
       data: page,
       metrics: global.global.metricsGlobal,
       newsletter: global.global.newsletterGlobal,
-      posts: posts.nodes
+      posts: posts.nodes,
+      blog: global.global.blogGlobal
     }
   } catch (error) {
     console.log(error)

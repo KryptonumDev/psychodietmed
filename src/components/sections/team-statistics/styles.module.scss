@@ -1,0 +1,99 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 465fr 765fr;
+  align-items: center;
+  gap: clamp(20px, calc(30vw/7.68), 50px);
+  position: relative;
+
+  @media (max-width: 1024px) {
+    align-items: flex-end;
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+
+  .image {
+    margin-top: clamp(35px, calc(25vw/7.68), 75px);
+    width: 100% !important;
+    height: calc(100% - clamp(35px, calc(25vw/7.68), 75px)) !important;
+    aspect-ratio: unset;
+
+    @media (max-width: 640px) {
+      max-height: 320px !important;
+      margin-top: 8px;
+      margin-right: 27px;
+      width: calc(100% - 27px) !important;
+      height: calc(100% - 8px) !important;
+    }
+
+    img {
+      border-radius: 20px;
+      box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+    }
+  }
+
+  .counters {
+    left: clamp(36px, calc(70vw/7.68), 230px);
+    top: 0;
+    position: absolute;
+    display: flex;
+    gap: 32px;
+    max-width: 520px;
+    padding: clamp(20px, calc(20vw/7.68), 24px) 28px;
+    background: #FFFFFF;
+    box-shadow: 0px 3px 7px rgba(179, 179, 179, 0.4);
+    border-radius: 20px;
+    z-index: 2;
+
+    @media (max-width: 640px) {
+      right: 0;
+      top: 0;
+      left: unset;
+    }
+
+    @media (max-width: 370px) {
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    >div {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      span {
+        font-size: clamp(24rem, calc(36vw/7.68), 48rem);
+        color: #194574;
+      }
+
+      p {
+        font-size: clamp(14rem, calc(16vw/7.68), 20rem);
+
+        @media (max-width: 370px) {
+          font-size: clamp(0rem, calc(14vw/3.7), 14rem);
+        }
+      }
+    }
+  }
+
+  .content {
+    margin-top: 115px;
+
+    @media (max-width: 640px) {
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: clamp(32rem, calc(36vw/7.68), 48rem);
+
+      @media (max-width: 370px) {
+        font-size: clamp(0rem, calc(32vw/3.7), 32rem);
+      }
+    }
+
+    .text {
+      margin: clamp(20px, calc(28vw/7.68), 36px) 0 36px 0;
+    }
+  }
+}

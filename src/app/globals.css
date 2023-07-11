@@ -62,9 +62,11 @@ main {
   overflow: hidden;
 }
 
+.swiper-slide-shadow {
+  display: none !important;
+}
+
 @media (max-width: 1439px) {
-
-
   main {
     padding: 0 clamp(16px, calc(32vw/7.68), 80px);
   }
@@ -122,6 +124,22 @@ p {
   line-height: 140.5%;
   font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
   color: #181818;
+}
+
+p strong {
+  color: #194574;
+  font-size: clamp(20rem, calc(28vw/7.68), 32rem);
+  font-weight: 500;
+}
+
+p+p {
+  margin-top: clamp(12px, calc(16vw/7.68), 20px);
+}
+
+@media (max-width: 370px) {
+  p strong {
+    font-size: clamp(0rem, calc(20vw/3.7), 20rem);
+  }
 }
 
 @media (max-width: 370px) {
@@ -203,7 +221,7 @@ p em {
   position: relative;
   color: #194574;
   font-weight: 700;
-  
+
   /* transition: background-size 0.3s cubic-bezier(0.39, 0.575, 0.565, 1) 0s; */
   /* background-repeat: no-repeat;
   background-position: left 100%; */
@@ -328,7 +346,7 @@ p em {
   padding: 0;
 }
 
-.react-select__input{
+.react-select__input {
   box-shadow: none !important;
   border-radius: 0 !important;
 }
@@ -340,11 +358,12 @@ p em {
   margin-top: 20px;
 
 }
-.lg-react-element img{
+
+.lg-react-element img {
   border-radius: 20px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
 }
 
-.lg-backdrop{
+.lg-backdrop {
   background-color: #000000dc !important;
 }

@@ -1,0 +1,84 @@
+.wrapper {
+  padding: clamp(20px, calc(40vw/7.68), 40px) clamp(18px, calc(32vw/7.68), 48px) clamp(36px, calc(64vw/7.68), 64px) clamp(18px, calc(32vw/7.68), 48px);
+  background: #F1F6FB;
+  margin: 0 -80px;
+  border-radius: 20px;
+
+  @media (max-width: 1439px) {
+    border-radius: 0px;
+    margin: 0 calc(-1 * clamp(16px, calc(32vw/7.68), 80px));
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  .text {
+    margin: clamp(20px, calc(28vw/7.68), 36px) auto 36px auto;
+    max-width: 906px;
+    text-align: center;
+  }
+
+  a {
+    margin: 0 auto;
+  }
+
+  .grid {
+    margin-top: clamp(36px, calc(36vw/7.68), 64px);
+    display: grid;
+    gap: clamp(12px, calc(20vw/7.68), 28px) clamp(20px, calc(20vw/7.68), 36px);
+    grid-template-columns: 1fr 1fr;
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+    }
+
+    .item {
+      padding: clamp(16px, calc(24vw/7.68), 36px) clamp(16px, calc(24vw/7.68), 36px) clamp(20px, calc(28vw/7.68), 42px) clamp(16px, calc(24vw/7.68), 36px);
+      border-radius: 20px;
+      background: #FFF;
+      box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+      display: grid;
+      gap: clamp(12px, calc(24vw/7.68), 24px);
+      grid-template-columns: clamp(40px, calc(50vw/7.68), 60px) 1fr;
+
+      @media (max-width: 1024px) and (min-width: 641px) {
+        grid-template-columns: 1fr;
+        text-align: center;
+
+        .image{
+          margin: 0 auto;
+        }
+      }
+
+      @media (max-width: 370px) {
+        grid-template-columns: clamp(30px, calc(40vw/3.7), 40px) 1fr;
+      }
+
+      .image {
+        width: clamp(40px, calc(50vw/7.68), 60px) !important;
+        height: clamp(40px, calc(50vw/7.68), 60px) !important;
+
+        @media (max-width: 370px) {
+          width: clamp(30px, calc(40vw/3.7), 40px) !important;
+          height: clamp(30px, calc(40vw/3.7), 40px) !important;
+        }
+      }
+
+      .content {
+        h3 {
+          font-size: clamp(20rem, calc(24vw/7.68), 32rem);
+          color: #194574;
+
+          @media (max-width: 370px) {
+            font-size: clamp(0rem, calc(20vw/3.7), 20rem);
+          }
+        }
+
+        >*+* {
+          margin-top: 12px;
+        }
+      }
+    }
+  }
+}

@@ -77,6 +77,10 @@ async function getData() {
               text
               consent
             }
+            blogGlobal{
+              title
+              text
+            }
           }
         }
         podopieczni(first: 4) {
@@ -194,10 +198,6 @@ async function getData() {
           id
           title
           homepage {
-            blog : sekcjaZBlogiemKopia{
-              title
-              text
-            }
             hero : sekcjaPowitalnaKopia {
               pageTitle
               link {
@@ -263,7 +263,7 @@ async function getData() {
               }
             }
             wezwanieDoDzialaniaZSzarymTlemKopia {
-              text
+              content
               link {
                 title
                 url
@@ -387,7 +387,7 @@ async function getData() {
     newReviews: podopieczni.nodes,
     statistics: homepage.sekcjaStatystykiKopia,
     citate: homepage.sekcjaZCytatemKopia,
-    blog: homepage.blog,
+    blog: global.global.blogGlobal,
     posts: posts.nodes,
     newsletter: global.global.newsletterGlobal
   }
