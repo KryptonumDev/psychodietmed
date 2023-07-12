@@ -33,7 +33,6 @@ export default async function Archive() {
       <Metrics data={metrics}/>
       <CallToAction data={data.brandHistory.callToActionBrand}/>
       <TwoColumnFlexWithGrid data={data.brandHistory.flexSecondBrand}/>
-
       <Newsletter data={newsletter}/>
       <OtherPosts data={posts} title={blog.title} text={blog.text}/>
     </main>

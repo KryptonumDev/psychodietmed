@@ -1,0 +1,41 @@
+.wrapper {
+  margin: 0 calc(-1 * clamp(16px, calc(32vw/7.68), 80px));
+  padding: 0 clamp(16px, calc(32vw/7.68), 80px);
+  margin-top: clamp(20px, calc(28vw/7.68), 48px);
+
+  @media (max-width: 480px) {
+    > div{
+      display: grid !important; 
+      gap: 12px;
+    }
+  }
+
+  .cardWrap {
+    width: fit-content;
+    height: 100%;
+    display: flex;
+
+    @media (max-width: 480px) {
+      width: 100%;
+    }
+  }
+}
+
+.control {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  width: fit-content;
+  margin-bottom: 32px;
+  margin-left: auto;
+  
+  @media (max-width: 480px) {
+    display: none;
+  }
+
+  button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}

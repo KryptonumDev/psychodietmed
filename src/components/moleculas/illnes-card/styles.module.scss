@@ -1,0 +1,29 @@
+.wrapper {
+  width: 100%;
+  max-width: clamp(521px, calc(521vw/7.68), 736px);
+  padding: clamp(24px, calc(24vw/7.68), 28px);
+  border-radius: 20px;
+  background: #FFF;
+  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+
+  .flex {
+    display: flex;
+    align-items: center;
+    gap: clamp(12px, calc(16vw/7.68), 20px);
+    margin-bottom: clamp(16px, calc(20vw/7.68), 28px);
+
+    p {
+      font-size: clamp(28rem, calc(32vw/7.68), 36rem);
+      color: #194574;
+
+      @media (max-width: 370px) {
+        font-size: clamp(0rem, calc(32vw/3.7), 28rem);
+      }
+    }
+
+    .icon {
+      width: clamp(76px, calc(107vw/7.68), 140px) !important;
+      height: clamp(76px, calc(107vw/7.68), 140px) !important;
+    }
+  }
+}

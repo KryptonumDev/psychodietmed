@@ -13,7 +13,7 @@ export default function TwoColumnFlexWithGrid({ data: { content, image, gridKafe
       </div>
       <div className={styles.grid}>
         {gridKafelkow.map((item, index) => (
-          <div className={styles.item}>
+          <div key={index} className={styles.item}>
             <div className={styles.text} dangerouslySetInnerHTML={{ __html: item.content }} />
             <Image className={styles.image} src={item.image.mediaItemUrl} alt={item.image.altText} width={item.image.mediaDetails.width} height={item.image.mediaDetails.height} />
           </div>

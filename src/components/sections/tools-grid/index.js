@@ -7,7 +7,7 @@ export default function Grid({ data: { repeater } }) {
   return (
     <>
       {repeater.map(({ image, title, description, link, illnes }, index) => (
-        <section className={styles.wrapper}>
+        <section key={index + title} className={styles.wrapper}>
           <Image quality={100} aspectRatio={true} className={styles.image} width={image.mediaDetails.width} height={image.mediaDetails.height} src={image.mediaItemUrl} alt={image.altText} />
           <div className={styles.content}>
             <h2>{title}</h2>

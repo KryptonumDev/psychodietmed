@@ -1,0 +1,11 @@
+.wrapper {
+  margin: 0 calc(-1 * clamp(16px, calc(32vw/7.68), 80px));
+  padding: 0 clamp(16px, calc(32vw/7.68), 80px);
+  margin-top: clamp(20px, calc(28vw/7.68), 48px);
+
+  .cardWrap {
+    width: fit-content;
+    height: 100%;
+    display: flex;
+  }
+}

@@ -1,0 +1,15 @@
+.wrapper{
+  .text{
+    margin-right: 120px;
+    max-width: 765px;
+    margin-bottom: -40px;
+    
+    @media (max-width: 768px) {
+      margin-right: 0;
+      margin-bottom: 18px;
+    }
+    h2{
+      margin-bottom: 28px;
+    }
+  }
+}

@@ -1,0 +1,42 @@
+.wrapper {
+  width: clamp(260px, calc(300vw/7.68), 400px);
+  min-height: clamp(110px, calc(144vw/7.68), 236px);
+  padding: clamp(16px, calc(20vw/7.68), 24px) clamp(16px, calc(20vw/7.68), 24px) clamp(20px, calc(24vw/7.68), 28px) clamp(16px, calc(20vw/7.68), 24px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  @media (max-width: 480px) {
+    width: 100%;
+  }
+
+  &.card-1{
+    border-radius: 20px;
+    background: #DEAFB8;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+  }
+
+  &.card-2{
+    border-radius: 20px;
+    background: #F1F6FB;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+  }
+
+  &.card-3{
+    border-radius: 20px;
+    background: #194574;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+
+    p{
+      color: #fff;
+    }
+  }
+
+  &.card-4{
+    border-radius: 20px;
+    border: 2px solid #DEAFB8;
+    background: #FFF;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+  }
+}
