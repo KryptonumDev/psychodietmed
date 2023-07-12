@@ -367,3 +367,91 @@ p em {
 .lg-backdrop {
   background-color: #000000dc !important;
 }
+
+.not-found {
+  border-radius: 20px;
+  background: #F1F6FB;
+  padding: 48px clamp(16px, calc(36vw/7.68), 58px) 0px 0px;
+  grid-template-columns: 494fr 730fr;
+  align-items: center;
+  gap: 0 !important;
+}
+
+@media (max-width: 1440px) {
+
+  .not-found {
+    margin-left: clamp(16px, calc(32vw/7.68), 80px);
+    margin-right: clamp(16px, calc(32vw/7.68), 80px);
+  }
+  
+}
+
+.not-found .content {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.not-found .content a {
+  margin: 36px auto 0 auto;
+}
+
+.not-found h2 {
+  font-size: clamp(32rem, calc(36vw/7.68), 48rem);
+  margin-bottom: clamp(8px, calc(12vw/7.68), 16px);
+}
+
+.not-found h1 {
+  font-size: clamp(96px, calc(96vw/7.68), 200px);
+}
+
+.not-found .image {
+  margin-top: auto;
+  width: 100% !important;
+  height: auto !important;
+  min-width: 340px;
+}
+
+@media (max-width: 768px) {
+  .not-found .content {
+    text-align: left;
+    margin-left: 24px;
+  }
+
+  .not-found .content a {
+    margin: 36px 0 0 0;
+  }
+}
+
+@media (max-width: 680px) {
+  .not-found .image {
+    min-width: 300px;
+  }
+}
+
+@media (max-width: 640px) {
+  .not-found{
+    display: flex !important;
+    flex-direction: column-reverse;
+    padding: 24px 16px 0px 16px;
+    text-align: center;
+  }
+  .not-found .content {
+    text-align: center;
+    margin-left: 0;
+  }
+  .not-found a {
+    margin: 36px auto 0 auto !important;
+  }
+  .not-found .image {
+    min-width: unset;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+
+
+@media (max-width: 370px) {
+  .not-found h2 {
+    font-size: clamp(0rem, calc(32vw/3.7), 32rem);
+  }
+}
