@@ -14,19 +14,19 @@ const urlSystem = [
     subpages: [
       {
         name: 'Zespół',
-        url: '/o-kliencie/zespol'
+        url: '/zespol'
       },
       {
         name: 'Historia marki',
-        url: '/o-kliencie/historia-marki'
+        url: '/historia-marki'
       },
       {
         name: 'Media',
-        url: '/o-kliencie/media'
+        url: '/media'
       },
       {
         name: 'Kontakt',
-        url: '/o-kliencie/kontakt'
+        url: '/kontakt'
       }
     ]
   },
@@ -36,19 +36,19 @@ const urlSystem = [
     subpages: [
       {
         name: 'Jak działamy',
-        url: '/dla-pacjenta/jak-dzialamy'
+        url: '/wspolpraca'
       },
       {
         name: 'Efekty współpracy',
-        url: '/dla-pacjenta/efekty-wspolpracy'
+        url: '/efekty-wspolpracy'
       },
       {
         name: 'Pakiety',
-        url: '/dla-pacjenta/pakiety'
+        url: '/pakiety'
       },
       {
         name: 'Narzędzia',
-        url: '/dla-pacjenta/narzedzia'
+        url: '/narzedzia'
       },
     ]
   },
@@ -58,7 +58,7 @@ const urlSystem = [
     subpages: [
       {
         name: 'Akademia',
-        url: '/dla-specjalisty/akademia'
+        url: '/akademia'
       }
     ]
   },

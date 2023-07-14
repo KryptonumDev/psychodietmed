@@ -18,12 +18,12 @@ import Steps from "@/components/sections/cooperate-steps";
 // }
 
 export default async function Wspolpraca() {
-  const { data, activities, faq, metrics } = await getData()
+  const { data, activities, faq, metrics, specialisations } = await getData()
 
   return (
     <main>
       <Hero data={data.cooperate.heroCooperate} />
-      <Steps data={data.cooperate.stepsCooperate} />
+      <Steps data={data.cooperate.stepsCooperate} specialisations={specialisations}/>
       <CallToAction data={data.cooperate.ctaCooperate} />
       <Specialisations data={data.cooperate.specialisationsCooperate} activities={activities} />
       <TwoColumnFlex data={data.cooperate.flexCooperate} />
@@ -50,7 +50,7 @@ export default async function Wspolpraca() {
 // }
 
 async function getData() {
-  const { data: { global, page, obszaryDzialania } } = await client.query({
+  const { data: { global, page, obszaryDzialania, specjalizacje } } = await client.query({
     query: gql`
       query Pages {
         global : page(id: "cG9zdDo3Nzk=") {
@@ -231,6 +231,19 @@ async function getData() {
             }
           }
         }
+        specjalizacje(first: 1000) {
+          nodes {
+            id
+            slug
+            title
+            profesje {
+              nodes {
+                name
+                slug
+              }
+            }
+          }
+        }
       }
     `,
   }, { pollInterval: 500 })
@@ -239,6 +252,7 @@ async function getData() {
     data: page,
     activities: obszaryDzialania.nodes,
     faq: global.global.faq,
-    metrics: global.global.metricsGlobal
+    metrics: global.global.metricsGlobal,
+    specialisations: specjalizacje.nodes
   }
 }
