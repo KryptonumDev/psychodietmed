@@ -12,6 +12,8 @@ import Citate from "@/components/sections/citate";
 import OtherPosts from "@/components/sections/other-posts";
 import Newsletter from "@/components/sections/newsletter";
 import StepsToConsultation from "@/components/sections/steps-to-consultation";
+import Compare from "@/components/sections/pdm-compare";
+import Academy from "@/components/sections/academy";
 
 // export async function generateMetadata(props) {
 //   console.log(props)
@@ -21,7 +23,7 @@ import StepsToConsultation from "@/components/sections/steps-to-consultation";
 // }
 
 export default async function Home() {
-  const { hero, flex, specialisationsSection, activities, cta, specialists, stepsToConsultation, newsletter, ctaGray, reviews, newReviews, statistics, citate, blog, posts } = await getData()
+  const { academy, compare, hero, flex, specialisationsSection, activities, cta, specialists, stepsToConsultation, newsletter, ctaGray, reviews, newReviews, statistics, citate, blog, posts } = await getData()
 
   const locReviews = { ...reviews }
 
@@ -37,15 +39,16 @@ export default async function Home() {
     <main className="overflow">
       <Hero data={hero} />
       <Flex data={flex} />
+      <Compare data={compare} />
       <Specialisations data={specialisationsSection} activities={activities} />
       <CallToActionTransparent data={cta} />
       <Specialists data={specialists} />
-      {/* <StepsToConsultation data={stepsToConsultation} /> */}
+      <StepsToConsultation data={stepsToConsultation} specialists={specialists} />
       <CallToActionGray data={ctaGray} />
       <ReviewsSlider data={locReviews} />
       <StatisticsFlex data={statistics} />
       <Citate data={citate} />
-      {/* akademia */}
+      <Academy data={academy} />
       <OtherPosts data={posts} title={blog.title} text={blog.text} />
       <Newsletter data={newsletter} />
     </main>
@@ -225,6 +228,18 @@ async function getData() {
                 }
               }
             }
+            compare: sekcjaZPorownaniem{
+              title
+              text
+              psychoterapeuta
+              psychodietyk
+              psychoterapeutaPsychodietetyk
+              cta
+              link{
+                title
+                url
+              }
+            }
             casestudie : sekcjaZCaseStudieKopia{
               content
               image {
@@ -249,10 +264,6 @@ async function getData() {
             }
             sekcjaJakUmowicKonsultacjeKopia{
               title
-              steps{
-                title
-                content
-              }
               image{
                 altText
                 mediaItemUrl
@@ -261,6 +272,19 @@ async function getData() {
                   width
                 }
               }
+              titleFirst
+              textFirst
+              illnes{
+                ... on Specjalizacja {
+                  id
+                  slug
+                  title
+                }
+              }
+              titleSecond
+              textSecond
+              titleThird
+              textThird
             }
             wezwanieDoDzialaniaZSzarymTlemKopia {
               content
@@ -367,6 +391,34 @@ async function getData() {
                   width
                 }
               }
+              image{
+                altText
+                mediaItemUrl
+                mediaDetails {
+                  height
+                  width
+                }
+              }
+            }
+            academy : sekcjaAkademia{
+              title
+              text
+              grid{
+                title
+                text
+                link{
+                  title
+                  url
+                }
+                image{
+                  altText
+                  mediaItemUrl
+                  mediaDetails {
+                    height
+                    width
+                  }
+                }
+              }
             }
           }
         }
@@ -389,6 +441,8 @@ async function getData() {
     citate: homepage.sekcjaZCytatemKopia,
     blog: global.global.blogGlobal,
     posts: posts.nodes,
-    newsletter: global.global.newsletterGlobal
+    newsletter: global.global.newsletterGlobal,
+    compare: homepage.compare,
+    academy: homepage.academy,
   }
 }

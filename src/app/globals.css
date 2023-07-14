@@ -194,7 +194,7 @@ h1 em {
   bottom: -14px;
   right: -14px;
   left: -14px;
-  z-index: -1;
+  z-index: 0;
 }
 
 .underline-third {
@@ -213,7 +213,7 @@ h1 em {
   height: 10px;
   right: -5px;
   left: -5px;
-  z-index: -1;
+  z-index: 0;
 }
 
 p em {
