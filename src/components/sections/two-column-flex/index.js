@@ -3,9 +3,9 @@ import styles from "./styles.module.scss"
 import Link from "next/link"
 import { Image } from "@/components/atoms/image"
 
-export default function TwoColumnFlex({ data: { content, link, image }, reverse }) {
+export default function TwoColumnFlex({ data: { content, link, image } }) {
   return (
-    <section className={`${styles.wrapper} ${reverse ? styles.reverse : ''}`}>
+    <section className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles.text} dangerouslySetInnerHTML={{ __html: content }} />
         {link && (

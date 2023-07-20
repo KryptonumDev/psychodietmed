@@ -72,25 +72,6 @@ export default function CartItemsContainer() {
     }
   };
 
-  // Clear the entire cart.
-  const handleClearCart = (event) => {
-
-    event.stopPropagation();
-
-    if (clearCartProcessing) {
-      return;
-    }
-
-    clearCart({
-      variables: {
-        input: {
-          clientMutationId: v4(),
-          all: true
-        }
-      },
-    });
-  }
-
   return (
     <div>
       {cart ? (

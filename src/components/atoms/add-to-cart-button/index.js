@@ -10,11 +10,16 @@ import GET_CART from "../../../queries/get-cart";
 import ADD_TO_CART from "../../../mutations/add-to-cart";
 import client from "../../../apollo/apolo-client";
 
-export default function AddToCart({ product }) {
+export default function AddToCart({ variationId, quantity, product }) {
 
   const productQryInput = {
-    clientMutationId: v4(), // Generate a unique id.
+    clientMutationId: v4(),
     productId: product.productId,
+    quantity: quantity || 1,
+    variationId: variationId || null,
+    // addons: {
+    //   fieldName: "title",
+    // }
   };
 
   const [cart, setCart] = useContext(AppContext);
@@ -29,7 +34,6 @@ export default function AddToCart({ product }) {
       // Update cart in the localStorage.
       const updatedCart = getFormattedCart(data);
       localStorage.setItem('woo-next-cart', JSON.stringify(updatedCart));
-
       // Update cart data in React Context.
       setCart(updatedCart);
     }
@@ -44,7 +48,8 @@ export default function AddToCart({ product }) {
     variables: {
       input: productQryInput,
     },
-    onCompleted: () => {
+    onCompleted: (res) => {
+
       // On Success:
       // 1. Make the GET_CART query to update the cart with new values in React context.
       refetch();
@@ -53,6 +58,7 @@ export default function AddToCart({ product }) {
       setShowViewCart(true)
     },
     onError: (error) => {
+
       if (error) {
         setRequestError(error?.graphQLErrors?.[0]?.message ?? '');
       }
@@ -65,20 +71,21 @@ export default function AddToCart({ product }) {
   };
 
   return (
-    <div>
-      <button
-        disabled={addToCartLoading}
-        onClick={handleAddToCartClick}
-      >
-        {addToCartLoading ? 'Adding to cart...' : 'Add to cart'}
-      </button>
+    <div >
       {showViewCart ? (
-        <Link href="/cart">
-          <button>
-            View Cart
-          </button>
+        <Link style={{ position: "relative", zIndex: 3 }} className="link" href="/koszyk">
+          Pokaż koszyk
         </Link>
-      ) : ''}
+      ) : (
+        <button
+          className="link"
+          disabled={addToCartLoading}
+          onClick={handleAddToCartClick}
+          style={{ position: "relative", zIndex: 3 }}
+        >
+          {addToCartLoading ? 'Dodaje do koszyka...' : 'Dodaj do koszyka'}
+        </button>
+      )}
     </div>
   );
 };

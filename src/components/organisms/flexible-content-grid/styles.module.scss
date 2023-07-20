@@ -1,0 +1,48 @@
+.wrapper {
+  h2 {
+    max-width: 660px;
+    font-size: clamp(32rem, calc(36vw/7.68), 48rem);
+
+    @media (max-width: 1024px) {
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(32vw/3.7), 32rem);
+    }
+  }
+}
+
+.grid {
+  margin-top: clamp(20px, calc(28vw/7.68), 36px);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: clamp(16px, calc(16vw/7.68), 32px) clamp(24px, calc(24vw/7.68), 42px);
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+
+  .item {
+    border-radius: 20px;
+    background: #FFF;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+    padding: clamp(24px, calc(24vw/7.68), 28px) clamp(24px, calc(24vw/7.68), 32px) clamp(28px, calc(28vw/7.68), 32px) clamp(24px, calc(24vw/7.68), 32px);
+
+    .icon {
+      margin: 0 auto;
+      height: clamp(36px, calc(45vw/7.68), 55px) !important;
+      width: auto !important;
+    }
+
+    p {
+      margin-top: clamp(8px, calc(12vw/7.68), 12px);
+      text-align: center;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { isEmpty } from "lodash";
 
-export default function Price({ regularPrice = 0, salesPrice }) {
+export default function Price({ quantity = 1, regularPrice = 0, salesPrice }) {
 
   if (isEmpty(salesPrice)) {
     return null;
@@ -25,15 +25,14 @@ export default function Price({ regularPrice = 0, salesPrice }) {
   const productMeta = discountPercent(regularPrice, salesPrice);
 
   return (
-    <h6 className="product-price text-gray-800 font-semibold mr-3 mb-5">
+    <p>
       {/* Regular price */}
-      {productMeta?.discountPercent ? <span className="product-price mr-2">{salesPrice}</span> : null}
+      {/* {productMeta?.discountPercent ? <span dangerouslySetInnerHTML={{ __html: salesPrice }} /> : null} */}
 
       {/* Discounted price */}
-      <span className={productMeta?.strikeThroughClass}>{regularPrice}</span>
-
+      <span dangerouslySetInnerHTML={{ __html: (parseInt(regularPrice) * quantity) + regularPrice.replace(/[0-9]/g, '') }}></span>
       {/* Discount percent */}
-      <span className="product-discount text-green-600 font-bold text-sm font-normal">{productMeta?.discountPercent}</span>
-    </h6>
+      {/* <span dangerouslySetInnerHTML={{ __html: productMeta?.discountPercent }} /> */}
+    </p>
   )
 }

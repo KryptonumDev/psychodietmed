@@ -1,4 +1,4 @@
-.wrapper{
+.wrapper {
   display: grid;
   grid-template-columns: 660fr 547fr;
   gap: clamp(24px, calc(24vw/7.68), 64px);
@@ -8,15 +8,44 @@
     flex-direction: column-reverse;
   }
 
-  .content{
+  .content {
 
-    .link{
+    .link {
       margin-top: 36px;
     }
 
-    .text{
+    .text {
 
-      > * + * {
+      q {
+        border-radius: 20px;
+        background: #F1F6FB;
+        box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+        display: block;
+        color: #194574;
+        font-size: clamp(20rem, calc(24vw/7.68), 28rem);
+        font-weight: 500;
+        line-height: 124%;
+        position: relative;
+
+        padding: clamp(16px, calc(20vw/7.68), 28px) clamp(64px, calc(80vw/7.68), 90px) clamp(20px, calc(24vw/7.68), 28px) clamp(16px, calc(20vw/7.68), 28px);
+
+        @media (max-width: 370px) {
+          font-size: clamp(0rem, calc(20vw/3.7), 20rem);
+        }
+
+        &::after {
+          display: none;
+        }
+
+        &::before {
+          content: url('./../../../assets/quotes.png');
+          position: absolute;
+          top: clamp(16px, calc(20vw/7.68), 28px);
+          right: clamp(20px, calc(28vw/7.68), 36px);  
+        }
+      }
+
+      >*+* {
         margin-top: clamp(8px, calc(16vw/7.68), 20px);
       }
 
@@ -34,7 +63,7 @@
         }
       }
 
-      a{
+      a {
         color: #194574;
         text-decoration: underline;
         font-weight: 700;
@@ -51,7 +80,8 @@
       }
     }
   }
-  .image{
+
+  .image {
     height: 100% !important;
     width: 100% !important;
 
@@ -60,12 +90,12 @@
       min-height: 197px;
       height: auto !important;
 
-      img{
+      img {
         object-position: 0% 23%;
       }
     }
 
-    img{
+    img {
       border-radius: 20px 0px;
       box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
     }

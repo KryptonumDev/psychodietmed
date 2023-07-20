@@ -1,5 +1,5 @@
 import Card from "@/components/moleculas/case-card-extended"
-import Pagination from "@/components/organisms/pagination-case"
+import Pagination from "@/components/organisms/pagination-client-side"
 import React from "react"
 import styles from './styles.module.scss'
 

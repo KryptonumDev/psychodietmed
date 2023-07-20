@@ -2,9 +2,9 @@ import React from "react"
 import styles from "./styles.module.scss"
 import { AnimatePresence, motion } from "framer-motion"
 
-export default function Input({ rows, placeholder, title, name, register, errors, error = 'To pole jest wymagane' }) {
+export default function Input({ className = '', rows, placeholder, title, name, register, errors, error = 'To pole jest wymagane' }) {
   return (
-    <label className={styles.wrapper}>
+    <label className={`${styles.wrapper} ${className}`}>
       <span>{title}</span>
       {rows
         ? <textarea rows={rows} placeholder={placeholder} className={errors[name] ? `${styles.errored} ${styles.input}` : styles.input} {...register} />

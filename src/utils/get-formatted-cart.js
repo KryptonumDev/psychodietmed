@@ -16,7 +16,8 @@ export const getFormattedCart = (data) => {
   let totalProductsCount = 0;
 
   for (let i = 0; i < givenProducts.length; i++) {
-    const givenProduct = givenProducts?.[i]?.product?.node;
+    // if product has variations then pick variation data instead of product data.
+    const givenProduct = givenProducts?.[i]?.variation?.node || givenProducts?.[i]?.product?.node;
     const product = {};
     const total = getFloatVal(givenProducts[i].total);
 
@@ -27,6 +28,11 @@ export const getFormattedCart = (data) => {
     product.price = total / product?.qty;
     product.totalPrice = givenProducts?.[i]?.total ?? '';
     product.image = {
+      mediaDetails: {
+        height: givenProduct?.image?.mediaDetails?.height,
+        width: givenProduct?.image?.mediaDetails?.width
+      },
+      mediaItemUrl: givenProduct?.image?.mediaItemUrl ?? '',
       sourceUrl: givenProduct?.image?.sourceUrl ?? '',
       srcSet: givenProduct?.image?.srcSet ?? '',
       title: givenProduct?.image?.title ?? '',
@@ -38,6 +44,7 @@ export const getFormattedCart = (data) => {
     // Push each item into the products array.
     formattedCart.products.push(product);
   }
+  
 
   formattedCart.totalProductsCount = totalProductsCount;
   formattedCart.totalProductsPrice = data?.cart?.total ?? '';

@@ -5,10 +5,14 @@
   gap: 24px;
   margin-top: 64px;
 
+  button{
+    border: none;
+    background-color: transparent;
+  }
+
   @media (max-width: 640px) {
     gap: 16px;
   }
-
 
   @media (max-width: 520px) {
     display: grid;
@@ -27,6 +31,7 @@
 
     .center{
       grid-area: dots;
+      margin: 0 auto;
     }
 
     .arrow{
@@ -46,7 +51,7 @@
     gap: 8px;
   }
 
-  a{
+  button{
     width: 50px;
     height: 50px;
     display: flex;
@@ -62,10 +67,9 @@
     }
 
     @media (max-width: 520px) {
-      aspect-ratio: 1/1;
-      width: 100%;
-      height: auto;
       font-size: 16rem;
+      width: 50px;
+      height: 50px;
     }
 
     &.active{

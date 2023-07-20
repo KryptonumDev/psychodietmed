@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 import client from "../../apollo/apolo-client";
+import Content from "@/components/sections/cart-content";
 
 // export async function generateMetadata(props) {
 //   console.log(props)
@@ -9,10 +10,11 @@ import client from "../../apollo/apolo-client";
 // }
 
 export default async function Cart() {
-  const { hero } = await getData()
+  // const { hero } = await getData()
 
   return (
     <main>
+      <Content/>
     </main>
   )
 }
@@ -30,19 +32,19 @@ export default async function Cart() {
 //   }
 // }
 
-async function getData() {
-  const { data } = await client.query({
-    query: gql`
-      query Pages {
-        posts{
-          nodes{
-            id
-          }
-        }
-      }
-    `,
-  }, { pollInterval: 500 })
+// async function getData() {
+//   const { data } = await client.query({
+//     query: gql`
+//       query Pages {
+//         posts{
+//           nodes{
+//             id
+//           }
+//         }
+//       }
+//     `,
+//   }, { pollInterval: 500 })
 
-  return {
-  }
-}
+//   return {
+//   }
+// }

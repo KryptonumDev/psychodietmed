@@ -1,0 +1,113 @@
+.wrapper {
+  border-radius: 20px;
+  border: 2px solid #DEAFB8;
+  background: #FFF;
+  padding: clamp(16px, calc(20vw/7.68), 28px) clamp(20px, calc(20vw/7.68), 32px) clamp(20px, calc(20vw/7.68), 32px) clamp(20px, calc(20vw/7.68), 32px);
+  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .image{
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  h3 {
+    margin-top: 16px;
+  }
+
+  .bundle{
+    margin-top: 24px;
+    display: grid;
+    gap: 16px;
+
+    li{
+      display: grid;
+      grid-template-columns: 24px auto;
+      gap: 8px;
+
+      p{
+        font-size: 20rem;
+      }
+    }
+  }
+
+  .variables {
+    margin-top: 24px;
+    display: grid;
+    gap: 12px;
+
+    .group {
+      display: grid;
+      gap: 12px;
+
+      label {
+        display: grid;
+        grid-template-columns: 30px 1fr;
+        align-items: center;
+        gap: 12px;
+        position: relative;
+
+        input{
+          left: 0;
+          top: 0;
+          opacity: 0;
+          pointer-events: none;
+          position: absolute;
+        }
+
+        span{
+          font-size: 20rem;
+        }
+
+        .checkbox {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          border: 2px solid #C8DAEF;
+          position: relative;
+          transition: all .2s cubic-bezier(0.755, 0.05, 0.855, 0.06);
+
+          &::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #194574;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity .2s cubic-bezier(0.755, 0.05, 0.855, 0.06);
+          }
+        }
+
+        input:checked~.checkbox {
+          border: 2px solid #194574;
+          color: #181818;
+
+          &::after {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+
+  .flex {
+    margin-top: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    p {
+      font-size: 20rem;
+    }
+  }
+}

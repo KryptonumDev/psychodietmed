@@ -27,7 +27,9 @@ export default async function Home() {
 
   const locReviews = { ...reviews }
 
-  if (locReviews.comments.length < 4) {
+  if (!locReviews.comments) {
+    locReviews.comments = [...newReviews]
+  } else if (locReviews.comments.length < 4) {
     newReviews.forEach(podopieczny => {
       if (!locReviews.comments.find(comment => comment.id === podopieczny.id) && locReviews.comments.length < 4) {
         locReviews.comments = [...locReviews.comments, podopieczny]
@@ -83,6 +85,30 @@ async function getData() {
             blogGlobal{
               title
               text
+            }
+            bookGlobal{
+              title
+              image{
+                altText
+                mediaItemUrl
+                mediaDetails {
+                  height
+                  width
+                }
+              }
+              titleFirst
+              textFirst
+              illnes{
+                ... on Specjalizacja {
+                  id
+                  slug
+                  title
+                }
+              }
+              titleSecond
+              textSecond
+              titleThird
+              textThird
             }
           }
         }
@@ -262,30 +288,6 @@ async function getData() {
                 url
               }
             }
-            sekcjaJakUmowicKonsultacjeKopia{
-              title
-              image{
-                altText
-                mediaItemUrl
-                mediaDetails {
-                  height
-                  width
-                }
-              }
-              titleFirst
-              textFirst
-              illnes{
-                ... on Specjalizacja {
-                  id
-                  slug
-                  title
-                }
-              }
-              titleSecond
-              textSecond
-              titleThird
-              textThird
-            }
             wezwanieDoDzialaniaZSzarymTlemKopia {
               content
               link {
@@ -431,7 +433,7 @@ async function getData() {
     flex: homepage.casestudie,
     specialisationsSection: homepage.specialisations,
     cta: homepage.cta,
-    stepsToConsultation: homepage.sekcjaJakUmowicKonsultacjeKopia,
+    stepsToConsultation: global.global.bookGlobal,
     ctaGray: homepage.wezwanieDoDzialaniaZSzarymTlemKopia,
     specialists: specjalisci.nodes,
     activities: obszaryDzialania.nodes,

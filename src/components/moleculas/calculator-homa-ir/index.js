@@ -7,7 +7,7 @@ export default function CalculatorHomaIr() {
   const [insulina, setInsulina] = useState(null)
   const [glukoza, setGlukoza] = useState(null)
   const [homa, setHoma] = useState(null)
-  debugger
+  
 
   useEffect(() => {
     if (insulina !== null && glukoza !== null) {

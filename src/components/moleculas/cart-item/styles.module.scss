@@ -1,0 +1,57 @@
+.wrapper {
+  border-radius: 20px;
+  background: #FFF;
+  padding: 16px 20px;
+  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+  margin-top: 16px;
+
+  display: grid;
+  grid-template-columns: 516fr 185fr 185fr auto 88fr;
+  align-items: center;
+  gap: 32px;
+
+  .product {
+    display: grid;
+    grid-template-columns: 142px auto;
+    align-items: center;
+    gap: 16px;
+
+    .image {
+      width: 100% !important;
+      height: auto !important;
+    }
+  }
+
+  .cart {
+    background-color: transparent;
+    border: none;
+    width: fit-content;
+    cursor: pointer;
+  }
+
+  .calculator {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 10px 20px 12px 20px;
+    border-radius: 50px;
+    border: 2px solid#DEAFB8;
+    background: #FFF;
+    width: fit-content;
+
+    input {
+      padding: 8px 12px;
+      width: 42px;
+      text-align: center;
+      border-radius: 10px;
+      border: 1px solid #F2DFE3;
+      background-color: transparent;
+    }
+
+    button {
+      padding: 4px;
+      border: none;
+      background-color: transparent;
+    }
+  }
+}

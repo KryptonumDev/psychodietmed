@@ -273,7 +273,7 @@ p em {
 
 
 .input .react-select__control {
-  padding: 14px 28px;
+  padding: clamp(6px, calc(6vw/7.68), 12px) 28px;
   background: #FFFFFF;
   border: 2px solid #DEAFB8;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
@@ -281,8 +281,12 @@ p em {
   width: 100%;
   min-height: 33px;
   line-height: 160%;
-  font-size: clamp(16rem, calc(20vw/7.68), 24rem);
+  font-size: clamp(16rem, calc(16vw/7.68), 20rem);
   font-weight: 500;
+}
+
+.input .react-select__control:hover {
+  border-color:#DEAFB8;
 }
 
 @media (max-width: 370px) {
@@ -304,7 +308,7 @@ p em {
 }
 
 .input .react-select__indicator {
-  padding: 5px;
+  padding: 0;
 }
 
 .input .react-select__option--is-focused {
@@ -321,6 +325,10 @@ p em {
   min-height: 33px;
   line-height: 160%;
   font-weight: 500;
+}
+
+.input .react-select__indicator-separator{
+  display: none;
 }
 
 @media (max-width: 370px) {

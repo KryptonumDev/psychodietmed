@@ -1,12 +1,10 @@
 'use client'
-import Link from "next/link"
 import React, { useMemo } from "react"
-import { PAGE_ITEM_COUNT } from "../../../constants/case"
 import styles from './styles.module.scss'
 import { LeftArrow } from "../../../assets/left-arrow"
 import { RightArrow } from "../../../assets/right-arrow"
 
-export default function Pagination({ currentPage, itemCount, urlBasis }) {
+export default function Pagination({ changePage, currentPage, itemCount, PAGE_ITEM_COUNT }) {
 
   const pagesCount = useMemo(() => {
     return (Math.ceil(itemCount / PAGE_ITEM_COUNT))
@@ -26,36 +24,34 @@ export default function Pagination({ currentPage, itemCount, urlBasis }) {
 
   return (
     <div className={styles.wrapper}>
-      <Link href={
-        currentPage >= 3
-          ? `${urlBasis}?strona=${currentPage - 1}`
-          : `${urlBasis}`
-      }
+      <button
+        onClick={() => {
+          changePage(currentPage >= 3
+            ? currentPage - 1
+            : 1)
+        }}
         className={`${styles.left} ${styles.arrow}`} >
         <LeftArrow />
-      </Link>
+      </button>
       <div className={styles.center}>
         {pagesCount < 6 ? (
           <>
             {buttons.map(el => (
-              <Link
+              <button
                 className={currentPage === el ? styles.active : ''}
                 key={el}
-                href={
-                  el !== 1
-                    ? `${urlBasis}?strona=${el}`
-                    : `${urlBasis}`}
+                onClick={() => { changePage(el) }}
               >
                 {el}
-              </Link>
+              </button>
             ))}
           </>
         ) : (
           <>
             {currentPage > 3
-              && <Link className={currentPage === 1 ? styles.active : ''} href={`${urlBasis}`} >
+              && <button className={currentPage === 1 ? styles.active : ''} onClick={() => { changePage(1) }} >
                 {1}
-              </Link>
+              </button>
             }
             {currentPage > 4
               && <div className={styles.not}>
@@ -66,23 +62,23 @@ export default function Pagination({ currentPage, itemCount, urlBasis }) {
             {buttons.map((el, index) => {
               if (currentPage < 4 && (index < 6)) { // first 4 pages
                 return (
-                  <Link className={currentPage === el ? styles.active : ''} key={el} href={`${urlBasis}?strona=${el}`}>
+                  <button className={currentPage === el ? styles.active : ''} key={el} onClick={() => { changePage(el) }} >
                     {el}
-                  </Link>
+                  </button>
                 )
               }
               if (currentPage > pagesCount - 3 && (index > pagesCount - 7)) { // last 4 pages
                 return (
-                  <Link className={currentPage === el ? styles.active : ''} key={el} href={`${urlBasis}?strona=${el}`}>
+                  <button className={currentPage === el ? styles.active : ''} key={el} onClick={() => { changePage(el) }} >
                     {el}
-                  </Link>
+                  </button>
                 )
               }
               if (index >= currentPage - 3 && index <= currentPage + 1) { // all othher pages
                 return (
-                  <Link className={currentPage === el ? styles.active : ''} key={el} href={`${urlBasis}?strona=${el}`}>
+                  <button className={currentPage === el ? styles.active : ''} key={el} onClick={() => { changePage(el) }} >
                     {el}
-                  </Link>
+                  </button>
                 )
               }
               return null
@@ -95,21 +91,21 @@ export default function Pagination({ currentPage, itemCount, urlBasis }) {
             }
             {(currentPage === 1 || pagesCount - currentPage > 2)
               && (
-                <Link className={currentPage === pagesCount ? styles.active : ''} href={`${urlBasis}?strona=${pagesCount}`}>
+                <button className={currentPage === pagesCount ? styles.active : ''} onClick={() => { changePage(pagesCount) }}>
                   {pagesCount}
-                </Link>
+                </button>
               )}
           </>
         )}
       </div>
-      <Link href={
-        currentPage < pagesCount
-          ? `${urlBasis}?strona=${currentPage + 1}`
-          : `${urlBasis}?strona=${pagesCount}`
-      }
+      <button onClick={() => {
+        changePage(currentPage < pagesCount
+          ? currentPage + 1
+          : pagesCount)
+      }}
         className={`${styles.right} ${styles.arrow}`}>
         <RightArrow />
-      </Link>
+      </button>
     </div>
   )
 }

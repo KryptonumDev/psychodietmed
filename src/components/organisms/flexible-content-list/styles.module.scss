@@ -1,0 +1,35 @@
+.wrapper {
+  h2 {
+    font-size: clamp(32rem, calc(36vw/7.68), 48rem);
+
+    @media (max-width: 480px) {
+      text-align: center;
+    }
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(32vw/3.7), 32rem);
+    }
+  }
+}
+
+.grid {
+  margin-top: clamp(20px, calc(28vw/7.68), 36px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(16px, calc(16vw/7.68), 24px) clamp(12px, calc(16vw/7.68), 32px);
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+
+  .item {
+    display: flex;
+    gap: 12px;
+
+    .icon {
+      min-width: clamp(30px, calc(30vw/7.68), 38px);
+      width: clamp(30px, calc(30vw/7.68), 38px) !important;
+      height: fit-content !important;
+    }
+  }
+}

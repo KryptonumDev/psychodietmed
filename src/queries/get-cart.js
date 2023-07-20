@@ -18,18 +18,23 @@ query GET_CART {
             averageRating
             reviewCount
             image {
-              id
-              sourceUrl
-              srcSet
               altText
-              title
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
             }
             galleryImages {
               nodes {
                 id
-                sourceUrl
-                srcSet
                 altText
+                mediaItemUrl
+                mediaDetails {
+                  height
+                  width
+                }
+                srcSet
                 title
               }
             }
@@ -48,16 +53,14 @@ query GET_CART {
             salePrice
             image {
               id
-              sourceUrl
-              srcSet
               altText
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
               title
             }
-          }
-          attributes {
-            id
-            name
-            value
           }
         }
         quantity
@@ -81,6 +84,12 @@ query GET_CART {
     feeTotal
     discountTax
     discountTotal
+    # new
+    availableShippingMethods {
+      supportsShippingCalculator
+      packageDetails
+    }
+    needsShippingAddress
   }
 }
 `;
