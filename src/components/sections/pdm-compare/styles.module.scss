@@ -144,6 +144,7 @@
   .rightRounds {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    max-width: 500px;
     margin-top: 28px;
 
     >div {
@@ -274,6 +275,8 @@
   .rightRounds {
     grid-area: rightRounds;
     margin-right: calc(-1 * clamp(3px, calc(3vw/7.68), 14px));
+    margin-left: auto;
+    width: 100%;
 
     >div {
       &:nth-child(1) {

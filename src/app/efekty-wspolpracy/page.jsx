@@ -24,7 +24,7 @@ export default async function Archive(props) {
       <Metrics data={metrics} />
       <Tiles data={data.historyArchive.servicesHistoryArchive} />
       <CallToActionTransparent data={data.historyArchive.ctaHistoryArchive} />
-      <Content currentPage={props?.searchParams?.strona || 1} podopieczni={podopieczni} />
+      <Content  podopieczni={podopieczni} />
       <FAQ data={faq} />
     </main>
   )
