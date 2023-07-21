@@ -25,7 +25,8 @@ export const getFormattedCart = (data) => {
     product.cartKey = givenProducts?.[i]?.key ?? '';
     product.name = givenProduct?.name ?? '';
     product.qty = givenProducts?.[i]?.quantity;
-    product.price = total / product?.qty;
+    product.regularPrice = givenProduct?.regularPrice ?? '';
+    product.price = givenProduct?.price ?? '';
     product.totalPrice = givenProducts?.[i]?.total ?? '';
     product.image = {
       mediaDetails: {
@@ -44,11 +45,14 @@ export const getFormattedCart = (data) => {
     // Push each item into the products array.
     formattedCart.products.push(product);
   }
-  
 
   formattedCart.totalProductsCount = totalProductsCount;
+  formattedCart.subTotalProductPrice = data?.cart?.subtotal ?? '';
   formattedCart.totalProductsPrice = data?.cart?.total ?? '';
+  formattedCart.totalProductsDiscount = data?.cart?.discountTotal ?? '';
+  formattedCart.needsShippingAddress = data?.cart?.needsShippingAddress ?? false;
+  formattedCart.shippingMethods = data?.cart?.availableShippingMethods?.[0]?.rates ?? [];
 
   return formattedCart;
-
 };
+

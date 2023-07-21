@@ -1,0 +1,176 @@
+.wrapper {
+  .desctop {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 64px;
+
+    @media (max-width: 1024px) {
+      gap: 4px;
+      align-items: unset;
+
+      .line{
+        margin-top: 17px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      display: none;
+    }
+  }
+
+  .step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+
+    svg{
+      display: none;
+    }
+
+    &.active{
+      svg{
+        display: block;
+      }
+    }
+
+    >div {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    span {
+      color: #194574;
+      font-size: clamp(16rem, calc(16vw/7.68), 20rem);
+      line-height: 100%;
+    }
+
+    p {
+      font-size: clamp(14rem, calc(14vw/7.68), 16rem);
+
+      line-height: 100%;
+    }
+
+    svg {
+      min-width: 35px;
+    }
+
+    @media (max-width: 1024px) {
+      flex-direction: column;
+
+      p{
+        color: #B5B5B5;
+        transition: .2s color cubic-bezier(0.77, 0, 0.175, 1);
+      }
+
+      span{
+        color: #91B5DE;
+        transition: .2s color cubic-bezier(0.77, 0, 0.175, 1);
+      }
+
+      svg{
+        display: block;
+        opacity: 0;
+        pointer-events: none;
+        transition: .2s opacity cubic-bezier(0.77, 0, 0.175, 1);
+      }
+  
+      &.active{
+        svg{
+          pointer-events: all;
+          opacity: 1;
+        }
+
+        p{
+          color: #181818;
+        }
+
+        span{
+          color: #194574;
+        }
+      }
+    }
+  }
+
+  .line {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: #DEAFB8;
+    border-radius: 5px;
+  }
+}
+
+.mobile {
+  display: none;
+  align-items: center;
+  gap: 10px;
+
+  @media (max-width: 640px) {
+    display: flex;
+    margin-bottom: 36px;
+  }
+
+  p {
+    font-size: 16rem;
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+    }
+  }
+
+  @keyframes p {
+    from {
+      --p: 0
+    }
+  }
+
+  .pie {
+    --p: 20;
+    --b: 2px;
+    --c: #DEAFB8;
+    --w: 72px;
+
+    width: var(--w);
+    aspect-ratio: 1;
+    position: relative;
+    margin: 5px;
+    animation: p 1s .5s both;
+
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    justify-content: center;
+
+    strong {
+      color: #194574;
+      font-size: 16rem;
+      font-weight: 500;
+    }
+
+    span,
+    small {
+      color: #194574;
+      font-size: 14rem;
+      font-weight: 500;
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    &:before {
+      inset: 0;
+      background:
+        radial-gradient(farthest-side, var(--c) 98%, #0000) top/var(--b) var(--b) no-repeat,
+        conic-gradient(var(--c) calc(var(--p)*1%), #F1F6FB 0);
+      -webkit-mask: radial-gradient(farthest-side, #0000 calc(99% - var(--b)), #000 calc(100% - var(--b)));
+      mask: radial-gradient(farthest-side, #0000 calc(99% - var(--b)), #000 calc(100% - var(--b)));
+      background-size: 0 0, auto;
+    }
+  }
+}

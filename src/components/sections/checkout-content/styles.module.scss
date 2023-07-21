@@ -1,17 +1,25 @@
 .wrapper {
-  display: flex;
-  justify-content: space-between;
-  gap: 36px;
 
-  .content {
-    max-width: 655px;
-    width: 100%;
+  h1{
+    text-align: center;
+    margin-bottom: clamp(20px, calc(48vw/7.68), 64px);
   }
 
-  aside {
-    max-width: 405px;
-    width: 100%;
-    position: sticky;
-    top: 120px;
+  .grid{
+    display: flex;
+    justify-content: space-between;
+    gap: 36px;
+  
+    .content {
+      max-width: 655px;
+      width: 100%;
+    }
+  
+    aside {
+      max-width: 405px;
+      width: 100%;
+      position: sticky;
+      top: 120px;
+    }
   }
 }

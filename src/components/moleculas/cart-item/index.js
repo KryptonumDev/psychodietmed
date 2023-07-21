@@ -45,12 +45,20 @@ export default function CartItem({
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.product}>
-        <Image aspectRatio={true} className={styles.image} src={item.image.mediaItemUrl} alt={item.image.altText} width={item.image.mediaDetails?.width} height={item.image.mediaDetails?.height} />
-        <p>{item.name}</p>
-      </div>
-      <div>
-        {('string' !== typeof item.price) ? item.price.toFixed(0) : item.price}
+      <Image aspectRatio={true} className={styles.image} src={item.image.mediaItemUrl} alt={item.image.altText} width={item.image.mediaDetails?.width} height={item.image.mediaDetails?.height} />
+      <p className={styles.title}>{item.name}</p>
+      <div className={styles.price}>
+        {item.regularPrice !== item.price && (
+          <s dangerouslySetInnerHTML={{ __html: item.regularPrice }} />
+        )}
+        <div dangerouslySetInnerHTML={{ __html: item.price }} />
+
+        {item.regularPrice !== item.price && (
+          <small>
+            Najniższa cena<br />
+            <span className={styles.desctop}>z ostatnich 30 dni</span>: <span dangerouslySetInnerHTML={{ __html: item.price }} />
+          </small>
+        )}
       </div>
       <div className={styles.calculator}>
         <button onClick={(event) => { handleQtyChange(event, item.cartKey, productCount - 1) }} aria-label='usuń zbędne z koszyka' disabled={updateCartProcessing}>
@@ -66,9 +74,7 @@ export default function CartItem({
           <Plus />
         </button>
       </div>
-      <div>
-        {('string' !== typeof item.totalPrice) ? item.totalPrice.toFixed(0) : item.totalPrice}
-      </div>
+      <div className={styles.total} dangerouslySetInnerHTML={{ __html: item.totalPrice }} />
       <button className={styles.cart} aria-label='Usuń produkt z koszyka' onClick={(event) => handleRemoveProductClick(event, item.cartKey, products)} >
         <Trash />
       </button>

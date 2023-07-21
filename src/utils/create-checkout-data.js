@@ -33,9 +33,12 @@ export const createCheckoutData = (order) => {
       phone: billingData?.phone,
       company: billingData?.company,
     },
+    customerNote: order.customerNote,
     shipToDifferentAddress: order.billingDifferentThanShipping,
     paymentMethod: order.paymentMethod,
-    isPaid: false,
+    shippingMethod: order.shippingMethod,
+    transactionId: order.transactionId,
+    isPaid: order.isPaid,
   };
 
   if (order.createAccount) {

@@ -6,19 +6,105 @@
   margin-top: 16px;
 
   display: grid;
-  grid-template-columns: 516fr 185fr 185fr auto 88fr;
+  grid-template-columns: 142px 342fr 185fr 185fr auto 88fr;
   align-items: center;
   gap: 32px;
 
-  .product {
-    display: grid;
-    grid-template-columns: 142px auto;
-    align-items: center;
+  @media (max-width: 972px) {
+    grid-template-columns: 142px 342fr 185fr 185fr 88fr;
     gap: 16px;
 
-    .image {
-      width: 100% !important;
-      height: auto !important;
+    .total {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 142px 327fr clamp(80px, calc(100vw/6.4), 120px) auto;
+    grid-template-areas:
+      'image name price cart'
+      'image calculator price cart';
+  }
+
+  @media (max-width: 580px) {
+    grid-template-columns: clamp(110px, calc(170vw/5.8), 170px) auto 34px;
+    gap: 12px;
+    grid-template-areas:
+      'image name cart'
+      'price calculator cart';
+  }
+
+  @media (max-width: 370px) {
+    grid-template-columns: auto auto 34px;
+    grid-template-areas:
+      'image name name'
+      'calculator price  cart';
+  }
+
+  .price {
+    @media (max-width: 768px) {
+      grid-area: price;
+      text-align: right;
+    }
+
+    @media (max-width: 580px) {
+      text-align: left;
+      padding-left: 10px;
+    }
+
+    @media (max-width: 370px) {
+      padding-left: 0;
+    }
+
+    s {
+      color: #8A8A8A;
+      text-decoration-line: line-through;
+      font-feature-settings: 'dlig' on, 'ss04' on, 'ss03' on, 'ss02' on, 'ss01' on, 'salt' on;
+      font-size: clamp(12rem, calc(14vw/7.68), 16rem);
+      margin-bottom: clamp(2px, calc(8vw/7.68), 8px);
+      display: block;
+    }
+
+    small {
+      color: #8A8A8A;
+      font-feature-settings: 'dlig' on, 'ss04' on, 'ss03' on, 'ss02' on, 'ss01' on, 'salt' on;
+      font-size: clamp(9rem, calc(11vw/7.68), 13rem);
+      line-height: 140.5%;
+      margin-top: clamp(2px, calc(8vw/7.68), 8px);
+      display: block;
+      font-weight: 500;
+
+      @media (max-width: 768px) {
+
+        .desctop,
+        br {
+          display: none;
+        }
+      }
+    }
+
+    div {
+      font-size: clamp(14rem, calc(20vw/7.68), 20rem);
+    }
+  }
+
+  .title {
+    @media (max-width: 768px) {
+      grid-area: name;
+      margin-top: auto;
+    }
+
+    @media (max-width: 580px) {
+      margin-bottom: auto;
+    }
+  }
+
+  .image {
+    width: 100% !important;
+    height: auto !important;
+
+    @media (max-width: 768px) {
+      grid-area: image;
     }
   }
 
@@ -27,25 +113,45 @@
     border: none;
     width: fit-content;
     cursor: pointer;
+
+    @media (max-width: 768px) {
+      grid-area: cart;
+      padding-right: 10px;
+    }
   }
 
   .calculator {
     display: flex;
     gap: 8px;
     align-items: center;
-    padding: 10px 20px 12px 20px;
+    padding: clamp(6px, calc(6vw/7.68), 10px) clamp(12px, calc(12vw/7.68), 20px) clamp(8px, calc(8vw/7.68), 12px) clamp(12px, calc(12vw/7.68), 20px);
     border-radius: 50px;
     border: 2px solid#DEAFB8;
     background: #FFF;
     width: fit-content;
 
+    @media (max-width: 768px) {
+      grid-area: calculator;
+      margin-bottom: auto;
+    }
+
+    @media (max-width: 580px) {
+      margin-top: auto;
+    }
+
+    @media (max-width: 380px) {
+      padding: 6px 8px 6px 8px;
+      gap: 3px;
+    }
+
     input {
-      padding: 8px 12px;
-      width: 42px;
+      padding: 8px 2px;
+      width: clamp(30px, calc(36vw/7.68), 42px);
       text-align: center;
       border-radius: 10px;
       border: 1px solid #F2DFE3;
       background-color: transparent;
+      font-size: clamp(14rem, calc(16vw/7.68), 20rem);
     }
 
     button {

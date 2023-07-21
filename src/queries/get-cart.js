@@ -38,6 +38,11 @@ query GET_CART {
                 title
               }
             }
+            ... on SimpleProduct {
+              price
+              regularPrice
+              salePrice
+            }
           }
         }
         variation {
@@ -88,6 +93,12 @@ query GET_CART {
     availableShippingMethods {
       supportsShippingCalculator
       packageDetails
+      rates {
+        cost
+        methodId
+        label
+        instanceId
+      }
     }
     needsShippingAddress
   }

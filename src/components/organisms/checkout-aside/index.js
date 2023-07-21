@@ -11,7 +11,7 @@ export default function Aside({ data }) {
             <h4>{el.name}</h4>
             <div className={styles.flex}>
               <span className={styles.count}>Ilość: <strong>{el.qty}</strong></span>
-              <span className={styles.price}>Cena: <strong>{el.totalPrice}</strong></span>
+              <span className={styles.price}>Cena: <strong dangerouslySetInnerHTML={{ __html: el.totalPrice }} /></span>
             </div>
           </li>
         ))}
@@ -19,9 +19,7 @@ export default function Aside({ data }) {
 
       <div className={styles.sum}>
         Razem:
-        <strong>
-          {data?.totalProductsPrice}
-        </strong>
+        <strong dangerouslySetInnerHTML={{ __html: data?.totalProductsPrice }} />
       </div>
     </aside>
   )

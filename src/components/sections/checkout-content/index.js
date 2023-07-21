@@ -9,15 +9,20 @@ import Personaldata from "@/components/organisms/checkout-personal-data";
 import { AppContext } from "../../../context/app-context";
 import client from "../../../apollo/apolo-client";
 import Aside from "@/components/organisms/checkout-aside";
+import Process from "@/components/organisms/checkout-steps";
+import Delivery from "@/components/organisms/checkout-delivery";
+import Content from "@/components/organisms/cart-content";
+import Summary from "@/components/organisms/checkout-summary";
+import { createCheckoutData } from "../../../utils/create-checkout-data";
+import Payment from "@/components/organisms/checkout-payment";
 
-export default function Content() {
+export default function CheckoutContent() {
   const [cart, setCart] = useContext(AppContext);
   const [input, setInput] = useState({});
   const [orderData, setOrderData] = useState(null);
-  const [requestError, setRequestError] = useState(null);
-
+  const [step, setStep] = useState(2);
   // Get Cart Data.
-  const { data } = useQuery(GET_CART, {
+  const { data, refetch } = useQuery(GET_CART, {
     client,
     notifyOnNetworkStatusChange: true,
     onCompleted: (data) => {
@@ -41,9 +46,7 @@ export default function Content() {
       input: orderData
     },
     onError: (error) => {
-      if (error) {
-        setRequestError(error?.graphQLErrors?.[0]?.message ?? '');
-      }
+      throw new Error(error?.graphQLErrors?.[0]?.message);
     }
   });
 
@@ -54,17 +57,32 @@ export default function Content() {
     }
   }, [orderData]);
 
-  // cart.needsShippingAddress  - bool
-  // cart.availableShippingMethods - arr
+  const handleSubmit = (data) => {
+    //
+    setOrderData(createCheckoutData(data))
+  }
 
   // if(!cart) return null TODO: add loader
-
   return (
     <section className={styles.wrapper}>
-      <div className={styles.content}>
-        <Personaldata />
-      </div>
-      <Aside data={cart} />
+      <h1>Podsumowanie zamówienia</h1>
+      <Process needsShippingAddress={cart?.needsShippingAddress} step={step} />
+      {((step < 5 && cart?.needsShippingAddress) || (step < 4 && !cart?.needsShippingAddress)) && (
+        <div className={styles.grid}>
+          <div className={styles.content} >
+            {step === 2 && <Personaldata input={input} setInput={setInput} setStep={setStep} />}
+            {(step === 3 && cart?.needsShippingAddress) && <Delivery input={input} setInput={setInput} setStep={setStep} shippingMethods={cart?.shippingMethods} />}
+            {((step === 4 && cart?.needsShippingAddress) || (step === 3 && !cart?.needsShippingAddress)) && <Payment input={input} setInput={setInput} setStep={setStep} paymentMethods={cart?.paymentMethods}  />}
+          </div>
+          <Aside data={cart} />
+        </div>
+      )}
+      {((step === 5 && cart?.needsShippingAddress) || (step === 4 && !cart?.needsShippingAddress)) && (
+        <>
+          <Content refetch={refetch} cart={cart} isCart={false} />
+          <Summary setStep={setStep} />
+        </>
+      )}
     </section>
   )
 }

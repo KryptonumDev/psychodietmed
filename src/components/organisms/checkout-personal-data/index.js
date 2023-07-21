@@ -6,12 +6,13 @@ import Input from "@/components/atoms/input";
 import { emailPattern, phonePattern } from "../../../constants/patterns";
 import axios from "axios";
 
-export default function Personaldata({ data }) {
-  const { setValue, register, watch, handleSubmit, formState: { errors } } = useForm({ mode: "onBlur", defaultValues: { type: 'person' } });
+export default function Personaldata({ input, setStep, setInput }) {
+  const { setValue, register, watch, handleSubmit, formState: { errors } } = useForm({ mode: "onBlur", defaultValues: { type: 'person', shipping_same_as_billing: true } });
 
   const [nipValue, setNipValue] = useState(false)
   const [isTrueNip, setIsTrueNip] = useState(false)
   const watchType = watch('type')
+  const watchShippingSameAsBilling = watch('shipping_same_as_billing')
 
   useEffect(() => {
     // https://wl-api.mf.gov.pl/api/search/nip/9512465557?date=2023-04-14
@@ -20,8 +21,13 @@ export default function Personaldata({ data }) {
       axios.get(`https://wl-api.mf.gov.pl/api/search/nip/${nipValue}?date=${date}`)
         .then(res => {
           if (res.data.result.subject) {
-            setValue('firmName', res.data.result.subject.name)
-            setValue('firmAdres', res.data.result.subject.workingAddress)
+            const [sentence, address, postcode, city] = res.data.result.subject.workingAddress.match(/^([^,]+),\s*([^,]+)\s([^,]+)$/);
+
+            setValue('billing_firmName', res.data.result.subject.name)
+            setValue('billing_address', address)
+            setValue('billing_postalCode', postcode)
+            setValue('billing_city', city)
+
             setIsTrueNip(true)
           } else {
             // toast.warn('Brak informacji w bazie NIP')
@@ -36,6 +42,43 @@ export default function Personaldata({ data }) {
 
 
   const submit = (data) => {
+    setInput({
+      ...input,
+      firmOrder: data.type === 'firm',
+      shipping: {
+        firstName: data.type === 'name' ? data.shipping_name.split(' ')[0] : data.shipping_same_as_billing ? data.billing_firmName : data.shipping_name.split(' ')[0],
+        lastName: data.type === 'name' ? data.shipping_name.split(' ')[1] : data.shipping_same_as_billing ? '' : data.shipping_name.split(' ')[1],
+        address1: data.type === 'name' ? data.shipping_address : data.shipping_same_as_billing ? data.billing_address : data.shipping_address,
+        address2: '',
+        city: data.type === 'name' ? data.shipping_city : data.shipping_same_as_billing ? data.billing_city : data.shipping_city,
+        country: 'PL',
+        state: '',
+        postcode: data.type === 'name' ? data.shipping_postalCode : data.shipping_same_as_billing ? data.billing_postalCode : data.shipping_postalCode,
+        email: data.type === 'name' ? data.shipping_email : data.shipping_same_as_billing ? data.billing_email : data.shipping_email,
+        phone: data.type === 'name' ? data.shipping_phone : data.shipping_same_as_billing ? data.billing_phone : data.shipping_phone,
+        company: data.type === 'name' ? '' : data.billing_firmName,
+      },
+      billing: {
+        firstName: data.type === 'name' ? data.shipping_name.split(' ')[0] : data.billing_firmName,
+        lastName: data.type === 'name' ? data.shipping_name.split(' ')[1] : '',
+        address1: data.type === 'name' ? data.shipping_address : data.billing_address,
+        address2: '',
+        city: data.type === 'name' ? data.shipping_city : data.billing_city,
+        country: 'PL',
+        state: '',
+        postcode: data.type === 'name' ? data.shipping_postalCode : data.billing_postalCode,
+        email: data.type === 'name' ? data.shipping_email : data.billing_email,
+        phone: data.type === 'name' ? data.shipping_phone : data.billing_phone,
+        company: data.type === 'name' ? '' : data.billing_firmName,
+      },
+      metaData: [
+        {
+          key: '_billing_nip',
+          value: data.billing_nip || '',
+        }
+      ]
+    })
+    setStep(3)
   }
 
   return (
@@ -55,64 +98,106 @@ export default function Personaldata({ data }) {
           </label>
         </div>
       </fieldset>
-      <fieldset>
-        <legend>Adres dostawy</legend>
-        {watchType === 'firm' ? (
-          <>
-            <Input
-              placeholder='NIP'
-              name='nip'
-              register={register('nip', { required: true, minLength: 10, maxLength: 10, onChange: (e) => { setNipValue(e.currentTarget.value) }, validate: () => isTrueNip })}
-              errors={errors}
-            />
-            <Input
-              placeholder='Nazwa firmy'
-              name='firmName'
-              register={register('firmName', { required: true, minLength: 3 })}
-              errors={errors}
-            />
-          </>
-        ) : (
+      {watchType === 'firm' && (
+        <fieldset className={styles.billing}>
+          <legend>Dane firmowe do faktury</legend>
           <Input
-            placeholder='Imię i nazwisko'
-            name='name'
-            register={register('name', { required: true, minLength: 3 })}
+            placeholder='NIP'
+            name='billing_nip'
+            register={register('billing_nip', { required: true, minLength: 10, maxLength: 10, onChange: (e) => { setNipValue(e.currentTarget.value) }, validate: () => isTrueNip })}
             errors={errors}
           />
+          <Input
+            placeholder='Nazwa firmy'
+            name='billing_firmName'
+            register={register('billing_firmName', { required: true, minLength: 3 })}
+            errors={errors}
+          />
+          <Input
+            placeholder='Adres e-mail'
+            name='billing_email'
+            register={register('billing_email', { required: true, pattern: emailPattern })}
+            errors={errors}
+          />
+          <Input
+            placeholder='Ulica i numer'
+            name='billing_address'
+            register={register('billing_address', { required: true })}
+            errors={errors}
+          />
+          <div className={styles.flex}>
+            <Input
+              placeholder='Kod pocztowy'
+              name='billing_postalCode'
+              register={register('billing_postalCode', { required: true })}
+              errors={errors}
+            />
+            <Input
+              placeholder='Miejscowość'
+              name='billing_city'
+              register={register('billing_city', { required: true })}
+              errors={errors}
+            />
+          </div>
+          <Input
+            className={styles.phone}
+            placeholder='Telefon (opcjonalnie)'
+            name='billing_phone'
+            register={register('billing_phone', { pattern: phonePattern })}
+            errors={errors}
+            error={'Niepoprawny numer telefonu'}
+          />
+        </fieldset>
+      )}
+      <fieldset className={styles.shipping}>
+        <legend>Adres dostawy</legend>
+
+        {watchType === 'firm' && (
+          <label className={styles.checkbox}>
+            <input {...register('shipping_same_as_billing')} type="checkbox" />
+            <span>Taki sam jak na fakturze.</span>
+          </label>
         )}
-        <Input
-          placeholder='Adres e-mail'
-          name='email'
-          register={register('email', { required: true, pattern: emailPattern })}
-          errors={errors}
-        />
-        {true && (
+
+        {(watchType === 'person' || !watchShippingSameAsBilling) && (
           <>
             <Input
+              placeholder='Imię i nazwisko'
+              name='shipping_name'
+              register={register('shipping_name', { required: true, minLength: 3 })}
+              errors={errors}
+            />
+            <Input
+              placeholder='Adres e-mail'
+              name='shipping_email'
+              register={register('shipping_email', { required: true, pattern: emailPattern })}
+              errors={errors}
+            />
+            <Input
               placeholder='Ulica i numer'
-              name='address'
-              register={register('address', { required: true })}
+              name='shipping_address'
+              register={register('shipping_address', { required: true })}
               errors={errors}
             />
             <div className={styles.flex}>
               <Input
                 placeholder='Kod pocztowy'
-                name='postalCode'
-                register={register('postalCode', { required: true })}
+                name='shipping_postalCode'
+                register={register('shipping_postalCode', { required: true })}
                 errors={errors}
               />
               <Input
                 placeholder='Miejscowość'
-                name='city'
-                register={register('city', { required: true })}
+                name='shipping_city'
+                register={register('shipping_city', { required: true })}
                 errors={errors}
               />
             </div>
             <Input
               className={styles.phone}
               placeholder='Telefon (opcjonalnie)'
-              name='phone'
-              register={register('phone', { pattern: phonePattern })}
+              name='shipping_phone'
+              register={register('shipping_phone', { pattern: phonePattern })}
               errors={errors}
               error={'Niepoprawny numer telefonu'}
             />
