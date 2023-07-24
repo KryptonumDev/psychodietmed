@@ -11,6 +11,7 @@ import RepeaterFlex from "@/components/sections/team-repeater-flex";
 import Specialists from "@/components/sections/specialists-slider";
 import CallToActionGray from "@/components/sections/call-to-action-gray";
 import Statistics from "@/components/sections/team-statistics";
+import CombinedSpecialisations from "@/components/sections/team-combined-specialisations";
 
 // export async function generateMetadata(props) {
 //   console.log(props)
@@ -29,7 +30,7 @@ export default async function Team() {
       <Flowers data={page.team.flowersTeam} />
       <Recruitment data={page.team.specialistGridTeam} />
       <RepeaterFlex data={page.team.repeaterFlexTeam} />
-
+      <CombinedSpecialisations data={page.team.combinedSpecialisationsTeam} />
       <Specialists data={specialists} />
       <CallToActionGray data={page.team.greyCtaTeam} />
       <Statistics data={page.team.statisticsTeam} />
@@ -82,6 +83,20 @@ async function getData() {
         page(id: "cG9zdDoxMTc2") {
           id
           team{
+            combinedSpecialisationsTeam{
+              title
+              combinedCards{
+                text
+                image{
+                  altText
+                  mediaItemUrl
+                  mediaDetails{
+                    height
+                    width
+                  }
+                }
+              }
+            }
             statisticsTeam{
               title
               text
