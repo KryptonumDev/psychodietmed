@@ -30,6 +30,7 @@ export default function Slider({ items }) {
             linkText={el.histori.caseStudyCard.linkText}
             before={el.histori.information.beforeImage}
             after={el.histori.information.afterImage}
+            boldText={el.histori.information.boldText}
           />
         </SwiperSlide>
       ))}

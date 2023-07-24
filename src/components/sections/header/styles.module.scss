@@ -27,12 +27,13 @@
   margin-left: 0 !important;
 
   @media (max-width: 420px) {
-    .logo{
+    .logo {
       width: 240px;
     }
   }
+
   @media (max-width: 350px) {
-    .logo{
+    .logo {
       width: 210px;
     }
   }
@@ -60,6 +61,25 @@
 
 .cart {
   margin-left: 20px !important;
+  position: relative;
+
+  span {
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    transform: translate(30%, 10%);
+    background: #194574;
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 500;
+
+  }
 
   @media (max-width: 640px) {
     display: none;
@@ -201,7 +221,7 @@
     opacity: 1;
   }
 
-  &.overlayed{
+  &.overlayed {
     opacity: 0;
     pointer-events: none;
   }
@@ -244,7 +264,7 @@
 }
 
 .mobile_menu_sub {
-  button{
+  button {
     justify-content: flex-start;
     gap: 4px;
   }

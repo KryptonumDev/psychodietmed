@@ -118,6 +118,7 @@ async function getData() {
             slug
             histori {
               information {
+                boldText
                 beforeImage {
                   altText
                   mediaItemUrl
@@ -304,6 +305,7 @@ async function getData() {
                   slug
                   histori {
                     information {
+                      boldText
                       beforeImage {
                         altText
                         mediaItemUrl

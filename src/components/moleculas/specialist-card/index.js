@@ -29,8 +29,8 @@ export default function Card({ data: { proffesional, slug, title } }) {
           <p>Wt., 9 Mar 9:30</p>
         </div>
         <div className={styles.flex}>
-          <Link className="link" href={`/specjalista/${slug}#shedule`}>Umów wizytę</Link>
-          <Link className={styles.link} href={`/specjalista/${slug}`}>Więcej terminów <RightArrow /></Link>
+          <Link className="link" href={`/zespol/${slug}#shedule`}>Umów wizytę</Link>
+          <Link className={styles.link} href={`/zespol/${slug}`}>Więcej terminów <RightArrow /></Link>
         </div>
       </div>
     </div>

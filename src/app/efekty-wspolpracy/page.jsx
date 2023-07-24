@@ -19,7 +19,7 @@ import { PAGE_ITEM_COUNT } from "../../constants/case"
 export default async function Archive(props) {
   const { data, faq, metrics, podopieczni } = await getData(props)
   return (
-    <main>
+    <main className="overflow">
       <Hero data={data.historyArchive.heroHistoryArchive} />
       <Metrics data={metrics} />
       <Tiles data={data.historyArchive.servicesHistoryArchive} />
@@ -57,6 +57,7 @@ async function getData(props) {
                     slug
                   }
                 }
+                boldText
                 beforeImage {
                   altText
                   mediaItemUrl

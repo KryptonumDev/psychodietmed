@@ -36,7 +36,7 @@
     display: grid;
     gap: 32px;
     align-items: center;
-    grid-template-columns: auto 686fr;
+    grid-template-columns: 482px 686fr;
 
     @media (max-width: 976px) {
       display: flex;
@@ -111,6 +111,7 @@
     font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
     color: #194574;
     padding-bottom: 80px;
+    width: fit-content;
 
     @media (max-width: 380px) {
       padding-bottom: 0;

@@ -44,7 +44,15 @@ export default function Hero({ data: { title, text, link, topImage, rightImage, 
         <div className={styles.line}>
           {wordLine.map((el, index) => (
             <React.Fragment key={index} >
-              <span className={styles.word}>{el.word}</span>
+              {el.word}
+              <span className={styles.dot} />
+            </React.Fragment>
+          ))}
+        </div>
+        <div className={`${styles.line_sub} ${styles.line}`}>
+          {wordLine.map((el, index) => (
+            <React.Fragment key={index} >
+              {el.word}
               <span className={styles.dot} />
             </React.Fragment>
           ))}

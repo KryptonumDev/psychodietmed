@@ -1,11 +1,12 @@
 'use client'
-import React from "react"
+import React, { useContext, useState } from "react"
 import styles from './styles.module.scss';
 import Link from "next/link";
 import { Logo } from "../../../assets/logo";
 import { AngleRight } from "../../../assets/angle-right";
 import { AngleLeft } from "../../../assets/angle-left";
 import Cart from "@/components/atoms/cart";
+import { AppContext } from "../../../context/app-context";
 
 const urlSystem = [
   {
@@ -71,8 +72,9 @@ const urlSystem = [
 
 export default function Header({ data }) {
 
-  const [isMenuOpened, setIsMenuOpened] = React.useState(false)
-  const [itemOpened, setItemOpened] = React.useState(false)
+  const [isMenuOpened, setIsMenuOpened] = useState(false)
+  const [itemOpened, setItemOpened] = useState(false)
+  const [cart] = useContext(AppContext);
 
   return (
     <header className={styles.header}>
@@ -106,10 +108,10 @@ export default function Header({ data }) {
             </li>
           ))}
         </ul>
-        <Link className={`${styles.link} link`} href='mailto: biuro@psychodietmed.pl'>
+        <Link className={`${styles.link} link`} href='/kontakt'>
           Skontaktuj się!
         </Link>
-        <Cart className={styles.cart}/>
+        <Cart cart={cart?.totalProductsCount} className={styles.cart}/>
         <button onClick={() => { setIsMenuOpened(!isMenuOpened); setItemOpened(false) }} className={`${styles.burger} ${isMenuOpened ? styles.active : ''}`}>
           <span />
           <span />

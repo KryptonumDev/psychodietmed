@@ -9,6 +9,7 @@ import FAQ from "@/components/sections/faq";
 import Grid from "@/components/sections/cooperate-grid";
 import FlexAlt from "@/components/sections/cooperate-flex";
 import Steps from "@/components/sections/cooperate-steps";
+import DigitalSlider from "@/components/sections/digital-products-slider";
 
 // export async function generateMetadata(props) {
 //   console.log(props)
@@ -18,19 +19,19 @@ import Steps from "@/components/sections/cooperate-steps";
 // }
 
 export default async function Wspolpraca() {
-  const { data, activities, faq, metrics, specialisations } = await getData()
+  const { products, data, activities, faq, metrics, specialisations } = await getData()
 
   return (
     <main>
       <Hero data={data.cooperate.heroCooperate} />
-      <Steps data={data.cooperate.stepsCooperate} specialisations={specialisations}/>
+      <Steps data={data.cooperate.stepsCooperate} specialisations={specialisations} />
       <CallToAction data={data.cooperate.ctaCooperate} />
       <Specialisations data={data.cooperate.specialisationsCooperate} activities={activities} />
       <TwoColumnFlex data={data.cooperate.flexCooperate} />
       <Metrics data={metrics} />
       <Grid data={data.cooperate.gridCooperate} />
       <FlexAlt data={data.cooperate.flexAltCooperate} />
-      {/* products */}
+      <DigitalSlider data={products} title={'Co oferujemy?'} />
       <FAQ data={faq} />
     </main>
   )
@@ -50,9 +51,67 @@ export default async function Wspolpraca() {
 // }
 
 async function getData() {
-  const { data: { global, page, obszaryDzialania, specjalizacje } } = await client.query({
+  const { data: { products, global, page, obszaryDzialania, specjalizacje } } = await client.query({
     query: gql`
       query Pages {
+        products(where: {orderby: {field: DATE, order: DESC}}, first: 12) {
+          nodes {
+            product {
+              discount
+              bundleItems {
+                text
+              }
+            }
+            id
+            productId: databaseId
+            slug
+            name
+            image {
+              id
+              altText
+              altText
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
+            }
+            ... on SimpleProduct {
+              id
+              price
+              regularPrice
+            }
+            ... on VariableProduct {
+              id
+              price
+              regularPrice
+              attributes {
+                nodes {
+                  variation
+                  name
+                  options
+                  attributeId
+                }
+              }
+              variations {
+                nodes {
+                  id
+                  name
+                  price
+                  regularPrice
+                  productId: databaseId
+                  attributes {
+                    nodes {
+                      value
+                      name
+                      attributeId
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
         global : page(id: "cG9zdDo3Nzk=") {
           id
           global {
@@ -253,6 +312,7 @@ async function getData() {
     activities: obszaryDzialania.nodes,
     faq: global.global.faq,
     metrics: global.global.metricsGlobal,
-    specialisations: specjalizacje.nodes
+    specialisations: specjalizacje.nodes,
+    products: products.nodes
   }
 }

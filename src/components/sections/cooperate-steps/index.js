@@ -1,11 +1,8 @@
-'use client'
 import Link from "next/link"
-import React, { useCallback } from "react"
+import React from "react"
 import styles from "./styles.module.scss"
 import { Image } from "@/components/atoms/image"
 import { RightArrow } from "../../../assets/small-right-arrow"
-import { CursorFinger } from "../../../assets/cursor-finger"
-import { useState } from "react"
 
 export default function Steps({ specialisations, data: { titleFirst, linkFirst, titleSecond, gridSecond, linkSecond, titleThird, linkThird, gridThird, titleFourth, gridFourth } }) {
 
@@ -23,23 +20,6 @@ export default function Steps({ specialisations, data: { titleFirst, linkFirst, 
     return proffessions
   })()
 
-  const [opened, setOpened] = useState(1)
-  const [chosenButtons, setChosenButtons] = useState([])
-
-  const handleOpen = useCallback((e, number) => {
-    e.preventDefault()
-    setOpened(number + 1)
-  }, [setOpened])
-
-  const handleChose = useCallback((el) => {
-    // if (chosenButtons.findIndex(inEl => inEl.slug === el.slug) === -1) {
-    //   setChosenButtons([...chosenButtons.filter(inEl => inEl !== el.slug)])
-    // } else {
-    //   setChosenButtons([...chosenButtons, el])
-    // }
-  }, [setChosenButtons, chosenButtons])
-
-
   return (
     <section className={styles.wrapper}>
       <div className={styles.step}>
@@ -54,22 +34,16 @@ export default function Steps({ specialisations, data: { titleFirst, linkFirst, 
             <h2>{titleFirst}</h2>
             <div className={styles.chose}>
               {proffessions.map((el, index) => (
-                <details onClick={(e) => { handleOpen(e, index) }} open={opened === index + 1} key={index}>
+                <details open={!index} key={index}>
                   <summary>
                     <span className={styles.symbol} />
-                    <div className={styles.flex}>
                       <h3>{el.name}</h3>
-                      <div className={styles.cursor}>
-                        <CursorFinger />
-                        <span>Kliknij, aby wybrać</span>
-                      </div>
-                    </div>
                   </summary>
                   <div className={styles.wrap}>
                     {el.arr.map((inEl, index) => (
-                      <button onClick={() => { handleChose(inEl) }} key={index} className={styles.illnes}>
+                      <span key={index} className={styles.illnes}>
                         {inEl.title}
-                      </button>
+                      </span>
                     ))}
                   </div>
                 </details>

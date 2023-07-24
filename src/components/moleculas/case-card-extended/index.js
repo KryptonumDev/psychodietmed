@@ -16,7 +16,7 @@ const Quote = () => (
   </svg>
 )
 
-export default function Card({ slug, name, avatar, comment, linkText, before, after, differences, problems, result, resultTitle }) {
+export default function Card({ slug, name, avatar, comment, linkText, before, after, differences, problems, result, resultTitle, boldText }) {
   return (
     <div className={styles.slide} >
       <Quote />

@@ -52,6 +52,7 @@ export default function Content({ podopieczni }) {
                   slug
                 }
               }
+              boldText
               beforeImage {
                 altText
                 mediaItemUrl
@@ -141,6 +142,7 @@ export default function Content({ podopieczni }) {
             resultTitle={el.histori.information.resultTitle}
             result={el.histori.information.result}
             problems={el.histori.information.problems}
+            boldText={el.histori.information.boldText}
           />
         ))}
       </div>

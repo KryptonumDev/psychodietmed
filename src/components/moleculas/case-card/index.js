@@ -5,7 +5,7 @@ import { Image } from "@/components/atoms/image";
 import { removeWrap } from "../../../utils/title-modification";
 import { RightArrow } from "../../../assets/small-right-arrow";
 
-export default function Card({ slug, name, avatar, comment, linkText, before, after }) {
+export default function Card({ slug, name, avatar, comment, linkText, before, after, boldText }) {
   return (
     <div className={(after?.mediaItemUrl && before?.mediaItemUrl) ? `${styles.slide}` : `${styles.wide} ${styles.slide}`} >
       <div className={styles.slideAuthor}>
