@@ -29,13 +29,13 @@ export default function Delivery({ input, setInput, setStep, shippingMethods }) 
               <span>{el.label}</span>
               {el.cost && <p>{el.cost}&nbsp;zł</p>}
             </div>
-            {el.methodId === 'easypack_parcel_machines' && (
+            {/* {el.methodId === 'easypack_parcel_machines' && (
               <InpostGeowidget
                 token={process.env.NEXT_PUBLIC_INPOST_GEO_KEY}
                 config='parcelCollect'
                 onPoint={onPointCallback}
               />
-            )}
+            )} */}
           </label>
         ))}
       </fieldset>
