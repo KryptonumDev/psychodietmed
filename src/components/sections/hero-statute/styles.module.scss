@@ -1,0 +1,44 @@
+.wrapper {
+  h1 {
+    margin-bottom: clamp(20px, calc(24vw/7.68), 64px);
+  }
+
+  >div {
+    max-width: 700px;
+    margin-bottom: 20px;
+  }
+
+  >a+a{
+    margin-top: 20px;
+  }
+  
+  >a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #194574;
+    width: fit-content;
+
+    @media (max-width: 370px) {
+      gap: 6px;
+    }
+
+    span {
+      font-size: clamp(16rem, calc(20vw/7.68), 24rem);
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      font-weight: 700;
+
+      @media (max-width: 370px) {
+        font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+      }
+    }
+
+    svg {
+      @media (max-width: 370px) {
+        width: clamp(24px, calc(36vw/3.7), 36px);
+        height: clamp(24px, calc(36vw/3.7), 36px);
+      }
+    }
+  }
+}

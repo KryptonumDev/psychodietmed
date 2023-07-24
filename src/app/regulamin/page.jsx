@@ -1,6 +1,7 @@
 import { gql } from "@apollo/client";
 import client from "../../apollo/apolo-client";
 import Slider from "@/components/sections/products-slider";
+import Hero from "@/components/sections/hero-statute";
 
 // export async function generateMetadata(props) {
 //   console.log(props)
@@ -10,11 +11,12 @@ import Slider from "@/components/sections/products-slider";
 // }
 
 export default async function Regulamin() {
-  const { products } = await getData()
+  const { data, products } = await getData()
 
   return (
     <main>
-      <Slider products={products}/>
+      <Hero data={data.heroStatute} />
+      <Slider products={products} />
     </main>
   )
 }
@@ -30,12 +32,32 @@ export default async function Regulamin() {
 //   return {
 //     ''
 //   }
-// }
+// } 
 
 async function getData() {
   const { data } = await client.query({
     query: gql`
       query Pages {
+        page(id: "cG9zdDoxNjMw") {
+          statute {
+            heroStatute {
+              title
+              text
+              files {
+                file {
+                  title
+                  altText
+                  mediaItemUrl
+                  mediaDetails {
+                    sizes {
+                      fileSize
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
         products(first: 5) {
           nodes {
             product {
@@ -100,5 +122,6 @@ async function getData() {
 
   return {
     products: data.products.nodes,
+    data: data.page.statute,
   }
 }
