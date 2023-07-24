@@ -1,0 +1,130 @@
+.wrapper {
+  .questions{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px 32px;
+  }
+
+  >button{
+    text-align: center;
+    margin: 76px auto 0 auto;
+  }
+
+  .result{
+    text-align: center;
+    max-width: 730px;
+    margin: 64px auto 0 auto;
+
+    p{
+      margin-top: 0;
+      &:last-child{
+        margin-top: 36px;
+      }
+
+      &:first-child{
+        margin-bottom: 18px;
+        font-size: 32rem;
+
+        span{
+          color: #194574;
+          font-size: 36rem;
+        }
+      }
+    }
+  }
+
+  label {
+    border-radius: 20px;
+    background: #F1F6FB;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+    padding: 36px 36px 42px 36px;
+
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+
+    h3 {
+      margin-bottom: 36px;
+    }
+
+    span {
+      color: #194574;
+      font-size: 24rem;
+      font-weight: 700;
+      font-variant-numeric: lining-nums proportional-nums ordinal;
+      font-feature-settings: 'dlig' on, 'ss04' on, 'ss03' on, 'ss02' on, 'ss01' on, 'salt' on;
+      line-height: 140%;
+    }
+
+    .input {
+      margin-top: 8px;
+      input {
+        width: 100%;
+        margin: 24px 0;
+
+        background: transparent;
+        border-radius: 15px;
+        width: 100%;
+        height: 6px;
+        -webkit-appearance: none;
+        appearance: none;
+        background: #DEAFB8;
+        cursor: pointer;
+  
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 32px;
+            width: 32px;
+            border-radius: 50%;
+            background: #DEAFB8;
+            cursor: pointer;
+            z-index: 2;
+            position: relative;
+        }
+  
+        &::-moz-range-thumb {
+            height: 32px;
+            width: 32px;
+            border-radius: 50%;
+            background: #DEAFB8;
+            cursor: pointer;
+            z-index: 2;
+            position: relative;
+        }
+  
+        &::-ms-thumb {
+            height: 32px;
+            width: 32px;
+            border-radius: 50%;
+            background: #DEAFB8;
+            cursor: pointer;
+            z-index: 2;
+            position: relative;
+        }
+      }
+
+      .control{
+        display: flex;
+        justify-content: space-between;
+        padding: 0 8px;
+      }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px 20px;
+
+      .answer {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 8px;
+
+        p {
+          margin-top: 2px;
+          color: #194574;
+          font-size: 20rem;
+        }
+      }
+    }
+  }
+}

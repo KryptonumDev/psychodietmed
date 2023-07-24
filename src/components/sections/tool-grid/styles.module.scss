@@ -20,6 +20,7 @@
     }
 
     .item {
+      break-inside: avoid;
       margin-top: clamp(16px, calc(16vw/7.68), 20px);
       border-radius: 20px 0px;
       border: 2px solid #DEAFB8;

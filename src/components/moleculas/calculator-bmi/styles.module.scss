@@ -5,14 +5,13 @@
   box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
   padding: clamp(32px, calc(32vw/7.68), 48px) clamp(20px, calc(20vw/7.68), 36px) clamp(36px, calc(36vw/7.68), 48px) clamp(20px, calc(20vw/7.68), 36px);
   display: grid;
-  gap: 40px;
-  transition: height .2s cubic-bezier(0.77, 0, 0.175, 1);
+  gap: clamp(28px, calc(36vw/7.68), 40px);
 
   .result {
     width: fit-content;
     margin: 0 auto;
 
-    svg{
+    svg {
       width: clamp(24px, calc(36vw/7.68), 36px);
       height: clamp(24px, calc(36vw/7.68), 36px);
     }
@@ -56,7 +55,7 @@
       border: 2px solid #DEAFB8;
       border-radius: 50px;
       line-height: 23px;
-      padding: clamp(10px, calc(10vw/7.68), 20px) 28px;
+      padding: clamp(10px, calc(10vw/7.68), 20px) 28px clamp(10px, calc(10vw/7.68), 20px) 6px;
       color: #194574;
       font-weight: 500;
       box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
@@ -70,7 +69,7 @@
       }
     }
 
-    &:last-child {
+    &.last {
       input {
         border: 2px solid #76A2D6;
       }

@@ -29,7 +29,7 @@ export default function CalculatorBmi() {
         <span>Wzrost:</span>
         <input min={0} max={250} placeholder="cm" onChange={(e) => { setWzrost(e.currentTarget.value) }} type="number" name="wzrost" />
       </label>
-      <label>
+      <label className={styles.last}>
         <span>Twoje BMI wynosi:</span>
         <input disabled={true} value={bmi || " "} />
       </label>
