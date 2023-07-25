@@ -143,6 +143,7 @@ export default function Content({ prices, orders, productCategories, defaultData
       offset: PAGE_ITEM_COUNT * (currentPage - 1)
     },
     onCompleted: (data) => {
+      document.getElementById('products').scrollIntoView({ behavior: 'smooth' })
       setProducts(data?.products)
     },
     onError: (error) => {
@@ -231,7 +232,7 @@ export default function Content({ prices, orders, productCategories, defaultData
   }, [currentPage])
 
   return (
-    <section className={styles.wrapper}>
+    <section id='products' className={styles.wrapper}>
       <h2 >Produkty</h2>
       <Filtration
         chosenOrder={chosenOrder}

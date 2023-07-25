@@ -108,10 +108,10 @@ export default function Header({ data }) {
             </li>
           ))}
         </ul>
-        <Link className={`${styles.link} link`} href='/kontakt'>
-          Skontaktuj się!
+        <Link className={`${styles.link} link`} href='/umow-wizyte'>
+          Umów się
         </Link>
-        <Cart cart={cart?.totalProductsCount} className={styles.cart}/>
+        <Cart cart={cart?.totalProductsCount} className={styles.cart} />
         <button onClick={() => { setIsMenuOpened(!isMenuOpened); setItemOpened(false) }} className={`${styles.burger} ${isMenuOpened ? styles.active : ''}`}>
           <span />
           <span />

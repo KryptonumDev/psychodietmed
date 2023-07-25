@@ -10,17 +10,17 @@ export default function Control({ className = '', activeIndex, items }) {
   const handlePrev = useCallback(() => {
     if (!swiper) return;
     swiper.slidePrev();
-  }, []);
+  }, [swiper]);
 
   const handleNext = useCallback(() => {
     if (!swiper) return;
     swiper.slideNext();
-  }, []);
+  }, [swiper]);
 
   const handleDotClick = useCallback((index) => {
     if (!swiper) return;
     swiper.slideTo(index);
-  }, []);
+  }, [swiper]);
 
   return (
     <div className={`${styles.control}`} >

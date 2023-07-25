@@ -18,7 +18,7 @@ export default async function Post({ params }) {
     <>
       <main>
         <Hero data={data} />
-        <Content next={data.next} prev={data.previous} author={data.postAuthor.author} data={data.content} />
+        <Content next={data.next} prev={data.previous} author={data.postAuthor.author} data={data.content} title={data.title} excerpt={data.excerpt}/>
         <OtherPosts data={posts} />
       </main>
     </>

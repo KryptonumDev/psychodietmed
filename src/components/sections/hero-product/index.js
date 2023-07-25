@@ -1,5 +1,5 @@
 'use client'
-import React, { useMemo, useState } from "react"
+import React, { useCallback, useMemo, useState } from "react"
 import styles from "./styles.module.scss"
 import { Image } from "@/components/atoms/image"
 import { removeWrap } from "../../../utils/title-modification"
@@ -25,6 +25,16 @@ export default function Hero({ data: { addons, variations, productId, title, des
 
   }, [price, regularPrice, chosenAddon, chosenVariation])
 
+  const handleAddonClick = useCallback((e, add) => {
+    //if its addon already chosen, remove it
+    if (chosenAddon?.val === add?.val) {
+      setChosenAddon(null)
+      return
+    }
+
+    setChosenAddon(add)
+  }, [chosenAddon, setChosenAddon])
+
   return (
     <section className={styles.wrapper}>
       <Image aspectRatio={true} className={styles.image} src={featuredImage.node.mediaItemUrl} alt={featuredImage.node.altText} width={featuredImage.node.mediaDetails.width} height={featuredImage.node.mediaDetails.height} />
@@ -37,7 +47,7 @@ export default function Hero({ data: { addons, variations, productId, title, des
             <div key={index} className={styles.group}>
               {el.options.map(inEl => (
                 <label key={inEl.label}>
-                  <input onChange={() => { setChosenAddon({ name: el.fieldName, val: inEl.label, price: inEl.price }) }} type="radio" name={el.name} value={inEl.label} />
+                  <input checked={chosenAddon?.val === inEl.label} onClick={(e) => { handleAddonClick(e, { name: el.fieldName, val: inEl.label, price: inEl.price }) }} type="radio" name={el.name} value={inEl.label} />
                   <span className={styles.checkbox} />
                   <span>
                     {inEl.label} <small>+&nbsp;{inEl.price}&nbsp;zł</small>

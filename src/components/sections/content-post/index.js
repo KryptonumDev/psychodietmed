@@ -5,7 +5,7 @@ import ContentPostNavigation from "@/components/organisms/content-post-navigatio
 import Contact from "@/components/organisms/post-contact"
 import Other from "@/components/organisms/post-quick-other"
 
-export default function Content({ next, prev, author, data }) {
+export default function Content({ title, excerpt, next, prev, author, data }) {
 
   const headings = createHeadings(data)
   const modifiedContent = modificateContent(data)
@@ -15,8 +15,8 @@ export default function Content({ next, prev, author, data }) {
       <ContentPostNavigation headings={headings} author={author} />
       <div className={styles.content_wrap}>
         <div className={styles.content} dangerouslySetInnerHTML={{ __html: modifiedContent }} />
-        <Contact />
-        <Other prev={prev} next={next}/>
+        <Contact title={title} excerpt={excerpt} />
+        <Other prev={prev} next={next} />
       </div>
     </section>
   )

@@ -130,7 +130,7 @@ export default function Content({ cart, refetch, isCart = true }) {
           <p><span>Wartość zamówienia:</span><span dangerouslySetInnerHTML={{ __html: cart?.subTotalProductPrice }} /></p>
           <p><span>Zniżka:</span><span dangerouslySetInnerHTML={{ __html: cart?.totalProductsDiscount }} /></p>
           {cart?.appliedCoupons?.map((coupon, index) => (
-            <p className={styles.coupon}>
+            <p key={index} className={styles.coupon}>
               <span>Zastosowano kod kuponu -<span dangerouslySetInnerHTML={{ __html: coupon.discountAmount }} />: {coupon.code}</span>
               <button onClick={() => { handleRemoveCoupon(coupon.code) }}>
                 <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -98,6 +98,7 @@ export default function Content({ podopieczni }) {
       offset: PAGE_ITEM_COUNT * (currentPage - 1)
     },
     onCompleted: (data) => {
+      document.getElementById('content').scrollIntoView({ behavior: 'smooth' })
       setCases(data?.podopieczni)
     },
     onError: (error) => {

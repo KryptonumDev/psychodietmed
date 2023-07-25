@@ -7,7 +7,14 @@
   z-index: 4;
   font-size: clamp(14rem, calc(16vw/7.68), 16rem);
   display: block;
+  background-color: transparent;
   text-align: center;
+  transition: all .3s cubic-bezier(0.77, 0, 0.175, 1);
+
+  &.active{
+    background-color: #194574;
+    color: #fff;
+  }
 
   @media (max-width: 370px) {
     font-size: clamp(0rem, calc(14vw/3.7), 14rem);

@@ -29,10 +29,10 @@ export default function Hero({ data: { featuredImage, title, categories, dateGmt
           <h1>{title}</h1>
         </div>
         <div className={styles.bottom}>
-          <div className={styles.info}>
+          {/* <div className={styles.info}>
             <Hearth />
             <span>11 osób lubi to</span>
-          </div>
+          </div> */}
           <div className={styles.info}>
             <Clock />
             <span>Czas czytania: <b>{readingTime} {Number(readingTime) > 4 ? 'minut' : 'minuty'}</b></span>

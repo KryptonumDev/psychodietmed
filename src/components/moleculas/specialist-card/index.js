@@ -4,9 +4,10 @@ import { Image } from "@/components/atoms/image";
 import styles from "./styles.module.scss";
 import { RightArrow } from "../../../assets/small-right-arrow";
 
-export default function Card({ data: { proffesional, slug, title } }) {
+export default function Card({ onClick = () => { }, chosenSpecialisations, short = false, data: { proffesional, slug, title } }) {
+
   return (
-    <div className={styles.item}>
+    <div onClick={onClick} className={styles.item}>
       <div>
         <Image
           className={styles.image}
@@ -19,20 +20,22 @@ export default function Card({ data: { proffesional, slug, title } }) {
         <p>{proffesional?.proffesion}</p>
         <ul>
           {proffesional?.specialisations?.map(({ title }, index) => (
-            <li key={index}>{title}</li>
+            <li className={(() => {
+              if (!chosenSpecialisations) return ''
+              if (chosenSpecialisations.includes(title)) return styles.active
+              return styles.inactive
+            })()} key={index}>{title}</li>
           ))}
         </ul>
       </div>
-      <div className={styles.bottom_inform}>
-        <div className={styles.flex}>
-          <p>Najbliższy termin:</p>
-          <p>Wt., 9 Mar 9:30</p>
+      {!short && (
+        <div className={styles.bottom_inform}>
+          <div className={styles.flex}>
+            <Link className="link" href={`/umow-sie`}>Umów wizytę</Link>
+            <Link className={styles.link} href={`/zespol/${slug}`}>Więcej terminów <RightArrow /></Link>
+          </div>
         </div>
-        <div className={styles.flex}>
-          <Link className="link" href={`/zespol/${slug}#shedule`}>Umów wizytę</Link>
-          <Link className={styles.link} href={`/zespol/${slug}`}>Więcej terminów <RightArrow /></Link>
-        </div>
-      </div>
+      )}
     </div>
   )
 }
