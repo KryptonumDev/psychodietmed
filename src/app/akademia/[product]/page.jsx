@@ -34,7 +34,7 @@ async function getData(params) {
     const { data: { product, global, specialists } } = await client.query({
       query: gql`
       query Pages($uri: ID!) {
-        specialists: specjalisci {
+        specialists: specjalisci(first: 100) {
           nodes {
             title
             slug
@@ -97,6 +97,18 @@ async function getData(params) {
           productId: databaseId
           title
           description
+          addons {
+            name
+            ... on AddonMultipleChoice {
+              description
+              name
+              options {
+                price
+                label
+              }
+              fieldName
+            }
+          }
           featuredImage {
             node {
               altText
@@ -109,13 +121,13 @@ async function getData(params) {
           }
           ... on SimpleProduct {
             id
-            price
-            regularPrice
+            price(format: RAW)
+            regularPrice(format: RAW)
           }
           ... on VariableProduct {
             id
-            price
-            regularPrice
+            price(format: RAW)
+            regularPrice(format: RAW)
             attributes {
               nodes {
                 variation
@@ -128,8 +140,8 @@ async function getData(params) {
               nodes {
                 id
                 name
-                price
-                regularPrice
+                price(format: RAW)
+                regularPrice(format: RAW)
                 productId: databaseId
                 attributes {
                   nodes {

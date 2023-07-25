@@ -1,20 +1,15 @@
 'use client'
-import React, { useContext, useState } from "react"
+import React, { useContext } from "react"
 import styles from "./styles.module.scss"
-import { useMutation, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { getFormattedCart } from "../../../utils/get-formatted-cart";
-import { getUpdatedItems } from "../../../utils/get-updated-items";
 import GET_CART from "../../../queries/get-cart";
-import UPDATE_CART from "../../../mutations/update-cart";
-import { v4 } from "uuid";
 import { AppContext } from "../../../context/app-context";
 import client from "../../../apollo/apolo-client";
-import CartItem from "@/components/moleculas/cart-item";
-import Link from "next/link";
-import APPLY_COUPON from "../../../mutations/apply-coupon";
 import { useForm } from "react-hook-form";
 import Process from "@/components/organisms/checkout-steps";
 import Content from "@/components/organisms/cart-content";
+import Link from "next/link";
 
 export default function Cart() {
 
@@ -37,9 +32,19 @@ export default function Cart() {
 
   return (
     <section className={styles.wrapper}>
-      <h1>Twój koszyk</h1>
-      <Process needsShippingAddress={cart?.needsShippingAddress} step={1} />
-      <Content refetch={refetch} cart={cart} />
+      {cart?.products?.length > 0 ? (
+        <>
+          <h1 className={styles.margin}>Twój koszyk</h1>
+          <Process needsShippingAddress={cart?.needsShippingAddress} step={1} />
+          <Content refetch={refetch} cart={cart} />
+        </>
+      ) : (
+        <>
+          <h1>Twój koszyk jest pusty.</h1>
+          <p>Nie możesz się zdecydować?</p>
+          <Link className="link" href="/akademia">Poznaj nasze pakiety</Link>
+        </>
+      )}
     </section>
   )
 }

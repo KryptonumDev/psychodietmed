@@ -6,6 +6,10 @@ query GET_CART {
     contents {
       nodes {
         key
+        extraData {
+          value
+          key
+        }
         product {
           node {
             id

@@ -41,7 +41,7 @@ async function getData(params) {
     const { data: { specjalisci, specjalistaBy, page } } = await client.query({
       query: gql`
       query Pages($uri: String) {
-        specjalisci {
+        specjalisci(first: 100) {
           nodes {
             title
             slug

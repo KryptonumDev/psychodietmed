@@ -14,13 +14,12 @@ export const getFormattedCart = (data) => {
   formattedCart = {};
   formattedCart.products = [];
   let totalProductsCount = 0;
-
   for (let i = 0; i < givenProducts.length; i++) {
     // if product has variations then pick variation data instead of product data.
     const givenProduct = givenProducts?.[i]?.variation?.node || givenProducts?.[i]?.product?.node;
     const product = {};
     const total = getFloatVal(givenProducts[i].total);
-
+    product.addons = JSON.parse(givenProducts?.[i]?.extraData?.[0]?.value).length === 0 ? {} : JSON.parse(givenProducts?.[i]?.extraData?.[0]?.value)[0];
     product.productId = givenProduct?.productId ?? '';
     product.cartKey = givenProducts?.[i]?.key ?? '';
     product.name = givenProduct?.name ?? '';
@@ -52,6 +51,7 @@ export const getFormattedCart = (data) => {
   formattedCart.totalProductsDiscount = data?.cart?.discountTotal ?? '';
   formattedCart.needsShippingAddress = data?.cart?.needsShippingAddress ?? false;
   formattedCart.shippingMethods = data?.cart?.availableShippingMethods?.[0]?.rates ?? [];
+  formattedCart.appliedCoupons = data?.cart?.appliedCoupons ?? [];
 
   return formattedCart;
 };

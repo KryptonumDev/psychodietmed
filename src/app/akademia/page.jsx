@@ -173,6 +173,18 @@ async function getData(params) {
       }
       bundles: products(where: {categoryIn: "bundle"}, first: 50) {
         nodes {
+          addons {
+            name
+            ... on AddonMultipleChoice {
+              description
+              name
+              options {
+                price
+                label
+              }
+              fieldName
+            }
+          }
           product {
             discount
             bundleItems {
@@ -248,6 +260,18 @@ async function getData(params) {
           }
         }
         nodes {
+          addons {
+            name
+            ... on AddonMultipleChoice {
+              description
+              name
+              options {
+                price
+                label
+              }
+              fieldName
+            }
+          }
           product {
             discount
             bundleItems {

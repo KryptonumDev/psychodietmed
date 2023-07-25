@@ -10,16 +10,20 @@ import GET_CART from "../../../queries/get-cart";
 import ADD_TO_CART from "../../../mutations/add-to-cart";
 import client from "../../../apollo/apolo-client";
 
-export default function AddToCart({ variationId, quantity, product }) {
+export default function AddToCart({ chosenAddon, variationId, quantity, product }) {
+
+  const addons = chosenAddon ? {
+    fieldName: { fieldName: chosenAddon?.name },
+    value: { fieldName: chosenAddon?.name, value: chosenAddon?.val }
+  } : null
+
 
   const productQryInput = {
     clientMutationId: v4(),
     productId: product.productId,
     quantity: quantity || 1,
     variationId: variationId || null,
-    // addons: {
-    //   fieldName: "title",
-    // }
+    addons: addons
   };
 
   const [cart, setCart] = useContext(AppContext);
@@ -49,7 +53,7 @@ export default function AddToCart({ variationId, quantity, product }) {
       input: productQryInput,
     },
     onCompleted: (res) => {
-
+      
       // On Success:
       // 1. Make the GET_CART query to update the cart with new values in React context.
       refetch();
@@ -59,6 +63,7 @@ export default function AddToCart({ variationId, quantity, product }) {
     },
     onError: (error) => {
 
+      
       if (error) {
         setRequestError(error?.graphQLErrors?.[0]?.message ?? '');
       }

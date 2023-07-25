@@ -1,0 +1,10 @@
+.wrapper {
+  h2 {
+    font-size: clamp(32rem, calc(36vw/7.68), 48rem);
+    margin-bottom: 64px;
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(32vw/3.7), 32rem);
+    }
+  }
+}

@@ -9,10 +9,19 @@
     display: flex;
     justify-content: space-between;
     gap: 36px;
+
+    @media (max-width: 968px) {
+      flex-direction: column-reverse;
+    }
   
     .content {
       max-width: 655px;
       width: 100%;
+  
+      @media (max-width: 968px) {
+        width: 100%;
+        max-width: unset;
+      }
     }
   
     aside {
@@ -20,6 +29,12 @@
       width: 100%;
       position: sticky;
       top: 120px;
+  
+      @media (max-width: 968px) {
+        width: 100%;
+        max-width: unset;
+        position: static;
+      }
     }
   }
 }

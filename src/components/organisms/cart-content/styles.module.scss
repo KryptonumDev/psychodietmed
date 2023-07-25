@@ -5,7 +5,7 @@
     margin-bottom: clamp(20px, calc(48vw/7.68), 64px);
   }
 
-  h2{
+  h2 {
     font-size: clamp(32rem, calc(36vw/7.68), 48rem);
     margin-bottom: clamp(24px, calc(28vw/7.68), 48px);
 
@@ -72,7 +72,8 @@
       gap: 16px;
     }
 
-    >a {
+
+    >.left {
       grid-area: link;
       font-size: 20rem;
       color: #194574;
@@ -87,7 +88,7 @@
       }
     }
 
-    >button {
+    >.right {
       grid-area: submit;
       margin-left: auto;
 
@@ -136,9 +137,24 @@
 
     .price {
       grid-area: price;
-      max-width: 445px;
+      max-width: 550px;
       width: 100%;
       margin-left: auto;
+
+      .coupon {
+        align-items: center;
+        color: #194574;
+        font-size: clamp(14rem, calc(20vw/7.68), 20rem);
+
+        @media (max-width: 370px) {
+          font-size: clamp(0rem, calc(14vw/3.7), 14rem);
+        }
+
+        button {
+          border: none;
+          background-color: transparent;
+        }
+      }
 
       @media (max-width: 768px) {
         max-width: unset;

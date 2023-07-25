@@ -13,7 +13,6 @@ export default function CartItem({
   handleRemoveProductClick,
   updateCart,
 }) {
-
   const [productCount, setProductCount] = useState(item.qty);
 
   const handleQtyChange = (event, cartKey, count) => {
@@ -46,7 +45,7 @@ export default function CartItem({
   return (
     <div className={styles.wrapper}>
       <Image aspectRatio={true} className={styles.image} src={item.image.mediaItemUrl} alt={item.image.altText} width={item.image.mediaDetails?.width} height={item.image.mediaDetails?.height} />
-      <p className={styles.title}>{item.name}</p>
+      <p className={styles.title}>{item.name}{item.addons.value ? ` + ${item.addons.value}` : ''}</p>
       <div className={styles.price}>
         {item.regularPrice !== item.price && (
           <s dangerouslySetInnerHTML={{ __html: item.regularPrice }} />

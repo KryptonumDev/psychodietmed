@@ -1,15 +1,29 @@
 'use client'
-import React, { useState } from "react"
+import React, { useMemo, useState } from "react"
 import styles from "./styles.module.scss"
 import { Image } from "@/components/atoms/image"
 import { removeWrap } from "../../../utils/title-modification"
 import AddToCart from "@/components/atoms/add-to-cart-button"
 import Price from "@/components/atoms/price"
 
-export default function Hero({ data: { variations, productId, title, description, featuredImage, price, regularPrice } }) {
+export default function Hero({ data: { addons, variations, productId, title, description, featuredImage, price, regularPrice } }) {
 
   const [productCount, setProductCount] = useState(1);
   const [chosenVariation, setChosenVariation] = useState(variations?.nodes[0] || null)
+  const [chosenAddon, setChosenAddon] = useState(null)
+
+  const prices = useMemo(() => {
+    let localprice = chosenVariation?.price || price
+    let localregularPrice = chosenVariation?.regularPrice || regularPrice
+
+    if (!chosenAddon) return { price: parseInt(localprice), regularPrice: parseInt(localregularPrice) }
+
+    const newPrice = parseInt(localprice) + parseInt(chosenAddon.price)
+    const newRegularPrice = parseInt(localregularPrice) + parseInt(chosenAddon.price)
+
+    return { price: newPrice, regularPrice: newRegularPrice }
+
+  }, [price, regularPrice, chosenAddon, chosenVariation])
 
   return (
     <section className={styles.wrapper}>
@@ -17,6 +31,22 @@ export default function Hero({ data: { variations, productId, title, description
       <div className={styles.conten}>
         <h1 dangerouslySetInnerHTML={{ __html: removeWrap(title) }} />
         <div dangerouslySetInnerHTML={{ __html: description }} />
+
+        <div className={styles.variables}>
+          {addons?.map((el, index) => (
+            <div key={index} className={styles.group}>
+              {el.options.map(inEl => (
+                <label key={inEl.label}>
+                  <input onChange={() => { setChosenAddon({ name: el.fieldName, val: inEl.label, price: inEl.price }) }} type="radio" name={el.name} value={inEl.label} />
+                  <span className={styles.checkbox} />
+                  <span>
+                    {inEl.label} <small>+&nbsp;{inEl.price}&nbsp;zł</small>
+                  </span>
+                </label>
+              ))}
+            </div>
+          ))}
+        </div>
 
         <div className={styles.variables}>
           {variations?.nodes?.map((el, index) => (
@@ -52,8 +82,8 @@ export default function Hero({ data: { variations, productId, title, description
             </div>
           </div>
           <div className={styles.addToCart}>
-            <Price quantity={productCount} salesPrice={chosenVariation?.price || price} regularPrice={chosenVariation?.regularPrice || regularPrice} />
-            <AddToCart quantity={productCount} variationId={chosenVariation?.productId} product={{ productId: productId }} />
+            <Price quantity={productCount} salesPrice={prices.price} regularPrice={prices.regularPrice} />
+            <AddToCart chosenAddon={chosenAddon} quantity={productCount} variationId={chosenVariation?.productId} product={{ productId: productId }} />
           </div>
         </div>
       </div>

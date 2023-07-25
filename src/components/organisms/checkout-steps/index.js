@@ -37,31 +37,22 @@ export default function Process({ needsShippingAddress, step = 2 }) {
           <CheckMark />
           <div>
             <span>{needsShippingAddress ? '04' : '03'}</span>
-            <p>Płatność</p>
-          </div>
-        </div>
-        <span className={styles.line} />
-        <div className={`${styles.step} ${((step >= 5 && needsShippingAddress) || (step >= 4 && !needsShippingAddress)) ? styles.active : ''}`}>
-          <CheckMark />
-          <div>
-            <span>{needsShippingAddress ? '05' : '04'}</span>
             <p>Podsumowanie</p>
           </div>
         </div>
       </div>
 
       <div className={styles.mobile}>
-        <div class={styles.pie} style={{ '--p': 100 * (step / (needsShippingAddress ? 5 : 4)) }}>
+        <div class={styles.pie} style={{ '--p': 100 * (step / (needsShippingAddress ? 4 : 3)) }}>
           <strong>0{step}</strong>
           <span>/</span>
-          <small>{needsShippingAddress ? '05' : '04'}</small>
+          <small>{needsShippingAddress ? '04' : '03'}</small>
         </div>
         <div>
           {step === 1 && <p>Twój koszyk</p>}
           {step === 2 && <p>Dane osobowe</p>}
           {(step === 3 && needsShippingAddress) && <p>Dostawa</p>}
-          {((step === 4 && needsShippingAddress) || (step === 3 && !needsShippingAddress)) && <p>Płatność</p>}
-          {((step === 5 && needsShippingAddress) || (step === 4 && !needsShippingAddress)) && <p>Podsumowanie</p>}
+          {((step === 4 && needsShippingAddress) || (step === 3 && !needsShippingAddress)) && <p>Podsumowanie</p>}
         </div>
       </div>
     </div>

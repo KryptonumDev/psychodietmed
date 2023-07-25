@@ -13,17 +13,16 @@ export const Card = ({ product }) => {
 
   return (
     <div className={styles.wrapper}>
+      <Link className={styles.link} href={`/akademia/${product?.slug}`} />
       <div>
-        <Link href={`/akademia/${product?.slug}`} >
-          <Image
-            width={product.image.mediaDetails.width}
-            height={product.image.mediaDetails.height}
-            src={product?.image?.mediaItemUrl ?? ''}
-            alt={product?.image?.altText ?? product?.slug}
-            aspectRatio={true}
-            className={styles.image}
-          />
-        </Link>
+        <Image
+          width={product.image.mediaDetails.width}
+          height={product.image.mediaDetails.height}
+          src={product?.image?.mediaItemUrl ?? ''}
+          alt={product?.image?.altText ?? product?.slug}
+          aspectRatio={true}
+          className={styles.image}
+        />
         <h3>{product.name}</h3>
         {product?.variations ? (
           <div className={styles.variables}>

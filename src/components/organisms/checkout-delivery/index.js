@@ -8,7 +8,7 @@ export default function Delivery({ input, setInput, setStep, shippingMethods }) 
   const [inpostNumber, setInpostNumber] = useState(null)
 
   const submit = (data) => {
-    setInput({ ...input, shippingMethod: data.delivery, inpostNumber: inpostNumber })
+    setInput({ ...input, shippingMethod: shippingMethods.filter(el => el.methodId === data.delivery)[0], inpostNumber: inpostNumber })
     setStep(4)
   }
 

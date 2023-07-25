@@ -42,34 +42,35 @@ export default function Personaldata({ input, setStep, setInput }) {
 
 
   const submit = (data) => {
+    
     setInput({
       ...input,
       firmOrder: data.type === 'firm',
       shipping: {
-        firstName: data.type === 'name' ? data.shipping_name.split(' ')[0] : data.shipping_same_as_billing ? data.billing_firmName : data.shipping_name.split(' ')[0],
-        lastName: data.type === 'name' ? data.shipping_name.split(' ')[1] : data.shipping_same_as_billing ? '' : data.shipping_name.split(' ')[1],
-        address1: data.type === 'name' ? data.shipping_address : data.shipping_same_as_billing ? data.billing_address : data.shipping_address,
+        firstName: data.type === 'person' ? data.shipping_name.split(' ')[0] : data.shipping_same_as_billing ? data.billing_firmName : data.shipping_name.split(' ')[0],
+        lastName: data.type === 'person' ? data.shipping_name.split(' ')[1] : data.shipping_same_as_billing ? '' : data.shipping_name.split(' ')[1],
+        address1: data.type === 'person' ? data.shipping_address : data.shipping_same_as_billing ? data.billing_address : data.shipping_address,
         address2: '',
-        city: data.type === 'name' ? data.shipping_city : data.shipping_same_as_billing ? data.billing_city : data.shipping_city,
+        city: data.type === 'person' ? data.shipping_city : data.shipping_same_as_billing ? data.billing_city : data.shipping_city,
         country: 'PL',
         state: '',
-        postcode: data.type === 'name' ? data.shipping_postalCode : data.shipping_same_as_billing ? data.billing_postalCode : data.shipping_postalCode,
-        email: data.type === 'name' ? data.shipping_email : data.shipping_same_as_billing ? data.billing_email : data.shipping_email,
-        phone: data.type === 'name' ? data.shipping_phone : data.shipping_same_as_billing ? data.billing_phone : data.shipping_phone,
-        company: data.type === 'name' ? '' : data.billing_firmName,
+        postcode: data.type === 'person' ? data.shipping_postalCode : data.shipping_same_as_billing ? data.billing_postalCode : data.shipping_postalCode,
+        email: data.type === 'person' ? data.shipping_email : data.shipping_same_as_billing ? data.billing_email : data.shipping_email,
+        phone: data.type === 'person' ? data.shipping_phone : data.shipping_same_as_billing ? data.billing_phone : data.shipping_phone,
+        company: data.type === 'person' ? '' : data.billing_firmName,
       },
       billing: {
-        firstName: data.type === 'name' ? data.shipping_name.split(' ')[0] : data.billing_firmName,
-        lastName: data.type === 'name' ? data.shipping_name.split(' ')[1] : '',
-        address1: data.type === 'name' ? data.shipping_address : data.billing_address,
+        firstName: data.type === 'person' ? data.shipping_name.split(' ')[0] : data.billing_firmName,
+        lastName: data.type === 'person' ? data.shipping_name.split(' ')[1] : '',
+        address1: data.type === 'person' ? data.shipping_address : data.billing_address,
         address2: '',
-        city: data.type === 'name' ? data.shipping_city : data.billing_city,
+        city: data.type === 'person' ? data.shipping_city : data.billing_city,
         country: 'PL',
         state: '',
-        postcode: data.type === 'name' ? data.shipping_postalCode : data.billing_postalCode,
-        email: data.type === 'name' ? data.shipping_email : data.billing_email,
-        phone: data.type === 'name' ? data.shipping_phone : data.billing_phone,
-        company: data.type === 'name' ? '' : data.billing_firmName,
+        postcode: data.type === 'person' ? data.shipping_postalCode : data.billing_postalCode,
+        email: data.type === 'person' ? data.shipping_email : data.billing_email,
+        phone: data.type === 'person' ? data.shipping_phone : data.billing_phone,
+        company: data.type === 'person' ? '' : data.billing_firmName,
       },
       metaData: [
         {

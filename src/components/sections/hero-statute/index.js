@@ -21,7 +21,7 @@ export default function Hero({ data: { title = ' ', text = ' ', files } }) {
       <h1 dangerouslySetInnerHTML={{ __html: removeWrap(title) }} />
       <div dangerouslySetInnerHTML={{ __html: text }} />
       {files?.map((el, index) => (
-        <a href={el.file.mediaItemUrl} download={'regulamin'} target="__blank" rel="noopener noreferer"><File /><span>{el.file.title}</span></a>
+        <a key={index} href={el.file.mediaItemUrl} download={'regulamin'} target="__blank" rel="noopener noreferer"><File /><span>{el.file.title}</span></a>
       ))}
     </section>
   )

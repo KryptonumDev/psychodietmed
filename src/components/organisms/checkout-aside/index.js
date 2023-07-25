@@ -10,7 +10,7 @@ export default function Aside({ data }) {
           <li key={el.name}>
             <h4>{el.name}</h4>
             <div className={styles.flex}>
-              <span className={styles.count}>Ilość: <strong>{el.qty}</strong></span>
+              <span className={styles.count}><span>Ilość:</span> <strong>{el.qty}</strong></span>
               <span className={styles.price}>Cena: <strong dangerouslySetInnerHTML={{ __html: el.totalPrice }} /></span>
             </div>
           </li>

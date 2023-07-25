@@ -10,6 +10,15 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
+
+  .link{
+    position: absolute;
+    inset: 0;
+    display: block;
+    border-radius: 20px;
+    z-index: 1;
+  }
 
   .image{
     width: 100% !important;
@@ -51,6 +60,8 @@
         align-items: center;
         gap: 12px;
         position: relative;
+        z-index: 3;
+        cursor: pointer;
 
         input{
           left: 0;
@@ -106,6 +117,8 @@
     justify-content: space-between;
     gap: 12px;
     flex-wrap: wrap;
+    position: relative;
+    z-index: 3;
 
     p {
       font-size: 20rem;

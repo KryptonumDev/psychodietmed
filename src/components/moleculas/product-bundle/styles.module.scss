@@ -76,11 +76,13 @@
       gap: 12px;
 
       label {
+        z-index: 3;
         display: grid;
         grid-template-columns: 30px 1fr;
         align-items: center;
         gap: clamp(8px, calc(12vw/7.68), 12px);
         position: relative;
+        cursor: pointer;
 
         input {
           left: 0;
@@ -138,7 +140,7 @@
     inset: 0;
     display: block;
     border-radius: 20px;
-    z-index: -1;
+    z-index: 1;
   }
 
   h3 {
@@ -238,6 +240,8 @@
       justify-content: space-between;
       gap: 8px;
       flex-wrap: wrap;
+      position: relative;
+      z-index: 3;
 
       @media (max-width: 420px) {
         flex-direction: column;

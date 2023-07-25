@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from "react"
+import React, { useCallback, useMemo, useState } from "react"
 import styles from './styles.module.scss'
 import { Image } from "@/components/atoms/image"
 import { CheckMark } from "../../../assets/check-mark"
@@ -7,9 +7,33 @@ import Price from "@/components/atoms/price"
 import AddToCart from "@/components/atoms/add-to-cart-button"
 import Link from "next/link"
 
-export default function Bundle({ data: { variations, slug, image, name, product, productId, price, regularPrice } }) {
+export default function Bundle({ data: { addons, variations, slug, image, name, product, productId, price, regularPrice } }) {
 
   const [chosenVariation, setChosenVariation] = useState(variations?.nodes[0] || null)
+  const [chosenAddon, setChosenAddon] = useState(null)
+
+  const prices = useMemo(() => {
+    let localprice = chosenVariation?.price || price
+    let localregularPrice = chosenVariation?.regularPrice || regularPrice
+
+    if (!chosenAddon) return { price: parseInt(localprice), regularPrice: parseInt(localregularPrice) }
+
+    const newPrice = parseInt(localprice) + parseInt(chosenAddon.price)
+    const newRegularPrice = parseInt(localregularPrice) + parseInt(chosenAddon.price)
+
+    return { price: newPrice, regularPrice: newRegularPrice }
+
+  }, [price, regularPrice, chosenAddon, chosenVariation])
+
+  const handleAddonClick = useCallback((e, add) => {
+    //if its addon already chosen, remove it
+    if (chosenAddon?.val === add?.val) {
+      setChosenAddon(null)
+      return
+    }
+
+    setChosenAddon(add)
+  }, [chosenAddon, setChosenAddon])
 
   return (
     <div className={styles.wrapper}>
@@ -45,6 +69,22 @@ export default function Bundle({ data: { variations, slug, image, name, product,
       </div>
       <div className={styles.info}>
         <div className={styles.radios}>
+
+          <div className={styles.variables}>
+            {addons?.map((el, index) => (
+              <div key={index} className={styles.group}>
+                {el.options.map(inEl => (
+                  <label key={inEl.label}>
+                    <input checked={chosenAddon?.val === inEl.label} onClick={(e) => { handleAddonClick(e, { name: el.fieldName, val: inEl.label, price: inEl.price }) }} type="radio" name={el.name} value={inEl.label} />
+                    <span className={styles.checkbox} />
+                    <span>
+                      {inEl.label} <small>+&nbsp;{inEl.price}&nbsp;zł</small>
+                    </span>
+                  </label>
+                ))}
+              </div>
+            ))}
+          </div>
           <div className={styles.variables}>
             {variations?.nodes?.map((el, index) => (
               <div key={index} className={styles.group}>
@@ -62,8 +102,8 @@ export default function Bundle({ data: { variations, slug, image, name, product,
           </div>
         </div>
         <div className={styles.flex}>
-          <Price salesPrice={chosenVariation?.price || price} regularPrice={chosenVariation?.price || regularPrice} />
-          <AddToCart variationId={chosenVariation?.productId} product={{ productId: productId }} />
+          <Price salesPrice={prices.price} regularPrice={prices.regularPrice} />
+          <AddToCart chosenAddon={chosenAddon} variationId={chosenVariation?.productId} product={{ productId: productId }} />
         </div>
       </div>
     </div>

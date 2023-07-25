@@ -1,5 +1,92 @@
 .wrapper {
-  margin-top: 100px;
+  margin-top: clamp(64px, calc(80vw/7.68), 100px);
+
+  h2 {
+    font-size: clamp(28rem, calc(32vw/7.68), 48rem);
+  }
+
+  .control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 36px;
+    margin-top: clamp(64px, calc(64vw/7.68), 128px);
+
+    @media (max-width: 520px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .check {
+      position: relative;
+      display: grid;
+      align-items: center;
+      grid-template-columns: 34px 1fr;
+      gap: 8px;
+
+      &.error {
+        span {
+          border-color: #B40909;
+        }
+
+        p {
+          color: #B40909;
+        }
+      }
+
+      input {
+        top: 0;
+        left: 0;
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      p {
+        font-weight: 700;
+        transition: all 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+        max-width: 660px;
+        font-size: clamp(14rem, calc(16vw/7.68), 20rem);
+
+        @media (max-width: 370px) {
+          font-size: clamp(0rem, calc(14vw/3.7), 14rem);
+        }
+
+        a {
+          font-weight: 700;
+          text-decoration: underline;
+          color: #194574;
+        }
+      }
+
+      input:checked~span::after {
+        opacity: 1;
+      }
+
+      span {
+        transition: all 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+        margin: 0;
+        display: block;
+        width: 34px;
+        height: 34px;
+        border: 2px solid #DEAFB8;
+        border-radius: 5px;
+        position: relative;
+
+        &::after {
+          content: url('/check-mark.png');
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: 22px;
+          height: 22px;
+          opacity: 0;
+          transition: opacity 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+        }
+      }
+    }
+  }
 
   .change {
     border: none;
@@ -8,7 +95,20 @@
     align-items: center;
     gap: 6px;
     color: #194574;
-    font-size: 20rem;
+    font-size: clamp(16rem, calc(20vw/7.68), 20rem);
+    font-weight: 500 !important;
+  }
+
+  .flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: clamp(28px, calc(32vw/7.68), 32px);
+
+    button {
+      font-weight: 500;
+    }
   }
 
   .shipping,
@@ -16,14 +116,81 @@
     border-radius: 20px;
     border: 2px solid #DEAFB8;
     background: #FFF;
-    padding: 24px 20px;
+    padding: clamp(16px, calc(16vw/7.68), 24px) 20px clamp(20px, calc(20vw/7.68), 24px) 20px;
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
 
-    .flex{
-      display: flex;
+    p+p {
+      margin-top: 16px;
+    }
+  }
+
+  .shipping,
+  .billing,
+  .delivery,
+  .clientType {
+    label {
+      width: fit-content;
+      position: relative;
+      margin-top: 0;
+      border-radius: 50px;
+      border: 2px solid #EBCFD4;
+      background: #FFF;
+      box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+      padding: clamp(8px, calc(10vw/7.68), 14px) clamp(16px, calc(16vw/7.68), 28px) clamp(10px, calc(12vw/7.68), 16px) clamp(16px, calc(16vw/7.68), 28px);
+
+      display: grid;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
+      grid-template-columns: 30px 1fr;
+      gap: 8px;
+
+      input {
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      p {
+        color: #8A8A8A;
+        transition: all .2s cubic-bezier(0.755, 0.05, 0.855, 0.06);
+      }
+
+      span {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 2px solid #C8DAEF;
+        position: relative;
+        transition: all .2s cubic-bezier(0.755, 0.05, 0.855, 0.06);
+
+        &::after {
+          content: '';
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: #194574;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          opacity: 0;
+          transition: opacity .2s cubic-bezier(0.755, 0.05, 0.855, 0.06);
+        }
+      }
+
+      input:checked~span {
+        border: 2px solid #194574;
+        color: #181818;
+
+        &::after {
+          opacity: 1;
+        }
+      }
+
+      input:checked~p {
+        color: #181818;
+      }
     }
   }
 
@@ -31,7 +198,94 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 64px 32px;
-    margin-top: 48px;
+    margin-top: clamp(24px, calc(28vw/7.68), 48px);
+    grid-template-areas:
+      'type     .......'
+      'shipping billing'
+      'delivery .......'
+      'comment  .......';
+
+    &.altGrid {
+      grid-template-areas:
+        'type     .......'
+        'shipping billing'
+        'comment  .......';
+    }
+
+    @media (max-width: 876px) {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        'type'
+        'shipping'
+        'billing'
+        'delivery'
+        'comment';
+
+      &.altGrid {
+        grid-template-areas:
+          'type'
+          'shipping'
+          'billing'
+          'comment';
+      }
+
+      gap: 36px;
+    }
+
+    .comment {
+      grid-area: comment;
+    }
+
+    .delivery {
+      grid-area: delivery;
+
+      label {
+        width: 100%;
+
+        p {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          small {
+            color: #535353;
+            font-size: clamp(14rem, calc(16vw/7.68), 16rem);
+          }
+        }
+      }
+    }
+
+    .params {
+      margin-top: 16px;
+      gap: 48px;
+      display: grid;
+      align-items: center;
+      grid-template-columns: 1fr auto;
+
+      @media (max-width: 520px) {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      >* {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        margin-top: 0;
+      }
+    }
+
+    .billing {
+      grid-area: billing;
+    }
+
+    .shipping {
+      grid-area: shipping;
+    }
+
+    .clientType {
+      grid-area: type;
+    }
   }
 
   .clientType {
@@ -41,70 +295,29 @@
     gap: 12px;
   }
 
-  label {
-    width: fit-content;
-    position: relative;
-    margin-top: 0;
-    border-radius: 50px;
-    border: 2px solid #EBCFD4;
-    background: #FFF;
-    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
-    padding: 14px 28px 16px 28px;
+  .comment {
+    width: 100%;
 
-    display: grid;
-    align-items: center;
-    grid-template-columns: 30px 1fr;
-    gap: 8px;
-
-    font-size: 24rem;
-
-    input {
-      opacity: 0;
-      pointer-events: none;
-      position: absolute;
-      left: 0;
-      top: 0;
+    h3 {
+      margin-bottom: 48px;
+      font-size: clamp(28rem, calc(32vw/7.68), 48rem);
     }
 
-    p {
-      color: #8A8A8A;
-      transition: all .2s cubic-bezier(0.755, 0.05, 0.855, 0.06);
-    }
+    textarea {
+      width: 100%;
+      border-radius: 20px;
+      background: #FFFEFE;
+      border: 2px solid #DEAFB8;
+      line-height: 23px;
+      padding: clamp(10px, calc(10vw/7.68), 20px) 28px;
+      color: #194574;
+      font-size: clamp(16rem, calc(16vw/7.68), 20rem);
+      font-weight: 500;
+      box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
 
-    span {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      border: 2px solid #C8DAEF;
-      position: relative;
-      transition: all .2s cubic-bezier(0.755, 0.05, 0.855, 0.06);
-
-      &::after {
-        content: '';
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: #194574;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        opacity: 0;
-        transition: opacity .2s cubic-bezier(0.755, 0.05, 0.855, 0.06);
+      @media (max-width: 370px) {
+        font-size: clamp(0rem, calc(16vw/3.7), 16rem);
       }
-    }
-
-    input:checked~span {
-      border: 2px solid #194574;
-      color: #181818;
-
-      &::after {
-        opacity: 1;
-      }
-    }
-
-    input:checked~p {
-      color: #181818;
     }
   }
 }

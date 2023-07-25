@@ -198,10 +198,9 @@ async function getData() {
                 }
               }
             }
-            
           }
         }
-        specjalisci {
+        specjalisci(first: 100) {
           nodes {
             title
             slug

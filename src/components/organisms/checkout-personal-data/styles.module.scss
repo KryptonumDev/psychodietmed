@@ -6,25 +6,38 @@
 
     legend {
       margin-bottom: 12px;
+      font-size: clamp(28rem, calc(32vw/7.68), 32rem);
+
+      @media (max-width: 876px) {
+        margin-bottom: 0;
+      }
+
+      @media (max-width: 370px) {
+        font-size: clamp(0rem, calc(28vw/3.7), 28rem);
+      }
     }
   }
 
   fieldset+fieldset {
-    margin-top: 64px;
+    margin-top: clamp(36px, calc(64vw/7.68), 64px);
   }
 
-  .checkbox{
+  .checkbox {
     display: grid;
     grid-template-columns: 34px auto;
     gap: 8px;
   }
 
   .radio {
-    margin-top: 36px;
+    margin-top: clamp(20px, calc(28vw/7.68), 36px);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 56px;
+    gap: clamp(16px, calc(16vw/7.68), 56px);
     align-items: center;
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
 
     label {
       position: relative;
@@ -33,14 +46,12 @@
       border: 2px solid #EBCFD4;
       background: #FFF;
       box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
-      padding: 14px 28px 16px 28px;
+      padding: clamp(8px, calc(10vw/7.68), 14px) clamp(16px, calc(16vw/7.68), 28px) clamp(10px, calc(12vw/7.68), 16px) clamp(16px, calc(16vw/7.68), 28px);
 
       display: grid;
       align-items: center;
       grid-template-columns: 30px 1fr;
       gap: 8px;
-
-      font-size: 24rem;
 
       input {
         opacity: 0;
@@ -50,9 +61,10 @@
         top: 0;
       }
 
-      p{
+      p {
         color: #8A8A8A;
         transition: all .2s cubic-bezier(0.755, 0.05, 0.855, 0.06);
+        white-space: nowrap;
       }
 
       span {
@@ -94,7 +106,7 @@
   }
 
   label {
-    margin-top: 36px;
+    margin-top: clamp(28px, calc(32vw/7.68), 36px);
 
     input {
       width: 100%;
@@ -106,13 +118,27 @@
     display: grid;
     grid-template-columns: 200px 1fr;
     gap: 20px;
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+      margin-top: 28px;
+      gap: 28px;
+
+      label {
+        margin-top: 0;
+
+        &:first-child {
+          max-width: 200px;
+        }
+      }
+    }
   }
 
   .phone {
     max-width: 310px;
   }
 
-  .submit{
+  .submit {
     margin-top: 48px;
   }
 }

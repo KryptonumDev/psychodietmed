@@ -57,7 +57,7 @@ async function getData() {
   const { data: { global, posts, page, specjalisci } } = await client.query({
     query: gql`
       query Pages {
-        specjalisci {
+        specjalisci(first: 100) {
           nodes {
             title
             slug
