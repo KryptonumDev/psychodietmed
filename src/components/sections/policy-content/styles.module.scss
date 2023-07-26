@@ -7,4 +7,131 @@
       font-size: clamp(0rem, calc(32vw/3.7), 32rem);
     }
   }
+
+  details {
+    margin-top: 28px;
+    border-radius: 20px;
+    background: #FFF;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+
+    &[open] {
+      .plus {
+        &::before {
+          transform: rotateX(90deg);
+        }
+      }
+    }
+
+    summary {
+      padding: clamp(16px, calc(20vw/7.68), 28px) clamp(16px, calc(28vw/7.68), 64px) clamp(20px, calc(28vw/7.68), 40px) clamp(16px, calc(28vw/7.68), 36px);
+      border-radius: 20px;
+      font-size: clamp(20rem, calc(28vw/7.68), 32rem);
+
+      @media (max-width: 370px) {
+        font-size: clamp(0rem, calc(20vw/3.7), 20rem);
+      }
+
+      position: relative;
+      cursor: pointer;
+      user-select: none;
+      display: grid;
+      align-items: center;
+      grid-template-columns: 27px 1fr;
+      gap: clamp(8px, calc(16vw/7.68), 16px);
+
+      .plus {
+        width: clamp(21px, calc(27vw/7.68), 27px);
+        height: clamp(21px, calc(27vw/7.68), 27px);
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: calc(50% - 1.5px);
+          left: 0;
+          right: 0;
+          height: 3px;
+          background: #194574;
+          border-radius: 5px;
+        }
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: calc(50% - 1.5px);
+          width: 3px;
+          background: #194574;
+          border-radius: 5px;
+          transform-origin: 50% 50%;
+          transition: all .25s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+        }
+      }
+    }
+
+    >div {
+      margin-left: clamp(36px, calc(44vw/7.68), 44px);
+      padding: 0 clamp(16px, calc(28vw/7.68), 64px) clamp(20px, calc(28vw/7.68), 40px) clamp(16px, calc(28vw/7.68), 36px);
+
+      @media (max-width: 350px) {
+        margin-left: 0;
+      }
+
+      a {
+        font-weight: 700;
+        color: #194574;
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+      }
+
+      br {
+        display: block;
+      }
+
+      * {
+        font-size: clamp(14rem, calc(16vw/7.68), 20rem);
+      }
+
+      ul,
+      ol {
+        margin: 12px;
+      }
+
+      li+li {
+        margin-top: 8px;
+      }
+
+      ul {
+        li {
+          list-style: disc;
+          margin-left: 20px;
+        }
+      }
+
+      ol {
+        >li {
+          margin-top: 16px;
+          position: relative;
+          padding-left: 44px;
+          min-height: 32px;
+          counter-increment: list;
+
+          &::before {
+            content: counter(list);
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            background: #F1F6FB;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
 }

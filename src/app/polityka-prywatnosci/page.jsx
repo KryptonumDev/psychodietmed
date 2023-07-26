@@ -1,7 +1,5 @@
 import { gql } from "@apollo/client";
 import client from "../../apollo/apolo-client";
-import Slider from "@/components/sections/products-slider";
-import Hero from "@/components/sections/hero-statute";
 import StepsToConsultation from "@/components/sections/steps-to-consultation";
 import Content from "@/components/sections/policy-content";
 

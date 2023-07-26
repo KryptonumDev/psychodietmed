@@ -7,7 +7,7 @@ export default function Content({ data }) {
       <h2>Polityka prywatności</h2>
       {data?.map((item, index) => (
         <details key={index}>
-          <summary>{item.title}</summary>
+          <summary><span className={styles.plus}/>{item.title}</summary>
           <div dangerouslySetInnerHTML={{ __html: item?.content }} />
         </details>
       ))}
