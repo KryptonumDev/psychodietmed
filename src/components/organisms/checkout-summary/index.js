@@ -54,11 +54,11 @@ export default function Summary({ needsShippingAddress, setStep, input }) {
           {input.firmOrder ? (
             <>
               <div className={styles.params}>
-                <p>{input.billing.company}</p>
+                <p title={input.billing.company}>{input.billing.company}</p>
                 <p>NIP: {input.metaData[0].value}</p>
               </div>
               <div className={styles.params}>
-                <p>{input.billing.email}</p>
+                <p title={input.billing.email}>{input.billing.email}</p>
                 <p>tel. {input.billing.phone}</p>
               </div>
             </>

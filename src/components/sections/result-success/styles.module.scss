@@ -1,0 +1,32 @@
+.wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  margin-top: clamp(28px, calc(36vw/7.68), 64px);
+
+  h1 {
+    text-align: center;
+  }
+
+  p {
+    text-align: center;
+
+    &:nth-child(2) {
+      margin-top: clamp(12px, calc(16vw/7.68), 20px);
+    }
+
+    &:nth-child(3) {
+      margin-top: clamp(24px, calc(28vw/7.68), 36px);
+    }
+
+    &:nth-child(4) {
+      margin-top: clamp(16px, calc(20vw/7.68), 24px);
+    }
+
+    a {
+      color: #194574;
+      text-decoration: underline;
+      font-weight: 700;
+      text-decoration-thickness: 2px;
+    }
+  }
+}
