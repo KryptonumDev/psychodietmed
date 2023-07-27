@@ -22,7 +22,8 @@ export default function Content({ categories, data }) {
     const category = searchParams.get("kategoria");
     if (!category) return null;
 
-    const categoryObj = categories.find((el) => el.value === category);
+    const categoryObj = categories.find((el) => el.slug === category);
+    debugger
     if (!categoryObj) return null;
 
     return categoryObj;
@@ -35,7 +36,7 @@ export default function Content({ categories, data }) {
   })
 
   const { refetch } = useQuery(
-    gql`query Posts($offset: Int!, $size: Int!, $category: String) {
+    gql`query ClientSidePosts($offset: Int!, $size: Int!, $category: String) {
       posts(where: {offsetPagination: {size: $size, offset: $offset}, categoryName: $category}) {
         pageInfo {
           offsetPagination {
@@ -72,7 +73,7 @@ export default function Content({ categories, data }) {
     client,
     skip: initialLoad,
     variables: {
-      category: chosenCategory?.value ? chosenCategory.value : null,
+      category: chosenCategory?.slug ? chosenCategory.slug : null,
       size: PAGE_ITEM_COUNT,
       offset: PAGE_ITEM_COUNT * (currentPage - 1)
     },
@@ -85,8 +86,8 @@ export default function Content({ categories, data }) {
     }
   })
 
-  const changeCategory = useCallback((value, label) => {
-    setChosenCategory(value === ' ' ? null : { value, label })
+  const changeCategory = useCallback((slug, label) => {
+    setChosenCategory(slug === ' ' ? null : { slug, label })
     setInitialLoad(false)
   }, [setChosenCategory, setInitialLoad])
 
@@ -100,8 +101,8 @@ export default function Content({ categories, data }) {
       refetch()
       const current = new URLSearchParams(Array.from(searchParams.entries()));
 
-      if (!chosenCategory?.value) current.delete("kategoria");
-      else current.set("kategoria", chosenCategory.value);
+      if (!chosenCategory?.slug) current.delete("kategoria");
+      else current.set("kategoria", chosenCategory.slug);
 
       current.delete("strona");
       setCurrentPage(1)
@@ -118,8 +119,8 @@ export default function Content({ categories, data }) {
       refetch()
       const current = new URLSearchParams(Array.from(searchParams.entries()));
 
-      if (!chosenCategory?.value) current.delete("kategoria");
-      else current.set("kategoria", chosenCategory.value);
+      if (!chosenCategory?.slug) current.delete("kategoria");
+      else current.set("kategoria", chosenCategory.slug);
 
       if (currentPage === 1) current.delete("strona");
       else current.set("strona", currentPage);
@@ -138,7 +139,7 @@ export default function Content({ categories, data }) {
       <div className={styles.categories}>
         <Category active={chosenCategory === null} onClick={() => { changeCategory(' ') }} name='Wszystkie artykuy' />
         {categories?.map(el => (
-          <Category active={chosenCategory?.value === el.slug} key={el.id} name={el.name} onClick={() => { changeCategory(el.slug, el.name) }} />
+          <Category active={chosenCategory?.slug === el.slug} key={el.id} name={el.name} onClick={() => { changeCategory(el.slug, el.name) }} />
         ))}
       </div>
       <Grid>
