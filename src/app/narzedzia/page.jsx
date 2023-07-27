@@ -2,17 +2,14 @@ import { gql } from "@apollo/client"
 import client from "../../apollo/apolo-client"
 import Hero from "@/components/sections/hero-tools"
 import Justification from "@/components/sections/tools-archive-justification"
-import CalculatorBmi from "@/components/moleculas/calculator-bmi"
-import CalculatorHomaIr from "@/components/moleculas/calculator-homa-ir"
 import Grid from "@/components/sections/tools-grid"
 import Warning from "@/components/sections/tool-warning"
+import { generetaSeo } from "../../utils/genereate-seo";
+import { GET_SEO_PAGE } from "../../queries/page-seo";
 
-// export async function generateMetadata(props) {
-//   console.log(props)
-//   return {
-//     title: '...',
-//   };
-// }
+export async function generateMetadata() {
+  return await generetaSeo('cG9zdDo5ODE=', '/narzedzie', GET_SEO_PAGE)
+}
 
 export default async function Media() {
   const { data } = await getData()

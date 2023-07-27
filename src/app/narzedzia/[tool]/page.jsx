@@ -7,13 +7,12 @@ import Grid from "@/components/sections/tool-grid"
 import FlexAlt from "@/components/sections/tool-flex-alt"
 import Warning from "@/components/sections/tool-warning"
 import CallToAction from "@/components/sections/tool-cta"
+import { generetaSeo } from "../../../utils/genereate-seo"
+import { GET_SEO_TOOL } from "../../../queries/tool-seo"
 
-// export async function generateMetadata(props) {
-//   console.log(props)
-//   return {
-//     title: '...',
-//   };
-// }
+export async function generateMetadata({ params }) {
+  return await generetaSeo(params.tool, '/narzedzia', GET_SEO_TOOL, 'post')
+}
 
 export default async function Post({ params }) {
   const { data, global } = await getData(params)

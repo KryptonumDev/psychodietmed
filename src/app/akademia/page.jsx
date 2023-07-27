@@ -7,13 +7,23 @@ import ReviewsSlider from "@/components/sections/reviews-slider";
 import Bundles from "@/components/sections/academy-bundles";
 import { notFound } from "next/navigation";
 import { PAGE_ITEM_COUNT } from "../../constants/academy";
+import { generetaSeo } from "../../utils/genereate-seo";
+import { GET_SEO_PAGE } from "../../queries/page-seo";
 
-// export async function generateMetadata(props) {
-//   console.log(props)
-//   return {
-//     title: '...',
-//   };
-// }
+export async function generateMetadata({ searchParams }) {
+
+  let url = '/akademia'
+
+  if (searchParams.kategoria) {
+    url += `?kategoria=${searchParams.kategoria}`
+    if (searchParams.strona)
+      url += `&strona=${searchParams.strona}`
+  } else if (searchParams.strona) {
+    url += `?strona=${searchParams.strona}`
+  }
+
+  return await generetaSeo('cG9zdDoyMTQ=', url, GET_SEO_PAGE)
+}
 
 const prices = [
   { value: '0-99', label: '0 - 99 zł' },
@@ -54,19 +64,6 @@ export default async function Shop(params) {
     </main>
   )
 }
-
-// async function getSeo() {
-//   const { data } = await client.query({
-//     query: gql`
-//       query Seo {
-//       }
-//     `,
-//   }, { pollInterval: 500 })
-
-//   return {
-//     ''
-//   }
-// }
 
 async function getData(params) {
   const currentPage = params.searchParams?.strona ? +params.searchParams?.strona : 1

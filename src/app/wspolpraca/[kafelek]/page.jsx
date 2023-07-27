@@ -9,13 +9,12 @@ import FlexDoubled from "@/components/sections/kafelek-flex"
 import Prediction from "@/components/sections/kafelek-prediction"
 import TwoColumnFlex from "@/components/sections/two-column-flex"
 import CallToAction from "@/components/sections/kafelek-cta"
+import { generetaSeo } from "../../../utils/genereate-seo"
+import { GET_SEO_KAFELEK } from "../../../queries/kafelek-seo"
 
-// export async function generateMetadata(props) {
-//   console.log(props)
-//   return {
-//     title: '...',
-//   };
-// }
+export async function generateMetadata({ params }) {
+  return await generetaSeo(params.kafelek, '/wspolpraca', GET_SEO_KAFELEK, 'post')
+}
 
 export default async function Post({ params }) {
   const { data } = await getData(params)

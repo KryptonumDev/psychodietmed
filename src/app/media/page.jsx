@@ -3,30 +3,28 @@ import client from "../../apollo/apolo-client"
 import { PAGE_ITEM_COUNT } from "../../constants/blog"
 import Hero from "@/components/sections/hero-media"
 import Content from "@/components/sections/content-media"
+import { generetaSeo } from "../../utils/genereate-seo";
+import { GET_SEO_PAGE } from "../../queries/page-seo";
+import { notFound } from "next/navigation"
 
-// export async function generateMetadata(props) {
-//   console.log(props)
-//   return {
-//     title: '...',
-//   };
-// }
+export async function generateMetadata({ searchParams }) {
+  return await generetaSeo('cG9zdDo5MDI=', `/media${searchParams.strona ? `?strona=${searchParams.strona}` : ''}`, GET_SEO_PAGE)
+}
 
-const clientId = '1260289094861018'
-const clientSecret = '62a0ccbef97b3c950eb13c639535620c'
-
-export default async function Media() {
-  const { data, mediums, totalCount } = await getData()
+export default async function Media({ searchParams }) {
+  const { data, mediums, totalCount } = await getData(searchParams.strona)
   return (
     <main>
       <Hero data={data} />
-      <Content data={mediums} totalCount={totalCount} page='1'/>
+      <Content data={mediums} page={searchParams.strona} totalCount={totalCount} />
     </main>
   )
 }
 
-async function getData() {
-  const { data: { pageBy, mediums } } = await client.query({
-    query: gql`
+async function getData(currentPage = 1) {
+  try {
+    const { data: { pageBy, mediums } } = await client.query({
+      query: gql`
       query Pages($size: Int) {
         pageBy(id: "cG9zdDo5MDI=") {
           mediaArchiwum {
@@ -59,14 +57,22 @@ async function getData() {
         }
       }
     `,
-    variables: {
-      size: PAGE_ITEM_COUNT,
-    },
-  }, { pollInterval: 500 })
+      variables: {
+        offset: (currentPage - 1) * PAGE_ITEM_COUNT,
+        size: PAGE_ITEM_COUNT,
+      },
+    }, { pollInterval: 500 })
 
-  return {
-    data: pageBy.mediaArchiwum,
-    mediums: mediums.nodes,
-    totalCount: mediums.pageInfo.offsetPagination.total,
+    if (!mediums.nodes.length)
+      return notFound()
+
+    return {
+      data: pageBy.mediaArchiwum,
+      mediums: mediums,
+      totalCount: mediums.pageInfo.offsetPagination.total,
+    }
+  } catch (error) {
+    console.log(error)
+    notFound()
   }
 }

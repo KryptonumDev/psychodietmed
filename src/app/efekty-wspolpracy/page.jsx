@@ -8,13 +8,12 @@ import CallToActionTransparent from "@/components/sections/call-to-action-tranpa
 import FAQ from "@/components/sections/faq"
 import Content from "@/components/sections/case-archive-content"
 import { PAGE_ITEM_COUNT } from "../../constants/case"
+import { generetaSeo } from "../../utils/genereate-seo";
+import { GET_SEO_PAGE } from "../../queries/page-seo";
 
-// export async function generateMetadata(props) {
-//   console.log(props)
-//   return {
-//     title: '...',
-//   };
-// }
+export async function generateMetadata({ searchParams }) {
+  return await generetaSeo('cG9zdDo5MzM=', `/historia-marki${searchParams.strona ? `?strona=${searchParams.strona}` : ''}`, GET_SEO_PAGE)
+}
 
 export default async function Archive(props) {
   const { data, faq, metrics, podopieczni } = await getData(props)
@@ -24,7 +23,7 @@ export default async function Archive(props) {
       <Metrics data={metrics} />
       <Tiles data={data.historyArchive.servicesHistoryArchive} />
       <CallToActionTransparent data={data.historyArchive.ctaHistoryArchive} />
-      <Content  podopieczni={podopieczni} />
+      <Content podopieczni={podopieczni} />
       <FAQ data={faq} />
     </main>
   )

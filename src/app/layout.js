@@ -1,13 +1,11 @@
 import './normalize.css'
 import './globals.css'
-
 import localFont from 'next/font/local'
 import Header from '@/components/sections/header'
 import Footer from '@/components/sections/footer'
 import { AppProvider } from '../context/app-context'
 import SubHeader from '@/components/sections/mobile-sub-header'
-// import { ApolloProvider } from '@apollo/client'
-// import client from '../apollo/apolo-client'
+
 const Satoshi = localFont({
   src: '../assets/fonts/satoshi.woff2',
   variable: '--font-satoshi',
@@ -15,14 +13,13 @@ const Satoshi = localFont({
   fallback: ["sans-serif"]
 })
 
-
 export const metadata = {
   title: 'Psychodietetyka i Psychoterapia: Zdrowe Relacje z Jedzeniem – Psychodietmed',
   description: 'Odkryj, jak poprawić swoje relacje z jedzeniem dzięki psychodietetyce i psychoterapii. Zdrowa dieta i zdrowe podejście do jedzenia dzięki PsychoDietMed.',
   openGraph: {
     title: 'Psychodietetyka i Psychoterapia: Zdrowe Relacje z Jedzeniem – Psychodietmed',
     description: 'Odkryj, jak poprawić swoje relacje z jedzeniem dzięki psychodietetyce i psychoterapii. Zdrowa dieta i zdrowe podejście do jedzenia dzięki PsychoDietMed.',
-    url: 'https://nextjs.org',
+    url: 'https://www.psychodietmed.pl/',
     siteName: 'Psychodietmed',
     locale: 'pl-PL',
     type: 'website',

@@ -6,13 +6,12 @@ import BundleContains from "@/components/sections/product-bundle-contains"
 import StepsToConsultation from "@/components/sections/steps-to-consultation"
 import ImportantInformation from "@/components/sections/product-important-information"
 import Hero from "@/components/sections/hero-product"
+import { generetaSeo } from "../../../utils/genereate-seo"
+import { GET_SEO_PRODUCT } from "../../../queries/product-seo"
 
-// export async function generateMetadata(props) {
-//   console.log(props)
-//   return {
-//     title: '...',
-//   };
-// }
+export async function generateMetadata({ params }) {
+  return await generetaSeo(params.product, '/akademia', GET_SEO_PRODUCT, 'post')
+}
 
 export default async function Post({ params }) {
   const { data, global, specialists } = await getData(params)

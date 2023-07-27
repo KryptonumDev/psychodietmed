@@ -2,13 +2,12 @@ import { gql } from "@apollo/client";
 import client from "../../apollo/apolo-client";
 import Content from "@/components/sections/cart";
 import Slider from "@/components/sections/products-slider";
+import { generetaSeo } from "../../utils/genereate-seo";
+import { GET_SEO_PAGE } from "../../queries/page-seo";
 
-// export async function generateMetadata(props) {
-//   console.log(props)
-//   return {
-//     title: '...',
-//   };
-// }
+export async function generateMetadata() {
+  return await generetaSeo('cG9zdDoyMTU=', '/koszyk', GET_SEO_PAGE)
+}
 
 export default async function Cart() {
   const { products } = await getData()
@@ -20,19 +19,6 @@ export default async function Cart() {
     </main>
   )
 }
-
-// async function getSeo() {
-//   const { data } = await client.query({
-//     query: gql`
-//       query Seo {
-//       }
-//     `,
-//   }, { pollInterval: 500 })
-
-//   return {
-//     ''
-//   }
-// }
 
 async function getData() {
   const { data } = await client.query({

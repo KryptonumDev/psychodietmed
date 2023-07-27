@@ -7,13 +7,12 @@ import FAQ from "@/components/sections/faq"
 import Reviews from "@/components/sections/specialist-reviews"
 import Specialists from "@/components/sections/specialists-slider"
 import Calendar from "@/components/sections/calendar-widget"
+import { GET_SEO_SPECIALIST } from "../../../queries/specialist-seo"
+import { generetaSeo } from "../../../utils/genereate-seo"
 
-// export async function generateMetadata(props) {
-//   console.log(props)
-//   return {
-//     title: '...',
-//   };
-// }
+export async function generateMetadata({ params }) {
+  return await generetaSeo(params.specjalista, '/zespol', GET_SEO_SPECIALIST, 'post')
+}
 
 export default async function Specjalista({ params }) {
   const { data, faq, other } = await getData(params)
@@ -27,9 +26,9 @@ export default async function Specjalista({ params }) {
           courses={data.proffesional.courses}
           certificates={data.proffesional.certificates}
         />
-        <Calendar calendlyUrl="https://calendly.com/d/y6h-z7h-sg3/30min"/>
+        <Calendar calendlyUrl="https://calendly.com/d/y6h-z7h-sg3/30min" />
         <Reviews data={data.proffesional.reviews} />
-        <Specialists data={other} title={'Podobni specjaliści'}/>
+        <Specialists data={other} title={'Podobni specjaliści'} />
         <FAQ data={faq} />
       </main>
     </>

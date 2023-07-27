@@ -12,13 +12,12 @@ import OtherPosts from "@/components/sections/other-posts"
 import Newsletter from "@/components/sections/newsletter"
 import CallToAction from "@/components/sections/brand-cta"
 import TwoColumnFlexWithGrid from "@/components/sections/brand-flex-and-grid"
+import { generetaSeo } from "../../utils/genereate-seo";
+import { GET_SEO_PAGE } from "../../queries/page-seo";
 
-// export async function generateMetadata(props) {
-//   console.log(props)
-//   return {
-//     title: '...',
-//   };
-// }
+export async function generateMetadata() {
+  return await generetaSeo('cG9zdDoxMDc1', '/historia-marki', GET_SEO_PAGE)
+}
 
 export default async function Archive() {
   const { data, metrics, newsletter, posts, blog } = await getData()

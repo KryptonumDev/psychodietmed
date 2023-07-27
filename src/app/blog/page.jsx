@@ -4,21 +4,30 @@ import Hero from "@/components/sections/hero-blog"
 import Content from "@/components/sections/content-blog"
 import { PAGE_ITEM_COUNT } from "../../constants/blog"
 import { notFound } from 'next/navigation';
+import { generetaSeo } from "../../utils/genereate-seo";
+import { GET_SEO_PAGE } from "../../queries/page-seo";
 
-// export async function generateMetadata(props) {
-//   console.log(props)
-//   return {
-//     title: '...',
-//   };
-// }
+export async function generateMetadata({ searchParams }) {
+  let url = '/blog'
 
-export default async function Blog({ params }) {
-  const { categories, hero, posts, newPosts, postsTotalCount } = await getData(params.page)
+  if (searchParams.kategoria) {
+    url += `?kategoria=${searchParams.kategoria}`
+    if (searchParams.strona)
+      url += `&strona=${searchParams.strona}`
+  } else if (searchParams.strona) {
+    url += `?strona=${searchParams.strona}`
+  }
+
+  return await generetaSeo('cG9zdDo2NzA=', url, GET_SEO_PAGE)
+}
+
+export default async function Blog({ searchParams }) {
+  const { categories, hero, posts, newPosts, postsTotalCount } = await getData(searchParams.strona)
 
   return (
     <main>
       <Hero data={hero} posts={newPosts} />
-      <Content categories={categories} page={params.page} data={posts} totalCount={postsTotalCount} />
+      <Content categories={categories} page={searchParams.strona} data={posts} totalCount={postsTotalCount} />
     </main>
   )
 }
@@ -122,36 +131,4 @@ async function getData(currentPage = 1) {
     console.log(error)
     notFound()
   }
-}
-
-export async function generateStaticParams() {
-  const { data: { posts } } = await client.query({
-    query: gql`
-      query Pages {
-        posts{
-          pageInfo {
-            offsetPagination {
-              total
-            }
-          }
-        }
-      }
-    `,
-  })
-
-  const pagesCount = (() => {
-    return (Math.ceil(posts.pageInfo.offsetPagination.total / PAGE_ITEM_COUNT))
-  })()
-
-  const buttons = (() => {
-    let arr = []
-    for (let i = 1; i < pagesCount; i++) {
-      arr.push(i + 1)
-    }
-    return arr
-  })()
-
-  return buttons.map(page => ({
-    page: String(page),
-  }));
 }

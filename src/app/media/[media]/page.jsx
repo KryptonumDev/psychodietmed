@@ -7,13 +7,12 @@ import Video from "@/components/sections/medium-video"
 import OtherMedia from "@/components/sections/other-media"
 import Contact from "@/components/sections/medium-contact"
 import Interview from "@/components/sections/media-interview"
+import { generetaSeo } from "../../../utils/genereate-seo"
+import { GET_SEO_MEDIA } from "../../../queries/media-seo"
 
-// export async function generateMetadata(props) {
-//   console.log(props)
-//   return {
-//     title: '...',
-//   };
-// }
+export async function generateMetadata({ params }) {
+  return await generetaSeo(params.media, '/media', GET_SEO_MEDIA, 'post')
+}
 
 export default async function Post({ params }) {
   const { data, otherMedia } = await getData(params)

@@ -10,13 +10,12 @@ import Grid from "@/components/sections/cooperate-grid";
 import FlexAlt from "@/components/sections/cooperate-flex";
 import Steps from "@/components/sections/cooperate-steps";
 import DigitalSlider from "@/components/sections/digital-products-slider";
+import { generetaSeo } from "../../utils/genereate-seo";
+import { GET_SEO_PAGE } from "../../queries/page-seo";
 
-// export async function generateMetadata(props) {
-//   console.log(props)
-//   return {
-//     title: '...',
-//   };
-// }
+export async function generateMetadata() {
+  return await generetaSeo('cG9zdDoxMzM4', '/wspolpraca', GET_SEO_PAGE)
+}
 
 export default async function Wspolpraca() {
   const { products, data, activities, faq, metrics, specialisations } = await getData()
@@ -36,19 +35,6 @@ export default async function Wspolpraca() {
     </main>
   )
 }
-
-// async function getSeo() {
-//   const { data } = await client.query({
-//     query: gql`
-//       query Seo {
-//       }
-//     `,
-//   }, { pollInterval: 500 })
-
-//   return {
-//     ''
-//   }
-// }
 
 async function getData() {
   const { data: { products, global, page, obszaryDzialania, specjalizacje } } = await client.query({

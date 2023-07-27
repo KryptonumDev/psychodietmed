@@ -12,13 +12,12 @@ import Specialists from "@/components/sections/specialists-slider";
 import CallToActionGray from "@/components/sections/call-to-action-gray";
 import Statistics from "@/components/sections/team-statistics";
 import CombinedSpecialisations from "@/components/sections/team-combined-specialisations";
+import { generetaSeo } from "../../utils/genereate-seo";
+import { GET_SEO_PAGE } from "../../queries/page-seo";
 
-// export async function generateMetadata(props) {
-//   console.log(props)
-//   return {
-//     title: '...',
-//   };
-// }
+export async function generateMetadata() {
+  return await generetaSeo('cG9zdDoxMTc2', '/zespol', GET_SEO_PAGE)
+}
 
 export default async function Team() {
   const { newsletter, posts, blog, page, specialists } = await getData()
@@ -39,19 +38,6 @@ export default async function Team() {
     </main>
   )
 }
-
-// async function getSeo() {
-//   const { data } = await client.query({
-//     query: gql`
-//       query Seo {
-//       }
-//     `,
-//   }, { pollInterval: 500 })
-
-//   return {
-//     ''
-//   }
-// }
 
 async function getData() {
   const { data: { global, posts, page, specjalisci } } = await client.query({

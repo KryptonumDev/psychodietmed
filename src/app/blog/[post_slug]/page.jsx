@@ -4,13 +4,12 @@ import client from "../../../apollo/apolo-client"
 import Hero from "@/components/sections/hero-post"
 import Content from "@/components/sections/content-post"
 import OtherPosts from "@/components/sections/other-posts"
+import { generetaSeo } from "../../../utils/genereate-seo"
+import { GET_SEO_POST } from "../../../queries/post-seo"
 
-// export async function generateMetadata(props) {
-//   console.log(props)
-//   return {
-//     title: '...',
-//   };
-// }
+export async function generateMetadata({ params }) {
+  return await generetaSeo(params.post_slug, '/blog', GET_SEO_POST, 'post')
+}
 
 export default async function Post({ params }) {
   const { data, posts } = await getData(params)
@@ -18,7 +17,7 @@ export default async function Post({ params }) {
     <>
       <main>
         <Hero data={data} />
-        <Content next={data.next} prev={data.previous} author={data.postAuthor.author} data={data.content} title={data.title} excerpt={data.excerpt}/>
+        <Content next={data.next} prev={data.previous} author={data.postAuthor.author} data={data.content} title={data.title} excerpt={data.excerpt} />
         <OtherPosts data={posts} />
       </main>
     </>
