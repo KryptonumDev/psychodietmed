@@ -73,7 +73,7 @@
       display: grid;
       height: fit-content;
 
-      a {
+      a, p {
         line-height: 200%;
         font-size: clamp(16rem, calc(20vw/7.68), 24rem);
         color: #181818;

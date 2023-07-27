@@ -10,7 +10,7 @@ export default function Hero({ data: { title, subTitle, description, calculatorT
   return (
     <section className={styles.wrapper}>
       <h1 dangerouslySetInnerHTML={{ __html: removeWrap(title) }} />
-      <div className={styles.grid}>
+      <div className={`${styles.grid} ${(calculatorType !== 'bmi' && calculatorType !== 'homa') ? styles.alt : ''}`}>
         <div className={styles.content}>
           <h2>{subTitle}</h2>
           <div dangerouslySetInnerHTML={{ __html: description }} />
@@ -26,8 +26,16 @@ export default function Hero({ data: { title, subTitle, description, calculatorT
           }
         })()}
       </div>
-      {/* <CalculatorBecka />
-      <CalculatorFear /> */}
+      {(() => {
+        switch (calculatorType) {
+          case 'beck':
+            return <CalculatorBecka />
+          case 'lek':
+            return <CalculatorFear />
+          default:
+            return null
+        }
+      })()}
     </section>
   )
 }

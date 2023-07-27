@@ -1,5 +1,6 @@
 import React from "react"
 import styles from "./styles.module.scss"
+import { AnimatePresence, motion } from "framer-motion"
 
 export default function Checkbox({ text, name, register, errors, error }) {
   return (
@@ -7,9 +8,9 @@ export default function Checkbox({ text, name, register, errors, error }) {
       <input type="checkbox" {...register} />
       <span className={styles.checkbox} />
       <div className={styles.text} dangerouslySetInnerHTML={{ __html: text }} />
-      {error && (
-        <>{errors[name] && <span className={styles.error}>{error}</span>}</>
-      )}
+      <AnimatePresence mode="wait">
+        {errors[name] && <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className={styles.error}>{error}</motion.span>}
+      </AnimatePresence>
     </label>
   )
 }

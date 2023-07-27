@@ -3,6 +3,8 @@ import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import styles from './styles.module.scss'
 import Select, { components } from 'react-select'
+import Checkbox from "@/components/atoms/checkbox"
+import Input from "@/components/atoms/input"
 
 const emailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 const namePattern = /^[a-z ,.'-]+$/i
@@ -38,16 +40,22 @@ export default function Form({ subjects }) {
 
   return (
     <form className={styles.wrapper} onSubmit={handleSubmit(onSubmit)}>
-      <label>
-        <span>Imię</span>
-        <input placeholder='Imię' {...register("name", { required: true, pattern: namePattern })} />
-        {errors.name && <div className={styles.error}>Proszę poprawnie uzupełnić to pole</div>}
-      </label>
-      <label>
-        <span>Adres e-mail</span>
-        <input placeholder='Adres e-mail' {...register("email", { required: true, pattern: emailPattern })} />
-        {errors.name && <div className={styles.error}>Proszę poprawnie uzupełnić to pole</div>}
-      </label>
+      <Input
+        name={'name'}
+        register={register('name', { required: true, pattern: namePattern })}
+        placeholder='Imię'
+        title={'Imię'}
+        errors={errors}
+        error="Proszę poprawnie uzupełnić to pole"
+      />
+      <Input
+        name={'email'}
+        register={register('email', { required: true, pattern: emailPattern })}
+        placeholder='Adres e-mail'
+        title={'Adres e-mail'}
+        errors={errors}
+        error="Proszę poprawnie uzupełnić to pole"
+      />
       <label>
         <span>Temat wiadomości</span>
         <Select
@@ -60,13 +68,23 @@ export default function Form({ subjects }) {
           options={subjects.map(el => {
             return { value: el.subject, label: el.subject }
           })} />
-        {errors.name && <div className={styles.error}>Proszę poprawnie uzupełnić to pole</div>}
       </label>
-      <label>
-        <span>Twoja wiadomość</span>
-        <textarea rows='5' placeholder='Twoja wiadomość' {...register("name", { required: true, pattern: namePattern })} />
-        {errors.name && <div className={styles.error}>Proszę poprawnie uzupełnić to pole</div>}
-      </label>
+      <Input
+        rows={5}
+        name={'text'}
+        register={register('text', { required: true, minLength: 3 })}
+        placeholder='Twoja wiadomość'
+        title={'Twoja wiadomość'}
+        errors={errors}
+        error="Proszę poprawnie uzupełnić to pole"
+      />
+      <Checkbox
+        text='Akceptuję <a href="/polityka-prywatnosci">politykę prywatności</a>.'
+        name='checkbox'
+        register={register('checkbox', { required: true })}
+        errors={errors}
+        error='Proszę zaakceptować politykę prywatności'
+      />
       <button className={`${styles.submit} link`}>Wyślij wiadomość</button>
     </form>
   )

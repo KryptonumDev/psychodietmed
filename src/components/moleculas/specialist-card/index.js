@@ -4,7 +4,7 @@ import { Image } from "@/components/atoms/image";
 import styles from "./styles.module.scss";
 import { RightArrow } from "../../../assets/small-right-arrow";
 
-export default function Card({ onClick = () => { }, chosenSpecialisations, short = false, data: { proffesional, slug, title } }) {
+export default function Card({ onClick = () => { }, short = false, data: { proffesional, slug, title } }) {
 
   return (
     <div onClick={onClick} className={styles.item}>
@@ -20,11 +20,7 @@ export default function Card({ onClick = () => { }, chosenSpecialisations, short
         <p>{proffesional?.proffesion}</p>
         <ul>
           {proffesional?.specialisations?.map(({ title }, index) => (
-            <li className={(() => {
-              if (!chosenSpecialisations) return ''
-              if (chosenSpecialisations.includes(title)) return styles.active
-              return styles.inactive
-            })()} key={index}>{title}</li>
+            <li key={index}>{title}</li>
           ))}
         </ul>
       </div>

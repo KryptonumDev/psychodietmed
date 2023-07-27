@@ -16,7 +16,7 @@ export default function Name({ data: { image, title, text, signature, psycho, di
     <section className={styles.wrapper}>
       <div className={styles.instruction}>
         <CursorFinger />
-        <p>Kliknij, aby dowiedzieć się więcej</p>
+        <p>Najedź, aby dowiedzieć się więcej</p>
       </div>
       <div className={styles.name}>
         <span>

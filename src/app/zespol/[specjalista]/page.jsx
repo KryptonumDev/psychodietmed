@@ -27,7 +27,9 @@ export default async function Specjalista({ params }) {
           certificates={data.proffesional.certificates}
         />
         <Calendar calendlyUrl="https://calendly.com/d/y6h-z7h-sg3/30min" />
-        <Reviews data={data.proffesional.reviews} />
+        {data.proffesional.reviews && (
+          <Reviews data={data.proffesional.reviews} />
+        )}
         <Specialists data={other} title={'Podobni specjaliści'} />
         <FAQ data={faq} />
       </main>

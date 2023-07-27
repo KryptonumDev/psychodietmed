@@ -10,13 +10,13 @@ export default function Flex({ content, diploms, courses, certificates }) {
     <section className={styles.wrapper}>
       <div className={styles.left_column}>
         <div className={styles.blue_box}>
-          {diploms.map(el => (
+          {diploms?.map(el => (
             <div key={el.diplom} className={styles.item}>
               <Diplom />
               <span>{el.diplom}</span>
             </div>
           ))}
-          {courses.map(el => (
+          {courses?.map(el => (
             <div key={el.course} className={styles.item}>
               <Badge />
               <span>{el.course}</span>

@@ -10,7 +10,7 @@ import { AppContext } from "../../../context/app-context";
 
 const urlSystem = [
   {
-    name: 'O kliencie',
+    name: 'O klinice',
     url: null,
     subpages: [
       {
@@ -42,10 +42,6 @@ const urlSystem = [
       {
         name: 'Efekty współpracy',
         url: '/efekty-wspolpracy'
-      },
-      {
-        name: 'Pakiety',
-        url: '/pakiety'
       },
       {
         name: 'Narzędzia',

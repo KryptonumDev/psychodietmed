@@ -1,33 +1,48 @@
 .wrapper {
-  .questions{
+  margin-top: clamp(28px, calc(36vw/7.68), 64px);
+
+  .questions {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 36px 32px;
+    gap: clamp(16px, calc(24vw/7.68), 36px) clamp(16px, calc(24vw/7.68 ), 32px);
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+    }
   }
 
-  >button{
+  >button {
     text-align: center;
     margin: 76px auto 0 auto;
   }
 
-  .result{
+  .result {
     text-align: center;
     max-width: 730px;
     margin: 64px auto 0 auto;
 
-    p{
+    p {
       margin-top: 0;
-      &:last-child{
-        margin-top: 36px;
+
+      &:last-child {
+        margin-top: clamp(18px, calc(24vw/7.68), 36px);
       }
 
-      &:first-child{
+      &:first-child {
         margin-bottom: 18px;
-        font-size: 32rem;
+        font-size: clamp(20rem, calc(24vw/7.68), 32rem);
 
-        span{
+        @media (max-width: 370px) {
+          font-size: clamp(0rem, calc(20vw/3.7), 20rem);
+        }
+
+        span {
           color: #194574;
-          font-size: 36rem;
+          font-size: clamp(22rem, calc(28vw/7.68), 36rem);
+
+          @media (max-width: 370px) {
+            font-size: clamp(0rem, calc(22vw/3.7), 22rem);
+          }
         }
       }
     }
@@ -37,26 +52,31 @@
     border-radius: 20px;
     background: #F1F6FB;
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
-    padding: 36px 36px 42px 36px;
+    padding: clamp(20px, calc(20vw/7.68), 36px) clamp(20px, calc(20vw/7.68), 36px) clamp(24px, calc(24vw/7.68), 42px) clamp(20px, calc(20vw/7.68), 36px);
 
     display: grid;
     grid-template-rows: auto 1fr auto;
 
     h3 {
-      margin-bottom: 36px;
+      margin-bottom: clamp(18px, calc(24vw/7.68), 36px);
     }
 
     span {
       color: #194574;
-      font-size: 24rem;
+      font-size: clamp(16rem, calc(16vw/7.68), 24rem);
       font-weight: 700;
       font-variant-numeric: lining-nums proportional-nums ordinal;
       font-feature-settings: 'dlig' on, 'ss04' on, 'ss03' on, 'ss02' on, 'ss01' on, 'salt' on;
       line-height: 140%;
+          
+      @media (max-width: 370px) {
+        font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+      }
     }
 
     .input {
-      margin-top: 8px;
+      margin-top: clamp(8px, calc(16vw/7.68), 24px);
+
       input {
         width: 100%;
         margin: 24px 0;
@@ -69,40 +89,40 @@
         appearance: none;
         background: #DEAFB8;
         cursor: pointer;
-  
+
         &::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            height: 32px;
-            width: 32px;
-            border-radius: 50%;
-            background: #DEAFB8;
-            cursor: pointer;
-            z-index: 2;
-            position: relative;
+          -webkit-appearance: none;
+          height: 32px;
+          width: 32px;
+          border-radius: 50%;
+          background: #DEAFB8;
+          cursor: pointer;
+          z-index: 2;
+          position: relative;
         }
-  
+
         &::-moz-range-thumb {
-            height: 32px;
-            width: 32px;
-            border-radius: 50%;
-            background: #DEAFB8;
-            cursor: pointer;
-            z-index: 2;
-            position: relative;
+          height: 32px;
+          width: 32px;
+          border-radius: 50%;
+          background: #DEAFB8;
+          cursor: pointer;
+          z-index: 2;
+          position: relative;
         }
-  
+
         &::-ms-thumb {
-            height: 32px;
-            width: 32px;
-            border-radius: 50%;
-            background: #DEAFB8;
-            cursor: pointer;
-            z-index: 2;
-            position: relative;
+          height: 32px;
+          width: 32px;
+          border-radius: 50%;
+          background: #DEAFB8;
+          cursor: pointer;
+          z-index: 2;
+          position: relative;
         }
       }
 
-      .control{
+      .control {
         display: flex;
         justify-content: space-between;
         padding: 0 8px;
@@ -112,17 +132,41 @@
     .grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px 20px;
+      gap: clamp(14px, calc(18vw/7.68), 36px) clamp(10px, calc(10vw/7.68), 20px);
+
+      grid-template-areas:
+        'zero two'
+        'one three';
 
       .answer {
         display: grid;
         grid-template-columns: auto 1fr;
-        gap: 8px;
+        gap: clamp(4px, calc(4vw/7.68), 8px);
+
+        &:nth-child(1) {
+          grid-area: zero;
+        }
+
+        &:nth-child(2) {
+          grid-area: one;
+        }
+
+        &:nth-child(3) {
+          grid-area: two;
+        }
+
+        &:nth-child(4) {
+          grid-area: three;
+        }
 
         p {
           margin-top: 2px;
           color: #194574;
-          font-size: 20rem;
+          font-size: clamp(14rem, calc(14vw/7.68), 20rem);
+          
+          @media (max-width: 370px) {
+            font-size: clamp(0rem, calc(14vw/3.7), 14rem);
+          }
         }
       }
     }

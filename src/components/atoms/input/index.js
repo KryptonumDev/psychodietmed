@@ -9,7 +9,7 @@ export default function Input({ className = '', rows, placeholder, title, name, 
       {rows
         ? <textarea rows={rows} placeholder={placeholder} className={errors[name] ? `${styles.errored} ${styles.input}` : styles.input} {...register} />
         : <input placeholder={placeholder} className={errors[name] ? `${styles.errored} ${styles.input}` : styles.input} {...register} />}
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {errors[name] && <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className={styles.error}>{error}</motion.span>}
       </AnimatePresence>
     </label>

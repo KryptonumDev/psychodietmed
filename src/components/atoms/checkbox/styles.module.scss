@@ -17,8 +17,8 @@
     left: 0;
     top: -2px;
     transform: translateY(-100%);
-    color: #EE6470;
-    font-size: 1rem;
+    color: #B40909;
+    font-size: clamp(12rem, calc(14vw/7.68), 16rem);
     display: flex;
     gap: 4px;
     align-items: center;
@@ -43,7 +43,7 @@
   }
 
   .text {
-    font-size: clamp(16rem, calc(16vw/7.68), 24rem);
+    font-size: clamp(16rem, calc(20vw/7.68), 20rem) !important;
     line-height: 140%;
 
     @media (max-width: 370px) {
@@ -52,6 +52,9 @@
 
     a {
       text-decoration: underline;
+      color: #194574;
+      font-weight: 700;
+      text-decoration-thickness: 2px;
     }
   }
 
@@ -62,6 +65,7 @@
     border-radius: 5px;
     position: relative;
     min-width: 30px;
+    display: block !important;
 
     &::after {
       content: url('/check-mark.png');

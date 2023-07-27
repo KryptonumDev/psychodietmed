@@ -1,9 +1,14 @@
 .wrapper {
+  margin-top: clamp(28px, calc(36vw/7.68), 64px);
 
   .questions {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 36px 32px;
+    gap: clamp(16px, calc(24vw/7.68), 36px) clamp(16px, calc(24vw/7.68 ), 32px);
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   >button {
@@ -20,23 +25,31 @@
       margin-top: 0;
 
       &:last-child {
-        margin-top: 36px;
+        margin-top: clamp(18px, calc(24vw/7.68), 36px);
       }
 
       &:first-child {
         margin-bottom: 18px;
-        font-size: 32rem;
+        font-size: clamp(20rem, calc(24vw/7.68), 32rem);
+
+        @media (max-width: 370px) {
+          font-size: clamp(0rem, calc(20vw/3.7), 20rem);
+        }
 
         span {
           color: #194574;
-          font-size: 36rem;
+          font-size: clamp(22rem, calc(28vw/7.68), 36rem);
+
+          @media (max-width: 370px) {
+            font-size: clamp(0rem, calc(22vw/3.7), 22rem);
+          }
         }
       }
     }
   }
 
   .question {
-    padding: 48px 28px;
+    padding: clamp(20px, calc(24vw/7.68), 48px) clamp(20px, calc(20vw/7.68), 28px) clamp(24px, calc(28vw/7.68), 48px) clamp(20px, calc(20vw/7.68), 28px);
     border-radius: 20px;
     background: #FFF;
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
@@ -61,9 +74,9 @@
     }
 
     .input{
-      margin-top: 32px;
+      margin-top: clamp(24px, calc(28vw/7.68), 32px);
       display: flex;
-      gap: 8px;
+      gap: 8px clamp(4px, calc(4vw/7.68), 8px);
       flex-wrap: wrap;
     }
 
@@ -73,6 +86,13 @@
       border-radius: 54px;
       border: 1px solid var(--primary-800, #194574);
       transition: all .2s cubic-bezier(0.77, 0, 0.175, 1);
+      display: block;
+      font-size: clamp(14rem, calc(16vw/7.68), 16rem);
+
+      @media (max-width: 370px) {
+        padding: clamp(8px, calc(10vw/3.7), 10px) clamp(8px, calc(12vw/3.7), 12px) clamp(8px, calc(12vw/3.7), 12px) clamp(8px, calc(12vw/3.7), 12px);
+        font-size: clamp(0rem, calc(14vw/3.7), 14rem);
+      }
     }
 
     input{

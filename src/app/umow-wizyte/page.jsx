@@ -11,6 +11,20 @@ export async function generateMetadata() {
 export default async function Home() {
   const { specialists, specializations } = await getData()
 
+  // const url = 'https://secure.przelewy24.pl/api/v1/merchant/register';
+
+  // const response = await fetch(url, {
+  //   method: 'POST',
+  //   headers: {
+  //     'Authorization': `Basic ${btoa(`${process.env.NEXT_P24_MERCHANT_ID}:${process.env.NEXT_P24_REST_API_KEY}`)}`,
+  //     'Content-Type': 'application/json',
+  //     'Content-Length': '0',
+  //   },
+  // });
+
+  // const text = await response.text();
+  // console.log(text)
+
   return (
     <main className="overflow">
       <Content specialists={specialists} specializations={specializations} />

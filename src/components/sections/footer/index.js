@@ -7,56 +7,52 @@ import Link from "next/link";
 
 const urlSystem = [
   {
-    name: 'O kliencie',
-    url: '/o-kliencie',
+    name: 'O klinice',
+    url: null,
     subpages: [
       {
         name: 'Zespół',
-        url: '/o-kliencie/zespol'
+        url: '/zespol'
       },
       {
         name: 'Historia marki',
-        url: '/o-kliencie/historia-marki'
+        url: '/historia-marki'
       },
       {
         name: 'Media',
-        url: '/o-kliencie/media'
+        url: '/media'
       },
       {
         name: 'Kontakt',
-        url: '/o-kliencie/kontakt'
+        url: '/kontakt'
       }
     ]
   },
   {
     name: 'Dla pacjenta',
-    url: '/dla-pacjenta',
+    url: null,
     subpages: [
       {
         name: 'Jak działamy',
-        url: '/dla-pacjenta/jak-dzialamy'
+        url: '/jak-dzialamy'
       },
       {
         name: 'Efekty współpracy',
-        url: '/dla-pacjenta/efekty-wspolpracy'
-      },
-      {
-        name: 'Pakiety',
-        url: '/dla-pacjenta/pakiety'
+        url: '/efekty-wspolpracy'
       },
       {
         name: 'Narzędzia',
-        url: '/dla-pacjenta/narzedzia'
+        url: '/narzedzia'
       },
     ]
   },
   {
     name: 'Dla specjalisty',
-    url: '/dla-specjalisty',
+    url: null,
     subpages: [
       {
         name: 'Akademia',
-        url: '/dla-specjalisty/akademia'
+        url: '/akademia'
       }
     ]
   }
@@ -70,7 +66,15 @@ export default function Footer() {
         <div className={styles.links}>
           {urlSystem.map((item, index) => (
             <div key={index} className={styles.link_wrap}>
-              <Link href={item.url}>{item.name}</Link>
+              {item.url ? (
+                <Link href={item.url}>
+                  {item.name}
+                </Link>
+              ) : (
+                <p>
+                  {item.name}
+                </p>
+              )}
               {item.subpages.map(el => (
                 <Link key={el.url} href={el.url}>{el.name}</Link>
               ))}

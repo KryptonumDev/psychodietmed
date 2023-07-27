@@ -4,13 +4,24 @@
   grid-template-columns: 443px 1fr;
   margin-top: clamp(20px, calc(28vw/7.68), 64px);
 
+  &.alt {
+    grid-template-columns: 1fr !important;
+
+    .content {
+      border-radius: 20px;
+      border: 2px solid #DEAFB8;
+      background: #FFF;
+      box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+    }
+  }
+
   @media (max-width: 1024px) {
     gap: 0;
     grid-template-columns: 271fr 433fr;
   }
 
   @media (max-width: 640px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
   }
 }
 

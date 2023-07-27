@@ -1,4 +1,3 @@
-
 import client from "../apollo/apolo-client"
 
 export const generetaSeo = async (id, url, query, type = 'page') => {
