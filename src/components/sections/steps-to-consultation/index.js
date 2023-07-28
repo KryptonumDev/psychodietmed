@@ -89,7 +89,7 @@ export default function StepsToConsultation({ data, specialists }) {
               <div />
               <div>
                 <div className={styles.text} dangerouslySetInnerHTML={{ __html: textThird }} />
-                <Link className="link" href={chosenSpecialist ? `/zespol/${chosenSpecialist?.slug}` : '/kontakt'}>Umów wizytę</Link>
+                <Link className="link" href={chosenSpecialist ? `/specjalisci/${chosenSpecialist?.slug}` : '/kontakt'}>Umów wizytę</Link>
               </div>
             </div>
           </details>

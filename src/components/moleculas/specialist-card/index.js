@@ -28,7 +28,7 @@ export default function Card({ onClick = () => { }, short = false, data: { proff
         <div className={styles.bottom_inform}>
           <div className={styles.flex}>
             <Link className="link" href={`/umow-sie`}>Umów wizytę</Link>
-            <Link className={styles.link} href={`/zespol/${slug}`}>Więcej terminów <RightArrow /></Link>
+            <Link className={styles.link} href={`/specjalisci/${slug}`}>Więcej terminów <RightArrow /></Link>
           </div>
         </div>
       )}
