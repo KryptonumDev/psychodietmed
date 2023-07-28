@@ -6,7 +6,7 @@ import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
 
 export async function generateMetadata() {
-  return await generetaSeo('cG9zdDoyMTU=', '/koszyk', GET_SEO_PAGE)
+  return await generetaSeo('cG9zdDoxODcw', '/koszyk', GET_SEO_PAGE)
 }
 
 export default async function Cart() {

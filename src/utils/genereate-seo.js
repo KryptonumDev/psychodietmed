@@ -2,7 +2,7 @@ import client from "../apollo/apolo-client"
 
 export const generetaSeo = async (id, url, query, type = 'page') => {
   try {
-    const { seo: { title, metaDesc, opengraphImage } } = await getSeo(id, query)
+    const { title, metaDesc, opengraphImage  } = await getSeo(id, query)
     const canonical = url + (type !== 'page' ? `/${id}` : '')
 
     return {
@@ -34,6 +34,5 @@ async function getSeo(id, query) {
       id: id
     }
   })
-
-  return data.page
+  return data.page.seo
 }

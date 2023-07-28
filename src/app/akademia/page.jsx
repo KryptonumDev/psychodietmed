@@ -22,7 +22,7 @@ export async function generateMetadata({ searchParams }) {
     url += `?strona=${searchParams.strona}`
   }
 
-  return await generetaSeo('cG9zdDoyMTQ=', url, GET_SEO_PAGE)
+  return await generetaSeo('cG9zdDoxODY4', url, GET_SEO_PAGE)
 }
 
 const prices = [
@@ -325,7 +325,7 @@ async function getData(params) {
           }
         }
       }
-      pageBy(id: "cG9zdDoyMTQ=") {
+      pageBy(id: "cG9zdDoxODY4") {
         academy {
           heroAcademy{
             list{
