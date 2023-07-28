@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 import { Image } from "@/components/atoms/image"
 import { Star } from "../../../assets/star"
 
-export default function Hero({ data: { title, proffesional: { personImage, proffesion, pacientsAge, specialisations } } }) {
+export default function Hero({ data: { title, specialisations, proffesional: { personImage, proffesion, pacientsAge } } }) {
   return (
     <section className={styles.wrapper}>
       <Image
@@ -24,7 +24,7 @@ export default function Hero({ data: { title, proffesional: { personImage, proff
         <div className={styles.specialisations}>
           <p>Specjalizuję się w:</p>
           <div>
-            {specialisations.map(el => (
+            {specialisations?.map(el => (
               <span key={el.title}>
                 {el.title}
               </span>

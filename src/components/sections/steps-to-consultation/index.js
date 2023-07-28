@@ -14,8 +14,8 @@ export default function StepsToConsultation({ data, specialists }) {
 
   const filtredSpecialists = useMemo(() => {
     return specialists.filter(el => {
-      if (!chosenIllnes || !el.proffesional.specialisations) return false
-      return el.proffesional.specialisations.some(inEl => inEl.id === chosenIllnes)
+      if (!chosenIllnes || !el.specialisations) return false
+      return el.specialisations.some(inEl => inEl.id === chosenIllnes)
     })
   }, [specialists, chosenIllnes])
 
@@ -49,9 +49,9 @@ export default function StepsToConsultation({ data, specialists }) {
               <div>
                 <div className={styles.text} dangerouslySetInnerHTML={{ __html: textFirst }} />
                 <div className={styles.buttons}>
-                  {illnes.map(el => (
+                  {/* {illnes?.map(el => (
                     <button onClick={() => { setChosenIllnes(el.id); setChosenSpecialist(null) }} key={el.id} className={`${styles.button} ${el.id === chosenIllnes ? styles.active : ''}`}>{el.title}</button>
-                  ))}
+                  ))} */}
                 </div></div>
             </div>
           </details>

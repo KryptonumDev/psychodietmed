@@ -46,6 +46,12 @@ async function getData(params) {
           nodes {
             title
             slug
+            specialisations {
+              nodes {
+                title : name
+                id
+              }
+            }
             proffesional {
               proffesion
               personImage {
@@ -54,12 +60,6 @@ async function getData(params) {
                 mediaDetails {
                   height
                   width
-                }
-              }
-              specialisations {
-                ... on Specjalizacja {
-                  id
-                  title
                 }
               }
             }
@@ -81,6 +81,12 @@ async function getData(params) {
         specjalistaBy(uri:  $uri) {
           id
           title
+          specialisations {
+            nodes {
+              title : name
+              id
+            }
+          }
           proffesional {
             proffesion
             pacientsAge
@@ -120,12 +126,6 @@ async function getData(params) {
               mediaDetails {
                 height
                 width
-              }
-            }
-            specialisations {
-              ... on Specjalizacja {
-                id
-                title
               }
             }
           }

@@ -276,19 +276,6 @@ async function getData() {
             }
           }
         }
-        specjalizacje(first: 1000) {
-          nodes {
-            id
-            slug
-            title
-            profesje {
-              nodes {
-                name
-                slug
-              }
-            }
-          }
-        }
       }
     `,
   }, { pollInterval: 500 })
@@ -298,7 +285,7 @@ async function getData() {
     activities: obszaryDzialania.nodes,
     faq: global.global.faq,
     metrics: global.global.metricsGlobal,
-    specialisations: specjalizacje.nodes,
+    specialisations: specjalizacje?.nodes || [],
     products: products.nodes
   }
 }
