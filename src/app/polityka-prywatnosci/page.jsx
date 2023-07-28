@@ -43,6 +43,10 @@ async function getData() {
               textSecond
               titleThird
               textThird
+              illnes {
+                id : databaseId
+                title : name
+              }
             }
           }
         }
@@ -52,8 +56,8 @@ async function getData() {
             slug
             specialisations {
               nodes {
+                id : databaseId
                 title : name
-                id
               }
             }
             proffesional {

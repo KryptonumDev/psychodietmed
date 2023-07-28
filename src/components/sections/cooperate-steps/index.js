@@ -4,22 +4,7 @@ import styles from "./styles.module.scss"
 import { Image } from "@/components/atoms/image"
 import { RightArrow } from "../../../assets/small-right-arrow"
 
-export default function Steps({ specialisations, data: { titleFirst, linkFirst, titleSecond, gridSecond, linkSecond, titleThird, linkThird, gridThird, titleFourth, gridFourth } }) {
-  return null
-  
-  const proffessions = (() => {
-    const proffessions = []
-    specialisations.forEach(el => {
-      el.profesje.nodes.forEach(inEl => {
-        if (proffessions.findIndex(el => el.name === inEl.name) === -1) {
-          proffessions.push({ name: inEl.name, arr: [el] })
-        } else {
-          proffessions[proffessions.findIndex(el => el.name === inEl.name)].arr.push(el)
-        }
-      })
-    })
-    return proffessions
-  })()
+export default function Steps({ data: { repeater, titleFirst, linkFirst, titleSecond, gridSecond, linkSecond, titleThird, linkThird, gridThird, titleFourth, gridFourth } }) {
 
   return (
     <section className={styles.wrapper}>
@@ -34,14 +19,14 @@ export default function Steps({ specialisations, data: { titleFirst, linkFirst, 
           <div className={styles.inner}>
             <h2>{titleFirst}</h2>
             <div className={styles.chose}>
-              {proffessions.map((el, index) => (
+              {repeater.map((el, index) => (
                 <details open={!index} key={index}>
                   <summary>
                     <span className={styles.symbol} />
-                      <h3>{el.name}</h3>
+                      <h3>{el.title}</h3>
                   </summary>
                   <div className={styles.wrap}>
-                    {el.arr.map((inEl, index) => (
+                    {el.illnes.map((inEl, index) => (
                       <span key={index} className={styles.illnes}>
                         {inEl.title}
                       </span>

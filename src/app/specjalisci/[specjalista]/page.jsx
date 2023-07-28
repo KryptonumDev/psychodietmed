@@ -48,8 +48,8 @@ async function getData(params) {
             slug
             specialisations {
               nodes {
+                id : databaseId
                 title : name
-                id
               }
             }
             proffesional {
@@ -83,8 +83,8 @@ async function getData(params) {
           title
           specialisations {
             nodes {
+              id : databaseId
               title : name
-              id
             }
           }
           proffesional {
