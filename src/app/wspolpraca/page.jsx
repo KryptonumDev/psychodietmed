@@ -18,12 +18,12 @@ export async function generateMetadata() {
 }
 
 export default async function Wspolpraca() {
-  const { products, data, activities, faq, metrics, specialisations } = await getData()
+  const { products, data, activities, faq, metrics } = await getData()
 
   return (
     <main>
       <Hero data={data.cooperate.heroCooperate} />
-      <Steps data={data.cooperate.stepsCooperate} specialisations={specialisations} />
+      <Steps data={data.cooperate.stepsCooperate} />
       <CallToAction data={data.cooperate.ctaCooperate} />
       <Specialisations data={data.cooperate.specialisationsCooperate} activities={activities} />
       <TwoColumnFlex data={data.cooperate.flexCooperate} />
@@ -37,7 +37,7 @@ export default async function Wspolpraca() {
 }
 
 async function getData() {
-  const { data: { products, global, page, obszaryDzialania, specjalizacje } } = await client.query({
+  const { data: { products, global, page, obszaryDzialania } } = await client.query({
     query: gql`
       query Pages {
         products(where: {orderby: {field: DATE, order: DESC}}, first: 12) {
@@ -201,7 +201,12 @@ async function getData() {
                 title
                 url
               }
-
+              repeater {
+                title
+                illnes {
+                  title: name
+                }
+              }
               # second
               titleSecond
               gridSecond{
@@ -285,7 +290,6 @@ async function getData() {
     activities: obszaryDzialania.nodes,
     faq: global.global.faq,
     metrics: global.global.metricsGlobal,
-    specialisations: specjalizacje?.nodes || [],
     products: products.nodes
   }
 }

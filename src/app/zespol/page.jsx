@@ -49,8 +49,8 @@ async function getData() {
             slug
             specialisations {
               nodes {
-                id
-                title:name
+                id : databaseId
+                title : name
               }
             }
             proffesional {
