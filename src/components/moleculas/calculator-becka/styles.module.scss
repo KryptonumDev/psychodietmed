@@ -87,7 +87,7 @@
         height: 6px;
         -webkit-appearance: none;
         appearance: none;
-        background: #DEAFB8;
+        background: var(--secondary-500);
         cursor: pointer;
 
         &::-webkit-slider-thumb {
@@ -95,7 +95,7 @@
           height: 32px;
           width: 32px;
           border-radius: 50%;
-          background: #DEAFB8;
+          background: var(--secondary-500);
           cursor: pointer;
           z-index: 2;
           position: relative;
@@ -105,7 +105,7 @@
           height: 32px;
           width: 32px;
           border-radius: 50%;
-          background: #DEAFB8;
+          background: var(--secondary-500);
           cursor: pointer;
           z-index: 2;
           position: relative;
@@ -115,7 +115,7 @@
           height: 32px;
           width: 32px;
           border-radius: 50%;
-          background: #DEAFB8;
+          background: var(--secondary-500);
           cursor: pointer;
           z-index: 2;
           position: relative;

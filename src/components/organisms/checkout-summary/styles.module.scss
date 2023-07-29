@@ -69,7 +69,7 @@
         display: block;
         width: 34px;
         height: 34px;
-        border: 2px solid #DEAFB8;
+        border: 2px solid var(--secondary-500);
         border-radius: 5px;
         position: relative;
 
@@ -114,7 +114,7 @@
   .shipping,
   .billing {
     border-radius: 20px;
-    border: 2px solid #DEAFB8;
+    border: 2px solid var(--secondary-500);
     background: #FFF;
     padding: clamp(16px, calc(16vw/7.68), 24px) 20px clamp(20px, calc(20vw/7.68), 24px) 20px;
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
@@ -307,7 +307,7 @@
       width: 100%;
       border-radius: 20px;
       background: #FFFEFE;
-      border: 2px solid #DEAFB8;
+      border: 2px solid var(--secondary-500);
       line-height: 23px;
       padding: clamp(10px, calc(10vw/7.68), 20px) 28px;
       color: #194574;

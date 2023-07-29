@@ -1,6 +1,6 @@
 .wrapper {
   border-radius: 20px;
-  border: 2px solid #DEAFB8;
+  border: 2px solid var(--secondary-500);
   background: #FFF;
   box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
   height: fit-content;
@@ -43,7 +43,7 @@
     li {
       padding-bottom: 28px;
       margin-bottom: 28px;
-      border-bottom: 1px solid #DEAFB8;
+      border-bottom: 1px solid var(--secondary-500);
       font-size: 20rem;
 
       @media (max-width: 968px) {
@@ -56,13 +56,13 @@
         }
 
         &:nth-child(2n) {
-          border-left: 1px solid #DEAFB8;
+          border-left: 1px solid var(--secondary-500);
           padding-left: 32px;
         }
       }
 
       @media (max-width: 760px) {
-        border-bottom: 1px solid #DEAFB8;
+        border-bottom: 1px solid var(--secondary-500);
         padding-bottom: 24px;
         margin-bottom: 24px;
 
@@ -91,7 +91,7 @@
 
         .count {
           border-radius: 50px;
-          border: 2px solid #DEAFB8;
+          border: 2px solid var(--secondary-500);
           background: #FFF;
           padding: clamp(7px, calc(7vw/7.68), 10px) clamp(8px, calc(12vw/7.68), 20px) clamp(8px, calc(8vw/7.68), 11px) clamp(8px, calc(12vw/7.68), 20px);
           display: flex;

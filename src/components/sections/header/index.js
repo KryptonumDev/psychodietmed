@@ -7,6 +7,8 @@ import { AngleRight } from "../../../assets/angle-right";
 import { AngleLeft } from "../../../assets/angle-left";
 import Cart from "@/components/atoms/cart";
 import { AppContext } from "../../../context/app-context";
+import { useEffect } from "react";
+import { usePathname } from 'next/navigation'
 
 const urlSystem = [
   {
@@ -66,23 +68,43 @@ const urlSystem = [
   }
 ]
 
-export default function Header({ data }) {
-
+export default function Header() {
   const [isMenuOpened, setIsMenuOpened] = useState(false)
   const [itemOpened, setItemOpened] = useState(false)
   const [cart] = useContext(AppContext);
 
+  useEffect(() => {
+    document.addEventListener("keydown", handleEscapeKey);
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey)
+    }
+  }, []);
+
+  const pathname = usePathname();
+
+  const handleEscapeKey = (e) => {
+    if (e.key === "Escape"){
+      setIsMenuOpened(false);
+      setItemOpened(false);
+    }
+  }
+
   return (
     <header className={styles.header}>
       <div className={styles.content}>
-        <Link href='/' className={styles.logo_link}>
+        <Link
+          href='/'
+          className={styles.logo_link}
+          aria-label='Strona główna'
+          onClick={() => { setIsMenuOpened(false); setItemOpened(false) }}
+        >
           <Logo className={styles.logo} />
         </Link>
         <ul className={styles.top_nav}>
           {urlSystem.map((item, index) => (
             <li key={index} className={styles.top_nav_item}>
               {item.url ? (
-                <Link href={item.url}>
+                <Link href={item.url} aria-current={pathname == item.url ? 'page' : false}>
                   {item.name}
                 </Link>
               ) : (
@@ -94,7 +116,7 @@ export default function Header({ data }) {
                 <ul className={styles.bottom_nav}>
                   {item.subpages?.map(el => (
                     <li key={el.url} className={styles.bottom_nav_item}>
-                      <Link href={el.url}>
+                      <Link href={el.url} aria-current={pathname == el.url ? 'page' : false}>
                         {el.name}
                       </Link>
                     </li>
@@ -104,22 +126,36 @@ export default function Header({ data }) {
             </li>
           ))}
         </ul>
-        <Link className={`${styles.link} link`} href='/umow-wizyte'>
+        <Link
+          className={`${styles.link} link`}
+          href='/umow-wizyte'
+          onClick={() => { setIsMenuOpened(false); setItemOpened(false) }}
+        >
           Umów się
         </Link>
-        <Cart cart={cart?.totalProductsCount} className={styles.cart} />
-        <button onClick={() => { setIsMenuOpened(!isMenuOpened); setItemOpened(false) }} className={`${styles.burger} ${isMenuOpened ? styles.active : ''}`}>
+        <Cart
+          cart={cart?.totalProductsCount}
+          className={styles.cart}
+          onClick={() => { setIsMenuOpened(false); setItemOpened(false) }}
+        />
+        <button
+          onClick={() => { setIsMenuOpened(!isMenuOpened); setItemOpened(false) }}
+          className={`${styles.burger} ${isMenuOpened ? styles.active : ''}`}
+        >
           <span />
           <span />
           <span />
         </button>
       </div>
-      <div onClick={() => { setIsMenuOpened(false); setItemOpened(false) }} className={`${styles.overlay} ${isMenuOpened ? styles.active : ''}`} />
+      <div
+        onClick={() => { setIsMenuOpened(false); setItemOpened(false) }}
+        className={`${styles.overlay} ${isMenuOpened ? styles.active : ''}`}
+      />
       <div className={`${styles.mobile_menu} ${isMenuOpened ? styles.active : ''} ${itemOpened ? styles.overlayed : ''}`}>
         {urlSystem.map((item, index) => (
           <React.Fragment key={index} >
             {item.url ? (
-              <Link href={item.url}>
+              <Link href={item.url} onClick={() => { setIsMenuOpened(false); setItemOpened(false) }}>
                 {item.name}
               </Link>
             ) : (
@@ -141,7 +177,12 @@ export default function Header({ data }) {
                 {item.name}
               </button>
               {item.subpages?.map(el => (
-                <Link key={el.url} href={el.url}>{el.name}</Link>
+                <Link
+                  key={el.url}
+                  href={el.url}
+                  onClick={() => { setIsMenuOpened(false); setItemOpened(false) }}
+                  aria-current={pathname == el.url ? 'page' : false}
+                >{el.name}</Link>
               ))}
             </div>
           )}

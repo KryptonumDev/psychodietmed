@@ -1,11 +1,12 @@
+'use client'
 import React from "react"
 import Link from "next/link";
 import { Image } from "@/components/atoms/image";
 import styles from "./styles.module.scss";
 import { RightArrow } from "../../../assets/small-right-arrow";
+import Button from "@/components/atoms/button";
 
-export default function Card({ onClick = () => { }, short = false, data: { proffesional, slug, title } }) {
-
+export default function Card({ onClick = () => { }, short = false, data: { specialisations, proffesional, slug, title } }) {
   return (
     <div onClick={onClick} className={styles.item}>
       <div>
@@ -19,7 +20,7 @@ export default function Card({ onClick = () => { }, short = false, data: { proff
         <h3>{title}</h3>
         <p>{proffesional?.proffesion}</p>
         <ul>
-          {proffesional?.specialisations?.map(({ title }, index) => (
+          {specialisations?.nodes.map(({ title }, index) => (
             <li key={index}>{title}</li>
           ))}
         </ul>
@@ -27,8 +28,11 @@ export default function Card({ onClick = () => { }, short = false, data: { proff
       {!short && (
         <div className={styles.bottom_inform}>
           <div className={styles.flex}>
-            <Link className="link" href={`/umow-sie`}>Umów wizytę</Link>
-            <Link className={styles.link} href={`/zespol/${slug}`}>Więcej terminów <RightArrow /></Link>
+            <Button href='/umow-sie'>Umów wizytę</Button>
+            <Link className={styles.link} href={`/zespol/${slug}`}>
+              Więcej terminów
+              <RightArrow />
+            </Link>
           </div>
         </div>
       )}

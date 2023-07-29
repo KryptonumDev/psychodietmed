@@ -15,7 +15,7 @@
 
   input, textarea {
     background: #FFFEFE;
-    border: 2px solid #DEAFB8;
+    border: 2px solid var(--secondary-500);
     border-radius: 50px;
     line-height: 23px;
     padding: clamp(10px, calc(10vw/7.68), 20px) 28px;

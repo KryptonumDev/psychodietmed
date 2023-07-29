@@ -5,7 +5,8 @@ import { Image } from "@/components/atoms/image"
 import { RightArrow } from "../../../assets/small-right-arrow"
 
 export default function Steps({ specialisations, data: { titleFirst, linkFirst, titleSecond, gridSecond, linkSecond, titleThird, linkThird, gridThird, titleFourth, gridFourth } }) {
-
+  return null
+  
   const proffessions = (() => {
     const proffessions = []
     specialisations.forEach(el => {

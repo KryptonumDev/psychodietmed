@@ -14,6 +14,22 @@
     }
   }
 
+  .notFound{
+    text-align: center;
+    max-width: 780px;
+    margin: 0 auto;
+
+    h3{
+      color: #194574;
+      font-size: clamp(32rem, calc(36vw / 7.68), 48rem);
+      margin-bottom: 12px;
+
+      @media (max-width: 370px) {
+        font-size: clamp(0rem, calc(32vw / 3.7), 32rem);
+      }
+    }
+  }
+
   h2{
     color: #194574;
     font-size: clamp(32rem, calc(36vw/7.68), 48rem);

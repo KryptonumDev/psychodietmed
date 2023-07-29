@@ -12,9 +12,9 @@ export default function Specialists({ setCurrentStep, setChosenSpecialist, chose
     if (!chosenSpecialisations) return specialists
     // filter specialists by specialisations
     const filtredSpecialists = specialists.filter(specialist => {
-      if (!specialist.proffesional.specialisations) return false
+      if (!specialist.specialisations) return false
 
-      const filtredSpecialisations = specialist.proffesional.specialisations.filter(specialisation => {
+      const filtredSpecialisations = specialist.specialisations.filter(specialisation => {
         return chosenSpecialisations.includes(specialisation.title)
       })
 
@@ -23,10 +23,10 @@ export default function Specialists({ setCurrentStep, setChosenSpecialist, chose
 
     // sort specialists by number of specialisations
     filtredSpecialists.sort((a, b) => {
-      const aSpecialisations = a.proffesional.specialisations.filter(specialisation => {
+      const aSpecialisations = a.specialisations.filter(specialisation => {
         return chosenSpecialisations.includes(specialisation.title)
       })
-      const bSpecialisations = b.proffesional.specialisations.filter(specialisation => {
+      const bSpecialisations = b.specialisations.filter(specialisation => {
         return chosenSpecialisations.includes(specialisation.title)
       })
       return bSpecialisations.length - aSpecialisations.length

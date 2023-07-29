@@ -40,6 +40,12 @@ async function getData() {
           nodes {
             title
             slug
+            specialisations {
+              nodes {
+                title : name
+                id
+              }
+            }
             proffesional {
               proffesion
               personImage {
@@ -50,19 +56,7 @@ async function getData() {
                   width
                 }
               }
-              specialisations {
-                ... on Specjalizacja {
-                  id
-                  title
-                }
-              }
             }
-          }
-        }
-        specjalizacje(first: 100) {
-          nodes {
-            id
-            title
           }
         }
       }
@@ -71,6 +65,6 @@ async function getData() {
 
   return {
     specialists: specjalisci.nodes,
-    specializations: specjalizacje.nodes
+    specializations: specjalizacje?.nodes || []
   }
 }

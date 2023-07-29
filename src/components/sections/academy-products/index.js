@@ -246,12 +246,21 @@ export default function Content({ prices, orders, productCategories, defaultData
         prices={prices}
         orders={orders}
       />
-      <div className={styles.grid}>
-        {products?.nodes?.map(product => (
-          <Card key={product.id} product={product} />
-        ))}
-      </div>
-      <Pagination changePage={changePage} currentPage={currentPage} itemCount={products?.pageInfo?.offsetPagination.total} PAGE_ITEM_COUNT={PAGE_ITEM_COUNT} />
+      {products?.nodes?.length > 0 ? (
+        <>
+          <div className={styles.grid}>
+            {products?.nodes?.map(product => (
+              <Card key={product.id} product={product} />
+            ))}
+          </div>
+          <Pagination changePage={changePage} currentPage={currentPage} itemCount={products?.pageInfo?.offsetPagination.total} PAGE_ITEM_COUNT={PAGE_ITEM_COUNT} />
+        </>
+      ) : (
+        <div className={styles.notFound}>
+          <h3>Niestety, nie znaleźliśmy produktu spełniającego dane wymagania</h3>
+          <p>Spróbuj zmienić lub usunąć filtry</p>
+        </div>
+      )}
     </section>
   )
 }

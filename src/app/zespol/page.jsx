@@ -43,10 +43,16 @@ async function getData() {
   const { data: { global, posts, page, specjalisci } } = await client.query({
     query: gql`
       query Pages {
-        specjalisci(first: 100) {
+        specjalisci {
           nodes {
             title
             slug
+            specialisations {
+              nodes {
+                id
+                title:name
+              }
+            }
             proffesional {
               proffesion
               personImage {
@@ -55,12 +61,6 @@ async function getData() {
                 mediaDetails {
                   height
                   width
-                }
-              }
-              specialisations {
-                ... on Specjalizacja {
-                  id
-                  title
                 }
               }
             }

@@ -10,7 +10,7 @@
   .item {
     padding: clamp(16px, calc(24vw/7.68), 36px) clamp(16px, calc(24vw/7.68), 36px) clamp(20px, calc(28vw/7.68), 42px) clamp(16px, calc(24vw/7.68), 36px);
     border-radius: 20px;
-    border: 2px solid #DEAFB8;
+    border: 2px solid var(--secondary-500);
     background: #FFF;
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
 

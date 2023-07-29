@@ -38,7 +38,7 @@
       padding: clamp(28px, calc(36vw/7.68), 48px) clamp(36px, calc(48vw/7.68), 96px) clamp(28px, calc(36vw/7.68), 48px) clamp(36px, calc(48vw/7.68), 96px);
 
       span {
-        background: #DEAFB8;
+        background: var(--secondary-500);
         border-radius: 50%;
         display: flex;
         align-items: center;

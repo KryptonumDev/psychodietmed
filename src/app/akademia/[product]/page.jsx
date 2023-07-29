@@ -37,6 +37,12 @@ async function getData(params) {
           nodes {
             title
             slug
+            specialisations {
+              nodes {
+                title : name
+                id
+              }
+            }
             proffesional {
               proffesion
               personImage {
@@ -45,12 +51,6 @@ async function getData(params) {
                 mediaDetails {
                   height
                   width
-                }
-              }
-              specialisations {
-                ... on Specjalizacja {
-                  id
-                  title
                 }
               }
             }
@@ -77,13 +77,6 @@ async function getData(params) {
               }
               titleFirst
               textFirst
-              illnes{
-                ... on Specjalizacja {
-                  id
-                  slug
-                  title
-                }
-              }
               titleSecond
               textSecond
               titleThird

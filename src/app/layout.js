@@ -1,5 +1,5 @@
 import './normalize.css'
-import './globals.css'
+import './globals.scss'
 import localFont from 'next/font/local'
 import Header from '@/components/sections/header'
 import Footer from '@/components/sections/footer'
