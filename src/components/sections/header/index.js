@@ -47,6 +47,10 @@ const urlSystem = [
         name: 'Narzędzia',
         url: '/narzedzia'
       },
+      {
+        name: 'Oferta',
+        url: '/oferta'
+      }
     ]
   },
   {
@@ -56,6 +60,10 @@ const urlSystem = [
       {
         name: 'Akademia',
         url: '/akademia'
+      },
+      {
+        name: 'Moje kursy',
+        url: '/moje-kursy'
       }
     ]
   },

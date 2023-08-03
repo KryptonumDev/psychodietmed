@@ -42,7 +42,7 @@ export default function Cart() {
         <>
           <h1>Twój koszyk jest pusty.</h1>
           <p>Nie możesz się zdecydować?</p>
-          <Link className="link" href="/akademia">Poznaj nasze pakiety</Link>
+          <Link className="link" href="/oferta">Poznaj nasze pakiety</Link>
         </>
       )}
     </section>

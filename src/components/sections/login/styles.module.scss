@@ -1,0 +1,70 @@
+.wrapper{
+
+  h2{
+    max-width: 480px; 
+    margin: 0 auto;
+    text-align: center;
+    font-size: clamp(32rem, calc(36vw/7.68), 48rem);
+
+    @media(max-width: 370px) {
+      font-size: clamp(0rem, calc(32vw/3.7), 32rem);
+    }
+  }
+
+  >p {
+    max-width: 820px; 
+    margin: 10px auto 0 auto;
+    text-align: center;
+  }
+
+  form{
+    max-width: 620px;
+    margin: 0 auto;
+
+    label{
+      margin-top: 42px;
+      span{
+        display: none;
+      }
+      input{
+        border-color: #194574;
+      }
+    }
+
+    .support{
+      text-align: right;
+      color: #535353;
+      margin-top: 12px;
+      font-size: 16rem;
+
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      justify-content: flex-end;
+
+      svg{
+        width: 21px;
+        height: 21px;
+        path{
+          fill: #535353;
+        }
+      }
+    }
+
+    >button{
+      margin: 36px auto 0 auto;
+    }
+  }
+
+  .button{
+    display: block;
+    margin: 20px auto 0 auto;
+    width: fit-content;
+    border: none;
+    background-color: transparent;
+    text-decoration: underline;
+    font-weight: 700;
+    font-size: 20rem;
+    text-decoration-thickness: 2px;
+  }
+}

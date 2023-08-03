@@ -1,0 +1,152 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 765fr 437fr;
+  gap: 64px;
+
+  aside{
+    height: fit-content;
+    position: sticky;
+    top: 110px;
+  }
+
+  h2 {
+    margin-bottom: 48px;
+    font-size: clamp(32rem, calc(36vw/7.68), 48rem);
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(32vw/3.7), 32rem);
+    }
+  }
+
+  .chapters {
+    margin-top: clamp(64px, calc(64vw/7.68), 180px);
+
+    .chapter {
+      border-radius: 20px;
+      background: #FFF;
+      box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+      padding: clamp(20px, calc(24vw/7.68), 26px) clamp(20px, calc(28vw/7.68), 36px) clamp(22px, calc(26vw/7.68), 28px) clamp(20px, calc(28vw/7.68), 36px);
+
+      .lesson {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 4px;
+        margin-top: 20px;
+
+        >span {
+          min-width: 110px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          color: #194574;
+          font-weight: 700;
+        }
+
+        >h4 {
+          // margin-left: 35px;
+          color: #194574;
+          font-size: 20rem;
+          display: grid;
+          align-items: center;
+          grid-template-columns: 36px auto;
+
+          strong {
+            text-align: center;
+            font-weight: 500;
+          }
+
+          span {
+            font-size: 24rem;
+            color: #181818;
+            font-weight: 500;
+          }
+        }
+      }
+
+      .info {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 8px;
+        align-items: center;
+        grid-template-areas:
+          'title time'
+          'number .';
+
+        h3 {
+          grid-area: title;
+          font-size: 28rem;
+          font-weight: 700;
+
+          span {
+            font-weight: 500;
+            color: #181818;
+          }
+        }
+
+        span {
+          &:nth-child(2) {
+            grid-area: time;
+            justify-self: end;
+            color: #194574;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            font-size: 20rem;
+            font-weight: 700;
+
+            svg {
+              width: 27px;
+              height: 27px;
+            }
+          }
+
+          &:nth-child(3) {
+            grid-area: number;
+            color: #535353;
+            font-size: 20rem;
+          }
+        }
+      }
+    }
+  }
+
+  .author {
+    border-radius: 20px;
+    background: #FFF;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+    padding: clamp(16px, calc(16vw/7.68), 20px) clamp(20px, calc(20vw/7.68), 36px) clamp(24px, calc(24vw/7.68), 28px) clamp(20px, calc(20vw/7.68), 36px);
+
+    .image {
+      width: 112px !important;
+      height: auto !important;
+      margin: 24px auto 12px auto;
+    }
+
+    .authorTitle{
+      color: #194574;
+      text-align: center;
+      font-size: 32rem;
+    }
+
+    .name{
+      text-align: center;
+      color: #194574;
+    }
+
+    small{
+      font-weight: 500;
+      color: #535353;
+      font-size: 16rem;
+      text-align: center;
+      display: block;
+      margin-top: 4px;
+    }
+
+    .excerpt{
+      text-align: center;
+      margin-top: 16px;
+      font-size: 20rem;
+    }
+  }
+}

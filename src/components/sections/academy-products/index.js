@@ -57,7 +57,7 @@ export default function Content({ prices, orders, productCategories, defaultData
       products(
         where: {
           categoryIn: $category, 
-          categoryNotIn: "bundle",
+          categoryNotIn: ["kurs", "bundle"],
           orderby: {field: $orderby, order: $orderDirection}, 
           maxPrice: $maxPrice,
           minPrice: $minPrice,

@@ -1,0 +1,35 @@
+.wrapper{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+
+  .image{
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  h1{
+    margin-bottom: 36px;
+  }
+
+  .info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 32px;
+
+    p{
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      span{
+        color: #194574;
+      }
+
+      svg{
+        margin-right: 4px;
+      }
+    }
+  }
+}

@@ -37,7 +37,7 @@ export const Card = ({ product }) => {
 
   return (
     <div className={styles.wrapper}>
-      <Link className={styles.link} href={`/akademia/${product?.slug}`} />
+      <Link className={styles.link} href={`/oferta/${product?.slug}`} />
       <div>
         <Image
           width={product.image.mediaDetails.width}

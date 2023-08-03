@@ -1,0 +1,11 @@
+.wrapper {
+  >div {
+    display: grid !important;
+    grid-template-columns: 100%;
+    grid-gap: clamp(64px, calc(64vw/7.68), 180px);
+  }
+
+  h1 {
+    margin-bottom: 64px;
+  }
+}

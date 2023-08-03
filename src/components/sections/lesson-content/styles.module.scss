@@ -1,0 +1,143 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 843fr 405fr;
+  gap: 64px 32px;
+  grid-template-areas:
+    'video aside'
+    'content aside';
+
+  .video {
+    grid-area: video;
+  }
+
+  .aside {
+    grid-area: aside;
+    height: fit-content;
+    position: sticky;
+    top: 110px;
+
+    border-radius: 20px;
+    background: #FFF;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+    padding: 24px 28px 28px 24px;
+
+    p {
+      &:first-child {
+        color: #194574;
+        font-weight: 700;
+      }
+
+      &:nth-child(2) {
+        margin-top: 4px;
+      }
+    }
+
+    .flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+
+      span {
+        &:nth-child(2) {
+          justify-self: end;
+          color: #194574;
+          display: flex;
+          gap: 8px;
+          align-items: center;
+          font-size: 16rem;
+          font-weight: 700;
+
+          svg {
+            width: 24px;
+            height: 24px;
+          }
+        }
+
+        &:nth-child(1) {
+          color: #535353;
+          font-size: 16rem;
+        }
+      }
+    }
+
+    .lesson {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4px;
+      margin-top: 20px;
+
+      >span {
+        min-width: 85px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #194574;
+        font-weight: 700;
+        font-size: 14rem;
+      }
+
+      >h4 {
+        // margin-left: 35px;
+        color: #194574;
+        font-size: 16rem;
+        display: grid;
+        align-items: center;
+        grid-template-columns: 36px auto;
+
+        strong {
+          text-align: center;
+          font-weight: 500;
+        }
+
+        span {
+          font-size: 16rem;
+          color: #181818;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  .content {
+    grid-area: content;
+
+    h2 {
+      margin-bottom: 28px;
+      font-size: clamp(32rem, calc(36vw/7.68), 48rem);
+
+      @media (max-width: 370px) {
+        font-size: clamp(0rem, calc(32vw/3.7), 32rem);
+      }
+    }
+  }
+
+  .frame {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 843/474;
+    background: #D9D9D9;
+  }
+
+  .flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 36px;
+    gap: 12px;
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #194574;
+      font-size: 20rem;
+
+      svg {
+        width: 23px;
+        height: 23px;
+      }
+    }
+  }
+}

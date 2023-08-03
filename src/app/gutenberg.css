@@ -1,0 +1,97 @@
+
+.gutenberg > * + * {
+  margin-top: 20px;
+}
+.gutenberg .wp-block-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 32px;
+}
+.gutenberg .wp-block-social-links {
+  display: flex;
+  justify-content: flex-end;
+  gap: 36px;
+}
+.gutenberg .wp-social-link {
+  padding-left: 0;
+  margin-top: 0;
+}
+.gutenberg .wp-social-link::after {
+  display: none;
+}
+.gutenberg .wp-social-link span {
+  display: none;
+}
+.gutenberg .wp-social-link svg {
+  width: 42px;
+  height: auto;
+}
+.gutenberg .wp-social-link svg path {
+  fill: #DEAFB8;
+}
+.gutenberg img {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+}
+.gutenberg > * + * {
+  margin-top: 20px;
+}
+.gutenberg h2 {
+  margin-bottom: 36px;
+  font-size: clamp(32rem, calc(36vw / 7.68), 48rem);
+}
+.gutenberg figure img {
+  width: 100%;
+  height: fit-content;
+}
+.gutenberg blockquote {
+  padding: 28px 90px 28px 28px;
+  background: #F1F6FB;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  position: relative;
+}
+.gutenberg blockquote::after {
+  content: url('./../assets/quotes.png');
+  position: absolute;
+  right: 36px;
+  top: 28px;
+}
+.gutenberg blockquote p {
+  font-size: 32rem;
+  color: #194574;
+  font-weight: 500;
+}
+.gutenberg li {
+  font-size: clamp(16rem, calc(20vw/7.68), 24rem);
+  min-height: 32px;
+}
+.gutenberg li + li {
+  margin-top: 16px;
+}
+.gutenberg ul li {
+  padding-left: 41px;
+  position: relative;
+}
+.gutenberg ul li::after {
+  content: url('./../assets/list-circle.png');
+  position: absolute;
+  left: 0;
+  top: -4px;
+}
+.gutenberg ol li {
+  padding-left: 41px;
+  position: relative;
+}
+.gutenberg ol li::after {
+  content: url('./../assets/list-check.png');
+  position: absolute;
+  left: 0;
+  top: -4px;
+}
+
+.gutenberg p strong{
+  font-size: inherit;
+  font-weight: 700;
+}

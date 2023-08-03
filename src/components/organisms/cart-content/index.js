@@ -143,7 +143,7 @@ export default function Content({ cart, refetch, isCart = true }) {
         </div>
         {isCart && (
           <>
-            <Link href='/akademia' className={styles.left}>Kontynuuj zakupy</Link>
+            <Link href='/oferta' className={styles.left}>Kontynuuj zakupy</Link>
             <Link href='/zamowienie' className={`link ${styles.right}`}>
               Realizuj zamówienie
             </Link>

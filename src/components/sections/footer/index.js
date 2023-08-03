@@ -44,6 +44,10 @@ const urlSystem = [
         name: 'Narzędzia',
         url: '/narzedzia'
       },
+      {
+        name: 'Oferta',
+        url: '/oferta'
+      }
     ]
   },
   {

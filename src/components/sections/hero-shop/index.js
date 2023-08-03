@@ -10,7 +10,7 @@ export default function Hero({ hero, data }) {
     <section className={styles.wrapper}>
       <h1>Nasz topowy produkt</h1>
       <div className={styles.product}>
-      <Link href={`/akademia/${data.slug}`} className={styles.link} />
+      <Link href={`/oferta/${data.slug}`} className={styles.link} />
         <Image className={styles.image} aspectRatio={true} src={data.image?.mediaItemUrl} alt={data.title} width={data.image.mediaDetails.width} height={data.image.mediaDetails.height} />
         <div>
           <p className={styles.name}>{data.name}</p>

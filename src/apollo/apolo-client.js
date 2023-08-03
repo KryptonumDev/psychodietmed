@@ -1,19 +1,21 @@
 import fetch from 'node-fetch';
 
 import { ApolloClient, ApolloLink, InMemoryCache, createHttpLink } from "@apollo/client";
+// import { getCookie } from '@/app/actions';
 
 /**
  * If we have a session token in localStorage, add it to the GraphQL request as a Session header.
  */
-export const middleware = new ApolloLink((operation, forward) => {
-
+export const middleware = new ApolloLink(async (operation, forward) => {
   // If session data exist in local storage, set value as session header.
   const session = (typeof window !== 'undefined') ? localStorage.getItem("woo-session") : null;
- 
+  // const authToken = await getCookie('authToken').value;
+  // console.log('authToken', authToken)
   if (session) {
     operation.setContext(({ headers = {} }) => ({
       headers: {
-        "woocommerce-session": `Session ${session}`
+        "woocommerce-session": `Session ${session}`,
+        // 'authorization': `Bearer ${authToken}`,
       }
     }));
   }
