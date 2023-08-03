@@ -22,7 +22,7 @@ export async function generateMetadata() {
 export default async function Archive() {
   const { data, metrics, newsletter, posts, blog } = await getData()
   return (
-    <main>
+    <main id="main">
       <Hero data={data.brandHistory.heroBrand} />
       <History data={data.brandHistory.historyBrand} />
       <Name data={data.brandHistory.nameBrand}/>

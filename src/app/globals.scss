@@ -3,22 +3,24 @@ html {
   max-width: 100%;
 }
 
+:root {
+  --animation: .3s ease-out;
+  --neutrals-800: #181818;
+  --secondary-500: #DEAFB8;
+  --secondary-600: #C996A0;
+  --primary-800: #194574;
+  --easing: cubic-bezier(0, .8, 0.62, 1);
+}
+
 body {
   font-size: 16rem;
   font-weight: 500;
   background: #FFFEFE;
   max-width: 100%;
+  color: var(--neutrals-800);
   /* overflow-x: hidden; */
 
   font-family: var(--font-satoshi), sans-serif;
-}
-
-:root {
-  --animation: .3s ease-out;
-  --secondary-500: #DEAFB8;
-  --secondary-600: #C996A0;
-  --primary-800: #194574;
-  --easing: cubic-bezier(0, .8, 0.62, 1);
 }
 
 *,
@@ -36,6 +38,9 @@ button {
 }
 svg {
   vertical-align: top;
+}
+a {
+  color: inherit;
 }
 
 .swiper-slide {
@@ -133,7 +138,7 @@ p {
   font-size: clamp(16rem, calc(20vw / 7.68), 24rem);
   line-height: 140.5%;
   font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
-  color: #181818;
+  color: var(--neutrals-800);
 }
 
 p strong {
@@ -257,7 +262,7 @@ p em {
   font-weight: 500;
   font-size: clamp(16rem, calc(20vw / 7.68), 20rem);
   line-height: 25px;
-  color: #181818;
+  color: var(--neutrals-800);
   padding: clamp(10px, calc(10vw/7.68), 14px) clamp(28px, calc(28vw/7.68), 36px) clamp(12px, calc(10vw/7.68), 16px) clamp(28px, calc(28vw/7.68), 36px);
   border-radius: 50px;
   display: block;

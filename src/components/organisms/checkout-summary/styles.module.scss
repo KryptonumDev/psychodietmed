@@ -181,7 +181,7 @@
 
       input:checked~span {
         border: 2px solid #194574;
-        color: #181818;
+        color: var(--neutrals-800);
 
         &::after {
           opacity: 1;
@@ -189,7 +189,7 @@
       }
 
       input:checked~p {
-        color: #181818;
+        color: var(--neutrals-800);
       }
     }
   }

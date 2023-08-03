@@ -22,7 +22,7 @@
     color: #194574;
 
     strong {
-      color: #181818;
+      color: var(--neutrals-800);
       font-size: clamp(20rem, calc(20vw/7.68), 32rem);
     }
   }
@@ -120,7 +120,7 @@
           font-size: clamp(14rem, calc(16vw/7.68), 20rem);
 
           strong {
-            color: #181818;
+            color: var(--neutrals-800);
             font-size: clamp(16rem, calc(20vw/7.68), 20rem);
           }
         }

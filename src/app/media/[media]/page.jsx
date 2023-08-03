@@ -18,7 +18,7 @@ export default async function Post({ params }) {
   const { data, otherMedia } = await getData(params)
   return (
     <>
-      <main>
+      <main id="main">
         <Hero title={data.title} excerpt={data.content} dateGmt={data.dateGmt} image={data.featuredImage.node} />
         {data.media?.twoColumnFlexMedia?.image && (
           <Flex data={data.media.twoColumnFlexMedia} />

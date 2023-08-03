@@ -55,7 +55,7 @@ export default async function Shop(params) {
   }
 
   return (
-    <main>
+    <main id="main">
       <Hero hero={data.heroAcademy} data={featured} />
       <Bundles data={bundles} />
       <Content prices={prices} orders={orders} productCategories={productCategories} defaultData={products} />

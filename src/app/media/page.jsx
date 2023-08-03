@@ -14,7 +14,7 @@ export async function generateMetadata({ searchParams }) {
 export default async function Media({ searchParams }) {
   const { data, mediums, totalCount } = await getData(searchParams.strona)
   return (
-    <main>
+    <main id="main">
       <Hero data={data} />
       <Content data={mediums} page={searchParams.strona} totalCount={totalCount} />
     </main>

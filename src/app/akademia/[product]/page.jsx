@@ -16,7 +16,7 @@ export async function generateMetadata({ params }) {
 export default async function Post({ params }) {
   const { data, global, specialists } = await getData(params)
   return (
-    <main>
+    <main id="main">
       <Hero data={data} />
       <FlexibleContent productId={data.productId} data={data.product.additionalSectionsProduct} />
       {data.product.bundleItems?.length > 0 && (

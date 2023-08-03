@@ -1,3 +1,17 @@
+.skipToMain {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 99;
+  background-color: var(--secondary-500);
+  opacity: 0;
+  pointer-events: none;
+  padding: 21px;
+  &:focus {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
 .header {
   background: #FFFEFE;
   position: fixed;
@@ -164,7 +178,7 @@
       border: none;
       background-color: transparent;
       font-size: 20rem;
-      color: #181818;
+      color: var(--neutrals-800);
       margin-left: 0;
       text-align: left;
       font-weight: 500;
@@ -290,7 +304,7 @@
     padding: 12px 10px;
     border-bottom: 1px solid #F2DFE3;
     text-align: left;
-    color: #181818;
+    color: var(--neutrals-800);
     font-weight: 500;
     display: flex;
     justify-content: space-between;

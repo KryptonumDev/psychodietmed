@@ -21,7 +21,7 @@ export default async function Wspolpraca() {
   const { products, data, activities, faq, metrics } = await getData()
 
   return (
-    <main>
+    <main id="main">
       <Hero data={data.cooperate.heroCooperate} />
       <Steps data={data.cooperate.stepsCooperate} />
       <CallToAction data={data.cooperate.ctaCooperate} />

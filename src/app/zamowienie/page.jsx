@@ -9,7 +9,7 @@ export async function generateMetadata() {
 
 export default async function Checkout() {
   return (
-    <main>
+    <main id="main">
       <Content/>
     </main>
   )

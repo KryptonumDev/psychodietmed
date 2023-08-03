@@ -18,7 +18,7 @@ export async function generateMetadata({ searchParams }) {
 export default async function Archive(props) {
   const { data, faq, metrics, podopieczni } = await getData(props)
   return (
-    <main className="overflow">
+    <main className="overflow" id="main">
       <Hero data={data.historyArchive.heroHistoryArchive} />
       <Metrics data={metrics} />
       <Tiles data={data.historyArchive.servicesHistoryArchive} />
