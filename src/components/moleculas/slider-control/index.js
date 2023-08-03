@@ -24,7 +24,7 @@ export default function Control({ className = '', activeIndex, items }) {
 
   return (
     <div className={`${styles.control}`} >
-      <button onClick={handlePrev} ><LeftArrow /></button>
+      <button onClick={handlePrev}><LeftArrow /></button>
       <div className={`${styles.dots} ${className}`}>
         {items.map((el, index) => (
           <button className={activeIndex !== index ? styles.dot : `${styles.dot} ${styles.active}`} key={index} onClick={() => handleDotClick(index)} />

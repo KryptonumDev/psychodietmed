@@ -126,10 +126,12 @@
   }
 
   .logo {
+    max-height: 64px;
+    max-width: 144px;
+    width: auto;
     cursor: pointer;
     filter: grayscale(100%);
     transition: filter var(--animation);
-
     &:hover {
       filter: grayscale(0%);
     }
