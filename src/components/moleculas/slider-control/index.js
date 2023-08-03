@@ -3,6 +3,8 @@ import { LeftArrow } from "../../../assets/left-arrow"
 import { RightArrow } from "../../../assets/right-arrow"
 import styles from './styles.module.scss'
 import { useSwiper } from "swiper/react";
+import ArrowLeft from "@/components/atoms/ArrowLeft";
+import ArrowRight from "@/components/atoms/ArrowRight";
 
 export default function Control({ className = '', activeIndex, items }) {
   const swiper = useSwiper();
@@ -24,13 +26,13 @@ export default function Control({ className = '', activeIndex, items }) {
 
   return (
     <div className={`${styles.control}`} >
-      <button onClick={handlePrev}><LeftArrow /></button>
+      <ArrowLeft onClick={handlePrev} />
       <div className={`${styles.dots} ${className}`}>
         {items.map((el, index) => (
           <button className={activeIndex !== index ? styles.dot : `${styles.dot} ${styles.active}`} key={index} onClick={() => handleDotClick(index)} />
         ))}
       </div>
-      <button onClick={handleNext} ><RightArrow /></button>
+      <ArrowRight onClick={handleNext} />
     </div >
   )
 }

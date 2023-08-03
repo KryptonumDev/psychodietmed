@@ -7,6 +7,8 @@ import 'swiper/scss';
 import Card from "@/components/moleculas/symptoms-card";
 import { LeftArrow } from "../../../assets/left-arrow";
 import { RightArrow } from "../../../assets/right-arrow";
+import ArrowLeft from "@/components/atoms/ArrowLeft";
+import ArrowRight from "@/components/atoms/ArrowRight";
 
 export default function Slider({ items }) {
 
@@ -25,12 +27,14 @@ export default function Slider({ items }) {
   return (
     <div>
       <div className={styles.control}>
-        <button onClick={() => { handlePrev() }} aria-label='strzałka w lewo' >
-          <LeftArrow />
-        </button>
-        <button onClick={() => { handleNext() }} aria-label='strzałka w prawo' >
-          <RightArrow />
-        </button>
+        <ArrowLeft
+          onClick={() => { handlePrev() }}
+          aria-label='Poprzedni element'
+        />
+        <ArrowRight
+          onClick={() => { handleNext() }}
+          aria-label='Następny element' 
+        />
       </div>
       <Swiper
         ref={sliderRef}
