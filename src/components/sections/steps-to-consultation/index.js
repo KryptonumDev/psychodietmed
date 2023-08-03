@@ -29,7 +29,7 @@ export default function StepsToConsultation({ data, specialists }) {
   useMemo(() => {
     if (chosenSpecialist && step === 2) setStep(3)
     else if (chosenIllnes && step === 1) setStep(2)
-  }, [chosenIllnes, chosenSpecialist])
+  }, [chosenIllnes, chosenSpecialist, step])
 
 
   return (
