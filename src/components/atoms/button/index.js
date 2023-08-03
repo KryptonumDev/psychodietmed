@@ -6,10 +6,16 @@ import Link from "next/link";
 
 const Button = ({ theme="primary", href, children }) => {
   return (
-    <Link className={styles.link} href={href}>
-      <span>{children}</span>
-      <RightArrow />
-    </Link>
+    theme === 'primary' ? (
+      <Link className={`link ${styles.link}`} href={href}>
+        <span>{children}</span>
+      </Link>
+    ) : (
+      <Link className={`link-secondary ${styles.link}`} href={href}>
+        <span>{children}</span>
+        <RightArrow />
+      </Link>
+    )
   );
 };
 

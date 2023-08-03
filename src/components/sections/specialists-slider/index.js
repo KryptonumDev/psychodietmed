@@ -8,7 +8,6 @@ import ArrowLeft from "@/components/atoms/ArrowLeft";
 import ArrowRight from "@/components/atoms/ArrowRight";
 
 export default function Specialists({ data, title = 'Wybierz specjalistę' }) {
-
   const sliderRef = useRef(null);
 
   const handlePrev = useCallback(() => {

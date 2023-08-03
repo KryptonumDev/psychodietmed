@@ -1,9 +1,10 @@
 'use client'
-import React, { useCallback, useMemo, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import styles from './styles.module.scss'
 import { removeWrap } from "../../../utils/title-modification"
 import { Image } from "@/components/atoms/image"
 import Link from "next/link"
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function StepsToConsultation({ data, specialists }) {
   const { title, image, titleFirst, textFirst, illnes, titleSecond, textSecond, titleThird, textThird } = data
@@ -19,18 +20,14 @@ export default function StepsToConsultation({ data, specialists }) {
     })
   }, [specialists, chosenIllnes])
 
-  const detailsClickHandler = useCallback((e, step) => {
-    e.preventDefault()
-    if (step === 2 && !chosenIllnes) return
-    if (step === 3 && !chosenSpecialist) return
-    setStep(step)
-  }, [chosenIllnes, chosenSpecialist, setStep])
-
-  useMemo(() => {
-    if (chosenSpecialist && step === 2) setStep(3)
-    else if (chosenIllnes && step === 1) setStep(2)
-  }, [chosenIllnes, chosenSpecialist, step])
-
+  const detailsClickHandler = (e, selectedStep) => {
+    if(e){
+      e.preventDefault();
+      if(selectedStep === 3 && !chosenSpecialist) return;
+      if(selectedStep === 2 && !chosenIllnes) return;
+    }
+    setStep(selectedStep);
+  }
 
   return (
     <section className={styles.wrapper}>
@@ -38,60 +35,101 @@ export default function StepsToConsultation({ data, specialists }) {
       <div className={styles.grid}>
         <Image aspectRatio={true} className={styles.image} src={image.mediaItemUrl} alt={image.altText} width={image.mediaDetails.width} height={image.mediaDetails.height} />
         <div className={styles.sub_grid}>
-
-          <details onClick={(e) => { detailsClickHandler(e, 1) }} open={step === 1} className={styles.item}>
-            <summary className={styles.step_flex}>
+          <details open={step === 1} className={styles.item}>
+            <summary onClick={(e) => { detailsClickHandler(e, 1) }}  className={styles.step_flex}>
               <div className={styles.step_number}>01</div>
               <h3 className={styles.step_title}>{titleFirst}</h3>
             </summary>
-            <div className={styles.step_content}>
-              <div />
-              <div>
-                <div className={styles.text} dangerouslySetInnerHTML={{ __html: textFirst }} />
-                <div className={styles.buttons}>
-                  {illnes?.map(el => (
-                    <button onClick={() => { setChosenIllnes(el.id); setChosenSpecialist(null) }} key={el.id} className={`${styles.button} ${el.id === chosenIllnes ? styles.active : ''}`}>{el.title}</button>
-                  ))}
-                </div></div>
-            </div>
+            <AnimatePresence mode="wait" initial={false}>
+              {step === 1 && (
+                <motion.div
+                  className={styles.step_content}
+                  key="step1"
+                  initial={{ height: 0 }}
+                  animate={{ height: 'auto' }}
+                  exit={{ height: 0 }}
+                >
+                  <div />
+                  <div>
+                    <div className={styles.text} dangerouslySetInnerHTML={{ __html: textFirst }} />
+                    <div className={styles.buttons}>
+                      {illnes?.map(el => (
+                        <button
+                          onClick={() => {
+                            setChosenIllnes(el.id);
+                            detailsClickHandler(null, 2);
+                          }}
+                          key={el.id}
+                          className={`${styles.button} ${el.id === chosenIllnes ? styles.active : ''}`}
+                        >{el.title}</button>
+                      ))}
+                    </div></div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </details>
-
-          <details onClick={(e) => { detailsClickHandler(e, 2) }} open={step === 2} className={styles.item}>
-            <summary className={styles.step_flex}>
+          <details open={step === 2} className={styles.item}>
+            <summary onClick={(e) => { detailsClickHandler(e, 2) }}  className={styles.step_flex}>
               <div className={styles.step_number}>02</div>
               <h3 className={styles.step_title}>{titleSecond}</h3>
             </summary>
-            <div className={styles.step_content}>
-              <div />
-              <div>
-                <div className={styles.text} dangerouslySetInnerHTML={{ __html: textSecond }} />
-                <div className={styles.persons}  >
-                  {filtredSpecialists.map(el => (
-                    <button key={el.id} onClick={() => { setChosenSpecialist(el) }} className={styles.person}>
-                      <Image aspectRatio={true} className={styles.avatar} src={el.proffesional.personImage.mediaItemUrl} alt={el.proffesional.personImage.altText} width={el.proffesional.personImage.mediaDetails.width} height={el.proffesional.personImage.mediaDetails.height} />
-                      <div>
-                        <p className={styles.name}>{el.title}</p>
-                        <p className={styles.profession}>{el.proffesional.proffesion}</p>
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <AnimatePresence mode="wait" initial={false}>
+              {step === 2 && (
+                <motion.div
+                  key="step2"
+                  className={styles.step_content}
+                  initial={{ height: 0 }}
+                  animate={{ height: 'auto' }}
+                  exit={{ height: 0 }}
+                >
+                  <div />
+                  <div>
+                    <div className={styles.text} dangerouslySetInnerHTML={{ __html: textSecond }} />
+                    <div className={styles.persons}  >
+                      {filtredSpecialists.map((el, i) => (
+                        <button
+                          key={i}
+                          onClick={() => {
+                            setChosenSpecialist(el)
+                            setStep(3)
+                          }}
+                          className={styles.person}
+                        >
+                          <Image aspectRatio={true} className={styles.avatar} src={el.proffesional.personImage.mediaItemUrl} alt={el.proffesional.personImage.altText} width={el.proffesional.personImage.mediaDetails.width} height={el.proffesional.personImage.mediaDetails.height} />
+                          <div>
+                            <p className={styles.name}>{el.title}</p>
+                            <p className={styles.profession}>{el.proffesional.proffesion}</p>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </details>
-
-          <details onClick={(e) => { detailsClickHandler(e, 3) }} open={step === 3} className={styles.item}>
-            <summary className={styles.step_flex}>
+          <details open={step === 3} className={styles.item}>
+            <summary onClick={(e) => { detailsClickHandler(e, 3) }} className={styles.step_flex}>
               <div className={styles.step_number}>03</div>
               <h3 className={styles.step_title}>{titleThird}</h3>
             </summary>
-            <div className={styles.step_content}>
-              <div />
-              <div>
-                <div className={styles.text} dangerouslySetInnerHTML={{ __html: textThird }} />
-                <Link className="link" href={chosenSpecialist ? `/specjalisci/${chosenSpecialist?.slug}` : '/kontakt'}>Umów wizytę</Link>
-              </div>
-            </div>
+            <AnimatePresence mode="wait" initial={false}>
+              {step === 3 && (
+                <motion.div
+                  key="step3"
+                  className={styles.step_content}
+                  initial={{ height: 0 }}
+                  animate={{ height: 'auto' }}
+                  exit={{ height: 0 }}
+                >
+                  <div />
+                  <div>
+                    <div className={styles.text} dangerouslySetInnerHTML={{ __html: textThird }} />
+                    <Link className="link" href={chosenSpecialist ? `/specjalisci/${chosenSpecialist?.slug}` : '/kontakt'}>Umów wizytę</Link>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </details>
 
         </div>
