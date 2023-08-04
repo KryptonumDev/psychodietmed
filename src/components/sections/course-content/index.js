@@ -36,7 +36,7 @@ export default function Content({ slug, content, chapters, author }) {
                   <span>{chapterCount} lekcje</span>
                 </div>
                 {chapter.lessons.map((el, inI) => (
-                  <Link key={inI} href={`/akademia/${slug}/${el.lesson.slug}`} className={styles.lesson}>
+                  <Link key={inI} href={`/moje-kursy/${slug}/${el.lesson.slug}`} className={styles.lesson}>
                     <h4 title={el.lesson.title}><strong>{index + 1}.{inI + 1}</strong><span>{el.lesson.title}</span></h4>
                     <span><Play />{el.lesson.lesson.time} minut</span>
                   </Link>

@@ -20,8 +20,8 @@ export default function Content({ title, chapters, content, databaseId, video, p
     chapters.forEach((el, i) => {
       el.lessons.forEach((inEl, inI) => {
         if (inEl.lesson.databaseId === databaseId) {
-          prev = el.lessons[inI - 1] ? `/akademia/${params.course}/${el.lessons[inI - 1].lesson.slug}` : null
-          next = el.lessons[inI + 1] ? `/akademia/${params.course}/${el.lessons[inI + 1].lesson.slug}` : null
+          prev = el.lessons[inI - 1] ? `/moje-kursy/${params.course}/${el.lessons[inI - 1].lesson.slug}` : null
+          next = el.lessons[inI + 1] ? `/moje-kursy/${params.course}/${el.lessons[inI + 1].lesson.slug}` : null
           chapter = { ...el, chapterNumber: i + 1 }
           currentLesson = inI + 1
         }

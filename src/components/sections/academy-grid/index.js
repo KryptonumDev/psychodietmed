@@ -1,6 +1,6 @@
 import React from "react"
 import styles from './styles.module.scss'
-import Card from "@/components/moleculas/course-card-academy"
+import Card from "@/components/moleculas/course-card-product"
 
 export default function Grid({ data }) {
   return (
