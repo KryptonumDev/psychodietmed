@@ -46,11 +46,9 @@ export default function Content({ podopieczni }) {
               resultTitle
               result
               problems {
-                ... on Specjalizacja {
-                  id
-                  title
-                  slug
-                }
+                id
+                title : name
+                slug
               }
               boldText
               beforeImage {
