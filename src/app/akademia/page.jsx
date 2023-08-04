@@ -1,9 +1,9 @@
-'use client'
 import { gql } from "@apollo/client";
 import client from "../../apollo/apolo-client";
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
-import axios from "axios";
+import Grid from "@/components/sections/academy-grid";
+import Recruitment from "@/components/sections/team-recruitment";
 // import { cookies } from "next/headers";
 
 export async function generateMetadata() {
@@ -11,49 +11,81 @@ export async function generateMetadata() {
 }
 
 export default async function Courses() {
-  const { courses } = await getData()
+  const { products, page } = await getData()
   return (
     <main className="overflow">
+      <Grid data={products} />
+      <Recruitment data={page.akademia.specialistGridTeam} />
     </main>
   )
 }
 
 async function getData() {
-  // const { data } = await axios.post('http://localhost:8000/api/get-course-content', {
-  //   data: {
-  //     id: 1808
-  //   }
-  // })
-  // lessons: data.lessons
-
-  const { data: { viewer, courses } } = await client.query({
-    query: gql`
+  try {
+    const { data: { page, viewer, products } } = await client.query({
+      query: gql`
       query Pages {
-        courses {
-          nodes {
-            id
-            databaseId
-            slug
-            title
+        page(id: "cG9zdDoyMDM3"){
+          akademia {
+            specialistGridTeam{
+              title
+              text
+              link{
+                title
+                url
+              }
+              grid{
+                text
+                icon{
+                  altText
+                  mediaItemUrl
+                  mediaDetails{
+                    height
+                    width
+                  }
+                }
+              }
+            }
           }
         }
-        viewer {
-          username
+        products(where: {categoryIn: "kurs"}) {
+          nodes {
+            productId: databaseId
+            slug
+            name
+            excerpt
+            image {
+              altText
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
+            }
+            ... on SimpleProduct {
+              id
+              price
+              regularPrice
+            }
+            product {
+              course {
+                ... on Course {
+                  slug
+                  databaseId
+                }
+              }
+            }
+          }
         }
       }
     `
-  }, {
-    pollInterval: 500,
-    options: {
-      context: {
-        headers: {
-          'Authorisation': `Bearer 12`
-        }
-      }
+    }, { pollInterval: 500 })
+
+    return {
+      products: products,
+      page: page
     }
-  })
-  console.log(viewer)
-  return {
-    courses: courses,
+  } catch (err) {
+    throw new Error(err)
   }
 }

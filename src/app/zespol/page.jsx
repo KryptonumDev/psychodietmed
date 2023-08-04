@@ -6,7 +6,6 @@ import Hero from "@/components/sections/hero-team";
 import Slider from "@/components/sections/team-slider";
 import Owner from "@/components/sections/team-owner";
 import Flowers from "@/components/sections/team-flowers";
-import Recruitment from "@/components/sections/team-recruitment";
 import RepeaterFlex from "@/components/sections/team-repeater-flex";
 import Specialists from "@/components/sections/specialists-slider";
 import CallToActionGray from "@/components/sections/call-to-action-gray";
@@ -27,7 +26,6 @@ export default async function Team() {
       <Slider data={page.team.sliderTeam} />
       <Owner data={page.team.ownerTeam} />
       <Flowers data={page.team.flowersTeam} />
-      <Recruitment data={page.team.specialistGridTeam} />
       <RepeaterFlex data={page.team.repeaterFlexTeam} />
       <CombinedSpecialisations data={page.team.combinedSpecialisationsTeam} />
       <Specialists data={specialists} />
@@ -192,25 +190,6 @@ async function getData() {
               link{
                 title
                 url
-              }
-            }
-            specialistGridTeam{
-              title
-              text
-              link{
-                title
-                url
-              }
-              grid{
-                text
-                icon{
-                  altText
-                  mediaItemUrl
-                  mediaDetails{
-                    height
-                    width
-                  }
-                }
               }
             }
             repeaterFlexTeam{

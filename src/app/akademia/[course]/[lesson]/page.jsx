@@ -15,6 +15,7 @@ export default async function Courses({ params }) {
   return (
     <main>
       <Content
+        title={lesson.title}
         databaseId={lesson.databaseId}
         content={lesson.content}
         video={lesson.lesson.video}
@@ -31,6 +32,7 @@ async function getData(params) {
       query: gql`
       query Pages($id: ID!) {
         lesson(id: $id, idType: SLUG) {
+          title
           content
           databaseId
           lesson {

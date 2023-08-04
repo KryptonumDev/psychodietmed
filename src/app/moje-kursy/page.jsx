@@ -4,13 +4,15 @@ import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
 import { cookies } from 'next/headers'
 import Controller from "@/components/sections/my-courses-controller";
+import { notFound, redirect } from "next/navigation";
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDoxOTAz', '/moje-kursy', GET_SEO_PAGE)
 }
 
 export default async function Courses() {
-  const { user, data } = await getData()
+  const { data } = await getData()
+  const { user } = await getUser()
 
   return (
     <main className="overflow">
@@ -19,12 +21,61 @@ export default async function Courses() {
   )
 }
 
-async function getData() {
-  const cookieStore = cookies()
-  const userId = cookieStore.get('userId')
+async function getUser() {
+  try {
+    const authToken = cookies().get('authToken').value
 
-  const { data: { page, viewer } } = await client.query({
-    query: gql`
+    const { data: { viewer } } = await client.query({
+      query: gql`
+      query Viewer {
+        viewer {
+          username
+          courses {
+            nodes {
+              id
+              databaseId
+              slug
+              title
+              featuredImage {
+                node {
+                  mediaItemUrl
+                  altText
+                  mediaDetails {
+                    height
+                    width
+                  }
+                }
+              }
+              course{
+                excerpt
+              }
+            }
+          }
+        }
+      }
+    `,
+      context: {
+        headers: {
+          "Authorization": `Bearer ${authToken}`
+        }
+      }
+    }, { pollInterval: 500 })
+    console.log(viewer?.username)
+    if(!viewer?.username) redirect('/logowanie')
+
+    return {
+      user: viewer
+    }
+  } catch (error) {
+    console.log('error', error)
+    redirect('/logowanie')
+  }
+}
+
+async function getData() {
+  try {
+    const { data: { page } } = await client.query({
+      query: gql`
       query Pages {
         page(id: "cG9zdDoxOTAz") {
           myCourses {
@@ -45,34 +96,15 @@ async function getData() {
             }
           }
         }
-        viewer {
-          username
-          courses {
-            nodes {
-              id
-              databaseId
-              slug
-              title
-              featuredImage {
-                node {
-                  mediaItemUrl
-                  altText
-                  mediaDetails {
-                    height
-                    width
-                  }
-                }
-              }
-            }
-          }
-        }
       }
     `
-  }, { pollInterval: 500 })
+    }, { pollInterval: 500 })
 
-
-  return {
-    user: viewer,
-    data: page.myCourses
+    return {
+      data: page.myCourses
+    }
+  } catch (error) {
+    console.log('error', error)
+    notFound()
   }
 }

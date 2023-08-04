@@ -4,8 +4,9 @@ import styles from './styles.module.scss'
 import { Clock } from "../../../assets/clock"
 import { Play } from "../../../assets/play"
 import { Image } from "@/components/atoms/image"
+import Link from "next/link"
 
-export default function Content({ content, chapters, author }) {
+export default function Content({ slug, content, chapters, author }) {
   return (
     <section className={styles.wrapper}>
       <div>
@@ -28,17 +29,17 @@ export default function Content({ content, chapters, author }) {
             }
 
             return (
-              <div className={styles.chapter}>
+              <div key={index} className={styles.chapter}>
                 <div className={styles.info}>
                   <h3>Rozdział {index + 1} <span>{chapter.title}</span></h3>
                   <span><Clock />{totalTime}</span>
                   <span>{chapterCount} lekcje</span>
                 </div>
                 {chapter.lessons.map((el, inI) => (
-                  <div className={styles.lesson}>
+                  <Link key={inI} href={`/akademia/${slug}/${el.lesson.slug}`} className={styles.lesson}>
                     <h4 title={el.lesson.title}><strong>{index + 1}.{inI + 1}</strong><span>{el.lesson.title}</span></h4>
                     <span><Play />{el.lesson.lesson.time} minut</span>
-                  </div>
+                  </Link>
                 ))}
               </div>
             )

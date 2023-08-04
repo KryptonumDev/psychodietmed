@@ -9,13 +9,10 @@ import { ApolloClient, ApolloLink, InMemoryCache, createHttpLink } from "@apollo
 export const middleware = new ApolloLink(async (operation, forward) => {
   // If session data exist in local storage, set value as session header.
   const session = (typeof window !== 'undefined') ? localStorage.getItem("woo-session") : null;
-  // const authToken = await getCookie('authToken').value;
-  // console.log('authToken', authToken)
   if (session) {
     operation.setContext(({ headers = {} }) => ({
       headers: {
         "woocommerce-session": `Session ${session}`,
-        // 'authorization': `Bearer ${authToken}`,
       }
     }));
   }

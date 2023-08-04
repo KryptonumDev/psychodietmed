@@ -32,7 +32,7 @@ export default async function Courses({ params }) {
   return (
     <main>
       <Hero title={course.title} image={course.featuredImage} time={totalTime} count={lessonsCount} />
-      <Content content={course.content} chapters={course.course.chapters} author={course.course.author} />
+      <Content slug={course.slug} content={course.content} chapters={course.course.chapters} author={course.course.author} />
     </main>
   )
 }

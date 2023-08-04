@@ -3,11 +3,29 @@
   grid-template-columns: 843fr 405fr;
   gap: 64px 32px;
   grid-template-areas:
+    'title title'
     'video aside'
     'content aside';
 
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'title'
+      'video'
+      'aside'
+      'content';
+  }
+
   .video {
     grid-area: video;
+  }
+
+  .title {
+    grid-area: title;
+
+    h1 {
+      margin-bottom: 12px;
+    }
   }
 
   .aside {
@@ -16,10 +34,24 @@
     position: sticky;
     top: 110px;
 
+    @media (max-width: 1024px) {
+      position: static;
+    }
+
     border-radius: 20px;
     background: #FFF;
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
-    padding: 24px 28px 28px 24px;
+    padding:  clamp(16px, calc(20vw/7.68), 24px) clamp(16px, calc(28vw/7.68), 24px)  clamp(18px, calc(28vw/7.68), 28px)  clamp(16px, calc(28vw/7.68), 24px);
+
+    .asideInfo {
+      margin-bottom: clamp(24px, calc(24vw/7.68), 32px);
+
+      @media (max-width: 640px) {
+        display: flex;
+        gap: 12px;
+        flex-direction: column-reverse;
+      }
+    }
 
     p {
       &:first-child {
@@ -48,15 +80,23 @@
           font-size: 16rem;
           font-weight: 700;
 
+          @media (max-width: 370px) {
+            font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+          }
+
           svg {
-            width: 24px;
-            height: 24px;
+            width: clamp(20px, calc(24vw/7.68), 24px);
+            height: auto;
           }
         }
 
         &:nth-child(1) {
           color: #535353;
-          font-size: 16rem;
+          font-size: clamp(14rem, calc(16vw/7.68), 16rem);
+
+          @media (max-width: 370px) {
+            font-size: clamp(0rem, calc(14vw/3.7), 14rem);
+          }
         }
       }
     }
@@ -66,7 +106,13 @@
       align-items: center;
       justify-content: space-between;
       gap: 4px;
-      margin-top: 20px;
+      margin-top: 4px;
+      padding: 8px 0 12px;
+
+      &.active {
+        border-bottom: 1px solid var(--secondary-500, #DEAFB8);
+        background: var(--secondary-50, #FCF7F8);
+      }
 
       >span {
         min-width: 85px;
@@ -76,6 +122,10 @@
         color: #194574;
         font-weight: 700;
         font-size: 14rem;
+
+        @media (max-width: 370px) {
+          font-size: clamp(0rem, calc(14vw/3.7), 14rem);
+        }
       }
 
       >h4 {
@@ -86,6 +136,10 @@
         align-items: center;
         grid-template-columns: 36px auto;
 
+        @media (max-width: 370px) {
+          font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+        }
+
         strong {
           text-align: center;
           font-weight: 500;
@@ -95,6 +149,10 @@
           font-size: 16rem;
           color: #181818;
           font-weight: 500;
+
+          @media (max-width: 370px) {
+            font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+          }
         }
       }
     }
@@ -105,10 +163,10 @@
 
     h2 {
       margin-bottom: 28px;
-      font-size: clamp(32rem, calc(36vw/7.68), 48rem);
+      font-size: clamp(28rem, calc(36vw/7.68), 48rem);
 
       @media (max-width: 370px) {
-        font-size: clamp(0rem, calc(32vw/3.7), 32rem);
+        font-size: clamp(0rem, calc(28vw/3.7), 28rem);
       }
     }
   }
@@ -121,11 +179,42 @@
   }
 
   .flex {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
-    margin-top: 36px;
-    gap: 12px;
+    margin-top: 16px;
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        'left right'
+        'button button';
+      gap: 16px;
+    }
+
+    @media (max-width: 480px) {
+      gap: 4px;
+      margin-top: 0;
+    }
+
+    >a,
+    span,
+    button {
+      display: block;
+    }
+
+    >a,
+    span {
+      width: fit-content;
+    }
+
+    button {
+      width: 100%;
+
+      @media (max-width: 640px) {
+        grid-area: button;
+      }
+    }
 
     a {
       display: flex;
@@ -133,6 +222,34 @@
       gap: 6px;
       color: #194574;
       font-size: 20rem;
+
+      @media (max-width: 480px) {
+        span {
+          display: none;
+        }
+
+        svg {
+          padding: 12px;
+          width: 55px !important;
+          height: 55px !important;
+        }
+      }
+
+      &:first-child {
+        margin-right: auto;
+
+        @media (max-width: 640px) {
+          grid-area: left;
+        }
+      }
+
+      &:last-child {
+        margin-left: auto;
+
+        @media (max-width: 640px) {
+          grid-area: right;
+        }
+      }
 
       svg {
         width: 23px;

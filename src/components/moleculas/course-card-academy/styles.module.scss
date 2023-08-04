@@ -23,7 +23,7 @@
     margin: 0 clamp(20px, calc(20vw/7.68), 40px);
   }
 
-  h3 {
+  h3{
     margin-top: 16px;
     font-size: clamp(20rem, calc(24vw/7.68), 36rem);
 
@@ -32,25 +32,33 @@
     }
   }
 
-  .text {
+  p{
     margin-top: 24px;
-    
     font-size: clamp(16rem, calc(20vw/7.68), 20rem);
 
     @media (max-width: 370px) {
       font-size: clamp(0rem, calc(16vw/3.7), 16rem);
     }
-
-    * {
-      font-size: clamp(16rem, calc(20vw/7.68), 20rem);
-
-      @media (max-width: 370px) {
-        font-size: clamp(0rem, calc(16vw/3.7), 16rem);
-      }
-    }
   }
 
-  >.control {
+  >.control{
     margin: 36px auto 0 auto;
+
+    button{
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 3;
+    }
+
+    a{
+      font-size: 20rem;
+      color: #194574;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      position: relative;
+      z-index: 3;
+    }
   }
 }

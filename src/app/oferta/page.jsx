@@ -1,10 +1,10 @@
 import { gql } from "@apollo/client";
 import client from "../../apollo/apolo-client";
 import Hero from "@/components/sections/hero-shop";
-import Content from "@/components/sections/academy-products";
+import Content from "@/components/sections/offer-products";
 import TwoColumnFlex from "@/components/sections/two-column-flex";
 import ReviewsSlider from "@/components/sections/reviews-slider";
-import Bundles from "@/components/sections/academy-bundles";
+import Bundles from "@/components/sections/offer-bundles";
 import { notFound } from "next/navigation";
 import { PAGE_ITEM_COUNT } from "../../constants/academy";
 import { generetaSeo } from "../../utils/genereate-seo";
@@ -280,8 +280,6 @@ async function getData(params) {
           slug
           name
           image {
-            id
-            altText
             altText
             mediaItemUrl
             mediaDetails {

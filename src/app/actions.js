@@ -6,11 +6,10 @@ export async function setCookie(name, value) {
   cookies().set({
     name: name,
     value: value,
-    path: '/', // For all paths
+    maxAge: 1209600 // 14 days
   })
 }
 
 export async function getCookie(name) {
-  console.log('all:' + cookies().getAll())
   return cookies().get(name)
 }

@@ -7,21 +7,23 @@ import { LeftArrow } from "../../../assets/left-arrow"
 import { Clock } from "../../../assets/clock"
 import { Play } from "../../../assets/play"
 
-export default function Content({ chapters, content, databaseId, video, params }) {
+export default function Content({ title, chapters, content, databaseId, video, params }) {
 
   let prev = null
   let next = null
   let totalTime = 0
   let chapterCount = 0
+  let currentLesson = null
 
   const currentChapter = (() => {
     let chapter = null
     chapters.forEach((el, i) => {
       el.lessons.forEach((inEl, inI) => {
         if (inEl.lesson.databaseId === databaseId) {
-          prev = el.lessons[inI - 1] ? `/akademia/${params.course}/${el.lessons[inI - 1].lesson.slug}` : null 
-          next = el.lessons[inI + 1] ? `/akademia/${params.course}/${el.lessons[inI + 1].lesson.slug}` : null 
+          prev = el.lessons[inI - 1] ? `/akademia/${params.course}/${el.lessons[inI - 1].lesson.slug}` : null
+          next = el.lessons[inI + 1] ? `/akademia/${params.course}/${el.lessons[inI + 1].lesson.slug}` : null
           chapter = { ...el, chapterNumber: i + 1 }
+          currentLesson = inI + 1
         }
       })
     });
@@ -41,20 +43,27 @@ export default function Content({ chapters, content, databaseId, video, params }
 
   return (
     <section className={styles.wrapper}>
+      <div className={styles.title}>
+        <h1>{currentChapter.title}</h1>
+        <p>Rozdział {currentLesson}: {title}</p>
+      </div>
       <div className={styles.video}>
         <iframe className={styles.frame} frameBorder="0" src={video} title='Filmik' />
         <div className={styles.flex}>
           {prev ? (
             <Link href={prev}>
               <LeftArrow />
-              Poprzednia lekcja
+              <span>Poprzednia lekcja</span>
             </Link>
           ) : (
             <span />
           )}
+          <button className="link">
+            Ukończ lekcję
+          </button>
           {next ? (
             <Link href={next}>
-              Następna lekcja
+              <span>Następna lekcja</span>
               <RightArrow />
             </Link>
           ) : (
@@ -67,14 +76,18 @@ export default function Content({ chapters, content, databaseId, video, params }
         <div className='gutenberg' dangerouslySetInnerHTML={{ __html: content }} />
       </div>
       <aside className={styles.aside}>
-        <p>Rozdział {currentChapter.chapterNumber}</p>
-        <p>{currentChapter.title}</p>
-        <div className={styles.flex}>
-          <span>{chapterCount} lekcje</span>
-          <span><Clock />{totalTime}</span>
+        <div className={styles.asideInfo}>
+          <div>
+            <p>Rozdział {currentChapter.chapterNumber}</p>
+            <p>{currentChapter.title}</p>
+          </div>
+          <div className={styles.flex}>
+            <span>{chapterCount} lekcje</span>
+            <span><Clock />{totalTime}</span>
+          </div>
         </div>
         {currentChapter.lessons.map((el, index) => (
-          <div className={styles.lesson}>
+          <div key={index} className={`${styles.lesson} ${currentLesson === (index + 1) ? styles.active : ''} `}>
             <h4 title={el.lesson.title}><strong>{currentChapter.chapterNumber}.{index + 1}</strong><span>{el.lesson.title}</span></h4>
             <span><Play />{el.lesson.lesson.time} minut</span>
           </div>

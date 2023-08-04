@@ -21,7 +21,7 @@ export default function Hero({ title, image, time, count }) {
           <h1>Kurs: {title}</h1>
           <Link className="link" href='#'>Rozpocznij lekcję</Link>
         </div>
-        <div>
+        <div className={styles.flex}>
           <p><Clock /> Łączny czas: <span>{time}</span></p>
           <p><Graduate /> Liczba lekcji: <span>{count}</span></p>
         </div>

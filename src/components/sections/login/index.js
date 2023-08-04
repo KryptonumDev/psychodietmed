@@ -4,17 +4,18 @@ import styles from './styles.module.scss'
 import Input from "@/components/atoms/input"
 import { emailPattern } from "../../../constants/patterns"
 import { useForm } from "react-hook-form"
-import { Info } from "../../../assets/info"
 import { v4 } from "uuid";
+import { useRouter } from 'next/navigation';
+import LOGIN from "../../../mutations/login"
+import { useMutation } from "@apollo/client"
+import { setCookie } from "@/app/actions"
+import client from "../../../apollo/apolo-client"
 
-export default function Login({ login }) {
+export default function Login() {
+  const { push } = useRouter();
+  const { register, handleSubmit, formState: { errors }, } = useForm()
+
   const [renewPass, setRenewPass] = useState(false)
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm()
 
   const onSubmit = (data) => {
     const Input = {
@@ -24,6 +25,20 @@ export default function Login({ login }) {
     };
     login({ variables: { input: Input } })
   }
+  const [login, {
+    data: loginResponse,
+    loading: loginLoading,
+    error: loginError
+  }] = useMutation(LOGIN, {
+    client,
+    onCompleted: (res) => {
+      setCookie('authToken', res.login.authToken)
+     push('/moje-kursy');
+    },
+    onError: (error) => {
+      throw new Error(error?.graphQLErrors?.[0]?.message ?? error);
+    }
+  });
 
   return (
     <section onSubmit={handleSubmit(onSubmit)} className={styles.wrapper}>
