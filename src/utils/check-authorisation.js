@@ -1,6 +1,7 @@
 import { cookies } from "next/headers"
 import client from "../apollo/apolo-client"
 import { redirect } from "next/navigation"
+import { gql } from "@apollo/client"
 
 export async function getUser() {
   try {

@@ -4,8 +4,9 @@ import { Image } from "@/components/atoms/image"
 import Link from "next/link"
 import { Clock } from "../../../assets/clock"
 import { Graduate } from "../../../assets/graduate"
+import AddToCart from "@/components/atoms/add-to-cart-button"
 
-export default function Hero({ accessToCourse, title, image, time, count }) {
+export default function Hero({ lessonSlug, slug, databaseId, accessToCourse, title, image, time, count }) {
   return (
     <section className={styles.wrapper}>
       <Image
@@ -20,9 +21,9 @@ export default function Hero({ accessToCourse, title, image, time, count }) {
         <div>
           <h1>Kurs: {title}</h1>
           {accessToCourse ? (
-            <Link className="link" href='#'>Rozpocznij lekcję</Link>
-          ): (
-            <Link className="link" href='#'>Zakup dostęp do kursu</Link>
+            <Link className="link" href={`/moje-kursy/${slug}/${lessonSlug}`}>Rozpocznij lekcję</Link>
+          ) : (
+            <AddToCart className="link" product={{ productId: databaseId }}>Zakup dostęp do kursu</AddToCart>
           )}
         </div>
         <div className={styles.flex}>

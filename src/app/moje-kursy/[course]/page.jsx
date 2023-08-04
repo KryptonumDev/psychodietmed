@@ -5,7 +5,6 @@ import client from "../../../apollo/apolo-client";
 import { notFound, redirect } from "next/navigation";
 import Hero from "@/components/sections/hero-course";
 import Content from "@/components/sections/course-content";
-import { cookies } from "next/headers";
 import { getUser } from "../../../utils/check-authorisation";
 
 // export async function generateMetadata() {
@@ -18,6 +17,7 @@ export default async function Courses({ params }) {
 
   let totalTime = 0
   let lessonsCount = 0
+  let firstLessonSlug = course.course.chapters[0].lessons[0].lesson.slug
 
   course.course.chapters.forEach(chapter => {
     chapter.lessons.forEach(el => {
@@ -34,7 +34,7 @@ export default async function Courses({ params }) {
 
   return (
     <main>
-      <Hero title={course.title} image={course.featuredImage} time={totalTime} count={lessonsCount} />
+      <Hero accessToCourse={true} lessonSlug={firstLessonSlug} slug={course.slug} title={course.title} image={course.featuredImage} time={totalTime} count={lessonsCount} />
       <Content slug={course.slug} content={course.content} chapters={course.course.chapters} author={course.course.author} />
     </main>
   )

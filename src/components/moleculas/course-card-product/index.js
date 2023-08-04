@@ -31,7 +31,7 @@ export default function Card({ data, myCourse = false }) {
             <AddToCart className="link" product={{ productId: data.productId }}>
               Kup kurs
             </AddToCart>
-            <Link href={`/moje-kursy/${data.product.course.slug}`}>
+            <Link className={styles.link} href={`/akademia/${data.slug}`}>
               Przejdź do kursu <RightArrow />
             </Link>
           </>
