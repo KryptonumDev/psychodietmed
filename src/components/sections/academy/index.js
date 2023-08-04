@@ -1,9 +1,8 @@
 import React from "react"
 import styles from './styles.module.scss';
 import { removeWrap } from "../../../utils/title-modification";
-import Link from "next/link";
-import { RightArrow } from "../../../assets/small-right-arrow";
 import { Image } from "@/components/atoms/image";
+import Button from "@/components/atoms/button";
 
 export default function Academy({ data: { title, text, grid } }) {
   return (
@@ -19,7 +18,7 @@ export default function Academy({ data: { title, text, grid } }) {
             </summary>
             <div className={styles.content} >
               <div dangerouslySetInnerHTML={{ __html: el.text }} />
-              <Link className={styles.link} href={el.link.url}>{el.link.title} <RightArrow /></Link>
+              <Button theme="secondary" href={el.link.url}>{el.link.title}</Button>
               <Image aspectRatio={true} className={styles.image} src={el.image.mediaItemUrl} alt={el.image.altText} width={el.image.mediaDetails.width} height={el.image.mediaDetails.height} />
             </div>
           </details>

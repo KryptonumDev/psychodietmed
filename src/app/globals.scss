@@ -263,6 +263,7 @@ p em {
 
 .link-secondary {
   display: flex;
+  width: fit-content;
   align-items: center;
   gap: 6px;
   color: #194574;
@@ -283,9 +284,15 @@ p em {
     transform: scaleX(0);
     transform-origin: left;
   }
+  svg {
+    transition: transform .4s var(--easing);
+  }
   &:hover {
     &::after {
       transform: scaleX(1);
+    }
+    svg {
+      transform: translateX(5px) scale(.9);
     }
   }
 }
