@@ -6,7 +6,7 @@ import { Image } from "@/components/atoms/image"
 export default function Card({ data }) {
   return (
     <div className={styles.wrapper}>
-      <Link className={styles.link} href={`/akademia/${data.slug}`} />
+      <Link className={styles.link} href={`/moje-kursy/${data.slug}`} />
       <div>
         <Image
           className={styles.image}
@@ -20,7 +20,7 @@ export default function Card({ data }) {
         <div className={styles.text} dangerouslySetInnerHTML={{ __html: data.course.excerpt }} />
       </div>
       <div className={styles.control}>
-        <Link className="link" href={`/akademia/${data.slug}`}>
+        <Link className="link" href={`/moje-kursy/${data.slug}`}>
           Przejdź do kursu
         </Link>
       </div>

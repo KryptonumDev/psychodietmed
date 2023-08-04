@@ -8,7 +8,7 @@ import { RightArrow } from "../../../assets/small-right-arrow"
 export default function Card({ data, myCourse = false }) {
   return (
     <div className={styles.wrapper}>
-      <Link className={styles.link} href={`/akademia/${data.product.course.slug}`} />
+      <Link className={styles.link} href={`/moje-kursy/${data.product.course.slug}`} />
       <div>
         <Image
           className={styles.image}
@@ -23,7 +23,7 @@ export default function Card({ data, myCourse = false }) {
       </div>
       <div className={styles.control}>
         {myCourse ? (
-          <Link className="link" href={`/akademia/${data.product.course.slug}`}>
+          <Link className="link" href={`/moje-kursy/${data.product.course.slug}`}>
             Przejdź do kursu
           </Link>
         ) : (
@@ -31,7 +31,7 @@ export default function Card({ data, myCourse = false }) {
             <AddToCart className="link" product={{ productId: data.productId }}>
               Kup kurs
             </AddToCart>
-            <Link href={`/akademia/${data.product.course.slug}`}>
+            <Link className={styles.link} href={`/akademia/${data.slug}`}>
               Przejdź do kursu <RightArrow />
             </Link>
           </>

@@ -4,6 +4,7 @@ import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
 import Grid from "@/components/sections/academy-grid";
 import Recruitment from "@/components/sections/team-recruitment";
+import { cookies } from "next/headers";
 // import { cookies } from "next/headers";
 
 export async function generateMetadata() {
@@ -12,12 +13,48 @@ export async function generateMetadata() {
 
 export default async function Courses() {
   const { products, page } = await getData()
+  const { user } = await getUser()
+
   return (
     <main className="overflow">
-      <Grid data={products} />
+      <Grid user={user} data={products} />
       <Recruitment data={page.akademia.specialistGridTeam} />
     </main>
   )
+}
+
+async function getUser() {
+  try {
+    const authToken = cookies().get('authToken').value
+
+    const { data: { viewer } } = await client.query({
+      query: gql`
+      query Viewer {
+        viewer {
+          username
+          courses {
+            nodes {
+              databaseId
+            }
+          }
+        }
+      }
+    `,
+      context: {
+        headers: {
+          "Authorization": `Bearer ${authToken}`
+        }
+      }
+    }, { pollInterval: 500 })
+
+    return {
+      user: viewer
+    }
+  } catch (error) {
+    return {
+      user: null
+    }
+  }
 }
 
 async function getData() {

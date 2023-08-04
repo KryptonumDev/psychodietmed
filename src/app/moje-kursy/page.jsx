@@ -60,7 +60,7 @@ async function getUser() {
         }
       }
     }, { pollInterval: 500 })
-    console.log(viewer?.username)
+    
     if(!viewer?.username) redirect('/logowanie')
 
     return {

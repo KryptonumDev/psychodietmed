@@ -2,9 +2,10 @@ import { gql } from "@apollo/client";
 import client from "../../../apollo/apolo-client";
 // import { generetaSeo } from "../../../utils/genereate-seo";
 // import { GET_SEO_PAGE } from "../../../queries/page-seo";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Hero from "@/components/sections/hero-course";
 import Content from "@/components/sections/course-content";
+import { getUser } from "../../../utils/check-authorisation";
 
 // export async function generateMetadata() {
 //   return await generetaSeo('cG9zdDoxODY4', '/akademia', GET_SEO_PAGE)
@@ -12,9 +13,11 @@ import Content from "@/components/sections/course-content";
 
 export default async function Courses({ params }) {
   const { course } = await getData(params)
+  const { } = await getUser()
 
   let totalTime = 0
   let lessonsCount = 0
+  let firstLessonSlug = course.course.chapters[0].lessons[0].lesson.slug
 
   course.course.chapters.forEach(chapter => {
     chapter.lessons.forEach(el => {
@@ -31,7 +34,7 @@ export default async function Courses({ params }) {
 
   return (
     <main>
-      <Hero title={course.title} image={course.featuredImage} time={totalTime} count={lessonsCount} />
+      <Hero accessToCourse={true} lessonSlug={firstLessonSlug} slug={course.slug} title={course.title} image={course.featuredImage} time={totalTime} count={lessonsCount} />
       <Content slug={course.slug} content={course.content} chapters={course.course.chapters} author={course.course.author} />
     </main>
   )

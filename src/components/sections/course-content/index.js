@@ -6,7 +6,7 @@ import { Play } from "../../../assets/play"
 import { Image } from "@/components/atoms/image"
 import Link from "next/link"
 
-export default function Content({ slug, content, chapters, author }) {
+export default function Content({ disabled, slug, content, chapters, author }) {
   return (
     <section className={styles.wrapper}>
       <div>
@@ -35,12 +35,23 @@ export default function Content({ slug, content, chapters, author }) {
                   <span><Clock />{totalTime}</span>
                   <span>{chapterCount} lekcje</span>
                 </div>
-                {chapter.lessons.map((el, inI) => (
-                  <Link key={inI} href={`/akademia/${slug}/${el.lesson.slug}`} className={styles.lesson}>
-                    <h4 title={el.lesson.title}><strong>{index + 1}.{inI + 1}</strong><span>{el.lesson.title}</span></h4>
-                    <span><Play />{el.lesson.lesson.time} minut</span>
-                  </Link>
-                ))}
+                {chapter.lessons.map((el, inI) => {
+                  if (disabled) {
+                    return (
+                      <span key={inI} className={styles.lesson}>
+                        <h4 title={el.lesson.title}><strong>{index + 1}.{inI + 1}</strong><span>{el.lesson.title}</span></h4>
+                        <span><Play />{el.lesson.lesson.time} minut</span>
+                      </span>
+                    )
+                  }
+
+                  return (
+                    <Link key={inI} href={`/moje-kursy/${slug}/${el.lesson.slug}`} className={styles.lesson}>
+                      <h4 title={el.lesson.title}><strong>{index + 1}.{inI + 1}</strong><span>{el.lesson.title}</span></h4>
+                      <span><Play />{el.lesson.lesson.time} minut</span>
+                    </Link>
+                  )
+                })}
               </div>
             )
           })}

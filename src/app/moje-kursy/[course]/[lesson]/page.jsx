@@ -4,6 +4,7 @@ import client from "../../../../apollo/apolo-client";
 // import { GET_SEO_PAGE } from "../../../queries/page-seo";
 import { notFound } from "next/navigation";
 import Content from "@/components/sections/lesson-content";
+import { getUser } from "../../../../utils/check-authorisation";
 
 // export async function generateMetadata() {
 //   return await generetaSeo('cG9zdDoxODY4', '/akademia', GET_SEO_PAGE)
@@ -11,6 +12,7 @@ import Content from "@/components/sections/lesson-content";
 
 export default async function Courses({ params }) {
   const { lesson } = await getData(params)
+  const { } = await getUser()
 
   return (
     <main>
