@@ -5,6 +5,7 @@ import { removeWrap } from "../../../utils/title-modification"
 import { Image } from "@/components/atoms/image"
 import Link from "next/link"
 import { AnimatePresence, motion } from "framer-motion";
+import { RightArrow } from "../../../assets/small-right-arrow"
 
 export default function StepsToConsultation({ data, specialists }) {
   const { title, image, titleFirst, textFirst, illnes, titleSecond, textSecond, titleThird, textThird } = data
@@ -96,10 +97,11 @@ export default function StepsToConsultation({ data, specialists }) {
                           className={styles.person}
                         >
                           <Image aspectRatio={true} className={styles.avatar} src={el.proffesional.personImage.mediaItemUrl} alt={el.proffesional.personImage.altText} width={el.proffesional.personImage.mediaDetails.width} height={el.proffesional.personImage.mediaDetails.height} />
-                          <div>
+                          <div className={styles.copy}>
                             <p className={styles.name}>{el.title}</p>
                             <p className={styles.profession}>{el.proffesional.proffesion}</p>
                           </div>
+                          <RightArrow />
                         </button>
                       ))}
                     </div>
