@@ -172,7 +172,10 @@
       font-size: clamp(0rem, calc(16vw/3.7), 16rem);
     }
   }
-
+  > span {
+    flex-shrink: 0;
+    display: block;
+  }
   span {
     font-weight: 500;
     font-size: clamp(36rem, calc(36vw/7.68), 48rem);
