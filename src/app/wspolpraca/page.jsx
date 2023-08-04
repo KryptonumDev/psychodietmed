@@ -40,7 +40,7 @@ async function getData() {
   const { data: { products, global, page, obszaryDzialania } } = await client.query({
     query: gql`
       query Pages {
-        products(where: {orderby: {field: DATE, order: DESC}}, first: 12) {
+        products(where: {orderby: {categoryNotIn: ["kurs"], field: DATE, order: DESC}}, first: 12) {
           nodes {
             product {
               discount

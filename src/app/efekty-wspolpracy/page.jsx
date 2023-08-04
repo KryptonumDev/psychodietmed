@@ -50,11 +50,9 @@ async function getData(props) {
                 resultTitle
                 result
                 problems {
-                  ... on Specjalizacja {
-                    id
-                    title
-                    slug
-                  }
+                  id
+                  title : name
+                  slug
                 }
                 boldText
                 beforeImage {

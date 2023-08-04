@@ -22,7 +22,7 @@ export async function generateMetadata({ searchParams }) {
     url += `?strona=${searchParams.strona}`
   }
 
-  return await generetaSeo('cG9zdDoxOTA1', url, GET_SEO_PAGE)
+  return await generetaSeo('cG9zdDoxODY4', url, GET_SEO_PAGE)
 }
 
 const prices = [

@@ -44,7 +44,7 @@ async function getData() {
             }
           }
         }
-        products(first: 5) {
+        products(first: 5, where: {categoryNotIn: ["kurs", "bundle"]} ) {
           nodes {
             product {
               discount

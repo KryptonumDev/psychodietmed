@@ -87,14 +87,12 @@ async function getData(params) {
               resultTitle
               result
               problems {
-                ... on Specjalizacja {
-                  id
-                  title
-                  specialisation {
-                    popupCasestudy {
-                      title
-                      text
-                    }
+                id
+                title : name
+                specialisation {
+                  popupCasestudy {
+                    title
+                    text
                   }
                 }
               }
