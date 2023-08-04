@@ -1,12 +1,12 @@
 import './normalize.css'
-import './globals.css'
 import './gutenberg.css'
+import './globals.scss'
 import localFont from 'next/font/local'
 import Header from '@/components/sections/header'
 import Footer from '@/components/sections/footer'
 import { AppProvider } from '../context/app-context'
 import SubHeader from '@/components/sections/mobile-sub-header'
-import { ToastContainer } from 'react-toastify'
+// import { ToastContainer } from 'react-toastify'
 
 const Satoshi = localFont({
   src: '../assets/fonts/satoshi.woff2',

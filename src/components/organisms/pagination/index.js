@@ -3,8 +3,10 @@ import Link from "next/link"
 import React, { useMemo } from "react"
 import { PAGE_ITEM_COUNT } from "../../../constants/blog"
 import styles from './styles.module.scss'
-import { LeftArrow } from "../../../assets/left-arrow"
+
 import { RightArrow } from "../../../assets/right-arrow"
+import ArrowLeft from "@/components/atoms/ArrowLeft"
+import ArrowRight from "@/components/atoms/ArrowRight"
 
 export default function Pagination({ currentPage, itemCount, urlBasis }) {
   const pagesCount = useMemo(() => {
@@ -25,14 +27,15 @@ export default function Pagination({ currentPage, itemCount, urlBasis }) {
 
   return (
     <div className={styles.wrapper}>
-      <Link href={
-        currentPage >= 3
+      <ArrowLeft
+        href={
+          currentPage >= 3
           ? `${urlBasis}/strona/${currentPage - 1}`
           : `${urlBasis}`
-      }
-        className={`${styles.left} ${styles.arrow}`} >
-        <LeftArrow />
-      </Link>
+        }
+        className={`${styles.left} ${styles.arrow}`}
+        as="Link"
+      />
       <div className={styles.center}>
         {pagesCount < 6 ? (
           <>
@@ -101,14 +104,15 @@ export default function Pagination({ currentPage, itemCount, urlBasis }) {
           </>
         )}
       </div>
-      <Link href={
-        currentPage < pagesCount
-          ? `${urlBasis}/strona/${currentPage + 1}`
-          : `${urlBasis}/strona/${pagesCount}`
-      }
-        className={`${styles.right} ${styles.arrow}`}>
-        <RightArrow />
-      </Link>
+      <ArrowRight
+        href={
+          currentPage < pagesCount
+            ? `${urlBasis}/strona/${currentPage + 1}`
+            : `${urlBasis}/strona/${pagesCount}`
+        }
+        className={`${styles.right} ${styles.arrow}`}
+        as="Link"
+      />
     </div>
   )
 }

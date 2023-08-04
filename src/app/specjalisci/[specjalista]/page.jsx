@@ -18,7 +18,7 @@ export default async function Specjalista({ params }) {
   const { data, faq, other } = await getData(params)
   return (
     <>
-      <main className="overflow">
+      <main className="overflow" id="main">
         <Hero data={data} />
         <Flex
           content={data.proffesional.excerpt}
@@ -83,8 +83,13 @@ async function getData(params) {
           title
           specialisations {
             nodes {
+<<<<<<< HEAD
+              title : name
+              id
+=======
               id : databaseId
               title : name
+>>>>>>> develop
             }
           }
           proffesional {

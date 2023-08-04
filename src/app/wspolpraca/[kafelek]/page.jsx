@@ -20,7 +20,7 @@ export default async function Post({ params }) {
   const { data } = await getData(params)
   return (
     <>
-      <main className="overflow">
+      <main className="overflow" id="main">
         <Hero data={data.acf.heroKafelek} />
         <SliderIllnes data={data.acf.illnesSliderKafelek} />
         <SliderSymptoms data={data.acf.symptomsSliderKafelek} />

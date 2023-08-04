@@ -21,7 +21,7 @@ export async function generateMetadata() {
 export default async function Team() {
   const { newsletter, posts, blog, page, specialists } = await getData()
   return (
-    <main className="overflow">
+    <main className="overflow" id="main">
       <Hero data={page.team.heroTeam} />
       <Slider data={page.team.sliderTeam} />
       <Owner data={page.team.ownerTeam} />

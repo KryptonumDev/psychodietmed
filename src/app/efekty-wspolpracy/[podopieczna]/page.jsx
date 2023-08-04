@@ -14,7 +14,7 @@ export async function generateMetadata({ params }) {
 export default async function Post({ params }) {
   const { data, other } = await getData(params)
   return (
-    <main>
+    <main id="main">
       <Hero data={data.histori.information} />
       <Cards data={data.histori.resultsSection} />
       <ReviewsSlider data={{ title: 'Poznaj inne historie', text: 'Dowiedz się, jaka zmiana zaszła w życiu naszych pacjentek', comments: other }} />

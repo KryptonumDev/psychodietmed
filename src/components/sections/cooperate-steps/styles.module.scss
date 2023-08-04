@@ -230,7 +230,7 @@
   }
 
   .number {
-    color: #DEAFB8;
+    color: var(--secondary-500);
     font-size: clamp(24rem, calc(36vw/7.68), 48rem);
 
     @media (max-width: 370px) {
@@ -246,7 +246,7 @@
       left: 0;
       top: clamp(16px, calc(28vw/7.68), 36px);
       right: 0;
-      border-top: clamp(3px, calc(4vw/7.68), 6px) dotted #DEAFB8;
+      border-top: clamp(3px, calc(4vw/7.68), 6px) dotted var(--secondary-500);
     }
 
     .left {
@@ -254,7 +254,7 @@
       left: 0;
       top: clamp(16px, calc(28vw/7.68), 36px);
       bottom: calc(-1 * clamp(74px, calc(80vw/7.68), 138px));
-      border-left: clamp(3px, calc(4vw/7.68), 6px) dotted #DEAFB8;
+      border-left: clamp(3px, calc(4vw/7.68), 6px) dotted var(--secondary-500);
     }
 
     .bottom {
@@ -262,7 +262,7 @@
       left: 0;
       bottom: calc(-1 * clamp(74px, calc(80vw/7.68), 144px));
       right: 0;
-      border-top: clamp(3px, calc(4vw/7.68), 6px) dotted #DEAFB8;
+      border-top: clamp(3px, calc(4vw/7.68), 6px) dotted var(--secondary-500);
     }
 
     &.first {

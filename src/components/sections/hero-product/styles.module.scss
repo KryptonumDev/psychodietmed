@@ -79,7 +79,7 @@
     align-items: center;
     padding: 7px 20px 8px 20px;
     border-radius: 50px;
-    border: 2px solid#DEAFB8;
+    border: 2px solidvar(--secondary-500);
     background: #FFF;
     width: fit-content;
 
@@ -154,7 +154,7 @@
 
       input:checked~.checkbox {
         border: 2px solid #194574;
-        color: #181818;
+        color: var(--neutrals-800);
 
         &::after {
           opacity: 1;

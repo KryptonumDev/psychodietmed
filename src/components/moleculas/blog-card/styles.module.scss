@@ -71,7 +71,11 @@
 
   .excerpt {
     margin-bottom: 36px;
-
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 4;
     * {
       font-size: clamp(14rem, calc(16vw/7.68), 20rem);
 

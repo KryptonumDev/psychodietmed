@@ -7,6 +7,12 @@
   @media (max-width: 1439px) {
     padding: 50px clamp(16px, calc(32vw/7.68), 80px);
   }
+
+  a {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .inform {
@@ -16,19 +22,19 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-
+  h3 a {
+    font-weight: 600;
+  }
   h3,
   a {
     font-weight: 500;
     font-size: 20px;
-    line-height: 320%;
     letter-spacing: -0.01em;
     color: #194574;
 
     @media (max-width: 480px) {
       line-height: 140%;
     }
-
     @media (max-width: 370px) {
       font-size: clamp(0rem, calc(20vw/3.7), 20rem);
     }
@@ -41,7 +47,7 @@
   gap: 0 48px;
 
   .link {
-    color: #181818;
+    color: var(--neutrals-800);
   }
 
   @media (max-width: 480px) {
@@ -52,6 +58,19 @@
 
 .logo {
   max-width: 100%;
+}
+
+.social {
+  svg {
+    transition: fill .3s;
+  }
+  a {
+    &:hover {
+      svg {
+        fill: var(--secondary-600);
+      }
+    }
+  }
 }
 
 .content {
@@ -76,7 +95,7 @@
       a, p {
         line-height: 200%;
         font-size: clamp(16rem, calc(20vw/7.68), 24rem);
-        color: #181818;
+        color: var(--neutrals-800);
         letter-spacing: -0.01em;
         line-height: 240%;
 

@@ -1,14 +1,15 @@
 'use client'
 import React, { useMemo } from "react"
 import styles from './styles.module.scss'
-import { LeftArrow } from "../../../assets/left-arrow"
 import { RightArrow } from "../../../assets/right-arrow"
+import ArrowLeft from "@/components/atoms/ArrowLeft"
+import ArrowRight from "@/components/atoms/ArrowRight"
 
 export default function Pagination({ changePage, currentPage, itemCount, PAGE_ITEM_COUNT }) {
 
   const pagesCount = useMemo(() => {
     return (Math.ceil(itemCount / PAGE_ITEM_COUNT))
-  }, [itemCount])
+  }, [itemCount, PAGE_ITEM_COUNT])
 
   const buttons = (() => {
     let arr = []
@@ -24,15 +25,14 @@ export default function Pagination({ changePage, currentPage, itemCount, PAGE_IT
 
   return (
     <div className={styles.wrapper}>
-      <button
+      <ArrowLeft
         onClick={() => {
           changePage(currentPage >= 3
             ? currentPage - 1
             : 1)
         }}
-        className={`${styles.left} ${styles.arrow}`} >
-        <LeftArrow />
-      </button>
+        className={`${styles.left} ${styles.arrow}`}
+      />
       <div className={styles.center}>
         {pagesCount < 6 ? (
           <>
@@ -98,14 +98,14 @@ export default function Pagination({ changePage, currentPage, itemCount, PAGE_IT
           </>
         )}
       </div>
-      <button onClick={() => {
-        changePage(currentPage < pagesCount
-          ? currentPage + 1
-          : pagesCount)
-      }}
-        className={`${styles.right} ${styles.arrow}`}>
-        <RightArrow />
-      </button>
+      <ArrowRight
+        onClick={() => {
+          changePage(currentPage < pagesCount
+            ? currentPage + 1
+            : pagesCount)
+        }}
+        className={`${styles.right} ${styles.arrow}`}
+      />
     </div>
   )
 }

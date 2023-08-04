@@ -13,7 +13,7 @@ export default async function Regulamin() {
   const { data, products } = await getData()
 
   return (
-    <main>
+    <main id="main">
       <Hero data={data.heroStatute} />
       <Slider products={products} />
     </main>

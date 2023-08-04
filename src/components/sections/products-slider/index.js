@@ -1,12 +1,12 @@
 'use client'
 import React, { useCallback, useRef } from "react"
 import styles from './styles.module.scss';
-import { LeftArrow } from "../../../assets/left-arrow";
-import { RightArrow } from "../../../assets/right-arrow";
 import { A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Card } from "@/components/moleculas/product-card";
 import 'swiper/scss';
+import ArrowLeft from "@/components/atoms/ArrowLeft";
+import ArrowRight from "@/components/atoms/ArrowRight";
 
 export default function Slider({ products, title = 'Może Cię zainteresować' }) {
 
@@ -26,12 +26,14 @@ export default function Slider({ products, title = 'Może Cię zainteresować' }
     <section className={styles.wrapper}>
       <h2>{title}</h2>
       <div className={`${styles.control} ${styles.desctop}`}>
-        <button onClick={() => { handlePrev() }} aria-label='strzałka w lewo' >
-          <LeftArrow />
-        </button>
-        <button onClick={() => { handleNext() }} aria-label='strzałka w prawo' >
-          <RightArrow />
-        </button>
+        <ArrowLeft
+          onClick={() => { handlePrev() }}
+          aria-label='Poprzedni produkt'
+        />
+        <ArrowRight
+          onClick={() => { handleNext() }}
+          aria-label='Następny produkt'
+        />
       </div>
       <Swiper
         ref={sliderRef}
@@ -56,12 +58,14 @@ export default function Slider({ products, title = 'Może Cię zainteresować' }
           </SwiperSlide>
         ))}
         <div className={`${styles.control} ${styles.mobile}`}>
-          <button onClick={() => { handlePrev() }} aria-label='strzałka w lewo' >
-            <LeftArrow />
-          </button>
-          <button onClick={() => { handleNext() }} aria-label='strzałka w prawo' >
-            <RightArrow />
-          </button>
+          <ArrowLeft
+            onClick={() => { handlePrev() }}
+            aria-label='Poprzedni produkt'
+          />
+          <ArrowRight
+            onClick={() => { handleNext() }}
+            aria-label='Następny produkt'
+          />
         </div>
       </Swiper>
     </section>

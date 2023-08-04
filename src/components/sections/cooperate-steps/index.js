@@ -5,7 +5,6 @@ import { Image } from "@/components/atoms/image"
 import { RightArrow } from "../../../assets/small-right-arrow"
 
 export default function Steps({ data: { repeater, titleFirst, linkFirst, titleSecond, gridSecond, linkSecond, titleThird, linkThird, gridThird, titleFourth, gridFourth } }) {
-
   return (
     <section className={styles.wrapper}>
       <div className={styles.step}>

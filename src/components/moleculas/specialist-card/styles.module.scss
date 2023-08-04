@@ -37,16 +37,13 @@
     flex-wrap: wrap;
     gap: 8px;
     margin-top: 24px;
-
     li {
-      padding: 10px clamp(12px, calc(16vw/7.68), 16px) 12px clamp(12px, calc(16vw/7.68), 16px);
-       color: #3A69A0;
+      padding: 10px clamp(12px, calc(16vw/7.68), 16px);
+      color: #3A69A0;
       border: 2px solid #3A69A0;
       border-radius: 50px;
-
       font-size: clamp(14rem, calc(16vw/7.68), 16rem);
       line-height: 124%;
-
       @media (max-width: 370px) {
         font-size: clamp(0rem, calc(16vw/3.7), 16rem);
         padding:
@@ -65,17 +62,4 @@
       margin-top: 12px;
     }
   }
-}
-
-.link{
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: #194574;
-  font-size: 20rem;
-
-  @media (max-width: 420px) {
-    margin: 0 auto;
-  }
-
 }

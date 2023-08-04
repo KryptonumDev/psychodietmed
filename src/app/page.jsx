@@ -37,7 +37,7 @@ export default async function Home() {
   }
 
   return (
-    <main className="overflow">
+    <main className="overflow" id="main">
       <Hero data={hero} />
       <Flex data={flex} />
       <Compare data={compare} />

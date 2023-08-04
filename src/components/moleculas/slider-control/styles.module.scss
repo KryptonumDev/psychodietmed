@@ -18,22 +18,21 @@
 .dots {
   display: flex;
   gap: 24px;
-
   @media (max-width: 640px) {
     display: none;
   }
-
   .dot {
     width: 80px;
     height: 5px;
     border-radius: 50px;
-    background: #C4C4C4;
     cursor: pointer;
-    background-color: #F5E7EA;
-    transition: background-color var(--transition);
-
+    background-color: var(--secondary-100);
+    transition: background-color .3s;
+    &:hover {
+      background-color: var(--secondary-200);
+    }
     &.active {
-      background-color: #DEAFB8;
+      background-color: var(--secondary-500);
     }
   }
 }

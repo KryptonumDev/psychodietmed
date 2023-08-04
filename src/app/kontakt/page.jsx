@@ -13,7 +13,7 @@ export default async function Specialist() {
   const { form, products } = await getData()
 
   return (
-    <main>
+    <main id="main">
       <Contact data={form} />
       <DigitalSlider data={products} />
     </main>

@@ -46,7 +46,7 @@
   .button {
     border: none;
     background-color: transparent;
-    color: #181818;
+    color: var(--neutrals-800);
     font-weight: 500;
     font-size: clamp(16rem, calc(16vw/7.68), 20rem);
     text-align: left;

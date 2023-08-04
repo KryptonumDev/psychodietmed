@@ -13,7 +13,7 @@
 
   &.card-1{
     border-radius: 20px;
-    background: #DEAFB8;
+    background: var(--secondary-500);
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
   }
 
@@ -35,7 +35,7 @@
 
   &.card-4{
     border-radius: 20px;
-    border: 2px solid #DEAFB8;
+    border: 2px solid var(--secondary-500);
     background: #FFF;
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
   }

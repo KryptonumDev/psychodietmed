@@ -26,7 +26,7 @@ export default async function Home() {
   // console.log(text)
 
   return (
-    <main className="overflow">
+    <main className="overflow" id="main">
       <Content specialists={specialists} specializations={specializations} />
     </main>
   )

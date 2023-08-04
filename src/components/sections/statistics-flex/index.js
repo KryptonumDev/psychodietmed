@@ -26,7 +26,9 @@ export default function StatisticsFlex({ data }) {
           <div className={styles.counters}>
             {counters.map((counter, index) => (
               <div className={styles.counterItem} key={index}>
-                <span>{counter.number}</span>
+                <span>
+                  {counter.number}
+                </span>
                 <p>{counter.text}</p>
               </div>
             ))}

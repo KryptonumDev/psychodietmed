@@ -84,7 +84,7 @@
         }
 
         p{
-          color: #181818;
+          color: var(--neutrals-800);
         }
 
         span{
@@ -98,7 +98,7 @@
     display: block;
     height: 2px;
     width: 100%;
-    background-color: #DEAFB8;
+    background-color: var(--secondary-500);
     border-radius: 5px;
   }
 }
@@ -130,7 +130,7 @@
   .pie {
     --p: 20;
     --b: 2px;
-    --c: #DEAFB8;
+    --c: var(--secondary-500);
     --w: 72px;
 
     width: var(--w);

@@ -15,7 +15,7 @@ export default async function Post({ params }) {
   const { data, posts } = await getData(params)
   return (
     <>
-      <main>
+      <main id="main">
         <Hero data={data} />
         <Content next={data.next} prev={data.previous} author={data.postAuthor.author} data={data.content} title={data.title} excerpt={data.excerpt} />
         <OtherPosts data={posts} />

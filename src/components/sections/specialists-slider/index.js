@@ -1,14 +1,13 @@
 'use client'
 import React, { useCallback, useRef } from "react"
 import styles from './styles.module.scss';
-import { LeftArrow } from "../../../assets/left-arrow";
-import { RightArrow } from "../../../assets/right-arrow";
 import Card from "@/components/moleculas/specialist-card";
 import { A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import ArrowLeft from "@/components/atoms/ArrowLeft";
+import ArrowRight from "@/components/atoms/ArrowRight";
 
 export default function Specialists({ data, title = 'Wybierz specjalistę' }) {
-
   const sliderRef = useRef(null);
 
   const handlePrev = useCallback(() => {
@@ -25,12 +24,14 @@ export default function Specialists({ data, title = 'Wybierz specjalistę' }) {
     <section className={styles.wrapper}>
       <h2>{title}</h2>
       <div className={`${styles.control} ${styles.desctop}`}>
-        <button onClick={() => { handlePrev() }} aria-label='strzałka w lewo' >
-          <LeftArrow />
-        </button>
-        <button onClick={() => { handleNext() }} aria-label='strzałka w prawo' >
-          <RightArrow />
-        </button>
+        <ArrowLeft
+          onClick={() => { handlePrev() }}
+          aria-label='Poprzedni specjalista'
+        />
+        <ArrowRight
+          onClick={() => { handleNext() }}
+          aria-label='Następny specjalista'
+        />
       </div>
       <Swiper
         ref={sliderRef}
@@ -57,12 +58,14 @@ export default function Specialists({ data, title = 'Wybierz specjalistę' }) {
           </SwiperSlide>
         ))}
         <div className={`${styles.control} ${styles.mobile}`}>
-          <button onClick={() => { handlePrev() }} aria-label='strzałka w lewo' >
-            <LeftArrow />
-          </button>
-          <button onClick={() => { handleNext() }} aria-label='strzałka w prawo' >
-            <RightArrow />
-          </button>
+          <ArrowLeft
+            onClick={() => { handlePrev() }}
+            aria-label='Poprzedni specjalista'
+          />
+          <ArrowRight
+            onClick={() => { handleNext() }}
+            aria-label='Następny specjalista'
+          />
         </div>
       </Swiper>
     </section>

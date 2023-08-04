@@ -51,7 +51,7 @@
 
       &:nth-child(1) {
         border-radius: 0px 64px;
-        background: #DEAFB8;
+        background: var(--secondary-500);
         box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
       }
 

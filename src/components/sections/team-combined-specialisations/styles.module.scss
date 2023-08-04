@@ -20,7 +20,7 @@
       margin: 0 auto;
       width: 0px;
       height: clamp(30px, calc(30vw/7.68), 60px);
-      border-left: 6px dotted #DEAFB8;
+      border-left: 6px dotted var(--secondary-500);
 
       &:last-child {
         display: none;
@@ -29,7 +29,7 @@
 
     >div {
       border-radius: 20px;
-      border: 1px solid var(--secondary-500, #DEAFB8);
+      border: 1px solid var(--secondary-500, var(--secondary-500));
       background: #FFF;
       padding: clamp(22px, calc(26vw/7.68), 46px) clamp(20px, calc(28vw/7.68), 48px) clamp(24px, calc(28vw/7.68), 48px) clamp(20px, calc(28vw/7.68), 48px);
       box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);

@@ -66,7 +66,9 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.content}>
-        <Logo className={styles.logo} />
+        <Link href="/" aria-label="Strona główna">
+          <Logo className={styles.logo} />
+        </Link>
         <div className={styles.links}>
           {urlSystem.map((item, index) => (
             <div key={index} className={styles.link_wrap}>
@@ -92,7 +94,7 @@ export default function Footer() {
           <Link className={styles.link} href='/regulamin'>Regulamin</Link>
           <Link className={styles.link} href='/polityka-prywatnosci'>Polityka prywatności</Link>
         </div>
-        <div className={styles.flex}>
+        <div className={`${styles.flex} ${styles.social}`}>
           <a href="https://www.instagram.com/psychodietmed/" aria-label="instagram">
             <Instagram />
           </a>

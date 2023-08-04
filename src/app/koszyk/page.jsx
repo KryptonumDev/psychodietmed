@@ -13,7 +13,7 @@ export default async function Cart() {
   const { products } = await getData()
 
   return (
-    <main>
+    <main id="main">
       <Content/>
       <Slider products={products}/>
     </main>

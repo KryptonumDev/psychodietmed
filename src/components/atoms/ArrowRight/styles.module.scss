@@ -1,0 +1,39 @@
+.button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-50);
+    border-radius: inherit;
+    z-index: -1;
+    transition: transform .4s, opacity .4s;
+    transition-timing-function: var(--easing);
+    transform: scale(.6);
+    opacity: 0;
+  }
+
+  svg {
+    transition: transform .4s var(--easing);
+  }
+
+  &:active {
+    svg {
+      transform: scale(.9);
+    }
+  }
+
+  &:hover {
+    &::before {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}

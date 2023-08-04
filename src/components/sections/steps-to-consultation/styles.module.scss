@@ -36,7 +36,7 @@
   font-size: clamp(32rem, calc(32vw/7.68), 48rem);
   line-height: 124%;
   font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
-  color: #DEAFB8;
+  color: var(--secondary-500);
   pointer-events: none;
 
   @media (max-width: 370px) {
@@ -64,7 +64,6 @@
   .item {
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
-
     summary {
       padding: 28px clamp(16px, calc(28vw/7.68), 56px) clamp(16px, calc(16vw/7.68), 28px) clamp(16px, calc(28vw/7.68), 56px);
       border-radius: 20px;
@@ -97,40 +96,54 @@
 
   .persons {
     margin-top: 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-
     .person {
       cursor: pointer;
       display: grid;
+      grid-template-columns: 160px 1fr auto;
+      @media (max-width: 549px){
+        grid-template-columns: 1fr auto;
+        .avatar {
+          grid-column: 3/1;
+        }
+      }
       align-items: center;
-      gap: 16px;
-      max-width: 240px;
       width: 100%;
-      background-color: transparent;
-      border: none;
-
+      gap: 8px;
+      text-align: left;
+      transition: transform .4s var(--easing), background-color .4s;
+      border-radius: 20px;
+      .copy {
+        padding: 16px 0 16px 16px;
+      }
+      &:not(:last-child){
+        margin-bottom: 13px;
+      }
+      &:active {
+        transform: scale(.98);
+      }
+      &:hover {
+        background-color: var(--primary-50);
+        svg {
+          transform: translateX(8px) scale(.9);
+        }
+      }
+      svg {
+        transition: transform .4s var(--easing);
+        margin-right: 13px;
+      }
       .avatar {
         width: 100% !important;
         height: auto !important;
-
-        img {
-          border-radius: 20px;
-        }
+        border-radius: 20px;
+        border: 1px solid var(--primary-50);
+        overflow: hidden;
       }
-
       .name {
         color: #194574;
       }
-
       .profession {
         margin-top: 0;
-        font-size: clamp(14rem, calc(16vw/7.68), 20rem);
-
-        @media (max-width: 370px) {
-          font-size: clamp(0rem, calc(14vw/3.7), 14rem);
-        }
+        font-size: clamp(14rem, calc(16vw/7.68), 18rem);
       }
     }
   }
@@ -138,9 +151,8 @@
   .buttons {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: clamp(6px, calc(12vw/7.68), 12px);
     margin-top: 24px;
- 
     button {
       padding: 10px clamp(12px, calc(16vw/7.68), 22px) 10px clamp(12px, calc(16vw/7.68), 22px);
       font-weight: 500;
@@ -150,11 +162,13 @@
       border: 2px solid #194574;
       border-radius: 50px;
       background-color: transparent;
-
+      transition: background-color .4s;
+      &:hover {
+        background-color: var(--primary-50);
+      }
       @media (max-width: 370px) {
         font-size: clamp(0rem, calc(14vw/3.7), 14rem);
       }
-
       &.active {
         background-color: #194574;
         color: #fff;

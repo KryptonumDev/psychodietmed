@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Image } from "@/components/atoms/image";
 import styles from "./styles.module.scss";
 import { RightArrow } from "../../../assets/small-right-arrow";
+import Button from "@/components/atoms/button";
 
 export default function Card({ onClick = () => { }, short = false, data: { specialisations, proffesional, slug, title } }) {
   return (
@@ -27,8 +28,8 @@ export default function Card({ onClick = () => { }, short = false, data: { speci
       {!short && (
         <div className={styles.bottom_inform}>
           <div className={styles.flex}>
-            <Link className="link" href={`/umow-sie`}>Umów wizytę</Link>
-            <Link className={styles.link} href={`/specjalisci/${slug}`}>Więcej terminów <RightArrow /></Link>
+            <Button href='/umow-sie'>Umów wizytę</Button>
+            <Button theme="secondary" href={`/zespol/${slug}`}>Więcej terminów</Button>
           </div>
         </div>
       )}

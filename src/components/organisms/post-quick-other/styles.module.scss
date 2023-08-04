@@ -11,7 +11,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      color: #181818;
+      color: var(--neutrals-800);
       font-size: clamp(14rem, calc(20vw/7.68), 24rem);
       margin-bottom: 12px;
 

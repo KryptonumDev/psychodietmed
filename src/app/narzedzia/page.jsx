@@ -14,7 +14,7 @@ export async function generateMetadata() {
 export default async function Media() {
   const { data } = await getData()
   return (
-    <main>
+    <main id="main">
       <Hero data={data.tools.heroTools} />
       <Justification data={data.tools.justificationTools}/>
       <Grid data={data.tools.gridTools}/>

@@ -127,7 +127,7 @@
         a {
           font-weight: 700;
           text-decoration: underline;
-          color: #181818;
+          color: var(--neutrals-800);
         }
       }
 
@@ -140,7 +140,7 @@
         display: block;
         width: 34px;
         height: 34px;
-        border: 2px solid #DEAFB8;  
+        border: 2px solid var(--secondary-500);  
         border-radius: 5px;
         position: relative;
 

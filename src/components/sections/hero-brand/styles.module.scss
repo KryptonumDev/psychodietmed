@@ -70,7 +70,7 @@
     top: 24px;
     z-index: 3;
     border-radius: 20px 20px 0px 20px;
-    background: var(--secondary-500, #DEAFB8);
+    background: var(--secondary-500, var(--secondary-500));
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
     width: clamp(54px, calc(64vw/7.68), 75px);
     height: clamp(54px, calc(64vw/7.68), 75px);

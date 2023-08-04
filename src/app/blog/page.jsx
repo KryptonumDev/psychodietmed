@@ -25,7 +25,7 @@ export default async function Blog({ searchParams }) {
   const { categories, hero, posts, newPosts, postsTotalCount } = await getData(searchParams.strona)
 
   return (
-    <main>
+    <main id="main">
       <Hero data={hero} posts={newPosts} />
       <Content categories={categories} page={searchParams.strona} data={posts} totalCount={postsTotalCount} />
     </main>

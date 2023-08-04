@@ -18,7 +18,7 @@ export default async function Post({ params }) {
   const { data, global } = await getData(params)
   return (
     <>
-      <main className="overflow">
+      <main className="overflow" id="main">
         <Hero data={data.tool.heroTool}/>
         <Flex data={data.tool.twoColumnFlexTool}/>
         <Grid data={data.tool.gridTool}/>
