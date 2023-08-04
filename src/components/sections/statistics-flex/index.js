@@ -67,7 +67,7 @@ export default function StatisticsFlex({ data }) {
           <div className={styles.counters}>
             {counters.map((counter, index) => (
               <div className={styles.counterItem} key={index}>
-                <span dangerouslySetInnerHTML={{ __html: counter.number.replace(/(\d+)/, '<span class="counter">$1</span>')}}>
+                <span dangerouslySetInnerHTML={{ __html: counter.number.replace(/(\d[\d\s]*)/g, '<span class="counter">$1</span>')}}>
                 </span>
                 <p>{counter.text}</p>
               </div>

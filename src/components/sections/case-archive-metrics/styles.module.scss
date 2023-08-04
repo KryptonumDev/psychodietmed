@@ -39,7 +39,6 @@
     @media (max-width: 340px) {
       width: 118px;
     }
-
     p {
       color: #194574;
       font-size: clamp(16rem, calc(24vw/7.68), 32rem);
@@ -54,6 +53,7 @@
       line-height: 124%;
       display: block;
       margin-bottom: 8px;
+      color: inherit;
 
       @media (max-width: 370px) {
         font-size: clamp(0rem, calc(24vw/3.7), 24rem);
@@ -90,35 +90,25 @@
 .graph {
   --size: clamp(96px, calc(150vw/7.68), 231px);
   --border: clamp(6px, calc(12vw/7.68), 18px);
-  margin: 0 auto 21px auto;
-  width: var(--size);
-  aspect-ratio: 1;
-  display: inline-grid;
   position: relative;
-  place-content: center;
-  border-radius: 50%;
-  animation: fillGraph 2s ease-in-out forwards;
-  font-size: clamp(24rem, calc(36vw/7.68), 48rem);
-
-  @media (max-width: 370px) {
-    font-size: clamp(0rem, calc(24vw/3.7), 24rem);
+  width: var(--size);
+  height: var(--size);
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  strong {
+    margin-bottom: 0 !important;
   }
-
-  border: var(--border) solid #FCF7F8;
-  color: #194574;
-
-  &::before,
-  &::after {
-    content: "";
+  .svg {
+    transform: rotate(-90deg);
+    padding: 9px;
+    overflow: visible;
     position: absolute;
-    border-radius: 50%;
-  }
-
-  &::before {
-    inset: calc(-1 * var(--border));
-    background:
-      conic-gradient(var(--secondary-500) calc(96 *1%), #0000 0);
-    -webkit-mask: radial-gradient(farthest-side, #0000 calc(99% - var(--border)), #000 calc(100% - var(--border)));
-    mask: radial-gradient(farthest-side, #0000 calc(99% - var(--border)), #000 calc(100% - var(--border)));
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    margin-top: 0 !important;
   }
 }
