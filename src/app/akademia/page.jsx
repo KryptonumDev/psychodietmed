@@ -7,7 +7,7 @@ import Recruitment from "@/components/sections/team-recruitment";
 // import { cookies } from "next/headers";
 
 export async function generateMetadata() {
-  return await generetaSeo('cG9zdDoxODY4', '/akademia', GET_SEO_PAGE)
+  return await generetaSeo('cG9zdDoyMDM3', '/akademia', GET_SEO_PAGE)
 }
 
 export default async function Courses() {
