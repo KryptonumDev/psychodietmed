@@ -6,6 +6,7 @@ import Header from '@/components/sections/header'
 import Footer from '@/components/sections/footer'
 import { AppProvider } from '../context/app-context'
 import SubHeader from '@/components/sections/mobile-sub-header'
+import GlobalScript from '../utils/global.js';
 // import { ToastContainer } from 'react-toastify'
 
 const Satoshi = localFont({
@@ -33,7 +34,6 @@ export const metadata = {
 export const dynamic = 'force-dynamic' 
 
 export default function RootLayout({ children }) {
-
   return (
     <html lang="pl">
       <AppProvider>
@@ -44,6 +44,7 @@ export default function RootLayout({ children }) {
           <Footer />
         </body>
       </AppProvider>
+      <GlobalScript />
       {/* <ToastContainer className='Toaster' /> */}
     </html>
   )
