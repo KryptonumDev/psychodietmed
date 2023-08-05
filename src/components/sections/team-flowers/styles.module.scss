@@ -34,7 +34,7 @@
 
       &:nth-child(4) {
         border-radius: 0px 64px;
-        background: #194574;
+        background: var(--primary-800);
         box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
         color: #FFFEFE;
       }
@@ -109,7 +109,7 @@
     margin: 0 auto;
 
     * {
-      color: #194574;
+      color: var(--primary-800);
       font-size: clamp(20rem, calc(28vw/7.68), 36rem);
 
       @media (max-width: 370px) {

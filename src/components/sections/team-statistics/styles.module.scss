@@ -64,7 +64,7 @@
 
       span {
         font-size: clamp(24rem, calc(36vw/7.68), 48rem);
-        color: #194574;
+        color: var(--primary-800);
       }
 
       p {

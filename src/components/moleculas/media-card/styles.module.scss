@@ -15,7 +15,7 @@
 
   .title {
     font-size: clamp(24rem, calc(28vw/7.68), 36rem);
-    color: #194574;
+    color: var(--primary-800);
 
     @media (max-width: 370px) {
       font-size: clamp(0rem, calc(24vw/3.7), 24rem);

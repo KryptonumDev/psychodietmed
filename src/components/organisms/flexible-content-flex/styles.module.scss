@@ -18,7 +18,7 @@
         background: #F1F6FB;
         box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
         display: block;
-        color: #194574;
+        color: var(--primary-800);
         font-size: clamp(24rem, calc(28vw/7.68), 32rem);
         font-weight: 500;
         line-height: 124%;
@@ -61,7 +61,7 @@
       }
 
       a {
-        color: #194574;
+        color: var(--primary-800);
         text-decoration: underline;
         font-weight: 700;
       }
@@ -69,7 +69,7 @@
       strong {
         font-weight: 500;
         font-size: clamp(20rem, calc(24vw/7.68), 32rem);
-        color: #194574;
+        color: var(--primary-800);
 
         @media (max-width: 370px) {
           font-size: clamp(0rem, calc(20vw / 3.7), 20rem);

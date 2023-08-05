@@ -31,6 +31,7 @@ export default function Pagination({ changePage, currentPage, itemCount, PAGE_IT
             ? currentPage - 1
             : 1)
         }}
+        aria-label="Poprzednia strona"
         className={`${styles.left} ${styles.arrow}`}
       />
       <div className={styles.center}>
@@ -104,6 +105,7 @@ export default function Pagination({ changePage, currentPage, itemCount, PAGE_IT
             ? currentPage + 1
             : pagesCount)
         }}
+        aria-label="Następna strona"
         className={`${styles.right} ${styles.arrow}`}
       />
     </div>

@@ -56,7 +56,7 @@
           width: 3px;
           transform: translateX(-50%);
           border-radius: 4px;
-          background-color: #194574;
+          background-color: var(--primary-800);
           transform-origin: 50% 50%;
           transition: all .3s cubic-bezier(0.77, 0, 0.175, 1);
         }
@@ -70,7 +70,7 @@
           height: 3px;
           transform: translateY(-50%);
           border-radius: 4px;
-          background-color: #194574;
+          background-color: var(--primary-800);
         }
       }
 
@@ -82,7 +82,7 @@
         display: flex;
         align-items: center;
         gap: 4px;
-        color: #194574;
+        color: var(--primary-800);
 
         @media (max-width: 370px) {
           font-size: clamp(0rem, calc(16vw/3.7), 16rem);
@@ -109,15 +109,15 @@
 
         .illnes {
           border-radius: 50px;
-          border: 2px solid #194574;
+          border: 2px solid var(--primary-800);
           background: #FFF;
           padding: 10px clamp(12px, calc(16vw/7.68), 22px) 12px clamp(12px, calc(16vw/7.68), 22px);
-          color: #194574;
+          color: var(--primary-800);
           font-weight: 500;
           font-size: clamp(14rem, calc(16vw/7.68), 20rem);
 
           &.active{
-            background: #194574;
+            background: var(--primary-800);
             color: #FFF;
           }
 
@@ -140,7 +140,7 @@
           display: flex;
           align-items: center;
           gap: 6px;
-          color: #194574;
+          color: var(--primary-800);
           font-size: clamp(16rem, calc(20vw/7.68), 20rem);
 
           @media (max-width: 370px) {

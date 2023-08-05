@@ -24,7 +24,7 @@ export default function Control({ className = '', activeIndex, items }) {
 
   return (
     <div className={`${styles.control}`} >
-      <ArrowLeft onClick={handlePrev} />
+      <ArrowLeft onClick={handlePrev} aria-label="Przesuń w lewą" />
       <div className={`${styles.dots} ${className}`}>
         {items.map((el, index) => (
           <button
@@ -34,7 +34,7 @@ export default function Control({ className = '', activeIndex, items }) {
           />
         ))}
       </div>
-      <ArrowRight onClick={handleNext} />
+      <ArrowRight onClick={handleNext} aria-label="Przesuń w prawo"  />
     </div >
   )
 }

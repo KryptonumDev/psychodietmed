@@ -19,7 +19,7 @@
     justify-content: space-between;
     align-items: center;
     font-size: clamp(16rem, calc(16vw/7.68), 24rem);
-    color: #194574;
+    color: var(--primary-800);
 
     strong {
       color: var(--neutrals-800);
@@ -78,7 +78,7 @@
 
       h4 {
         font-size: clamp(16rem, calc(20vw/7.68), 24rem);
-        color: #194574;
+        color: var(--primary-800);
         font-weight: 500;
         margin-bottom: clamp(20px, calc(28vw/7.68), 28px);
       }
@@ -113,7 +113,7 @@
         }
 
         .price {
-          color: #194574;
+          color: var(--primary-800);
           display: flex;
           align-items: center;
           gap: 8px;

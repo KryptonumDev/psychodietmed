@@ -38,7 +38,7 @@ export default function StepsToConsultation({ data, specialists }) {
         <div className={styles.sub_grid}>
           <details open={step === 1} className={styles.item}>
             <summary onClick={(e) => { detailsClickHandler(e, 1) }}  className={styles.step_flex}>
-              <div className={styles.step_number}>01</div>
+              <span className={styles.step_number}>01</span>
               <h3 className={styles.step_title}>{titleFirst}</h3>
             </summary>
             <AnimatePresence mode="wait" initial={false}>
@@ -71,7 +71,7 @@ export default function StepsToConsultation({ data, specialists }) {
           </details>
           <details open={step === 2} className={styles.item}>
             <summary onClick={(e) => { detailsClickHandler(e, 2) }}  className={styles.step_flex}>
-              <div className={styles.step_number}>02</div>
+              <span className={styles.step_number}>02</span>
               <h3 className={styles.step_title}>{titleSecond}</h3>
             </summary>
             <AnimatePresence mode="wait" initial={false}>
@@ -112,7 +112,7 @@ export default function StepsToConsultation({ data, specialists }) {
           </details>
           <details open={step === 3} className={styles.item}>
             <summary onClick={(e) => { detailsClickHandler(e, 3) }} className={styles.step_flex}>
-              <div className={styles.step_number}>03</div>
+              <span className={styles.step_number}>03</span>
               <h3 className={styles.step_title}>{titleThird}</h3>
             </summary>
             <AnimatePresence mode="wait" initial={false}>

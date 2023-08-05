@@ -1,7 +1,7 @@
 .category {
   padding: 10px clamp(12px, calc(16vw/7.68), 16px) 12px clamp(12px, calc(16vw/7.68), 16px);
-  color: #194574;
-  border: 2px solid #194574;
+  color: var(--primary-800);
+  border: 2px solid var(--primary-800);
   border-radius: 50px;
   position: relative;
   z-index: 4;
@@ -12,7 +12,7 @@
   transition: all .3s cubic-bezier(0.77, 0, 0.175, 1);
 
   &.active{
-    background-color: #194574;
+    background-color: var(--primary-800);
     color: #fff;
   }
 

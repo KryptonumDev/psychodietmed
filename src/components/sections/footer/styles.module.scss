@@ -30,7 +30,7 @@
     font-weight: 500;
     font-size: 20px;
     letter-spacing: -0.01em;
-    color: #194574;
+    color: var(--primary-800);
 
     @media (max-width: 480px) {
       line-height: 140%;
@@ -106,7 +106,7 @@
         &:first-child {
           font-size: clamp(20rem, calc(24vw/7.68), 32rem);
           line-height: 200%;
-          color: #194574;
+          color: var(--primary-800);
 
           @media (max-width: 370px) {
             font-size: clamp(0rem, calc(20vw/3.7), 20rem);

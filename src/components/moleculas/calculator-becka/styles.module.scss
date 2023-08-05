@@ -37,7 +37,7 @@
         }
 
         span {
-          color: #194574;
+          color: var(--primary-800);
           font-size: clamp(22rem, calc(28vw/7.68), 36rem);
 
           @media (max-width: 370px) {
@@ -62,7 +62,7 @@
     }
 
     span {
-      color: #194574;
+      color: var(--primary-800);
       font-size: clamp(16rem, calc(16vw/7.68), 24rem);
       font-weight: 700;
       font-variant-numeric: lining-nums proportional-nums ordinal;
@@ -161,7 +161,7 @@
 
         p {
           margin-top: 2px;
-          color: #194574;
+          color: var(--primary-800);
           font-size: clamp(14rem, calc(14vw/7.68), 20rem);
           
           @media (max-width: 370px) {

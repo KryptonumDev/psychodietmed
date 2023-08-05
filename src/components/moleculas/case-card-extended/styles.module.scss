@@ -71,7 +71,7 @@
       display: flex;
       gap: 12px;
       font-weight: 500;
-      color: #194574;
+      color: var(--primary-800);
       margin-top: 16px;
       font-size: clamp(14rem, calc(16vw/7.68), 20rem);
   
@@ -109,7 +109,7 @@
     font-size: clamp(28rem, calc(36vw/7.68), 48rem);
     line-height: 124%;
     font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
-    color: #194574;
+    color: var(--primary-800);
     padding-bottom: 80px;
     width: fit-content;
 
@@ -130,7 +130,7 @@
     }
 
     .differences_title{
-      color: #194574;
+      color: var(--primary-800);
       font-size: clamp(14rem, calc(16vw/7.68), 20rem);
   
       @media (max-width: 370px) {
@@ -153,7 +153,7 @@
 
   .slideLink {
     height: fit-content;
-    color: #194574;
+    color: var(--primary-800);
     display: flex;
     gap: 6px;
     align-items: center;
@@ -218,7 +218,7 @@
     .slideAuthorName {
       line-height: 124%;
       font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
-      color: #194574;
+      color: var(--primary-800);
       font-size: clamp(20rem, calc(24vw/7.68), 32rem);
 
       @media (max-width: 370px) {

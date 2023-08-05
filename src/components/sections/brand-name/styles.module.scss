@@ -6,7 +6,7 @@
     margin-bottom: clamp(20px, calc(28vw/7.68), 28px);
     p {
       font-size: 16rem;
-      color: #194574;
+      color: var(--primary-800);
       @media (max-width: 370px) {
         font-size: clamp(0rem, calc(16vw/3.7), 16rem);
       }
@@ -32,7 +32,7 @@
 
     span {
       font-size: clamp(36rem, calc(40vw/7.68), 64rem);
-      color: #194574;
+      color: var(--primary-800);
       position: relative;
       cursor: pointer;
 
@@ -121,7 +121,7 @@
         strong {
           display: block;
           margin-bottom: 24px;
-          color: #194574;
+          color: var(--primary-800);
           font-size: clamp(24rem, calc(28vw/7.68), 32rem);
           font-weight: 500;
           line-height: 124%;

@@ -72,7 +72,7 @@
     font-size: clamp(28rem, calc(36vw/7.68), 48rem);
     line-height: 124%;
     font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
-    color: #194574;
+    color: var(--primary-800);
     padding-bottom: 80px;
 
     @media (max-width: 380px) {
@@ -87,7 +87,7 @@
   .slideLink {
     grid-area: link;
     height: fit-content;
-    color: #194574;
+    color: var(--primary-800);
     display: flex;
     gap: 6px;
     align-items: center;
@@ -144,7 +144,7 @@
       font-size: clamp(20rem, calc(24vw/7.68), 32rem);
       line-height: 124%;
       font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
-      color: #194574;
+      color: var(--primary-800);
     }
 
     .slideAuthorImage {

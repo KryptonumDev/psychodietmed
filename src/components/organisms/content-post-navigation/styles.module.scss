@@ -22,7 +22,7 @@
   }
 
   .author_name {
-    color: #194574;
+    color: var(--primary-800);
     font-weight: 500;
     font-size: clamp(24rem, calc(28vw/7.68), 32rem);
     text-align: center;
@@ -72,7 +72,7 @@
         min-width: 32px;
         display: block;
         padding-right: 8px;
-        color: #194574;
+        color: var(--primary-800);
         font-size: clamp(16rem, calc(16vw/7.68), 20rem);
         font-weight: 500;
 

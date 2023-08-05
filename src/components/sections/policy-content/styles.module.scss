@@ -51,7 +51,7 @@
           left: 0;
           right: 0;
           height: 3px;
-          background: #194574;
+          background: var(--primary-800);
           border-radius: 5px;
         }
 
@@ -62,7 +62,7 @@
           bottom: 0;
           left: calc(50% - 1.5px);
           width: 3px;
-          background: #194574;
+          background: var(--primary-800);
           border-radius: 5px;
           transform-origin: 50% 50%;
           transition: all .25s cubic-bezier(0.785, 0.135, 0.15, 0.86);
@@ -80,7 +80,7 @@
 
       a {
         font-weight: 700;
-        color: #194574;
+        color: var(--primary-800);
         text-decoration: underline;
         text-decoration-thickness: 2px;
       }
