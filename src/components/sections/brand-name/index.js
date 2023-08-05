@@ -19,7 +19,7 @@ export default function Name({ data: { image, title, text, signature, psycho, di
         <p>Najedź, aby dowiedzieć się więcej</p>
       </div>
       <div className={styles.name}>
-        <span>
+        <span tabIndex="0">
           Psycho
           <div className={styles.description} >
             <div className={styles.icon}>
@@ -29,7 +29,7 @@ export default function Name({ data: { image, title, text, signature, psycho, di
           </div>
         </span>
         <NameDivider />
-        <span>
+        <span tabIndex="0">
           Diet
           <div className={styles.description} >
             <div className={styles.icon}>
@@ -39,7 +39,7 @@ export default function Name({ data: { image, title, text, signature, psycho, di
           </div>
         </span>
         <NameDivider />
-        <span>
+        <span tabIndex="0">
           Med
           <div className={styles.description} >
             <div className={styles.icon}>
