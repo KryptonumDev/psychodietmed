@@ -13,7 +13,7 @@ export async function generateMetadata() {
 }
 
 export default async function Courses() {
-  const authToken = cookies().get('authToken').value
+  const authToken = cookies().get('authToken')?.value
   const { user } = await getUser(authToken)
 
   if (user?.username) redirect('/moje-kursy')
