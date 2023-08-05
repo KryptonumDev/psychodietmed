@@ -5,6 +5,7 @@ import { GET_SEO_PAGE } from "../../queries/page-seo";
 import { cookies } from 'next/headers'
 import Controller from "@/components/sections/my-courses-controller";
 import { notFound, redirect } from "next/navigation";
+import Breadcrumbs from "@/components/sections/breadcrumbs";
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDoxOTAz', '/moje-kursy', GET_SEO_PAGE)
@@ -20,14 +21,14 @@ export default async function Courses() {
 
   return (
     <main className="overflow">
+      <Breadcrumbs data={[{ page: 'Moje kursy', url: `/moje-kursy` }]} />
       <Controller user={user} cta={data?.callToActionCourses} />
     </main>
   )
 }
 
-async function getUser() {
+async function getUser(authToken) {
   try {
-
     const { data: { viewer } } = await client.query({
       query: gql`
       query Viewer {
@@ -63,8 +64,8 @@ async function getUser() {
         }
       }
     })
-    
-    if(!viewer?.username) redirect('/logowanie')
+
+    if (!viewer?.username) redirect('/logowanie')
 
     return {
       user: viewer

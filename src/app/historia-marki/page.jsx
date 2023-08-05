@@ -14,6 +14,7 @@ import CallToAction from "@/components/sections/brand-cta"
 import TwoColumnFlexWithGrid from "@/components/sections/brand-flex-and-grid"
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
+import Breadcrumbs from "@/components/sections/breadcrumbs"
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDoxMDc1', '/historia-marki', GET_SEO_PAGE)
@@ -23,17 +24,18 @@ export default async function Archive() {
   const { data, metrics, newsletter, posts, blog } = await getData()
   return (
     <main id="main">
+      <Breadcrumbs data={[{ page: 'Historia marki', url: `/historia-marki` }]} />
       <Hero data={data.brandHistory.heroBrand} />
       <History data={data.brandHistory.historyBrand} />
-      <Name data={data.brandHistory.nameBrand}/>
-      <TwoColumnFlexMultiText data={data.brandHistory.flexBrand}/>
-      <TwoColumnFlexMultiImages data={data.brandHistory.flexImagesBrand}/>
-      <TwoColumnFlex data={data.brandHistory.missionBrand}/>
-      <Metrics data={metrics}/>
-      <CallToAction data={data.brandHistory.callToActionBrand}/>
-      <TwoColumnFlexWithGrid data={data.brandHistory.flexSecondBrand}/>
-      <Newsletter data={newsletter}/>
-      <OtherPosts data={posts} title={blog.title} text={blog.text}/>
+      <Name data={data.brandHistory.nameBrand} />
+      <TwoColumnFlexMultiText data={data.brandHistory.flexBrand} />
+      <TwoColumnFlexMultiImages data={data.brandHistory.flexImagesBrand} />
+      <TwoColumnFlex data={data.brandHistory.missionBrand} />
+      <Metrics data={metrics} />
+      <CallToAction data={data.brandHistory.callToActionBrand} />
+      <TwoColumnFlexWithGrid data={data.brandHistory.flexSecondBrand} />
+      <Newsletter data={newsletter} />
+      <OtherPosts data={posts} title={blog.title} text={blog.text} />
     </main>
   )
 }

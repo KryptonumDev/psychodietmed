@@ -9,6 +9,7 @@ import Warning from "@/components/sections/tool-warning"
 import CallToAction from "@/components/sections/tool-cta"
 import { generetaSeo } from "../../../utils/genereate-seo"
 import { GET_SEO_TOOL } from "../../../queries/tool-seo"
+import Breadcrumbs from "@/components/sections/breadcrumbs"
 
 export async function generateMetadata({ params }) {
   return await generetaSeo(params.tool, '/narzedzia', GET_SEO_TOOL, 'post')
@@ -19,12 +20,13 @@ export default async function Post({ params }) {
   return (
     <>
       <main className="overflow" id="main">
-        <Hero data={data.tool.heroTool}/>
-        <Flex data={data.tool.twoColumnFlexTool}/>
-        <Grid data={data.tool.gridTool}/>
-        <FlexAlt data={data.tool.twoColumnFlexAltTool}/>
-        <Warning data={data.tool.alertTool}/>
-        <CallToAction data={global.global.callToActionGlobal}/>
+        <Breadcrumbs data={[{ page: 'Narzędzia', url: `/narzedzia` }, { page: data.title, url: `/narzedzia/${params.tool}` }]} />
+        <Hero data={data.tool.heroTool} />
+        <Flex data={data.tool.twoColumnFlexTool} />
+        <Grid data={data.tool.gridTool} />
+        <FlexAlt data={data.tool.twoColumnFlexAltTool} />
+        <Warning data={data.tool.alertTool} />
+        <CallToAction data={global.global.callToActionGlobal} />
       </main>
     </>
   )
@@ -58,6 +60,7 @@ async function getData(params) {
         }
         narzedzie(id: $uri, idType: URI) {
           id
+          title
           tool {
             heroTool {
               title

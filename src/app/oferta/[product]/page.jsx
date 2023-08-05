@@ -8,6 +8,7 @@ import ImportantInformation from "@/components/sections/product-important-inform
 import Hero from "@/components/sections/hero-product"
 import { generetaSeo } from "../../../utils/genereate-seo"
 import { GET_SEO_PRODUCT } from "../../../queries/product-seo"
+import Breadcrumbs from "@/components/sections/breadcrumbs"
 
 export async function generateMetadata({ params }) {
   return await generetaSeo(params.product, '/akademia', GET_SEO_PRODUCT, 'post')
@@ -17,6 +18,7 @@ export default async function Post({ params }) {
   const { data, global, specialists } = await getData(params)
   return (
     <main id="main">
+      <Breadcrumbs data={[{ page: 'Sklep', url: `/oferta` }, { page: data.title, url: `/oferta/${params.product}` }]} />
       <Hero data={data} />
       <FlexibleContent productId={data.productId} data={data.product.additionalSectionsProduct} />
       {data.product.bundleItems?.length > 0 && (

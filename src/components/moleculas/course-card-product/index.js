@@ -8,7 +8,7 @@ import { RightArrow } from "../../../assets/small-right-arrow"
 export default function Card({ data, myCourse = false }) {
   return (
     <div className={styles.wrapper}>
-      <Link className={styles.link} href={`/moje-kursy/${data.product.course.slug}`} />
+      <Link className={styles.link} href={myCourse ? `/moje-kursy/${data.product.course.slug}` : `/akademia/${data.product.course.slug}`} />
       <div>
         <Image
           className={styles.image}

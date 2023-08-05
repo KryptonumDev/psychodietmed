@@ -13,6 +13,7 @@ import Statistics from "@/components/sections/team-statistics";
 import CombinedSpecialisations from "@/components/sections/team-combined-specialisations";
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
+import Breadcrumbs from "@/components/sections/breadcrumbs";
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDoxMTc2', '/zespol', GET_SEO_PAGE)
@@ -22,6 +23,7 @@ export default async function Team() {
   const { newsletter, posts, blog, page, specialists } = await getData()
   return (
     <main className="overflow" id="main">
+      <Breadcrumbs data={[{ page: 'Zespół', url: '/zespol' }]} />
       <Hero data={page.team.heroTeam} />
       <Slider data={page.team.sliderTeam} />
       <Owner data={page.team.ownerTeam} />

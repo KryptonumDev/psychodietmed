@@ -6,6 +6,7 @@ import { notFound, redirect } from "next/navigation";
 import Hero from "@/components/sections/hero-course";
 import Content from "@/components/sections/course-content";
 import { getUser } from "../../../utils/check-authorisation";
+import Breadcrumbs from "@/components/sections/breadcrumbs";
 
 // export async function generateMetadata() {
 //   return await generetaSeo('cG9zdDoxODY4', '/akademia', GET_SEO_PAGE)
@@ -34,6 +35,7 @@ export default async function Courses({ params }) {
 
   return (
     <main>
+      <Breadcrumbs data={[{ page: 'Moje kursy', url: `/moje-kursy` }, { page: course.title, url: `/moje-kursy/${params.course}` }]} />
       <Hero accessToCourse={true} lessonSlug={firstLessonSlug} slug={course.slug} title={course.title} image={course.featuredImage} time={totalTime} count={lessonsCount} />
       <Content slug={course.slug} content={course.content} chapters={course.course.chapters} author={course.course.author} />
     </main>

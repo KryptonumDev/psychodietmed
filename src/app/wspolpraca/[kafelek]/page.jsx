@@ -11,6 +11,7 @@ import TwoColumnFlex from "@/components/sections/two-column-flex"
 import CallToAction from "@/components/sections/kafelek-cta"
 import { generetaSeo } from "../../../utils/genereate-seo"
 import { GET_SEO_KAFELEK } from "../../../queries/kafelek-seo"
+import Breadcrumbs from "@/components/sections/breadcrumbs"
 
 export async function generateMetadata({ params }) {
   return await generetaSeo(params.kafelek, '/wspolpraca', GET_SEO_KAFELEK, 'post')
@@ -19,18 +20,17 @@ export async function generateMetadata({ params }) {
 export default async function Post({ params }) {
   const { data } = await getData(params)
   return (
-    <>
-      <main className="overflow" id="main">
-        <Hero data={data.acf.heroKafelek} />
-        <SliderIllnes data={data.acf.illnesSliderKafelek} />
-        <SliderSymptoms data={data.acf.symptomsSliderKafelek} />
-        <CallToActionGray data={data.acf.greyCtaKafelek} />
-        <FlexDoubled data={data.acf.flexKafelek} />
-        <Prediction data={data.acf.predictionKafelek} />
-        <TwoColumnFlex data={data.acf.flexAltKafelek}/>
-        <CallToAction data={data.acf.ctaKafelek}/>
-      </main>
-    </>
+    <main className="overflow" id="main">
+      <Breadcrumbs data={[{ page: 'Współpraca', url: '/wspolpraca' }, { page: data.title, url: `/wspolpraca/${params.kafelek}` }]} />
+      <Hero data={data.acf.heroKafelek} />
+      <SliderIllnes data={data.acf.illnesSliderKafelek} />
+      <SliderSymptoms data={data.acf.symptomsSliderKafelek} />
+      <CallToActionGray data={data.acf.greyCtaKafelek} />
+      <FlexDoubled data={data.acf.flexKafelek} />
+      <Prediction data={data.acf.predictionKafelek} />
+      <TwoColumnFlex data={data.acf.flexAltKafelek} />
+      <CallToAction data={data.acf.ctaKafelek} />
+    </main>
   )
 }
 
@@ -41,6 +41,7 @@ async function getData(params) {
       query Pages($slug: String) {
         obszarDzilaniaBy(uri: $slug){
           id
+          title
           acf : obszar_dzialania {
             heroKafelek {
               title

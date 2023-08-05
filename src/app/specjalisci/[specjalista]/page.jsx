@@ -9,6 +9,7 @@ import Specialists from "@/components/sections/specialists-slider"
 import Calendar from "@/components/sections/calendar-widget"
 import { GET_SEO_SPECIALIST } from "../../../queries/specialist-seo"
 import { generetaSeo } from "../../../utils/genereate-seo"
+import Breadcrumbs from "@/components/sections/breadcrumbs"
 
 export async function generateMetadata({ params }) {
   return await generetaSeo(params.specjalista, '/zespol', GET_SEO_SPECIALIST, 'post')
@@ -17,23 +18,22 @@ export async function generateMetadata({ params }) {
 export default async function Specjalista({ params }) {
   const { data, faq, other } = await getData(params)
   return (
-    <>
-      <main className="overflow" id="main">
-        <Hero data={data} />
-        <Flex
-          content={data.proffesional.excerpt}
-          diploms={data.proffesional.diploms}
-          courses={data.proffesional.courses}
-          certificates={data.proffesional.certificates}
-        />
-        <Calendar calendlyUrl="https://calendly.com/d/y6h-z7h-sg3/30min" />
-        {data.proffesional.reviews && (
-          <Reviews data={data.proffesional.reviews} />
-        )}
-        <Specialists data={other} title={'Podobni specjaliści'} />
-        <FAQ data={faq} />
-      </main>
-    </>
+    <main className="overflow" id="main">
+      <Breadcrumbs data={[{ page: 'Specjaliści', url: '/specjalisci' }, { page: data.title, url: `/specjalisci/${params.specjalista}` }]} />
+      <Hero data={data} />
+      <Flex
+        content={data.proffesional.excerpt}
+        diploms={data.proffesional.diploms}
+        courses={data.proffesional.courses}
+        certificates={data.proffesional.certificates}
+      />
+      <Calendar />
+      {data.proffesional.reviews && (
+        <Reviews data={data.proffesional.reviews} />
+      )}
+      <Specialists data={other} title={'Podobni specjaliści'} />
+      <FAQ data={faq} />
+    </main>
   )
 }
 

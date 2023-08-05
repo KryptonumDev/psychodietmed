@@ -4,6 +4,7 @@ import Contact from "@/components/sections/contact";
 import DigitalSlider from "@/components/sections/digital-products-slider";
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
+import Breadcrumbs from "@/components/sections/breadcrumbs";
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDo3MjQ=', '/koszyk', GET_SEO_PAGE)
@@ -14,6 +15,7 @@ export default async function Specialist() {
 
   return (
     <main id="main">
+      <Breadcrumbs data={[{ page: 'Kontakt', url: '/kontakt' }]} />
       <Contact data={form} />
       <DigitalSlider data={products} />
     </main>

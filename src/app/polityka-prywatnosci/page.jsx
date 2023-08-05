@@ -4,6 +4,7 @@ import StepsToConsultation from "@/components/sections/steps-to-consultation";
 import Content from "@/components/sections/policy-content";
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
+import Breadcrumbs from "@/components/sections/breadcrumbs";
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDoxNjQz', '/polityka-prywatnosci', GET_SEO_PAGE)
@@ -14,6 +15,7 @@ export default async function Regulamin() {
 
   return (
     <main id="main">
+      <Breadcrumbs data={[{ page: 'Polityka prywatności', url: '/polityka-prywatnosci' }]} />
       <Content data={data.policySections} />
       <StepsToConsultation data={book} specialists={specialists} />
     </main>

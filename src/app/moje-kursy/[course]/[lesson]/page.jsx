@@ -5,6 +5,7 @@ import client from "../../../../apollo/apolo-client";
 import { notFound } from "next/navigation";
 import Content from "@/components/sections/lesson-content";
 import { getUser } from "../../../../utils/check-authorisation";
+import Breadcrumbs from "@/components/sections/breadcrumbs";
 
 // export async function generateMetadata() {
 //   return await generetaSeo('cG9zdDoxODY4', '/akademia', GET_SEO_PAGE)
@@ -16,6 +17,7 @@ export default async function Courses({ params }) {
 
   return (
     <main>
+      <Breadcrumbs data={[{ page: 'Moje kursy', url: `/moje-kursy` }, { page: lesson.lesson.course.title, url: `/moje-kursy/${params.course}` }, { page: lesson.title, url: `/moje-kursy/${params.course}/${params.lesson}` }]} />
       <Content
         title={lesson.title}
         databaseId={lesson.databaseId}
@@ -43,6 +45,7 @@ async function getData(params) {
               ... on Course {
                 databaseId
                 slug
+                title
                 course {
                   chapters {
                     title

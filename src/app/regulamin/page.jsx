@@ -4,6 +4,7 @@ import Slider from "@/components/sections/products-slider";
 import Hero from "@/components/sections/hero-statute";
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
+import Breadcrumbs from "@/components/sections/breadcrumbs";
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDoxNjMw', '/regulamin', GET_SEO_PAGE)
@@ -14,6 +15,7 @@ export default async function Regulamin() {
 
   return (
     <main id="main">
+      <Breadcrumbs data={[{ page: 'Regulamin', url: '/regulamin' }]} />
       <Hero data={data.heroStatute} />
       <Slider products={products} />
     </main>

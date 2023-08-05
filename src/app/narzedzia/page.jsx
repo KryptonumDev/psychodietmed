@@ -6,6 +6,7 @@ import Grid from "@/components/sections/tools-grid"
 import Warning from "@/components/sections/tool-warning"
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
+import Breadcrumbs from "@/components/sections/breadcrumbs"
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDo5ODE=', '/narzedzie', GET_SEO_PAGE)
@@ -15,10 +16,11 @@ export default async function Media() {
   const { data } = await getData()
   return (
     <main id="main">
+      <Breadcrumbs data={[{ page: 'Narzędzia', url: `/narzedzia` }]} />
       <Hero data={data.tools.heroTools} />
-      <Justification data={data.tools.justificationTools}/>
-      <Grid data={data.tools.gridTools}/>
-      <Warning data={data.tools.alertTools}/>
+      <Justification data={data.tools.justificationTools} />
+      <Grid data={data.tools.gridTools} />
+      <Warning data={data.tools.alertTools} />
     </main>
   )
 }

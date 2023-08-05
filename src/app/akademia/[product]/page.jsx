@@ -6,6 +6,7 @@ import { notFound, redirect } from "next/navigation";
 import Hero from "@/components/sections/hero-course";
 import Content from "@/components/sections/course-content";
 import { cookies } from "next/headers";
+import Breadcrumbs from "@/components/sections/breadcrumbs";
 
 // export async function generateMetadata() {
 //   return await generetaSeo('cG9zdDoxODY4', '/akademia', GET_SEO_PAGE)
@@ -39,6 +40,7 @@ export default async function Courses({ params }) {
 
   return (
     <main>
+      <Breadcrumbs data={[{ page: 'Akademia', url: `/akademia` }, { page: product.title, url: `/akademia/${params.product}` }]} />
       <Hero lessonSlug={firstLessonSlug} slug={product.product.course.slug} databaseId={product.databaseId} title={product.product.course.title} image={product.product.course.featuredImage} time={totalTime} count={lessonsCount} />
       <Content disabled={true} slug={product.product.course.slug} content={product.product.course.content} chapters={product.product.course.course.chapters} author={product.product.course.course.author} />
     </main>

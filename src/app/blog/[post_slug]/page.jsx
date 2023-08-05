@@ -6,6 +6,7 @@ import Content from "@/components/sections/content-post"
 import OtherPosts from "@/components/sections/other-posts"
 import { generetaSeo } from "../../../utils/genereate-seo"
 import { GET_SEO_POST } from "../../../queries/post-seo"
+import Breadcrumbs from "@/components/sections/breadcrumbs"
 
 export async function generateMetadata({ params }) {
   return await generetaSeo(params.post_slug, '/blog', GET_SEO_POST, 'post')
@@ -16,6 +17,7 @@ export default async function Post({ params }) {
   return (
     <>
       <main id="main">
+        <Breadcrumbs data={[{ page: 'Blog', url: `/blog` }, { page: data.title, url: `/blog/${params.post_slug}` }]} />
         <Hero data={data} />
         <Content next={data.next} prev={data.previous} author={data.postAuthor.author} data={data.content} title={data.title} excerpt={data.excerpt} />
         <OtherPosts data={posts} />

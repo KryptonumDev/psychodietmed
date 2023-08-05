@@ -6,6 +6,7 @@ import Content from "@/components/sections/content-media"
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
 import { notFound } from "next/navigation"
+import Breadcrumbs from "@/components/sections/breadcrumbs"
 
 export async function generateMetadata({ searchParams }) {
   return await generetaSeo('cG9zdDo5MDI=', `/media${searchParams.strona ? `?strona=${searchParams.strona}` : ''}`, GET_SEO_PAGE)
@@ -15,6 +16,7 @@ export default async function Media({ searchParams }) {
   const { data, mediums, totalCount } = await getData(searchParams.strona)
   return (
     <main id="main">
+      <Breadcrumbs data={[{ page: 'Media', url: `/media` }]} />
       <Hero data={data} />
       <Content data={mediums} page={searchParams.strona} totalCount={totalCount} />
     </main>

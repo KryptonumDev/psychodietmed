@@ -12,6 +12,7 @@ import Steps from "@/components/sections/cooperate-steps";
 import DigitalSlider from "@/components/sections/digital-products-slider";
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
+import Breadcrumbs from "@/components/sections/breadcrumbs";
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDoxMzM4', '/wspolpraca', GET_SEO_PAGE)
@@ -22,6 +23,7 @@ export default async function Wspolpraca() {
 
   return (
     <main id="main">
+      <Breadcrumbs data={[{ page: 'Współpraca', url: '/wspolpraca' }]} />
       <Hero data={data.cooperate.heroCooperate} />
       <Steps data={data.cooperate.stepsCooperate} />
       <CallToAction data={data.cooperate.ctaCooperate} />

@@ -9,6 +9,7 @@ import { notFound } from "next/navigation";
 import { PAGE_ITEM_COUNT } from "../../constants/academy";
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
+import Breadcrumbs from "@/components/sections/breadcrumbs";
 
 export async function generateMetadata({ searchParams }) {
 
@@ -56,6 +57,7 @@ export default async function Shop(params) {
 
   return (
     <main>
+      <Breadcrumbs data={[{ page: 'Sklep', url: '/oferta' }]} />
       <Hero hero={data.heroAcademy} data={featured} />
       <Bundles data={bundles} />
       <Content prices={prices} orders={orders} productCategories={productCategories} defaultData={products} />

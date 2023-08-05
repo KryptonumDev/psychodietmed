@@ -1,4 +1,4 @@
-import AddToCart from "@/components/atoms/add-to-cart-button"
+// import AddToCart from "@/components/atoms/add-to-cart-button"
 import React from "react"
 import styles from "./styles.module.scss"
 import { Image } from "@/components/atoms/image"
@@ -16,7 +16,7 @@ export default function BundleContains({ productId, data }) {
             </p>
           ))}
         </div>
-        <AddToCart product={{ productId: productId }} />
+        {/* <AddToCart product={{ productId: productId }} /> */}
       </div>
       <Image className={styles.image} src={ImageSRC} alt='Obrazek dokarycyjny' width={547} height={487} />
     </section>

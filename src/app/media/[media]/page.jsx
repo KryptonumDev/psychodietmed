@@ -9,6 +9,7 @@ import Contact from "@/components/sections/medium-contact"
 import Interview from "@/components/sections/media-interview"
 import { generetaSeo } from "../../../utils/genereate-seo"
 import { GET_SEO_MEDIA } from "../../../queries/media-seo"
+import Breadcrumbs from "@/components/sections/breadcrumbs"
 
 export async function generateMetadata({ params }) {
   return await generetaSeo(params.media, '/media', GET_SEO_MEDIA, 'post')
@@ -19,6 +20,7 @@ export default async function Post({ params }) {
   return (
     <>
       <main id="main">
+        <Breadcrumbs data={[{ page: 'Media', url: `/media` }, { page: data.title, url: `/media/${params.tool}` }]} />
         <Hero title={data.title} excerpt={data.content} dateGmt={data.dateGmt} image={data.featuredImage.node} />
         {data.media?.twoColumnFlexMedia?.image && (
           <Flex data={data.media.twoColumnFlexMedia} />
