@@ -108,7 +108,7 @@ async function getData(params) {
       variables: {
         slug: params.post_slug,
       }
-    }, { pollInterval: 500 })
+    })
 
     if (!postBy.id)
       notFound()

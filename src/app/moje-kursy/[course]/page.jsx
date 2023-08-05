@@ -103,7 +103,7 @@ async function getData(params) {
       variables: {
         id: params.course
       }
-    }, { pollInterval: 500 })
+    })
 
     if (!course?.id) notFound()
 

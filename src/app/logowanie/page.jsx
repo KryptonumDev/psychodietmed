@@ -12,7 +12,8 @@ export async function generateMetadata() {
 }
 
 export default async function Courses() {
-  const { user } = await getUser()
+  const authToken = cookies().get('authToken').value
+  const { user } = await getUser(authToken)
 
   if (user?.username) redirect('/moje-kursy')
 
@@ -24,10 +25,8 @@ export default async function Courses() {
   )
 }
 
-async function getUser() {
+async function getUser(authToken) {
   try {
-    const authToken = cookies().get('authToken').value
-
     const { data: { viewer } } = await client.query({
       query: gql`
       query Viewer {
@@ -41,7 +40,7 @@ async function getUser() {
           "Authorization": `Bearer ${authToken}`
         }
       }
-    }, { pollInterval: 500 })
+    })
     return { user: viewer }
   } catch (error) {
     console.log('error', error)

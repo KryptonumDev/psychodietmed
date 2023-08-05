@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.14",
-    "@mailerlite/mailerlite-nodejs": "^1.0.1",
+    "@ingameltd/node-przelewy24": "^2.1.0",
+    "@mailerlite/mailerlite-nodejs": "^1.1.0",
     "axios": "^1.4.0",
     "eslint": "^8.41.0",
     "eslint-config-next": "^13.4.3",
@@ -21,7 +22,6 @@
     "lodash": "^4.17.21",
     "next": "^13.4.4",
     "react": "^18.2.0",
-    "react-calendly": "^4.1.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.44.3",
     "react-select": "^5.7.3",

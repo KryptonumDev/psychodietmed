@@ -55,7 +55,7 @@ async function getData(params) {
       variables: {
         id: params.course,
       }
-    }, { pollInterval: 500 })
+    })
 
     if (!course.databaseId) notFound()
 

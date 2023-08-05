@@ -24,7 +24,7 @@ export default function Hero({ data: { title, specialisations, proffesional: { p
         <div className={styles.specialisations}>
           <p>Specjalizuję się w:</p>
           <div>
-            {specialisations?.map(el => (
+            {specialisations?.nodes?.map(el => (
               <span key={el.title}>
                 {el.title}
               </span>

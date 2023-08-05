@@ -134,7 +134,7 @@ async function getData(params) {
       variables: {
         uri: `${params.media}`,
       }
-    }, { pollInterval: 500 })
+    })
 
     if (!medium.id)
       notFound()

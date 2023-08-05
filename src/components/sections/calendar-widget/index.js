@@ -1,6 +1,4 @@
-'use client'
 import React from "react"
-import { InlineWidget } from "react-calendly"
 import "./styles.css"
 
 export default function Calendar({ calendlyUrl }) {
@@ -8,8 +6,8 @@ export default function Calendar({ calendlyUrl }) {
 
   return (
     <div>
-      <iframe className="calendesk-frame" src="https://au8s6ssfmk.calendesk.net/" scrolling="yes" title="Kryptonum" frameBorder="0"></iframe>
-      {/* <InlineWidget url={calendlyUrl} /> */}
+      <iframe class="calendesk-frame" src="https://yypv0aiygw.calendesk.net/" scrolling="yes" title="PsychoDietMed" frameBorder="0"></iframe>
+      {/* <iframe class="calendesk-frame" src="https://06bfebkar8.calendesk.net/" scrolling="yes" title="PsychoDietMed" frameBorder="0"></iframe> */}
     </div>
   )
 }

@@ -247,7 +247,7 @@ async function getData() {
         }
       }
     `
-    }, { pollInterval: 500 })
+    })
 
     return {
       data: page,

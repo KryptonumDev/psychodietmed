@@ -84,7 +84,7 @@ async function getData() {
         }
       }
     `,
-  }, { pollInterval: 500 })
+  })
 
   return {
     products: data.products.nodes,

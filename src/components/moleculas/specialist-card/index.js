@@ -29,7 +29,7 @@ export default function Card({ onClick = () => { }, short = false, data: { speci
         <div className={styles.bottom_inform}>
           <div className={styles.flex}>
             <Button href='/umow-sie'>Umów wizytę</Button>
-            <Button theme="secondary" href={`/zespol/${slug}`}>Więcej terminów</Button>
+            <Button theme="secondary" href={`/specjalisci/${slug}`}>Więcej terminów</Button>
           </div>
         </div>
       )}

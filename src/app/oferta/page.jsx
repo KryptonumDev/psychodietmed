@@ -410,8 +410,6 @@ async function getData(params) {
         count: PAGE_ITEM_COUNT,
         offset: PAGE_ITEM_COUNT * (currentPage - 1)
       }
-    }, {
-      pollInterval: 500,
     });
 
     return {

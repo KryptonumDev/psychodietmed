@@ -410,7 +410,7 @@ async function getData() {
         }
       }
     `,
-  }, { pollInterval: 500 })
+  })
 
   return {
     hero: homepage.hero,

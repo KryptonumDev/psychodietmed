@@ -204,7 +204,7 @@ async function getData(params) {
       variables: {
         uri: `${params.product}`,
       }
-    }, { pollInterval: 500 })
+    })
 
     if (!product.id)
       notFound()

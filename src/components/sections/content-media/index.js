@@ -24,8 +24,8 @@ export default function Content({ data, totalCount, page = '1' }) {
   })
 
   const { refetch } = useQuery(
-    gql`query Posts($offset: Int!, $size: Int!, $category: String) {
-      mediums(where: {offsetPagination: {size: $size, offset: 0}}) {
+    gql`query Posts($offset: Int!, $size: Int!) {
+      mediums(where: {offsetPagination: {size: $size, offset: $offset}}) {
         pageInfo {
           offsetPagination {
             total
@@ -57,10 +57,12 @@ export default function Content({ data, totalCount, page = '1' }) {
       size: PAGE_ITEM_COUNT,
     },
     onCompleted: (data) => {
+      debugger
       document.getElementById('posts').scrollIntoView({ behavior: 'smooth' })
       setPosts(data?.mediums)
     },
     onError: (error) => {
+      debugger
       throw new Error(error)
     }
   })
@@ -74,9 +76,6 @@ export default function Content({ data, totalCount, page = '1' }) {
     if (!initialLoad) {
       refetch()
       const current = new URLSearchParams(Array.from(searchParams.entries()));
-
-      if (!chosenCategory?.value) current.delete("kategoria");
-      else current.set("kategoria", chosenCategory.value);
 
       if (currentPage === 1) current.delete("strona");
       else current.set("strona", currentPage);

@@ -70,7 +70,7 @@ async function getData(params) {
         id: params.lesson,
         course: params.course
       }
-    }, { pollInterval: 500 })
+    })
 
     if (!lesson?.databaseId) notFound()
     if (lesson.lesson.course.slug !== params.course) notFound()

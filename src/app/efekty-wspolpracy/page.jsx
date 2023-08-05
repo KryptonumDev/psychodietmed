@@ -172,7 +172,7 @@ async function getData(props) {
         offset: (currentPage - 1) * PAGE_ITEM_COUNT,
         size: PAGE_ITEM_COUNT,
       },
-    }, { pollInterval: 500 })
+    })
 
     return {
       data: page,

@@ -12,8 +12,12 @@ import { cookies } from "next/headers";
 // }
 
 export default async function Courses({ params }) {
+  const authToken = cookies().get('authToken').value
+
+  if (!authToken) redirect('/logowanie')
+
   const { product } = await getData(params)
-  const { user } = await getUser()
+  const { user } = await getUser(authToken)
 
   if (!!user?.courses?.nodes?.find((el) => el.databaseId === product.product.course.databaseId)) redirect(`/moje-kursy/${product?.product?.course?.slug}`)
   let totalTime = 0
@@ -41,10 +45,8 @@ export default async function Courses({ params }) {
   )
 }
 
-async function getUser() {
+async function getUser(authToken) {
   try {
-    const authToken = cookies().get('authToken').value
-
     const { data: { viewer } } = await client.query({
       query: gql`
       query Viewer {
@@ -63,7 +65,7 @@ async function getUser() {
           "Authorization": `Bearer ${authToken}`
         }
       }
-    }, { pollInterval: 500 })
+    })
 
     return {
       user: viewer
@@ -147,7 +149,7 @@ async function getData(params) {
       variables: {
         id: params.product
       }
-    }, { pollInterval: 500 })
+    })
 
     if (!product?.databaseId) notFound()
     if (!product?.product?.course?.databaseId) notFound()

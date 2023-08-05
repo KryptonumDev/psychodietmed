@@ -61,7 +61,7 @@ async function getData(currentPage = 1) {
         offset: (currentPage - 1) * PAGE_ITEM_COUNT,
         size: PAGE_ITEM_COUNT,
       },
-    }, { pollInterval: 500 })
+    })
 
     if (!mediums.nodes.length)
       return notFound()

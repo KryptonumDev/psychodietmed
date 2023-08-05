@@ -262,9 +262,16 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@mailerlite/mailerlite-nodejs@^1.0.1":
+"@ingameltd/node-przelewy24@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@ingameltd/node-przelewy24/-/node-przelewy24-2.1.0.tgz#a66f12d6f6da6382f61085a2738faafc8f5876d5"
+  integrity sha512-dE7hZOSpARc8kI21yUTOBkBYmRzthTagG7oYxMWP8a/SBZwA7S19DSP/sga8awVB7A+T6EZvt+UJZn13VjfOcQ==
+  dependencies:
+    axios "^0.21.1"
+
+"@mailerlite/mailerlite-nodejs@^1.1.0":
   version "1.1.0"
-  resolved "https://registry.npmjs.org/@mailerlite/mailerlite-nodejs/-/mailerlite-nodejs-1.1.0.tgz"
+  resolved "https://registry.yarnpkg.com/@mailerlite/mailerlite-nodejs/-/mailerlite-nodejs-1.1.0.tgz#845e643ba3808fc09b9a8d414e6cb306686c4e5e"
   integrity sha512-XwjO7mQJEF97v6cxjPmjmCeOtNC1XSODUlP5DhUyFmeKHWINbDHP3gcmyQ6U1xUHmQiNHSn2Vdy5tUUD3pgdOg==
   dependencies:
     axios "^1.2.0"
@@ -612,6 +619,13 @@ axe-core@^4.6.2:
   version "4.6.3"
   resolved "https://registry.npmjs.org/axe-core/-/axe-core-4.6.3.tgz"
   integrity sha512-/BQzOX780JhsxDnPpH4ZiyrJAzcd8AfzFPkv+89veFSr1rcMjuq2JDCwypKaPeB6ljHp9KjXhPpjgCvQlWYuqg==
+
+axios@^0.21.1:
+  version "0.21.4"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.4.tgz#c67b90dc0568e5c1cf2b0b858c43ba28e2eda575"
+  integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
+  dependencies:
+    follow-redirects "^1.14.0"
 
 axios@^1.2.0, axios@^1.4.0:
   version "1.4.0"
@@ -1382,7 +1396,7 @@ flatted@^3.1.0:
   resolved "https://registry.npmjs.org/flatted/-/flatted-3.2.7.tgz"
   integrity sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==
 
-follow-redirects@^1.15.0:
+follow-redirects@^1.14.0, follow-redirects@^1.15.0:
   version "1.15.2"
   resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.15.2.tgz"
   integrity sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==
@@ -2369,11 +2383,6 @@ rc@^1.2.7:
     ini "~1.3.0"
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
-
-react-calendly@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.npmjs.org/react-calendly/-/react-calendly-4.1.1.tgz"
-  integrity sha512-NEVYY3BXvDb11jmEh7ttMzXRKHSZA2POxNI64wh9sqXgcwvWzy/pfDGOxfM3UCgCvH1iXyPmdy+qntHDEprh4w==
 
 react-dom@^18.2.0:
   version "18.2.0"

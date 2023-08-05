@@ -176,7 +176,7 @@ async function getData(params) {
       variables: {
         slug: params.kafelek,
       }
-    }, { pollInterval: 500 })
+    })
 
     if (!obszarDzilaniaBy.id)
       notFound()

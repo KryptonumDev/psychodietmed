@@ -109,7 +109,7 @@ async function getData(params) {
       variables: {
         uri: `${params.tool}`,
       }
-    }, { pollInterval: 500 })
+    })
 
     if (!narzedzie.id)
       notFound()

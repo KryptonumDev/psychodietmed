@@ -83,13 +83,8 @@ async function getData(params) {
           title
           specialisations {
             nodes {
-<<<<<<< HEAD
-              title : name
-              id
-=======
               id : databaseId
               title : name
->>>>>>> develop
             }
           }
           proffesional {
@@ -140,7 +135,7 @@ async function getData(params) {
       variables: {
         uri: `${params.specjalista}`,
       }
-    }, { pollInterval: 500 })
+    })
 
     if (!specjalistaBy.id)
       notFound()

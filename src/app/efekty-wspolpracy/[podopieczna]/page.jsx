@@ -121,7 +121,7 @@ async function getData(params) {
       variables: {
         uri: `${params.podopieczna}`,
       }
-    }, { pollInterval: 500 })
+    })
 
     if (!podopiecznaBy.id)
       notFound()
