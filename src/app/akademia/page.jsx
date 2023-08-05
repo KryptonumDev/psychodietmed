@@ -11,7 +11,7 @@ export async function generateMetadata() {
   return await generetaSeo('cG9zdDoyMDM3', '/akademia', GET_SEO_PAGE)
 }
 
-export default async function Courses() {lue
+export default async function Courses() {
   const authToken = cookies().get('authToken').value
 
   if (!authToken) redirect('/logowanie')
