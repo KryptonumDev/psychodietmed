@@ -1,11 +1,9 @@
 import React from "react"
 import styles from './styles.module.scss';
 import { Image } from "@/components/atoms/image";
-import Link from "next/link";
-import { RightArrow } from "../../../assets/small-right-arrow";
+import Button from "@/components/atoms/button";
 
 export default function Hero({ data: { logo, text, image, comment } }) {
-
   return (
     <section className={styles.wrapper}>
       <div>
@@ -18,11 +16,11 @@ export default function Hero({ data: { logo, text, image, comment } }) {
         <Image aspectRatio={true} className={styles.image} src={image.mediaItemUrl} alt={image.altText} width={image.mediaDetails.width} height={image.mediaDetails.height} />
         <div className={styles.comment}>
           <div className={styles.avatar}>
-            <img src={comment.avatar.mediaItemUrl} alt={comment.avatar.altText} />
+            <Image src={comment.avatar.mediaItemUrl} alt={comment.avatar.altText || ''} width={comment.avatar.mediaDetails.width} height={comment.avatar.mediaDetails.height} />
             <p>{comment.name}</p>
           </div>
           <div className={styles.text} dangerouslySetInnerHTML={{ __html: comment.content }} />
-          <Link href={comment.link.url}>{comment.link.title}<RightArrow/></Link>
+          <Button theme="secondary" href={comment.link.url}>{comment.link.title}</Button>
         </div>
       </div>
     </section>

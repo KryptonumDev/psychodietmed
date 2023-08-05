@@ -116,6 +116,10 @@ async function getData() {
                 avatar{
                   altText
                   mediaItemUrl
+                  mediaDetails {
+                    height
+                    width
+                  }
                 }
                 link{
                   title
