@@ -15,7 +15,7 @@ export default function Slider({ data }) {
       className={styles.wrapper}
       spaceBetween={50}
       slidesPerView={1}
-      loop={true}
+      loop={false}
       onSlideChange={(swiper) => {
         setActiveIndex(swiper.realIndex);
       }}

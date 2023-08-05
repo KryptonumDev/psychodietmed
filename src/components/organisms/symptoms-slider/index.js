@@ -5,8 +5,6 @@ import { A11y } from 'swiper';
 import styles from './styles.module.scss';
 import 'swiper/scss';
 import Card from "@/components/moleculas/symptoms-card";
-import { LeftArrow } from "../../../assets/left-arrow";
-import { RightArrow } from "../../../assets/right-arrow";
 import ArrowLeft from "@/components/atoms/ArrowLeft";
 import ArrowRight from "@/components/atoms/ArrowRight";
 

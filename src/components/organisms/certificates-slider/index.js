@@ -11,7 +11,6 @@ export default function Slider({ data }) {
     <LightGallery className='grid' mode="lg-fade">
       {data.map((el, index) => (
         <Image key={index} width={el.certificate.mediaDetails.width} height={el.certificate.mediaDetails.height} src={el.certificate.mediaItemUrl} alt={el.certificate.altText} className={styles.certificate} />
-
       ))}
     </LightGallery>
   )
