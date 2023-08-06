@@ -20,7 +20,7 @@ export async function getUser() {
           "Authorization": `Bearer ${authToken}`
         }
       }
-    })
+    }, { pollInterval: 500 })
 
     if (!viewer?.username) redirect('/logowanie')
 

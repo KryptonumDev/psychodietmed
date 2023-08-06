@@ -42,7 +42,7 @@ async function getUser(authToken) {
           "Authorization": `Bearer ${authToken}`
         }
       }
-    })
+    }, { pollInterval: 500 })
     return { user: viewer }
   } catch (error) {
     console.log('error', error)
