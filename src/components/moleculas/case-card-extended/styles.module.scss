@@ -194,6 +194,7 @@
 
   .after {
     margin-bottom: 64px;
+    aspect-ratio: 224/336 !important;
 
     @media (max-width: 740px) {
       margin-bottom: 0;
@@ -202,7 +203,7 @@
 
   .before {
     margin-top: 64px;
-
+    aspect-ratio: 224/336 !important;
 
     @media (max-width: 740px) {
       margin-top: 0;

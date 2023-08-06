@@ -190,3 +190,22 @@ async function getData(params) {
     notFound()
   }
 }
+
+export async function generateStaticParams() {
+
+  const { data: { obszaryDzialania } } = await client.query({
+    query: gql`
+    query PostStaticParams {
+      obszaryDzialania(first: 100) {
+        nodes {
+          slug
+        }
+      }
+    }
+  `
+  })
+
+  return obszaryDzialania.nodes.map(({ slug }) => ({
+    kafelek: slug
+  }))
+}

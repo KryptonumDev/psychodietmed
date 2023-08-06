@@ -22,6 +22,8 @@ export async function generateMetadata({ searchParams }) {
   return await generetaSeo('cG9zdDo2NzA=', url, GET_SEO_PAGE)
 }
 
+export const dynamic = 'force-dynamic' 
+
 export default async function Blog({ searchParams }) {
   const { categories, hero, posts, newPosts, postsTotalCount } = await getData(searchParams.strona)
 

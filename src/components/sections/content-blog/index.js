@@ -23,7 +23,6 @@ export default function Content({ categories, data }) {
     if (!category) return null;
 
     const categoryObj = categories.find((el) => el.slug === category);
-    debugger
     if (!categoryObj) return null;
 
     return categoryObj;

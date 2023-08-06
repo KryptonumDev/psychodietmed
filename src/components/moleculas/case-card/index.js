@@ -20,7 +20,9 @@ export default function Card({ slug, name, avatar, comment, linkText, before, af
         </svg>
       </div>
       <div className={styles.slideText} dangerouslySetInnerHTML={{ __html: comment }} />
-      <Button theme="secondary" href={`/efekty-wspolpracy/${slug}`} className={styles.slideLink}>{linkText}</Button>
+      {after?.mediaItemUrl && before?.mediaItemUrl && (
+        <Button theme="secondary" href={`/efekty-wspolpracy/${slug}`} className={styles.slideLink}>{linkText}</Button>
+      )}
       {after?.mediaItemUrl && before?.mediaItemUrl ? (
         <div className={styles.slideImages}>
           <Image aspectRatio={true} quality='90' src={before.mediaItemUrl} alt={before.altText} width={before.mediaDetails.width} height={before.mediaDetails.height} className={`${styles.before} ${styles.image}`} />

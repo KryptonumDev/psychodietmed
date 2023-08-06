@@ -21,7 +21,7 @@ export default async function Post({ params }) {
     <>
       <main id="main">
         <Breadcrumbs data={[{ page: 'Media', url: `/media` }, { page: data.title, url: `/media/${params.tool}` }]} />
-        <Hero title={data.title} excerpt={data.content} dateGmt={data.dateGmt} image={data.featuredImage.node} />
+        <Hero title={data.title} excerpt={data.content} dateGmt={data.dateGmt} image={data.featuredImage?.node} />
         {data.media?.twoColumnFlexMedia?.image && (
           <Flex data={data.media.twoColumnFlexMedia} />
         )}
@@ -149,4 +149,22 @@ async function getData(params) {
     console.log(error)
     notFound()
   }
+}
+
+export async function generateStaticParams() {
+  const { data: { mediums } } = await client.query({
+    query: gql`
+    query PostStaticParams {
+      mediums(first: 100) {
+        nodes {
+          slug
+        }
+      }
+    }
+  `
+  })
+
+  return mediums.nodes.map(({ slug }) => ({
+    media: slug
+  }))
 }

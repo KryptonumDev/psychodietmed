@@ -126,3 +126,21 @@ async function getData(params) {
     notFound()
   }
 }
+
+export async function generateStaticParams() {
+  const { data: { narzedzia } } = await client.query({
+    query: gql`
+    query PostStaticParams {
+      narzedzia(first: 100) {
+        nodes {
+          slug
+        }
+      }
+    }
+  `
+  })
+
+  return narzedzia.nodes.map(({ slug }) => ({
+    tool: slug
+  }))
+}

@@ -92,7 +92,7 @@
     gap: 6px;
     align-items: center;
 
-    svg{
+    svg {
       margin-top: 4px;
     }
 
@@ -120,6 +120,7 @@
 
   .after {
     margin-bottom: 120px;
+    aspect-ratio: 224/336 !important;
 
     @media (max-width: 740px) {
       margin-bottom: 0;
@@ -128,6 +129,7 @@
 
   .before {
     margin-top: 120px;
+    aspect-ratio: 224/336 !important;
 
     @media (max-width: 740px) {
       margin-top: 0;

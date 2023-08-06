@@ -432,3 +432,9 @@ async function getData() {
     academy: homepage.academy,
   }
 }
+
+export async function getStaticProps() {
+  return {
+
+  }
+}

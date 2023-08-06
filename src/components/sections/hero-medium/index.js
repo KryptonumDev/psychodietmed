@@ -22,7 +22,9 @@ export default function Hero({ title, excerpt, image, dateGmt }) {
           <span>11 osób lubi to</span>
         </div> */}
       </div>
-      <Image className={styles.image} alt={image.altText} src={image.mediaItemUrl} width={image.mediaDetails.width} height={image.mediaDetails.height}/>
+      {image && (
+        <Image className={styles.image} alt={image.altText} src={image.mediaItemUrl} width={image.mediaDetails.width} height={image.mediaDetails.height} />
+      )}
     </section>
   )
 }

@@ -40,6 +40,8 @@ const orders = [
   { value: 'DATE-DESC', label: 'Daty: Najstarsze' },
 ]
 
+export const dynamic = 'force-dynamic' 
+
 export default async function Shop(params) {
   const { productCategories, featured, cases, data, products, bundles } = await getData(params)
 

@@ -33,6 +33,7 @@ async function getData(params) {
           nodes {
             id
             slug
+            title
             histori {
               information {
                 boldText
@@ -137,4 +138,22 @@ async function getData(params) {
     console.log(error)
     notFound()
   }
+}
+
+export async function generateStaticParams() {
+  const { data: { podopieczni } } = await client.query({
+    query: gql`
+    query PostStaticParams {
+      podopieczni(first: 100) {
+        nodes {
+          slug
+        }
+      }
+    }
+  `
+  })
+
+  return podopieczni.nodes.map(({ slug }) => ({
+    podopieczna: slug
+  }))
 }

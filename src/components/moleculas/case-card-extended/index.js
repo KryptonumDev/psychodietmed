@@ -6,6 +6,7 @@ import { removeWrap } from "../../../utils/title-modification";
 import { RightArrow } from "../../../assets/small-right-arrow";
 import { Butterfly } from "../../../assets/butterfly";
 import Category from "@/components/atoms/category-pill";
+import Button from "@/components/atoms/button";
 
 const Quote = () => (
   <svg className={styles.svg} width="59" height="58" viewBox="0 0 59 58" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -58,7 +59,9 @@ export default function Card({ slug, name, avatar, comment, linkText, before, af
           <div className={styles.slideText} dangerouslySetInnerHTML={{ __html: comment }} />
         </div>
       </div>
-      <Link href={`/efekty-wspolpracy/${slug}`} className={styles.slideLink}>{linkText} <RightArrow /></Link>
+      {after?.mediaItemUrl && before?.mediaItemUrl && (
+        <Button theme="secondary" href={`/efekty-wspolpracy/${slug}`} className={styles.slideLink}>{linkText}</Button>
+      )}
     </div>
   )
 }

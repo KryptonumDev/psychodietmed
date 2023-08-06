@@ -1,1 +1,1 @@
-export const PAGE_ITEM_COUNT = 6
+export const PAGE_ITEM_COUNT = 3

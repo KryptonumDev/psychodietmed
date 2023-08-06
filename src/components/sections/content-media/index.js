@@ -57,12 +57,10 @@ export default function Content({ data, totalCount, page = '1' }) {
       size: PAGE_ITEM_COUNT,
     },
     onCompleted: (data) => {
-      debugger
       document.getElementById('posts').scrollIntoView({ behavior: 'smooth' })
       setPosts(data?.mediums)
     },
     onError: (error) => {
-      debugger
       throw new Error(error)
     }
   })
