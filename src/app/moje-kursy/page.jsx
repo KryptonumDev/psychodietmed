@@ -14,7 +14,7 @@ export async function generateMetadata() {
 export default async function Courses() {
   const authToken = cookies().get('authToken')?.value
 
-  if (!authToken) redirect('/logowanie')
+  if (!authToken) redirect('/logowanie', 'replace')
 
   const { data } = await getData()
   const { user } = await getUser(authToken)

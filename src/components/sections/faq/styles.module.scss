@@ -8,6 +8,7 @@
     display: grid;
     gap: clamp(16px, calc(20vw/7.68), 24px);
     margin-top: clamp(28px, calc(36vw/7.68), 36px);
+    padding-bottom: 20px;
   }
 
   details {
@@ -74,7 +75,62 @@
     .content {
       margin-top: clamp(16px, calc(24vw/7.68), 36px);
       padding-left: clamp(38px, calc(44vw/7.68), 44px);
-      max-width: 700px;
+      max-width: 900px;
+
+      a{
+        text-decoration: underline;
+        color: #194574;
+        text-decoration-thickness: 2px;
+      }
+
+      li {
+        font-size: clamp(16rem, calc(20vw/7.68), 24rem);
+        min-height: 32px;
+        line-height: 125%;
+
+        @media (max-width: 370px) {
+          font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+        }
+      }
+
+      li+li {
+        margin-top: 16px;
+      }
+
+      ul, ol {
+        margin: clamp(16px, calc(30vw/7.68), 30px) 0;
+      }
+
+      ul li {
+        padding-left: 41px;
+        position: relative;
+
+        @media (max-width: 640px) {
+          padding-left: 21px;
+        }
+      }
+
+      ul li::after {
+        content: url('./../../../assets/list-circle.png');
+        position: absolute;
+        left: 0;
+        top: -4px;
+
+        @media (max-width: 640px) {
+          transform: scale(0.6);
+          top: -9px;
+          left: -12px;
+        }
+      }
+
+      ol li {
+        margin-left: 41px;
+        list-style: decimal;
+
+        @media (max-width: 640px) {
+          margin-left: 21px;
+        }
+      }
     }
   }
 }

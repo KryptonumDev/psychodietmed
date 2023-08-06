@@ -43,7 +43,7 @@ export default function Process({ needsShippingAddress, step = 2 }) {
       </div>
 
       <div className={styles.mobile}>
-        <div class={styles.pie} style={{ '--p': 100 * (step / (needsShippingAddress ? 4 : 3)) }}>
+        <div className={styles.pie} style={{ '--p': 100 * (step / (needsShippingAddress ? 4 : 3)) }}>
           <strong>0{step}</strong>
           <span>/</span>
           <small>{needsShippingAddress ? '04' : '03'}</small>
