@@ -5,7 +5,7 @@ import Hero from "@/components/sections/hero-medium"
 import Flex from "@/components/sections/medium-flex"
 import Video from "@/components/sections/medium-video"
 import OtherMedia from "@/components/sections/other-media"
-import Contact from "@/components/sections/medium-contact"
+// import Contact from "@/components/sections/medium-contact"
 import Interview from "@/components/sections/media-interview"
 import { generetaSeo } from "../../../utils/genereate-seo"
 import { GET_SEO_MEDIA } from "../../../queries/media-seo"
@@ -31,7 +31,7 @@ export default async function Post({ params }) {
         {data.media?.interviewSection.length > 0 && (
           <Interview data={data.media.interviewSection} />
         )}
-        <Contact prev={data.previous} next={data.next} currPage={data.title} />
+        {/* <Contact prev={data.previous} next={data.next} currPage={data.title} /> */}
         {otherMedia.length > 0 && (
           <OtherMedia data={otherMedia} />
         )}

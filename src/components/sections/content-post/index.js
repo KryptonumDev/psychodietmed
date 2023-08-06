@@ -2,8 +2,8 @@ import React from "react"
 import './styles.scss'
 import { slugTransform } from "../../../utils/slug-transform"
 import ContentPostNavigation from "@/components/organisms/content-post-navigation"
-import Contact from "@/components/organisms/post-contact"
-import Other from "@/components/organisms/post-quick-other"
+// import Contact from "@/components/organisms/post-contact"
+// import Other from "@/components/organisms/post-quick-other"
 
 export default function Content({ title, excerpt, next, prev, author, data }) {
 
@@ -15,8 +15,8 @@ export default function Content({ title, excerpt, next, prev, author, data }) {
       <ContentPostNavigation headings={headings} author={author} />
       <div className='content-wrap'>
         <div className='content' dangerouslySetInnerHTML={{ __html: modifiedContent }} />
-        <Contact title={title} excerpt={excerpt} />
-        <Other prev={prev} next={next} />
+        {/* <Contact title={title} excerpt={excerpt} /> */}
+        {/* <Other prev={prev} next={next} /> */}
       </div>
     </section>
   )

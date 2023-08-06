@@ -62,13 +62,7 @@ const client = new ApolloClient({
     uri: `https://psychodietmed.headlesshub.com/graphql`,
     fetch: fetch
   }))),
-  cache: new InMemoryCache({
-    typePolicies: {
-      Page: {
-        keyFields: []
-      }
-    }
-  }),
+  cache: new InMemoryCache(),
 });
 
 export default client;

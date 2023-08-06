@@ -14,23 +14,22 @@ export async function generateMetadata({ params }) {
 
 export default async function Post({ params }) {
   const { data, posts } = await getData(params)
+
   return (
-    <>
-      <main id="main">
-        <Breadcrumbs data={[{ page: 'Blog', url: `/blog` }, { page: data.title, url: `/blog/${params.post_slug}` }]} />
-        <Hero data={data} />
-        <Content next={data.next} prev={data.previous} author={data.postAuthor.author} data={data.content} title={data.title} excerpt={data.excerpt} />
-        <OtherPosts data={posts} />
-      </main>
-    </>
+    <main id="main">
+      <Breadcrumbs data={[{ page: 'Blog', url: `/blog` }, { page: data.title, url: `/blog/${params.post_slug}` }]} />
+      <Hero data={data} />
+      <Content next={data.next} prev={data.previous} author={data.postAuthor.author} data={data.content} title={data.title} excerpt={data.excerpt} />
+      <OtherPosts data={posts} />
+    </main>
   )
 }
 
 async function getData(params) {
   try {
-    const { data: { postBy, posts } } = await client.query({
+    const { data: { post, posts } } = await client.query({
       query: gql`
-      query Pages($slug: String) {
+      query BlogPost($slug: ID!) {
         posts(first: 3) {
           nodes {
             id
@@ -57,7 +56,7 @@ async function getData(params) {
             }
           }
         }
-        postBy(slug: $slug){
+        post(id:  $slug, idType: SLUG){
           dateGmt
           readingTime
           id
@@ -80,6 +79,7 @@ async function getData(params) {
             nodes {
               name
               slug
+              id
             }
           }
           postAuthor {
@@ -97,10 +97,14 @@ async function getData(params) {
             }
           }
           next {
+            id
+            __typename
             title
             slug
           }
           previous {
+            id
+            __typename
             title
             slug
           }
@@ -112,11 +116,11 @@ async function getData(params) {
       }
     })
 
-    if (!postBy.id)
+    if (!post.id)
       notFound()
 
     return {
-      data: postBy,
+      data: post,
       posts: posts.nodes
     }
   } catch (error) {
