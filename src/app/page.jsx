@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import client from "../apollo/apolo-client";
+import  getClient from "../apollo/apolo-client";
 import Hero from "@/components/sections/hero-home";
 import Flex from "@/components/sections/case-studies-flex";
 import Specialisations from "@/components/sections/specialisations";
@@ -57,7 +57,7 @@ export default async function Home() {
 }
 
 async function getData() {
-  const { data: { global, podopieczni, posts, obszaryDzialania, specjalisci, page: { homepage } } } = await client.query({
+  const { data: { global, podopieczni, posts, obszaryDzialania, specjalisci, page: { homepage } } } = await getClient().query({
     query: gql`
       query Pages {
         global : page(id: "cG9zdDo3Nzk=") {
@@ -410,6 +410,13 @@ async function getData() {
         }
       }
     `,
+    context: {
+      fetchOptions: {
+        next: {
+          revalidate: 3600,
+        }
+      }
+    }
   })
 
   return {

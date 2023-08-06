@@ -1,5 +1,4 @@
 import { gql } from "@apollo/client";
-import client from "../../apollo/apolo-client";
 import Hero from "@/components/sections/hero-shop";
 import Content from "@/components/sections/offer-products";
 import TwoColumnFlex from "@/components/sections/two-column-flex";
@@ -10,6 +9,7 @@ import { PAGE_ITEM_COUNT } from "../../constants/academy";
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
 import Breadcrumbs from "@/components/sections/breadcrumbs";
+import getClient from "../../apollo/apolo-client";
 
 export async function generateMetadata({ searchParams }) {
 
@@ -40,7 +40,7 @@ const orders = [
   { value: 'DATE-DESC', label: 'Daty: Najstarsze' },
 ]
 
-export const dynamic = 'force-dynamic' 
+export const dynamic = 'force-dynamic'
 
 export default async function Shop(params) {
   const { productCategories, featured, cases, data, products, bundles } = await getData(params)
@@ -77,7 +77,7 @@ async function getData(params) {
   const orderby = params.searchParams?.sortowanie ? params.searchParams?.sortowanie.split('-')[0] : 'MENU_ORDER'
   const orderDirection = params.searchParams?.sortowanie ? params.searchParams?.sortowanie.split('-')[1] : 'ASC'
   try {
-    const { data } = await client.query({
+    const { data } = await getClient().query({
       query: gql`
     query Academy ($category: [String], $maxPrice: Float, $minPrice: Float, $orderby: ProductsOrderByEnum!, $orderDirection: OrderEnum, $count: Int, $offset: Int) {
       productCategories(where: {exclude: ["dGVybToyNg==", "dGVybTo1OQ=="]}) {

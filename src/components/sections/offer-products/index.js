@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react"
 import styles from './styles.module.scss'
 import { Card } from "@/components/moleculas/product-card"
 import Filtration from "@/components/organisms/academy-filtration"
-import { gql, useQuery } from "@apollo/client"
-import client from "../../../apollo/apolo-client"
+import { gql } from "@apollo/client"
 import { useCallback } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { PAGE_ITEM_COUNT } from "../../../constants/academy"
 import Pagination from "@/components/organisms/pagination-client-side"
+import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
 
 export default function Content({ prices, orders, productCategories, defaultData }) {
 
@@ -131,7 +131,6 @@ export default function Content({ prices, orders, productCategories, defaultData
       }
     }
   `, {
-    client,
     skip: initialLoad,
     variables: {
       category: chosenCategory?.value ? chosenCategory.value : null,

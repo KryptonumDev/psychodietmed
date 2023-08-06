@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import { gql } from "@apollo/client"
-import client from "../../../apollo/apolo-client"
+import  getClient from "../../../apollo/apolo-client"
 import Hero from "@/components/sections/hero-kafelek"
 import SliderIllnes from "@/components/sections/kafelek-illnes-slider"
 import SliderSymptoms from "@/components/sections/kafelek-sympotms-slider"
@@ -36,7 +36,7 @@ export default async function Post({ params }) {
 
 async function getData(params) {
   try {
-    const { data: { obszarDzilaniaBy } } = await client.query({
+    const { data: { obszarDzilaniaBy } } = await getClient().query({
       query: gql`
       query Pages($slug: String) {
         obszarDzilaniaBy(uri: $slug){
@@ -193,7 +193,7 @@ async function getData(params) {
 
 export async function generateStaticParams() {
 
-  const { data: { obszaryDzialania } } = await client.query({
+  const { data: { obszaryDzialania } } = await getClient().query({
     query: gql`
     query PostStaticParams {
       obszaryDzialania(first: 100) {

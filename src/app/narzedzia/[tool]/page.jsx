@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import { gql } from "@apollo/client"
-import client from "../../../apollo/apolo-client"
+import  getClient from "../../../apollo/apolo-client"
 import Hero from "@/components/sections/hero-tool"
 import Flex from "@/components/sections/tool-flex"
 import Grid from "@/components/sections/tool-grid"
@@ -34,7 +34,7 @@ export default async function Post({ params }) {
 
 async function getData(params) {
   try {
-    const { data: { narzedzie, global } } = await client.query({
+    const { data: { narzedzie, global } } = await getClient().query({
       query: gql`
       query Pages($uri: ID!) {
         global : page(id: "cG9zdDo3Nzk=") {
@@ -128,7 +128,7 @@ async function getData(params) {
 }
 
 export async function generateStaticParams() {
-  const { data: { narzedzia } } = await client.query({
+  const { data: { narzedzia } } = await getClient().query({
     query: gql`
     query PostStaticParams {
       narzedzia(first: 100) {

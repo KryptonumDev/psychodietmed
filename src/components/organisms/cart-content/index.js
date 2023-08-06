@@ -5,7 +5,6 @@ import { useMutation } from "@apollo/client";
 import { getUpdatedItems } from "../../../utils/get-updated-items";
 import UPDATE_CART from "../../../mutations/update-cart";
 import { v4 } from "uuid";
-import client from "../../../apollo/apolo-client";
 import CartItem from "@/components/moleculas/cart-item";
 import Link from "next/link";
 import APPLY_COUPON from "../../../mutations/apply-coupon";
@@ -17,7 +16,6 @@ export default function Content({ cart, refetch, isCart = true }) {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const [updateCart, { loading: updateCartProcessing }] = useMutation(UPDATE_CART, {
-    client,
     onCompleted: () => {
       refetch();
     },
@@ -30,7 +28,6 @@ export default function Content({ cart, refetch, isCart = true }) {
   });
 
   const [applyCoupon, { loading: applyCouponProcessing }] = useMutation(APPLY_COUPON, {
-    client,
     onCompleted: () => {
       refetch();
     },
@@ -42,7 +39,6 @@ export default function Content({ cart, refetch, isCart = true }) {
   });
 
   const [removeCoupon, { loading: removeCouponProcessing }] = useMutation(REMOVE_COUPON, {
-    client,
     onCompleted: () => {
       refetch();
     },

@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import client from "../../apollo/apolo-client";
+import  getClient from "../../apollo/apolo-client";
 import Content from "@/components/sections/book-content";
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
@@ -21,7 +21,7 @@ export default async function Home() {
 }
 
 async function getData() {
-  const { data: { specjalisci, specjalizacje } } = await client.query({
+  const { data: { specjalisci, specjalizacje } } = await getClient().query({
     query: gql`
       query Pages {
         specjalisci(first: 100) {

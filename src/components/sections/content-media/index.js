@@ -4,9 +4,9 @@ import Grid from "@/components/organisms/post-grid"
 import Card from "@/components/moleculas/media-card"
 import Pagination from "@/components/organisms/pagination-client-side"
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
-import { gql, useQuery } from "@apollo/client"
-import client from "../../../apollo/apolo-client"
+import { gql } from "@apollo/client"
 import { PAGE_ITEM_COUNT } from "../../../constants/media"
+import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
 
 export default function Content({ data, totalCount, page = '1' }) {
 
@@ -50,7 +50,6 @@ export default function Content({ data, totalCount, page = '1' }) {
       }
     }
   `, {
-    client,
     skip: initialLoad,
     variables: {
       offset: (currentPage - 1) * PAGE_ITEM_COUNT,

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import { gql } from "@apollo/client"
-import client from "../../../apollo/apolo-client"
+import  getClient from "../../../apollo/apolo-client"
 import Hero from "@/components/sections/hero-medium"
 import Flex from "@/components/sections/medium-flex"
 import Video from "@/components/sections/medium-video"
@@ -42,7 +42,7 @@ export default async function Post({ params }) {
 
 async function getData(params) {
   try {
-    const { data: { medium, mediums } } = await client.query({
+    const { data: { medium, mediums } } = await getClient().query({
       query: gql`
       query Pages($uri: ID!) {
         mediums(first: 7) {
@@ -152,7 +152,7 @@ async function getData(params) {
 }
 
 export async function generateStaticParams() {
-  const { data: { mediums } } = await client.query({
+  const { data: { mediums } } = await getClient().query({
     query: gql`
     query PostStaticParams {
       mediums(first: 100) {

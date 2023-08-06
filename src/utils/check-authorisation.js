@@ -1,5 +1,5 @@
 import { cookies } from "next/headers"
-import client from "../apollo/apolo-client"
+import  getClient from "../apollo/apolo-client"
 import { redirect } from "next/navigation"
 import { gql } from "@apollo/client"
 
@@ -7,7 +7,7 @@ export async function getUser() {
   try {
     const authToken = cookies().get('authToken').value
 
-    const { data: { viewer } } = await client.query({
+    const { data: { viewer } } = await getClient().query({
       query: gql`
       query Viewer {
         viewer {

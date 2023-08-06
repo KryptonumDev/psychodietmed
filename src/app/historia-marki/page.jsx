@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import { gql } from "@apollo/client"
-import client from "../../apollo/apolo-client"
+import  getClient from "../../apollo/apolo-client"
 import Hero from "@/components/sections/hero-brand"
 import History from "@/components/sections/brand-history"
 import Name from "@/components/sections/brand-name"
@@ -43,7 +43,7 @@ export default async function Archive() {
 async function getData() {
   try {
 
-    const { data: { page, global, posts } } = await client.query({
+    const { data: { page, global, posts } } = await getClient().query({
       query: gql`
       query Page {
         posts(first: 3) {

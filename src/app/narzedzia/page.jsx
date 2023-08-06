@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client"
-import client from "../../apollo/apolo-client"
+import  getClient from "../../apollo/apolo-client"
 import Hero from "@/components/sections/hero-tools"
 import Justification from "@/components/sections/tools-archive-justification"
 import Grid from "@/components/sections/tools-grid"
@@ -26,7 +26,7 @@ export default async function Media() {
 }
 
 async function getData() {
-  const { data: { pageBy } } = await client.query({
+  const { data: { pageBy } } = await getClient().query({
     query: gql`
       query Pages {
         pageBy(id: "cG9zdDo5ODE=") {

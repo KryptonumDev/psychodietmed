@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import { gql } from "@apollo/client"
-import client from "../../../apollo/apolo-client"
+import  getClient from "../../../apollo/apolo-client"
 import Hero from "@/components/sections/hero-case"
 import Cards from "@/components/sections/case-result-cards"
 import ReviewsSlider from "@/components/sections/reviews-slider"
@@ -26,7 +26,7 @@ export default async function Post({ params }) {
 
 async function getData(params) {
   try {
-    const { data: { podopiecznaBy, podopieczni } } = await client.query({
+    const { data: { podopiecznaBy, podopieczni } } = await getClient().query({
       query: gql`
       query Pages($uri: String) {
         podopieczni(first: 5) {
@@ -141,7 +141,7 @@ async function getData(params) {
 }
 
 export async function generateStaticParams() {
-  const { data: { podopieczni } } = await client.query({
+  const { data: { podopieczni } } = await getClient().query({
     query: gql`
     query PostStaticParams {
       podopieczni(first: 100) {

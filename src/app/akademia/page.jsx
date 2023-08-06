@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import client from "../../apollo/apolo-client";
+import  getClient from "../../apollo/apolo-client";
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
 import Grid from "@/components/sections/academy-grid";
@@ -30,7 +30,7 @@ export default async function Courses() {
 
 async function getUser(authToken) {
   try {
-    const { data: { viewer } } = await client.query({
+    const { data: { viewer } } = await getClient().query({
       query: gql`
       query Viewer {
         viewer {
@@ -62,7 +62,7 @@ async function getUser(authToken) {
 
 async function getData() {
   try {
-    const { data: { page, viewer, products } } = await client.query({
+    const { data: { page, viewer, products } } = await getClient().query({
       query: gql`
       query Pages {
         page(id: "cG9zdDoyMDM3"){

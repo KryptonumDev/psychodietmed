@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client"
-import client from "../../apollo/apolo-client"
+import  getClient from "../../apollo/apolo-client"
 import Hero from "@/components/sections/hero-blog"
 import Content from "@/components/sections/content-blog"
 import { PAGE_ITEM_COUNT } from "../../constants/blog"
@@ -38,7 +38,7 @@ export default async function Blog({ searchParams }) {
 
 async function getData(currentPage = 1) {
   try {
-    const { data: { categories, newPosts, posts, page: { blog } } } = await client.query({
+    const { data: { categories, newPosts, posts, page: { blog } } } = await getClient().query({
       query: gql`
       query Pages($offset: Int, $size: Int) {
         categories(first: 100) {

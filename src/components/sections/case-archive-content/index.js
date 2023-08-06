@@ -5,8 +5,8 @@ import React, { useCallback, useEffect, useState } from "react"
 import styles from './styles.module.scss'
 import { PAGE_ITEM_COUNT } from "../../../constants/case"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { gql, useQuery } from "@apollo/client"
-import client from "../../../apollo/apolo-client"
+import { gql } from "@apollo/client"
+import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
 
 export default function Content({ podopieczni }) {
 
@@ -89,7 +89,6 @@ export default function Content({ podopieczni }) {
       }
     }
   `, {
-    client,
     skip: initialLoad,
     variables: {
       count: PAGE_ITEM_COUNT,

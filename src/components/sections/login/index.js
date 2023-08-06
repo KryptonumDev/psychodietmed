@@ -9,7 +9,6 @@ import { useRouter } from 'next/navigation';
 import LOGIN from "../../../mutations/login"
 import { useMutation } from "@apollo/client"
 import { setCookie } from "@/app/actions"
-import client from "../../../apollo/apolo-client"
 
 export default function Login() {
   const { push } = useRouter();
@@ -30,7 +29,6 @@ export default function Login() {
     loading: loginLoading,
     error: loginError
   }] = useMutation(LOGIN, {
-    client,
     onCompleted: (res) => {
       setCookie('authToken', res.login.authToken)
      push('/moje-kursy');

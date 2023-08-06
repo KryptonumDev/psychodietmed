@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import { gql } from "@apollo/client"
-import client from "../../../apollo/apolo-client"
+import  getClient from "../../../apollo/apolo-client"
 import Hero from "@/components/sections/hero-specialist"
 import Flex from "@/components/sections/specialist-flex"
 import FAQ from "@/components/sections/faq"
@@ -39,7 +39,7 @@ export default async function Specjalista({ params }) {
 
 async function getData(params) {
   try {
-    const { data: { specjalisci, specjalistaBy, page } } = await client.query({
+    const { data: { specjalisci, specjalistaBy, page } } = await getClient().query({
       query: gql`
       query Pages($uri: String) {
         specjalisci(first: 100) {
@@ -153,7 +153,7 @@ async function getData(params) {
 
 export async function generateStaticParams() {
 
-  const { data: { specjalisci } } = await client.query({
+  const { data: { specjalisci } } = await getClient().query({
     query: gql`
     query PostStaticParams {
       specjalisci(first: 100) {

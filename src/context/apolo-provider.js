@@ -1,13 +1,12 @@
-import fetch from 'node-fetch';
+"use client";
 
+import { ApolloLink, HttpLink } from "@apollo/client";
 import {
-  NextSSRInMemoryCache,
   NextSSRApolloClient,
+  ApolloNextAppProvider,
+  NextSSRInMemoryCache,
+  SSRMultipartLink,
 } from "@apollo/experimental-nextjs-app-support/ssr";
-import { registerApolloClient } from "@apollo/experimental-nextjs-app-support/rsc";
-
-
-import { ApolloLink, createHttpLink } from "@apollo/client";
 // import { getCookie } from '@/app/actions';
 
 /**
@@ -64,14 +63,29 @@ export const afterware = new ApolloLink((operation, forward) => {
   });
 });
 
-const { getClient } = registerApolloClient(() => {
-  return new NextSSRApolloClient({
-    link: middleware.concat(afterware.concat(createHttpLink({
-      uri: `https://psychodietmed.headlesshub.com/graphql`,
-      fetch: fetch
-    }))),
-    cache: new NextSSRInMemoryCache(),
-  });
-})
+function makeClient() {
+  const httpLink = middleware.concat(afterware.concat(new HttpLink({
+    uri: "https://psychodietmed.headlesshub.com/graphql",
+  })));
 
-export default getClient;
+  return new NextSSRApolloClient({
+    cache: new NextSSRInMemoryCache(),
+    link:
+      typeof window === "undefined"
+        ? ApolloLink.from([
+          new SSRMultipartLink({
+            stripDefer: true,
+          }),
+          httpLink,
+        ])
+        : httpLink,
+  });
+}
+
+export function ApolloWrapper({ children }) {
+  return (
+    <ApolloNextAppProvider makeClient={makeClient}>
+      {children}
+    </ApolloNextAppProvider>
+  );
+}

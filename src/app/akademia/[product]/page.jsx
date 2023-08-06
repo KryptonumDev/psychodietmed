@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import client from "../../../apollo/apolo-client";
+import getClient from "../../../apollo/apolo-client";
 // import { generetaSeo } from "../../../utils/genereate-seo";
 // import { GET_SEO_PAGE } from "../../../queries/page-seo";
 import { notFound, redirect } from "next/navigation";
@@ -49,7 +49,7 @@ export default async function Courses({ params }) {
 
 async function getUser(authToken) {
   try {
-    const { data: { viewer } } = await client.query({
+    const { data: { viewer } } = await getClient().query({
       query: gql`
       query Viewer {
         viewer {
@@ -81,7 +81,7 @@ async function getUser(authToken) {
 
 async function getData(params) {
   try {
-    const { data: { product } } = await client.query({
+    const { data: { product } } = await getClient().query({
       query: gql`
       query Pages($id: ID!) {
         product(id: $id, idType: SLUG) {
@@ -166,7 +166,7 @@ async function getData(params) {
 }
 
 export async function generateStaticParams() {
-  const { data: { products } } = await client.query({
+  const { data: { products } } = await getClient().query({
     query: gql`
     query PostStaticParams {
       products(

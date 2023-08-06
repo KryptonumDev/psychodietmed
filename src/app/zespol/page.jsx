@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import client from "../../apollo/apolo-client";
+import  getClient from "../../apollo/apolo-client";
 import OtherPosts from "@/components/sections/other-posts";
 import Newsletter from "@/components/sections/newsletter";
 import Hero from "@/components/sections/hero-team";
@@ -40,7 +40,7 @@ export default async function Team() {
 }
 
 async function getData() {
-  const { data: { global, posts, page, specjalisci } } = await client.query({
+  const { data: { global, posts, page, specjalisci } } = await getClient().query({
     query: gql`
       query Pages {
         specjalisci {

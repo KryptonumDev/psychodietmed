@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import { gql } from "@apollo/client"
-import client from "../../../apollo/apolo-client"
+import getClient from "../../../apollo/apolo-client"
 import Hero from "@/components/sections/hero-post"
 import Content from "@/components/sections/content-post"
 import OtherPosts from "@/components/sections/other-posts"
@@ -27,7 +27,7 @@ export default async function Post({ params }) {
 
 async function getData(params) {
   try {
-    const { data: { post, posts } } = await client.query({
+    const { data: { post, posts } } = await getClient().query({
       query: gql`
       query BlogPost($slug: ID!) {
         posts(first: 3) {
@@ -131,7 +131,7 @@ async function getData(params) {
 
 export async function generateStaticParams() {
 
-  const { data: { posts } } = await client.query({
+  const { data: { posts } } = await getClient().query({
     query: gql`
     query PostStaticParams {
       posts(first: 100) {

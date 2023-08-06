@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client"
-import client from "../../apollo/apolo-client"
+import  getClient from "../../apollo/apolo-client"
 import { PAGE_ITEM_COUNT } from "../../constants/blog"
 import Hero from "@/components/sections/hero-media"
 import Content from "@/components/sections/content-media"
@@ -27,7 +27,7 @@ export default async function Media({ searchParams }) {
 
 async function getData(currentPage = 1) {
   try {
-    const { data: { pageBy, mediums } } = await client.query({
+    const { data: { pageBy, mediums } } = await getClient().query({
       query: gql`
       query Pages($size: Int) {
         pageBy(id: "cG9zdDo5MDI=") {

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import { gql } from "@apollo/client"
-import client from "../../apollo/apolo-client"
+import  getClient from "../../apollo/apolo-client"
 import Hero from "@/components/sections/hero-case-archive"
 import Metrics from "@/components/sections/case-archive-metrics"
 import Tiles from "@/components/sections/case-archive-tiles"
@@ -37,7 +37,7 @@ async function getData(props) {
   try {
     let currentPage = props?.searchParams?.strona || 1
 
-    const { data: { page, global, podopieczni } } = await client.query({
+    const { data: { page, global, podopieczni } } = await getClient().query({
       query: gql`
       query Archive($offset: Int, $size: Int) {
         podopieczni(where: {offsetPagination: {size: $size, offset: $offset}}){

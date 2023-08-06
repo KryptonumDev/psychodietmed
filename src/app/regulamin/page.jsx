@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import client from "../../apollo/apolo-client";
+import getClient from "../../apollo/apolo-client";
 import Slider from "@/components/sections/products-slider";
 import Hero from "@/components/sections/hero-statute";
 import { generetaSeo } from "../../utils/genereate-seo";
@@ -23,7 +23,7 @@ export default async function Regulamin() {
 }
 
 async function getData() {
-  const { data } = await client.query({
+  const { data } = await getClient().query({
     query: gql`
       query Pages {
         page(id: "cG9zdDoxNjMw") {

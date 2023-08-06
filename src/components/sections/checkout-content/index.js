@@ -1,19 +1,19 @@
 'use client'
 import React, { useContext, useEffect, useState } from "react"
 import styles from "./styles.module.scss"
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import GET_CART from "../../../queries/get-cart";
 import { getFormattedCart } from "../../../utils/get-formatted-cart";
 import CHECKOUT_MUTATION from "../../../mutations/checkout";
 import Personaldata from "@/components/organisms/checkout-personal-data";
 import { AppContext } from "../../../context/app-context";
-import client from "../../../apollo/apolo-client";
 import Aside from "@/components/organisms/checkout-aside";
 import Process from "@/components/organisms/checkout-steps";
 import Delivery from "@/components/organisms/checkout-delivery";
 import Content from "@/components/organisms/cart-content";
 import Summary from "@/components/organisms/checkout-summary";
 import { createCheckoutData } from "../../../utils/create-checkout-data";
+import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 
 export default function CheckoutContent() {
   const [cart, setCart] = useContext(AppContext);
@@ -56,7 +56,6 @@ export default function CheckoutContent() {
   const [step, setStep] = useState(2);
   // Get Cart Data.
   const { data, refetch } = useQuery(GET_CART, {
-    client,
     notifyOnNetworkStatusChange: true,
     onCompleted: (data) => {
 
@@ -74,7 +73,6 @@ export default function CheckoutContent() {
     data: checkoutResponse,
     loading: isOrderProcessing,
   }] = useMutation(CHECKOUT_MUTATION, {
-    client,
     variables: {
       input: orderData
     },

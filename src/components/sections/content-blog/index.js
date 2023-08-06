@@ -5,10 +5,10 @@ import Grid from "@/components/organisms/post-grid"
 import Category from "@/components/atoms/category-pill"
 import Card from "@/components/moleculas/blog-card"
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { gql, useQuery } from "@apollo/client"
+import { gql } from "@apollo/client"
 import { PAGE_ITEM_COUNT } from "../../../constants/blog"
 import Pagination from "@/components/organisms/pagination-client-side"
-import client from "../../../apollo/apolo-client"
+import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
 
 export default function Content({ categories, data }) {
 
@@ -69,7 +69,6 @@ export default function Content({ categories, data }) {
       }
     }
   `, {
-    client,
     skip: initialLoad,
     variables: {
       category: chosenCategory?.slug ? chosenCategory.slug : null,

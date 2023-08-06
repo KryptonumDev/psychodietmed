@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import client from "../../apollo/apolo-client";
+import  getClient from "../../apollo/apolo-client";
 import Hero from "@/components/sections/hero-cooperate";
 import CallToAction from "@/components/sections/cooperate-cta";
 import Specialisations from "@/components/sections/specialisations";
@@ -39,7 +39,7 @@ export default async function Wspolpraca() {
 }
 
 async function getData() {
-  const { data: { products, global, page, obszaryDzialania } } = await client.query({
+  const { data: { products, global, page, obszaryDzialania } } = await getClient().query({
     query: gql`
       query Pages {
         products(where: {orderby: {field: DATE, order: DESC}, categoryNotIn: ["kurs"]}, first: 12) {

@@ -2,12 +2,13 @@ import { useContext, useState } from 'react';
 import { AppContext } from "../../context/AppContext";
 import { getUpdatedItems } from '../../../functions';
 import { v4 } from 'uuid';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import UPDATE_CART from "../../../mutations/update-cart";
 import GET_CART from "../../../queries/get-cart";
 import CLEAR_CART_MUTATION from "../../../mutations/clear-cart";
 import { isEmpty } from 'lodash'
 import { getFormattedCart } from '../../../../utils/get-formatted-cart';
+import { useQuery } from '@apollo/experimental-nextjs-app-support/ssr';
 
 
 export default function CartItemsContainer() {

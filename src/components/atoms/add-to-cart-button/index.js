@@ -1,6 +1,5 @@
 'use client'
 import { useState, useContext } from "react";
-import { useQuery, useMutation } from '@apollo/client';
 import Link from "next/link";
 import { v4 } from 'uuid';
 
@@ -8,7 +7,8 @@ import { AppContext } from "../../../context/app-context";
 import { getFormattedCart } from "../../../utils/get-formatted-cart";
 import GET_CART from "../../../queries/get-cart";
 import ADD_TO_CART from "../../../mutations/add-to-cart";
-import client from "../../../apollo/apolo-client";
+import { useQuery, } from "@apollo/experimental-nextjs-app-support/ssr";
+import { useMutation } from "@apollo/client";
 
 export default function AddToCart({ chosenAddon, variationId, quantity, product }) {
 
@@ -32,9 +32,9 @@ export default function AddToCart({ chosenAddon, variationId, quantity, product 
 
   // Get Cart Data.
   const { data, refetch } = useQuery(GET_CART, {
-    client,
     notifyOnNetworkStatusChange: true,
     onCompleted: (data) => {
+      debugger
       // Update cart in the localStorage.
       const updatedCart = getFormattedCart(data);
       localStorage.setItem('woo-next-cart', JSON.stringify(updatedCart));
@@ -48,12 +48,11 @@ export default function AddToCart({ chosenAddon, variationId, quantity, product 
     loading: addToCartLoading,
     error: addToCartError
   }] = useMutation(ADD_TO_CART, {
-    client,
     variables: {
       input: productQryInput,
     },
     onCompleted: (res) => {
-      
+        debugger
       // On Success:
       // 1. Make the GET_CART query to update the cart with new values in React context.
       refetch();

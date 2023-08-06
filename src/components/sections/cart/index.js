@@ -1,15 +1,14 @@
 'use client'
 import React, { useContext } from "react"
 import styles from "./styles.module.scss"
-import { useQuery } from "@apollo/client";
 import { getFormattedCart } from "../../../utils/get-formatted-cart";
 import GET_CART from "../../../queries/get-cart";
 import { AppContext } from "../../../context/app-context";
-import client from "../../../apollo/apolo-client";
 import { useForm } from "react-hook-form";
 import Process from "@/components/organisms/checkout-steps";
 import Content from "@/components/organisms/cart-content";
 import Link from "next/link";
+import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 
 export default function Cart() {
 
@@ -19,7 +18,6 @@ export default function Cart() {
 
   const { loading, error, data, refetch } = useQuery(GET_CART, {
     notifyOnNetworkStatusChange: true,
-    client,
     onCompleted: (data) => {
       // Update cart in the localStorage.
       const updatedCart = getFormattedCart(data);

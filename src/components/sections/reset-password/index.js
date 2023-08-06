@@ -7,7 +7,6 @@ import { v4 } from "uuid"
 import { Info } from "../../../assets/info"
 import RESET from "../../../mutations/reset-password"
 import { useMutation } from "@apollo/client"
-import client from "../../../apollo/apolo-client"
 import { redirect } from "next/navigation"
 
 export default function Reset({ resetkey, login }) {
@@ -19,7 +18,6 @@ export default function Reset({ resetkey, login }) {
   } = useForm()
 
   const [reset, { loading }] = useMutation(RESET, {
-    client,
     onCompleted: (res) => {
       redirect('/moje-kursy')
     },

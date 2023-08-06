@@ -1,8 +1,8 @@
-import client from "../apollo/apolo-client"
+import getClient from "../apollo/apolo-client"
 
 export const generetaSeo = async (id, url, query, type = 'page') => {
   try {
-    const { title, metaDesc, opengraphImage  } = await getSeo(id, query)
+    const { title, metaDesc, opengraphImage } = await getSeo(id, query)
     const canonical = url + (type !== 'page' ? `/${id}` : '')
 
     return {
@@ -28,7 +28,7 @@ export const generetaSeo = async (id, url, query, type = 'page') => {
 }
 
 async function getSeo(id, query) {
-  const { data } = await client.query({
+  const { data } = await getClient().query({
     query: query,
     variables: {
       id: id

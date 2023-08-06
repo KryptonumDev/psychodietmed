@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import client from "../../apollo/apolo-client";
+import  getClient from "../../apollo/apolo-client";
 import Contact from "@/components/sections/contact";
 import DigitalSlider from "@/components/sections/digital-products-slider";
 import { generetaSeo } from "../../utils/genereate-seo";
@@ -23,7 +23,7 @@ export default async function Specialist() {
 }
 
 async function getData() {
-  const { data: { products, page: { kontakt } } } = await client.query({
+  const { data: { products, page: { kontakt } } } = await getClient().query({
     query: gql`
       query Pages {
         products(where: {orderby: { field: DATE, order: DESC}, categoryNotIn: ["kurs"]}, first: 12) {

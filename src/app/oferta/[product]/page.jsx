@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import { gql } from "@apollo/client"
-import client from "../../../apollo/apolo-client"
+import  getClient from "../../../apollo/apolo-client"
 import FlexibleContent from "@/components/sections/product-flexible-content"
 import BundleContains from "@/components/sections/product-bundle-contains"
 import StepsToConsultation from "@/components/sections/steps-to-consultation"
@@ -32,7 +32,7 @@ export default async function Post({ params }) {
 
 async function getData(params) {
   try {
-    const { data: { product, global, specialists } } = await client.query({
+    const { data: { product, global, specialists } } = await getClient().query({
       query: gql`
       query Pages($uri: ID!) {
         specialists: specjalisci(first: 100) {
@@ -223,7 +223,7 @@ async function getData(params) {
 }
 
 export async function generateStaticParams() {
-  const { data: { products } } = await client.query({
+  const { data: { products } } = await getClient().query({
     query: gql`
     query PostStaticParams {
       products(
