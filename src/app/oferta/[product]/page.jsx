@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import { gql } from "@apollo/client"
-import  getClient from "../../../apollo/apolo-client"
+import getClient from "../../../apollo/apolo-client"
 import FlexibleContent from "@/components/sections/product-flexible-content"
 import BundleContains from "@/components/sections/product-bundle-contains"
 import StepsToConsultation from "@/components/sections/steps-to-consultation"
@@ -25,7 +25,7 @@ export default async function Post({ params }) {
         <BundleContains productId={data.productId} data={data.product.bundleItems} />
       )}
       <StepsToConsultation data={global.bookGlobal} specialists={specialists} />
-      <ImportantInformation data={global.importantInformationGlobal} />
+      <ImportantInformation data={data.product.importantInformation} />
     </main>
   )
 }
@@ -61,12 +61,6 @@ async function getData(params) {
         global : page(id: "cG9zdDo3Nzk=") {
           id
           global {
-            importantInformationGlobal{
-              title
-              list{
-                text
-              }
-            }
             bookGlobal{
               title
               image{
@@ -152,6 +146,12 @@ async function getData(params) {
             }
           }
           product {
+            importantInformation{
+              title
+              list{
+                text
+              }
+            }
             bundleItems {
               text
             }
