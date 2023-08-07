@@ -6,7 +6,8 @@ export default function Specialisations({ setCurrentStep, specializations, chose
   const clickHandler = (e) => {
     if (chosenSpecialisations) {
       if (chosenSpecialisations.includes(e.target.innerText)) {
-        setChosenSpecialisations(chosenSpecialisations.filter(el => el !== e.target.innerText))
+        let newArr = chosenSpecialisations.filter(el => el !== e.target.innerText)
+        setChosenSpecialisations(newArr.length > 0 ? newArr : null)
       } else {
         setChosenSpecialisations([...chosenSpecialisations, e.target.innerText])
       }

@@ -22,7 +22,7 @@ export default function Content({ specialists }) {
 
     return arr
   }, [specialists])
-  debugger
+
   return (
     <div>
       {currentStep === 1 && (
