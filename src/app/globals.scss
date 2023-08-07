@@ -71,6 +71,9 @@ a {
   outline: 2px solid #A0636F;
   outline-offset: 2px;
 }
+input[type="checkbox"] + span {
+  cursor: pointer;
+}
 .slick-list {
   overflow: visible !important;
 }
