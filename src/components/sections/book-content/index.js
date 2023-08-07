@@ -14,14 +14,14 @@ export default function Content({ specialists }) {
 
     specialists.forEach((el) => {
       el?.specialisations?.nodes?.forEach((el) => {
-        arr.push(el)
+        if (!arr.find((e) => e.id === el.id)) {
+          arr.push(el)
+        }
       })
     })
 
-    debugger
     return arr
   }, [specialists])
-
   debugger
   return (
     <div>
