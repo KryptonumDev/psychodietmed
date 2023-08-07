@@ -10,18 +10,18 @@ export async function generateMetadata() {
 }
 
 export default async function Home() {
-  const { specialists, specializations } = await getData()
+  const { specialists } = await getData()
 
   return (
     <main className="overflow" id="main">
       <Breadcrumbs data={[{ page: 'Umów wizytę', url: '/umow-wizyte' }]} />
-      <Content specialists={specialists} specializations={specializations} />
+      <Content specialists={specialists}/>
     </main>
   )
 }
 
 async function getData() {
-  const { data: { specjalisci, specjalizacje } } = await getClient().query({
+  const { data: { specjalisci } } = await getClient().query({
     query: gql`
       query Pages {
         specjalisci(first: 100) {
@@ -53,6 +53,5 @@ async function getData() {
 
   return {
     specialists: specjalisci.nodes,
-    specializations: specjalizacje?.nodes || []
   }
 }

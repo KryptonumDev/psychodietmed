@@ -12,12 +12,8 @@ export async function generateMetadata() {
 }
 
 export default async function Courses() {
-  const authToken = cookies().get('authToken')?.value
-
-  if (!authToken) redirect('/logowanie')
-
   const { products, page } = await getData()
-  const { user } = await getUser(authToken)
+  const { user } = await getUser()
 
   return (
     <main className="overflow">
@@ -28,8 +24,9 @@ export default async function Courses() {
   )
 }
 
-async function getUser(authToken) {
+async function getUser() {
   try {
+    const authToken = cookies().get('authToken')?.valuex
     const { data: { viewer } } = await getClient().query({
       query: gql`
       query Viewer {
