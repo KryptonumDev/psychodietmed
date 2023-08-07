@@ -87,28 +87,28 @@ async function getData(params) {
   }
 }
 
-export async function generateStaticParams() {
-  const { data: { lessons } } = await getClient().query({
-    query: gql`
-    query PostStaticParams {
-      lessons(first: 100) {
-        nodes {
-          slug
-          lesson {
-            course {
-              ... on Course {
-                slug
-              }
-            }
-          }
-        }
-      }
-    }
-  `
-  })
+// export async function generateStaticParams() {
+//   const { data: { lessons } } = await getClient().query({
+//     query: gql`
+//     query PostStaticParams {
+//       lessons(first: 100) {
+//         nodes {
+//           slug
+//           lesson {
+//             course {
+//               ... on Course {
+//                 slug
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   `
+//   })
 
-  return lessons.nodes.map(({ lesson, slug }) => ({
-    lesson: slug,
-    course: lesson.course.slug
-  }))
-}
+//   return lessons.nodes.map(({ lesson, slug }) => ({
+//     lesson: slug,
+//     course: lesson.course.slug
+//   }))
+// }

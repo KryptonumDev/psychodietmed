@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import  getClient from "../apollo/apolo-client";
+import getClient from "../apollo/apolo-client";
 import Hero from "@/components/sections/hero-home";
 import Flex from "@/components/sections/case-studies-flex";
 import Specialisations from "@/components/sections/specialisations";

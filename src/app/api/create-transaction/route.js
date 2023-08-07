@@ -8,8 +8,7 @@ import {
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  const { data: { amount, sessionId, email } } = await req.json()
-
+  const { amount, sessionId, email } = await req.json()
   try {
     const p24 = new P24(
       process.env.P24_MERCHANT_ID,
@@ -36,9 +35,8 @@ export async function POST(req) {
     }
     const result = await p24.createTransaction(order)
 
-    return NextResponse.json({ error: null, result: result })
+    return NextResponse.json({ result: result })
   } catch (error) {
-    console.log(error)
-    return NextResponse.json({ error: error.data, result: null })
+    return NextResponse.json({ error: error }, { status: 500 })
   }
 };

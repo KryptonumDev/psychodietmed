@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 import  getClient from "../../../apollo/apolo-client";
 // import { generetaSeo } from "../../../utils/genereate-seo";
 // import { GET_SEO_PAGE } from "../../../queries/page-seo";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import Hero from "@/components/sections/hero-course";
 import Content from "@/components/sections/course-content";
 import { getUser } from "../../../utils/check-authorisation";
@@ -118,20 +118,20 @@ async function getData(params) {
   }
 }
 
-export async function generateStaticParams() {
-  const { data: { courses } } = await getClient().query({
-    query: gql`
-    query PostStaticParams {
-      courses(first: 100) {
-        nodes {
-          slug
-        }
-      }
-    }
-  `
-  })
+// export async function generateStaticParams() {
+//   const { data: { courses } } = await getClient().query({
+//     query: gql`
+//     query PostStaticParams {
+//       courses(first: 100) {
+//         nodes {
+//           slug
+//         }
+//       }
+//     }
+//   `
+//   })
 
-  return courses.nodes.map(({ slug }) => ({
-    course: slug
-  }))
-}
+//   return courses.nodes.map(({ slug }) => ({
+//     course: slug
+//   }))
+// }
