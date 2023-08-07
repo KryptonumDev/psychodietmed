@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useMemo, useState } from "react"
 import styles from './styles.module.scss'
 import { removeWrap } from "../../../utils/title-modification"
 import { Image } from "@/components/atoms/image"

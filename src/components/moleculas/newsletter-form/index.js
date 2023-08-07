@@ -2,20 +2,34 @@
 import React from "react"
 import { useForm } from "react-hook-form"
 import styles from './styles.module.scss'
-import { emailPattern, namePattern } from "../../../constants/patterns";
+import { emailPattern } from "../../../constants/patterns";
+import { NEWSLETTER_GROUPID } from "../../../constants/mailerLite";
+import Button from "@/components/atoms/button";
 
-export default function Form({ consent }) {
-
+export default function Form({ consent, sentStatus, setSentStatus }) {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const onSubmit = data => {
-    axios.post('/api/newsletter-api', {
-      name: data.name,
-      email: data.email
-    }).then(res => {
-      'TODO: show success message'
-    }).catch(err => {
-      'TODO: show error message'
+  const onSubmit = (data) => {
+    setSentStatus({ sent: true });
+    fetch('/api/newsletter', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email,
+        group_id: NEWSLETTER_GROUPID
+      }),
+    })
+    .then(response => response.json())
+    .then(response => {
+      if(response.success){
+        setSentStatus(prevStatus => ({ ...prevStatus, success: true }));
+      } else {
+        setSentStatus(prevStatus => ({ ...prevStatus, success: false }));
+      }
+    })
+    .catch(() => {
+      setSentStatus(prevStatus => ({ ...prevStatus, success: false }));
     })
   }
 
@@ -23,7 +37,7 @@ export default function Form({ consent }) {
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <label>
         <span>Imię</span>
-        <input {...register("name", { required: true, pattern: namePattern })} />
+        <input {...register("name")} />
         {errors.name && <div className={styles.error}>Proszę poprawnie uzupełnić to pole</div>}
       </label>
       <label>
@@ -31,7 +45,6 @@ export default function Form({ consent }) {
         <input {...register("email", { required: true, pattern: emailPattern })} />
         {errors.email && <div className={styles.error}>Proszę poprawnie uzupełnić to pole</div>}
       </label>
-      <button className="link">Wyślij</button>
       <label className={styles.check}>
         <input type="checkbox" {...register("check", { required: true })} />
         <span />
@@ -40,6 +53,7 @@ export default function Form({ consent }) {
           Proszę zaakceptować politykę prywatności
         </div>}
       </label>
+      <Button type="submit" disabled={sentStatus.sent && sentStatus.success === undefined}>Zapisz się</Button>
     </form>
   )
 }

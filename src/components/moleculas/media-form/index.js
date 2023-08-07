@@ -11,7 +11,7 @@ export default function Form() {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = data => {
-    axios.post('/api/newsletter-api', {
+    axios.post('/api/newsletter', {
       name: data.name,
       email: data.email
     }).then(res => {

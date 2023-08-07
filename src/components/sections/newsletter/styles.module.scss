@@ -20,4 +20,24 @@
       color: var(--primary-800);
     }
   }
+  position: relative;
+  .status {
+    position: absolute;
+    inset: 0;
+    background-color: var(--primary-50);
+    z-index: 4;
+    padding: clamp(36px, calc(36vw/7.68), 64px) clamp(24px, calc(48vw/7.68), 75px);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    h3 {
+      font-size: clamp(32px, calc(36vw/7.68), 42px);
+      margin: 24px 0 16px;
+    }
+    button {
+      margin-top: 24px;
+    }
+  }
 }

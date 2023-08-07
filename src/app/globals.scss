@@ -42,6 +42,16 @@ button {
   background-color: transparent;
 }
 
+[disabled] {
+  pointer-events: none;
+  opacity: .6;
+  animation: 2s loading infinite;
+  @keyframes loading {
+    50% {
+      opacity: .4;
+    }
+  }
+}
 svg {
   vertical-align: top;
 }
@@ -53,15 +63,14 @@ a {
   height: auto !important;
 }
 
-*:focus {
+:focus {
   outline: none;
 }
-
-*:focus-visible {
+.tabbing :focus-visible,
+.tabbing input[type="checkbox"]:focus-visible + span {
   outline: 2px solid #A0636F;
   outline-offset: 2px;
 }
-
 .slick-list {
   overflow: visible !important;
 }
