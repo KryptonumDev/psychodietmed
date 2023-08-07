@@ -1,0 +1,1 @@
+export const NEWSLETTER_GROUPID = 108599104;
