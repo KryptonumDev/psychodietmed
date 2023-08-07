@@ -5,6 +5,8 @@ import { gql } from "@apollo/client"
 
 export async function getUser() {
   try {
+    const authToken = cookies().get('authToken').value
+
     const { data: { viewer } } = await getClient().query({
       query: gql`
       query Viewer {
@@ -13,6 +15,11 @@ export async function getUser() {
         }
       }
     `,
+      context: {
+        headers: {
+          "Authorization": `Bearer ${authToken}`
+        }
+      }
     }, { pollInterval: 500 })
 
     if (!viewer?.username) redirect('/logowanie')

@@ -4,12 +4,15 @@ import styles from "./styles.module.scss"
 import { getFormattedCart } from "../../../utils/get-formatted-cart";
 import GET_CART from "../../../queries/get-cart";
 import { AppContext } from "../../../context/app-context";
+import { useForm } from "react-hook-form";
 import Process from "@/components/organisms/checkout-steps";
 import Content from "@/components/organisms/cart-content";
 import Link from "next/link";
 import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 
 export default function Cart() {
+
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
   const [cart, setCart] = useContext(AppContext);
 
@@ -23,6 +26,7 @@ export default function Cart() {
       setCart(updatedCart);
     }
   });
+
 
   return (
     <section className={styles.wrapper}>

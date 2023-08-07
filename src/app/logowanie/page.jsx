@@ -2,6 +2,7 @@ import { gql } from "@apollo/client";
 import  getClient from "../../apollo/apolo-client";
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
+import { cookies } from 'next/headers'
 import { redirect } from "next/navigation";
 import Login from "@/components/sections/login";
 import CallToActionGray from "@/components/sections/call-to-action-gray";
@@ -12,7 +13,9 @@ export async function generateMetadata() {
 }
 
 export default async function Courses() {
-  const { user } = await getUser()
+  const authToken = cookies().get('authToken')?.value
+  const { user } = await getUser(authToken)
+
   if (user?.username) redirect('/moje-kursy')
 
   return (
@@ -24,7 +27,7 @@ export default async function Courses() {
   )
 }
 
-async function getUser() {
+async function getUser(authToken) {
   try {
     const { data: { viewer } } = await getClient().query({
       query: gql`
@@ -34,6 +37,11 @@ async function getUser() {
         }
       }
     `,
+      context: {
+        headers: {
+          "Authorization": `Bearer ${authToken}`
+        }
+      }
     }, { pollInterval: 500 })
     return { user: viewer }
   } catch (error) {
