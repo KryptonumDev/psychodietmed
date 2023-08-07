@@ -20,7 +20,7 @@
     margin-top: clamp(36px, calc(48vw/7.68), 96px);
     min-width: max-content;
     font-size: clamp(32px, calc(36vw/7.68), 64px);
-    color: #194574;
+    color: var(--primary-800);
 
     .dot {
       border-radius: 50%;
@@ -55,7 +55,7 @@
   strong {
     margin-top: 20px;
     font-size: clamp(20rem, calc(28vw/7.68), 32rem);
-    color: #194574;
+    color: var(--primary-800);
     font-weight: 500;
     margin-top: 20px;
     display: block;

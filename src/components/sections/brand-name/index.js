@@ -6,7 +6,7 @@ import { CursorFinger } from "../../../assets/cursor-finger"
 
 const NameDivider = () => (
   <svg className={styles.dots} xmlns="http://www.w3.org/2000/svg" width="96" height="6" viewBox="0 0 103 7" fill="none">
-    <path d="M99.5 3.5H3.5" stroke="#DEAFB8" strokeWidth="6" stroke-miterlimit="16" strokeLinecap="round" strokeLinejoin="round" stroke-dasharray="0.1 19" />
+    <path d="M99.5 3.5H3.5" stroke="#DEAFB8" strokeWidth="6" strokeMiterlimit="16" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="0.1 19" />
   </svg>
 )
 
@@ -19,7 +19,7 @@ export default function Name({ data: { image, title, text, signature, psycho, di
         <p>Najedź, aby dowiedzieć się więcej</p>
       </div>
       <div className={styles.name}>
-        <span>
+        <span tabIndex="0">
           Psycho
           <div className={styles.description} >
             <div className={styles.icon}>
@@ -29,7 +29,7 @@ export default function Name({ data: { image, title, text, signature, psycho, di
           </div>
         </span>
         <NameDivider />
-        <span>
+        <span tabIndex="0">
           Diet
           <div className={styles.description} >
             <div className={styles.icon}>
@@ -39,7 +39,7 @@ export default function Name({ data: { image, title, text, signature, psycho, di
           </div>
         </span>
         <NameDivider />
-        <span>
+        <span tabIndex="0">
           Med
           <div className={styles.description} >
             <div className={styles.icon}>

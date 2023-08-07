@@ -5,7 +5,7 @@
   span {
     margin-left: 26px;
     margin-bottom: 4px;
-    color: #194574;
+    color: var(--primary-800);
     font-size: clamp(16rem, calc(16vw/7.68), 20rem);
 
     @media (max-width: 370px) {
@@ -19,7 +19,7 @@
     border-radius: 50px;
     line-height: 23px;
     padding: clamp(10px, calc(10vw/7.68), 20px) 28px;
-    color: #194574;
+    color: var(--primary-800);
     font-size: clamp(16rem, calc(16vw/7.68), 20rem);
     font-weight: 500;
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);

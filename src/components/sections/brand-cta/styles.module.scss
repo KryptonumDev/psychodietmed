@@ -74,7 +74,7 @@
   }
 
   strong {
-    color: #194574;
+    color: var(--primary-800);
     font-size: clamp(24rem, calc(28vw/7.68), 32rem);
     font-weight: 500;
 

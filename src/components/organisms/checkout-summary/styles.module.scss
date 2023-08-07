@@ -55,7 +55,7 @@
         a {
           font-weight: 700;
           text-decoration: underline;
-          color: #194574;
+          color: var(--primary-800);
         }
       }
 
@@ -94,7 +94,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    color: #194574;
+    color: var(--primary-800);
     font-size: clamp(16rem, calc(20vw/7.68), 20rem);
     font-weight: 500 !important;
   }
@@ -169,7 +169,7 @@
           width: 20px;
           height: 20px;
           border-radius: 50%;
-          background: #194574;
+          background: var(--primary-800);
           position: absolute;
           left: 50%;
           top: 50%;
@@ -180,7 +180,7 @@
       }
 
       input:checked~span {
-        border: 2px solid #194574;
+        border: 2px solid var(--primary-800);
         color: var(--neutrals-800);
 
         &::after {
@@ -310,7 +310,7 @@
       border: 2px solid var(--secondary-500);
       line-height: 23px;
       padding: clamp(10px, calc(10vw/7.68), 20px) 28px;
-      color: #194574;
+      color: var(--primary-800);
       font-size: clamp(16rem, calc(16vw/7.68), 20rem);
       font-weight: 500;
       box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);

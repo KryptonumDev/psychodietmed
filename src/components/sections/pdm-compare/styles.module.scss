@@ -103,7 +103,7 @@
       }
 
       &.bold {
-        color: #194574;
+        color: var(--primary-800);
         font-size: clamp(16rem, calc(20vw/7.68), 24rem);
 
         @media (max-width: 370px) {

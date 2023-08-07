@@ -76,7 +76,7 @@
     >.left {
       grid-area: link;
       font-size: 20rem;
-      color: #194574;
+      color: var(--primary-800);
       margin: auto 0;
 
       @media (max-width: 370px) {
@@ -113,7 +113,7 @@
 
       input {
         border-radius: 50px;
-        border: 2px solid #194574;
+        border: 2px solid var(--primary-800);
         background: #FFFEFE;
         box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
         padding: clamp(12px, calc(12vw/7.68), 16px) 28px;
@@ -143,7 +143,7 @@
 
       .coupon {
         align-items: center;
-        color: #194574;
+        color: var(--primary-800);
         font-size: clamp(14rem, calc(20vw/7.68), 20rem);
 
         @media (max-width: 370px) {

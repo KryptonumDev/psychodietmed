@@ -58,7 +58,7 @@
     top: -32px;
     z-index: 2;
     border-radius: 20px 20px 20px 0px;
-    background: #194574;
+    background: var(--primary-800);
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
     width: clamp(68px, calc(81vw/7.68), 95px);
     height: clamp(68px, calc(81vw/7.68), 95px);
@@ -108,12 +108,12 @@
 
     .avatar{
       display: flex;
-      gap: 8px;
+      gap: 16px;
       align-items: center;
-      margin-bottom: clamp(4px, calc(12vw/7.68), 12px);
+      margin-bottom: 12px;
 
       p{
-        color: #194574;
+        color: var(--primary-800);
       }
     }
 
@@ -130,7 +130,7 @@
       align-items: center;
       gap: 6px;
       margin-top: clamp(8px, calc(12vw/7.68), 12px);
-      color: #194574;
+      color: var(--primary-800);
       font-size: clamp(16rem, calc(20vw/7.68), 20rem);
       
       @media (max-width: 370px) {

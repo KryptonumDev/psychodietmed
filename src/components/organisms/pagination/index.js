@@ -33,6 +33,7 @@ export default function Pagination({ currentPage, itemCount, urlBasis }) {
           ? `${urlBasis}/strona/${currentPage - 1}`
           : `${urlBasis}`
         }
+        aria-label="Poprzednia strona"
         className={`${styles.left} ${styles.arrow}`}
         as="Link"
       />
@@ -110,6 +111,7 @@ export default function Pagination({ currentPage, itemCount, urlBasis }) {
             ? `${urlBasis}/strona/${currentPage + 1}`
             : `${urlBasis}/strona/${pagesCount}`
         }
+        aria-label="Następna strona"
         className={`${styles.right} ${styles.arrow}`}
         as="Link"
       />

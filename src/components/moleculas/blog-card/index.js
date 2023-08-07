@@ -9,7 +9,7 @@ import Category from "@/components/atoms/category-pill"
 export default function Card({ className, data }) {
   return (
     <div className={`${styles.card} ${className}`}>
-      <Link className={styles.wrap_link} href={`/blog/${data.slug}`} />
+      <Link className={styles.wrap_link} href={`/blog/${data.slug}`} aria-label={`Przejdź do artykułu '${removeWrap(data.title)}'`} />
       <Image
         className={styles.image}
         src={data?.featuredImage?.node.mediaItemUrl}

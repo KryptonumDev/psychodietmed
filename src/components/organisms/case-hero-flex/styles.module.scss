@@ -42,7 +42,7 @@
 .result {
   display: flex;
   gap: 16px;
-  color: #194574;
+  color: var(--primary-800);
   font-size: clamp(16rem, calc(20vw/7.68), 24rem);
   margin-bottom: 16px;
 
@@ -65,7 +65,7 @@
   p:first-child {
     font-size: clamp(16rem, calc(20vw/7.68), 24rem);
     font-weight: 700;
-    color: #194574;
+    color: var(--primary-800);
 
     @media (max-width: 370px) {
       font-size: clamp(0rem, calc(16vw/3.7), 16rem);
@@ -74,7 +74,7 @@
 
   p:last-child {
     font-size: 16rem;
-    color: #194574;
+    color: var(--primary-800);
     display: flex;
     align-items: center;
     gap: 6px;

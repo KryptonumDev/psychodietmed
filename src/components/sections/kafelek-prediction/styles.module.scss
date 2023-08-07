@@ -36,7 +36,7 @@
           margin-top: 0;
           padding: 10px clamp(16px, calc(18vw/7.68), 22px) 12px clamp(16px, calc(18vw/7.68), 22px);
           border-radius: 50px;
-          background: #194574;
+          background: var(--primary-800);
           color: #FFFEFE;
           font-size: clamp(14rem, calc(16vw/7.68), 20rem);
 

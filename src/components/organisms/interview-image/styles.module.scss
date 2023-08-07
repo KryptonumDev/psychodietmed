@@ -51,7 +51,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #194574;
+      background: var(--primary-800);
       border-radius: 50%;
       color: #F1F6FB;
       padding-left: 4px;
@@ -79,7 +79,7 @@
       justify-content: center;
       background: #F1F6FB;
       border-radius: 50%;
-      color: #194574;
+      color: var(--primary-800);
       padding-left: 4px;
     }
   }

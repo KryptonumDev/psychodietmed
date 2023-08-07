@@ -42,7 +42,7 @@
     }
 
     span {
-      color: #194574;
+      color: var(--primary-800);
       font-size: clamp(16rem, calc(16vw/7.68), 20rem);
       line-height: 100%;
     }
@@ -88,7 +88,7 @@
         }
 
         span{
-          color: #194574;
+          color: var(--primary-800);
         }
       }
     }
@@ -145,14 +145,14 @@
     justify-content: center;
 
     strong {
-      color: #194574;
+      color: var(--primary-800);
       font-size: 16rem;
       font-weight: 500;
     }
 
     span,
     small {
-      color: #194574;
+      color: var(--primary-800);
       font-size: 14rem;
       font-weight: 500;
     }

@@ -15,7 +15,7 @@
 
   .blueListTitle {
     text-align: center;
-    color: #194574;
+    color: var(--primary-800);
     font-size: clamp(24rem, calc(28vw/7.68), 48rem);
 
     @media (max-width: 420px) {
@@ -163,7 +163,7 @@
   align-items: center;
 
   p {
-    color: #194574;
+    color: var(--primary-800);
     font-size: clamp(16rem, calc(20vw/7.68), 20rem);
 
     @media (max-width: 370px) {
@@ -179,7 +179,7 @@
     font-size: clamp(36rem, calc(36vw/7.68), 48rem);
     line-height: 124%;
     font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
-    color: #194574;
+    color: var(--primary-800);
 
     @media (max-width: 370px) {
       font-size: clamp(0rem, calc(36vw/3.7), 36rem);

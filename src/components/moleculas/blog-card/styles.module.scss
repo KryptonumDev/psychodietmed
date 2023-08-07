@@ -110,7 +110,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #194574;
+  color: var(--primary-800);
   font-weight: 500;
   font-size: clamp(16rem, calc(20vw/7.68), 20rem);
 

@@ -37,7 +37,7 @@
         }
 
         span {
-          color: #194574;
+          color: var(--primary-800);
           font-size: clamp(22rem, calc(28vw/7.68), 36rem);
 
           @media (max-width: 370px) {
@@ -81,10 +81,10 @@
     }
 
     span{
-      color: #194574;
+      color: var(--primary-800);
       padding: 10px 12px 12px 12px;
       border-radius: 54px;
-      border: 1px solid var(--primary-800, #194574);
+      border: 1px solid var(--primary-800, var(--primary-800));
       transition: all .2s cubic-bezier(0.77, 0, 0.175, 1);
       display: block;
       font-size: clamp(14rem, calc(16vw/7.68), 16rem);
@@ -102,7 +102,7 @@
     }
 
     input:checked ~ span{
-      background-color: #194574;
+      background-color: var(--primary-800);
       color: #fff;
     }
   }

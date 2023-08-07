@@ -75,7 +75,7 @@
     span {
       margin-left: 26px;
       margin-bottom: 4px;
-      color: #194574;
+      color: var(--primary-800);
       font-size: clamp(16rem, calc(16vw/7.68), 20rem);
 
       @media (max-width: 370px) {
@@ -85,11 +85,11 @@
 
     input {
       background: #FFFEFE;
-      border: 2px solid #194574;
+      border: 2px solid var(--primary-800);
       border-radius: 50px;
       line-height: 23px;
       padding: clamp(10px, calc(10vw/7.68), 20px) 28px;
-      color: #194574;
+      color: var(--primary-800);
       font-size: clamp(16rem, calc(16vw/7.68), 20rem);
       font-weight: 500;
 

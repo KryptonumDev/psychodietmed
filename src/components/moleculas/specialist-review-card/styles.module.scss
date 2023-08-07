@@ -14,7 +14,7 @@
     display: flex;
     gap: 16px;
     align-items: center;
-    color: #194574;
+    color: var(--primary-800);
     font-size: clamp(24rem, calc(28vw/7.68), 32rem);
   }
 }

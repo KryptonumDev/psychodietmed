@@ -81,7 +81,7 @@
     bottom: 0;
     position: absolute;
     transform: translate(30%, 10%);
-    background: #194574;
+    background: var(--primary-800);
     color: #fff;
     width: 20px;
     height: 20px;
@@ -219,7 +219,7 @@
       height: 3px;
       width: 100%;
       display: block;
-      background-color: #194574;
+      background-color: var(--primary-800);
       transition: transform .4s var(--easing);
       &:nth-child(2) {
         z-index: -1;
@@ -246,11 +246,9 @@
   inset: 0;
   z-index: 1;
   background: rgba(217, 217, 217, 0.4);
-
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
-
+  transition: opacity .3s;
   &.active {
     pointer-events: all;
     opacity: 1;
@@ -259,20 +257,17 @@
 
 .mobile_menu,
 .mobile_menu_sub {
-  pointer-events: none;
   opacity: 0;
-  transition: opacity 0.2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
-
+  visibility: hidden;
+  transition: opacity .3s, visibility .3s;
   &.active {
-    pointer-events: all;
+    visibility: visible;
     opacity: 1;
   }
-
   &.overlayed {
     opacity: 0;
-    pointer-events: none;
+    visibility: hidden;
   }
-
   width: 300px;
   background-color: #fff;
   position: fixed;

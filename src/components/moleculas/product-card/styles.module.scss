@@ -88,7 +88,7 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: #194574;
+            background: var(--primary-800);
             position: absolute;
             left: 50%;
             top: 50%;
@@ -99,7 +99,7 @@
         }
 
         input:checked~.checkbox {
-          border: 2px solid #194574;
+          border: 2px solid var(--primary-800);
           color: var(--neutrals-800);
 
           &::after {

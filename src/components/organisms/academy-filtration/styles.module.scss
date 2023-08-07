@@ -22,7 +22,7 @@
 
     p {
       margin-left: 25px;
-      color: #194574;
+      color: var(--primary-800);
     }
   }
 }
@@ -63,7 +63,7 @@
   }
 
   .clear {
-    color: #194574;
+    color: var(--primary-800);
     text-decoration: underline;
     text-decoration-thickness: 2px;
     font-size: clamp(16rem, calc(20vw / 7.68), 24rem);

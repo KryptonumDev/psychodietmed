@@ -40,7 +40,7 @@
       width: 118px;
     }
     p {
-      color: #194574;
+      color: var(--primary-800);
       font-size: clamp(16rem, calc(24vw/7.68), 32rem);
 
       @media (max-width: 370px) {

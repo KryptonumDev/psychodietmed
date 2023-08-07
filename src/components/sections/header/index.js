@@ -151,6 +151,7 @@ export default function Header() {
           <button
             onClick={() => { setIsMenuOpened(!isMenuOpened); setItemOpened(false) }}
             className={`${styles.burger} ${isMenuOpened ? styles.active : ''}`}
+            aria-label="Otwórz/Zamknij nawigację"
           >
             <span />
             <span />

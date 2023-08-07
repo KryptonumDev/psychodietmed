@@ -1,15 +1,12 @@
 .wrapper {
-
-  .instruction{
+  .instruction {
     display: flex;
     align-items: center;
     gap: 4px;
     margin-bottom: clamp(20px, calc(28vw/7.68), 28px);
-
-    p{
+    p {
       font-size: 16rem;
-      color: #194574;
-
+      color: var(--primary-800);
       @media (max-width: 370px) {
         font-size: clamp(0rem, calc(16vw/3.7), 16rem);
       }
@@ -35,7 +32,7 @@
 
     span {
       font-size: clamp(36rem, calc(40vw/7.68), 64rem);
-      color: #194574;
+      color: var(--primary-800);
       position: relative;
       cursor: pointer;
 
@@ -45,25 +42,46 @@
 
       @media (max-width: 1320px) {
         position: static;
-
-        &:nth-child(1) {
+        &:nth-of-type(1) {
           .description {
-            right: unset;
+            .icon {
+              left: 45%;
+            }
             left: 0;
+            transform: unset;
           }
         }
-
-        &:nth-child(3) {
+        &:nth-of-type(2) {
           .description {
-            right: unset;
-            left: 50%;
-            transform: translateX(-50%);
+            .icon {
+              left: 57%;
+            }
           }
         }
-
-        &:nth-child(5) {
+        &:nth-of-type(3) {
           .description {
-            right: 0px;
+            .icon {
+              left: 60%;
+            }
+            right: 0;
+            left: unset;
+            transform: unset;
+          }
+        }
+      }
+      @media (max-width: 1059px) {
+        &:nth-of-type(1) {
+          .description {
+            .icon {
+              left: 25%;
+            }
+          }
+        }
+        &:nth-of-type(3) {
+          .description {
+            .icon {
+              left: 80%;
+            }
           }
         }
       }
@@ -88,20 +106,22 @@
       .description {
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.3s cubic-bezier(0.77, 0, 0.175, 1);
+        transition: opacity .4s var(--easing);
         position: absolute;
-        right: -154px;
+        top: calc(clamp(50px, calc(62vw/7.68), 82px) * 1.5);
+        left: 50%;
+        transform: translateX(-50%);
         border-radius: 20px;
-        background: var(--neutrals-50, #FFF);
+        background-color: var(--neutrals-50, #FFF);
         box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
         width: clamp(344px, calc(523vw/7.68), 624px);
         z-index: 3;
-        padding: clamp(20px, calc(32vw/7.68), 48px) clamp(20px, calc(24vw/7.68), 48px) clamp(24px, calc(28vw/7.68), 48px) clamp(20px, calc(24vw/7.68), 48px);
+        padding: clamp(32px, calc(32vw/7.68), 48px) clamp(20px, calc(24vw/7.68), 48px) clamp(24px, calc(28vw/7.68), 48px) clamp(20px, calc(24vw/7.68), 48px);
 
         strong {
           display: block;
           margin-bottom: 24px;
-          color: #194574;
+          color: var(--primary-800);
           font-size: clamp(24rem, calc(28vw/7.68), 32rem);
           font-weight: 500;
           line-height: 124%;
@@ -114,12 +134,12 @@
         .icon {
           position: absolute;
           top: 0;
-          right: 90px;
-          transform: translateY(-50%);
+          left: 50%;
+          transform: translate(-50%, -50%);
           border-radius: 50%;
           background: #F1F6FB;
-          width: clamp(51px, calc(61vw/7.68), 85px);
-          height: clamp(51px, calc(61vw/7.68), 85px);
+          width: clamp(50px, calc(62vw/7.68), 82px);
+          height: clamp(50px, calc(62vw/7.68), 82px);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -130,11 +150,10 @@
           }
         }
       }
-
-      &:hover {
+      &:hover,
+      &:focus {
         .description {
           opacity: 1;
-          pointer-events: all;
         }
       }
     }

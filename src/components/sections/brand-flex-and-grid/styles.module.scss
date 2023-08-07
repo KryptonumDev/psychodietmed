@@ -45,7 +45,7 @@
           font-size: clamp(20rem, calc(24vw/7.68), 28rem);
           display: block;
           margin-bottom: 12px;
-          color: #194574;
+          color: var(--primary-800);
         }
 
         p {
@@ -115,7 +115,7 @@
         }
 
         a {
-          color: #194574;
+          color: var(--primary-800);
           text-decoration: underline;
           font-weight: 700;
         }
@@ -123,7 +123,7 @@
         strong {
           font-weight: 500;
           font-size: clamp(20rem, calc(24vw/7.68), 32rem);
-          color: #194574;
+          color: var(--primary-800);
 
           @media (max-width: 370px) {
             font-size: clamp(0rem, calc(20vw / 3.7), 20rem);

@@ -46,7 +46,7 @@
   display: flex;
   gap: 8px;
   align-items: center;
-  color: #194574;
+  color: var(--primary-800);
   font-size: clamp(20rem, calc(24vw/3.7), 24rem);
 
   @media (max-width: 370px) {

@@ -62,7 +62,7 @@
     h2 {
       font-size: clamp(24rem, calc(28vw/7.68), 36rem);
       line-height: 125%;
-      color: #194574;
+      color: var(--primary-800);
       margin-bottom: clamp(16px, calc(20vw/7.68), 24px);
 
       @media (max-width: 370px) {

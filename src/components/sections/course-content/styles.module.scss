@@ -49,7 +49,7 @@
           display: flex;
           align-items: center;
           gap: 8px;
-          color: #194574;
+          color: var(--primary-800);
           font-weight: 700;
           font-size: clamp(14rem, calc(14vw/7.68), 16rem);
 
@@ -61,7 +61,7 @@
 
         >h4 {
           // margin-left: 35px;
-          color: #194574;
+          color: var(--primary-800);
           display: grid;
           align-items: center;
           grid-template-columns: 36px auto;
@@ -128,7 +128,7 @@
           &:nth-child(2) {
             grid-area: time;
             justify-self: end;
-            color: #194574;
+            color: var(--primary-800);
             display: flex;
             gap: 8px;
             align-items: center;
@@ -189,7 +189,7 @@
     }
 
     .authorTitle {
-      color: #194574;
+      color: var(--primary-800);
       text-align: center;
       font-size: clamp(28rem, calc(28vw/7.68), 32rem);
 
@@ -206,7 +206,7 @@
 
     .name {
       text-align: center;
-      color: #194574;
+      color: var(--primary-800);
 
       @media (max-width: 1024px) {
         grid-area: name;
