@@ -31,7 +31,7 @@ export default function Login() {
   }] = useMutation(LOGIN, {
     onCompleted: (res) => {
       setCookie('authToken', res.login.authToken)
-     push('/moje-kursy');
+      push('/moje-kursy');
     },
     onError: (error) => {
       throw new Error(error?.graphQLErrors?.[0]?.message ?? error);

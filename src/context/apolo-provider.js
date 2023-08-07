@@ -1,5 +1,6 @@
 "use client";
 
+import { setCookie } from "@/app/actions";
 import { ApolloLink, HttpLink } from "@apollo/client";
 import {
   NextSSRApolloClient,
@@ -15,10 +16,12 @@ import {
 export const middleware = new ApolloLink(async (operation, forward) => {
   // If session data exist in local storage, set value as session header.
   const session = (typeof window !== 'undefined') ? localStorage.getItem("woo-session") : null;
+  const authToken = (typeof window !== 'undefined') ? localStorage.getItem("authToken") : null;
   if (session) {
     operation.setContext(({ headers = {} }) => ({
       headers: {
         "woocommerce-session": `Session ${session}`,
+        "Authorization": `Bearer ${authToken}`
       }
     }));
   }
@@ -53,7 +56,8 @@ export const afterware = new ApolloLink((operation, forward) => {
         // Update session new data if changed.
       } else if (localStorage.getItem("woo-session") !== session) {
 
-        localStorage.setItem("woo-session", headers.get("woocommerce-session"));
+        localStorage.setItem("woo-session", headers.get("woocommerce-session"))
+        setCookie('woo-session', headers.get("woocommerce-session"))
 
       }
     }

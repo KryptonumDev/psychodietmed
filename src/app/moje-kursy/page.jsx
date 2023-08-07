@@ -13,11 +13,10 @@ export async function generateMetadata() {
 
 export default async function Courses() {
   const authToken = cookies().get('authToken')?.value
-
   if (!authToken) redirect('/logowanie', 'replace')
 
   const { data } = await getData()
-  const { user } = await getUser(authToken)
+  const { user } = await getUser()
 
   return (
     <main className="overflow">
@@ -27,7 +26,7 @@ export default async function Courses() {
   )
 }
 
-async function getUser(authToken) {
+async function getUser() {
   try {
     const { data: { viewer } } = await getClient().query({
       query: gql`
@@ -58,11 +57,6 @@ async function getUser(authToken) {
         }
       }
     `,
-      context: {
-        headers: {
-          "Authorization": `Bearer ${authToken}`
-        }
-      }
     }, { pollInterval: 500 })
 
     if (!viewer?.username) redirect('/logowanie')

@@ -14,11 +14,10 @@ import Breadcrumbs from "@/components/sections/breadcrumbs";
 
 export default async function Courses({ params }) {
   const authToken = cookies().get('authToken')?.value
-
   if (!authToken) redirect('/logowanie')
 
   const { product } = await getData(params)
-  const { user } = await getUser(authToken)
+  const { user } = await getUser()
 
   if (!!user?.courses?.nodes?.find((el) => el.databaseId === product.product.course.databaseId)) redirect(`/moje-kursy/${product?.product?.course?.slug}`)
   let totalTime = 0
@@ -47,7 +46,7 @@ export default async function Courses({ params }) {
   )
 }
 
-async function getUser(authToken) {
+async function getUser() {
   try {
     const { data: { viewer } } = await getClient().query({
       query: gql`
@@ -62,11 +61,6 @@ async function getUser(authToken) {
         }
       }
     `,
-      context: {
-        headers: {
-          "Authorization": `Bearer ${authToken}`
-        }
-      }
     }, { pollInterval: 500 })
 
     return {
