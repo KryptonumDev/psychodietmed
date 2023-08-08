@@ -356,6 +356,10 @@ p em {
   &:hover::after {
     transform: translate(-50%, -50%) scale(1);
   }
+  transition: transform .4s var(--easing);
+  &:active {
+    transform: scale(.98);
+  }
 }
 
 @media (max-width: 420px) {
