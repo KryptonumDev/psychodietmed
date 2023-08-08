@@ -7,7 +7,9 @@ export async function POST(req) {
       'Content-Type': 'application/json',
       'X-MailerLite-ApiKey': process.env.MAILERLITE_APIKEY,
     };
-    const requestBody = await req.json();
+    let requestBody = await req.json();
+
+    requestBody = {fields: { marketing_permissions: 1 }, ...requestBody}
 
     const response = await fetch(`https://api.mailerlite.com/api/v2/subscribers`, {
       method: 'POST',
