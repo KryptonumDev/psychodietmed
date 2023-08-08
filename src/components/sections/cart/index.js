@@ -11,7 +11,6 @@ import Link from "next/link";
 import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 
 export default function Cart() {
-
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const [cart, setCart] = useContext(AppContext);

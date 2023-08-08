@@ -1,7 +1,6 @@
 import { v4 } from 'uuid';
 
 export const createCheckoutData = (order) => {
-
   // Set the billing Data to shipping, if applicable.
   const billingData = order.billingDifferentThanShipping ? order.billing : order.shipping;
 
@@ -35,7 +34,7 @@ export const createCheckoutData = (order) => {
     },
     customerNote: order.customerNote,
     shipToDifferentAddress: order.billingDifferentThanShipping,
-    paymentMethod: order.paymentMethod,
+    paymentMethod: 'bacs',
     shippingMethod: order.shippingMethod,
     transactionId: order.transactionId,
     isPaid: order.isPaid,

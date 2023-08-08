@@ -14,6 +14,8 @@ import Content from "@/components/organisms/cart-content";
 import Summary from "@/components/organisms/checkout-summary";
 import { createCheckoutData } from "../../../utils/create-checkout-data";
 import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr";
+import axios from "axios";
+import { v4 } from "uuid";
 
 export default function CheckoutContent() {
   const [cart, setCart] = useContext(AppContext);
@@ -53,7 +55,7 @@ export default function CheckoutContent() {
     ]
   });
   const [orderData, setOrderData] = useState(null);
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(3);
   // Get Cart Data.
   const { data, refetch } = useQuery(GET_CART, {
     notifyOnNetworkStatusChange: true,
@@ -76,21 +78,30 @@ export default function CheckoutContent() {
     variables: {
       input: orderData
     },
+    onCompleted: (data) => {
+      axios.post('/api/create-transaction', {
+        "amount": data.checkout.order.total,
+        "sessionId": data.checkout.order.orderKey,
+        "email": data.checkout.customer.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
+      }).then((response) => {
+        debugger
+      }).catch((error) => {
+        debugger
+      })
+    },
     onError: (error) => {
       throw new Error(error?.graphQLErrors?.[0]?.message);
     }
   });
 
-  useEffect(async () => {
+  useEffect(() => {
     if (null !== orderData) {
-      // Call the checkout mutation when the value for orderData changes/updates.
-      await checkout();
+      checkout();
     }
   }, [orderData]);
 
   const handleSubmit = (data) => {
-    //
-    setOrderData(createCheckoutData(data))
+    setOrderData(createCheckoutData(input))
   }
 
   // if(!cart) return null TODO: add loader
@@ -114,7 +125,7 @@ export default function CheckoutContent() {
       {((step === 4 && cart?.needsShippingAddress) || (step === 3 && !cart?.needsShippingAddress)) && (
         <>
           <Content refetch={refetch} cart={cart} isCart={false} />
-          <Summary needsShippingAddress={cart?.needsShippingAddress} input={input} setStep={setStep} />
+          <Summary submit={handleSubmit} needsShippingAddress={cart?.needsShippingAddress} input={input} setStep={setStep} />
         </>
       )}
     </section>

@@ -35,8 +35,10 @@ export async function POST(req) {
     }
     const result = await p24.createTransaction(order)
 
+    console.log(result)
     return NextResponse.json({ result: result })
   } catch (error) {
+    console.log(error)
     return NextResponse.json({ error: error }, { status: 500 })
   }
 };

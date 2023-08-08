@@ -46,6 +46,7 @@ export default function Personaldata({ input, setStep, setInput }) {
     setInput({
       ...input,
       firmOrder: data.type === 'firm',
+      billingDifferentThanShipping: !data.shipping_same_as_billing,
       shipping: {
         firstName: data.type === 'person' ? data.shipping_name.split(' ')[0] : data.shipping_same_as_billing ? data.billing_firmName : data.shipping_name.split(' ')[0],
         lastName: data.type === 'person' ? data.shipping_name.split(' ')[1] : data.shipping_same_as_billing ? '' : data.shipping_name.split(' ')[1],

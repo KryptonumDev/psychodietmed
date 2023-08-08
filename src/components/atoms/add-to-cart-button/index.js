@@ -5,9 +5,7 @@ import { v4 } from 'uuid';
 
 import { AppContext } from "../../../context/app-context";
 import { getFormattedCart } from "../../../utils/get-formatted-cart";
-import GET_CART from "../../../queries/get-cart";
 import ADD_TO_CART from "../../../mutations/add-to-cart";
-import { useQuery, } from "@apollo/experimental-nextjs-app-support/ssr";
 import { useMutation } from "@apollo/client";
 
 export default function AddToCart({ chosenAddon, variationId, quantity, product }) {
@@ -16,7 +14,6 @@ export default function AddToCart({ chosenAddon, variationId, quantity, product 
     fieldName: { fieldName: chosenAddon?.name },
     value: { fieldName: chosenAddon?.name, value: chosenAddon?.val }
   } : null
-
 
   const productQryInput = {
     clientMutationId: v4(),
@@ -30,18 +27,6 @@ export default function AddToCart({ chosenAddon, variationId, quantity, product 
   const [showViewCart, setShowViewCart] = useState(false);
   const [requestError, setRequestError] = useState(null);
 
-  // Get Cart Data.
-  const { data, refetch } = useQuery(GET_CART, {
-    notifyOnNetworkStatusChange: true,
-    onCompleted: (data) => {
-      debugger
-      // Update cart in the localStorage.
-      const updatedCart = getFormattedCart(data);
-      localStorage.setItem('woo-next-cart', JSON.stringify(updatedCart));
-      // Update cart data in React Context.
-      setCart(updatedCart);
-    }
-  });
   // Add to Cart Mutation.
   const [addToCart, {
     data: addToCartRes,
@@ -52,17 +37,13 @@ export default function AddToCart({ chosenAddon, variationId, quantity, product 
       input: productQryInput,
     },
     onCompleted: (res) => {
-        debugger
-      // On Success:
-      // 1. Make the GET_CART query to update the cart with new values in React context.
-      refetch();
-
+      const updatedCart = getFormattedCart(res.addToCart);
+      localStorage.setItem('woo-next-cart', JSON.stringify(updatedCart));
+      setCart(updatedCart);
       // 2. Show View Cart Button
       setShowViewCart(true)
     },
     onError: (error) => {
-
-      
       if (error) {
         setRequestError(error?.graphQLErrors?.[0]?.message ?? '');
       }

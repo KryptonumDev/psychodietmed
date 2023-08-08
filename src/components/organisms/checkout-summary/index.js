@@ -5,7 +5,7 @@ import Link from "next/link"
 import Input from "@/components/atoms/input"
 import { useForm } from "react-hook-form"
 
-export default function Summary({ needsShippingAddress, setStep, input }) {
+export default function Summary({ submit, needsShippingAddress, setStep, input }) {
   const {
     register,
     handleSubmit,
@@ -14,6 +14,7 @@ export default function Summary({ needsShippingAddress, setStep, input }) {
 
 
   const onSubmit = (data) => {
+    submit()
   }
   
   return (
