@@ -19,43 +19,9 @@ import { v4 } from "uuid";
 
 export default function CheckoutContent() {
   const [cart, setCart] = useContext(AppContext);
-  const [input, setInput] = useState({
-    "firmOrder": true,
-    "shipping": {
-      "firstName": "KRYPTONUM SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ",
-      "lastName": "",
-      "address1": "ALEJA KOMISJI EDUKACJI NARODOWEJ 103/61",
-      "address2": "",
-      "city": "WARSZAWA",
-      "country": "PL",
-      "state": "",
-      "postcode": "02-722",
-      "email": "bogdan@kryptonum.eu",
-      "phone": "730788035",
-      "company": "KRYPTONUM SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ"
-    },
-    "billing": {
-      "firstName": "KRYPTONUM SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ",
-      "lastName": "",
-      "address1": "ALEJA KOMISJI EDUKACJI NARODOWEJ 103/61",
-      "address2": "",
-      "city": "WARSZAWA",
-      "country": "PL",
-      "state": "",
-      "postcode": "02-722",
-      "email": "bogdan@kryptonum.eu",
-      "phone": "730788035",
-      "company": "KRYPTONUM SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ"
-    },
-    "metaData": [
-      {
-        "key": "_billing_nip",
-        "value": "9512465557"
-      }
-    ]
-  });
+  const [input, setInput] = useState({});
   const [orderData, setOrderData] = useState(null);
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(2);
   // Get Cart Data.
   const { data, refetch } = useQuery(GET_CART, {
     notifyOnNetworkStatusChange: true,
@@ -71,10 +37,7 @@ export default function CheckoutContent() {
   });
 
   // Create New order: Checkout Mutation.
-  const [checkout, {
-    data: checkoutResponse,
-    loading: isOrderProcessing,
-  }] = useMutation(CHECKOUT_MUTATION, {
+  const [checkout] = useMutation(CHECKOUT_MUTATION, {
     variables: {
       input: orderData
     },
@@ -84,7 +47,6 @@ export default function CheckoutContent() {
         email: data.checkout.customer?.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
         fields: {
           name: data.checkout.customer?.firstName || data.checkout.order.billing.firstName || data.checkout.order.shipping.firstName,
-          accepts_marketing: 1
         }
       }).then((response) => {
         debugger
@@ -92,15 +54,15 @@ export default function CheckoutContent() {
         debugger
       })
 
-      // axios.post('/api/create-transaction', {
-      //   "amount": data.checkout.order.total,
-      //   "sessionId": data.checkout.order.orderKey,
-      //   "email": data.checkout.customer.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
-      // }).then((response) => {
-      //   debugger
-      // }).catch((error) => {
-      //   debugger
-      // })
+      axios.post('/api/create-transaction', {
+        "amount": data.checkout.order.total,
+        "sessionId": data.checkout.order.orderKey,
+        "email": data.checkout.customer.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
+      }).then((response) => {
+        debugger
+      }).catch((error) => {
+        debugger
+      })
     },
     onError: (error) => {
       throw new Error(error?.graphQLErrors?.[0]?.message);
@@ -113,7 +75,7 @@ export default function CheckoutContent() {
     }
   }, [orderData]);
 
-  const handleSubmit = (data) => {
+  const handleSubmit = (props) => {
     setOrderData(createCheckoutData(input))
   }
 

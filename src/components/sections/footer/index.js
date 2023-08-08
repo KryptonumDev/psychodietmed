@@ -57,6 +57,10 @@ const urlSystem = [
       {
         name: 'Akademia',
         url: '/akademia'
+      },
+      {
+        name: 'Moje kursy',
+        url: '/moje-kursy'
       }
     ]
   }

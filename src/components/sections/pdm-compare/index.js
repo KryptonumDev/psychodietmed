@@ -38,7 +38,7 @@ export default function Compare({ data: { title, text, psychoterapeuta, psychodi
           </div>
           <div>
             <p>Łącznie</p>
-            <strong>640 minut</strong>
+            <strong>320 minut</strong>
             <small></small>
           </div>
         </div>
@@ -67,7 +67,7 @@ export default function Compare({ data: { title, text, psychoterapeuta, psychodi
           </div>
           <div>
             <p>Oszczędzasz</p>
-            <strong>440 minut</strong>
+            <strong>120 minut</strong>
             <small></small>
           </div>
         </div>

@@ -20,9 +20,10 @@ export default function Card({ onClick = () => { }, short = false, data: { speci
         <h3>{title}</h3>
         <p>{proffesional?.proffesion}</p>
         <ul>
-          {specialisations?.nodes.map(({ title }, index) => (
-            <li key={index}>{title}</li>
-          ))}
+          {specialisations?.nodes.map(({ title }, index) => {
+            if(index > 4) return null
+            return <li key={index}>{title}</li>
+          })}
         </ul>
       </div>
       {!short && (

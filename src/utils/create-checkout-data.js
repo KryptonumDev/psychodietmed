@@ -38,14 +38,11 @@ export const createCheckoutData = (order) => {
     shippingMethod: order.shippingMethod,
     transactionId: order.transactionId,
     isPaid: order.isPaid,
+    account: { //TODO: check if this is needed
+      username: billingData?.email,
+      password: v4(),
+    }
   };
-
-  if (order.createAccount) {
-    checkoutData.account = {
-      username: order.username,
-      password: order.password,
-    };
-  }
 
   return checkoutData;
 };
