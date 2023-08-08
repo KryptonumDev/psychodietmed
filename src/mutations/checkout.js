@@ -6,10 +6,16 @@ mutation CHECKOUT_MUTATION( $input: CheckoutInput! ) {
     clientMutationId
     customer {
       email
+      firstName
     }
     order {
       billing {
         email
+        firstName
+      }
+      shipping {
+        email
+        firstName
       }
       id
       orderKey

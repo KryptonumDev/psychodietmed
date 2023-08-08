@@ -11,14 +11,14 @@ export default function Form() {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = data => {
-    axios.post('/api/newsletter', {
-      name: data.name,
-      email: data.email
-    }).then(res => {
-      'TODO: show success message'
-    }).catch(err => {
-      'TODO: show error message'
-    })
+    // axios.post('/api/newsletter', {
+    //   name: data.name,
+    //   email: data.email
+    // }).then(res => {
+    //   'TODO: show success message'
+    // }).catch(err => {
+    //   'TODO: show error message'
+    // })
   }
 
   return (

@@ -30,7 +30,7 @@ export default function CheckoutContent() {
       "country": "PL",
       "state": "",
       "postcode": "02-722",
-      "email": "kryptonumstudio@gmail.com",
+      "email": "bogdan@kryptonum.eu",
       "phone": "730788035",
       "company": "KRYPTONUM SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ"
     },
@@ -43,7 +43,7 @@ export default function CheckoutContent() {
       "country": "PL",
       "state": "",
       "postcode": "02-722",
-      "email": "kryptonumstudio@gmail.com",
+      "email": "bogdan@kryptonum.eu",
       "phone": "730788035",
       "company": "KRYPTONUM SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ"
     },
@@ -79,15 +79,28 @@ export default function CheckoutContent() {
       input: orderData
     },
     onCompleted: (data) => {
-      axios.post('/api/create-transaction', {
-        "amount": data.checkout.order.total,
-        "sessionId": data.checkout.order.orderKey,
-        "email": data.checkout.customer.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
+      debugger
+      axios.post('/api/mailer-lite-register', {
+        email: data.checkout.customer?.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
+        fields: {
+          name: data.checkout.customer?.firstName || data.checkout.order.billing.firstName || data.checkout.order.shipping.firstName,
+          accepts_marketing: 1
+        }
       }).then((response) => {
         debugger
       }).catch((error) => {
         debugger
       })
+
+      // axios.post('/api/create-transaction', {
+      //   "amount": data.checkout.order.total,
+      //   "sessionId": data.checkout.order.orderKey,
+      //   "email": data.checkout.customer.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
+      // }).then((response) => {
+      //   debugger
+      // }).catch((error) => {
+      //   debugger
+      // })
     },
     onError: (error) => {
       throw new Error(error?.graphQLErrors?.[0]?.message);
