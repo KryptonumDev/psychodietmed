@@ -11,7 +11,7 @@ export default function Form({ consent, sentStatus, setSentStatus }) {
 
   const onSubmit = (data) => {
     setSentStatus({ sent: true });
-    fetch('/api/newsletter', {
+    fetch('/api/subscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
