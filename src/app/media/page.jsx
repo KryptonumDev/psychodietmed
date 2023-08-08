@@ -29,14 +29,14 @@ async function getData(currentPage = 1) {
   try {
     const { data: { pageBy, mediums } } = await getClient().query({
       query: gql`
-      query Pages($size: Int) {
+      query Pages($offset: Int!, $size: Int) {
         pageBy(id: "cG9zdDo5MDI=") {
           mediaArchiwum {
             pageTitle
             text
           }
         }
-        mediums(where: {offsetPagination: {size: $size, offset: 0}}) {
+        mediums(where: {offsetPagination: {size: $size, offset: $offset}}) {
           pageInfo {
             offsetPagination {
               total
