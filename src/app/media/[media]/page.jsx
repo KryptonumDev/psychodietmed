@@ -15,7 +15,7 @@ export async function generateMetadata({ params }) {
   return await generetaSeo(params.media, '/media', GET_SEO_MEDIA, 'post')
 }
 
-export const revalidate = 5
+export const revalidate = 60
 
 export default async function Post({ params }) {
   const { data, otherMedia } = await getData(params)
