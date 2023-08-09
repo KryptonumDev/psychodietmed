@@ -7,7 +7,7 @@ import { Image } from "@/components/atoms/image"
 import Price from "@/components/atoms/price"
 import { CheckMark } from "../../../assets/check-mark"
 
-export const Card = ({ product }) => {
+export const Card = ({ offer = true, product }) => {
 
   const [chosenVariation, setChosenVariation] = useState(product?.variations?.nodes[0] || null)
   const [chosenAddon, setChosenAddon] = useState(null)
@@ -37,7 +37,7 @@ export const Card = ({ product }) => {
 
   return (
     <div className={styles.wrapper}>
-      <Link className={styles.link} href={`/oferta/${product?.slug}`} />
+      <Link className={styles.link} href={offer ? `/oferta/${product?.slug}` : `/akademia/${product?.slug}`} />
       <div>
         <Image
           width={product.image.mediaDetails.width}

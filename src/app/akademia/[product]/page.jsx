@@ -1,141 +1,204 @@
-import { gql } from "@apollo/client";
-import getClient from "../../../apollo/apolo-client";
-// import { generetaSeo } from "../../../utils/genereate-seo";
-// import { GET_SEO_PAGE } from "../../../queries/page-seo";
-import { notFound, redirect } from "next/navigation";
-import Hero from "@/components/sections/hero-course";
-import Content from "@/components/sections/course-content";
-import { cookies } from "next/headers";
-import Breadcrumbs from "@/components/sections/breadcrumbs";
+import { notFound } from "next/navigation"
+import { gql } from "@apollo/client"
+import getClient from "../../../apollo/apolo-client"
+import FlexibleContent from "@/components/sections/product-flexible-content"
+import BundleContains from "@/components/sections/product-bundle-contains"
+import StepsToConsultation from "@/components/sections/steps-to-consultation"
+import ImportantInformation from "@/components/sections/product-important-information"
+import Hero from "@/components/sections/hero-product"
+import { generetaSeo } from "../../../utils/genereate-seo"
+import { GET_SEO_PRODUCT } from "../../../queries/product-seo"
+import Breadcrumbs from "@/components/sections/breadcrumbs"
 
-// export async function generateMetadata() {
-//   return await generetaSeo('cG9zdDoxODY4', '/akademia', GET_SEO_PAGE)
-// }
+export async function generateMetadata({ params }) {
+  return await generetaSeo(params.product, '/akademia', GET_SEO_PRODUCT, 'post')
+}
 
-export default async function Courses({ params }) {
-  const { product } = await getData(params)
-  const { user } = await getUser()
-
-  if (!!user?.courses?.nodes?.find((el) => el.databaseId === product.product.course.databaseId)) redirect(`/moje-kursy/${product?.product?.course?.slug}`)
-  let totalTime = 0
-  let lessonsCount = 0
-  let firstLessonSlug = product.product.course.course.chapters[0].lessons[0].lesson.slug
-
-  product.product.course.course.chapters.forEach(chapter => {
-    chapter.lessons.forEach(el => {
-      totalTime += Number(el.lesson.lesson.time)
-      lessonsCount++
-    })
-  })
-
-  if (totalTime > 60) {
-    totalTime = Math.floor(totalTime / 60) + ' godzin ' + totalTime % 60 + ' minut'
-  } else {
-    totalTime = totalTime + ' minut'
-  }
-
+export default async function Post({ params }) {
+  const { data, global, specialists } = await getData(params)
   return (
-    <main>
-      <Breadcrumbs data={[{ page: 'Akademia', url: `/akademia` }, { page: product.title, url: `/akademia/${params.product}` }]} />
-      <Hero lessonSlug={firstLessonSlug} slug={product.product.course.slug} databaseId={product.databaseId} title={product.product.course.title} image={product.product.course.featuredImage} time={totalTime} count={lessonsCount} />
-      <Content disabled={true} slug={product.product.course.slug} content={product.product.course.content} chapters={product.product.course.course.chapters} author={product.product.course.course.author} />
+    <main id="main">
+      <Breadcrumbs data={[{ page: 'Adakemia', url: `/akademia` }, { page: data.title, url: `/akademia/${params.product}` }]} />
+      <Hero data={data} />
+      <FlexibleContent productId={data.productId} data={data.product.additionalSectionsProduct} />
+      {data.product.bundleItems?.length > 0 && (
+        <BundleContains productId={data.productId} data={data.product.bundleItems} />
+      )}
+      <StepsToConsultation data={global.bookGlobal} specialists={specialists} />
+      <ImportantInformation data={data.product.importantInformation} />
     </main>
   )
 }
 
-async function getUser() {
-  const authToken = cookies().get('authToken')?.value
+async function getData(params) {
   try {
-    const { data: { viewer } } = await getClient().query({
+    const { data: { product, global, specialists } } = await getClient().query({
       query: gql`
-      query Viewer {
-        viewer {
-          username
-          courses {
-            nodes {
-              databaseId
+      query Pages($uri: ID!) {
+        specialists: specjalisci(first: 100) {
+          nodes {
+            title
+            slug
+            specialisations {
+              nodes {
+                id : databaseId
+                title : name
+              }
+            }
+            proffesional {
+              proffesion
+              personImage {
+                altText
+                mediaItemUrl
+                mediaDetails {
+                  height
+                  width
+                }
+              }
             }
           }
         }
-      }
-    `,
-      context: {
-        headers: {
-          "Authorization": `Bearer ${authToken}`
+        global : page(id: "cG9zdDo3Nzk=") {
+          id
+          global {
+            bookGlobal{
+              title
+              image{
+                altText
+                mediaItemUrl
+                mediaDetails {
+                  height
+                  width
+                }
+              }
+              titleFirst
+              textFirst
+              titleSecond
+              textSecond
+              titleThird
+              textThird
+              illnes {
+                id : databaseId
+                title : name
+              }
+            }
+          }
         }
-      }
-    }, { pollInterval: 500 })
-
-    return {
-      user: viewer
-    }
-  } catch (error) {
-    return {
-      user: null
-    }
-  }
-}
-
-async function getData(params) {
-  try {
-    const { data: { product } } = await getClient().query({
-      query: gql`
-      query Pages($id: ID!) {
-        product(id: $id, idType: SLUG) {
-          databaseId
+        product(id: $uri, idType: SLUG) {
+          id
+          productId: databaseId
           title
-          slug
-          product {
-            course {
-              ... on Course {
-                databaseId
+          description
+          productCategories{
+            nodes{
+              slug
+            }
+          }
+          addons {
+            name
+            ... on AddonMultipleChoice {
+              description
+              name
+              options {
+                price
+                label
+              }
+              fieldName
+            }
+          }
+          featuredImage {
+            node {
+              altText
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
+            }
+          }
+          ... on SimpleProduct {
+            id
+            price(format: RAW)
+            regularPrice(format: RAW)
+          }
+          ... on VariableProduct {
+            id
+            price(format: RAW)
+            regularPrice(format: RAW)
+            attributes {
+              nodes {
+                variation
+                name
+                options
+                attributeId
+              }
+            }
+            variations {
+              nodes {
                 id
-                title
-                slug
+                name
+                price(format: RAW)
+                regularPrice(format: RAW)
+                productId: databaseId
+                attributes {
+                  nodes {
+                    value
+                    name
+                    attributeId
+                  }
+                }
+              }
+            }
+          }
+          product {
+            importantInformation{
+              title
+              list{
+                text
+              }
+            }
+            bundleItems {
+              text
+            }
+            additionalSectionsProduct {
+              ... on Product_Product_AdditionalSectionsProduct_TwoColumnFlex {
                 content
-                featuredImage {
-                  node {
+                fieldGroupName
+                image {
+                  altText
+                  mediaItemUrl
+                  mediaDetails {
+                    height
+                    width
+                  }
+                }
+              }
+              ... on Product_Product_AdditionalSectionsProduct_TwoColumnGrid {
+                fieldGroupName
+                title
+                grid {
+                  text
+                  icon {
                     altText
                     mediaItemUrl
                     mediaDetails {
-                      width
                       height
+                      width
                     }
                   }
                 }
-                course {
-                  author {
-                    ... on Specjalista {
-                      id
-                      title
-                      proffesional {
-                        courseExcerpt
-                        proffesion
-                        avatar {
-                          altText
-                          mediaItemUrl
-                          mediaDetails {
-                            width
-                            height
-                          }
-                        }
-                      }
-                    }
-                  }
-                  chapters {
-                    title
-                    lessons {
-                      lesson {
-                        ... on Lesson {
-                          id
-                          title
-                          slug
-                          databaseId
-                          lesson {
-                            time
-                          }
-                        }
-                      }
+              }
+              ... on Product_Product_AdditionalSectionsProduct_TwoColumnList {
+                fieldGroupName
+                title
+                lista {
+                  text
+                  icon {
+                    altText
+                    mediaItemUrl
+                    mediaDetails {
+                      height
+                      width
                     }
                   }
                 }
@@ -146,15 +209,17 @@ async function getData(params) {
       }
     `,
       variables: {
-        id: params.product
+        uri: `${params.product}`,
       }
     })
 
-    if (!product?.databaseId) notFound()
-    if (!product?.product?.course?.databaseId) notFound()
+    if (!product.id || product.productCategories.nodes.some(({ slug }) => slug !== 'ebook'))
+      notFound()
 
     return {
-      product: product,
+      data: product,
+      global: global.global,
+      specialists: specialists.nodes
     }
   } catch (error) {
     console.log(error)
@@ -168,7 +233,7 @@ export async function generateStaticParams() {
     query PostStaticParams {
       products(
         first: 100,
-        where: {categoryIn: ["kurs"]}
+        where: {categoryIn: ["ebook"]}
       ) {
         nodes {
           slug

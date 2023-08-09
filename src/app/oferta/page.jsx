@@ -245,7 +245,7 @@ async function getData(params) {
       products(
           where: {
             categoryIn: $category, 
-            categoryNotIn: ["kurs", "bundle"],
+            categoryNotIn: ["ebook", "kurs", "bundle"],
             orderby: {field: $orderby, order: $orderDirection}, 
             maxPrice: $maxPrice,
             minPrice: $minPrice,

@@ -46,7 +46,7 @@ async function getData() {
             }
           }
         }
-        products(first: 5, where: {categoryNotIn: ["kurs", "bundle"]} ) {
+        products(first: 5, where: {categoryNotIn: ["ebook", "kurs", "bundle"]} ) {
           nodes {
             product {
               discount

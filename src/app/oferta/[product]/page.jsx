@@ -11,7 +11,7 @@ import { GET_SEO_PRODUCT } from "../../../queries/product-seo"
 import Breadcrumbs from "@/components/sections/breadcrumbs"
 
 export async function generateMetadata({ params }) {
-  return await generetaSeo(params.product, '/akademia', GET_SEO_PRODUCT, 'post')
+  return await generetaSeo(params.product, '/oferta', GET_SEO_PRODUCT, 'post')
 }
 
 export default async function Post({ params }) {
@@ -89,6 +89,11 @@ async function getData(params) {
           productId: databaseId
           title
           description
+          productCategories{
+            nodes{
+              slug
+            }
+          }
           addons {
             name
             ... on AddonMultipleChoice {
@@ -208,7 +213,7 @@ async function getData(params) {
       }
     })
 
-    if (!product.id)
+    if (!product.id || product.productCategories.nodes.some(({ slug }) => slug === 'ebook' || slug === 'kurs'))
       notFound()
 
     return {
@@ -228,7 +233,7 @@ export async function generateStaticParams() {
     query PostStaticParams {
       products(
         first: 100,
-        where: {categoryNotIn: ["kurs"]}
+        where: {categoryNotIn: ["ebook", "kurs"]}
       ) {
         nodes {
           slug

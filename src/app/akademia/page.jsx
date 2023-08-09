@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import  getClient from "../../apollo/apolo-client";
+import getClient from "../../apollo/apolo-client";
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
 import Grid from "@/components/sections/academy-grid";
@@ -12,13 +12,13 @@ export async function generateMetadata() {
 }
 
 export default async function Courses() {
-  const { products, page } = await getData()
+  const { courses, page, ebooks } = await getData()
   const { user } = await getUser()
 
   return (
     <main className="overflow">
       <Breadcrumbs data={[{ page: 'Akademia', url: `/akademia` }]} />
-      <Grid user={user} data={products} />
+      <Grid user={user} courses={courses} ebooks={ebooks}/>
       <Recruitment data={page.akademia.specialistGridTeam} />
     </main>
   )
@@ -59,7 +59,7 @@ async function getUser() {
 
 async function getData() {
   try {
-    const { data: { page, viewer, products } } = await getClient().query({
+    const { data: { page, courses, ebooks } } = await getClient().query({
       query: gql`
       query Pages {
         page(id: "cG9zdDoyMDM3"){
@@ -85,7 +85,75 @@ async function getData() {
             }
           }
         }
-        products(where: {categoryIn: "kurs"}) {
+        ebooks: products(where: {categoryIn: "ebook"}) {
+          nodes{
+            addons {
+              name
+              ... on AddonMultipleChoice {
+                description
+                name
+                options {
+                  price
+                  label
+                }
+                fieldName
+              }
+            }
+            product {
+              discount
+              bundleItems {
+                text
+              }
+            }
+            id
+            productId: databaseId
+            slug
+            name
+            image {
+              altText
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
+            }
+            ... on SimpleProduct {
+              id
+              price
+              regularPrice
+            }
+            ... on VariableProduct {
+              id
+              price
+              regularPrice
+              attributes {
+                nodes {
+                  variation
+                  name
+                  options
+                  attributeId
+                }
+              }
+              variations {
+                nodes {
+                  id
+                  name
+                  price
+                  regularPrice
+                  productId: databaseId
+                  attributes {
+                    nodes {
+                      value
+                      name
+                      attributeId
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        courses: products(where: {categoryIn: "kurs"}) {
           nodes {
             productId: databaseId
             slug
@@ -119,8 +187,9 @@ async function getData() {
     })
 
     return {
-      products: products,
-      page: page
+      courses: courses,
+      page: page,
+      ebooks: ebooks
     }
   } catch (err) {
     throw new Error(err)
