@@ -1,4 +1,3 @@
-import fetch from "node-fetch"
 import { NextResponse } from 'next/server';
 
 export async function POST(req) {
@@ -8,8 +7,6 @@ export async function POST(req) {
       'X-MailerLite-ApiKey': process.env.MAILERLITE_APIKEY,
     };
     let requestBody = await req.json();
-
-    requestBody = { status: 'active', fields: { marketing_permissions: 1 }, ...requestBody }
 
     const response = await fetch(`https://api.mailerlite.com/api/v2/subscribers`, {
       method: 'POST',

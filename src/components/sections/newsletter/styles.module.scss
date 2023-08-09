@@ -6,10 +6,19 @@
   overflow: hidden;
 
   &::after{
-    content: url('/for-pacient.png');
+    content: 'Dla specjalisty';
     position: absolute;
     right: 0;
     top: 0;
+    background-color: var(--primary-800);
+    color: var(--background-50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    width: 300px;
+    transform: translate(32%, 100%) rotate(45deg);
+    font-size: clamp(12px, calc(16vw/7.68), 16px);
   }
 
   .text {
