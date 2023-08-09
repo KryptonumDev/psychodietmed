@@ -1,6 +1,6 @@
 import { v4 } from 'uuid';
 
-export const createCheckoutData = (order) => {
+export const createCheckoutData = (order, needAccount, registred, props ) => {
   // Set the billing Data to shipping, if applicable.
   const billingData = order.billingDifferentThanShipping ? order.billing : order.shipping;
 
@@ -38,11 +38,14 @@ export const createCheckoutData = (order) => {
     shippingMethod: order.shippingMethod,
     transactionId: order.transactionId,
     isPaid: order.isPaid,
-    account: { //TODO: check if this is needed
+  };
+
+  if (needAccount && !registred) {
+    checkoutData.account = {
       username: billingData?.email,
       password: v4(),
     }
-  };
+  }
 
   return checkoutData;
 };

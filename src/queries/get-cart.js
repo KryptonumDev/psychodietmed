@@ -12,6 +12,11 @@ query GET_CART {
         }
         product {
           node {
+            productCategories {
+              nodes {
+                slug
+              }
+            }
             id
             productId: databaseId
             name

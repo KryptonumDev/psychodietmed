@@ -23,7 +23,7 @@ export default function CheckoutContent() {
   const [orderData, setOrderData] = useState(null);
   const [step, setStep] = useState(2);
   // Get Cart Data.
-  const { data, refetch } = useQuery(GET_CART, {
+  const { refetch } = useQuery(GET_CART, {
     notifyOnNetworkStatusChange: true,
     onCompleted: (data) => {
 
@@ -43,28 +43,28 @@ export default function CheckoutContent() {
     },
     onCompleted: (data) => {
       debugger
-      axios.post('/api/mailer-lite-register', {
-        email: data.checkout.customer?.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
-        status: 'active', 
-        fields: {
-          marketing_permissions: '1',
-          name: data.checkout.customer?.firstName || data.checkout.order.billing.firstName || data.checkout.order.shipping.firstName,
-        }
-      }).then((response) => {
-        debugger
-      }).catch((error) => {
-        debugger
-      })
+      // axios.post('/api/mailer-lite-register', {
+      //   email: data.checkout.customer?.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
+      //   status: 'active',
+      //   fields: {
+      //     marketing_permissions: '1',
+      //     name: data.checkout.customer?.firstName || data.checkout.order.billing.firstName || data.checkout.order.shipping.firstName,
+      //   }
+      // }).then((response) => {
+      //   debugger
+      // }).catch((error) => {
+      //   debugger
+      // })
 
-      axios.post('/api/create-transaction', {
-        "amount": data.checkout.order.total,
-        "sessionId": data.checkout.order.orderKey,
-        "email": data.checkout.customer.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
-      }).then((response) => {
-        debugger
-      }).catch((error) => {
-        debugger
-      })
+      // axios.post('/api/create-transaction', {
+      //   "amount": data.checkout.order.total,
+      //   "sessionId": data.checkout.order.orderKey,
+      //   "email": data.checkout.customer.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
+      // }).then((response) => {
+      //   debugger
+      // }).catch((error) => {
+      //   debugger
+      // })
     },
     onError: (error) => {
       throw new Error(error?.graphQLErrors?.[0]?.message);
@@ -78,7 +78,9 @@ export default function CheckoutContent() {
   }, [orderData]);
 
   const handleSubmit = (props) => {
-    setOrderData(createCheckoutData(input))
+    const needAccount = cart.products.some((item) => item.categories.some((category) => category.slug === 'kurs'))
+    const registred = false // TODO: add check if user is already registred
+    setOrderData(createCheckoutData(input, needAccount, registred, props))
   }
 
   // if(!cart) return null TODO: add loader

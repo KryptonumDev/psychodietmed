@@ -14,7 +14,7 @@ export default function Summary({ submit, needsShippingAddress, setStep, input }
 
 
   const onSubmit = (data) => {
-    submit()
+    submit(data)
   }
   
   return (

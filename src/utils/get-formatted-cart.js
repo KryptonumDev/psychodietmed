@@ -27,6 +27,7 @@ export const getFormattedCart = (data) => {
     product.regularPrice = givenProduct?.regularPrice ?? '';
     product.price = givenProduct?.price ?? '';
     product.totalPrice = givenProducts?.[i]?.total ?? '';
+    product.categories = givenProduct?.productCategories?.nodes ?? [];
     product.image = {
       mediaDetails: {
         height: givenProduct?.image?.mediaDetails?.height,
