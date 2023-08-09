@@ -17,13 +17,10 @@
     li {
       display: flex;
       gap: 12px;
-
       svg {
         min-width: clamp(32px, calc(32vw/7.68), 45px);
         width: clamp(32px, calc(32vw/7.68), 45px);
-        height: fit-content;
       }
-
       p {
         margin-top: clamp(3px, calc(3vw/7.68), 4px);
       }
