@@ -75,7 +75,7 @@ export default function CheckoutContent() {
     if (null !== orderData) {
       checkout();
     }
-  }, [orderData]);
+  }, [checkout, orderData]);
 
   const handleSubmit = (props) => {
     setOrderData(createCheckoutData(input))
