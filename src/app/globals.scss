@@ -59,6 +59,12 @@ svg {
 a {
   color: inherit;
 }
+summary {
+  &::marker,
+  &::-webkit-details-marker {
+    display: none;
+  }
+}
 
 .swiper-slide {
   height: auto !important;
