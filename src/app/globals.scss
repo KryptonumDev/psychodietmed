@@ -6,6 +6,7 @@ html {
 :root {
   --animation: .3s ease-out;
   --neutrals-800: #181818;
+  --background-50: #FFFEFE;
   --secondary-100: #F5E7EA;
   --secondary-200: #F2DFE3;
   --secondary-500: #DEAFB8;
@@ -59,6 +60,12 @@ svg {
 
 a {
   color: inherit;
+}
+summary {
+  &::marker,
+  &::-webkit-details-marker {
+    display: none;
+  }
 }
 
 .swiper-slide {

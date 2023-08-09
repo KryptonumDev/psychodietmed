@@ -90,6 +90,15 @@ export default function Header() {
 
   const pathname = usePathname();
 
+  const handleClick = (e) => {
+    const target = e.target;
+    target.blur();
+    target.closest('ul').style.display = "none";
+    setTimeout(() => {
+      target.closest('ul').style = null;
+    }, 10);
+  }
+
   const handleEscapeKey = (e) => {
     if (e.key === "Escape"){
       setIsMenuOpened(false);
@@ -118,15 +127,15 @@ export default function Header() {
                     {item.name}
                   </Link>
                 ) : (
-                  <button>
+                  <span>
                     {item.name}
-                  </button>
+                  </span>
                 )}
                 {item.subpages && (
                   <ul className={styles.bottom_nav}>
                     {item.subpages?.map(el => (
                       <li key={el.url} className={styles.bottom_nav_item}>
-                        <Link href={el.url} aria-current={pathname == el.url ? 'page' : false}>
+                        <Link href={el.url} aria-current={pathname == el.url ? 'page' : false} onClick={(e) => handleClick(e)}>
                           {el.name}
                         </Link>
                       </li>
