@@ -45,7 +45,9 @@ export default function CheckoutContent() {
       debugger
       axios.post('/api/mailer-lite-register', {
         email: data.checkout.customer?.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
+        status: 'active', 
         fields: {
+          marketing_permissions: '1',
           name: data.checkout.customer?.firstName || data.checkout.order.billing.firstName || data.checkout.order.shipping.firstName,
         }
       }).then((response) => {

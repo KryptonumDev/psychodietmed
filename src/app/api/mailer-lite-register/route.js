@@ -9,8 +9,6 @@ export async function POST(req) {
     };
     let requestBody = await req.json();
 
-    requestBody = { status: 'active', fields: { marketing_permissions: 1 }, ...requestBody }
-
     const response = await fetch(`https://api.mailerlite.com/api/v2/subscribers`, {
       method: 'POST',
       headers,
