@@ -17,6 +17,7 @@ html {
   --secondary-500: #DEAFB8;
   --secondary-600: #C996A0;
   --primary-50: #F1F6FB;
+  --primary-500: #76A2D6;
   --primary-800: #194574;
   --easing: cubic-bezier(0, .8, 0.62, 1);
 }
@@ -404,7 +405,7 @@ p em {
 
 
 .input .react-select__control {
-  padding: clamp(6px, calc(6vw/7.68), 12px) 28px;
+  padding: 12px 28px;
   background: #FFFFFF;
   border: 2px solid var(--secondary-500);
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
@@ -415,9 +416,12 @@ p em {
   font-size: clamp(16rem, calc(16vw/7.68), 20rem);
   font-weight: 500;
 }
-
-.input .react-select__control:hover {
-  border-color: var(--secondary-500);
+.input.dark .react-select__control {
+  border-color: var(--primary-800);
+  transition: border-color .4s;
+  &:hover {
+    border-color: var(--primary-500);
+  }
 }
 
 @media (max-width: 370px) {

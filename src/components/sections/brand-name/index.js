@@ -50,7 +50,7 @@ export default function Name({ data: { image, title, text, signature, psycho, di
         </span>
       </div>
       <div className={styles.flex}>
-        <Image className={styles.image} src={image.mediaItemUrl} alt={image.altText} width={image.mediaDetails.width} height={image.mediaDetails.height} />
+        <Image aspectRatio={true} className={styles.image} src={image.mediaItemUrl} alt={image.altText} width={image.mediaDetails.width} height={image.mediaDetails.height} />
         <div>
           <h2 dangerouslySetInnerHTML={{ __html: removeWrap(title) }} />
           <div className={styles.text} dangerouslySetInnerHTML={{ __html: text }} />

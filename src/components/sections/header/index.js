@@ -104,7 +104,7 @@ export default function Header() {
     target.closest('ul').style.display = "none";
     setTimeout(() => {
       target.closest('ul').style = null;
-    }, 10);
+    }, 100);
   }
 
   const handleEscapeKey = (e) => {

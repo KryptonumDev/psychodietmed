@@ -36,6 +36,9 @@
     padding: clamp(28px, calc(36vw/7.68), 48px) clamp(36px, calc(48vw/7.68), 96px);
     overflow: hidden;
     position: relative;
+    @media (min-width: 701px){
+      min-height: 610px;
+    }
     .title {
       display: flex;
       align-items: center;
@@ -74,7 +77,7 @@
       gap: 64px;
       justify-content: space-between;
       margin-top: clamp(24px, calc(34vw/7.68), 48px);
-      @media (min-width: 701px){
+      @media (min-width: 701px) {
         min-height: clamp(240px, calc(240vw/7.68), 500px);
       }
       .image {

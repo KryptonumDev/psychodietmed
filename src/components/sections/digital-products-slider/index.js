@@ -16,7 +16,6 @@ export default function DigitalSlider({ data, title='Poznaj nasze usługi cyfrow
     <section className={styles.wrapper}>
       <h2 dangerouslySetInnerHTML={{ __html: removeWrap(title) }} />
       <Slider data={arrays} />
-      {/* arrays */}
     </section>
   )
 }

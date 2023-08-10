@@ -62,17 +62,17 @@ export default function Academy({ data: { title, text, grid } }) {
                   initial={
                     isSmallWidth
                     ? { height: 0 }
-                    : { opacity: 0 }
+                    : { opacity: 0, display: 'none' }
                   }
                   animate={
                     isSmallWidth
                     ? { height: 'auto' }
-                    : { opacity: activeElement === index ? 1 : 0 }
+                    : { opacity: 1, display: 'flex' }
                   }
                   exit={
                     isSmallWidth
                     ? { height: 0 }
-                    : { opacity: 0 }
+                    : { opacity: 0, display: 'none' }
                   }
                   transition={
                     isSmallWidth

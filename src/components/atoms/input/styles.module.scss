@@ -15,7 +15,7 @@
 
   input, textarea {
     background: #FFFEFE;
-    border: 2px solid var(--secondary-500);
+    border: 2px solid var(--primary-800);
     border-radius: 50px;
     line-height: 23px;
     padding: clamp(10px, calc(10vw/7.68), 20px) 28px;
@@ -23,6 +23,10 @@
     font-size: clamp(16rem, calc(16vw/7.68), 20rem);
     font-weight: 500;
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+    transition: border-color .3s;
+    &:hover {
+      border-color: var(--primary-500);
+    }
 
     @media (max-width: 370px) {
       font-size: clamp(0rem, calc(16vw/3.7), 16rem);

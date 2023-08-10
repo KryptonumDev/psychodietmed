@@ -136,6 +136,10 @@ async function getData() {
                 icon{
                   altText
                   mediaItemUrl
+                  mediaDetails{
+                    height
+                    width
+                  }
                 }
                 text
               }
@@ -144,10 +148,10 @@ async function getData() {
               psycho
               diet
               med
-              image{
+              image {
                 altText
                 mediaItemUrl
-                mediaDetails{
+                mediaDetails {
                   height
                   width
                 }

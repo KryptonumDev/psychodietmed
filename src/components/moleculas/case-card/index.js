@@ -1,6 +1,5 @@
 import React from "react"
 import styles from './styles.module.scss';
-import Link from "next/link";
 import { Image } from "@/components/atoms/image";
 import { removeWrap } from "../../../utils/title-modification";
 import { RightArrow } from "../../../assets/small-right-arrow";

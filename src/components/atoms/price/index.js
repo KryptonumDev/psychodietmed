@@ -1,4 +1,3 @@
-
 export default function Price({ quantity = 1, regularPrice = 0, salesPrice }) {
 
   return (
