@@ -40,14 +40,21 @@ export default function Specialists({ data, title = 'Wybierz specjalistę' }) {
         spaceBetween={28}
         slidesPerView={1}
         breakpoints={{
-          1240: {
+          1366: {
             slidesPerView: 2.5,
           },
+
+          1024: {
+            slidesPerView: 3,
+          },
           768: {
-            slidesPerView: 2,
+            slidesPerView: 2.5,
             spaceBetween: 48
           },
-          520: {
+          640: {
+            slidesPerView: 2,
+          },
+          480: {
             slidesPerView: 1.5,
           }
         }}

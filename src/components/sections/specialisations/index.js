@@ -40,7 +40,6 @@ export default function Specialisations({ data: { text, title }, activities }) {
                   <p>{specialisationCard.zajawkaSpecjalizacji}</p>
                 </div>
               </div>
-              <span />
             </div>
           )
         })}

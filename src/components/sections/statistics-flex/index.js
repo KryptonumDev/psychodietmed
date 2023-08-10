@@ -33,7 +33,7 @@ export default function StatisticsFlex({ data }) {
     const handleScrollCountup = () => {
       counters.forEach(counter => {
         const { top } = counter.getBoundingClientRect();
-        if (top < window.innerHeight && counter.classList.contains('counter')) {
+        if (top < window.innerHeight && counter.classList.contains('counter') && counter.parentElement) {
           animateCounter(counter);
           counter.classList.remove('counter');
         }

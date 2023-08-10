@@ -30,7 +30,6 @@
 
   .item {
     display: grid;
-    grid-template-columns: auto 36px;
     gap: clamp(12px, calc(12vw/7.68), 56px);
     align-items: center;
     min-height: 200px;
@@ -44,6 +43,7 @@
     -webkit-user-drag: none;
 
     &.active {
+      grid-template-columns: auto 36px;
       &:active {
         transform: scale(.98);
       }
