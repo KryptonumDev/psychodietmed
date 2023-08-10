@@ -80,11 +80,19 @@ export default function Header() {
   const [isMenuOpened, setIsMenuOpened] = useState(false)
   const [itemOpened, setItemOpened] = useState(false)
   const [cart] = useContext(AppContext);
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll);
     document.addEventListener("keydown", handleEscapeKey);
     return () => {
       document.removeEventListener("keydown", handleEscapeKey)
+      window.removeEventListener("scroll", handleScroll);
     }
   }, []);
 
@@ -100,7 +108,7 @@ export default function Header() {
   }
 
   const handleEscapeKey = (e) => {
-    if (e.key === "Escape"){
+    if (e.key === "Escape") {
       setIsMenuOpened(false);
       setItemOpened(false);
     }
@@ -109,7 +117,7 @@ export default function Header() {
   return (
     <>
       <a href="#main" className={styles.skipToMain}>Przejdź do treści głownej</a>
-      <header className={styles.header}>
+      <header className={`${styles.header} ${scrollY > 0 ? styles.scrolled : ''}`}>
         <div className={styles.content}>
           <Link
             href='/'
