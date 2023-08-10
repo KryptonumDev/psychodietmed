@@ -3,7 +3,7 @@ html {
   max-width: 100%;
   font-size: 5.3%;
 
-  @media (max-height: 720px) and (min-width: 1024px){
+  @media (max-height: 768px) and (min-width: 1024px){
     zoom: 0.84;
   }
 }
@@ -115,7 +115,7 @@ main {
     padding-top: clamp(130px, calc(200vw/7.68), 200px);
   }
 
-  @media (max-height: 720px) and (min-width: 1024px){
+  @media (max-height: 768px) and (min-width: 1024px){
     padding-top: clamp(130px, calc(130vw/7.68), 130px);
   }
 }

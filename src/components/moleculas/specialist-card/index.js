@@ -1,9 +1,7 @@
 'use client'
 import React from "react"
-import Link from "next/link";
 import { Image } from "@/components/atoms/image";
 import styles from "./styles.module.scss";
-import { RightArrow } from "../../../assets/small-right-arrow";
 import Button from "@/components/atoms/button";
 
 export default function Card({ onClick = () => { }, short = false, data: { specialisations, proffesional, slug, title } }) {
