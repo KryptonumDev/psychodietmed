@@ -43,6 +43,11 @@
       padding: 28px clamp(16px, calc(28vw/7.68), 56px) clamp(16px, calc(16vw/7.68), 28px) clamp(16px, calc(28vw/7.68), 56px);
       border-radius: 20px;
     }
+    .notFound {
+      h3 {
+        margin: clamp(24px, calc(32vw/7.68), 48px) 0 -16px;
+      }
+    }
   }
 }
 

@@ -21,7 +21,7 @@ export default function StatisticsFlex({ data }) {
         var progress = easeCustom(frame / totalFrames);
         var currentCount = Math.round(countTo * progress);
         if(parseInt(el.textContent, 10) !== currentCount){
-          el.textContent = currentCount;
+          el.textContent = currentCount.toLocaleString();
         }
         if(frame === totalFrames){
           el.parentElement.style = null;
