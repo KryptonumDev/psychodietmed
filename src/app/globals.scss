@@ -2,6 +2,10 @@ html {
   /* overflow-x: hidden; */
   max-width: 100%;
   font-size: 5.88%;
+
+  @media (max-height: 720px) and (min-width: 1024px){
+    zoom: 0.9;
+  }
 }
 
 :root {
@@ -105,6 +109,15 @@ main {
   grid-template-columns: 100%;
   grid-gap: clamp(64px, calc(64vw/7.68), 180px);
   position: relative;
+
+  @media (max-width: 1439px) {
+    padding: 0 clamp(16px, calc(32vw/7.68), 80px);
+    padding-top: clamp(130px, calc(200vw/7.68), 200px);
+  }
+
+  @media (max-height: 680px) and (min-width: 1024px){
+    padding-top: clamp(130px, calc(160vw/7.68), 160px);
+  }
 }
 
 .overflow {
@@ -114,13 +127,6 @@ main {
 
 .swiper-slide-shadow {
   display: none !important;
-}
-
-@media (max-width: 1439px) {
-  main {
-    padding: 0 clamp(16px, calc(32vw/7.68), 80px);
-    padding-top: clamp(130px, calc(200vw/7.68), 200px);
-  }
 }
 
 /* calc((36vw / 7.68) * 1rem) */
