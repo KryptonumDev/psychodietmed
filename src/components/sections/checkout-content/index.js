@@ -79,7 +79,7 @@ export default function CheckoutContent() {
     if (null !== orderData) {
       checkout();
     }
-  }, [orderData]);
+  }, [checkout, orderData]);
 
   const handleSubmit = (props) => {
     const needAccount = cart.products.some((item) => item.categories.some((category) => category.slug === 'kurs'))
