@@ -6,6 +6,7 @@ import { Image } from "@/components/atoms/image"
 import Link from "next/link"
 import { AnimatePresence, motion } from "framer-motion";
 import { RightArrow } from "../../../assets/small-right-arrow"
+import Button from "@/components/atoms/button"
 
 export default function StepsToConsultation({ data, specialists }) {
   const { title, image, titleFirst, textFirst, illnes, titleSecond, textSecond, titleThird, textThird } = data
@@ -36,7 +37,7 @@ export default function StepsToConsultation({ data, specialists }) {
       <div className={styles.grid}>
         <Image aspectRatio={true} className={styles.image} src={image.mediaItemUrl} alt={image.altText} width={image.mediaDetails.width} height={image.mediaDetails.height} />
         <div className={styles.sub_grid}>
-          <details open={step === 1} className={styles.item}>
+          <details open={step === 1} className={styles.item} style={step > 1 ? { cursor: 'pointer' } : {}}>
             <summary onClick={(e) => { detailsClickHandler(e, 1) }}  className={styles.step_flex}>
               <span className={styles.step_number}>01</span>
               <h3 className={styles.step_title}>{titleFirst}</h3>
@@ -69,7 +70,7 @@ export default function StepsToConsultation({ data, specialists }) {
               )}
             </AnimatePresence>
           </details>
-          <details open={step === 2} className={styles.item}>
+          <details open={step === 2} className={styles.item} style={step > 2 ? { cursor: 'pointer' } : {}}>
             <summary onClick={(e) => { detailsClickHandler(e, 2) }}  className={styles.step_flex}>
               <span className={styles.step_number}>02</span>
               <h3 className={styles.step_title}>{titleSecond}</h3>
@@ -86,24 +87,33 @@ export default function StepsToConsultation({ data, specialists }) {
                   <div />
                   <div>
                     <div className={styles.text} dangerouslySetInnerHTML={{ __html: textSecond }} />
-                    <div className={styles.persons}  >
-                      {filtredSpecialists.map((el, i) => (
-                        <button
-                          key={i}
-                          onClick={() => {
-                            setChosenSpecialist(el)
-                            setStep(3)
-                          }}
-                          className={styles.person}
-                        >
-                          <Image aspectRatio={true} className={styles.avatar} src={el.proffesional.personImage.mediaItemUrl} alt={el.proffesional.personImage.altText} width={el.proffesional.personImage.mediaDetails.width} height={el.proffesional.personImage.mediaDetails.height} />
-                          <div className={styles.copy}>
-                            <p className={styles.name}>{el.title}</p>
-                            <p className={styles.profession}>{el.proffesional.proffesion}</p>
-                          </div>
-                          <RightArrow />
-                        </button>
-                      ))}
+                    <div className={styles.persons}>
+                      {filtredSpecialists.length < 1 ? (
+                        <div className={styles.notFound}>
+                          <h3>Nie możesz znaleźć specjalisty?</h3>
+                          <Button href='/kontakt'>Skontaktuj się z nami</Button>
+                        </div>
+                      ) : (
+                        <>
+                          {filtredSpecialists.map((el, i) => (
+                            <button
+                              key={i}
+                              onClick={() => {
+                                setChosenSpecialist(el)
+                                setStep(3)
+                              }}
+                              className={styles.person}
+                            >
+                              <Image aspectRatio={true} className={styles.avatar} src={el.proffesional.personImage.mediaItemUrl} alt={el.proffesional.personImage.altText} width={el.proffesional.personImage.mediaDetails.width} height={el.proffesional.personImage.mediaDetails.height} />
+                              <div className={styles.copy}>
+                                <p className={styles.name}>{el.title}</p>
+                                <p className={styles.profession}>{el.proffesional.proffesion}</p>
+                              </div>
+                              <RightArrow />
+                            </button>
+                          ))}
+                        </>
+                      )}
                     </div>
                   </div>
                 </motion.div>
