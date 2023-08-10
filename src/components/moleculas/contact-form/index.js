@@ -61,7 +61,7 @@ export default function Form({ subjects }) {
         <Select
           components={{ DropdownIndicator, NoOptionsMessage }}
           classNamePrefix="react-select"
-          className="input"
+          className="input dark"
           placeholder="Wybierz kategorię"
           onChange={(e) => { setSubject(e.value) }}
           defaultValue={{ value: subjects[0].subject, label: subjects[0].subject }}

@@ -190,6 +190,7 @@
 
     .image {
       width: 100% !important;
+      height: auto !important;
 
       @media (max-width: 640px) {
         aspect-ratio: 343/247;

@@ -321,6 +321,7 @@
   opacity: 0;
   visibility: hidden;
   transition: opacity .3s, visibility .3s;
+  font-size: 18px;
   &.active {
     visibility: visible;
     opacity: 1;
@@ -335,7 +336,7 @@
   right: 0;
   top: 0;
   z-index: 1;
-  padding: 115px 16px 16px 16px;
+  padding: 105px 16px 16px 16px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
   border-radius: 0px 20px;
 

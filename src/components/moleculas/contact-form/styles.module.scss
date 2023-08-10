@@ -2,15 +2,16 @@
   display: grid;
   gap: 42px;
   margin-top: clamp(36px, calc(48vw/7.68), 64px);
-
+  .input .react-select__control {
+    border-color: var(--primary-800) !important;
+  }
   label {
     position: relative;
-
     input,
     textarea {
       padding: 14px 28px;
       background: #FFFFFF;
-      border: 2px solid var(--secondary-500);
+      border: 2px solid var(--primary-800);
       box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
       border-radius: 50px;
       width: 100%;

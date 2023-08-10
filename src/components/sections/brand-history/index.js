@@ -1,6 +1,7 @@
 import React from "react"
 import styles from "./styles.module.scss"
 import { removeWrap } from "../../../utils/title-modification"
+import { Image } from "@/components/atoms/image";
 
 export default function History({ data: { title, text, grid } }) {
   return (
@@ -10,7 +11,7 @@ export default function History({ data: { title, text, grid } }) {
       <div className={styles.grid}>
         {grid.map(el => (
           <div key={el.text} className={styles.item}>
-            <img src={el.icon.mediaItemUrl} alt={el.icon.altText} />
+            <Image aspectRatio={true} quality='90' src={el.icon.mediaItemUrl} alt={el.icon.altText || ''} width={el.icon.mediaDetails.width} height={el.icon.mediaDetails.height} />
             <p>{el.text}</p>
           </div>
         ))}
