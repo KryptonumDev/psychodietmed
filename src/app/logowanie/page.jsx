@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import  getClient from "../../apollo/apolo-client";
+import getClient from "../../apollo/apolo-client";
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
 import { cookies } from 'next/headers'

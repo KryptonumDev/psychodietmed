@@ -67,7 +67,11 @@ export default function CheckoutContent() {
       // })
     },
     onError: (error) => {
-      throw new Error(error?.graphQLErrors?.[0]?.message);
+      debugger
+      if(error.message === 'Konto z Twoim adresem e-mail jest już zarejestrowane. <a href="#" class="showlogin">Zaloguj się.</a>'){
+        setOrderData(createCheckoutData(input, true))
+      }
+      console.log(error.message)
     }
   });
 
@@ -79,8 +83,9 @@ export default function CheckoutContent() {
 
   const handleSubmit = (props) => {
     const needAccount = cart.products.some((item) => item.categories.some((category) => category.slug === 'kurs'))
-    const registred = false // TODO: add check if user is already registred
-    setOrderData(createCheckoutData(input, needAccount, registred, props))
+    const formattedInput = {...input, comment: props.comment, needAccount: needAccount}
+    setOrderData(createCheckoutData(formattedInput, false))
+    setInput(formattedInput)
   }
 
   // if(!cart) return null TODO: add loader

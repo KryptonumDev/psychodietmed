@@ -9,6 +9,8 @@ import { useRouter } from 'next/navigation';
 import LOGIN from "../../../mutations/login"
 import { useMutation } from "@apollo/client"
 import { setCookie } from "@/app/actions"
+import { ToastContainer, toast } from "react-toastify"
+import SEND_RESET from "../../../mutations/send-password-reset"
 
 export default function Login() {
   const { push } = useRouter();
@@ -16,7 +18,7 @@ export default function Login() {
 
   const [renewPass, setRenewPass] = useState(false)
 
-  const onSubmit = (data) => {
+  const loginSumbit = (data) => {
     const Input = {
       clientMutationId: v4(),
       username: data.email,
@@ -24,27 +26,51 @@ export default function Login() {
     };
     login({ variables: { input: Input } })
   }
+
+  const resetSubmit = (data) => {
+    const Input = {
+      clientMutationId: v4(),
+      username: data.email,
+    };
+    debugger
+    reset({ variables: { input: Input } })
+  }
+
   const [login, {
-    data: loginResponse,
     loading: loginLoading,
-    error: loginError
   }] = useMutation(LOGIN, {
+    ignoreResults: true,
     onCompleted: (res) => {
+      debugger
       setCookie('authToken', res.login.authToken)
-     push('/moje-kursy');
+      push('/moje-kursy');
     },
     onError: (error) => {
-      throw new Error(error?.graphQLErrors?.[0]?.message ?? error);
+      if (error.message === "invalid_email") {
+        debugger
+        toast("Nieprawidłowy adres e-mail")
+      }
+    }
+  });
+
+  const [reset, {
+    loading: resetLoading,
+  }] = useMutation(SEND_RESET, {
+    onCompleted: (res) => {
+      debugger
+    },
+    onError: (error) => {
     }
   });
 
   return (
-    <section onSubmit={handleSubmit(onSubmit)} className={styles.wrapper}>
+    <section className={styles.wrapper}>
+      <ToastContainer className='Toaster' />
       {renewPass ? (
         <>
           <h2>Nie pamiętasz hasła?</h2>
           <p>Żaden problem! Podaj adres e-mail, a wyślemy na niego link do zmiany hasła, który wystarczy kliknąć.</p>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(resetSubmit)}>
             <Input
               register={register("email", { required: true, pattern: emailPattern })}
               errors={errors}
@@ -59,7 +85,7 @@ export default function Login() {
       ) : (
         <>
           <h2>Zaloguj się, aby mieć dostęp do kursów</h2>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(loginSumbit)}>
             <Input
               register={register("email", { required: true, pattern: emailPattern })}
               errors={errors}

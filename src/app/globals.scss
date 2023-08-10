@@ -48,12 +48,14 @@ button {
   pointer-events: none;
   opacity: .6;
   animation: 2s loading infinite;
+
   @keyframes loading {
     50% {
       opacity: .4;
     }
   }
 }
+
 svg {
   vertical-align: top;
 }
@@ -61,7 +63,9 @@ svg {
 a {
   color: inherit;
 }
+
 summary {
+
   &::marker,
   &::-webkit-details-marker {
     display: none;
@@ -75,14 +79,17 @@ summary {
 :focus {
   outline: none;
 }
+
 .tabbing :focus-visible,
-.tabbing input[type="checkbox"]:focus-visible + span {
+.tabbing input[type="checkbox"]:focus-visible+span {
   outline: 2px solid #A0636F;
   outline-offset: 2px;
 }
-input[type="checkbox"] + span {
+
+input[type="checkbox"]+span {
   cursor: pointer;
 }
+
 .slick-list {
   overflow: visible !important;
 }
@@ -166,10 +173,18 @@ h3 {
 
 p {
   font-weight: 500;
-  font-size: clamp(16rem, calc(20vw / 7.68), 24rem);
+  font-size: clamp(20rem, calc(24vw / 14.40), 24rem);
   line-height: 140.5%;
   font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
   color: var(--neutrals-800);
+
+  @media (max-width: 768px) {
+    font-size: clamp(16rem, calc(20vw / 7.68), 24rem);
+  }
+
+  @media (max-width: 370px) {
+    font-size: clamp(0rem, calc(16vw / 3.7), 16rem);
+  }
 }
 
 p strong {
@@ -185,12 +200,6 @@ p+p {
 @media (max-width: 370px) {
   p strong {
     font-size: clamp(0rem, calc(20vw/3.7), 20rem);
-  }
-}
-
-@media (max-width: 370px) {
-  p {
-    font-size: clamp(0rem, calc(16vw / 3.7), 16rem);
   }
 }
 
@@ -363,7 +372,9 @@ p em {
   &:hover::after {
     transform: translate(-50%, -50%) scale(1);
   }
+
   transition: transform .4s var(--easing);
+
   &:active {
     transform: scale(.98);
   }

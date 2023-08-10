@@ -8,7 +8,6 @@ import { AppProvider } from '../context/app-context'
 import SubHeader from '@/components/sections/mobile-sub-header'
 import { ApolloWrapper } from '../context/apolo-provider'
 import GlobalScript from '../utils/global.js';
-// import { ToastContainer } from 'react-toastify'
 
 const Satoshi = localFont({
   src: '../assets/fonts/satoshi.woff2',
@@ -49,7 +48,6 @@ export default function RootLayout({ children }) {
         </ApolloWrapper>
         <GlobalScript />
       </body>
-      {/* <ToastContainer className='Toaster' /> */}
     </html>
   )
 }
