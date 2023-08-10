@@ -16,18 +16,34 @@ export default function Specialisations({ data: { text, title }, activities }) {
       <h2 dangerouslySetInnerHTML={{ __html: removeWrap(title) }} />
       <div className={styles.text} dangerouslySetInnerHTML={{ __html: text }} />
       <div className={styles.grid}>
-        {sortedActivities?.map(({ slug, title, obszar_dzialania: { specialisationCard } }, index) => (
-          <Link href={`/wspolpraca/${slug}`} key={index} className={styles.item}>
-            <div className={styles.itemContent}>
-              <Image className={styles.icon} src={specialisationCard.icon.mediaItemUrl} alt={specialisationCard.icon.altText} width={specialisationCard.icon.mediaDetails.width} height={specialisationCard.icon.mediaDetails.height} />
-              <div>
-                <h3>{title}</h3>
-                <p>{specialisationCard.zajawkaSpecjalizacji}</p>
+        {sortedActivities?.map(({ slug, title, obszar_dzialania: { heroKafelek, specialisationCard } }, index) => {
+
+          if (heroKafelek.title) return (
+            <Link href={`/wspolpraca/${slug}`} key={index} className={`${styles.item} ${styles.active}`}>
+              <div className={styles.itemContent}>
+                <Image className={styles.icon} src={specialisationCard.icon.mediaItemUrl} alt={specialisationCard.icon.altText} width={specialisationCard.icon.mediaDetails.width} height={specialisationCard.icon.mediaDetails.height} />
+                <div>
+                  <h3>{title}</h3>
+                  <p>{specialisationCard.zajawkaSpecjalizacji}</p>
+                </div>
               </div>
+              <RightArrow />
+            </Link>
+          )
+
+          return (
+            <div key={index} className={`${styles.item}`}>
+              <div className={styles.itemContent}>
+                <Image className={styles.icon} src={specialisationCard.icon.mediaItemUrl} alt={specialisationCard.icon.altText} width={specialisationCard.icon.mediaDetails.width} height={specialisationCard.icon.mediaDetails.height} />
+                <div>
+                  <h3>{title}</h3>
+                  <p>{specialisationCard.zajawkaSpecjalizacji}</p>
+                </div>
+              </div>
+              <span />
             </div>
-            <RightArrow />
-          </Link>
-        ))}
+          )
+        })}
       </div>
     </section>
   )

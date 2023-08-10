@@ -168,6 +168,9 @@ async function getData() {
             slug
             uri
             obszar_dzialania {
+              heroKafelek {
+                title
+              }
               specialisationCard {
                 zajawkaSpecjalizacji
                 number

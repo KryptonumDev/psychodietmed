@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import { gql } from "@apollo/client"
-import  getClient from "../../../apollo/apolo-client"
+import getClient from "../../../apollo/apolo-client"
 import Hero from "@/components/sections/hero-kafelek"
 import SliderIllnes from "@/components/sections/kafelek-illnes-slider"
 import SliderSymptoms from "@/components/sections/kafelek-sympotms-slider"
@@ -179,7 +179,7 @@ async function getData(params) {
       }
     })
 
-    if (!obszarDzilaniaBy.id)
+    if (!obszarDzilaniaBy.id || !obszarDzilaniaBy.acf.heroKafelek.title)
       notFound()
 
     return {
@@ -199,13 +199,18 @@ export async function generateStaticParams() {
       obszaryDzialania(first: 100) {
         nodes {
           slug
+          acf : obszar_dzialania {
+            heroKafelek {
+              title
+            }
+          }
         }
       }
     }
   `
   })
 
-  return obszaryDzialania.nodes.map(({ slug }) => ({
+  return obszaryDzialania.nodes.filter(el => !!el.acf.heroKafelek.title).map(({ slug }) => ({
     kafelek: slug
   }))
 }
