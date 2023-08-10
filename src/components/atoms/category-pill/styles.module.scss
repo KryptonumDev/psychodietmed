@@ -1,5 +1,5 @@
 .category {
-  padding: 10px clamp(12px, calc(16vw/7.68), 16px) 12px clamp(12px, calc(16vw/7.68), 16px);
+  padding: clamp(6px, calc(8vw/7.68), 10px) clamp(12px, calc(16vw/7.68), 16px);
   color: var(--primary-800);
   border: 2px solid var(--primary-800);
   border-radius: 50px;
@@ -9,13 +9,10 @@
   display: block;
   background-color: transparent;
   text-align: center;
-  transition: all .3s cubic-bezier(0.77, 0, 0.175, 1);
-
-  &.active{
+  &.active {
     background-color: var(--primary-800);
     color: #fff;
   }
-
   @media (max-width: 370px) {
     font-size: clamp(0rem, calc(14vw/3.7), 14rem);
     padding: 

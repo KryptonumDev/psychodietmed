@@ -3,36 +3,7 @@
   height: 100%;
   position: relative;
   display: grid;
-  grid-template-rows: auto 1fr;
-
-  grid-template-rows: auto auto auto 1fr auto;
-  grid-template-areas:
-    "image"
-    "categories"
-    "title"
-    "excerpt"
-    "button";
-
-  .image {
-    grid-area: image;
-  }
-
-  .categories {
-    grid-area: categories;
-  }
-
-  h3 {
-    grid-area: title;
-  }
-
-  .excerpt {
-    grid-area: excerpt;
-  }
-
-  .button {
-    grid-area: button;
-  }
-
+  grid-template-rows: auto auto auto auto 1fr;
   &:hover {
     .button {
       svg {
@@ -56,10 +27,10 @@
 
   h3 {
     margin-bottom: 16px;
-    font-size: clamp(20rem, calc(20vw/7.68), 32rem);
+    font-size: clamp(20px, calc(20vw/7.68), 32rem);
 
     @media (max-width: 1024px) {
-      font-size: clamp(20rem, calc(28vw/7.68), 32rem);
+      font-size: clamp(20px, calc(28vw/7.68), 32rem);
     }
 
     @media (max-width: 370px) {
@@ -70,7 +41,7 @@
   }
 
   .excerpt {
-    margin-bottom: 36px;
+    margin-bottom: clamp(16rem, calc(24vw/7.68), 32rem);
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -109,6 +80,7 @@
   background-color: transparent;
   display: flex;
   align-items: center;
+  align-self: flex-end;
   gap: 6px;
   color: var(--primary-800);
   font-weight: 500;
