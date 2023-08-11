@@ -15,7 +15,7 @@ export default function Slider({ data }) {
       className={styles.wrapper}
       spaceBetween={50}
       slidesPerView={1}
-      loop={false}
+      loop={true}
       onSlideChange={(swiper) => {
         setActiveIndex(swiper.realIndex);
       }}
@@ -30,7 +30,7 @@ export default function Slider({ data }) {
         </SwiperSlide>
       ))}
       {data.length > 1 && (
-        <Control items={data} activeIndex={activeIndex} />
+        <Control items={data} activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
       )}
     </Swiper >
   )
