@@ -1,6 +1,6 @@
 .wrapper {
   display: grid;
-  gap: 42px;
+  gap: 24px;
   margin-top: clamp(36px, calc(48vw/7.68), 64px);
   .input .react-select__control {
     border-color: var(--primary-800) !important;

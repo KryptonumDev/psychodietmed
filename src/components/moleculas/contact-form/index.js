@@ -70,7 +70,7 @@ export default function Form({ subjects }) {
           })} />
       </label>
       <Input
-        rows={5}
+        rows={3}
         name={'text'}
         register={register('text', { required: true, minLength: 3 })}
         placeholder='Twoja wiadomość'
