@@ -12,6 +12,7 @@ export default function CartItem({
   updateCartProcessing,
   handleRemoveProductClick,
   updateCart,
+  setInnerLoading = () => { }
 }) {
   const [productCount, setProductCount] = useState(item.qty);
 
@@ -30,6 +31,7 @@ export default function CartItem({
 
       if (products.length) {
         const updatedItems = getUpdatedItems(products, newQty, cartKey);
+        setInnerLoading(true)
         updateCart({
           variables: {
             input: {

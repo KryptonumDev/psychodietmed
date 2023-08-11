@@ -10,14 +10,21 @@ import Link from "next/link";
 import APPLY_COUPON from "../../../mutations/apply-coupon";
 import { useForm } from "react-hook-form";
 import REMOVE_COUPON from "../../../mutations/remove-coupon";
+import { getFormattedCart } from "../../../utils/get-formatted-cart";
 
-export default function Content({ cart, refetch, isCart = true }) {
+export default function Content({ setInnerLoading, setCart, cart, refetch, isCart = true }) {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const [updateCart, { loading: updateCartProcessing }] = useMutation(UPDATE_CART, {
-    onCompleted: () => {
-      refetch();
+    onCompleted: (data) => {
+      debugger
+      // Update cart in the localStorage.
+      const updatedCart = getFormattedCart(data.updateItemQuantities);
+      localStorage.setItem('woo-next-cart', JSON.stringify(updatedCart));
+      // Update cart data in React Context.
+      setCart(updatedCart);
+      setInnerLoading(false)
     },
     onError: (error) => {
       if (error) {
@@ -56,7 +63,7 @@ export default function Content({ cart, refetch, isCart = true }) {
       // By passing the newQty to 0 in updateCart Mutation, it will remove the item.
       const newQty = 0;
       const updatedItems = getUpdatedItems(products, newQty, cartKey);
-
+      setInnerLoading(true)
       updateCart({
         variables: {
           input: {
@@ -69,6 +76,7 @@ export default function Content({ cart, refetch, isCart = true }) {
   };
 
   const handleApplyCoupon = (data) => {
+    setInnerLoading(true)
     applyCoupon({
       variables: {
         input: {
@@ -80,6 +88,7 @@ export default function Content({ cart, refetch, isCart = true }) {
   };
 
   const handleRemoveCoupon = (data) => {
+    setInnerLoading(true)
     removeCoupon({
       variables: {
         input: {
@@ -103,6 +112,7 @@ export default function Content({ cart, refetch, isCart = true }) {
       <div className={styles.grid}>
         {cart?.products?.map((item, index) => (
           <CartItem
+            setInnerLoading={setInnerLoading}
             key={item.productId + index}
             item={item}
             updateCartProcessing={updateCartProcessing}

@@ -26,6 +26,7 @@ export default function CheckoutContent() {
   const { refetch } = useQuery(GET_CART, {
     notifyOnNetworkStatusChange: true,
     onCompleted: (data) => {
+      debugger
 
       // Update cart in the localStorage.
       const updatedCart = getFormattedCart(data);
