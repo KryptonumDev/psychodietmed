@@ -7,7 +7,7 @@ export default function FAQ({ data: { title, text, qa } }) {
   const arrays = (() => {
     const arr = []
 
-    qa.forEach((el, index) => {
+    qa.forEach(el => {
       arr.push({
         "@type": "Question",
         "name": el.question,

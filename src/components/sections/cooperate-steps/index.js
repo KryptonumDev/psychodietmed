@@ -3,6 +3,7 @@ import React from "react"
 import styles from "./styles.module.scss"
 import { Image } from "@/components/atoms/image"
 import { RightArrow } from "../../../assets/small-right-arrow"
+import Button from "@/components/atoms/button"
 
 export default function Steps({ data: { repeater, titleFirst, linkFirst, titleSecond, gridSecond, linkSecond, titleThird, linkThird, gridThird, titleFourth, gridFourth } }) {
   return (
@@ -36,7 +37,7 @@ export default function Steps({ data: { repeater, titleFirst, linkFirst, titleSe
             </div>
             <div className={styles.flex}>
               <Link className="link" href={linkFirst.url}>{linkFirst.title}</Link>
-              <Link className={styles.link} href={'/zespol'}>Poznaj specjalistów PsychoDietMed <RightArrow /></Link>
+              <Button theme="secondary" className={styles.link} href={'/zespol'}>Poznaj specjalistów PsychoDietMed</Button>
             </div>
           </div>
         </div>
