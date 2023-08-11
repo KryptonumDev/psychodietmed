@@ -27,7 +27,7 @@ export default function Card({ data }) {
           <div className={styles.flex}>
             <div className={styles.categories}>
               {data.categories.nodes?.map((el, index) => (
-                <Category key={el.id} name={el.name} href={`/blog/kategoria/${el.slug}`} />
+                <Category key={el.id} name={el.name} href={`/blog/${el.slug}`} />
               ))}
             </div>
             <span className={styles.date}>{date}</span>
