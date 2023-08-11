@@ -1,5 +1,5 @@
 'use client'
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import styles from "./styles.module.scss"
 import { getFormattedCart } from "../../../utils/get-formatted-cart";
 import GET_CART from "../../../queries/get-cart";
@@ -14,7 +14,7 @@ import { AnimatePresence, motion } from "framer-motion";
 export default function Cart() {
   const [needAnimation, setNeedAnimation] = useState(false);
   const [cart, setCart] = useContext(AppContext);
-  const [innerLoading, setInnerLoading] = useState(false);
+  const [innerLoading, setInnerLoading] = useState(true);
 
   const { loading, refetch } = useQuery(GET_CART, {
     onCompleted: (data) => {
@@ -26,6 +26,10 @@ export default function Cart() {
       setCart(updatedCart);
     }
   });
+
+  useEffect(() => {
+    setInnerLoading(false)
+  }, [])
 
   return (
     <section className={styles.wrapper}>
