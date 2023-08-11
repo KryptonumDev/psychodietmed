@@ -4,7 +4,7 @@ import { useSwiper } from "swiper/react";
 import ArrowLeft from "@/components/atoms/ArrowLeft";
 import ArrowRight from "@/components/atoms/ArrowRight";
 
-export default function Control({ className = '', activeIndex, items }) {
+export default function Control({ className = '', activeIndex, setActiveIndex, items }) {
   const swiper = useSwiper();
 
   const handlePrev = useCallback(() => {
@@ -19,8 +19,9 @@ export default function Control({ className = '', activeIndex, items }) {
 
   const handleDotClick = useCallback((index) => {
     if (!swiper) return;
-    swiper.slideTo(index);
-  }, [swiper]);
+    setActiveIndex(index);
+    swiper.slideToLoop(index);
+  }, [setActiveIndex, swiper]);
 
   return (
     <div className={`${styles.control}`} >

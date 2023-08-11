@@ -8,14 +8,14 @@ import 'swiper/scss';
 import Card from "@/components/moleculas/case-card";
 
 export default function Slider({ items }) {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [ activeIndex, setActiveIndex ] = useState(0);
   return (
     <Swiper
       modules={[A11y]}
       className={styles.wrapper}
       spaceBetween={50}
       slidesPerView={1}
-      loop={false}
+      loop={true}
       onSlideChange={(swiper) => {
         setActiveIndex(swiper.realIndex);
       }}
@@ -35,7 +35,7 @@ export default function Slider({ items }) {
         </SwiperSlide>
       ))}
       {items.length > 1 && (
-        <Control items={items} activeIndex={activeIndex} />
+        <Control items={items} activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
       )}
     </Swiper >
   )
