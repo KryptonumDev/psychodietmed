@@ -6,6 +6,8 @@ import { GET_SEO_PAGE } from "../../queries/page-seo";
 import { notFound } from "next/navigation"
 import Breadcrumbs from "@/components/sections/breadcrumbs"
 
+export const dynamic = 'force-dynamic'
+
 export async function generateMetadata({ searchParams }) {
   return await generetaSeo('cG9zdDo5MDI=', `/media${searchParams.strona ? `?strona=${searchParams.strona}` : ''}`, GET_SEO_PAGE)
 }

@@ -6,6 +6,8 @@ import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
 import Breadcrumbs from "@/components/sections/breadcrumbs"
 
+export const dynamic = 'force-dynamic'
+
 export async function generateMetadata({ searchParams }) {
   let url = '/blog'
 
