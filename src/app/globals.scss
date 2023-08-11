@@ -519,6 +519,7 @@ p em {
   grid-template-columns: 494fr 730fr;
   align-items: center;
   gap: 0 !important;
+  margin-top: clamp(120px, calc(120vw/7.68), 160px);
 }
 
 @media (max-width: 1440px) {

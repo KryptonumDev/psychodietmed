@@ -34,7 +34,7 @@ const urlSystem = [
     subpages: [
       {
         name: 'Jak działamy',
-        url: '/jak-dzialamy'
+        url: '/wspolpraca'
       },
       {
         name: 'Efekty współpracy',
