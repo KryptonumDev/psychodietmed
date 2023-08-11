@@ -22,7 +22,7 @@ export default async function Post({ params }) {
   return (
     <>
       <main id="main">
-        <Breadcrumbs data={[{ page: 'Media', url: `/media` }, { page: data.title, url: `/media/${params.tool}` }]} />
+        <Breadcrumbs data={[{ page: 'Media', url: `/media` }, { page: data.title, url: `/media/${params.media}` }]} />
         <Hero title={data.title} excerpt={data.content} dateGmt={data.dateGmt} image={data.featuredImage?.node} />
         {data.media?.twoColumnFlexMedia?.image && (
           <Flex data={data.media.twoColumnFlexMedia} />

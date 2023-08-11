@@ -2,6 +2,15 @@
 const path = require('path');
 
 const nextConfig = {
+  async redirects() {
+    return [
+      {
+        source: '/specjalisci',
+        destination: '/zespol',
+        permanent: false,
+      },
+    ]
+  },
   experimental: {
     appDir: true,
     serverActions: true,
