@@ -15,15 +15,17 @@ import Summary from "@/components/organisms/checkout-summary";
 import { createCheckoutData } from "../../../utils/create-checkout-data";
 import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import axios from "axios";
-import { v4 } from "uuid";
+import Loader from "../loader";
 
 export default function CheckoutContent() {
   const [cart, setCart] = useContext(AppContext);
   const [input, setInput] = useState({});
   const [orderData, setOrderData] = useState(null);
   const [step, setStep] = useState(2);
+  const [innerLoading, setInnerLoading] = useState(true);
+
   // Get Cart Data.
-  const { refetch } = useQuery(GET_CART, {
+  const { refetch, loading } = useQuery(GET_CART, {
     notifyOnNetworkStatusChange: true,
     onCompleted: (data) => {
       debugger
@@ -36,6 +38,10 @@ export default function CheckoutContent() {
       setCart(updatedCart);
     }
   });
+  debugger
+  useEffect(() => {
+    setInnerLoading(false)
+  }, [])
 
   // Create New order: Checkout Mutation.
   const [checkout] = useMutation(CHECKOUT_MUTATION, {
@@ -43,35 +49,33 @@ export default function CheckoutContent() {
       input: orderData
     },
     onCompleted: (data) => {
-      debugger
-      // axios.post('/api/mailer-lite-register', {
-      //   email: data.checkout.customer?.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
-      //   status: 'active',
-      //   fields: {
-      //     marketing_permissions: '1',
-      //     name: data.checkout.customer?.firstName || data.checkout.order.billing.firstName || data.checkout.order.shipping.firstName,
-      //   }
-      // }).then((response) => {
-      //   debugger
-      // }).catch((error) => {
-      //   debugger
-      // })
 
-      axios.post('/api/create-transaction', {
+      const mailerlite = axios.post('/api/mailer-lite-register', {
+        email: data.checkout.customer?.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
+        status: 'active',
+        fields: {
+          marketing_permissions: '1',
+          name: data.checkout.customer?.firstName || data.checkout.order.billing.firstName || data.checkout.order.shipping.firstName,
+        }
+      })
+
+      const transaction = axios.post('/api/create-transaction', {
         "amount": data.checkout.order.total * 100,
         "sessionId": data.checkout.order.orderKey,
         "email": data.checkout.customer.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
         "id": data.checkout.order.orderNumber
-      }).then((response) => {
-        if(response.data.link){
-          window.location.href = response.data.link
-        }
-      }).catch((error) => {
-        console.log(error)
       })
+
+      Promise.all([mailerlite, transaction])
+        .then(function (values) {
+          debugger
+          if (response.data.link) {
+            window.location.href = response.data.link
+          }
+        });
     },
     onError: (error) => {
-      if(error.message === 'Konto z Twoim adresem e-mail jest już zarejestrowane. <a href="#" class="showlogin">Zaloguj się.</a>'){
+      if (error.message === 'Konto z Twoim adresem e-mail jest już zarejestrowane. <a href="#" class="showlogin">Zaloguj się.</a>') {
         setOrderData(createCheckoutData(input, true))
       }
       console.log(error.message)
@@ -86,14 +90,14 @@ export default function CheckoutContent() {
 
   const handleSubmit = (props) => {
     const needAccount = cart.products.some((item) => item.categories.some((category) => category.slug === 'kurs'))
-    const formattedInput = {...input, comment: props.comment, needAccount: needAccount}
+    const formattedInput = { ...input, comment: props.comment, needAccount: needAccount }
     setOrderData(createCheckoutData(formattedInput, false))
     setInput(formattedInput)
   }
 
-  // if(!cart) return null TODO: add loader
   return (
     <section className={styles.wrapper}>
+      <Loader show={loading || innerLoading} />
       <h1>
         {step === 2 && 'Dane osobowe'}
         {(step === 3 && cart?.needsShippingAddress) && 'Dostawa'}

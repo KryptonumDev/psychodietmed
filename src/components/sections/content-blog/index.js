@@ -134,7 +134,7 @@ export default function Content({ categories, data }) {
 
   return (
     <section id='posts' className={styles.wrapper}>
-    {(loading) && <Loader />}
+      <Loader show={loading} />
       <h2 className={styles.title}>Wszystkie artykuły <span>({posts.pageInfo.offsetPagination.total})</span></h2>
       <div className={styles.categories}>
         <Category active={chosenCategory === null} onClick={() => { changeCategory(' ') }} name='Wszystkie artykuy' />

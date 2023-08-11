@@ -89,7 +89,7 @@ export default function Content({ data, totalCount, page = '1' }) {
 
   return (
     <section className={styles.wrapper} id='posts'>
-      {(loading) && <Loader />}
+      <Loader show={loading} />
       <Grid>
         {posts.nodes.map((el, index) => (
           <Card key={index} data={el} />

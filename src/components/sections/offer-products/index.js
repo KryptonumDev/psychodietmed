@@ -233,7 +233,7 @@ export default function Content({ prices, orders, productCategories, defaultData
 
   return (
     <section id='products' className={styles.wrapper}>
-      {(loading) && <Loader />}
+      <Loader show={loading} />
       <h2 >Produkty</h2>
       <Filtration
         chosenOrder={chosenOrder}

@@ -126,7 +126,7 @@ export default function Content({ podopieczni }) {
 
   return (
     <section className={styles.wrapper} id='content'>
-      {(loading) && <Loader />}
+      <Loader show={loading} />
       <div className={styles.grid}>
         {cases.nodes.map(el => (
           <Card
