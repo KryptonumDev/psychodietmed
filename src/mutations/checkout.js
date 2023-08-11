@@ -22,6 +22,13 @@ mutation CHECKOUT_MUTATION( $input: CheckoutInput! ) {
       orderNumber
       status
       total(format: RAW)
+      databaseId
+      shippingLines {
+        nodes {
+          methodTitle
+          total
+        }
+      }
       refunds {
         nodes {
           amount

@@ -56,18 +56,20 @@ export default function CheckoutContent() {
       //   debugger
       // })
 
-      // axios.post('/api/create-transaction', {
-      //   "amount": data.checkout.order.total,
-      //   "sessionId": data.checkout.order.orderKey,
-      //   "email": data.checkout.customer.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
-      // }).then((response) => {
-      //   debugger
-      // }).catch((error) => {
-      //   debugger
-      // })
+      axios.post('/api/create-transaction', {
+        "amount": data.checkout.order.total * 100,
+        "sessionId": data.checkout.order.orderKey,
+        "email": data.checkout.customer.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
+        "id": data.checkout.order.orderNumber
+      }).then((response) => {
+        if(response.data.link){
+          window.location.href = response.data.link
+        }
+      }).catch((error) => {
+        console.log(error)
+      })
     },
     onError: (error) => {
-      debugger
       if(error.message === 'Konto z Twoim adresem e-mail jest już zarejestrowane. <a href="#" class="showlogin">Zaloguj się.</a>'){
         setOrderData(createCheckoutData(input, true))
       }

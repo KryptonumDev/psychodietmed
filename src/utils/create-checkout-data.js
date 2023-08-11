@@ -35,10 +35,19 @@ export const createCheckoutData = (order, registred) => {
     customerNote: order.comment,
     shipToDifferentAddress: order.billingDifferentThanShipping,
     paymentMethod: 'bacs',
-    shippingMethod: order.shippingMethod,
+    shippingMethod: null,
     transactionId: order.transactionId,
     isPaid: order.isPaid,
   };
+
+  if (order.shippingMethod) {
+    checkoutData.shippingMethod = {
+      cost: order.shippingMethod.cost || "0",
+      methodId: order.shippingMethod.methodId,
+      label: order.shippingMethod.label,
+      instanceId: String(order.shippingMethod.instanceId)
+    }
+  }
 
   if (order.needAccount && !registred) {
     checkoutData.account = {

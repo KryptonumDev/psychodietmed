@@ -61,7 +61,7 @@ async function getData(currentPage = 1) {
               }
             }
           }
-        }` ,
+        ` ,
         variables: {
           offset: (currentPage - 1) * PAGE_ITEM_COUNT,
           size: PAGE_ITEM_COUNT,
