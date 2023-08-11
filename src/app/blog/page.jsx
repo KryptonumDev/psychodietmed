@@ -2,23 +2,23 @@ import Hero from "@/components/sections/hero-blog"
 import Content from "@/components/sections/content-blog"
 import { PAGE_ITEM_COUNT } from "../../constants/blog"
 import { notFound } from 'next/navigation';
-// import { generetaSeo } from "../../utils/genereate-seo";
-// import { GET_SEO_PAGE } from "../../queries/page-seo";
+import { generetaSeo } from "../../utils/genereate-seo";
+import { GET_SEO_PAGE } from "../../queries/page-seo";
 import Breadcrumbs from "@/components/sections/breadcrumbs"
 
-// export async function generateMetadata({ searchParams }) {
-//   let url = '/blog'
+export async function generateMetadata({ searchParams }) {
+  let url = '/blog'
 
-//   if (searchParams.kategoria) {
-//     url += `?kategoria=${searchParams.kategoria}`
-//     if (searchParams.strona)
-//       url += `&strona=${searchParams.strona}`
-//   } else if (searchParams.strona) {
-//     url += `?strona=${searchParams.strona}`
-//   }
+  if (searchParams.kategoria) {
+    url += `?kategoria=${searchParams.kategoria}`
+    if (searchParams.strona)
+      url += `&strona=${searchParams.strona}`
+  } else if (searchParams.strona) {
+    url += `?strona=${searchParams.strona}`
+  }
 
-//   return await generetaSeo('cG9zdDo2NzA=', url, GET_SEO_PAGE)
-// }
+  return await generetaSeo('cG9zdDo2NzA=', url, GET_SEO_PAGE)
+}
 
 export default async function Blog({ searchParams }) {
   const { categories, hero, posts, newPosts, postsTotalCount } = await getData(searchParams.strona)

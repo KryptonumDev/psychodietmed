@@ -6,13 +6,13 @@ import CallToActionTransparent from "@/components/sections/call-to-action-tranpa
 import FAQ from "@/components/sections/faq"
 import Content from "@/components/sections/case-archive-content"
 import { PAGE_ITEM_COUNT } from "../../constants/case"
-// import { generetaSeo } from "../../utils/genereate-seo";
-// import { GET_SEO_PAGE } from "../../queries/page-seo";
+import { generetaSeo } from "../../utils/genereate-seo";
+import { GET_SEO_PAGE } from "../../queries/page-seo";
 import Breadcrumbs from "@/components/sections/breadcrumbs"
 
-// export async function generateMetadata({ searchParams }) {
-//   return await generetaSeo('cG9zdDo5MzM=', `/historia-marki${searchParams.strona ? `?strona=${searchParams.strona}` : ''}`, GET_SEO_PAGE)
-// }
+export async function generateMetadata({ searchParams }) {
+  return await generetaSeo('cG9zdDo5MzM=', `/historia-marki${searchParams.strona ? `?strona=${searchParams.strona}` : ''}`, GET_SEO_PAGE)
+}
 
 export default async function Archive(props) {
   const { data, faq, metrics, podopieczni } = await getData(props)

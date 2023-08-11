@@ -1,6 +1,4 @@
-import { gql } from "@apollo/client";
-
-export const GET_SEO_TOOL = gql`
+export const GET_SEO_TOOL = `
   query Seo($id: ID!) {
     page : narzedzie(id: $id, idType: URI){
       id

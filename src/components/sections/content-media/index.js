@@ -7,6 +7,8 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import { gql } from "@apollo/client"
 import { PAGE_ITEM_COUNT } from "../../../constants/media"
 import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
+import styles from './styles.module.scss'
+import Loader from "../loader"
 
 export default function Content({ data, totalCount, page = '1' }) {
 
@@ -23,7 +25,7 @@ export default function Content({ data, totalCount, page = '1' }) {
     return +page;
   })
 
-  const { refetch } = useQuery(
+  const { refetch, loading } = useQuery(
     gql`query Posts($offset: Int!, $size: Int!) {
       mediums(where: {offsetPagination: {size: $size, offset: $offset}}) {
         pageInfo {
@@ -86,7 +88,8 @@ export default function Content({ data, totalCount, page = '1' }) {
   }, [currentPage])
 
   return (
-    <section id='posts'>
+    <section className={styles.wrapper} id='posts'>
+      {(loading) && <Loader />}
       <Grid>
         {posts.nodes.map((el, index) => (
           <Card key={index} data={el} />

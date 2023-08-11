@@ -7,6 +7,7 @@ import { PAGE_ITEM_COUNT } from "../../../constants/case"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { gql } from "@apollo/client"
 import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
+import Loader from "../loader"
 
 export default function Content({ podopieczni }) {
 
@@ -23,7 +24,7 @@ export default function Content({ podopieczni }) {
     return +page;
   })
 
-  const { refetch } = useQuery(
+  const { refetch, loading } = useQuery(
     gql`query Specialists($count: Int, $offset: Int) {
       podopieczni(
         where: {
@@ -124,7 +125,8 @@ export default function Content({ podopieczni }) {
   }, [currentPage])
 
   return (
-    <section id='content'>
+    <section className={styles.wrapper} id='content'>
+      {(loading) && <Loader />}
       <div className={styles.grid}>
         {cases.nodes.map(el => (
           <Card

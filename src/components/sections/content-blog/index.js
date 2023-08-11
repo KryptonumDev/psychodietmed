@@ -9,6 +9,7 @@ import { gql } from "@apollo/client"
 import { PAGE_ITEM_COUNT } from "../../../constants/blog"
 import Pagination from "@/components/organisms/pagination-client-side"
 import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
+import Loader from "../loader"
 
 export default function Content({ categories, data }) {
 
@@ -34,7 +35,7 @@ export default function Content({ categories, data }) {
     return +page;
   })
 
-  const { refetch } = useQuery(
+  const { refetch, loading } = useQuery(
     gql`query ClientSidePosts($offset: Int!, $size: Int!, $category: String) {
       posts(where: {offsetPagination: {size: $size, offset: $offset}, categoryName: $category}) {
         pageInfo {
@@ -133,6 +134,7 @@ export default function Content({ categories, data }) {
 
   return (
     <section id='posts' className={styles.wrapper}>
+    {(loading) && <Loader />}
       <h2 className={styles.title}>Wszystkie artykuły <span>({posts.pageInfo.offsetPagination.total})</span></h2>
       <div className={styles.categories}>
         <Category active={chosenCategory === null} onClick={() => { changeCategory(' ') }} name='Wszystkie artykuy' />

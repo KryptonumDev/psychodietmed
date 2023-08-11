@@ -5,24 +5,24 @@ import ReviewsSlider from "@/components/sections/reviews-slider";
 import Bundles from "@/components/sections/offer-bundles";
 import { notFound } from "next/navigation";
 import { PAGE_ITEM_COUNT } from "../../constants/academy";
-// import { generetaSeo } from "../../utils/genereate-seo";
-// import { GET_SEO_PAGE } from "../../queries/page-seo";
+import { generetaSeo } from "../../utils/genereate-seo";
+import { GET_SEO_PAGE } from "../../queries/page-seo";
 import Breadcrumbs from "@/components/sections/breadcrumbs";
 
-// export async function generateMetadata({ searchParams }) {
+export async function generateMetadata({ searchParams }) {
 
-//   let url = '/oferta'
+  let url = '/oferta'
 
-//   if (searchParams.kategoria) {
-//     url += `?kategoria=${searchParams.kategoria}`
-//     if (searchParams.strona)
-//       url += `&strona=${searchParams.strona}`
-//   } else if (searchParams.strona) {
-//     url += `?strona=${searchParams.strona}`
-//   }
+  if (searchParams.kategoria) {
+    url += `?kategoria=${searchParams.kategoria}`
+    if (searchParams.strona)
+      url += `&strona=${searchParams.strona}`
+  } else if (searchParams.strona) {
+    url += `?strona=${searchParams.strona}`
+  }
 
-//   return await generetaSeo('cG9zdDoxODY4', url, GET_SEO_PAGE)
-// }
+  return await generetaSeo('cG9zdDoxODY4', url, GET_SEO_PAGE)
+}
 
 const prices = [
   { value: '0-99', label: '0 - 99 zł' },
@@ -82,7 +82,7 @@ async function getData(params) {
       body: JSON.stringify({
         query: `
         query Academy ($category: [String], $maxPrice: Float, $minPrice: Float, $orderby: ProductsOrderByEnum!, $orderDirection: OrderEnum, $count: Int, $offset: Int) {
-          productCategories(where: {exclude: ["dGVybToyNg==", "dGVybTo1OQ=="]}) {
+          productCategories(where: {exclude: ["dGVybToyNg==", "dGVybTo1OQ==", "dGVybTo2Ng=="]}) {
             nodes {
               id
               value : slug

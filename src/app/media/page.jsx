@@ -1,14 +1,14 @@
 import { PAGE_ITEM_COUNT } from "../../constants/blog"
 import Hero from "@/components/sections/hero-media"
 import Content from "@/components/sections/content-media"
-// import { generetaSeo } from "../../utils/genereate-seo";
-// import { GET_SEO_PAGE } from "../../queries/page-seo";
+import { generetaSeo } from "../../utils/genereate-seo";
+import { GET_SEO_PAGE } from "../../queries/page-seo";
 import { notFound } from "next/navigation"
 import Breadcrumbs from "@/components/sections/breadcrumbs"
 
-// export async function generateMetadata({ searchParams }) {
-//   return await generetaSeo('cG9zdDo5MDI=', `/media${searchParams.strona ? `?strona=${searchParams.strona}` : ''}`, GET_SEO_PAGE)
-// }
+export async function generateMetadata({ searchParams }) {
+  return await generetaSeo('cG9zdDo5MDI=', `/media${searchParams.strona ? `?strona=${searchParams.strona}` : ''}`, GET_SEO_PAGE)
+}
 
 export default async function Media({ searchParams }) {
   const { data, mediums, totalCount } = await getData(searchParams.strona)

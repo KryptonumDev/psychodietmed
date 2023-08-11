@@ -33,9 +33,7 @@ export default function Cart() {
 
   return (
     <section className={styles.wrapper}>
-      <AnimatePresence mode="wait">
-        {(loading || innerLoading) && <Loader />}
-      </AnimatePresence>
+      {(loading || innerLoading) && <Loader />}
       <AnimatePresence mode="wait">
         {cart?.products?.length > 0 ? (
           <motion.div className={styles.content} key='three' initial={{ opacity: needAnimation ? 0 : 1 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>

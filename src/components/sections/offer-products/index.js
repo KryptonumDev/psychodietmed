@@ -9,6 +9,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { PAGE_ITEM_COUNT } from "../../../constants/academy"
 import Pagination from "@/components/organisms/pagination-client-side"
 import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
+import Loader from "../loader"
 
 export default function Content({ prices, orders, productCategories, defaultData }) {
 
@@ -52,12 +53,12 @@ export default function Content({ prices, orders, productCategories, defaultData
     return +page;
   })
 
-  const { refetch } = useQuery(
+  const { refetch, loading } = useQuery(
     gql`query Product($category: [String], $maxPrice: Float, $minPrice: Float, $orderby: ProductsOrderByEnum!, $orderDirection: OrderEnum, $count: Int, $offset: Int) {
       products(
         where: {
           categoryIn: $category, 
-          categoryNotIn: ["kurs", "bundle"],
+          categoryNotIn: ["kurs", "bundle", "ebook"],
           orderby: {field: $orderby, order: $orderDirection}, 
           maxPrice: $maxPrice,
           minPrice: $minPrice,
@@ -232,6 +233,7 @@ export default function Content({ prices, orders, productCategories, defaultData
 
   return (
     <section id='products' className={styles.wrapper}>
+      {(loading) && <Loader />}
       <h2 >Produkty</h2>
       <Filtration
         chosenOrder={chosenOrder}

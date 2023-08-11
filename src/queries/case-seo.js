@@ -1,6 +1,4 @@
-import { gql } from "@apollo/client";
-
-export const GET_SEO_CASE = gql`
+export const GET_SEO_CASE = `
   query Seo($id: ID!) {
     page : podopieczna(id:  $id, idType: URI){
       id

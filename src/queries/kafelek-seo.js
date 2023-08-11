@@ -1,6 +1,4 @@
-import { gql } from "@apollo/client";
-
-export const GET_SEO_KAFELEK = gql`
+export const GET_SEO_KAFELEK = `
   query Seo($id: ID!) {
     page : obszarDzilania(id: $id, idType: URI){
       id

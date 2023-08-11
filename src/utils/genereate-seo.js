@@ -1,5 +1,3 @@
-import getClient from "../apollo/apolo-client"
-
 export const generetaSeo = async (id, url, query, type = 'page') => {
   try {
     const { title, metaDesc, opengraphImage } = await getSeo(id, query)
@@ -28,11 +26,21 @@ export const generetaSeo = async (id, url, query, type = 'page') => {
 }
 
 async function getSeo(id, query) {
-  const { data } = await getClient().query({
-    query: query,
-    variables: {
-      id: id
-    }
-  })
+  const result = await fetch('https://psychodietmed.headlesshub.com/graphql', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      query,
+      variables: {
+        id: id
+      }
+    }),
+    cache: 'force-cache',
+  });
+
+  const { data } = await result.json()
+
   return data.page.seo
 }
