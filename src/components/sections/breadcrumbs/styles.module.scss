@@ -10,6 +10,10 @@
     right: clamp(16px, 4.1666666667vw, 80px);
   }
 
+  @media (max-height: 768px) and (min-width: 1024px){
+    top: calc( 165px - clamp(28px, calc(36vw/7.68), 44px));
+  }
+
   .ul {
     display: flex;
     align-items: center;
