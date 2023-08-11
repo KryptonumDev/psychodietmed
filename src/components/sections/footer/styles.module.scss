@@ -9,8 +9,25 @@
   }
 
   a {
-    &:hover {
-      text-decoration: underline;
+    width: fit-content;
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 5px;
+      width: 100%;
+      height: 3px;
+      z-index: -1;
+      border-radius: 6px;
+      ;
+      background-color: var(--secondary-600);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .4s var(--easing);
+    }
+    &:hover::before {
+      transform: scaleX(1);
     }
   }
 }
@@ -39,6 +56,11 @@
       font-size: clamp(0rem, calc(20vw/3.7), 20rem);
     }
   }
+  a {
+    &::before {
+      bottom: -5px;
+    }
+  }
 }
 
 .flex {
@@ -65,6 +87,9 @@
     transition: fill .3s;
   }
   a {
+    &::before {
+      display: none;
+    }
     &:hover {
       svg {
         fill: var(--secondary-600);
@@ -94,11 +119,10 @@
       height: fit-content;
 
       a, p {
-        line-height: 200%;
+        padding: 13px 0;
         font-size: clamp(16rem, calc(20vw/7.68), 24rem);
         color: var(--neutrals-800);
         letter-spacing: -0.01em;
-        line-height: 240%;
 
         @media (max-width: 370px) {
           font-size: clamp(0rem, calc(16vw/3.7), 16rem);
