@@ -180,7 +180,6 @@ async function getData(props) {
           size: PAGE_ITEM_COUNT,
         }
       }),
-      cache: 'force-cache',
       next: {
         revalidate: 3600
       }

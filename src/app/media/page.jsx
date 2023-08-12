@@ -69,7 +69,6 @@ async function getData(currentPage = 1) {
           size: PAGE_ITEM_COUNT,
         }
       }),
-      cache: 'force-cache',
       next: {
         revalidate: 3600
       }

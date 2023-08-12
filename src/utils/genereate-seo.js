@@ -37,7 +37,6 @@ async function getSeo(id, query) {
         id: id
       }
     }),
-    cache: 'force-cache',
     next: {
       revalidate: 3600
     }

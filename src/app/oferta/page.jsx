@@ -418,7 +418,6 @@ async function getData(params) {
           offset: PAGE_ITEM_COUNT * (currentPage - 1)
         }
       }),
-      cache: 'force-cache',
       next: {
         revalidate: 3600
       }
