@@ -3,11 +3,13 @@ import styles from "./styles.module.scss";
 import { useForm } from "react-hook-form";
 
 export default function Delivery({ input, setInput, setStep, shippingMethods }) {
+  debugger
   const { register, watch, handleSubmit, formState: { errors } } = useForm({ mode: "onBlur", defaultValues: { delivery: shippingMethods[0].methodId } });
 
   const [inpostNumber, setInpostNumber] = useState(null)
 
   const submit = (data) => {
+    debugger
     setInput({ ...input, shippingMethod: shippingMethods.filter(el => el.methodId === data.delivery)[0], inpostNumber: inpostNumber })
     setStep(4)
   }

@@ -98,6 +98,7 @@
     }
 
     .discount {
+      position: relative;
       max-width: 476px;
       width: 100%;
       grid-area: discount;
@@ -106,6 +107,7 @@
       height: fit-content;
       align-items: flex-end;
       gap: 8px;
+      margin-bottom: 20px;
 
       @media (max-width: 768px) {
         max-width: unset;
@@ -132,6 +134,15 @@
             font-size: clamp(0rem, calc(14vw/3.7), 14rem);
           }
         }
+      }
+
+      .error{
+        color: #B40909;
+        font-size: clamp(12rem, calc(14vw/7.68), 16rem);
+        position: absolute;
+        left: 26px;
+        bottom: -4px;
+        transform: translateY(100%);
       }
     }
 

@@ -1,7 +1,6 @@
 import React from "react"
 import styles from "./styles.module.scss"
 import { RightArrow } from "../../../assets/small-right-arrow"
-import Link from "next/link"
 import Input from "@/components/atoms/input"
 import { useForm } from "react-hook-form"
 
@@ -91,7 +90,7 @@ export default function Summary({ submit, needsShippingAddress, setStep, input }
         )}
         <label className={styles.comment} >
           <h3>Komentarz do zamówienia</h3>
-          <Input {...register('comment')} rows={5} errors={errors} placeholder={'Dodaj komentarz do zamówienia'} />
+          <Input register={register('comment')} rows={5} errors={errors} placeholder={'Dodaj komentarz do zamówienia'} />
         </label>
       </div>
       <div className={styles.control}>

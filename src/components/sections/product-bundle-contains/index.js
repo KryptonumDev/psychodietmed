@@ -8,7 +8,7 @@ export default function BundleContains({ productId, data }) {
   return (
     <section className={styles.wrapper}>
       <div>
-        <h2>Co otrzymasz w pakiecie?</h2>
+        <h2>Co otrzymasz po zakupie?</h2>
         <div className={styles.grid}>
           {data.map((el, index) => (
             <p key={index} className={styles.item}>

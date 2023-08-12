@@ -5,9 +5,29 @@ import { useForm } from "react-hook-form";
 import Input from "@/components/atoms/input";
 import { emailPattern, phonePattern } from "../../../constants/patterns";
 import axios from "axios";
+import Checkbox from "@/components/atoms/checkbox";
 
 export default function Personaldata({ input, setStep, setInput }) {
-  const { setValue, register, watch, handleSubmit, formState: { errors } } = useForm({ mode: "onBlur", defaultValues: { type: 'person', shipping_same_as_billing: true } });
+  const { setValue, register, watch, handleSubmit, formState: { errors } } = useForm({ 
+    mode: "onBlur", 
+    defaultValues: { 
+      type: input?.firmOrder ? 'firm' : 'person', 
+      shipping_same_as_billing: !input?.billingDifferentThanShipping,
+      billing_nip: input?.metaData?.find(el => el.key === '_billing_nip')?.value || '',
+      billing_firmName: input?.billing?.company || '',
+      billing_email: input?.billing?.email || '',
+      billing_address: input?.billing?.address1 || '',
+      billing_postalCode: input?.billing?.postcode || '',
+      billing_city: input?.billing?.city || '',
+      billing_phone: input?.billing?.phone || '',
+      shipping_name: (input?.shipping?.firstName || input?.shipping?.lastName) ? `${input?.shipping?.firstName} ${input?.shipping?.lastName}` : '',
+      shipping_address: input?.shipping?.address1 || '',
+      shipping_postalCode: input?.shipping?.postcode || '',
+      shipping_city: input?.shipping?.city || '',
+      shipping_phone: input?.shipping?.phone || '',
+      shipping_email: input?.shipping?.email || '',
+    } 
+  });
 
   const [nipValue, setNipValue] = useState(false)
   const [isTrueNip, setIsTrueNip] = useState(false)
@@ -42,7 +62,7 @@ export default function Personaldata({ input, setStep, setInput }) {
 
 
   const submit = (data) => {
-    
+
     setInput({
       ...input,
       firmOrder: data.type === 'firm',
@@ -155,10 +175,12 @@ export default function Personaldata({ input, setStep, setInput }) {
         <legend>Adres dostawy</legend>
 
         {watchType === 'firm' && (
-          <label className={styles.checkbox}>
-            <input {...register('shipping_same_as_billing')} type="checkbox" />
-            <span>Taki sam jak na fakturze.</span>
-          </label>
+          <Checkbox
+            text='Taki sam jak na fakturze.'
+            name='shipping_same_as_billing'
+            register={register('shipping_same_as_billing')}
+            errors={errors}
+          />
         )}
 
         {(watchType === 'person' || !watchShippingSameAsBilling) && (

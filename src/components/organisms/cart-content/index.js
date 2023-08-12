@@ -1,5 +1,5 @@
 'use client'
-import React from "react"
+import React, { useState } from "react"
 import styles from "./styles.module.scss"
 import { useMutation } from "@apollo/client";
 import { getUpdatedItems } from "../../../utils/get-updated-items";
@@ -11,48 +11,64 @@ import APPLY_COUPON from "../../../mutations/apply-coupon";
 import { useForm } from "react-hook-form";
 import REMOVE_COUPON from "../../../mutations/remove-coupon";
 import { getFormattedCart } from "../../../utils/get-formatted-cart";
+import { AnimatePresence, motion } from "framer-motion";
 
-export default function Content({ setInnerLoading, setCart, cart, refetch, isCart = true }) {
+export default function Content({ setCart, setInnerLoading, cart, isCart = true }) {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const [couponError, setCouponError] = useState(null);
 
   const [updateCart, { loading: updateCartProcessing }] = useMutation(UPDATE_CART, {
     onCompleted: (data) => {
-      debugger
       // Update cart in the localStorage.
       const updatedCart = getFormattedCart(data.updateItemQuantities);
       localStorage.setItem('woo-next-cart', JSON.stringify(updatedCart));
       // Update cart data in React Context.
-      setCart(updatedCart);
+
+      if (!updatedCart && !isCart) {
+        window.location.href = '/koszyk'
+      }
+
+      setCart(updatedCart || null);
       setInnerLoading(false)
     },
     onError: (error) => {
+      setInnerLoading(false)
       if (error) {
-        const errorMessage = error?.graphQLErrors?.[0]?.message ? error.graphQLErrors[0].message : '';
-        throw new Error(errorMessage);
+        throw new Error(error?.graphQLErrors?.[0]?.message);
       }
     }
   });
 
   const [applyCoupon, { loading: applyCouponProcessing }] = useMutation(APPLY_COUPON, {
-    onCompleted: () => {
-      refetch();
+    onCompleted: (data) => {
+      // Update cart in the localStorage.
+      const updatedCart = getFormattedCart(data.applyCoupon);
+      localStorage.setItem('woo-next-cart', JSON.stringify(updatedCart));
+      // Update cart data in React Context.
+      setCart(updatedCart || null);
+      setInnerLoading(false)
+      setCouponError(null)
     },
     onError: (error) => {
-      if (error) {
-        throw new Error(error?.graphQLErrors?.[0]?.message);
-      }
+      setInnerLoading(false)
+      setCouponError(error?.graphQLErrors?.[0]?.message)
     }
   });
 
   const [removeCoupon, { loading: removeCouponProcessing }] = useMutation(REMOVE_COUPON, {
-    onCompleted: () => {
-      refetch();
+    onCompleted: (data) => {
+      // Update cart in the localStorage.
+      const updatedCart = getFormattedCart(data.removeCoupons);
+      localStorage.setItem('woo-next-cart', JSON.stringify(updatedCart));
+      // Update cart data in React Context.
+      setCart(updatedCart || null);
+      setInnerLoading(false)
+      setCouponError(null)
     },
     onError: (error) => {
-      if (error) {
-        throw new Error(error?.graphQLErrors?.[0]?.message);
-      }
+      setInnerLoading(false)
+      reload()
     }
   });
 
@@ -131,6 +147,11 @@ export default function Content({ setInnerLoading, setCart, cart, refetch, isCar
           <button className="link">
             Aktywuj
           </button>
+          <AnimatePresence mode="wait">
+            {couponError && (
+              <motion.span className={styles.error} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>{couponError}</motion.span>
+            )}
+          </AnimatePresence>
         </form>
         <div className={styles.price}>
           <p><span>Wartość zamówienia:</span><span dangerouslySetInnerHTML={{ __html: cart?.subTotalProductPrice }} /></p>

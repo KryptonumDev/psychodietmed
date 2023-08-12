@@ -1,7 +1,7 @@
 import React from "react"
 import styles from './styles.module.scss'
 
-export default function Success({ data }) {
+export default function Success() {
   return (
     <section className={styles.wrapper}>
       <h1>Dziękujemy za złożenie zamówienia</h1>

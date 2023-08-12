@@ -1,0 +1,15 @@
+.wrapper{
+
+}.wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  margin-top: clamp(28px, calc(36vw/7.68), 64px);
+
+  h1 {
+    text-align: center;
+  }
+
+  a{
+    margin: 36px auto 0 auto;
+  }
+}

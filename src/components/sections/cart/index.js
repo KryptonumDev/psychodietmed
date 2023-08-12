@@ -23,7 +23,7 @@ export default function Cart() {
       localStorage.setItem('woo-next-cart', JSON.stringify(updatedCart));
       // Update cart data in React Context.
       setNeedAnimation(true)
-      setCart(updatedCart);
+      setCart(updatedCart || null);
     }
   });
 

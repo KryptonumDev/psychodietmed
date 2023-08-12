@@ -7,19 +7,26 @@ export default function Grid({ user, courses, ebooks }) {
   return (
     <section className={styles.wrapper}>
       {/* <h1>Sprawdź najnowszy kurs</h1> */}
-
-      <h2>Nasze kursy</h2>
-      <div className={styles.grid}>
-        {courses.nodes.map((item, index) => (
-          <Course myCourse={!!user?.courses?.nodes?.find((el) => el.databaseId === item.product.course.databaseId)} data={item} key={index} />
-        ))}
-      </div>
-      <h2>Nasze eBooki</h2>
-      <div className={styles.grid}>
-        {ebooks.nodes.map((item, index) => (
-          <Card offer={false} product={item} key={index} />
-        ))}
-      </div>
+      {courses.nodes.length > 0 && (
+        <>
+          <h2>Nasze kursy</h2>
+          <div className={styles.grid}>
+            {courses.nodes.map((item, index) => (
+              <Course myCourse={!!user?.courses?.nodes?.find((el) => el.databaseId === item.product.course.databaseId)} data={item} key={index} />
+            ))}
+          </div>
+        </>
+      )}
+      {ebooks.nodes.length > 0 && (
+        <>
+          <h2>Nasze eBooki</h2>
+          <div className={styles.grid}>
+            {ebooks.nodes.map((item, index) => (
+              <Card offer={false} product={item} key={index} />
+            ))}
+          </div>
+        </>
+      )}
     </section>
   )
 }

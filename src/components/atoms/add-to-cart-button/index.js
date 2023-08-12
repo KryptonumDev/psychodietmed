@@ -39,7 +39,7 @@ export default function AddToCart({ chosenAddon, variationId, quantity, product 
     onCompleted: (res) => {
       const updatedCart = getFormattedCart(res.addToCart);
       localStorage.setItem('woo-next-cart', JSON.stringify(updatedCart));
-      setCart(updatedCart);
+      setCart(updatedCart || null);
       // 2. Show View Cart Button
       setShowViewCart(true)
     },

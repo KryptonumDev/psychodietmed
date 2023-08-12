@@ -24,27 +24,35 @@ export default function CheckoutContent() {
   const [step, setStep] = useState(2);
   const [innerLoading, setInnerLoading] = useState(true);
 
-  // Get Cart Data.
-  const { refetch, loading } = useQuery(GET_CART, {
-    notifyOnNetworkStatusChange: true,
-    onCompleted: (data) => {
-      debugger
+  useEffect(() => {
+    debugger
+    if ((cart && cart?.products?.length === 0) || cart === null) {
+      window.location.href = '/koszyk'
+    }
+  }, [cart])
 
+  // Get Cart Data.
+  const { loading } = useQuery(GET_CART, {
+    onCompleted: (data) => {
       // Update cart in the localStorage.
       const updatedCart = getFormattedCart(data);
       localStorage.setItem('woo-next-cart', JSON.stringify(updatedCart));
 
+      if (!updatedCart && !cart) {
+        window.location.href = '/koszyk'
+      }
+
       // Update cart data in React Context.
-      setCart(updatedCart);
+      setCart(updatedCart || null);
     }
   });
-  debugger
+
   useEffect(() => {
     setInnerLoading(false)
   }, [])
 
   // Create New order: Checkout Mutation.
-  const [checkout] = useMutation(CHECKOUT_MUTATION, {
+  const [checkout, { loading: checkoutLoad }] = useMutation(CHECKOUT_MUTATION, {
     variables: {
       input: orderData
     },
@@ -68,10 +76,12 @@ export default function CheckoutContent() {
 
       Promise.all([mailerlite, transaction])
         .then(function (values) {
-          debugger
-          if (response.data.link) {
-            window.location.href = response.data.link
+          if (values[1].data.link) {
+            window.location.href = values[1].data.link
           }
+        })
+        .catch(error => {
+          throw new Error(error)
         });
     },
     onError: (error) => {
@@ -91,13 +101,14 @@ export default function CheckoutContent() {
   const handleSubmit = (props) => {
     const needAccount = cart.products.some((item) => item.categories.some((category) => category.slug === 'kurs'))
     const formattedInput = { ...input, comment: props.comment, needAccount: needAccount }
+    debugger
     setOrderData(createCheckoutData(formattedInput, false))
     setInput(formattedInput)
   }
 
   return (
     <section className={styles.wrapper}>
-      <Loader show={loading || innerLoading} />
+      <Loader show={loading || innerLoading || checkoutLoad} />
       <h1>
         {step === 2 && 'Dane osobowe'}
         {(step === 3 && cart?.needsShippingAddress) && 'Dostawa'}
@@ -115,7 +126,7 @@ export default function CheckoutContent() {
       )}
       {((step === 4 && cart?.needsShippingAddress) || (step === 3 && !cart?.needsShippingAddress)) && (
         <>
-          <Content refetch={refetch} cart={cart} isCart={false} />
+          <Content setCart={setCart} setInnerLoading={setInnerLoading} cart={cart} isCart={false} />
           <Summary submit={handleSubmit} needsShippingAddress={cart?.needsShippingAddress} input={input} setStep={setStep} />
         </>
       )}
