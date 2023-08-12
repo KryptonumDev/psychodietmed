@@ -19,7 +19,8 @@ export async function POST(req) {
     } else {
       return NextResponse.json({ success: false }, { status: 500 });
     }
-  } catch {
+  } catch(err) {
+    console.log(err);
     return NextResponse.json({ success: false }, { status: 500 });
   }
 }

@@ -5,7 +5,7 @@ export const generetaSeo = async (id, url, query, type = 'page') => {
     const { title, metaDesc, opengraphImage } = await getSeo(id, query)
     const canonical = url + (type !== 'page' ? `/${id}` : '')
 
-    return {
+    const data = {
       metadataBase: new URL('https://www.psychodietmed.pl'),
       title: title,
       description: metaDesc,
@@ -16,12 +16,19 @@ export const generetaSeo = async (id, url, query, type = 'page') => {
         title: title,
         description: metaDesc,
         url: canonical,
-        images: opengraphImage?.mediaItemUrl || null,
       },
       robots: {
         index: false,
       }
     }
+
+    if(opengraphImage?.mediaItemUrl){
+      data.openGraph.images = [
+        opengraphImage?.mediaItemUrl
+      ]
+    }
+
+    return data
   } catch (error) {
     console.log(error)
   }
