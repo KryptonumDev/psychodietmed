@@ -1,10 +1,9 @@
-import { gql } from "@apollo/client";
-import getClient from "../../apollo/apolo-client";
 import Slider from "@/components/sections/products-slider";
 import Hero from "@/components/sections/hero-statute";
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
 import Breadcrumbs from "@/components/sections/breadcrumbs";
+import { Fetch } from "../../utils/fetch-query";
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDoxNjMw', '/regulamin', GET_SEO_PAGE)
@@ -23,81 +22,22 @@ export default async function Regulamin() {
 }
 
 async function getData() {
-  const { data } = await getClient().query({
-    query: gql`
-      query Pages {
-        page(id: "cG9zdDoxNjMw") {
-          statute {
-            heroStatute {
-              title
-              text
-              files {
-                file {
-                  title
-                  altText
-                  mediaItemUrl
-                  mediaDetails {
-                    sizes {
-                      fileSize
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-        products(first: 5, where: {categoryNotIn: ["ebook", "kurs", "bundle"]} ) {
-          nodes {
-            product {
-              discount
-              bundleItems {
-                text
-              }
-            }
-            id
-            productId: databaseId
-            slug
-            name
-            image {
-              id
-              altText
-              altText
-              mediaItemUrl
-              mediaDetails {
-                height
-                width
-              }
-            }
-            ... on SimpleProduct {
-              id
-              price
-              regularPrice
-            }
-            ... on VariableProduct {
-              id
-              price
-              regularPrice
-              attributes {
-                nodes {
-                  variation
-                  name
-                  options
-                  attributeId
-                }
-              }
-              variations {
-                nodes {
-                  id
-                  name
-                  price
-                  regularPrice
-                  productId: databaseId
-                  attributes {
-                    nodes {
-                      value
-                      name
-                      attributeId
-                    }
+  const { body: { data } } = await Fetch({
+    query: `
+    query Pages {
+      page(id: "cG9zdDoxNjMw") {
+        statute {
+          heroStatute {
+            title
+            text
+            files {
+              file {
+                title
+                altText
+                mediaItemUrl
+                mediaDetails {
+                  sizes {
+                    fileSize
                   }
                 }
               }
@@ -105,7 +45,67 @@ async function getData() {
           }
         }
       }
-    `,
+      products(first: 5, where: {categoryNotIn: ["ebook", "kurs", "bundle"]} ) {
+        nodes {
+          product {
+            discount
+            bundleItems {
+              text
+            }
+          }
+          id
+          productId: databaseId
+          slug
+          name
+          image {
+            id
+            altText
+            altText
+            mediaItemUrl
+            mediaDetails {
+              height
+              width
+            }
+          }
+          ... on SimpleProduct {
+            id
+            price
+            regularPrice
+          }
+          ... on VariableProduct {
+            id
+            price
+            regularPrice
+            attributes {
+              nodes {
+                variation
+                name
+                options
+                attributeId
+              }
+            }
+            variations {
+              nodes {
+                id
+                name
+                price
+                regularPrice
+                productId: databaseId
+                attributes {
+                  nodes {
+                    value
+                    name
+                    attributeId
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `,
+    revalidate: 3600
   })
 
   return {

@@ -1,5 +1,3 @@
-import { gql } from "@apollo/client";
-import getClient from "../../apollo/apolo-client";
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
 import { cookies } from 'next/headers'
@@ -7,6 +5,7 @@ import { redirect } from "next/navigation";
 import Login from "@/components/sections/login";
 import CallToActionGray from "@/components/sections/call-to-action-gray";
 import Breadcrumbs from "@/components/sections/breadcrumbs";
+import { Fetch } from "../../utils/fetch-query";
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDoxOTAz', '/moje-kursy', GET_SEO_PAGE)
@@ -29,20 +28,20 @@ export default async function Courses() {
 
 async function getUser(authToken) {
   try {
-    const { data: { viewer } } = await getClient().query({
-      query: gql`
-      query Viewer {
-        viewer {
-          username
+    const { body: { data: { viewer } } } = await Fetch({
+      query:`
+        query Viewer {
+          viewer {
+            username
+          }
         }
+      `,
+      revalidate: 360,
+      headers: {
+        "Authorization": `Bearer ${authToken}`
       }
-    `,
-      context: {
-        headers: {
-          "Authorization": `Bearer ${authToken}`
-        }
-      }
-    }, { pollInterval: 500 })
+    })
+
     return { user: viewer }
   } catch (error) {
     console.log('error', error)

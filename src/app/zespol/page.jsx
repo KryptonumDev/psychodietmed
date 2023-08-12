@@ -1,5 +1,3 @@
-import { gql } from "@apollo/client";
-import  getClient from "../../apollo/apolo-client";
 import OtherPosts from "@/components/sections/other-posts";
 import Newsletter from "@/components/sections/newsletter";
 import Hero from "@/components/sections/hero-team";
@@ -14,6 +12,7 @@ import CombinedSpecialisations from "@/components/sections/team-combined-special
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
 import Breadcrumbs from "@/components/sections/breadcrumbs";
+import { Fetch } from "../../utils/fetch-query";
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDoxMTc2', '/zespol', GET_SEO_PAGE)
@@ -40,223 +39,224 @@ export default async function Team() {
 }
 
 async function getData() {
-  const { data: { global, posts, page, specjalisci } } = await getClient().query({
-    query: gql`
-      query Pages {
-        specjalisci {
-          nodes {
-            title
-            slug
-            specialisations {
-              nodes {
-                id : databaseId
-                title : name
-              }
-            }
-            proffesional {
-              proffesion
-              personImage {
-                altText
-                mediaItemUrl
-                mediaDetails {
-                  height
-                  width
-                }
-              }
+  const { body: { data: { global, posts, page, specjalisci } } } = await Fetch({
+    query: `
+    query Pages {
+      specjalisci {
+        nodes {
+          title
+          slug
+          specialisations {
+            nodes {
+              id : databaseId
+              title : name
             }
           }
-        }
-        page(id: "cG9zdDoxMTc2") {
-          id
-          team{
-            combinedSpecialisationsTeam{
-              title
-              combinedCards{
-                text
-                image{
-                  altText
-                  mediaItemUrl
-                  mediaDetails{
-                    height
-                    width
-                  }
-                }
-              }
-            }
-            statisticsTeam{
-              title
-              text
-              link{
-                title
-                url
-              }
-              counters{
-                number
-                text
-              }
-              image{
-                altText
-                mediaItemUrl
-                mediaDetails{
-                  height
-                  width
-                }
-              }
-            }
-            heroTeam{
-              title
-              text
-              link{
-                title
-                url
-              }
-              image{
-                altText
-                mediaItemUrl
-                mediaDetails{
-                  height
-                  width
-                }
-              }
-              logo{
-                altText
-                mediaItemUrl
-                mediaDetails{
-                  height
-                  width
-                }
-              }
-              grid{
-                text
-                icon{
-                  altText
-                  mediaItemUrl
-                  mediaDetails{
-                    height
-                    width
-                  }
-                }
-              }
-              subTitle
-            }
-            sliderTeam{
-              title
-              content
-              subTitle
-              slider{
-                altText
-                mediaItemUrl
-                mediaDetails{
-                  height
-                  width
-                }
-              }
-            }
-            ownerTeam{
-              title
-              text
-              image{
-                altText
-                mediaItemUrl
-                mediaDetails {
-                  height
-                  width
-                }
-              }
-              owner {
-                ... on Specjalista {
-                  id
-                  title
-                  proffesional {
-                    proffesion
-                    personImage {
-                      altText
-                      mediaItemUrl
-                      mediaDetails {
-                        height
-                        width
-                      }
-                    }
-                    diploms {
-                      diplom
-                    }
-                  }
-                }
-              }
-            }
-            flowersTeam{
-              repeater{
-                text
-              }
-              text
-              link{
-                title
-                url
-              }
-            }
-            repeaterFlexTeam{
-              title
-              text
-              image{
-                altText
-                mediaItemUrl
-                mediaDetails{
-                  height
-                  width
-                }
-              }
-            }
-            greyCtaTeam {
-              content
-              link {
-                title
-                url
-              }
-            }
-          }
-        }
-        global : page(id: "cG9zdDo3Nzk=") {
-          id
-          global {
-            newsletterGlobal{
-              title
-              text
-              consent
-            }
-            blogGlobal{
-              title
-              text
-            }
-          }
-        }
-        posts(first: 3) {
-          nodes {
-            id
-            dateGmt
-            featuredImage {
-              node {
-                altText
-                mediaItemUrl
-                mediaDetails {
-                  height
-                  width
-                }
-              }
-            }
-            slug
-            title
-            excerpt
-            categories {
-              nodes {
-                name
-                slug
-                id
+          proffesional {
+            proffesion
+            personImage {
+              altText
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
               }
             }
           }
         }
       }
-    `,
+      page(id: "cG9zdDoxMTc2") {
+        id
+        team{
+          combinedSpecialisationsTeam{
+            title
+            combinedCards{
+              text
+              image{
+                altText
+                mediaItemUrl
+                mediaDetails{
+                  height
+                  width
+                }
+              }
+            }
+          }
+          statisticsTeam{
+            title
+            text
+            link{
+              title
+              url
+            }
+            counters{
+              number
+              text
+            }
+            image{
+              altText
+              mediaItemUrl
+              mediaDetails{
+                height
+                width
+              }
+            }
+          }
+          heroTeam{
+            title
+            text
+            link{
+              title
+              url
+            }
+            image{
+              altText
+              mediaItemUrl
+              mediaDetails{
+                height
+                width
+              }
+            }
+            logo{
+              altText
+              mediaItemUrl
+              mediaDetails{
+                height
+                width
+              }
+            }
+            grid{
+              text
+              icon{
+                altText
+                mediaItemUrl
+                mediaDetails{
+                  height
+                  width
+                }
+              }
+            }
+            subTitle
+          }
+          sliderTeam{
+            title
+            content
+            subTitle
+            slider{
+              altText
+              mediaItemUrl
+              mediaDetails{
+                height
+                width
+              }
+            }
+          }
+          ownerTeam{
+            title
+            text
+            image{
+              altText
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
+            }
+            owner {
+              ... on Specjalista {
+                id
+                title
+                proffesional {
+                  proffesion
+                  personImage {
+                    altText
+                    mediaItemUrl
+                    mediaDetails {
+                      height
+                      width
+                    }
+                  }
+                  diploms {
+                    diplom
+                  }
+                }
+              }
+            }
+          }
+          flowersTeam{
+            repeater{
+              text
+            }
+            text
+            link{
+              title
+              url
+            }
+          }
+          repeaterFlexTeam{
+            title
+            text
+            image{
+              altText
+              mediaItemUrl
+              mediaDetails{
+                height
+                width
+              }
+            }
+          }
+          greyCtaTeam {
+            content
+            link {
+              title
+              url
+            }
+          }
+        }
+      }
+      global : page(id: "cG9zdDo3Nzk=") {
+        id
+        global {
+          newsletterGlobal{
+            title
+            text
+            consent
+          }
+          blogGlobal{
+            title
+            text
+          }
+        }
+      }
+      posts(first: 3) {
+        nodes {
+          id
+          dateGmt
+          featuredImage {
+            node {
+              altText
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
+            }
+          }
+          slug
+          title
+          excerpt
+          categories {
+            nodes {
+              name
+              slug
+              id
+            }
+          }
+        }
+      }
+    }
+  `,
+    revalidate: 3600
   })
 
   return {

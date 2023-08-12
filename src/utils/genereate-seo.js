@@ -1,3 +1,5 @@
+import { Fetch } from "./fetch-query"
+
 export const generetaSeo = async (id, url, query, type = 'page') => {
   try {
     const { title, metaDesc, opengraphImage } = await getSeo(id, query)
@@ -21,28 +23,18 @@ export const generetaSeo = async (id, url, query, type = 'page') => {
       }
     }
   } catch (error) {
-    throw new Error(error)
+    console.log(error)
   }
 }
 
 async function getSeo(id, query) {
-  const result = await fetch('https://psychodietmed.headlesshub.com/graphql', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+  const { body: { data } } = await Fetch({
+    query: query,
+    variables: {
+      id: id
     },
-    body: JSON.stringify({
-      query,
-      variables: {
-        id: id
-      }
-    }),
-    next: {
-      revalidate: 3600
-    }
-  });
-
-  const { data } = await result.json()
+    revalidate: 3600
+  })
 
   return data.page.seo
 }

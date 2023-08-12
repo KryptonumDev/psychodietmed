@@ -1,6 +1,4 @@
 import { notFound } from "next/navigation"
-import { gql } from "@apollo/client"
-import  getClient from "../../apollo/apolo-client"
 import Hero from "@/components/sections/hero-brand"
 import History from "@/components/sections/brand-history"
 import Name from "@/components/sections/brand-name"
@@ -15,6 +13,7 @@ import TwoColumnFlexWithGrid from "@/components/sections/brand-flex-and-grid"
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
 import Breadcrumbs from "@/components/sections/breadcrumbs"
+import { Fetch } from "../../utils/fetch-query"
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDoxMDc1', '/historia-marki', GET_SEO_PAGE)
@@ -42,9 +41,8 @@ export default async function Archive() {
 
 async function getData() {
   try {
-
-    const { data: { page, global, posts } } = await getClient().query({
-      query: gql`
+    const { body: { data: { page, global, posts } } } = await Fetch({
+      query: `
       query Page {
         posts(first: 3) {
           nodes {
@@ -256,7 +254,8 @@ async function getData() {
           }
         }
       }
-    `
+    `,
+      revalidate: 3600,
     })
 
     return {

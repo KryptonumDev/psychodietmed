@@ -1,6 +1,4 @@
 import { notFound } from "next/navigation"
-import { gql } from "@apollo/client"
-import  getClient from "../../../apollo/apolo-client"
 import Hero from "@/components/sections/hero-tool"
 import Flex from "@/components/sections/tool-flex"
 import Grid from "@/components/sections/tool-grid"
@@ -10,6 +8,7 @@ import CallToAction from "@/components/sections/tool-cta"
 import { generetaSeo } from "../../../utils/genereate-seo"
 import { GET_SEO_TOOL } from "../../../queries/tool-seo"
 import Breadcrumbs from "@/components/sections/breadcrumbs"
+import { Fetch } from "../../../utils/fetch-query"
 
 export async function generateMetadata({ params }) {
   return await generetaSeo(params.tool, '/narzedzia', GET_SEO_TOOL, 'post')
@@ -34,8 +33,8 @@ export default async function Post({ params }) {
 
 async function getData(params) {
   try {
-    const { data: { narzedzie, global } } = await getClient().query({
-      query: gql`
+    const { body: { data: { narzedzie, global } } } = await Fetch({
+      query:`
       query Pages($uri: ID!) {
         global : page(id: "cG9zdDo3Nzk=") {
           id
@@ -109,6 +108,7 @@ async function getData(params) {
         }
       }
     `,
+      revalidate: 3600,
       variables: {
         uri: `${params.tool}`,
       }
@@ -128,16 +128,17 @@ async function getData(params) {
 }
 
 export async function generateStaticParams() {
-  const { data: { narzedzia } } = await getClient().query({
-    query: gql`
-    query PostStaticParams {
-      narzedzia(first: 100) {
-        nodes {
-          slug
+  const { body: { data: { narzedzia } } } = await Fetch({
+    query:`
+      query PostStaticParams {
+        narzedzia(first: 100) {
+          nodes {
+            slug
+          }
         }
       }
-    }
-  `
+    `,
+    revalidate: 360
   })
 
   return narzedzia.nodes.map(({ slug }) => ({

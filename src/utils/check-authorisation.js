@@ -1,26 +1,24 @@
 import { cookies } from "next/headers"
-import  getClient from "../apollo/apolo-client"
 import { redirect } from "next/navigation"
-import { gql } from "@apollo/client"
+import { Fetch } from "./fetch-query"
 
 export async function getUser() {
   try {
     const authToken = cookies().get('authToken').value
 
-    const { data: { viewer } } = await getClient().query({
-      query: gql`
+    const { body: { data: { viewer } } } = await Fetch({
+      query: `
       query Viewer {
         viewer {
           username
         }
       }
     `,
-      context: {
-        headers: {
-          "Authorization": `Bearer ${authToken}`
-        }
+      revalidate: 360,
+      headers: {
+        "Authorization": `Bearer ${authToken}`
       }
-    }, { pollInterval: 500 })
+    })
 
     if (!viewer?.username) redirect('/logowanie')
 

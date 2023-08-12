@@ -1,6 +1,4 @@
 import { notFound } from "next/navigation"
-import { gql } from "@apollo/client"
-import  getClient from "../../../apollo/apolo-client"
 import Hero from "@/components/sections/hero-medium"
 import Flex from "@/components/sections/medium-flex"
 import Video from "@/components/sections/medium-video"
@@ -10,6 +8,7 @@ import Interview from "@/components/sections/media-interview"
 import { generetaSeo } from "../../../utils/genereate-seo"
 import { GET_SEO_MEDIA } from "../../../queries/media-seo"
 import Breadcrumbs from "@/components/sections/breadcrumbs"
+import { Fetch } from "../../../utils/fetch-query"
 
 export async function generateMetadata({ params }) {
   return await generetaSeo(params.media, '/media', GET_SEO_MEDIA, 'post')
@@ -44,8 +43,8 @@ export default async function Post({ params }) {
 
 async function getData(params) {
   try {
-    const { data: { medium, mediums } } = await getClient().query({
-      query: gql`
+    const { body: { data: { medium, mediums } } } = await Fetch({
+      query:`
       query Pages($uri: ID!) {
         mediums(first: 7) {
           nodes {
@@ -135,6 +134,7 @@ async function getData(params) {
         }
       }
     `,
+      revalidate: 3600,
       variables: {
         uri: `${params.media}`,
       }
@@ -154,16 +154,17 @@ async function getData(params) {
 }
 
 export async function generateStaticParams() {
-  const { data: { mediums } } = await getClient().query({
-    query: gql`
-    query PostStaticParams {
-      mediums(first: 100) {
-        nodes {
-          slug
+  const { body: { data: { mediums } } } = await Fetch({
+    query:`
+      query PostStaticParams {
+        mediums(first: 100) {
+          nodes {
+            slug
+          }
         }
       }
-    }
-  `
+    `,
+    revalidate: 360,
   })
 
   return mediums.nodes.map(({ slug }) => ({

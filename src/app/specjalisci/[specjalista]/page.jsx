@@ -1,6 +1,4 @@
 import { notFound } from "next/navigation"
-import { gql } from "@apollo/client"
-import  getClient from "../../../apollo/apolo-client"
 import Hero from "@/components/sections/hero-specialist"
 import Flex from "@/components/sections/specialist-flex"
 import FAQ from "@/components/sections/faq"
@@ -10,6 +8,7 @@ import Calendar from "@/components/sections/calendar-widget"
 import { GET_SEO_SPECIALIST } from "../../../queries/specialist-seo"
 import { generetaSeo } from "../../../utils/genereate-seo"
 import Breadcrumbs from "@/components/sections/breadcrumbs"
+import { Fetch } from "../../../utils/fetch-query"
 
 export async function generateMetadata({ params }) {
   return await generetaSeo(params.specjalista, '/zespol', GET_SEO_SPECIALIST, 'post')
@@ -39,8 +38,8 @@ export default async function Specjalista({ params }) {
 
 async function getData(params) {
   try {
-    const { data: { specjalisci, specjalistaBy, page } } = await getClient().query({
-      query: gql`
+    const { body: { data: { specjalisci, specjalistaBy, page } } } = await Fetch({
+      query: `
       query Pages($uri: String) {
         specjalisci(first: 100) {
           nodes {
@@ -133,6 +132,7 @@ async function getData(params) {
         }
       }
     `,
+      revalidate: 3600,
       variables: {
         uri: `${params.specjalista}`,
       }
@@ -152,9 +152,8 @@ async function getData(params) {
 }
 
 export async function generateStaticParams() {
-
-  const { data: { specjalisci } } = await getClient().query({
-    query: gql`
+  const { body: { data: { specjalisci } } } = await Fetch({
+    query: `
     query PostStaticParams {
       specjalisci(first: 100) {
         nodes {
@@ -162,7 +161,8 @@ export async function generateStaticParams() {
         }
       }
     }
-  `
+  `,
+    revalidate: 360
   })
 
   return specjalisci.nodes.map(({ slug }) => ({

@@ -1,5 +1,3 @@
-import { gql } from "@apollo/client";
-import getClient from "../../../../apollo/apolo-client";
 // import { generetaSeo } from "../../../utils/genereate-seo";
 // import { GET_SEO_PAGE } from "../../../queries/page-seo";
 import { notFound, redirect } from "next/navigation";
@@ -7,6 +5,7 @@ import Hero from "@/components/sections/hero-course";
 import Content from "@/components/sections/course-content";
 import { cookies } from "next/headers";
 import Breadcrumbs from "@/components/sections/breadcrumbs";
+import { Fetch } from "../../../../utils/fetch-query";
 
 // export async function generateMetadata() {
 //   return await generetaSeo('cG9zdDoxODY4', '/akademia', GET_SEO_PAGE)
@@ -46,25 +45,24 @@ export default async function Courses({ params }) {
 async function getUser() {
   const authToken = cookies().get('authToken')?.value
   try {
-    const { data: { viewer } } = await getClient().query({
-      query: gql`
-      query Viewer {
-        viewer {
-          username
-          courses {
-            nodes {
-              databaseId
+    const { body: { data: { viewer } } } = await Fetch({
+      query: `
+        query Viewer {
+          viewer {
+            username
+            courses {
+              nodes {
+                databaseId
+              }
             }
           }
         }
+      `,
+      revalidate: 360,
+      headers: {
+        "Authorization": `Bearer ${authToken}`
       }
-    `,
-      context: {
-        headers: {
-          "Authorization": `Bearer ${authToken}`
-        }
-      }
-    }, { pollInterval: 500 })
+    })
 
     return {
       user: viewer
@@ -78,8 +76,8 @@ async function getUser() {
 
 async function getData(params) {
   try {
-    const { data: { product } } = await getClient().query({
-      query: gql`
+    const { body: { data: { product } } } = await Fetch({
+      query: `
       query Pages($id: ID!) {
         product(id: $id, idType: SLUG) {
           databaseId
@@ -145,6 +143,7 @@ async function getData(params) {
         }
       }
     `,
+      revalidate: 360,
       variables: {
         id: params.product
       }
@@ -163,19 +162,20 @@ async function getData(params) {
 }
 
 export async function generateStaticParams() {
-  const { data: { products } } = await getClient().query({
-    query: gql`
-    query PostStaticParams {
-      products(
-        first: 100,
-        where: {categoryIn: ["kurs"]}
-      ) {
-        nodes {
-          slug
+  const { body: { data: { products } } } = await Fetch({
+    query: `
+      query PostStaticParams {
+        products(
+          first: 100,
+          where: {categoryIn: ["kurs"]}
+        ) {
+          nodes {
+            slug
+          }
         }
       }
-    }
-  `
+    `,
+    revalidate: 360,
   })
 
   return products.nodes.map(({ slug }) => ({

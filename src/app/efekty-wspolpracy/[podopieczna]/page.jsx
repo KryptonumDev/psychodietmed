@@ -1,12 +1,11 @@
 import { notFound } from "next/navigation"
-import { gql } from "@apollo/client"
-import  getClient from "../../../apollo/apolo-client"
 import Hero from "@/components/sections/hero-case"
 import Cards from "@/components/sections/case-result-cards"
 import ReviewsSlider from "@/components/sections/reviews-slider"
 import { generetaSeo } from "../../../utils/genereate-seo"
 import { GET_SEO_CASE } from "../../../queries/case-seo"
 import Breadcrumbs from "@/components/sections/breadcrumbs"
+import { Fetch } from "../../../utils/fetch-query"
 
 export async function generateMetadata({ params }) {
   return await generetaSeo(params.podopieczna, '/efekty-wspolpracy', GET_SEO_CASE, 'post')
@@ -26,8 +25,8 @@ export default async function Post({ params }) {
 
 async function getData(params) {
   try {
-    const { data: { podopiecznaBy, podopieczni } } = await getClient().query({
-      query: gql`
+    const { body: { data: { podopiecznaBy, podopieczni } } } = await Fetch({
+      query: `
       query Pages($uri: String) {
         podopieczni(first: 5) {
           nodes {
@@ -122,6 +121,7 @@ async function getData(params) {
         }
       }
     `,
+      revalidate: 3600,
       variables: {
         uri: `${params.podopieczna}`,
       }
@@ -141,8 +141,8 @@ async function getData(params) {
 }
 
 export async function generateStaticParams() {
-  const { data: { podopieczni } } = await getClient().query({
-    query: gql`
+  const { body: { data: { podopieczni } } } = await Fetch({
+    query: `
     query PostStaticParams {
       podopieczni(first: 100) {
         nodes {
@@ -150,7 +150,8 @@ export async function generateStaticParams() {
         }
       }
     }
-  `
+  `,
+    revalidate: 360,
   })
 
   return podopieczni.nodes.map(({ slug }) => ({

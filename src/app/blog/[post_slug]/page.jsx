@@ -1,12 +1,11 @@
 import { notFound } from "next/navigation"
-import { gql } from "@apollo/client"
-import getClient from "../../../apollo/apolo-client"
 import Hero from "@/components/sections/hero-post"
 import Content from "@/components/sections/content-post"
 import OtherPosts from "@/components/sections/other-posts"
 import { generetaSeo } from "../../../utils/genereate-seo"
 import { GET_SEO_POST } from "../../../queries/post-seo"
 import Breadcrumbs from "@/components/sections/breadcrumbs"
+import { Fetch } from "../../../utils/fetch-query"
 
 export async function generateMetadata({ params }) {
   return await generetaSeo(params.post_slug, '/blog', GET_SEO_POST, 'post')
@@ -27,8 +26,8 @@ export default async function Post({ params }) {
 
 async function getData(params) {
   try {
-    const { data: { post, posts } } = await getClient().query({
-      query: gql`
+    const { body: { data: { post, posts } } } = await Fetch({
+      query: `
       query BlogPost($slug: ID!) {
         posts(first: 3) {
           nodes {
@@ -111,6 +110,7 @@ async function getData(params) {
         }
       }
     `,
+      revalidate: 3600,
       variables: {
         slug: params.post_slug,
       }
@@ -130,17 +130,17 @@ async function getData(params) {
 }
 
 export async function generateStaticParams() {
-
-  const { data: { posts } } = await getClient().query({
-    query: gql`
-    query PostStaticParams {
-      posts(first: 100) {
-        nodes {
-          slug
+  const { body: { data: { posts } } } = await Fetch({
+    query: `
+      query PostStaticParams {
+        posts(first: 100) {
+          nodes {
+            slug
+          }
         }
       }
-    }
-  `
+    `,
+    revalidate: 360,
   })
 
   return posts.nodes.map(({ slug }) => ({

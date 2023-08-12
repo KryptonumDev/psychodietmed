@@ -1,6 +1,4 @@
 import { notFound } from "next/navigation"
-import { gql } from "@apollo/client"
-import getClient from "../../../apollo/apolo-client"
 import FlexibleContent from "@/components/sections/product-flexible-content"
 import BundleContains from "@/components/sections/product-bundle-contains"
 import StepsToConsultation from "@/components/sections/steps-to-consultation"
@@ -9,6 +7,7 @@ import Hero from "@/components/sections/hero-product"
 import { generetaSeo } from "../../../utils/genereate-seo"
 import { GET_SEO_PRODUCT } from "../../../queries/product-seo"
 import Breadcrumbs from "@/components/sections/breadcrumbs"
+import { Fetch } from "../../../utils/fetch-query"
 
 export async function generateMetadata({ params }) {
   return await generetaSeo(params.product, '/oferta', GET_SEO_PRODUCT, 'post')
@@ -32,8 +31,8 @@ export default async function Post({ params }) {
 
 async function getData(params) {
   try {
-    const { data: { product, global, specialists } } = await getClient().query({
-      query: gql`
+    const { body: { data: { product, global, specialists } } } = await Fetch({
+      query: `
       query Pages($uri: ID!) {
         specialists: specjalisci(first: 100) {
           nodes {
@@ -210,7 +209,8 @@ async function getData(params) {
     `,
       variables: {
         uri: `${params.product}`,
-      }
+      },
+      revalidate: 3600
     })
 
     if (!product.id || product.productCategories.nodes.some(({ slug }) => slug === 'ebook' || slug === 'kurs'))
@@ -228,8 +228,8 @@ async function getData(params) {
 }
 
 export async function generateStaticParams() {
-  const { data: { products } } = await getClient().query({
-    query: gql`
+  const { body: { data } } = await Fetch({
+    query: `
     query PostStaticParams {
       products(
         first: 100,
@@ -240,10 +240,11 @@ export async function generateStaticParams() {
         }
       }
     }
-  `
+  `,
+    revalidate: 360
   })
 
-  return products.nodes.map(({ slug }) => ({
+  return data.products.nodes.map(({ slug }) => ({
     product: slug
   }))
 }

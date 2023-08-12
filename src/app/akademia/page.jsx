@@ -1,11 +1,10 @@
-import { gql } from "@apollo/client";
-import getClient from "../../apollo/apolo-client";
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
 import Grid from "@/components/sections/academy-grid";
 import Recruitment from "@/components/sections/team-recruitment";
 import { cookies } from "next/headers";
 import Breadcrumbs from "@/components/sections/breadcrumbs";
+import { Fetch } from "../../utils/fetch-query";
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDoyMDM3', '/akademia', GET_SEO_PAGE)
@@ -26,26 +25,26 @@ export default async function Courses() {
 
 async function getUser() {
   try {
-    const authToken = cookies().get('authToken')?.valuex
-    const { data: { viewer } } = await getClient().query({
-      query: gql`
-      query Viewer {
-        viewer {
-          username
-          courses {
-            nodes {
-              databaseId
+    const authToken = cookies().get('authToken')?.value
+
+    const { body: { data: { viewer } } } = await Fetch({
+      query: `
+        query Viewer {
+          viewer {
+            username
+            courses {
+              nodes {
+                databaseId
+              }
             }
           }
         }
+      `,
+      revalidate: 360,
+      headers: {
+        "Authorization": `Bearer ${authToken}`
       }
-    `,
-      context: {
-        headers: {
-          "Authorization": `Bearer ${authToken}`
-        }
-      }
-    }, { pollInterval: 500 })
+    })
 
     return {
       user: viewer
@@ -59,8 +58,8 @@ async function getUser() {
 
 async function getData() {
   try {
-    const { data: { page, courses, ebooks } } = await getClient().query({
-      query: gql`
+    const { body: { data: { page, courses, ebooks } } } = await Fetch({
+      query: `
       query Pages {
         page(id: "cG9zdDoyMDM3"){
           akademia {
@@ -183,7 +182,8 @@ async function getData() {
           }
         }
       }
-    `
+    `,
+      revalidate: 3600,
     })
 
     return {

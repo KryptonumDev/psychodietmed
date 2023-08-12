@@ -1,6 +1,4 @@
 import { notFound } from "next/navigation"
-import { gql } from "@apollo/client"
-import getClient from "../../../apollo/apolo-client"
 import Hero from "@/components/sections/hero-kafelek"
 import SliderIllnes from "@/components/sections/kafelek-illnes-slider"
 import SliderSymptoms from "@/components/sections/kafelek-sympotms-slider"
@@ -12,6 +10,7 @@ import CallToAction from "@/components/sections/kafelek-cta"
 import { generetaSeo } from "../../../utils/genereate-seo"
 import { GET_SEO_KAFELEK } from "../../../queries/kafelek-seo"
 import Breadcrumbs from "@/components/sections/breadcrumbs"
+import { Fetch } from "../../../utils/fetch-query"
 
 export async function generateMetadata({ params }) {
   return await generetaSeo(params.kafelek, '/wspolpraca', GET_SEO_KAFELEK, 'post')
@@ -36,8 +35,8 @@ export default async function Post({ params }) {
 
 async function getData(params) {
   try {
-    const { data: { obszarDzilaniaBy } } = await getClient().query({
-      query: gql`
+    const { body: { data: { obszarDzilaniaBy } } } = await Fetch({
+      query: `
       query Pages($slug: String) {
         obszarDzilaniaBy(uri: $slug){
           id
@@ -173,10 +172,11 @@ async function getData(params) {
           }
         }
       }
-    `,
+      `,
       variables: {
         slug: params.kafelek,
-      }
+      },
+      revalidate: 3600
     })
 
     if (!obszarDzilaniaBy.id || !obszarDzilaniaBy.acf.heroKafelek.title)
@@ -193,21 +193,22 @@ async function getData(params) {
 
 export async function generateStaticParams() {
 
-  const { data: { obszaryDzialania } } = await getClient().query({
-    query: gql`
-    query PostStaticParams {
-      obszaryDzialania(first: 100) {
-        nodes {
-          slug
-          acf : obszar_dzialania {
-            heroKafelek {
-              title
+  const { body: { data: { obszaryDzialania } } } = await Fetch({
+    query: `
+      query PostStaticParams {
+        obszaryDzialania(first: 100) {
+          nodes {
+            slug
+            acf : obszar_dzialania {
+              heroKafelek {
+                title
+              }
             }
           }
         }
       }
-    }
-  `
+    `,
+    revalidate: 360
   })
 
   return obszaryDzialania.nodes.filter(el => !!el.acf.heroKafelek.title).map(({ slug }) => ({

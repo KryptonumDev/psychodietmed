@@ -1,5 +1,3 @@
-import { gql } from "@apollo/client";
-import getClient from "../apollo/apolo-client";
 import Hero from "@/components/sections/hero-home";
 import Flex from "@/components/sections/case-studies-flex";
 import Specialisations from "@/components/sections/specialisations";
@@ -16,6 +14,7 @@ import Compare from "@/components/sections/pdm-compare";
 import Academy from "@/components/sections/academy";
 import { generetaSeo } from "../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../queries/page-seo";
+import { Fetch } from "../utils/fetch-query";
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDo5', '/', GET_SEO_PAGE)
@@ -57,24 +56,52 @@ export default async function Home() {
 }
 
 async function getData() {
-  const { data: { global, podopieczni, posts, obszaryDzialania, specjalisci, page: { homepage } } } = await getClient().query({
-    query: gql`
-      query Pages {
-        global : page(id: "cG9zdDo3Nzk=") {
+  const { body: { data: { global, podopieczni, posts, obszaryDzialania, specjalisci, page: { homepage } } } } = await Fetch({
+    query: `
+    query Pages {
+      global : page(id: "cG9zdDo3Nzk=") {
+        id
+        global {
+          newsletterGlobal{
+            title
+            text
+            consent
+          }
+          blogGlobal{
+            title
+            text
+          }
+          bookGlobal{
+            title
+            image{
+              altText
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
+            }
+            titleFirst
+            textFirst
+            titleSecond
+            textSecond
+            titleThird
+            textThird
+            illnes {
+              id : databaseId
+              title : name
+            }
+          }
+        }
+      }
+      podopieczni(first: 4) {
+        nodes {
           id
-          global {
-            newsletterGlobal{
-              title
-              text
-              consent
-            }
-            blogGlobal{
-              title
-              text
-            }
-            bookGlobal{
-              title
-              image{
+          slug
+          histori {
+            information {
+              boldText
+              beforeImage {
                 altText
                 mediaItemUrl
                 mediaDetails {
@@ -82,65 +109,7 @@ async function getData() {
                   width
                 }
               }
-              titleFirst
-              textFirst
-              titleSecond
-              textSecond
-              titleThird
-              textThird
-              illnes {
-                id : databaseId
-                title : name
-              }
-            }
-          }
-        }
-        podopieczni(first: 4) {
-          nodes {
-            id
-            slug
-            histori {
-              information {
-                boldText
-                beforeImage {
-                  altText
-                  mediaItemUrl
-                  mediaDetails {
-                    height
-                    width
-                  }
-                }
-                afterImage {
-                  altText
-                  mediaItemUrl
-                  mediaDetails {
-                    height
-                    width
-                  }
-                }
-              }
-              caseStudyCard {
-                name
-                linkText
-                comment
-                avatar {
-                  altText
-                  mediaItemUrl
-                  mediaDetails {
-                    height
-                    width
-                  }
-                }
-              }
-            }
-          }
-        }
-        posts(first: 3) {
-          nodes {
-            id
-            dateGmt
-            featuredImage {
-              node {
+              afterImage {
                 altText
                 mediaItemUrl
                 mediaDetails {
@@ -149,31 +118,219 @@ async function getData() {
                 }
               }
             }
-            slug
+            caseStudyCard {
+              name
+              linkText
+              comment
+              avatar {
+                altText
+                mediaItemUrl
+                mediaDetails {
+                  height
+                  width
+                }
+              }
+            }
+          }
+        }
+      }
+      posts(first: 3) {
+        nodes {
+          id
+          dateGmt
+          featuredImage {
+            node {
+              altText
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
+            }
+          }
+          slug
+          title
+          excerpt
+          categories {
+            nodes {
+              name
+              slug
+              id
+            }
+          }
+        }
+      }
+      obszaryDzialania {
+        nodes {
+          title
+          id
+          slug
+          uri
+          obszar_dzialania {
+            heroKafelek {
+              title
+            }
+            specialisationCard {
+              zajawkaSpecjalizacji
+              number
+              icon {
+                altText
+                mediaItemUrl
+                mediaDetails {
+                  height
+                  width
+                }
+              }
+            }
+          }
+        }
+      }
+      specjalisci(first: 100) {
+        nodes {
+          title
+          slug
+          specialisations {
+            nodes {
+              id : databaseId
+              title : name
+            }
+          }
+          proffesional {
+            proffesion
+            personImage {
+              altText
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
+            }
+          }
+        }
+      }
+      page(id: "cG9zdDo5") {
+        id
+        title
+        homepage {
+          hero : sekcjaPowitalnaKopia {
+            pageTitle
+            link {
+              url
+              title
+            }
+            content
+            image {
+              altText
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
+            }
+            logos {
+              link
+              logo {
+                altText
+                mediaItemUrl
+                mediaDetails {
+                  height
+                  width
+                }
+              }
+            }
+          }
+          compare: sekcjaZPorownaniem{
             title
-            excerpt
-            categories {
-              nodes {
-                name
-                slug
+            text
+            psychoterapeuta
+            psychodietyk
+            psychoterapeutaPsychodietetyk
+            cta
+            link{
+              title
+              url
+            }
+          }
+          casestudie : sekcjaZCaseStudieKopia{
+            content
+            image {
+              altText
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
+            }
+          }
+          specialisations : sekcjaZSiatkaSpecjalizacjiKopia {
+            text
+            title
+          }
+          cta : wezwanieDoDzialaniaKopia {
+            content
+            link {
+              title
+              url
+            }
+          }
+          wezwanieDoDzialaniaZSzarymTlemKopia {
+            content
+            link {
+              title
+              url
+            }
+          }
+          sekcjaZOpiniamiKopia {
+            title
+            text
+            comments {
+              ... on Podopieczna {
                 id
+                slug
+                histori {
+                  information {
+                    boldText
+                    beforeImage {
+                      altText
+                      mediaItemUrl
+                      mediaDetails {
+                        height
+                        width
+                      }
+                    }
+                    afterImage {
+                      altText
+                      mediaItemUrl
+                      mediaDetails {
+                        height
+                        width
+                      }
+                    }
+                  }
+                  caseStudyCard {
+                    name
+                    linkText
+                    comment
+                    avatar {
+                      altText
+                      mediaItemUrl
+                      mediaDetails {
+                        height
+                        width
+                      }
+                    }
+                  }
+                }
               }
             }
           }
-        }
-        obszaryDzialania {
-          nodes {
+          sekcjaStatystykiKopia {
             title
-            id
-            slug
-            uri
-            obszar_dzialania {
-              heroKafelek {
-                title
-              }
-              specialisationCard {
-                zajawkaSpecjalizacji
-                number
+            textTop
+            pinkList {
+              title
+              listItems {
+                text
                 icon {
                   altText
                   mediaItemUrl
@@ -184,53 +341,11 @@ async function getData() {
                 }
               }
             }
-          }
-        }
-        specjalisci(first: 100) {
-          nodes {
-            title
-            slug
-            specialisations {
-              nodes {
-                id : databaseId
-                title : name
-              }
-            }
-            proffesional {
-              proffesion
-              personImage {
-                altText
-                mediaItemUrl
-                mediaDetails {
-                  height
-                  width
-                }
-              }
-            }
-          }
-        }
-        page(id: "cG9zdDo5") {
-          id
-          title
-          homepage {
-            hero : sekcjaPowitalnaKopia {
-              pageTitle
-              link {
-                url
-                title
-              }
-              content
-              image {
-                altText
-                mediaItemUrl
-                mediaDetails {
-                  height
-                  width
-                }
-              }
-              logos {
-                link
-                logo {
+            blueList {
+              title
+              listItems {
+                text
+                icon {
                   altText
                   mediaItemUrl
                   mediaDetails {
@@ -240,145 +355,48 @@ async function getData() {
                 }
               }
             }
-            compare: sekcjaZPorownaniem{
+            textBot
+            counters: licznikiNadZdjeciem {
+              text
+              number
+            }
+            image {
+              altText
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
+            }
+          }
+          sekcjaZCytatemKopia {
+            cytat
+            author {
+              altText
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
+            }
+            image{
+              altText
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
+            }
+          }
+          academy : sekcjaAkademia{
+            title
+            text
+            grid{
               title
               text
-              psychoterapeuta
-              psychodietyk
-              psychoterapeutaPsychodietetyk
-              cta
               link{
                 title
                 url
-              }
-            }
-            casestudie : sekcjaZCaseStudieKopia{
-              content
-              image {
-                altText
-                mediaItemUrl
-                mediaDetails {
-                  height
-                  width
-                }
-              }
-            }
-            specialisations : sekcjaZSiatkaSpecjalizacjiKopia {
-              text
-              title
-            }
-            cta : wezwanieDoDzialaniaKopia {
-              content
-              link {
-                title
-                url
-              }
-            }
-            wezwanieDoDzialaniaZSzarymTlemKopia {
-              content
-              link {
-                title
-                url
-              }
-            }
-            sekcjaZOpiniamiKopia {
-              title
-              text
-              comments {
-                ... on Podopieczna {
-                  id
-                  slug
-                  histori {
-                    information {
-                      boldText
-                      beforeImage {
-                        altText
-                        mediaItemUrl
-                        mediaDetails {
-                          height
-                          width
-                        }
-                      }
-                      afterImage {
-                        altText
-                        mediaItemUrl
-                        mediaDetails {
-                          height
-                          width
-                        }
-                      }
-                    }
-                    caseStudyCard {
-                      name
-                      linkText
-                      comment
-                      avatar {
-                        altText
-                        mediaItemUrl
-                        mediaDetails {
-                          height
-                          width
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-            sekcjaStatystykiKopia {
-              title
-              textTop
-              pinkList {
-                title
-                listItems {
-                  text
-                  icon {
-                    altText
-                    mediaItemUrl
-                    mediaDetails {
-                      height
-                      width
-                    }
-                  }
-                }
-              }
-              blueList {
-                title
-                listItems {
-                  text
-                  icon {
-                    altText
-                    mediaItemUrl
-                    mediaDetails {
-                      height
-                      width
-                    }
-                  }
-                }
-              }
-              textBot
-              counters: licznikiNadZdjeciem {
-                text
-                number
-              }
-              image {
-                altText
-                mediaItemUrl
-                mediaDetails {
-                  height
-                  width
-                }
-              }
-            }
-            sekcjaZCytatemKopia {
-              cytat
-              author {
-                altText
-                mediaItemUrl
-                mediaDetails {
-                  height
-                  width
-                }
               }
               image{
                 altText
@@ -389,37 +407,12 @@ async function getData() {
                 }
               }
             }
-            academy : sekcjaAkademia{
-              title
-              text
-              grid{
-                title
-                text
-                link{
-                  title
-                  url
-                }
-                image{
-                  altText
-                  mediaItemUrl
-                  mediaDetails {
-                    height
-                    width
-                  }
-                }
-              }
-            }
           }
         }
       }
-    `,
-    context: {
-      fetchOptions: {
-        next: {
-          revalidate: 3600,
-        }
-      }
     }
+  `,
+    revalidate: 3600
   })
 
   return {

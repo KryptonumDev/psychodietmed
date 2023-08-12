@@ -1,5 +1,3 @@
-import { gql } from "@apollo/client";
-import  getClient from "../../../apollo/apolo-client";
 // import { generetaSeo } from "../../../utils/genereate-seo";
 // import { GET_SEO_PAGE } from "../../../queries/page-seo";
 import { notFound } from "next/navigation";
@@ -7,6 +5,7 @@ import Hero from "@/components/sections/hero-course";
 import Content from "@/components/sections/course-content";
 import { getUser } from "../../../utils/check-authorisation";
 import Breadcrumbs from "@/components/sections/breadcrumbs";
+import { Fetch } from "../../../utils/fetch-query";
 
 // export async function generateMetadata() {
 //   return await generetaSeo('cG9zdDoxODY4', '/akademia', GET_SEO_PAGE)
@@ -44,8 +43,8 @@ export default async function Courses({ params }) {
 
 async function getData(params) {
   try {
-    const { data: { course } } = await getClient().query({
-      query: gql`
+    const { body: { data: { course } } } = await Fetch({
+      query:`
       query Pages($id: ID!) {
         course(id: $id, idType: SLUG) {
           databaseId
@@ -102,6 +101,7 @@ async function getData(params) {
         }
       }
     `,
+      revalidate: 3600,
       variables: {
         id: params.course
       }

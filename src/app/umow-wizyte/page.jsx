@@ -1,9 +1,8 @@
-import { gql } from "@apollo/client";
-import  getClient from "../../apollo/apolo-client";
 import Content from "@/components/sections/book-content";
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
 import Breadcrumbs from "@/components/sections/breadcrumbs";
+import { Fetch } from "../../utils/fetch-query";
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDoxNzg2', '/umow-wizyte', GET_SEO_PAGE)
@@ -21,35 +20,37 @@ export default async function Home() {
 }
 
 async function getData() {
-  const { data: { specjalisci } } = await getClient().query({
-    query: gql`
-      query Pages {
-        specjalisci(first: 100) {
-          nodes {
-            title
-            slug
-            specialisations {
-              nodes {
-                id : databaseId
-                title : name
-              }
+
+  const { body: { data: { specjalisci } } } = await Fetch({
+    query: `
+    query Pages {
+      specjalisci(first: 100) {
+        nodes {
+          title
+          slug
+          specialisations {
+            nodes {
+              id : databaseId
+              title : name
             }
-            proffesional {
-              docotorCalendarCode
-              proffesion
-              personImage {
-                altText
-                mediaItemUrl
-                mediaDetails {
-                  height
-                  width
-                }
+          }
+          proffesional {
+            docotorCalendarCode
+            proffesion
+            personImage {
+              altText
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
               }
             }
           }
         }
       }
-    `,
+    }
+  `,
+    revalidate: 3600
   })
 
   return {

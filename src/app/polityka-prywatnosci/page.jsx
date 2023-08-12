@@ -1,10 +1,9 @@
-import { gql } from "@apollo/client";
-import  getClient from "../../apollo/apolo-client";
 import StepsToConsultation from "@/components/sections/steps-to-consultation";
 import Content from "@/components/sections/policy-content";
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
 import Breadcrumbs from "@/components/sections/breadcrumbs";
+import { Fetch } from "../../utils/fetch-query";
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDoxNjQz', '/polityka-prywatnosci', GET_SEO_PAGE)
@@ -23,68 +22,69 @@ export default async function Regulamin() {
 }
 
 async function getData() {
-  const { data: { specjalisci, global, page } } = await getClient().query({
-    query: gql`
-      query Pages {
-        global : page(id: "cG9zdDo3Nzk=") {
-          id
-          global {
-            bookGlobal{
-              title
-              image{
-                altText
-                mediaItemUrl
-                mediaDetails {
-                  height
-                  width
-                }
-              }
-              titleFirst
-              textFirst
-              titleSecond
-              textSecond
-              titleThird
-              textThird
-              illnes {
-                id : databaseId
-                title : name
-              }
-            }
-          }
-        }
-        specjalisci(first: 100) {
-          nodes {
+  const { body: { data: { specjalisci, global, page } } } = await Fetch({
+    query: `
+    query Pages {
+      global : page(id: "cG9zdDo3Nzk=") {
+        id
+        global {
+          bookGlobal{
             title
-            slug
-            specialisations {
-              nodes {
-                id : databaseId
-                title : name
+            image{
+              altText
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
               }
             }
-            proffesional {
-              proffesion
-              personImage {
-                altText
-                mediaItemUrl
-                mediaDetails {
-                  height
-                  width
-                }
-              }
-            }
-          }
-        }
-        page(id: "cG9zdDoxNjQz") {
-          privacyPolicy {
-            policySections {
-              title
-              content
+            titleFirst
+            textFirst
+            titleSecond
+            textSecond
+            titleThird
+            textThird
+            illnes {
+              id : databaseId
+              title : name
             }
           }
         }
       }
-    `,
+      specjalisci(first: 100) {
+        nodes {
+          title
+          slug
+          specialisations {
+            nodes {
+              id : databaseId
+              title : name
+            }
+          }
+          proffesional {
+            proffesion
+            personImage {
+              altText
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
+            }
+          }
+        }
+      }
+      page(id: "cG9zdDoxNjQz") {
+        privacyPolicy {
+          policySections {
+            title
+            content
+          }
+        }
+      }
+    }
+  `,
+    revalidate: 3600
   })
 
   return {

@@ -1,9 +1,8 @@
-import { gql } from "@apollo/client";
-import  getClient from "../../apollo/apolo-client";
 import Content from "@/components/sections/cart";
 import Slider from "@/components/sections/products-slider";
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
+import { Fetch } from "../../utils/fetch-query";
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDoxODcw', '/koszyk', GET_SEO_PAGE)
@@ -21,61 +20,60 @@ export default async function Cart() {
 }
 
 async function getData() {
-  const { data } = await getClient().query({
-    query: gql`
-      query Pages {
-        products(first: 5, where: {categoryNotIn: ["ebook", "kurs", "bundle"]} ) {
-          nodes {
-            product {
-              discount
-              bundleItems {
-                text
-              }
+  const { body: { data } } = await Fetch({
+    query:`
+    query Pages {
+      products(first: 5, where: {categoryNotIn: ["ebook", "kurs", "bundle"]} ) {
+        nodes {
+          product {
+            discount
+            bundleItems {
+              text
             }
+          }
+          id
+          productId: databaseId
+          slug
+          name
+          image {
             id
-            productId: databaseId
-            slug
-            name
-            image {
-              id
-              altText
-              altText
-              mediaItemUrl
-              mediaDetails {
-                height
-                width
+            altText
+            altText
+            mediaItemUrl
+            mediaDetails {
+              height
+              width
+            }
+          }
+          ... on SimpleProduct {
+            id
+            price
+            regularPrice
+          }
+          ... on VariableProduct {
+            id
+            price
+            regularPrice
+            attributes {
+              nodes {
+                variation
+                name
+                options
+                attributeId
               }
             }
-            ... on SimpleProduct {
-              id
-              price
-              regularPrice
-            }
-            ... on VariableProduct {
-              id
-              price
-              regularPrice
-              attributes {
-                nodes {
-                  variation
-                  name
-                  options
-                  attributeId
-                }
-              }
-              variations {
-                nodes {
-                  id
-                  name
-                  price
-                  regularPrice
-                  productId: databaseId
-                  attributes {
-                    nodes {
-                      value
-                      name
-                      attributeId
-                    }
+            variations {
+              nodes {
+                id
+                name
+                price
+                regularPrice
+                productId: databaseId
+                attributes {
+                  nodes {
+                    value
+                    name
+                    attributeId
                   }
                 }
               }
@@ -83,7 +81,9 @@ async function getData() {
           }
         }
       }
-    `,
+    }
+  `,
+    revalidate: 3600,
   })
 
   return {
