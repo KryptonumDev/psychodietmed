@@ -181,6 +181,9 @@ async function getData(props) {
         }
       }),
       cache: 'force-cache',
+      next: {
+        revalidate: 3600
+      }
     });
 
     const { data: { page, global, podopieczni } } = await result.json()

@@ -38,6 +38,9 @@ async function getSeo(id, query) {
       }
     }),
     cache: 'force-cache',
+    next: {
+      revalidate: 3600
+    }
   });
 
   const { data } = await result.json()

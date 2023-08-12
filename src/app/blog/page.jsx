@@ -125,6 +125,9 @@ async function getData(currentPage = 1) {
         }
       }),
       cache: 'force-cache',
+      next: {
+        revalidate: 3600
+      }
     });
 
     const { data: { categories, newPosts, posts, page: { blog } } } = await result.json()

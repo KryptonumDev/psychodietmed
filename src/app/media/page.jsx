@@ -70,6 +70,9 @@ async function getData(currentPage = 1) {
         }
       }),
       cache: 'force-cache',
+      next: {
+        revalidate: 3600
+      }
     });
 
     const { data: { pageBy, mediums } } = await result.json()
