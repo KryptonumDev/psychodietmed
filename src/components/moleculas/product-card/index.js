@@ -56,7 +56,7 @@ export const Card = ({ offer = true, product }) => {
                   <input defaultChecked={chosenVariation?.productId === el.productId} onChange={() => { setChosenVariation(el) }} type="radio" name={product.name} value={el.productId} />
                   <span className={styles.checkbox} />
                   <span>
-                    {el.attributes.nodes.map((option, index) => (
+                    {el?.attributes?.nodes?.map((option, index) => (
                       <React.Fragment key={index}>{option.value}{index + 1 < el.attributes.nodes.length ? ', ' : ''}</React.Fragment>
                     ))}
                   </span>
