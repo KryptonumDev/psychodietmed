@@ -25,8 +25,8 @@ export default function Specialisations({ setCurrentStep, specializations, chose
 
   return (
     <section className={styles.wrapper}>
-      <h1 dangerouslySetInnerHTML={{ __html: '<span class="underline-second">Wybierz</span>, z czym masz problem?' }} />
-      <p>A pomożemy Ci przywrócić wewnętrzny spokój</p>
+      <h1 dangerouslySetInnerHTML={{ __html: '<span class="underline-second">Wybierz</span>, z czym się zmagasz?' }} />
+      <p>Specjaliści PsychoDietMed pomogą Ci przywrócić wewnętrzny spokój!</p>
       <div className={styles.grid}>
         {specializations?.map((el, index) => (
           <button onClick={(e) => { clickHandler(e) }} key={index} className={`${styles.item} ${classtest(el)}`}>

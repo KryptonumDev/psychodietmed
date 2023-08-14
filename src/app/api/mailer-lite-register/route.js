@@ -12,6 +12,7 @@ export async function POST(req) {
       method: 'POST',
       headers,
       body: JSON.stringify(requestBody),
+      cache: 'no-cache',
     });
 
     if (response.ok) {
