@@ -12,12 +12,13 @@ import { setCookie } from "@/app/actions"
 import SEND_RESET from "../../../mutations/send-password-reset"
 import Button from "@/components/atoms/button"
 import { AnimatePresence, motion } from "framer-motion"
+import Loader from "../loader"
 
 export default function Login() {
   const { push } = useRouter();
   const { register, handleSubmit, formState: { errors }, } = useForm()
 
-  const [ loginStatus, setLoginStatus ] = useState({ sending: false });
+  const [loginStatus, setLoginStatus] = useState({ sending: false });
   const [renewPass, setRenewPass] = useState(false);
 
   const loginSumbit = (data) => {
@@ -45,19 +46,17 @@ export default function Login() {
   }] = useMutation(LOGIN, {
     ignoreResults: true,
     onCompleted: (res) => {
-      debugger
       setCookie('authToken', res.login.authToken)
       localStorage.setItem('authToken', res.login.authToken)
       push('/moje-kursy');
       setLoginStatus({ sending: false });
     },
     onError: (error) => {
-      debugger
       setLoginStatus({ sending: false, error: 'Nieprawidłowy adres e-mail' });
       if (error.message === "invalid_email") {
         setLoginStatus({ sending: false, error: 'Nieprawidłowy adres e-mail' });
       }
-      if(error.message === "invalid_password") {
+      if (error.message === "invalid_password") {
         setLoginStatus({ sending: false, error: 'Nieprawidłowe hasło' });
       }
     }
@@ -67,7 +66,6 @@ export default function Login() {
     loading: resetLoading,
   }] = useMutation(SEND_RESET, {
     onCompleted: (res) => {
-      debugger
       setRenewPass(false);
       setLoginStatus({ sending: false });
     },
@@ -78,6 +76,7 @@ export default function Login() {
 
   return (
     <section className={styles.wrapper}>
+      <Loader show={loginLoading || resetLoading} />
       {renewPass ? (
         <>
           <h2>Nie pamiętasz hasła?</h2>

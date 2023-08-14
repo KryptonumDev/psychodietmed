@@ -7,7 +7,7 @@ import { v4 } from "uuid"
 import { Info } from "../../../assets/info"
 import RESET from "../../../mutations/reset-password"
 import { useMutation } from "@apollo/client"
-import { redirect } from "next/navigation"
+import Loader from "../loader"
 
 export default function Reset({ resetkey, login }) {
   const {
@@ -19,7 +19,7 @@ export default function Reset({ resetkey, login }) {
 
   const [reset, { loading }] = useMutation(RESET, {
     onCompleted: (res) => {
-      redirect('/moje-kursy')
+      window.location.href = '/moje-kursy'
     },
     onError: (error) => {
       throw new Error(error?.graphQLErrors?.[0]?.message ?? error);
@@ -38,6 +38,7 @@ export default function Reset({ resetkey, login }) {
 
   return (
     <section className={styles.wrapper}>
+      <Loader show={loading} />
       <h1>Ustaw nowe hasło</h1>
       <form onSubmit={handleSubmit(onSubmit)} >
         <Input
