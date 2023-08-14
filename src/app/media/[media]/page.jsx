@@ -134,7 +134,7 @@ async function getData(params) {
         }
       }
     `,
-      revalidate: 3600,
+      revalidate: 600,
       variables: {
         uri: `${params.media}`,
       }

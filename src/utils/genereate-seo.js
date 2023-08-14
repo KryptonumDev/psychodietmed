@@ -40,7 +40,7 @@ async function getSeo(id, query) {
     variables: {
       id: id
     },
-    revalidate: 3600
+    revalidate: 600
   })
 
   return data.page.seo

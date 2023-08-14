@@ -110,7 +110,7 @@ async function getData(params) {
         }
       }
     `,
-      revalidate: 3600,
+      revalidate: 600,
       variables: {
         slug: params.post_slug,
       }

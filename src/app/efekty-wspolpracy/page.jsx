@@ -181,7 +181,7 @@ async function getData(props) {
         }
       }),
       next: {
-        revalidate: 3600
+        revalidate: 600
       }
     });
 

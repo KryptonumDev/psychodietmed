@@ -210,7 +210,7 @@ async function getData(params) {
       variables: {
         uri: `${params.product}`,
       },
-      revalidate: 3600
+      revalidate: 600
     })
 
     if (!product.id || product.productCategories.nodes.some(({ slug }) => slug === 'ebook' || slug === 'kurs'))

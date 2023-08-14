@@ -125,7 +125,7 @@ async function getData(currentPage = 1) {
         }
       }),
       next: {
-        revalidate: 3600
+        revalidate: 600
       }
     });
 

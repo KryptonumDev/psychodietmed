@@ -5,8 +5,9 @@ import Link from "next/link"
 import { Clock } from "../../../assets/clock"
 import { Graduate } from "../../../assets/graduate"
 import AddToCart from "@/components/atoms/add-to-cart-button"
+import Price from "@/components/atoms/price"
 
-export default function Hero({ lessonSlug, slug, databaseId, accessToCourse, title, image, time, count }) {
+export default function Hero({ regularPrice, price, lessonSlug, slug, databaseId, accessToCourse, title, image, time, count }) {
   return (
     <section className={styles.wrapper}>
       <Image
@@ -20,11 +21,16 @@ export default function Hero({ lessonSlug, slug, databaseId, accessToCourse, tit
       <div className={styles.info}>
         <div>
           <h1>Kurs: {title}</h1>
-          {accessToCourse ? (
-            <Link className="link" href={`/moje-kursy/${slug}/${lessonSlug}`}>Rozpocznij lekcję</Link>
-          ) : (
-            <AddToCart className="link" product={{ productId: databaseId }}>Zakup dostęp do kursu</AddToCart>
-          )}
+          <div className={styles.priecflex}>
+            {!accessToCourse && (
+              <Price salesPrice={price} regularPrice={regularPrice} />
+            )}
+            {accessToCourse ? (
+              <Link className="link" href={`/moje-kursy/${slug}/${lessonSlug}`}>Rozpocznij lekcję</Link>
+            ) : (
+              <AddToCart className="link" product={{ productId: databaseId }}>Zakup dostęp do kursu</AddToCart>
+            )}
+          </div>
         </div>
         <div className={styles.flex}>
           <p><Clock /> Łączny czas: <span>{time}</span></p>

@@ -83,7 +83,7 @@ async function getData() {
       }
     }
   `,
-    revalidate: 3600,
+    revalidate: 600,
   })
 
   return {

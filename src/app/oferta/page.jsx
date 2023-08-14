@@ -419,7 +419,7 @@ async function getData(params) {
         }
       }),
       next: {
-        revalidate: 3600
+        revalidate: 600
       }
     });
 

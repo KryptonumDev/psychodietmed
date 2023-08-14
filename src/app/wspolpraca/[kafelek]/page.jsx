@@ -176,7 +176,7 @@ async function getData(params) {
       variables: {
         slug: params.kafelek,
       },
-      revalidate: 3600
+      revalidate: 600
     })
 
     if (!obszarDzilaniaBy.id || !obszarDzilaniaBy.acf.heroKafelek.title)

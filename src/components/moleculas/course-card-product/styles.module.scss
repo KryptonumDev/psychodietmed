@@ -10,6 +10,19 @@
   justify-content: space-between;
   position: relative;
 
+  .priceflex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+
+    p{
+      margin-top: 0;
+    }
+  }
+
   .link {
     position: absolute;
     inset: 0;
@@ -45,7 +58,6 @@
     margin: 36px auto 0 auto;
 
     button{
-      margin-bottom: 18px;
       position: relative;
       z-index: 3;
     }
