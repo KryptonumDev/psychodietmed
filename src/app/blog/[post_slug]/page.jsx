@@ -97,13 +97,11 @@ async function getData(params) {
           }
           next {
             id
-            __typename
             title
             slug
           }
           previous {
             id
-            __typename
             title
             slug
           }
