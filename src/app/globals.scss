@@ -604,3 +604,23 @@ p em {
     font-size: clamp(0rem, calc(32vw/3.7), 32rem);
   }
 }
+
+blockquote {
+  padding: 28px 90px 28px 28px;
+  background: #F1F6FB;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  position: relative;
+
+  &::after {
+    content: url('./../assets/quotes.png');
+    position: absolute;
+    right: 36px;
+    top: 28px;
+  }
+  p {
+    font-size: 32rem;
+    color: var(--primary-800);
+    font-weight: 500;
+  }
+}

@@ -25,9 +25,12 @@
 }
 
 .image {
+  top: 110px;
+  position: sticky;
   min-width: 272px;
   width: 100% !important;
-  min-height: 100%;
+  max-height: fit-content !important;
+  height: auto !important;
 
   @media (max-width: 640px) {
     height: 100% !important;
