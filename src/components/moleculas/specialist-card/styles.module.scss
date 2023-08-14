@@ -40,7 +40,7 @@
   ul {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: clamp(5px, calc(8vw/7.68), 8px);
     margin-top: 16px;
     li {
       padding: 8px clamp(8px, calc(12vw/7.68), 12px);

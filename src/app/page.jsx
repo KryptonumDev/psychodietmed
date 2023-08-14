@@ -40,12 +40,12 @@ export default async function Home() {
     <main className="overflow" id="main">
       <Hero data={hero} />
       <Flex data={flex} />
-      <Compare data={compare} />
       <Specialisations data={specialisationsSection} activities={activities} />
       <CallToActionTransparent data={cta} />
       <Specialists data={specialists} />
       <StepsToConsultation data={stepsToConsultation} specialists={specialists} />
       <CallToActionGray data={ctaGray} />
+      <Compare data={compare} />
       <ReviewsSlider data={locReviews} />
       <StatisticsFlex data={statistics} />
       <Citate data={citate} />

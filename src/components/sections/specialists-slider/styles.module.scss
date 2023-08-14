@@ -10,34 +10,17 @@
     -o-user-drag: none;
     user-drag: none;
   }
-
-  h2{
-    @media (max-width: 840px) {
-      margin-bottom: 20px;
-    }
-  }
+}
+.header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: flex-end;
+  margin-bottom: 32px;
 }
 
 .control {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  width: fit-content;
-  margin-bottom: 32px;
-  margin-left: auto;
-
-  &.mobile{
-    display: none;
-  }
-
-  @media (max-width: 840px) {
-    display: none;
-
-    &.mobile{
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      margin-top: 45px;
-    }
-  }
+  gap: clamp(8px, calc(16vw/7.68), 24px);
 }
