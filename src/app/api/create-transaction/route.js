@@ -29,8 +29,8 @@ export async function POST(req) {
       email: email,
       country: Country.Poland,
       language: Language.PL,
-      urlReturn: `https://psychodietmed-git-develop-kryptonum.vercel.app/podsumowanie/?status=success&id=${id}`, // URL address to which customer will be redirected when transaction is complete
-      urlStatus: `https://psychodietmed-git-develop-kryptonum.vercel.app/podsumowanie/?status=failed&id=${id}`, // URL address to which transaction status will be send
+      urlReturn: `http://psychodietmed-git-develop-kryptonum.vercel.app/api/complete-order/?status=success&id=${id}`, // URL address to which customer will be redirected when transaction is complete
+      urlStatus: `http://psychodietmed-git-develop-kryptonum.vercel.app/api/complete-order/?status=failed&id=${id}`, // URL address to which transaction status will be send
       timeLimit: 60,
       encoding: Encoding.UTF8,
     }

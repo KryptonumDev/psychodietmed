@@ -17,7 +17,7 @@ export default async function Post({ params }) {
   const { data, global, specialists } = await getData(params)
   return (
     <main id="main">
-      <Breadcrumbs data={[{ page: 'Adakemia', url: `/akademia` }, { page: data.title, url: `/akademia/${params.product}` }]} />
+      <Breadcrumbs data={[{ page: 'Akademia', url: `/akademia` }, { page: data.title, url: `/akademia/${params.product}` }]} />
       <Hero data={data} />
       <FlexibleContent productId={data.productId} data={data.product.additionalSectionsProduct} />
       {data.product.bundleItems?.length > 0 && (

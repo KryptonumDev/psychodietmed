@@ -43,9 +43,11 @@ export default function Login() {
     onCompleted: (res) => {
       debugger
       setCookie('authToken', res.login.authToken)
+      localStorage.setItem('authToken', res.login.authToken)
       push('/moje-kursy');
     },
     onError: (error) => {
+      debugger
       if (error.message === "invalid_email") {
         setLoginError('Nieprawidłowy adres e-mail')
       }

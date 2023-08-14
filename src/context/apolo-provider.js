@@ -15,11 +15,19 @@ import {
 export const middleware = new ApolloLink(async (operation, forward) => {
   // If session data exist in local storage, set value as session header.
   const session = (typeof window !== 'undefined') ? localStorage.getItem("woo-session") : null;
+  const authToken = (typeof window !== 'undefined') ? localStorage.getItem("authToken") : null;
+
+  const newHeaders = {}
+  if (session) {
+    newHeaders['woocommerce-session'] = `Session ${session}`
+  }
+  if (authToken) {
+    newHeaders['Authorization'] = `Bearer ${authToken}`
+  }
+
   if (session) {
     operation.setContext(({ headers = {} }) => ({
-      headers: {
-        "woocommerce-session": `Session ${session}`,
-      }
+      headers: newHeaders
     }));
   }
 
@@ -31,7 +39,6 @@ export const middleware = new ApolloLink(async (operation, forward) => {
  * This catches the incoming session token and stores it in localStorage, for future GraphQL requests.
  */
 export const afterware = new ApolloLink((operation, forward) => {
-
   return forward(operation).map(response => {
 
     if (typeof window === 'undefined') {
@@ -53,7 +60,7 @@ export const afterware = new ApolloLink((operation, forward) => {
         // Update session new data if changed.
       } else if (localStorage.getItem("woo-session") !== session) {
 
-        localStorage.setItem("woo-session", headers.get("woocommerce-session"));
+        localStorage.setItem("woo-session", session);
 
       }
     }

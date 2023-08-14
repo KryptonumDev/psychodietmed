@@ -25,8 +25,8 @@ export default function CheckoutContent() {
   const [innerLoading, setInnerLoading] = useState(true);
 
   useEffect(() => {
-    debugger
     if ((cart && cart?.products?.length === 0) || cart === null) {
+      debugger
       window.location.href = '/koszyk'
     }
   }, [cart])
@@ -58,14 +58,14 @@ export default function CheckoutContent() {
     },
     onCompleted: (data) => {
 
-      const mailerlite = axios.post('/api/mailer-lite-register', {
-        email: data.checkout.customer?.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
-        status: 'active',
-        fields: {
-          marketing_permissions: '1',
-          name: data.checkout.customer?.firstName || data.checkout.order.billing.firstName || data.checkout.order.shipping.firstName,
-        }
-      })
+      // const mailerlite = axios.post('/api/mailer-lite-register', {
+      //   email: data.checkout.customer?.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
+      //   status: 'active',
+      //   fields: {
+      //     marketing_permissions: '1',
+      //     name: data.checkout.customer?.firstName || data.checkout.order.billing.firstName || data.checkout.order.shipping.firstName,
+      //   }
+      // })
 
       const transaction = axios.post('/api/create-transaction', {
         "amount": data.checkout.order.total * 100,
@@ -74,21 +74,27 @@ export default function CheckoutContent() {
         "id": data.checkout.order.orderNumber
       })
 
-      Promise.all([mailerlite, transaction])
+      Promise.all([
+        transaction
+        // mailerlite, 
+      ])
         .then(function (values) {
-          if (values[1].data.link) {
-            window.location.href = values[1].data.link
+          if (values[0].data.link) {
+            window.location.href = values[0].data.link
           }
+          setInnerLoading(false)
         })
         .catch(error => {
+          setInnerLoading(false)
           throw new Error(error)
         });
     },
     onError: (error) => {
       if (error.message === 'Konto z Twoim adresem e-mail jest już zarejestrowane. <a href="#" class="showlogin">Zaloguj się.</a>') {
         setOrderData(createCheckoutData(input, true))
+      } else {
+        window.location.href = '/koszyk'
       }
-      console.log(error.message)
     }
   });
 
@@ -101,9 +107,9 @@ export default function CheckoutContent() {
   const handleSubmit = (props) => {
     const needAccount = cart.products.some((item) => item.categories.some((category) => category.slug === 'kurs'))
     const formattedInput = { ...input, comment: props.comment, needAccount: needAccount }
-    debugger
     setOrderData(createCheckoutData(formattedInput, false))
     setInput(formattedInput)
+    setInnerLoading(true)
   }
 
   return (

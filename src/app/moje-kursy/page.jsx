@@ -57,7 +57,7 @@ async function getUser(authToken) {
           }
         }
       `,
-      revalidate: 3600,
+      revalidate: 0,
       headers: {
         "Authorization": `Bearer ${authToken}`
       }

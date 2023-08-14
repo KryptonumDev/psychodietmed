@@ -47,6 +47,7 @@ export default function AddToCart({ chosenAddon, variationId, quantity, product 
       if (error) {
         setRequestError(error?.graphQLErrors?.[0]?.message ?? '');
       }
+      console.log(error.message)
     }
   });
 
