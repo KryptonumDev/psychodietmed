@@ -26,7 +26,11 @@
   .item {
     &:not([open]){
       cursor: pointer;
+      &:hover {
+        background: var(--primary-50);
+      }
     }
+    transition: background-color .4s;
     width: 100px;
     @media (max-width: 700px){
       width: 100%;
@@ -37,7 +41,7 @@
     overflow: hidden;
     position: relative;
     @media (min-width: 701px){
-      min-height: 610px;
+      min-height: 580px;
     }
     .title {
       display: flex;
@@ -78,7 +82,7 @@
       justify-content: space-between;
       margin-top: clamp(24px, calc(34vw/7.68), 48px);
       @media (min-width: 701px) {
-        min-height: 400px;
+        min-height: clamp(200px, calc(200vw/7.68), 450px);
       }
       .image {
         z-index: -1;

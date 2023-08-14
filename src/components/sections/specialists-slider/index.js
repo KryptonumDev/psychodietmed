@@ -22,17 +22,19 @@ export default function Specialists({ data, title = 'Wybierz specjalistę' }) {
 
   return (
     <section className={styles.wrapper}>
-      <h2>{title}</h2>
-      <div className={`${styles.control} ${styles.desctop}`}>
-        <ArrowLeft
-          onClick={() => { handlePrev() }}
-          aria-label='Poprzedni specjalista'
-        />
-        <ArrowRight
-          onClick={() => { handleNext() }}
-          aria-label='Następny specjalista'
-        />
-      </div>
+      <header className={styles.header}>
+        <h2>{title}</h2>
+        <div className={styles.control}>
+          <ArrowLeft
+            onClick={() => { handlePrev() }}
+            aria-label='Poprzedni specjalista'
+          />
+          <ArrowRight
+            onClick={() => { handleNext() }}
+            aria-label='Następny specjalista'
+          />
+        </div>
+      </header>
       <Swiper
         ref={sliderRef}
         modules={[A11y]}
@@ -64,16 +66,6 @@ export default function Specialists({ data, title = 'Wybierz specjalistę' }) {
             <Card data={el} />
           </SwiperSlide>
         ))}
-        <div className={`${styles.control} ${styles.mobile}`}>
-          <ArrowLeft
-            onClick={() => { handlePrev() }}
-            aria-label='Poprzedni specjalista'
-          />
-          <ArrowRight
-            onClick={() => { handleNext() }}
-            aria-label='Następny specjalista'
-          />
-        </div>
       </Swiper>
     </section>
   )
