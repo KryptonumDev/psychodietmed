@@ -5,6 +5,7 @@ import styles from './styles.module.scss'
 import Select, { components } from 'react-select'
 import Checkbox from "@/components/atoms/checkbox"
 import Input from "@/components/atoms/input"
+import axios from "axios"
 
 const emailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 const namePattern = /^[a-z ,.'-]+$/i
@@ -30,13 +31,32 @@ const NoOptionsMessage = props => {
 export default function Form({ subjects }) {
 
   const [subject, setSubject] = useState('')
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [send, setSend] = useState(false)
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
   const onSubmit = data => {
-    'TODO: send data to wp'
-  }
+    let url = `https://psychodietmed.headlesshub.com/wp-json/contact-form-7/v1/contact-forms/eff187f/feedback`
 
-  'TODO: react select'
+    let body = new FormData()
+
+    body.append('mail', data.email)
+    body.append('fname', data.name)
+    body.append('message', data.text)
+    body.append('subject', subject)
+
+    axios.post(url, body)
+      .then((res) => {
+        debugger
+        if (res.status === 200) {
+          setSend('success')
+          reset()
+        } else {
+          setSend('error')
+        }
+      }).catch((err) => {
+        debugger
+      })
+  };
 
   return (
     <form className={styles.wrapper} onSubmit={handleSubmit(onSubmit)}>
@@ -85,7 +105,7 @@ export default function Form({ subjects }) {
         errors={errors}
         error='Proszę zaakceptować politykę prywatności'
       />
-      <button className={`${styles.submit} link`}>Wyślij wiadomość</button>
+      <button type="submit" className={`${styles.submit} link`}>Wyślij wiadomość</button>
     </form>
   )
 }
