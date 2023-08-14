@@ -16,6 +16,12 @@
       font-size: clamp(0rem, calc(32vw/3.7), 32rem);
     }
   }
+
+  blockquote{
+    color: var(--primary-800);
+    font-size: clamp(20rem, calc(28vw/7.68), 32rem);
+    font-weight: 500;
+  }
 }
 
 .image {

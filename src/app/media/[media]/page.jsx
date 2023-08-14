@@ -145,7 +145,7 @@ async function getData(params) {
 
     return {
       data: medium,
-      otherMedia: mediums.nodes.filter(item => item.id !== medium.id)
+      otherMedia: mediums.nodes.filter(item => item.id !== medium.id).slice(0, 6)
     }
   } catch (error) {
     console.log(error)

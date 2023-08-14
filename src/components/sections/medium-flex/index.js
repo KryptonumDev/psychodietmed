@@ -9,7 +9,7 @@ export default function Flex({ data: { title, text, image } }) {
       <Image className={styles.image} alt={image.altText} src={image.mediaItemUrl} width={image.mediaDetails.width} height={image.mediaDetails.height} />
       <div>
         <h2 dangerouslySetInnerHTML={{ __html: removeWrap(title) }} />
-        <div className={styles.text} dangerouslySetInnerHTML={{ __html: text }} />
+        <div className={`${styles.text} gutenberg`} dangerouslySetInnerHTML={{ __html: text }} />
       </div>
     </section>
   )

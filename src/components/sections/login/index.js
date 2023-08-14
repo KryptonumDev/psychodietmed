@@ -9,7 +9,6 @@ import { useRouter } from 'next/navigation';
 import LOGIN from "../../../mutations/login"
 import { useMutation } from "@apollo/client"
 import { setCookie } from "@/app/actions"
-import { ToastContainer, toast } from "react-toastify"
 import SEND_RESET from "../../../mutations/send-password-reset"
 
 export default function Login() {
@@ -17,6 +16,7 @@ export default function Login() {
   const { register, handleSubmit, formState: { errors }, } = useForm()
 
   const [renewPass, setRenewPass] = useState(false)
+  const [loginError, setLoginError] = useState(false)
 
   const loginSumbit = (data) => {
     const Input = {
@@ -47,8 +47,10 @@ export default function Login() {
     },
     onError: (error) => {
       if (error.message === "invalid_email") {
-        debugger
-        toast("Nieprawidłowy adres e-mail")
+        setLoginError('Nieprawidłowy adres e-mail')
+      }
+      if(error.message === "invalid_password") {
+        setLoginError('Nieprawidłowe hasło')
       }
     }
   });
@@ -65,7 +67,6 @@ export default function Login() {
 
   return (
     <section className={styles.wrapper}>
-      <ToastContainer className='Toaster' />
       {renewPass ? (
         <>
           <h2>Nie pamiętasz hasła?</h2>
