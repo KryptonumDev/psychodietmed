@@ -26,13 +26,13 @@ export default function CheckoutContent() {
 
   useEffect(() => {
     if ((cart && cart?.products?.length === 0) || cart === null) {
-      debugger
       window.location.href = '/koszyk'
     }
   }, [cart])
 
   // Get Cart Data.
   const { loading } = useQuery(GET_CART, {
+    fetchPolicy: 'no-cache', // Disable Apollo cache for this query.
     onCompleted: (data) => {
       // Update cart in the localStorage.
       const updatedCart = getFormattedCart(data);
@@ -57,15 +57,14 @@ export default function CheckoutContent() {
       input: orderData
     },
     onCompleted: (data) => {
-
-      // const mailerlite = axios.post('/api/mailer-lite-register', {
-      //   email: data.checkout.customer?.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
-      //   status: 'active',
-      //   fields: {
-      //     marketing_permissions: '1',
-      //     name: data.checkout.customer?.firstName || data.checkout.order.billing.firstName || data.checkout.order.shipping.firstName,
-      //   }
-      // })
+      const mailerlite = axios.post('/api/mailer-lite-register', {
+        email: data.checkout.customer?.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
+        status: 'active',
+        fields: {
+          marketing_permissions: '1',
+          name: data.checkout.customer?.firstName || data.checkout.order.billing.firstName || data.checkout.order.shipping.firstName,
+        }
+      })
 
       const transaction = axios.post('/api/create-transaction', {
         "amount": data.checkout.order.total * 100,
@@ -75,8 +74,8 @@ export default function CheckoutContent() {
       })
 
       Promise.all([
-        transaction
-        // mailerlite, 
+        transaction,
+        mailerlite, 
       ])
         .then(function (values) {
           if (values[0].data.link) {

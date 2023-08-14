@@ -17,6 +17,7 @@ export default function Cart() {
   const [innerLoading, setInnerLoading] = useState(true);
 
   const { loading, refetch } = useQuery(GET_CART, {
+    fetchPolicy: 'no-cache', // Disable Apollo cache for this query.
     onCompleted: (data) => {
       // Update cart in the localStorage.
       const updatedCart = getFormattedCart(data);

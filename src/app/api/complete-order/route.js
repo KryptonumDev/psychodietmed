@@ -31,7 +31,7 @@ export async function GET(req) {
           input: {
             clientMutationId: v4(),
             orderId: Number(id),
-            status: "PROCESSING"
+            status: "COMPLETED"
           },
         }
       }),
