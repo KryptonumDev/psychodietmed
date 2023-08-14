@@ -40,13 +40,12 @@ export default async function Home() {
       <Hero data={hero} />
       <Flex data={flex} />
       <Specialisations data={specialisationsSection} activities={activities} />
-      <Compare data={compare} />
       <CallToActionTransparent data={cta} />
       <Specialists data={specialists} />
       <StepsToConsultation data={stepsToConsultation} specialists={specialists} />
-      <CallToActionGray data={ctaGray} />
       <Compare data={compare} />
       <ReviewsSlider data={locReviews} />
+      <CallToActionGray data={ctaGray} />
       <StatisticsFlex data={statistics} />
       <Citate data={citate} />
       <Academy data={academy} />
