@@ -85,6 +85,7 @@ export default function CheckoutContent() {
         })
         .catch(error => {
           setInnerLoading(false)
+          alert(error)
           throw new Error(error)
         });
     },
