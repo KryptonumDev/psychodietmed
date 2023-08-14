@@ -10,15 +10,18 @@ import LOGIN from "../../../mutations/login"
 import { useMutation } from "@apollo/client"
 import { setCookie } from "@/app/actions"
 import SEND_RESET from "../../../mutations/send-password-reset"
+import Button from "@/components/atoms/button"
+import { AnimatePresence, motion } from "framer-motion"
 
 export default function Login() {
   const { push } = useRouter();
   const { register, handleSubmit, formState: { errors }, } = useForm()
 
-  const [renewPass, setRenewPass] = useState(false)
-  const [loginError, setLoginError] = useState(false)
+  const [ loginStatus, setLoginStatus ] = useState({ sending: false });
+  const [renewPass, setRenewPass] = useState(false);
 
   const loginSumbit = (data) => {
+    setLoginStatus({ sending: true });
     const Input = {
       clientMutationId: v4(),
       username: data.email,
@@ -28,6 +31,7 @@ export default function Login() {
   }
 
   const resetSubmit = (data) => {
+    setLoginStatus({ sending: true });
     const Input = {
       clientMutationId: v4(),
       username: data.email,
@@ -45,14 +49,16 @@ export default function Login() {
       setCookie('authToken', res.login.authToken)
       localStorage.setItem('authToken', res.login.authToken)
       push('/moje-kursy');
+      setLoginStatus({ sending: false });
     },
     onError: (error) => {
       debugger
+      setLoginStatus({ sending: false, error: 'Nieprawidłowy adres e-mail' });
       if (error.message === "invalid_email") {
-        setLoginError('Nieprawidłowy adres e-mail')
+        setLoginStatus({ sending: false, error: 'Nieprawidłowy adres e-mail' });
       }
       if(error.message === "invalid_password") {
-        setLoginError('Nieprawidłowe hasło')
+        setLoginStatus({ sending: false, error: 'Nieprawidłowe hasło' });
       }
     }
   });
@@ -62,8 +68,11 @@ export default function Login() {
   }] = useMutation(SEND_RESET, {
     onCompleted: (res) => {
       debugger
+      setRenewPass(false);
+      setLoginStatus({ sending: false });
     },
-    onError: (error) => {
+    onError: () => {
+      setLoginStatus({ sending: false, error: 'Coś poszło nie tak. Spróbuj ponownie później.' });
     }
   });
 
@@ -81,7 +90,17 @@ export default function Login() {
               title="E-mail"
               placeholder="E-mail"
             />
-            <button className="link" type="submit">Zresetuj hasło</button>
+            <AnimatePresence mode='wait'>
+              {loginStatus.error && (
+                <motion.p
+                  className={styles.error}
+                  initial={{ height: 0 }}
+                  animate={{ height: 'auto' }}
+                  exit={{ height: 0 }}
+                >{loginStatus.error}</motion.p>
+              )}
+            </AnimatePresence>
+            <Button type="submit" disabled={loginStatus.sending}>Zresetuj hasło</Button>
           </form>
           <button onClick={() => { setRenewPass(false) }} className={styles.button}>Zaloguj się</button>
         </>
@@ -104,8 +123,17 @@ export default function Login() {
               placeholder="Hasło"
               type="password"
             />
-            {/* <p className={styles.support}><Info />Hasło powinno zawierać co najmniej 12 znaków</p> */}
-            <button className="link" type="submit">Zaloguj się</button>
+            <AnimatePresence mode='wait'>
+              {loginStatus.error && (
+                <motion.p
+                  className={styles.error}
+                  initial={{ height: 0 }}
+                  animate={{ height: 'auto' }}
+                  exit={{ height: 0 }}
+                >{loginStatus.error}</motion.p>
+              )}
+            </AnimatePresence>
+            <Button type="submit" disabled={loginStatus.sending}>Zaloguj się</Button>
           </form>
           <button onClick={() => { setRenewPass(true) }} className={styles.button}>Nie pamiętam hasła</button>
         </>

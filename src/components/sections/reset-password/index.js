@@ -60,7 +60,7 @@ export default function Reset({ resetkey, login }) {
         />
         <p className={`${styles.support} ${watch('password')?.length >= 12 ? styles.active : ''} ${(errors['password']?.type === 'minLength' || errors['password']?.type === 'required') ? styles.error : ''}`}>
           <Info />Hasło powinno zawierać co najmniej 12 znaków</p>
-        <p className={`${styles.support} ${styles.error} ${watch('password') === watch('repeat-password') ? styles.active : ''}`}><Info />Hasła powinne się zgadzać</p>
+        <p className={`${styles.support} ${styles.error} ${watch('password') === watch('repeat-password') ? styles.active : ''}`}><Info />Hasła powinny się zgadzać</p>
         <button disabled={loading} className="link" type="submit">Ustaw hasło</button>
       </form>
     </section >
