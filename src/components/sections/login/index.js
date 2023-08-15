@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import styles from './styles.module.scss'
 import Input from "@/components/atoms/input"
 import { emailPattern } from "../../../constants/patterns"
@@ -101,7 +101,7 @@ export default function Login() {
             </AnimatePresence>
             <Button type="submit" disabled={loginStatus.sending}>Zresetuj hasło</Button>
           </form>
-          <button onClick={() => { setRenewPass(false) }} className={styles.button}>Zaloguj się</button>
+          <button onClick={() => { setRenewPass(false); window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }) }} className={styles.button}>Zaloguj się</button>
         </>
       ) : (
         <>
@@ -134,7 +134,7 @@ export default function Login() {
             </AnimatePresence>
             <Button type="submit" disabled={loginStatus.sending}>Zaloguj się</Button>
           </form>
-          <button onClick={() => { setRenewPass(true) }} className={styles.button}>Nie pamiętam hasła</button>
+          <button onClick={() => { setRenewPass(true); window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }) }} className={styles.button}>Nie pamiętam hasła</button>
         </>
       )}
     </section >
