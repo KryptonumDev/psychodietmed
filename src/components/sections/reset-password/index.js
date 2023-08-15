@@ -19,7 +19,7 @@ export default function Reset({ resetkey, login }) {
 
   const [reset, { loading }] = useMutation(RESET, {
     onCompleted: (res) => {
-      window.location.href = '/moje-kursy'
+      window.location.href = '/logowanie'
     },
     onError: (error) => {
       throw new Error(error?.graphQLErrors?.[0]?.message ?? error);
