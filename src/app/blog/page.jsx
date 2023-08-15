@@ -23,7 +23,7 @@ export async function generateMetadata({ searchParams }) {
 }
 
 export default async function Blog({ searchParams }) {
-  const { categories, hero, posts, newPosts, postsTotalCount } = await getData(searchParams.strona)
+  const { categories, hero, posts, newPosts, postsTotalCount } = await getData(searchParams.strona, searchParams.kategoria)
 
   return (
     <main id="main">
@@ -34,9 +34,8 @@ export default async function Blog({ searchParams }) {
   )
 }
 
-async function getData(currentPage = 1) {
+async function getData(currentPage = 1, kategoria) {
   try {
-
     const result = await fetch('https://psychodietmed.headlesshub.com/graphql', {
       method: 'POST',
       headers: {
@@ -44,7 +43,7 @@ async function getData(currentPage = 1) {
       },
       body: JSON.stringify({
         query: `
-        query Pages($offset: Int, $size: Int) {
+        query Pages($offset: Int, $size: Int, $category: String) {
           categories(first: 100) {
             nodes {
               slug
@@ -78,7 +77,7 @@ async function getData(currentPage = 1) {
               }
             }
           }
-          posts(where: {offsetPagination: {size: $size, offset: $offset}}) {
+          posts(where: {offsetPagination: {size: $size, offset: $offset}, categoryName: $category}) {
             pageInfo {
               offsetPagination {
                 total
@@ -122,6 +121,7 @@ async function getData(currentPage = 1) {
         variables: {
           offset: (currentPage - 1) * PAGE_ITEM_COUNT,
           size: PAGE_ITEM_COUNT,
+          category: kategoria || null,
         }
       }),
       next: {
