@@ -35,7 +35,6 @@ export default function Personaldata({ input, setStep, setInput }) {
   const watchShippingSameAsBilling = watch('shipping_same_as_billing')
 
   useEffect(() => {
-    // https://wl-api.mf.gov.pl/api/search/nip/9512465557?date=2023-04-14
     const date = new Date().toISOString().split('T')[0]
     if (nipValue?.length === 10) {
       axios.get(`https://wl-api.mf.gov.pl/api/search/nip/${nipValue}?date=${date}`)
@@ -60,6 +59,22 @@ export default function Personaldata({ input, setStep, setInput }) {
     }
   }, [nipValue, setValue])
 
+  useEffect(() => {
+    setValue('shipping_same_as_billing', !input?.billingDifferentThanShipping)
+    setValue('billing_nip', input?.metaData?.find(el => el.key === '_billing_nip')?.value || '')
+    setValue('billing_firmName', input?.billing?.company || '')
+    setValue('billing_email', input?.billing?.email || '')  
+    setValue('billing_address', input?.billing?.address1 || '')
+    setValue('billing_postalCode', input?.billing?.postcode || '')
+    setValue('billing_city', input?.billing?.city || '')
+    setValue('billing_phone', input?.billing?.phone || '')
+    setValue('shipping_name', (input?.shipping?.firstName || input?.shipping?.lastName) ? `${input?.shipping?.firstName} ${input?.shipping?.lastName}` : '')
+    setValue('shipping_address', input?.shipping?.address1 || '')
+    setValue('shipping_postalCode', input?.shipping?.postcode || '')
+    setValue('shipping_city', input?.shipping?.city || '')
+    setValue('shipping_phone', input?.shipping?.phone || '')
+    setValue('shipping_email', input?.shipping?.email || '')
+  }, [input])
 
   const submit = (data) => {
 

@@ -1,5 +1,34 @@
 .wrapper {
 
+  .inpostNumber{
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+
+    button{
+      margin-top: 0;
+    }
+  }
+  
+  .widget {
+    height: 0px !important;
+    margin-top: 0px;
+    transition: all .3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
+    &.active{
+      height: 650px !important;
+      margin-top: 32px;
+    }
+
+    iframe {
+      height: 100%;
+    }
+  }
+
+  .inpost {}
+
   fieldset {
     border: none;
     padding: 0;
@@ -29,7 +58,6 @@
     display: block;
 
     &.expanded {
-      margin: 48px 0;
       padding: 20px 28px 22px 28px;
       border-radius: 20px;
     }

@@ -35,6 +35,8 @@
   @media (max-width: 640px) {
     height: 100% !important;
     aspect-ratio: 343/253;
+    position: relative;
+    top: unset;
   }
 
   img {

@@ -2406,6 +2406,11 @@ react-hook-form@^7.44.3:
   resolved "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.45.2.tgz"
   integrity sha512-9s45OdTaKN+4NSTbXVqeDITd/nwIg++nxJGL8+OD5uf1DxvhsXQ641kaYHk5K28cpIOTYm71O/fYk7rFaygb3A==
 
+react-inpost-geowidget@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-inpost-geowidget/-/react-inpost-geowidget-1.1.1.tgz#788e32d324650f404ff1a17f9971305c515e1bcc"
+  integrity sha512-2G6XpOerBFYw1vsP46RUxMD/Uy/EmdMoLFBnKCY0jHcQw1xwFIo/RIXL2o43bCNjDLkMO4Tkjp6nMCC7eeRrZg==
+
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"

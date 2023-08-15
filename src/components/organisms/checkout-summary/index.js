@@ -76,7 +76,7 @@ export default function Summary({ submit, needsShippingAddress, setStep, input }
           <div className={styles.delivery}>
             <div className={styles.flex}>
               <h3>Dostawa</h3>
-              <button className={styles.change} onClick={() => { setStep(2) }}>
+              <button className={styles.change} onClick={() => { setStep(3) }}>
                 Zmień
                 <RightArrow />
               </button>
@@ -84,7 +84,7 @@ export default function Summary({ submit, needsShippingAddress, setStep, input }
             <label>
               <input checked={true} type="radio" name="delivery" value="person" />
               <span className={styles.checkbox} />
-              <p>{input.shippingMethod.label} <small>{input.shippingMethod.cost}&nbsp;zł</small></p>
+              <p>{input.shippingMethod.label} <small>{input.shippingMethod.cost || '0'}&nbsp;zł</small></p>
             </label>
           </div>
         )}

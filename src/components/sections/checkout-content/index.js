@@ -25,7 +25,7 @@ export default function CheckoutContent() {
   const [innerLoading, setInnerLoading] = useState(true);
 
   useEffect(() => {
-    if ((cart && cart?.products?.length === 0) || cart === null) {
+    if ((cart && cart?.products?.length === 0)) {
       window.location.href = '/koszyk'
     }
   }, [cart])
@@ -34,6 +34,23 @@ export default function CheckoutContent() {
   const { loading } = useQuery(GET_CART, {
     fetchPolicy: 'no-cache', // Disable Apollo cache for this query.
     onCompleted: (data) => {
+      if (data.viewer) {
+        setInput({
+          ...input,
+          billing: {
+            ...input.billing,
+            firstName: data.viewer.firstName,
+            lastName: data.viewer.lastName,
+            email: data.viewer.email,
+          },
+          shipping: {
+            ...input.shipping,
+            firstName: data.viewer.firstName,
+            lastName: data.viewer.lastName,
+            email: data.viewer.email,
+          }
+        })
+      }
       // Update cart in the localStorage.
       const updatedCart = getFormattedCart(data);
       localStorage.setItem('woo-next-cart', JSON.stringify(updatedCart));
@@ -53,10 +70,12 @@ export default function CheckoutContent() {
 
   // Create New order: Checkout Mutation.
   const [checkout, { loading: checkoutLoad }] = useMutation(CHECKOUT_MUTATION, {
+    fetchPolicy: 'no-cache', // Disable Apollo cache for this query.
     variables: {
       input: orderData
     },
     onCompleted: (data) => {
+      debugger
       const mailerlite = axios.post('/api/mailer-lite-register', {
         email: data.checkout.customer?.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
         status: 'active',
@@ -75,7 +94,7 @@ export default function CheckoutContent() {
 
       Promise.all([
         transaction,
-        mailerlite, 
+        mailerlite,
       ])
         .then(function (values) {
           if (values[0].data.link) {
@@ -90,11 +109,12 @@ export default function CheckoutContent() {
         });
     },
     onError: (error) => {
+      debugger
       if (error.message === 'Konto z Twoim adresem e-mail jest już zarejestrowane. <a href="#" class="showlogin">Zaloguj się.</a>') {
         setOrderData(createCheckoutData(input, true))
       } else {
+        setInnerLoading(false)
         alert(error)
-        window.location.href = '/koszyk'
       }
     }
   });
@@ -133,7 +153,7 @@ export default function CheckoutContent() {
       )}
       {((step === 4 && cart?.needsShippingAddress) || (step === 3 && !cart?.needsShippingAddress)) && (
         <>
-          <Content setCart={setCart} setInnerLoading={setInnerLoading} cart={cart} isCart={false} />
+          <Content delivery={input.shippingMethod} setCart={setCart} setInnerLoading={setInnerLoading} cart={cart} isCart={false} />
           <Summary submit={handleSubmit} needsShippingAddress={cart?.needsShippingAddress} input={input} setStep={setStep} />
         </>
       )}

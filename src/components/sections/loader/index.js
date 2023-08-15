@@ -15,7 +15,7 @@ export default function Loader({ show }) {
     <AnimatePresence mode="wait">
       {show && (
         <motion.div key='two' initial={{ opacity: needAnimation ? 0 : 1 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className={styles.loader}>
-          <div class={styles.ldsdefault}><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+          <div className={styles.ldsdefault}><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
         </motion.div>
       )}
     </AnimatePresence>

@@ -38,15 +38,19 @@ export const createCheckoutData = (order, registred) => {
     shippingMethod: null,
     transactionId: order.transactionId,
     isPaid: order.isPaid,
+    metaData: []
   };
 
+  if (order.firmOrder) {
+    checkoutData.metaData.push(...order.metaData)
+  }
+
   if (order.shippingMethod) {
-    checkoutData.shippingMethod = {
-      cost: order.shippingMethod.cost || "0",
-      methodId: order.shippingMethod.methodId,
-      label: order.shippingMethod.label,
-      instanceId: String(order.shippingMethod.instanceId)
-    }
+    checkoutData.shippingMethod = order.shippingMethod.methodId;
+  }
+
+  if (order?.inpostNumber?.name) {
+    checkoutData.metaData.push({ key: 'parcel_machine_id', value: order?.inpostNumber?.name })
   }
 
   if (order.needAccount && !registred) {
@@ -55,6 +59,6 @@ export const createCheckoutData = (order, registred) => {
       password: v4(),
     }
   }
-
+  debugger
   return checkoutData;
 };

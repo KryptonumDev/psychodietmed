@@ -91,7 +91,7 @@ const ADD_TO_CART = gql`
           subtotalTax
           shippingTax
           shippingTotal
-          total
+          total(format: RAW)
           totalTax
           feeTax
           feeTotal

@@ -2,6 +2,11 @@ import { gql } from "@apollo/client";
 
 const GET_CART = gql`
 query GET_CART {
+  viewer {
+    email
+    firstName
+    lastName
+  }
   cart {
     contents {
       nodes {
@@ -92,7 +97,7 @@ query GET_CART {
     subtotalTax
     shippingTax
     shippingTotal
-    total
+    total(format: RAW)
     totalTax
     feeTax
     feeTotal
