@@ -13,6 +13,22 @@
     }
   }
 
+  .inputWrap{
+    position: relative;
+    width: 100%;
+
+    input{
+      width: 100%;
+    }
+
+    svg{
+      position: absolute;
+      right: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
   input,
   textarea {
     background: #FFFEFE;

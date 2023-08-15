@@ -24,7 +24,7 @@ export default function Form() {
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <Input
-        rows={4}
+        rows={3}
         placeholder='Dodaj komentarz'
         name='comment'
         register={register('comment', { required: true, minLength: 3 })}

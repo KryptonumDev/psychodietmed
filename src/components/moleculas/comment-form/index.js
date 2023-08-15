@@ -7,7 +7,7 @@ export default function Form() {
       <legend>Zostaw komentarz</legend>
       <label className={styles.label}>
         <span>Dodaj komentarz</span>
-        <textarea rows={5} placeholder="Dodaj komentarz" />
+        <textarea rows={3} placeholder="Dodaj komentarz" />
       </label>
       <label className={styles.label}>
         <span>Adres e-mail</span>
