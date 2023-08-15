@@ -27,7 +27,9 @@ export default function Content({ podopieczni }) {
   const { refetch, loading } = useQuery(
     gql`query Specialists($count: Int, $offset: Int) {
       podopieczni(
-        where: {
+        where: 
+        {
+          search: "historia",
           offsetPagination: {
             size: $count, 
             offset: $offset

@@ -144,7 +144,7 @@ export async function generateStaticParams() {
   const { body: { data: { podopieczni } } } = await Fetch({
     query: `
     query PostStaticParams {
-      podopieczni(first: 100) {
+      podopieczni(first: 100, where: {search: "historia"}) {
         nodes {
           slug
         }

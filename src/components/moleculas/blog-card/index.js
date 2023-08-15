@@ -19,7 +19,7 @@ export default function Card({ className, data }) {
       />
       <div className={styles.categories}>
         {data.categories.nodes?.map((el) => (
-          <Category key={el.id} name={el.name} href={`/blog?kategoria=${el.slug}`} />
+          <Category key={el.id} name={el.name} />
         ))}
       </div>
       <h3 dangerouslySetInnerHTML={{ __html: removeWrap(data.title) }} />

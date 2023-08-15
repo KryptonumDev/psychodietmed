@@ -43,7 +43,7 @@ async function getData(props) {
       body: JSON.stringify({
         query: `
         query Archive($offset: Int, $size: Int) {
-          podopieczni(where: {offsetPagination: {size: $size, offset: $offset}}){
+          podopieczni(where: {search: "historia", offsetPagination: {size: $size, offset: $offset}}){
             pageInfo {
               offsetPagination {
                 total
