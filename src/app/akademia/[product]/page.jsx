@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation"
 import FlexibleContent from "@/components/sections/product-flexible-content"
 import BundleContains from "@/components/sections/product-bundle-contains"
-import StepsToConsultation from "@/components/sections/steps-to-consultation"
 import ImportantInformation from "@/components/sections/product-important-information"
 import Hero from "@/components/sections/hero-product"
 import { generetaSeo } from "../../../utils/genereate-seo"
@@ -14,7 +13,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Post({ params }) {
-  const { data, global, specialists } = await getData(params)
+  const { data } = await getData(params)
   return (
     <main id="main">
       <Breadcrumbs data={[{ page: 'Akademia', url: `/akademia` }, { page: data.title, url: `/akademia/${params.product}` }]} />
@@ -23,7 +22,6 @@ export default async function Post({ params }) {
       {data.product.bundleItems?.length > 0 && (
         <BundleContains productId={data.productId} data={data.product.bundleItems} />
       )}
-      <StepsToConsultation data={global.bookGlobal} specialists={specialists} />
       <ImportantInformation data={data.product.importantInformation} />
     </main>
   )
@@ -31,58 +29,9 @@ export default async function Post({ params }) {
 
 async function getData(params) {
   try {
-    const { body: { data: { product, global, specialists } } } = await Fetch({
+    const { body: { data: { product } } } = await Fetch({
       query: `
       query Pages($uri: ID!) {
-        specialists: specjalisci(first: 100) {
-          nodes {
-            title
-            slug
-            specialisations {
-              nodes {
-                id : databaseId
-                title : name
-              }
-            }
-            proffesional {
-              proffesion
-              personImage {
-                altText
-                mediaItemUrl
-                mediaDetails {
-                  height
-                  width
-                }
-              }
-            }
-          }
-        }
-        global : page(id: "cG9zdDo3Nzk=") {
-          id
-          global {
-            bookGlobal{
-              title
-              image{
-                altText
-                mediaItemUrl
-                mediaDetails {
-                  height
-                  width
-                }
-              }
-              titleFirst
-              textFirst
-              titleSecond
-              textSecond
-              titleThird
-              textThird
-              illnes {
-                id : databaseId
-                title : name
-              }
-            }
-          }
-        }
         product(id: $uri, idType: SLUG) {
           id
           productId: databaseId
@@ -218,8 +167,6 @@ async function getData(params) {
 
     return {
       data: product,
-      global: global.global,
-      specialists: specialists.nodes
     }
   } catch (error) {
     console.log(error)
