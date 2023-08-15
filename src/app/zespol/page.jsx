@@ -24,12 +24,12 @@ export default async function Team() {
     <main className="overflow" id="main">
       <Breadcrumbs data={[{ page: 'Zespół', url: '/zespol' }]} />
       <Hero data={page.team.heroTeam} />
+      <Specialists data={specialists} />
       <Slider data={page.team.sliderTeam} />
       <Owner data={page.team.ownerTeam} />
       <Flowers data={page.team.flowersTeam} />
       <RepeaterFlex data={page.team.repeaterFlexTeam} />
       <CombinedSpecialisations data={page.team.combinedSpecialisationsTeam} />
-      <Specialists data={specialists} />
       <CallToActionGray data={page.team.greyCtaTeam} />
       <Statistics data={page.team.statisticsTeam} />
       <Newsletter data={newsletter} />

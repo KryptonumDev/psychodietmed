@@ -11,8 +11,8 @@ export default function Hero({ data: { title, text, image, logo } }) {
         <div className={styles.text} dangerouslySetInnerHTML={{ __html: text }} />
       </div>
       <div className={styles.imageWrap}>
-        <Image aspectRatio={true} className={styles.image} src={image.mediaItemUrl} alt={image.altText} width={image.mediaDetails.width} height={image.mediaDetails.height} />
-        <Image aspectRatio={true} className={styles.logo} src={logo.mediaItemUrl} alt={logo.altText} width={logo.mediaDetails.width} height={logo.mediaDetails.height} />
+        <Image loading='eager' aspectRatio={true} className={styles.image} src={image.mediaItemUrl} alt={image.altText} width={image.mediaDetails.width} height={image.mediaDetails.height} />
+        <Image loading='eager' aspectRatio={true} className={styles.logo} src={logo.mediaItemUrl} alt={logo.altText} width={logo.mediaDetails.width} height={logo.mediaDetails.height} />
       </div>
     </section>
   )

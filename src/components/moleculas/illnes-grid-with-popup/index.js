@@ -28,7 +28,7 @@ export default function IllnesGrid({ problems, active, setActive }) {
                 <div className={styles.text} dangerouslySetInnerHTML={{ __html: el.specialisation.popupCasestudy.text }} />
 
                 <div className={styles.control}>
-                  <Link href='#' className="link">Umów wizytę online</Link>
+                  <Link href='/umow-wizyte' className="link">Umów wizytę online</Link>
                   <button onClick={() => { setActive(null) }}><Cross /><span>Zamknij</span></button>
                 </div>
               </motion.div>

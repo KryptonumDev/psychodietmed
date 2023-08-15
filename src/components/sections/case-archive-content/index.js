@@ -46,6 +46,7 @@ export default function Content({ podopieczni }) {
             information {
               resultTitle
               result
+              text
               problems {
                 id
                 title : name
@@ -134,7 +135,7 @@ export default function Content({ podopieczni }) {
             slug={el.slug}
             name={el.histori.caseStudyCard.name}
             avatar={el.histori.caseStudyCard.avatar}
-            comment={el.histori.caseStudyCard.comment}
+            comment={el.histori.information.text}
             linkText={el.histori.caseStudyCard.linkText}
             differences={el.histori.caseStudyCard.differences}
             before={el.histori.information.beforeImage}

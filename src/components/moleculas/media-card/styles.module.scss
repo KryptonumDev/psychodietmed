@@ -25,6 +25,11 @@
   .text{
     font-size: clamp(14rem, calc(16vw/7.68), 20rem);
     margin-top: 16px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     @media (max-width: 370px) {
       font-size: clamp(0rem, calc(14vw/3.7), 14rem);

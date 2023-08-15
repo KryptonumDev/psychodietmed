@@ -7,17 +7,8 @@
   gap: 16px;
   flex-direction: column;
   justify-content: space-between;
-  position: relative;
-
-  a{
-    z-index: 2;
-  }
-
-  .link{
-    position: absolute;
-    z-index: 1;
-    inset: 0;
-  }
+  background-color: transparent;
+  border: none;
 
   p{
     font-size: clamp(16rem, calc(16vw/7.68), 20rem);

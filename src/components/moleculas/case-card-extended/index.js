@@ -32,7 +32,7 @@ export default function Card({ slug, name, avatar, comment, linkText, before, af
             <p><strong>Z czym się zmagałam?</strong></p>
             <div className={styles.illnes}>
               {problems.map(el => (
-                <Category key={el?.title} name={el?.title} href={'#'} />
+                <Category key={el?.title} name={el?.title} />
               ))}
             </div>
           </div>

@@ -56,6 +56,7 @@ async function getData(props) {
                 information {
                   resultTitle
                   result
+                  text
                   problems {
                     id
                     title : name

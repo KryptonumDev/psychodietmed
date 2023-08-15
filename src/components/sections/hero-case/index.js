@@ -9,6 +9,7 @@ export default function Hero({ data: { beforeImage, afterImage, result, title, t
     <section className={styles.wrapper}>
       <div className={styles.images}>
         <Image
+          loading='eager'
           width={beforeImage.mediaDetails.width}
           height={beforeImage.mediaDetails.height}
           src={beforeImage.mediaItemUrl}
@@ -19,6 +20,7 @@ export default function Hero({ data: { beforeImage, afterImage, result, title, t
         <AngleRightDouble />
         <div className={styles.left_wrap}>
           <Image
+            loading='eager'
             width={afterImage.mediaDetails.width}
             height={afterImage.mediaDetails.height}
             src={afterImage.mediaItemUrl}

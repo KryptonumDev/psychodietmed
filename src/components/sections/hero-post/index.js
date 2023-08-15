@@ -40,6 +40,7 @@ export default function Hero({ data: { featuredImage, title, categories, dateGmt
         </div>
       </div>
       <Image
+        loading='eager'
         width={featuredImage.node.mediaDetails.width}
         height={featuredImage.node.mediaDetails.height}
         src={featuredImage.node.mediaItemUrl}

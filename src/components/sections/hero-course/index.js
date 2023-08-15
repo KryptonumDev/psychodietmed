@@ -11,6 +11,7 @@ export default function Hero({ regularPrice, price, lessonSlug, slug, databaseId
   return (
     <section className={styles.wrapper}>
       <Image
+        loading='eager'
         width={image.node.mediaDetails.width}
         height={image.node.mediaDetails.height}
         src={image.node.mediaItemUrl}

@@ -21,7 +21,7 @@ export default function Specialists({ data, title = 'Wybierz specjalistę' }) {
   }, []);
 
   return (
-    <section className={styles.wrapper}>
+    <section id='zespol' className={styles.wrapper}>
       <header className={styles.header}>
         <h2>{title}</h2>
         <div className={styles.control}>

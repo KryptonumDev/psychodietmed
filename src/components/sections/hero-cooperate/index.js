@@ -16,6 +16,7 @@ export default function Hero({ data: { title, text, link, grid } }) {
         {grid.map((el, index) => (
           <div className={styles.item} key={index}>
             <Image
+              loading='eager'
               width={el.icon.mediaDetails.width}
               height={el.icon.mediaDetails.height}
               src={el.icon.mediaItemUrl}

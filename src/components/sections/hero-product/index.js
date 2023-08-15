@@ -37,7 +37,7 @@ export default function Hero({ data: { addons, variations, productId, title, des
 
   return (
     <section className={styles.wrapper}>
-      <Image aspectRatio={true} className={styles.image} src={featuredImage.node.mediaItemUrl} alt={featuredImage.node.altText} width={featuredImage.node.mediaDetails.width} height={featuredImage.node.mediaDetails.height} />
+      <Image loading='eager' aspectRatio={true} className={styles.image} src={featuredImage.node.mediaItemUrl} alt={featuredImage.node.altText} width={featuredImage.node.mediaDetails.width} height={featuredImage.node.mediaDetails.height} />
       <div className={styles.conten}>
         <h1 dangerouslySetInnerHTML={{ __html: removeWrap(title) }} />
         <div dangerouslySetInnerHTML={{ __html: description }} />

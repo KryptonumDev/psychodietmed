@@ -15,6 +15,7 @@ export default function Hero({ data: { title, text, link, topImage, rightImage, 
         </div>
         <div className={styles.grid}>
           <Image
+            loading='eager'
             width={topImage.mediaDetails.width}
             height={topImage.mediaDetails.height}
             src={topImage.mediaItemUrl}
@@ -23,6 +24,7 @@ export default function Hero({ data: { title, text, link, topImage, rightImage, 
             aspectRatio={true}
           />
           <Image
+            loading='eager'
             width={leftImage.mediaDetails.width}
             height={leftImage.mediaDetails.height}
             src={leftImage.mediaItemUrl}
@@ -31,6 +33,7 @@ export default function Hero({ data: { title, text, link, topImage, rightImage, 
             aspectRatio={true}
           />
           <Image
+            loading='eager'
             width={rightImage.mediaDetails.width}
             height={rightImage.mediaDetails.height}
             src={rightImage.mediaItemUrl}

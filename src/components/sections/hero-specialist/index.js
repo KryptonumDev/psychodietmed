@@ -2,11 +2,13 @@ import React from "react"
 import styles from './styles.module.scss'
 import { Image } from "@/components/atoms/image"
 import { Star } from "../../../assets/star"
+import Link from "next/link"
 
 export default function Hero({ data: { title, specialisations, proffesional: { personImage, proffesion, pacientsAge } } }) {
   return (
     <section className={styles.wrapper}>
       <Image
+        loading='eager'
         className={styles.image}
         width={personImage.mediaDetails.width}
         height={personImage.mediaDetails.height}
@@ -36,7 +38,7 @@ export default function Hero({ data: { title, specialisations, proffesional: { p
           <span>{pacientsAge}</span>
         </div>
       </div>
-      <button className={`${styles.button} link`}>Umów wizytę online</button>
+      <Link href='#kalendarz' className={`${styles.button} link`}>Umów wizytę online</Link>
     </section>
   )
 }
