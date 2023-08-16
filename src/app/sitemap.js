@@ -12,7 +12,6 @@ export default async function sitemap() {
       }
     })
 
-    console.log(a)
     return a
   }
 

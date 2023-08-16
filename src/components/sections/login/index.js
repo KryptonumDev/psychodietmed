@@ -37,7 +37,6 @@ export default function Login() {
       clientMutationId: v4(),
       username: data.email,
     };
-    debugger
     reset({ variables: { input: Input } })
   }
 

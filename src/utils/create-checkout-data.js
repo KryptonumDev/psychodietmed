@@ -59,6 +59,6 @@ export const createCheckoutData = (order, registred) => {
       password: v4(),
     }
   }
-  debugger
+
   return checkoutData;
 };

@@ -75,7 +75,6 @@ export default function CheckoutContent() {
       input: orderData
     },
     onCompleted: (data) => {
-      debugger
       const mailerlite = axios.post('/api/mailer-lite-register', {
         email: data.checkout.customer?.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
         status: 'active',
@@ -109,7 +108,6 @@ export default function CheckoutContent() {
         });
     },
     onError: (error) => {
-      debugger
       if (error.message === 'Konto z Twoim adresem e-mail jest już zarejestrowane. <a href="#" class="showlogin">Zaloguj się.</a>') {
         setOrderData(createCheckoutData(input, true))
       } else {
