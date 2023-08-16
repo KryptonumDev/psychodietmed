@@ -89,7 +89,7 @@ const REMOVE_COUPON = gql`
           subtotalTax
           shippingTax
           shippingTotal
-          total
+          total(format: RAW)
           totalTax
           feeTax
           feeTotal
