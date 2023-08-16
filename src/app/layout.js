@@ -28,7 +28,7 @@ export const metadata = {
     type: 'website',
   },
   robots: {
-    index: true,
+    index: false,
   }
 }
 
