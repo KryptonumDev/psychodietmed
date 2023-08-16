@@ -17,7 +17,7 @@ import { GET_SEO_PAGE } from "../queries/page-seo";
 import { Fetch } from "../utils/fetch-query";
 
 export async function generateMetadata() {
-  return await generetaSeo('cG9zdDo5', '/', GET_SEO_PAGE)
+  return await generetaSeo('cG9zdDo5', '', GET_SEO_PAGE)
 }
 
 export default async function Home() {
