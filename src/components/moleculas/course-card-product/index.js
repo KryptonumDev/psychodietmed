@@ -3,8 +3,8 @@ import styles from './styles.module.scss'
 import Link from "next/link"
 import { Image } from "@/components/atoms/image"
 import AddToCart from "@/components/atoms/add-to-cart-button"
-import { RightArrow } from "../../../assets/small-right-arrow"
 import Price from "@/components/atoms/price"
+import Button from "@/components/atoms/button"
 
 export default function Card({ data, myCourse = false }) {
   return (
@@ -35,9 +35,7 @@ export default function Card({ data, myCourse = false }) {
                 Kup kurs
               </AddToCart>
             </div>
-            <Link className={styles.link} href={`/akademia/kurs/${data.slug}`}>
-              Przejdź do kursu <RightArrow />
-            </Link>
+            <Button theme="secondary" href={`/akademia/kurs/${data.slug}`}>Przejdź do kursu</Button>
           </>
         )}
       </div>
