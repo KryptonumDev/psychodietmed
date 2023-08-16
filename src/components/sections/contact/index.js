@@ -8,7 +8,7 @@ export default function Contact({ data: { title, text, image, subjects } }) {
   return (
     <section className={styles.wrapper}>
       <div>
-        <h2 dangerouslySetInnerHTML={{ __html: htmlDelete(title) }} />
+        <h1 dangerouslySetInnerHTML={{ __html: htmlDelete(title) }} />
         <div dangerouslySetInnerHTML={{ __html: text }} />
         <Form subjects={subjects}/>
       </div>

@@ -15,7 +15,7 @@ export default function Hero({ title, excerpt, image, dateGmt }) {
     <section className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles.date}>{date}</div>
-        <h2 dangerouslySetInnerHTML={{ __html: removeWrap(title) }} />
+        <h1 dangerouslySetInnerHTML={{ __html: removeWrap(title) }} />
         <div className={styles.text} dangerouslySetInnerHTML={{ __html: excerpt }} />
         {/* <div className={styles.info}>
           <Hearth />
