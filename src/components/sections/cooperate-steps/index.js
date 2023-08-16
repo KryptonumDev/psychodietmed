@@ -37,7 +37,7 @@ export default function Steps({ data: { repeater, titleFirst, linkFirst, titleSe
             </div>
             <div className={styles.flex}>
               <Link className="link" href={linkFirst.url}>{linkFirst.title}</Link>
-              <Button theme="secondary" className={styles.link} href={'/zespol'}>Poznaj specjalistów PsychoDietMed</Button>
+              <Button theme="secondary" className={styles.link} href={'/o-nas'}>Poznaj specjalistów PsychoDietMed</Button>
             </div>
           </div>
         </div>

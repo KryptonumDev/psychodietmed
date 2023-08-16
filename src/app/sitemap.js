@@ -29,7 +29,7 @@ export default async function sitemap() {
       lastModified: new Date(),
     },
     {
-      url: 'https://www.psychodietmed.pl/zespol',
+      url: 'https://www.psychodietmed.pl/o-nas',
       lastModified: new Date(),
     },
     {

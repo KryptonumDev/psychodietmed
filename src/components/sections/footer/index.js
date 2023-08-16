@@ -11,8 +11,8 @@ const urlSystem = [
     url: null,
     subpages: [
       {
-        name: 'Zespół',
-        url: '/zespol'
+        name: 'O nas',
+        url: '/o-nas'
       },
       {
         name: 'Historia marki',

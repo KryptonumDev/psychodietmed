@@ -15,14 +15,14 @@ import Breadcrumbs from "@/components/sections/breadcrumbs";
 import { Fetch } from "../../utils/fetch-query";
 
 export async function generateMetadata() {
-  return await generetaSeo('cG9zdDoxMTc2', '/zespol', GET_SEO_PAGE)
+  return await generetaSeo('cG9zdDoxMTc2', '/o-nas', GET_SEO_PAGE)
 }
 
 export default async function Team() {
   const { newsletter, posts, blog, page, specialists } = await getData()
   return (
     <main className="overflow" id="main">
-      <Breadcrumbs data={[{ page: 'Zespół', url: '/zespol' }]} />
+      <Breadcrumbs data={[{ page: 'O nas', url: '/o-nas' }]} />
       <Hero data={page.team.heroTeam} />
       <Specialists data={specialists} />
       <Slider data={page.team.sliderTeam} />
