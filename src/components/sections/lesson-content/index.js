@@ -7,7 +7,7 @@ import { LeftArrow } from "../../../assets/left-arrow"
 import { Clock } from "../../../assets/clock"
 import { Play } from "../../../assets/play"
 
-export default function Content({ title, chapters, content, databaseId, video, params }) {
+export default function Content({ course, title, chapters, content, databaseId, video, params }) {
 
   let prev = null
   let next = null
@@ -88,10 +88,10 @@ export default function Content({ title, chapters, content, databaseId, video, p
           </div>
         </div>
         {currentChapter.lessons.map((el, index) => (
-          <div key={index} className={`${styles.lesson} ${currentLesson === (index + 1) ? styles.active : ''} `}>
+          <Link href={`/moje-kursy/${course}/${el.lesson.slug}`} key={index} className={`${styles.lesson} ${currentLesson === (index + 1) ? styles.active : ''} `}>
             <h4 title={el.lesson.title}><strong>{currentChapter.chapterNumber}.{index + 1}</strong><span>{el.lesson.title}</span></h4>
             <span><Play />{el.lesson.lesson.time} minut</span>
-          </div>
+          </Link>
         ))}
       </aside>
     </section>

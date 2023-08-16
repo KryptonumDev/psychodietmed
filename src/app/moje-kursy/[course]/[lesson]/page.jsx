@@ -18,6 +18,7 @@ export default async function Courses({ params }) {
     <main>
       <Breadcrumbs data={[{ page: 'Moje kursy', url: `/moje-kursy` }, { page: lesson.lesson.course.title, url: `/moje-kursy/${params.course}` }, { page: lesson.title, url: `/moje-kursy/${params.course}/${params.lesson}` }]} />
       <Content
+        course={lesson.lesson.course.slug}
         title={lesson.title}
         databaseId={lesson.databaseId}
         content={lesson.content}
@@ -32,7 +33,7 @@ export default async function Courses({ params }) {
 async function getData(params) {
   try {
     const { body: { data: { lesson } } } = await Fetch({
-      query:`
+      query: `
       query Pages($id: ID!) {
         lesson(id: $id, idType: SLUG) {
           title
