@@ -34,7 +34,7 @@ export const createCheckoutData = (order, registred) => {
     },
     customerNote: order.comment,
     shipToDifferentAddress: order.billingDifferentThanShipping,
-    paymentMethod: 'bacs',
+    paymentMethod: 'przelewy24',
     shippingMethod: null,
     transactionId: order.transactionId,
     isPaid: order.isPaid,

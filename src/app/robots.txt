@@ -8,3 +8,4 @@ Disallow: /koszyk
 Disallow: /podsumowanie
 Disallow: /zamowienie
 Disallow: /api/*
+Sitemap: https://www.psychodietmed.pl/sitemap.xml
