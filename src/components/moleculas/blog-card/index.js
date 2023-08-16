@@ -23,7 +23,7 @@ export default function Card({ className, data }) {
         ))}
       </div>
       <h3 dangerouslySetInnerHTML={{ __html: removeWrap(data.title) }} />
-      <div className={styles.excerpt} dangerouslySetInnerHTML={{ __html: removeWrap(data.excerpt) }} />
+      <div className={styles.excerpt} dangerouslySetInnerHTML={{ __html: data.excerpt }} />
       <div className={styles.button}>
         Czytaj dalej <RightArrow />
       </div>
