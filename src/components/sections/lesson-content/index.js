@@ -58,9 +58,10 @@ export default function Content({ title, chapters, content, databaseId, video, p
           ) : (
             <span />
           )}
-          <button className="link">
+          <span/>
+          {/* <button className="link">
             Ukończ lekcję
-          </button>
+          </button> */}
           {next ? (
             <Link href={next}>
               <span>Następna lekcja</span>
