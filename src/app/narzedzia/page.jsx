@@ -8,7 +8,7 @@ import Breadcrumbs from "@/components/sections/breadcrumbs"
 import { Fetch } from "../../utils/fetch-query"
 
 export async function generateMetadata() {
-  return await generetaSeo('cG9zdDo5ODE=', '/narzedzie', GET_SEO_PAGE)
+  return await generetaSeo('cG9zdDo5ODE=', '/narzedzia', GET_SEO_PAGE)
 }
 
 export default async function Media() {

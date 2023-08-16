@@ -38,7 +38,7 @@ const urlSystem = [
     url: null,
     subpages: [
       {
-        name: 'Jak działamy',
+        name: 'Jak umówić wizytę?',
         url: '/wspolpraca'
       },
       {
@@ -46,11 +46,11 @@ const urlSystem = [
         url: '/efekty-wspolpracy'
       },
       {
-        name: 'Narzędzia',
+        name: 'Zrób test',
         url: '/narzedzia'
       },
       {
-        name: 'Oferta',
+        name: 'Cennik',
         url: '/oferta'
       }
     ]

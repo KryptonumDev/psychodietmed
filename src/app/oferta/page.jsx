@@ -57,7 +57,7 @@ export default async function Shop(params) {
 
   return (
     <main>
-      <Breadcrumbs data={[{ page: 'Sklep', url: '/oferta' }]} />
+      <Breadcrumbs data={[{ page: 'Cennik', url: '/oferta' }]} />
       <Hero hero={data.heroAcademy} data={featured} />
       <Bundles data={bundles} />
       <Content prices={prices} orders={orders} productCategories={productCategories} defaultData={products} />

@@ -11,14 +11,14 @@ import Breadcrumbs from "@/components/sections/breadcrumbs"
 import { Fetch } from "../../../utils/fetch-query"
 
 export async function generateMetadata({ params }) {
-  return await generetaSeo(params.specjalista, '/o-nas', GET_SEO_SPECIALIST, 'post')
+  return await generetaSeo(params.specjalista, '', GET_SEO_SPECIALIST, 'post')
 }
 
 export default async function Specjalista({ params }) {
   const { data, faq, other } = await getData(params)
   return (
     <main className="overflow" id="main">
-      <Breadcrumbs data={[{ page: 'Specjaliści', url: '/specjalisci' }, { page: data.title, url: `/specjalisci/${params.specjalista}` }]} />
+      <Breadcrumbs data={[{ page: data.title, url: `/specjalisci/${params.specjalista}` }]} />
       <Hero data={data} />
       <Flex
         content={data.proffesional.excerpt}
