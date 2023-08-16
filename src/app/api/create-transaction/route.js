@@ -6,9 +6,15 @@ import {
   Encoding,
 } from "@ingameltd/node-przelewy24";
 import { NextResponse } from "next/server";
+import { v4 } from "uuid";
 
-export async function POST(req) {
-  const { amount, sessionId, email, id } = await req.json()
+export async function GET(req) {
+  // const { amount, sessionId, email, id } = await req.json()
+
+  const amount = 100
+  const sessionId = v4()
+  const email = 'shevabogdan16@gmail.com'
+  const id = '1'
 
   try {
     const p24 = new P24(
@@ -17,7 +23,7 @@ export async function POST(req) {
       process.env.P24_REST_API_KEY,
       process.env.P24_CRC,
       {
-        sandbox: Boolean(process.env.P24_SANDBOX)
+        sandbox: false
       }
     );
 
