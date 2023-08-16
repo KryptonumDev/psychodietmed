@@ -19,7 +19,7 @@ export default function Hero({ data: { featuredImage, title, categories, dateGmt
           <div className={styles.flex}>
             <div className={styles.categories}>
               {categories.nodes?.map((el) => (
-                <Category key={el.id} name={el.name} href={`/blog/${el.slug}`} />
+                <Category key={el.id} name={el.name} href={`/blog/?kategoria=${el.slug}`} />
               ))}
             </div>
             <div className={styles.date}>
