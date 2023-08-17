@@ -15,12 +15,12 @@ import { generetaSeo } from "../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../queries/page-seo";
 import { Fetch } from "../utils/fetch-query";
 
-// export async function generateMetadata() {
-//   return await generetaSeo('cG9zdDo5', '', GET_SEO_PAGE)
-// }
+export async function generateMetadata() {
+  return await generetaSeo('cG9zdDo5', '', GET_SEO_PAGE)
+}
 
 export default async function Home() {
-  const { academy, compare, hero, flex, specialisationsSection, activities, cta, specialists, stepsToConsultation, newsletter, ctaGray, reviews, newReviews, statistics, citate, blog, posts } = await getData()
+  const { academy, compare, hero, specialisationsSection, activities, cta, specialists, stepsToConsultation, newsletter, ctaGray, reviews, newReviews, statistics, citate, blog, posts } = await getData()
 
   const locReviews = { ...reviews }
 
@@ -404,7 +404,6 @@ async function getData() {
 
   return {
     hero: homepage.hero,
-    flex: homepage.casestudie,
     specialisationsSection: homepage.specialisations,
     cta: homepage.cta,
     stepsToConsultation: global.global.bookGlobal,
