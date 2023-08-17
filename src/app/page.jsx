@@ -1,5 +1,4 @@
 import Hero from "@/components/sections/hero-home";
-import Flex from "@/components/sections/case-studies-flex";
 import Specialisations from "@/components/sections/specialisations";
 import CallToActionTransparent from "@/components/sections/call-to-action-tranparent";
 import Specialists from "@/components/sections/specialists-slider";
@@ -38,7 +37,6 @@ export default async function Home() {
   return (
     <main className="overflow" id="main">
       <Hero data={hero} />
-      <Flex data={flex} />
       <Specialisations data={specialisationsSection} activities={activities} />
       <CallToActionTransparent data={cta} />
       <Specialists data={specialists} />
