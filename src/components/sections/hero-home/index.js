@@ -23,9 +23,9 @@ export default function Hero({ data }) {
       </div>
       <motion.div dragConstraints={constraintsRef} drag="x" className={styles.logos_wrapper}>
         {logos.map(({ logo, link }, index) => (
-          <a target="__blank" rel='noreferer noopener' href={link} aria-label="Artykuł o PsychoDietMed w zewnętrznym medium" key={index} >
+          <Link href={link} aria-label="Artykuł o PsychoDietMed w zewnętrznym medium" key={index} >
             <Image className={styles.logo} src={logo.mediaItemUrl} alt={logo.altText} width={logo.mediaDetails.width} height={logo.mediaDetails.height} />
-          </a>
+          </Link>
         ))}
       </motion.div>
     </section>
