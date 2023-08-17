@@ -82,7 +82,7 @@
       justify-content: space-between;
       margin-top: clamp(24px, calc(34vw/7.68), 48px);
       @media (min-width: 701px) {
-        min-height: clamp(200px, calc(200vw/7.68), 450px);
+        min-height: clamp(200px, calc(200vw/7.68), 350px);
       }
       .image {
         z-index: -1;
