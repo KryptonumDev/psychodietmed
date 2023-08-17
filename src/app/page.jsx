@@ -251,17 +251,6 @@ async function getData() {
               url
             }
           }
-          casestudie : sekcjaZCaseStudieKopia{
-            content
-            image {
-              altText
-              mediaItemUrl
-              mediaDetails {
-                height
-                width
-              }
-            }
-          }
           specialisations : sekcjaZSiatkaSpecjalizacjiKopia {
             text
             title
