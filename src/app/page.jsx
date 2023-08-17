@@ -15,9 +15,9 @@ import { generetaSeo } from "../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../queries/page-seo";
 import { Fetch } from "../utils/fetch-query";
 
-export async function generateMetadata() {
-  return await generetaSeo('cG9zdDo5', '', GET_SEO_PAGE)
-}
+// export async function generateMetadata() {
+//   return await generetaSeo('cG9zdDo5', '', GET_SEO_PAGE)
+// }
 
 export default async function Home() {
   const { academy, compare, hero, flex, specialisationsSection, activities, cta, specialists, stepsToConsultation, newsletter, ctaGray, reviews, newReviews, statistics, citate, blog, posts } = await getData()
@@ -247,17 +247,6 @@ async function getData() {
             link{
               title
               url
-            }
-          }
-          casestudie : sekcjaZCaseStudieKopia{
-            content
-            image {
-              altText
-              mediaItemUrl
-              mediaDetails {
-                height
-                width
-              }
             }
           }
           specialisations : sekcjaZSiatkaSpecjalizacjiKopia {
