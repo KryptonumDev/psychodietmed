@@ -26,6 +26,9 @@ export const metadata = {
     siteName: 'Psychodietmed',
     locale: 'pl-PL',
     type: 'website',
+    images: [
+      'https://psychodietmed-git-develop-kryptonum.vercel.app/opengraph-image.jpg'
+    ]
   },
   robots: {
     index: false,
