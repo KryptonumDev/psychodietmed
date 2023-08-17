@@ -1,7 +1,15 @@
-import React from "react"
+'use client'
+import React, { useContext, useEffect } from "react"
 import styles from './styles.module.scss'
+import { AppContext } from "../../../context/app-context";
 
 export default function Success() {
+  const [cart, setCart] = useContext(AppContext);
+
+  useEffect(() => {
+    setCart(null)
+  }, [])
+  
   return (
     <section className={styles.wrapper}>
       <h1>Dziękujemy za złożenie zamówienia</h1>
