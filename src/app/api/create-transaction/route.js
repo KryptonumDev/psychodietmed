@@ -8,7 +8,7 @@ import {
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  const { amount, sessionId, email, id } = await req.json()
+  const { amount, sessionId, email, urlReturn, description = 'Zamówienie z psychodietmed.pl' } = await req.json()
 
   try {
     const p24 = new P24(
@@ -25,12 +25,11 @@ export async function POST(req) {
       sessionId: sessionId,
       amount: Number(amount),
       currency: Currency.PLN,
-      description: "Zamówienie z psychodietmed.pl",
+      description: description,
       email: email,
       country: Country.Poland,
       language: Language.PL,
-      urlReturn: `http://www.psychodietmed.pl/api/complete-order/?status=success&id=${id}`, // URL address to which customer will be redirected when transaction is complete
-      urlStatus: `http://www.psychodietmed.pl/api/complete-order/?status=failed&id=${id}`, // URL address to which transaction status will be send
+      urlReturn: urlReturn, // URL address to which customer will be redirected when transaction is complete
       timeLimit: 60,
       encoding: Encoding.UTF8,
     }

@@ -1,13 +1,14 @@
-import { NextResponse } from 'next/server';
-import { v4 } from 'uuid';
+import { NextResponse } from "next/server"
 
 export async function GET(req) {
   try {
     const { searchParams } = new URL(req.url)
-    const id = searchParams.get('id')
+
+    const bookingId = searchParams.get('id')
+    const amount = searchParams.get('amount')
     const session = searchParams.get('session')
 
-    if (!id || !session) return NextResponse.redirect('https://www.psychodietmed.pl/podsumowanie?status=error')
+    if (!bookingId || !session || !amount) return NextResponse.redirect('https://www.psychodietmed.pl/podsumowanie?status=error')
 
     const transactionHeaders = new Headers();
     transactionHeaders.append("Content-Type", "application/json");
@@ -23,34 +24,32 @@ export async function GET(req) {
         if (res.data.status < 1 || res.data.status > 2)
           throw new Error('failed')
 
-        await fetch('https://psychodietmed.headlesshub.com/graphql', {
+        const headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        headers.append("X-Requested-With", "XMLHttpRequest");
+        headers.append("X-Tenant", process.env.CALENDESK_TENANT_NAME);
+        headers.append("X-Api-Key", process.env.CALENDESK_API_KEY);
+
+        var body = JSON.stringify({
+          "payment_method": "other",
+          "booking_id": bookingId,
+          "amount": amount,
+          "status": "approved",
+          "is_paid": true,
+        });
+
+        await fetch(`https://api.calendesk.com/api/admin/payments/bookings`, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Basic ${btoa(`${process.env.AUTHORISE_USERNAME}:${process.env.AUTHORISE_PASSWORD}`)}`
-          },
-          body: JSON.stringify({
-            query: `
-              mutation UPDATE_ORDER( $input: UpdateOrderInput! ) {
-                updateOrder(input: $input) {
-                  clientMutationId
-                }
-              }
-            `,
-            variables: {
-              input: {
-                clientMutationId: v4(),
-                orderId: Number(id),
-                status: "COMPLETED",
-              },
-            }
-          }),
-          cache: 'no-cache',
+          headers: headers,
+          body: body,
+          redirect: 'follow',
+          cache: 'no-cache'
         })
-          .then(result => result.json())
-          .then(result => {
-            console.log(result)
-            if (result.data?.updateOrder?.clientMutationId)
+          .then(data => data.json())
+          .then(data => {
+            console.log(data)
+
+            if (data.id && data.status === 'paid')
               throw new Error('complete')
             else
               throw new Error('error')

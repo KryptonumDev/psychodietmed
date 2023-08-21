@@ -26,7 +26,11 @@ export default async function Specjalista({ params }) {
         courses={data.proffesional.courses}
         certificates={data.proffesional.certificates}
       />
-      <Calendar code={data.proffesional.docotorCalendarCode}/>
+      <Calendar
+        name={data.title}
+        specialistId={data.proffesional.specialistId}
+        serviceId={data.proffesional.serviceId}
+      />
       {data.proffesional.reviews && (
         <Reviews data={data.proffesional.reviews} />
       )}
@@ -90,7 +94,8 @@ async function getData(params) {
             proffesion
             pacientsAge
             excerpt
-            docotorCalendarCode
+            specialistId
+            serviceId
             diploms {
               diplom
             }

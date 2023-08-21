@@ -23,8 +23,7 @@ export default function Delivery({ input, setInput, setStep, shippingMethods }) 
   const onPointCallback = (e) => {
     setInpostNumber(e)
   }
-  // TODO: validate inpost number
-  function afterPointSelected(point) { alert('Selected point: ' + point.name) }
+  
   return (
     <form onSubmit={handleSubmit(submit)} className={styles.wrapper}>
       <fieldset>
