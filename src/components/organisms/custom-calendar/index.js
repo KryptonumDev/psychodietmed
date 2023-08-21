@@ -8,10 +8,11 @@ import { CalendarTime } from "./time"
 import { CalendarSummary } from "./summary"
 import { PopUp } from "./pop-up"
 import { AnimatePresence } from "framer-motion"
+import Loader from "@/components/sections/loader"
 
 export const CustomCalendar = ({ specialistId, serviceId, name }) => {
   const fetchData = () => {
-    fetch("https://www.psychodietmed.pl/api/get-avaible-dates", {
+    fetch("http://localhost:8000/api/get-avaible-dates", {
       method: 'POST',
       body: JSON.stringify({
         employeId: specialistId,
@@ -54,53 +55,58 @@ export const CustomCalendar = ({ specialistId, serviceId, name }) => {
     }
   }, [chosenDate])
 
-  if (!data) return null
-
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.content}>
-        <h2>Umów wizytę online</h2>
-        <label className={styles.inputWrap}>
-          <span className={styles.title}>Wybrana data</span>
-          <input
-            value={inputValue}
-            placeholder="26/01/2023  |  Godzina"
-          />
-          <span className={styles.anotation}>DD/MM/YYYY</span>
-          <CalendarIcon />
-        </label>
-        <CalendarDate
-          chosenDate={chosenDate}
-          setChosenDate={setChosenDate}
-          today={today}
-          data={data}
-        />
-      </div>
-      <CalendarTime
-        chosenDate={chosenDate}
-        chosenTime={chosenTime}
-        setChosenTime={setChosenTime}
-        data={data}
-      />
-      <CalendarSummary
-        service={service}
-        chosenDate={chosenDate}
-        chosenTime={chosenTime}
-        setPopupOpened={setPopupOpened}
-      />
-      <AnimatePresence>
-        {popupOpened && (
-          <PopUp
-            service={service}
-            chosenDate={chosenDate}
-            chosenTime={chosenTime}
-            name={name}
-            setPopupOpened={setPopupOpened}
-            specialistId={specialistId}
-            serviceId={serviceId}
-          />
+    <div className={styles.box}>
+      <div className={styles.wrapper}>
+        <div className={`${styles.placehodler}`}><Loader show={!data} /></div>
+        {data && (
+          <>
+            <div className={styles.content}>
+              <h2>Umów wizytę online</h2>
+              <label className={styles.inputWrap}>
+                <span className={styles.title}>Wybrana data</span>
+                <input
+                  value={inputValue}
+                  placeholder="26/01/2023  |  Godzina"
+                />
+                <span className={styles.anotation}>DD/MM/YYYY</span>
+                <CalendarIcon />
+              </label>
+              <CalendarDate
+                chosenDate={chosenDate}
+                setChosenDate={setChosenDate}
+                today={today}
+                data={data}
+              />
+            </div>
+            <CalendarTime
+              chosenDate={chosenDate}
+              chosenTime={chosenTime}
+              setChosenTime={setChosenTime}
+              data={data}
+            />
+            <CalendarSummary
+              service={service}
+              chosenDate={chosenDate}
+              chosenTime={chosenTime}
+              setPopupOpened={setPopupOpened}
+            />
+            <AnimatePresence>
+              {popupOpened && (
+                <PopUp
+                  service={service}
+                  chosenDate={chosenDate}
+                  chosenTime={chosenTime}
+                  name={name}
+                  setPopupOpened={setPopupOpened}
+                  specialistId={specialistId}
+                  serviceId={serviceId}
+                />
+              )}
+            </AnimatePresence>
+          </>
         )}
-      </AnimatePresence>
+      </div>
     </div>
   )
 }

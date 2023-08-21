@@ -1,5 +1,4 @@
 import React from "react"
-import "./styles.css"
 import { CustomCalendar } from "@/components/organisms/custom-calendar"
 
 export default function Calendar({ name, specialistId, serviceId }) {
