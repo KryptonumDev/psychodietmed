@@ -87,6 +87,8 @@ async function getData(params) {
                 title
                 proffesional {
                   proffesion
+                  specialistId
+                  serviceId
                   personImage {
                     altText
                     mediaItemUrl

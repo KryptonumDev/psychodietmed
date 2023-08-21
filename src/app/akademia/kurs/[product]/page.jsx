@@ -114,6 +114,8 @@ async function getData(params) {
                       proffesional {
                         courseExcerpt
                         proffesion
+                        specialistId
+                        serviceId
                         avatar {
                           altText
                           mediaItemUrl

@@ -54,6 +54,8 @@ async function getData() {
           }
           proffesional {
             proffesion
+            specialistId
+            serviceId
             personImage {
               altText
               mediaItemUrl
@@ -168,6 +170,8 @@ async function getData() {
                 title
                 proffesional {
                   proffesion
+                  specialistId
+                  serviceId
                   personImage {
                     altText
                     mediaItemUrl

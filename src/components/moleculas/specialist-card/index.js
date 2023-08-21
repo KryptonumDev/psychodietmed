@@ -1,14 +1,57 @@
 'use client'
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Image } from "@/components/atoms/image";
 import styles from "./styles.module.scss";
 import Button from "@/components/atoms/button";
 import Link from "next/link";
+import dayjs from "dayjs";
+import 'dayjs/locale/pl';
+
+const days = [
+  'Pon.',
+  'Wt.',
+  'Śr.',
+  'Czw.',
+  'Pt.',
+  'Sob.',
+  'Niedz.'
+]
 
 export default function Card({ data: { specialisations, proffesional, slug, title } }) {
+
+  const fetchData = () => {
+    fetch("https://www.psychodietmed.pl/api/get-avaible-dates", {
+      method: 'POST',
+      body: JSON.stringify({
+        employeId: proffesional.specialistId,
+        serviceId: proffesional.serviceId
+      })
+    })
+      .then(response => response.json())
+      .then(({ service, dates: data }) => {
+        let arr = null
+        for (const [key, value] of Object.entries(data)) {
+          if (value.length > 0) {
+            arr = {
+              date: dayjs(key).locale('pl'),
+              hours: value
+            }
+            break
+          }
+        }
+        setDate(arr)
+      })
+  }
+
+  const [date, setDate] = useState()
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
   return (
     <div className={styles.item}>
-      <Link href={`/specjalisci/${slug}`} tabIndex={-1}  className={styles.link}/>
+      <Link href={`/specjalisci/${slug}`} tabIndex={-1} className={styles.link} />
       <div>
         <Image
           className={styles.image}
@@ -25,6 +68,14 @@ export default function Card({ data: { specialisations, proffesional, slug, titl
             return <li key={index}>{title}</li>
           })}
         </ul>
+      </div>
+      <div className={styles.flex}>
+        <p>Najbliższy termin:</p>
+        {date
+          ? <p>{days[date.date.day()]}, {date.date.format('D MMMM')} {date.hours[0]}</p>
+          : <p>Pobieram dane...</p>
+        }
+
       </div>
       <div className={styles.bottom_inform}>
         <div className={styles.flex}>

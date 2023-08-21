@@ -63,6 +63,8 @@ async function getData() {
           }
           proffesional {
             proffesion
+            specialistId
+            serviceId
             personImage {
               altText
               mediaItemUrl
