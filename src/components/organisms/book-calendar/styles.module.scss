@@ -5,6 +5,10 @@
     text-align: center;
   }
 
+  section{
+    margin-bottom: 80px;
+  }
+
   >button {
     margin: clamp(48px, calc(48vw/7.68), 64px) auto 0 auto;
   }

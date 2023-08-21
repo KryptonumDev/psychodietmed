@@ -12,7 +12,7 @@ import Loader from "@/components/sections/loader"
 
 export const CustomCalendar = ({ specialistId, serviceId, name }) => {
   const fetchData = () => {
-    fetch("http://localhost:8000/api/get-avaible-dates", {
+    fetch("https://www.psychodietmed.pl/api/get-avaible-dates", {
       method: 'POST',
       body: JSON.stringify({
         employeId: specialistId,

@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 import { A11y } from "swiper"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/scss';
-import Card from "@/components/moleculas/specialist-card";
+import Card from "@/components/moleculas/specialist-card-short";
 
 export default function Specialists({ setCurrentStep, setChosenSpecialist, chosenSpecialisations, specialists }) {
 
@@ -59,7 +59,7 @@ export default function Specialists({ setCurrentStep, setChosenSpecialist, chose
       >
         {filtredSpecialists.map((el, index) => (
           <SwiperSlide key={index}>
-            <Card onClick={() => { setChosenSpecialist(el); setCurrentStep(3) }} chosenSpecialisations={chosenSpecialisations} short={true} data={el} />
+            <Card onClick={() => { setChosenSpecialist(el); setCurrentStep(3) }} data={el} />
           </SwiperSlide>
         ))}
       </Swiper>

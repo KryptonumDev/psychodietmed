@@ -7,6 +7,14 @@
     'image info'
     'image button';
 
+  .title {
+    font-size: clamp(32rem, calc(36vw/7.68), 48rem);
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(32vw/3.7), 32rem);
+    }
+  }
+
   @media (max-width: 768px) {
     grid-template-areas:
       'image info'
@@ -37,11 +45,11 @@
 .button {
   grid-area: button;
 
-  @media (max-width: 768px){
+  @media (max-width: 768px) {
     margin-top: 24px;
   }
 
-  @media (max-width: 640px){
+  @media (max-width: 640px) {
     margin-top: 0;
   }
 }

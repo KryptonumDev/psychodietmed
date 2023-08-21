@@ -4,7 +4,7 @@ import { Image } from "@/components/atoms/image"
 import { Star } from "../../../assets/star"
 import Link from "next/link"
 
-export default function Hero({ data: { title, specialisations, proffesional: { personImage, proffesion, pacientsAge } } }) {
+export default function Hero({ h2, data: { title, specialisations, proffesional: { personImage, proffesion, pacientsAge } } }) {
   return (
     <section className={styles.wrapper}>
       <Image
@@ -17,7 +17,9 @@ export default function Hero({ data: { title, specialisations, proffesional: { p
         aspectRatio={true}
       />
       <div className={styles.info}>
-        <h1 className={styles.title}>{title}</h1>
+        {h2
+          ? <h2 className={styles.title}>{title}</h2>
+          : <h1 className={styles.title}>{title}</h1>}
         <p>{proffesion}</p>
         <div className={styles.rating}>
           <p>Średnia ocena:</p>
@@ -33,12 +35,16 @@ export default function Hero({ data: { title, specialisations, proffesional: { p
             ))}
           </div>
         </div>
-        <div className={styles.age}>
-          <p>Komu pomagam:</p>
-          <span>{pacientsAge}</span>
-        </div>
+        {!h2 && (
+          <div className={styles.age}>
+            <p>Komu pomagam:</p>
+            <span>{pacientsAge}</span>
+          </div>
+        )}
       </div>
-      <Link href='#kalendarz' className={`${styles.button} link`}>Umów wizytę online</Link>
+      {!h2 && (
+        <Link href='#kalendarz' className={`${styles.button} link`}>Umów wizytę online</Link>
+      )}
     </section>
   )
 }

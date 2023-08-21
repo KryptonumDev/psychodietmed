@@ -28,14 +28,11 @@ export default function Content({ specialists }) {
       {currentStep === 1 && (
         <Specialisations setCurrentStep={setCurrentStep} chosenSpecialisations={chosenSpecialisations} setChosenSpecialisations={setChosenSpecialisations} specializations={specializations} />
       )}
-      {/* {currentStep === 2 && (
-        <Specialists setChosenSpecialist={setChosenSpecialist} specialists={specialists} setCurrentStep={setCurrentStep} chosenSpecialisations={chosenSpecialisations} />
-      )} */}
-      {/* {currentStep === 3 && (
-        <Calendar chosenSpecialist={chosenSpecialist} />
-      )} */}
       {currentStep === 2 && (
-        <Calendar chosenSpecialist={specialists[0]} />
+        <Specialists setChosenSpecialist={setChosenSpecialist} specialists={specialists} setCurrentStep={setCurrentStep} chosenSpecialisations={chosenSpecialisations} />
+      )}
+      {currentStep === 3 && (
+        <Calendar chosenSpecialist={chosenSpecialist} />
       )}
     </div>
   )

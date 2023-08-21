@@ -3,7 +3,7 @@ import React from "react"
 import { Image } from "@/components/atoms/image";
 import styles from "./styles.module.scss";
 
-export default function Card({ onClick = () => { }, short = false, data: { specialisations, proffesional, slug, title } }) {
+export default function Card({ onClick = () => { }, data: { specialisations, proffesional, slug, title } }) {
   return (
     <button onClick={onClick} className={styles.item}>
       <div>

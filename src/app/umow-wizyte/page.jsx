@@ -35,7 +35,8 @@ async function getData() {
             }
           }
           proffesional {
-            docotorCalendarCode
+            specialistId
+            serviceId
             proffesion
             personImage {
               altText
