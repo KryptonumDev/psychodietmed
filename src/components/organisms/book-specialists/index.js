@@ -1,9 +1,12 @@
-import React, { useMemo } from "react"
+import React, { useMemo, useState } from "react"
 import styles from './styles.module.scss'
 import { A11y } from "swiper"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/scss';
 import Card from "@/components/moleculas/specialist-card-short";
+import Button from "@/components/atoms/button";
+import { PopUp } from "../custom-calendar/pop-up";
+import { AnimatePresence } from "framer-motion";
 
 export default function Specialists({ setCurrentStep, setChosenSpecialist, chosenSpecialisations, specialists }) {
 
@@ -36,6 +39,9 @@ export default function Specialists({ setCurrentStep, setChosenSpecialist, chose
 
   }, [specialists, chosenSpecialisations])
 
+  const [chosenTime, setChosenTime] = useState(null)
+  const [popupOpened, setPopupOpened] = useState(false)
+
   return (
     <section className={styles.wrapper}>
       <h1 dangerouslySetInnerHTML={{ __html: 'Wybierz <span class="underline-third">specjalistę</span>, który wesprze Cię na drodze do dobrej zmiany' }} />
@@ -47,7 +53,7 @@ export default function Specialists({ setCurrentStep, setChosenSpecialist, chose
         spaceBetween={0}
         slidesPerView={1}
         breakpoints={{
-          768: {
+          520: {
             slidesPerView: 2,
             spaceBetween: 28
           },
@@ -59,10 +65,24 @@ export default function Specialists({ setCurrentStep, setChosenSpecialist, chose
       >
         {filtredSpecialists.map((el, index) => (
           <SwiperSlide key={index}>
-            <Card onClick={() => { setChosenSpecialist(el); setCurrentStep(3) }} data={el} />
+            <Card chosenTime={chosenTime} setChosenTime={setChosenTime} onClick={() => { setChosenSpecialist(el); setCurrentStep(3) }} data={el} />
           </SwiperSlide>
         ))}
       </Swiper>
+      <Button onClick={() => { setPopupOpened(true) }} disabled={!chosenTime}>Wybieram termin</Button>
+      <AnimatePresence>
+        {popupOpened && (
+          <PopUp
+            service={chosenTime.service}
+            specialistId={chosenTime.person.proffesional.specialistId}
+            serviceId={chosenTime.person.proffesional.serviceId}
+            setPopupOpened={setPopupOpened}
+            chosenDate={chosenTime.date}
+            chosenTime={chosenTime.time}
+            name={chosenTime.person.title}
+          />
+        )}
+      </AnimatePresence>
     </section>
   )
 }

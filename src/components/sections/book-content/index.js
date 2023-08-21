@@ -2,7 +2,7 @@
 import Calendar from "@/components/organisms/book-calendar"
 import Specialisations from "@/components/organisms/book-specialisations"
 import Specialists from "@/components/organisms/book-specialists"
-import React, { useMemo, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 
 export default function Content({ specialists }) {
 
@@ -22,6 +22,10 @@ export default function Content({ specialists }) {
 
     return arr
   }, [specialists])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [currentStep])
 
   return (
     <div>

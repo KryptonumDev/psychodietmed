@@ -1,22 +1,75 @@
 'use client'
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Image } from "@/components/atoms/image";
 import styles from "./styles.module.scss";
+import dayjs from "dayjs";
+import 'dayjs/locale/pl';
+import { Clock } from "../../../assets/clock";
+import Button from "@/components/atoms/button";
 
-export default function Card({ onClick = () => { }, data: { specialisations, proffesional, slug, title } }) {
+export default function Card({ chosenTime, setChosenTime, onClick = () => { }, data }) {
+  const fetchData = () => {
+    fetch("https://www.psychodietmed.pl/api/get-avaible-dates", {
+      method: 'POST',
+      body: JSON.stringify({
+        employeId: data.proffesional.specialistId,
+        serviceId: data.proffesional.serviceId
+      })
+    })
+      .then(response => response.json())
+      .then(({ service, dates: data }) => {
+        const arr = []
+        for (const [key, value] of Object.entries(data)) {
+          if (value.length > 0 && arr.length < 2) {
+            arr.push({
+              date: dayjs(key).locale('pl'),
+              hours: value
+            })
+          } else if (arr.length === 2) {
+            break
+          }
+        }
+        setDates(arr)
+        setService(service)
+        setLoading(false)
+      })
+  }
+
+  const [dates, setDates] = useState()
+  const [loading, setLoading] = useState(false)
+  const [service, setService] = useState()
+
+  useEffect(() => {
+    setLoading(true)
+    fetchData()
+  }, [])
+
   return (
-    <button onClick={onClick} className={styles.item}>
+    <div className={styles.item}>
       <div>
         <Image
           className={styles.image}
-          src={proffesional?.personImage?.mediaItemUrl}
-          alt={proffesional?.personImage?.altText}
-          width={proffesional?.personImage.mediaDetails.width}
-          height={proffesional?.personImage.mediaDetails.height}
+          src={data.proffesional?.personImage?.mediaItemUrl}
+          alt={data.proffesional?.personImage?.altText}
+          width={data.proffesional?.personImage.mediaDetails.width}
+          height={data.proffesional?.personImage.mediaDetails.height}
         />
-        <h3>{title}</h3>
-        <p>{proffesional?.proffesion}</p>
+        <h3>{data.title}</h3>
+        <p>{data.proffesional?.proffesion}</p>
       </div>
-    </button>
+      <div className={styles.dates}>
+        <p className={styles.title}>Najbliższe terminy</p>
+        <div className={styles.buttons}>
+          {dates?.map(el => (
+            <button onClick={() => { setChosenTime({ service: service, person: data, date: el.date, time: el.hours[0] }) }} key={el.date} className={(chosenTime?.person.title === data.title && chosenTime?.date === el.date) ? styles.active : ''}>
+              <p>{el.date.format('DD MMMM')}</p>
+              <p><Clock />{el.hours[0]}</p>
+            </button>
+          ))}
+          {loading && <p>Pobieram dane...</p>}
+        </div>
+        <Button onClick={onClick} className={styles.button} theme="secondary" >Więcej terminów</Button>
+      </div>
+    </div>
   )
 }

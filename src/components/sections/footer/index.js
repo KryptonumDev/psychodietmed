@@ -70,7 +70,7 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.content}>
-        <Link href="/" aria-label="Strona główna">
+        <Link className={styles.logolink} href="/" aria-label="Strona główna">
           <Logo className={styles.logo} />
         </Link>
         <div className={styles.links}>

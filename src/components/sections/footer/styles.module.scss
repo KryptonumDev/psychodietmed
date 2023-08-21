@@ -32,6 +32,12 @@
   }
 }
 
+.logolink{
+  &::before {
+    display: none !important;
+  }
+}
+
 .inform {
   margin-top: 64px;
   display: flex;
