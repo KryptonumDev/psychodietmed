@@ -14,19 +14,19 @@
   &.card-1{
     border-radius: 20px;
     background: var(--secondary-500);
-    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+    // box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
   }
 
   &.card-2{
     border-radius: 20px;
     background: #F1F6FB;
-    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+    // box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
   }
 
   &.card-3{
     border-radius: 20px;
     background: var(--primary-800);
-    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+    // box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
 
     p{
       color: #fff;
@@ -37,6 +37,6 @@
     border-radius: 20px;
     border: 2px solid var(--secondary-500);
     background: #FFF;
-    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+    // box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
   }
 }

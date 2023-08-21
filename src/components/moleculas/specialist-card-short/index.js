@@ -66,7 +66,7 @@ export default function Card({ chosenTime, setChosenTime, onClick = () => { }, d
               <p><Clock />{el.hours[0]}</p>
             </button>
           ))}
-          {loading && <p>Pobieram dane...</p>}
+          {loading && <p>Pobieramy dane...</p>}
         </div>
         <Button onClick={onClick} className={styles.button} theme="secondary" >Więcej terminów</Button>
       </div>

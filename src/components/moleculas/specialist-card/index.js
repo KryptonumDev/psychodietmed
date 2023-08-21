@@ -73,7 +73,7 @@ export default function Card({ data: { specialisations, proffesional, slug, titl
         <p>Najbliższy termin:</p>
         {date
           ? <p>{days[date.date.day()]}, {date.date.format('D MMMM')} {date.hours[0]}</p>
-          : <p>Pobieram dane...</p>
+          : <p>Pobieramy dane...</p>
         }
 
       </div>
