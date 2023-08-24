@@ -10,7 +10,7 @@ import { PopUp } from "./pop-up"
 import { AnimatePresence } from "framer-motion"
 import Loader from "@/components/sections/loader"
 
-export const CustomCalendar = ({ specialistId, serviceId, name }) => {
+export const CustomCalendar = ({ specialistId, serviceId, specialistData }) => {
   const fetchData = () => {
     fetch("https://www.psychodietmed.pl/api/get-avaible-dates", {
       method: 'POST',
@@ -97,7 +97,7 @@ export const CustomCalendar = ({ specialistId, serviceId, name }) => {
                   service={service}
                   chosenDate={chosenDate}
                   chosenTime={chosenTime}
-                  name={name}
+                  specialistData={specialistData}
                   setPopupOpened={setPopupOpened}
                   specialistId={specialistId}
                   serviceId={serviceId}

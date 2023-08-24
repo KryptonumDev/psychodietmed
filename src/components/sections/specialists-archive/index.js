@@ -114,7 +114,7 @@ export default function Content({ data }) {
             setPopupOpened={setPopupOpened}
             chosenDate={chosenTime.date}
             chosenTime={chosenTime.time}
-            name={chosenTime.person.title}
+            specialistData={chosenTime.person}
           />
         )}
       </AnimatePresence>

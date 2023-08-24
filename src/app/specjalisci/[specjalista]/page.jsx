@@ -27,7 +27,7 @@ export default async function Specjalista({ params }) {
         certificates={data.proffesional.certificates}
       />
       <Calendar
-        name={data.title}
+        data={data}
         specialistId={data.proffesional.specialistId}
         serviceId={data.proffesional.serviceId}
       />
