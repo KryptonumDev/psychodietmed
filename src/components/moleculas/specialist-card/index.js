@@ -80,7 +80,7 @@ export default function Card({ data: { specialisations, proffesional, slug, titl
       <div className={styles.bottom_inform}>
         <div className={styles.flex}>
           <Button href='/umow-wizyte'>Umów wizytę</Button>
-          <Button theme="secondary" href={`/specjalisci/${slug}`}>Więcej terminów</Button>
+          <Button theme="secondary" href={`/specjalisci/${slug}#kalendarz`}>Więcej terminów</Button>
         </div>
       </div>
     </div>

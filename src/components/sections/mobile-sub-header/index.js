@@ -9,8 +9,8 @@ export default function SubHeader() {
   const [cart] = useContext(AppContext);
   return (
     <aside className={styles.wrapper}>
-      <Link className={`${styles.link} link`} href='mailto: biuro@psychodietmed.pl'>
-        Skontaktuj się!
+      <Link className={`${styles.link} link`} href='/umow-wizyte'>
+        Umów się!
       </Link>
       <Cart
         cart={cart?.totalProductsCount}

@@ -50,8 +50,8 @@ export const CalendarDate = ({ data, today, setChosenDate, chosenDate }) => {
       return currentDate.set('date', i + 1)
     })
 
-    const firstWeekDay = currentDate.get('day')
-
+    const firstWeekDay = 1
+    
     const previousMonthFillArray = Array.from({
       length: firstWeekDay,
     })

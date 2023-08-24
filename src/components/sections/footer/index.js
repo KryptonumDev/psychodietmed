@@ -33,6 +33,10 @@ const urlSystem = [
     url: null,
     subpages: [
       {
+        name: 'Specjaliści',
+        url: '/specjalisci'
+      },
+      {
         name: 'Jak umówić wizytę?',
         url: '/wspolpraca'
       },

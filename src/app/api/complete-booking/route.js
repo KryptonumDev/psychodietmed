@@ -63,5 +63,5 @@ export async function GET(req) {
       return NextResponse.redirect('https://www.psychodietmed.pl/podsumowanie?status=failed')
     else
       return NextResponse.redirect('https://www.psychodietmed.pl/podsumowanie?status=error')
-  }
+   }
 }

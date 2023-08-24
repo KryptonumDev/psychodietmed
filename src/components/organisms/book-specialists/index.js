@@ -70,7 +70,7 @@ export default function Specialists({ setCurrentStep, setChosenSpecialist, chose
         ))}
       </Swiper>
       <Button onClick={() => { setPopupOpened(true) }} disabled={!chosenTime}>Wybieram termin</Button>
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {popupOpened && (
           <PopUp
             service={chosenTime.service}

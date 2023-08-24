@@ -18,7 +18,7 @@ export default async function Specjalista({ params }) {
   const { data, faq, other } = await getData(params)
   return (
     <main className="overflow" id="main">
-      <Breadcrumbs data={[{ page: data.title, url: `/specjalisci/${params.specjalista}` }]} />
+      <Breadcrumbs data={[{ page: 'Specjaliści', url: `/specjalisci` }, { page: data.title, url: `/specjalisci/${params.specjalista}` }]} />
       <Hero data={data} />
       <Flex
         content={data.proffesional.excerpt}
