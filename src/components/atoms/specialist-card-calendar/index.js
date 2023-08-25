@@ -118,7 +118,7 @@ export default function Calendar({ service, clickDate, dates, data }) {
           {parsedDates.map(({ date, hours }, index) => {
             if (chosenIndexes.includes(index)) {
               return (
-                <div>
+                <div key={index + hours[0] + date.format('DD-MM-YYYY')}>
                   <div className={styles.title}>
                     <strong>{(() => {
                       if (date.format('DD MM YYYY') === dayjs().format('DD MM YYYY'))
@@ -131,12 +131,12 @@ export default function Calendar({ service, clickDate, dates, data }) {
                     {hours.map(({ hour, avaible }) => {
                       if (avaible)
                         return (
-                          <button onClick={() => { clickDate(date, hour, data, service) }} className={styles.hour}>
+                          <button key={hour + avaible} onClick={() => { clickDate(date, hour, data, service) }} className={styles.hour}>
                             {hour}
                           </button>
                         )
 
-                      return <span>-</span>
+                      return <span key={hour + avaible} >-</span>
                     })}
                   </div>
                 </div>
@@ -162,13 +162,13 @@ export default function Calendar({ service, clickDate, dates, data }) {
           {firstDay.hours.map((el, index) => {
             if (index > 1) return null
             return (
-              <button onClick={() => { clickDate(firstDay.date, el, data, service) }} className={styles.hour}>
+              <button key={index} onClick={() => { clickDate(firstDay.date, el, data, service) }} className={styles.hour}>
                 {el}
               </button>
             )
           })}
           <Link className={styles.hour} href={`/specjalisci/${data.slug}#kalendarz`}>
-            więcej <AngleRight/>
+            więcej <AngleRight />
           </Link>
         </div>
       </div>
