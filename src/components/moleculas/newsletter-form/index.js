@@ -5,6 +5,7 @@ import styles from './styles.module.scss'
 import { emailPattern } from "../../../constants/patterns";
 import { NEWSLETTER_GROUPID } from "../../../constants/mailerLite";
 import Button from "@/components/atoms/button";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Form({ consent, sentStatus, setSentStatus }) {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -20,17 +21,17 @@ export default function Form({ consent, sentStatus, setSentStatus }) {
         group_id: NEWSLETTER_GROUPID
       }),
     })
-    .then(response => response.json())
-    .then(response => {
-      if(response.success){
-        setSentStatus(prevStatus => ({ ...prevStatus, success: true }));
-      } else {
+      .then(response => response.json())
+      .then(response => {
+        if (response.success) {
+          setSentStatus(prevStatus => ({ ...prevStatus, success: true }));
+        } else {
+          setSentStatus(prevStatus => ({ ...prevStatus, success: false }));
+        }
+      })
+      .catch(() => {
         setSentStatus(prevStatus => ({ ...prevStatus, success: false }));
-      }
-    })
-    .catch(() => {
-      setSentStatus(prevStatus => ({ ...prevStatus, success: false }));
-    })
+      })
   }
 
   return (
@@ -43,15 +44,19 @@ export default function Form({ consent, sentStatus, setSentStatus }) {
       <label>
         <span>Adres e-mail</span>
         <input {...register("email", { required: true, pattern: emailPattern })} />
-        {errors.email && <div className={styles.error}>Proszę poprawnie uzupełnić to pole</div>}
+        <AnimatePresence mode="wait">
+          {errors.email && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className={styles.error}>Proszę poprawnie uzupełnić to pole</motion.div>}
+        </AnimatePresence>
       </label>
       <label className={styles.check}>
         <input type="checkbox" {...register("check", { required: true })} />
         <span />
         <div dangerouslySetInnerHTML={{ __html: consent }} />
-        {errors.check && <div className={styles.error}>
-          Proszę zaakceptować politykę prywatności
-        </div>}
+        <AnimatePresence mode="wait">
+          {errors.check && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className={styles.error}>
+            Proszę zaakceptować politykę prywatności
+          </motion.div>}
+        </AnimatePresence>
       </label>
       <Button type="submit" disabled={sentStatus.sent && sentStatus.success === undefined}>Zapisz się</Button>
     </form>

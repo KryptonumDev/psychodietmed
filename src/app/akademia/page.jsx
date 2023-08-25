@@ -5,20 +5,32 @@ import Recruitment from "@/components/sections/team-recruitment";
 import { cookies } from "next/headers";
 import Breadcrumbs from "@/components/sections/breadcrumbs";
 import { Fetch } from "../../utils/fetch-query";
+import Newsletter from "@/components/sections/newsletter";
+import Owner from "@/components/sections/team-owner";
+import GridTextImagePlates from "@/components/organisms/grid-text-image-plates";
+import TwoColumnFlex from "@/components/sections/two-column-flex";
+import Hero from "@/components/sections/hero-academy";
+import Featured from "@/components/sections/academy-featured";
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDoyMDM3', '/akademia', GET_SEO_PAGE)
 }
 
 export default async function Courses() {
-  const { courses, page, ebooks } = await getData()
+  const { newsletter, courses, page, ebooks } = await getData()
   const { user } = await getUser()
 
   return (
     <main className="overflow">
       <Breadcrumbs data={[{ page: 'Akademia', url: `/akademia` }]} />
-      <Grid user={user} courses={courses} ebooks={ebooks}/>
+      <Hero data={page.akademia.heroAcademy}/>
+      <Featured user={user} post={courses.nodes[0]} data={page.akademia.featuredAcademy} />
+      <Grid user={user} courses={courses} ebooks={ebooks} />
+      <GridTextImagePlates grid={page.akademia.gridAcademy} />
+      <TwoColumnFlex data={page.akademia.flexAcademy}/>
+      <Owner data={page.akademia.ownerAcademy} />
       <Recruitment data={page.akademia.specialistGridTeam} />
+      <Newsletter data={newsletter} />
     </main>
   )
 }
@@ -58,11 +70,118 @@ async function getUser() {
 
 async function getData() {
   try {
-    const { body: { data: { page, courses, ebooks } } } = await Fetch({
+    const { body: { data: { global, page, courses, ebooks } } } = await Fetch({
       query: `
       query Pages {
+        global : page(id: "cG9zdDo3Nzk=") {
+          id
+          global {
+            newsletterGlobal{
+              title
+              text
+              consent
+            }
+          }
+        }
         page(id: "cG9zdDoyMDM3"){
           akademia {
+            heroAcademy : heroAkademia{
+              content
+              grid{
+                text
+                icon{
+                  altText
+                  mediaItemUrl
+                  mediaDetails{
+                    height
+                    width
+                  }
+                }
+              }
+              image{
+                altText
+                mediaItemUrl
+                mediaDetails{
+                  height
+                  width
+                }
+              }
+            }
+            featuredAcademy{
+              content
+            }
+            flexAcademy{
+              content
+              link{
+                url
+                title
+              }
+              image{
+                altText
+                mediaItemUrl
+                mediaDetails{
+                  height
+                  width
+                }
+              }
+            }
+            gridAcademy{
+              content
+              image{
+                altText
+                mediaItemUrl
+                mediaDetails{
+                  height
+                  width
+                }
+              }
+            }
+            ownerAcademy{
+              title
+              text
+              link{
+                title
+                url
+              }
+              repeater{
+                text
+                icon{
+                  altText
+                  mediaItemUrl
+                  mediaDetails {
+                    height
+                    width
+                  }
+                }
+              }
+              image{
+                altText
+                mediaItemUrl
+                mediaDetails {
+                  height
+                  width
+                }
+              }
+              owner {
+                ... on Specjalista {
+                  id
+                  title
+                  proffesional {
+                    proffesion
+                    specialistId
+                    serviceId
+                    personImage {
+                      altText
+                      mediaItemUrl
+                      mediaDetails {
+                        height
+                        width
+                      }
+                    }
+                  }
+                }
+              }
+            }
             specialistGridTeam{
               title
               text
@@ -189,7 +308,8 @@ async function getData() {
     return {
       courses: courses,
       page: page,
-      ebooks: ebooks
+      ebooks: ebooks,
+      newsletter: global.global.newsletterGlobal
     }
   } catch (err) {
     throw new Error(err)

@@ -1,0 +1,16 @@
+.wrapper{
+  h2{
+    font-size: clamp(32rem, calc(36vw / 7.68), 48rem);
+    margin-bottom: clamp(20px, calc(28vw/7.68), 36px);
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(32vw / 3.7), 32rem);
+    }
+  }
+
+  .text{
+    text-align: center;
+    max-width: 840px;
+    margin: 0 auto clamp(36px, calc(48vw/7.68), 128px) auto;
+  }
+}

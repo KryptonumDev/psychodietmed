@@ -1,6 +1,7 @@
 import React from "react"
 import styles from "./styles.module.scss"
 import { Image } from "@/components/atoms/image"
+import GridTextImagePlates from "@/components/organisms/grid-text-image-plates"
 
 export default function TwoColumnFlexWithGrid({ data: { content, image, gridKafelkow } }) {
   return (
@@ -11,14 +12,7 @@ export default function TwoColumnFlexWithGrid({ data: { content, image, gridKafe
           <div className={styles.text} dangerouslySetInnerHTML={{ __html: content }} />
         </div>
       </div>
-      <div className={styles.grid}>
-        {gridKafelkow.map((item, index) => (
-          <div key={index} className={styles.item}>
-            <div className={styles.text} dangerouslySetInnerHTML={{ __html: item.content }} />
-            <Image className={styles.image} src={item.image.mediaItemUrl} alt={item.image.altText} width={item.image.mediaDetails.width} height={item.image.mediaDetails.height} />
-          </div>
-        ))}
-      </div>
+      <GridTextImagePlates grid={gridKafelkow}/>
     </section>
   )
 }

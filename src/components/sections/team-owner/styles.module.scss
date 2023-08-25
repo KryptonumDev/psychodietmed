@@ -31,6 +31,7 @@
       .image {
         width: 100% !important;
         height: 100% !important;
+        min-height: 350px;
 
         img{
           border-radius: 16px;
@@ -69,6 +70,17 @@
         margin-top: 20px;
         display: flex;
         gap: 6px;
+        
+        .icon{
+          width: 100% !important;
+          max-width: 22px !important;
+          height: fit-content !important;
+        }
+
+        span{
+          margin-top: 1px;
+          font-size: 18rem;
+        }
 
         &:first-child {
           margin-top: 28px;
@@ -87,4 +99,8 @@
       }
     }
   }
+}
+
+.text + a{
+  margin-top: 36px; 
 }

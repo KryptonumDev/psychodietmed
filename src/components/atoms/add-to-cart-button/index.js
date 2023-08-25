@@ -8,7 +8,7 @@ import { getFormattedCart } from "../../../utils/get-formatted-cart";
 import ADD_TO_CART from "../../../mutations/add-to-cart";
 import { useMutation } from "@apollo/client";
 
-export default function AddToCart({ chosenAddon, variationId, quantity, product }) {
+export default function AddToCart({ children, chosenAddon, variationId, quantity, product }) {
 
   const addons = chosenAddon ? {
     fieldName: { fieldName: chosenAddon?.name },
@@ -69,7 +69,7 @@ export default function AddToCart({ chosenAddon, variationId, quantity, product 
           onClick={handleAddToCartClick}
           style={{ position: "relative", zIndex: 3 }}
         >
-          {addToCartLoading ? 'Dodaje do koszyka...' : 'Dodaj do koszyka'}
+          {addToCartLoading ? 'Dodaje do koszyka...' : children ? children : 'Dodaj do koszyka'}
         </button>
       )}
     </div>

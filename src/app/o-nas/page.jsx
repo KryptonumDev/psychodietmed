@@ -156,6 +156,21 @@ async function getData() {
           ownerTeam{
             title
             text
+            link{
+              title
+              url
+            }
+            repeater{
+              text
+              icon{
+                altText
+                mediaItemUrl
+                mediaDetails {
+                  height
+                  width
+                }
+              }
+            }
             image{
               altText
               mediaItemUrl
@@ -179,9 +194,6 @@ async function getData() {
                       height
                       width
                     }
-                  }
-                  diploms {
-                    diplom
                   }
                 }
               }
