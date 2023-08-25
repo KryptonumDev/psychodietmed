@@ -8,6 +8,8 @@ import { AppProvider } from '../context/app-context'
 import SubHeader from '@/components/sections/mobile-sub-header'
 import { ApolloWrapper } from '../context/apolo-provider'
 import GlobalScript from '../utils/global.js';
+// import { Suspense } from 'react'
+// import { FacebookPixelEvents } from '../context/facebook-pixel'
 
 const Satoshi = localFont({
   src: '../assets/fonts/satoshi.woff2',
@@ -50,6 +52,10 @@ export default function RootLayout({ children }) {
           </AppProvider>
         </ApolloWrapper>
         <GlobalScript />
+        {/* <Suspense fallback={null}>
+          <FacebookPixelEvents fb_id={''} />
+        </Suspense> */}
+        {/* <GoogleAnalytics ga_id={''} /> */}
       </body>
     </html>
   )

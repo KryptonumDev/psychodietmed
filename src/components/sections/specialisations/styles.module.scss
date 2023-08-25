@@ -61,7 +61,9 @@
     }
 
     @media (max-width: 640px) {
-      min-height: 130px;
+      >div{
+        align-items: center;
+      }
     }
   }
 

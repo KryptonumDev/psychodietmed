@@ -37,7 +37,7 @@ export default function StepsToConsultation({ data, specialists }) {
       <div className={styles.grid}>
         <Image aspectRatio={true} className={styles.image} src={image.mediaItemUrl} alt={image.altText} width={image.mediaDetails.width} height={image.mediaDetails.height} />
         <div className={styles.sub_grid}>
-          <details open={step === 1} className={styles.item} style={step > 1 ? { cursor: 'pointer' } : {}}>
+          <details open={step === 1} className={styles.item} style={step !== 1 ? { cursor: 'pointer' } : {}}>
             <summary onClick={(e) => { detailsClickHandler(e, 1) }}  className={styles.step_flex}>
               <span className={styles.step_number}>01</span>
               <h3 className={styles.step_title}>{titleFirst}</h3>
@@ -70,7 +70,7 @@ export default function StepsToConsultation({ data, specialists }) {
               )}
             </AnimatePresence>
           </details>
-          <details open={step === 2} className={styles.item} style={step > 2 ? { cursor: 'pointer' } : {}}>
+          <details open={step === 2} className={styles.item} style={(step !== 2 && chosenIllnes) ? { cursor: 'pointer' } : {}}>
             <summary onClick={(e) => { detailsClickHandler(e, 2) }}  className={styles.step_flex}>
               <span className={styles.step_number}>02</span>
               <h3 className={styles.step_title}>{titleSecond}</h3>
@@ -120,7 +120,7 @@ export default function StepsToConsultation({ data, specialists }) {
               )}
             </AnimatePresence>
           </details>
-          <details open={step === 3} className={styles.item}>
+          <details open={step === 3} className={styles.item} style={(step !== 3 && chosenSpecialist) ? { cursor: 'pointer' } : {}}>
             <summary onClick={(e) => { detailsClickHandler(e, 3) }} className={styles.step_flex}>
               <span className={styles.step_number}>03</span>
               <h3 className={styles.step_title}>{titleThird}</h3>
@@ -137,7 +137,7 @@ export default function StepsToConsultation({ data, specialists }) {
                   <div />
                   <div>
                     <div className={styles.text} dangerouslySetInnerHTML={{ __html: textThird }} />
-                    <Link className="link" href={chosenSpecialist ? `/specjalisci/${chosenSpecialist?.slug}` : '/kontakt'}>Umów wizytę</Link>
+                    <Link className="link" href={chosenSpecialist ? `/specjalisci/${chosenSpecialist?.slug}#kalendarz` : '/umow-wizyte'}>Umów wizytę</Link>
                   </div>
                 </motion.div>
               )}

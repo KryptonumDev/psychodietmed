@@ -261,7 +261,7 @@
 
   .rightSecond {
     grid-area: rightSecond;
-    background: #E5BFC6;
+    background: #deafb8;
 
     .flex {
       display: flex;
@@ -289,7 +289,7 @@
       }
 
       &:nth-child(3) {
-        background: #E5BFC6;
+        background: #deafb8;
         margin-left: calc(-2 * clamp(3px, calc(3vw/7.68), 14px));
       }
     }

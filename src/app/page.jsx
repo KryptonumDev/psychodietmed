@@ -9,8 +9,8 @@ import Citate from "@/components/sections/citate";
 import OtherPosts from "@/components/sections/other-posts";
 import Newsletter from "@/components/sections/newsletter";
 import StepsToConsultation from "@/components/sections/steps-to-consultation";
-import Compare from "@/components/sections/pdm-compare";
-import Academy from "@/components/sections/academy";
+// import Compare from "@/components/sections/pdm-compare";
+// import Academy from "@/components/sections/academy";
 import { generetaSeo } from "../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../queries/page-seo";
 import { Fetch } from "../utils/fetch-query";
@@ -41,12 +41,12 @@ export default async function Home() {
       <CallToActionTransparent data={cta} />
       <Specialists data={specialists} />
       <StepsToConsultation data={stepsToConsultation} specialists={specialists} />
-      <Compare data={compare} />
+      {/* <Compare data={compare} /> */}
       <ReviewsSlider data={locReviews} />
       <CallToActionGray data={ctaGray} />
       <StatisticsFlex data={statistics} />
       <Citate data={citate} />
-      <Academy data={academy} />
+      {/* <Academy data={academy} /> */}
       <OtherPosts data={posts} title={blog.title} text={blog.text} />
       <Newsletter data={newsletter} />
     </main>

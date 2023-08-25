@@ -24,7 +24,6 @@ export default function Specialisations({ data: { text, title }, activities }) {
                 <Image className={styles.icon} src={specialisationCard.icon.mediaItemUrl} alt={specialisationCard.icon.altText} width={specialisationCard.icon.mediaDetails.width} height={specialisationCard.icon.mediaDetails.height} />
                 <div>
                   <h3>{title}</h3>
-                  <p>{specialisationCard.zajawkaSpecjalizacji}</p>
                 </div>
               </div>
               <RightArrow />
@@ -37,7 +36,6 @@ export default function Specialisations({ data: { text, title }, activities }) {
                 <Image className={styles.icon} src={specialisationCard.icon.mediaItemUrl} alt={specialisationCard.icon.altText} width={specialisationCard.icon.mediaDetails.width} height={specialisationCard.icon.mediaDetails.height} />
                 <div>
                   <h3>{title}</h3>
-                  <p>{specialisationCard.zajawkaSpecjalizacji}</p>
                 </div>
               </div>
             </div>
