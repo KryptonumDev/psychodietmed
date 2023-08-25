@@ -7,7 +7,7 @@ import 'dayjs/locale/pl';
 import { Clock } from "../../../assets/clock";
 import Button from "@/components/atoms/button";
 
-export default function Card({ chosenTime, setChosenTime, onClick = () => { }, data }) {
+export default function Card({ chosenTime, setChosenTime, data }) {
   const fetchData = () => {
     fetch("https://www.psychodietmed.pl/api/get-avaible-dates", {
       method: 'POST',
@@ -68,7 +68,7 @@ export default function Card({ chosenTime, setChosenTime, onClick = () => { }, d
           ))}
           {loading && <p>Pobieramy dane...</p>}
         </div>
-        <Button onClick={onClick} className={styles.button} theme="secondary" >Więcej terminów</Button>
+        <Button href={`/specjalisci/${data.slug}#kalendarz`} className={styles.button} theme="secondary" >Więcej terminów</Button>
       </div>
     </div>
   )

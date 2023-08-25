@@ -8,7 +8,7 @@ import Button from "@/components/atoms/button";
 import { PopUp } from "../custom-calendar/pop-up";
 import { AnimatePresence } from "framer-motion";
 
-export default function Specialists({ setCurrentStep, setChosenSpecialist, chosenSpecialisations, specialists }) {
+export default function Specialists({ chosenSpecialisations, specialists }) {
 
 
   const filtredSpecialists = useMemo(() => {
@@ -65,7 +65,7 @@ export default function Specialists({ setCurrentStep, setChosenSpecialist, chose
       >
         {filtredSpecialists.map((el, index) => (
           <SwiperSlide key={index}>
-            <Card chosenTime={chosenTime} setChosenTime={setChosenTime} onClick={() => { setChosenSpecialist(el); setCurrentStep(3) }} data={el} />
+            <Card chosenTime={chosenTime} setChosenTime={setChosenTime} data={el} />
           </SwiperSlide>
         ))}
       </Swiper>
