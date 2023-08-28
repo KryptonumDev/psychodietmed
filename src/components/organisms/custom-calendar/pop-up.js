@@ -1,5 +1,5 @@
 'use client'
-import React from "react"
+import React, { useEffect } from "react"
 import styles from './styles.module.scss'
 import Input from "@/components/atoms/input"
 import { useForm } from "react-hook-form"
@@ -33,7 +33,6 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
     })
       .then(response => response.json())
       .then(res => {
-        debugger
         const session = v4()
         fetch("https://psychodietmed-git-develop-kryptonum.vercel.app/api/create-transaction", {
           method: 'POST',
@@ -60,6 +59,19 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
         console.log(err)
       })
   }
+
+  useEffect(() => {
+    const escFunction = (event) => {
+      if (event.keyCode === 27) {
+        setPopupOpened(false)
+      }
+    }
+    document.addEventListener("keydown", escFunction, false)
+
+    return () => {
+      document.removeEventListener("keydown", escFunction, false)
+    }
+  }, [setPopupOpened])
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className={styles.popup}>

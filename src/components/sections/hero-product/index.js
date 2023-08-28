@@ -42,37 +42,40 @@ export default function Hero({ data: { addons, variations, productId, title, des
         <h1 dangerouslySetInnerHTML={{ __html: removeWrap(title) }} />
         <div dangerouslySetInnerHTML={{ __html: description }} />
 
-        <div className={styles.variables}>
-          {addons?.map((el, index) => (
-            <div key={index} className={styles.group}>
-              {el.options.map(inEl => (
-                <label key={inEl.label}>
-                  <input checked={chosenAddon?.val === inEl.label} onClick={(e) => { handleAddonClick(e, { name: el.fieldName, val: inEl.label, price: inEl.price }) }} type="radio" name={el.name} value={inEl.label} />
+        {addons?.length > 0 && (
+          <div className={styles.variables}>
+            {addons?.map((el, index) => (
+              <div key={index} className={styles.group}>
+                {el.options.map(inEl => (
+                  <label key={inEl.label}>
+                    <input checked={chosenAddon?.val === inEl.label} onClick={(e) => { handleAddonClick(e, { name: el.fieldName, val: inEl.label, price: inEl.price }) }} type="radio" name={el.name} value={inEl.label} />
+                    <span className={styles.checkbox} />
+                    <span>
+                      {inEl.label} <small>+&nbsp;{inEl.price}&nbsp;zł</small>
+                    </span>
+                  </label>
+                ))}
+              </div>
+            ))}
+          </div>
+        )}
+        {variations?.nodes?.length > 0 && (
+          <div className={styles.variables}>
+            {variations?.nodes?.map((el, index) => (
+              <div key={index} className={styles.group}>
+                <label key={index}>
+                  <input defaultChecked={chosenVariation?.productId === el.productId} onChange={() => { setChosenVariation(el) }} type="radio" name={title} value={el.productId} />
                   <span className={styles.checkbox} />
                   <span>
-                    {inEl.label} <small>+&nbsp;{inEl.price}&nbsp;zł</small>
+                    {el.attributes.nodes.map((option, index) => (
+                      <React.Fragment key={index}>{option.value}{index + 1 < el.attributes.nodes.length ? ', ' : ''}</React.Fragment>
+                    ))}
                   </span>
                 </label>
-              ))}
-            </div>
-          ))}
-        </div>
-
-        <div className={styles.variables}>
-          {variations?.nodes?.map((el, index) => (
-            <div key={index} className={styles.group}>
-              <label key={index}>
-                <input defaultChecked={chosenVariation?.productId === el.productId} onChange={() => { setChosenVariation(el) }} type="radio" name={title} value={el.productId} />
-                <span className={styles.checkbox} />
-                <span>
-                  {el.attributes.nodes.map((option, index) => (
-                    <React.Fragment key={index}>{option.value}{index + 1 < el.attributes.nodes.length ? ', ' : ''}</React.Fragment>
-                  ))}
-                </span>
-              </label>
-            </div>
-          ))}
-        </div>
+              </div>
+            ))}
+          </div>
+        )}
         <div className={styles.flex}>
           <div className={styles.qtyWrap}>
             <p>Ilość produktów:</p>
@@ -81,7 +84,7 @@ export default function Hero({ data: { addons, variations, productId, title, des
                 <Minus />
               </button>
               <input
-                disabled={true}
+                readOnly={true}
                 value={productCount}
                 min="1"
                 onChange={(event) => handleQtyChange(event, item.cartKey)}

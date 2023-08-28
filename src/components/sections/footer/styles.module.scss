@@ -11,6 +11,8 @@
   a {
     width: fit-content;
     position: relative;
+    font-size: clamp(20rem, calc(20vw/7.68), 24rem);
+
     &::before {
       content: '';
       position: absolute;
@@ -26,13 +28,43 @@
       transform-origin: left;
       transition: transform .4s var(--easing);
     }
+
     &:hover::before {
       transform: scaleX(1);
     }
   }
 }
 
-.logolink{
+.left {
+  display: flex;
+  gap: 28px;
+  flex-direction: column;
+  justify-content: space-between;
+
+  p{
+    font-size: clamp(20rem, calc(20vw/7.68), 24rem);
+  }
+
+  .phone {
+    a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 20px;
+
+      span {
+        font-size: clamp(20rem, calc(20vw/7.68), 24rem);
+      }
+
+      svg{
+        width: clamp(19px, calc(27vw/7.68), 27px);
+        height: auto;
+      }
+    }
+  }
+}
+
+.logolink {
   &::before {
     display: none !important;
   }
@@ -45,9 +77,11 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+
   h3 a {
     font-weight: 600;
   }
+
   h3,
   a {
     font-weight: 500;
@@ -58,10 +92,12 @@
     @media (max-width: 480px) {
       line-height: 140%;
     }
+
     @media (max-width: 370px) {
       font-size: clamp(0rem, calc(20vw/3.7), 20rem);
     }
   }
+
   a {
     &::before {
       bottom: -5px;
@@ -92,10 +128,12 @@
   svg {
     transition: fill .3s;
   }
+
   a {
     &::before {
       display: none;
     }
+
     &:hover {
       svg {
         fill: var(--secondary-600);
@@ -108,7 +146,6 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  align-items: flex-start;
   gap: 32px;
 
   .links {
@@ -117,21 +154,22 @@
     flex-wrap: wrap;
 
     @media (max-width: 360px) {
-      gap: 36px;
+      gap: 36px 24px;
     }
 
     .link_wrap {
       display: grid;
       height: fit-content;
 
-      a, p {
-        padding: 13px 0;
-        font-size: clamp(16rem, calc(20vw/7.68), 24rem);
+      a,
+      p {
+        padding: clamp(9px, calc(13vw/7.68), 13px) 0;
+        font-size: clamp(20rem, calc(20vw/7.68), 24rem);
         color: var(--neutrals-800);
         letter-spacing: -0.01em;
 
         @media (max-width: 370px) {
-          font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+          font-size: clamp(0rem, calc(20vw/3.7), 20rem);
         }
 
         &:first-child {

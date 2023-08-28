@@ -80,6 +80,7 @@ export default function Specialists({ chosenSpecialisations, specialists }) {
             chosenDate={chosenTime.date}
             chosenTime={chosenTime.time}
             name={chosenTime.person.title}
+            specialistData={chosenTime.person}
           />
         )}
       </AnimatePresence>

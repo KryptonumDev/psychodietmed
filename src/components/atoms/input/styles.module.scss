@@ -37,17 +37,13 @@
     line-height: 23px;
     padding: clamp(10px, calc(10vw/7.68), 20px) 28px;
     color: var(--primary-800);
-    font-size: max(clamp(16rem, calc(16vw/7.68), 20rem), 16px);
+    font-size: clamp(16px, calc(20vw/7.68), 24rem) !important;
     font-weight: 500;
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
     transition: border-color .3s;
 
     &:hover {
       border-color: var(--primary-500);
-    }
-
-    @media (max-width: 370px) {
-      font-size: clamp(0rem, calc(16vw/3.7), 16rem);
     }
   }
 

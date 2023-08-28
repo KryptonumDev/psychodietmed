@@ -13,7 +13,7 @@ import REMOVE_COUPON from "../../../mutations/remove-coupon";
 import { getFormattedCart } from "../../../utils/get-formatted-cart";
 import { AnimatePresence, motion } from "framer-motion";
 
-export default function Content({ delivery = {}, setCart, setInnerLoading, cart, isCart = true }) {
+export default function Content({ isCartPage, delivery = {}, setCart, setInnerLoading, cart, isCart = true }) {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [couponError, setCouponError] = useState(null);
@@ -117,7 +117,7 @@ export default function Content({ delivery = {}, setCart, setInnerLoading, cart,
 
   return (
     <div className={styles.wrapper}>
-      <h2>Twój koszyk</h2>
+      {!isCartPage && <h2>Twój koszyk</h2>}
       <div className={styles.cartControl}>
         <span>Produkt</span>
         <span>Cena jedn.</span>

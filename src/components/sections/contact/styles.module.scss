@@ -5,12 +5,11 @@
 
   @media (max-width: 1024px) {
     grid-template-columns: 431fr 248fr;
-    
   }
 
   @media (max-width: 640px) {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 
   h1{
@@ -34,7 +33,7 @@
   }
 
   @media (max-width: 640px){
-    height: 340px !important;
+    height: clamp(340px, calc(640vw/7.68), 640px) !important;
     width: 100% !important;
 
     img{

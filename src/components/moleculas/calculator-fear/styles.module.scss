@@ -1,6 +1,10 @@
 .wrapper {
   margin-top: clamp(28px, calc(36vw/7.68), 64px);
 
+  label{
+    cursor: pointer;
+  }
+
   .questions {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -21,14 +25,18 @@
     max-width: 730px;
     margin: 64px auto 0 auto;
 
+    a{
+      margin: 36px auto 0 auto;
+    }
+
     p {
       margin-top: 0;
 
-      &:last-child {
-        margin-top: clamp(18px, calc(24vw/7.68), 36px);
+      &:nth-child(3) {
+        margin-top: clamp(16px, calc(20vw/7.68), 24px);
       }
 
-      &:first-child {
+      &:nth-child(1) {
         margin-bottom: 18px;
         font-size: clamp(20rem, calc(24vw/7.68), 32rem);
 

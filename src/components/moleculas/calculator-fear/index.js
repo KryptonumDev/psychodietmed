@@ -3,6 +3,7 @@ import React, { useState } from "react"
 import styles from './styles.module.scss'
 import { useForm } from "react-hook-form"
 import { AnimatePresence, motion } from "framer-motion"
+import Button from "@/components/atoms/button"
 
 const questions = [
   {
@@ -107,8 +108,11 @@ export default function CalculatorFear() {
               </motion.p>
             )}
             <p>
-              SPamiętaj nie jest to diagnoza, a tylko narzędzie do wskazania problemu. Jest to bezpłatny i automatyczny test, który może pomóc odpowiedzieć na pytania dotyczące Twojego zdrowia. Nie zastąpi on jednak konsultacji z lekarzem psychiatrą lub psychologiem
+              Pamiętaj nie jest to diagnoza, a tylko narzędzie do wskazania problemu. Jest to bezpłatny i automatyczny test, który może pomóc odpowiedzieć na pytania dotyczące Twojego zdrowia. Nie zastąpi on jednak konsultacji z lekarzem psychiatrą lub psychologiem
             </p>
+            {result > 10 && (
+              <Button className={styles.button} href="/umow-wizyte">Umów wizytę</Button>
+            )}
           </motion.div>
         }
       </AnimatePresence>

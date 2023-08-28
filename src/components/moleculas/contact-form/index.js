@@ -8,6 +8,7 @@ import Input from "@/components/atoms/input"
 import axios from "axios"
 import Button from "@/components/atoms/button"
 import { AnimatePresence, motion } from 'framer-motion';
+import { phonePattern } from "../../../constants/patterns"
 
 const emailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 const namePattern = /^[a-z ,.'-]+$/i
@@ -45,6 +46,7 @@ export default function Form({ subjects }) {
     body.append('fname', data.name)
     body.append('message', data.text)
     body.append('subject', subject)
+    body.append('tel', data.tel)
 
     axios.post(url, body)
     .then((res) => {
@@ -105,6 +107,14 @@ export default function Form({ subjects }) {
         register={register('email', { required: true, pattern: emailPattern })}
         placeholder='Adres e-mail'
         title={'Adres e-mail'}
+        errors={errors}
+        error="Proszę poprawnie uzupełnić to pole"
+      />
+      <Input
+        name={'tel'}
+        register={register('tel', { required: true, pattern: phonePattern })}
+        placeholder='Numer telefonu'
+        title={'Numer telefonu'}
         errors={errors}
         error="Proszę poprawnie uzupełnić to pole"
       />

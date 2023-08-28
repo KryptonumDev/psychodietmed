@@ -75,7 +75,7 @@ export default function Bundle({ data: { addons, variations, slug, image, name, 
               <div key={index} className={styles.group}>
                 {el.options.map(inEl => (
                   <label key={inEl.label}>
-                    <input checked={chosenAddon?.val === inEl.label} onClick={(e) => { handleAddonClick(e, { name: el.fieldName, val: inEl.label, price: inEl.price }) }} type="radio" name={el.name} value={inEl.label} />
+                    <input checked={chosenAddon?.val === inEl.label} onClick={(e) => { handleAddonClick(e, { name: el.fieldName, val: inEl.label, price: inEl.price }) }} type="radio" name={el.name + slug} value={inEl.label} />
                     <span className={styles.checkbox} />
                     <span>
                       {inEl.label} <small>+&nbsp;{inEl.price}&nbsp;zł</small>

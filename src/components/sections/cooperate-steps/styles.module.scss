@@ -1,22 +1,31 @@
 .wrapper {
 
-  h1{
+  h1 {
     margin-bottom: 48px;
   }
 
   h2 {
-    font-size: clamp(24rem, calc(36vw/7.68), 40rem);
+    font-size: clamp(24rem, calc(28vw/7.68), 40rem);
 
     @media (max-width: 370px) {
       font-size: clamp(0rem, calc(24vw/3.7), 24rem);
     }
   }
 
+  h3{
+    @media (max-width: 380px) {
+      font-size: 18rem;
+    }
+    @media (max-width: 350px) {
+      font-size: 16rem;
+    }
+  }
+
   .step {
     display: grid;
-    grid-template-columns: 252fr 992fr;
+    grid-template-columns: 182fr 992fr;
     gap: clamp(12px, calc(24vw/7.68), 32px);
-    padding-bottom: clamp(64px, calc(64vw/7.68), 128px);
+    padding-bottom: clamp(48px, calc(64vw/7.68), 96px);
 
     @media (max-width: 972px) {
       grid-template-columns: clamp(8px, calc(8vw/4.2), 16px) auto;
@@ -27,10 +36,15 @@
       gap: 24px;
 
       details {
-        padding: clamp(24px, calc(24vw/7.68), 28px) clamp(12px, calc(36vw/7.68), 64px) clamp(28px, calc(28vw/7.68), 40px) clamp(12px, calc(24vw/7.68), 36px);
+        padding:
+          clamp(16px, calc(16vw/7.68), 22px) clamp(12px, calc(36vw/7.68), 64px) clamp(16px, calc(16vw/7.68), 22px) clamp(12px, calc(20vw/7.68), 32px);
         border-radius: 16px;
         background: #FFF;
         box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+
+        @media (max-width: 480px) {
+          margin-left: -32px;
+        }
 
         &[open] {
           .cursor {
@@ -99,14 +113,15 @@
         grid-template-columns: 28px 1fr;
         gap: 16px;
         word-break: break-word;
+        align-items: center;
       }
 
       .wrap {
         margin-left: 44px;
         display: flex;
         flex-wrap: wrap;
-        gap: 12px;
-        margin-top: clamp(12px, calc(24vw/7.68), 36px);
+        gap: 8px;
+        margin-top: clamp(12px, calc(16vw/7.68), 24px);
 
         @media (max-width: 1024px) {
           margin-left: 0;
@@ -116,18 +131,18 @@
           border-radius: 50px;
           border: 2px solid var(--primary-800);
           background: #FFF;
-          padding: 10px clamp(12px, calc(16vw/7.68), 22px) 12px clamp(12px, calc(16vw/7.68), 22px);
+          padding: clamp(8px, calc(8vw/7.68), 10px) clamp(8px, calc(12vw/7.68), 16px) clamp(8px, calc(8vw/7.68), 10px) clamp(8px, calc(12vw/7.68), 16px);
           color: var(--primary-800);
           font-weight: 500;
-          font-size: clamp(14rem, calc(16vw/7.68), 20rem);
+          font-size: clamp(14rem, calc(14vw/7.68), 18rem);
 
-          &.active{
+          &.active {
             background: var(--primary-800);
             color: #FFF;
           }
 
           @media (max-width: 370px) {
-            padding: clamp(8px, calc(10vw/3.7), 10px) clamp(8px, calc(12vw/3.7), 12px) clamp(8px, calc(10vw/3.7), 10px) clamp(8px, calc(12vw/3.7), 12px);
+            padding: clamp(6px, calc(8vw/3.7), 8px) clamp(6px, calc(8vw/3.7), 8px) clamp(6px, calc(8vw/3.7), 8px) clamp(6px, calc(8vw/3.7), 8px);
             font-size: clamp(0rem, calc(14vw/3.7), 14rem);
           }
         }
@@ -249,7 +264,7 @@
     .top {
       position: absolute;
       left: 0;
-      top: clamp(16px, calc(28vw/7.68), 36px);
+      top: clamp(16px, calc(28vw/7.68), 28px);
       right: 0;
       border-top: clamp(3px, calc(4vw/7.68), 6px) dotted var(--secondary-500);
     }
@@ -257,15 +272,15 @@
     .left {
       position: absolute;
       left: 0;
-      top: clamp(16px, calc(28vw/7.68), 36px);
-      bottom: calc(-1 * clamp(74px, calc(80vw/7.68), 138px));
+      top: clamp(16px, calc(28vw/7.68), 28px);
+      bottom: calc(-1 * clamp(64px, calc(80vw/7.68), 114px));
       border-left: clamp(3px, calc(4vw/7.68), 6px) dotted var(--secondary-500);
     }
 
     .bottom {
       position: absolute;
       left: 0;
-      bottom: calc(-1 * clamp(74px, calc(80vw/7.68), 144px));
+      bottom: calc(-1 * clamp(64px, calc(80vw/7.68), 114px));
       right: 0;
       border-top: clamp(3px, calc(4vw/7.68), 6px) dotted var(--secondary-500);
     }
@@ -282,11 +297,11 @@
 
     &.last {
       .bottom {
-        bottom: calc(-1 * clamp(80px, calc(90vw/7.68), 158px));
+        bottom: calc(-1 * clamp(70px, calc(84vw/7.68), 126px));
       }
 
       .left {
-        bottom: calc(-1 * clamp(80px, calc(90vw/7.68), 158px));
+        bottom: calc(-1 * clamp(70px, calc(84vw/7.68), 126px));
       }
     }
   }

@@ -1,5 +1,4 @@
 import OtherPosts from "@/components/sections/other-posts";
-import Newsletter from "@/components/sections/newsletter";
 import Hero from "@/components/sections/hero-team";
 import Slider from "@/components/sections/team-slider";
 import Owner from "@/components/sections/team-owner";
@@ -19,7 +18,7 @@ export async function generateMetadata() {
 }
 
 export default async function Team() {
-  const { newsletter, posts, blog, page, specialists } = await getData()
+  const { posts, blog, page, specialists } = await getData()
   return (
     <main className="overflow" id="main">
       <Breadcrumbs data={[{ page: 'O nas', url: '/o-nas' }]} />
@@ -32,7 +31,6 @@ export default async function Team() {
       <CombinedSpecialisations data={page.team.combinedSpecialisationsTeam} />
       <CallToActionGray data={page.team.greyCtaTeam} />
       <Statistics data={page.team.statisticsTeam} />
-      <Newsletter data={newsletter} />
       <OtherPosts data={posts} title={blog.title} text={blog.text} />
     </main>
   )
@@ -233,11 +231,6 @@ async function getData() {
       global : page(id: "cG9zdDo3Nzk=") {
         id
         global {
-          newsletterGlobal{
-            title
-            text
-            consent
-          }
           blogGlobal{
             title
             text
@@ -277,7 +270,6 @@ async function getData() {
 
   return {
     page: page,
-    newsletter: global.global.newsletterGlobal,
     posts: posts.nodes,
     blog: global.global.blogGlobal,
     specialists: specjalisci.nodes

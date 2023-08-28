@@ -44,7 +44,7 @@ export const createCheckoutData = (order, registred) => {
   if (order.firmOrder) {
     checkoutData.metaData.push(...order.metaData)
   }
-
+  debugger
   if (order.shippingMethod) {
     checkoutData.shippingMethod = order.shippingMethod.methodId;
   }

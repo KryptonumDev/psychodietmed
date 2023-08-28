@@ -30,10 +30,6 @@
 
   @media (max-width: 1120px) {
     grid-template-columns: 286fr 321fr;
-
-    &.wide {
-      grid-template-columns: 377fr 243fr;
-    }
   }
 
   @media (max-width: 740px) {
@@ -65,11 +61,15 @@
   .slideText {
     grid-area: text;
     max-width: 532px;
+
+    * {
+      font-size: clamp(16rem, 1.3366666667vw, 19rem);
+    }
   }
 
   .slideBoldText {
     grid-area: images;
-    font-size: clamp(28rem, calc(36vw/7.68), 48rem);
+    font-size: clamp(22rem, 3.6875vw, 38rem);
     line-height: 124%;
     font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
     color: var(--primary-800);
@@ -107,10 +107,10 @@
     grid-template-columns: 1fr 1fr;
     grid-gap: 24px;
 
-    >div{
+    >div {
       position: relative;
 
-      svg{
+      svg {
         position: absolute;
         top: 0;
         right: 0;
@@ -126,6 +126,7 @@
 
   .image {
     aspect-ratio: 224/336 !important;
+
     img {
       box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
       border-radius: 10px;

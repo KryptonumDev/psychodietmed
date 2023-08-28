@@ -7,6 +7,7 @@ import Calendar from "@/components/atoms/specialist-card-calendar"
 import Loader from "@/components/sections/loader"
 import { AnimatePresence } from "framer-motion"
 import Button from "@/components/atoms/button"
+import { Star } from "../../../assets/star"
 
 const regex = /<[^>]+>([^<]*)<\/[^>]+>/;
 
@@ -47,9 +48,15 @@ export default function Card({ clickDate, data }) {
             width={proffesional?.personImage.mediaDetails.width}
             height={proffesional?.personImage.mediaDetails.height}
           />
-          <div>
-            <h3>{title}</h3>
-            <p>{proffesional?.proffesion}</p>
+          <div className={styles.inform}>
+            <div>
+              <h3>{title}</h3>
+              <p>{proffesional?.proffesion}</p>
+            </div>
+            <div className={styles.rating}>
+              <p>Średnia ocena:</p>
+              <span><Star /> 5</span>
+            </div>
           </div>
         </div>
         <ul>

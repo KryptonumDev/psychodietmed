@@ -29,7 +29,7 @@ async function getData(params) {
     const { body: { data: { post, posts } } } = await Fetch({
       query: `
       query BlogPost($slug: ID!) {
-        posts(first: 3) {
+        posts(first: 4) {
           nodes {
             id
             dateGmt
@@ -121,7 +121,7 @@ async function getData(params) {
 
     return {
       data: post,
-      posts: posts.nodes
+      posts: posts.nodes.filter(({ id }) => id !== post.id).slice(0, 3)
     }
   } catch (error) {
     console.log(error)

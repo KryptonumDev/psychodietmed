@@ -1,11 +1,13 @@
 'use client'
-import React, { useCallback, useRef } from "react"
+import React, { useCallback, useRef, useState } from "react"
 import styles from './styles.module.scss';
 import Card from "@/components/moleculas/specialist-card";
 import { A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ArrowLeft from "@/components/atoms/ArrowLeft";
 import ArrowRight from "@/components/atoms/ArrowRight";
+import { AnimatePresence } from "framer-motion";
+import { PopUp } from "@/components/organisms/custom-calendar/pop-up";
 
 export default function Specialists({ data, title = 'Wybierz specjalistę' }) {
   const sliderRef = useRef(null);
@@ -19,6 +21,9 @@ export default function Specialists({ data, title = 'Wybierz specjalistę' }) {
     if (!sliderRef.current) return;
     sliderRef.current.swiper.slideNext();
   }, []);
+
+  const [chosenTime, setChosenTime] = useState(null);
+  const [popupOpened, setPopupOpened] = useState(false);
 
   return (
     <section id='zespol' className={styles.wrapper}>
@@ -63,10 +68,24 @@ export default function Specialists({ data, title = 'Wybierz specjalistę' }) {
       >
         {data?.map((el, index) => (
           <SwiperSlide key={index}>
-            <Card data={el} />
+            <Card setPopupOpened={setPopupOpened} setChosenTime={setChosenTime} data={el} />
           </SwiperSlide>
         ))}
       </Swiper>
+      <AnimatePresence mode="wait">
+        {popupOpened && (
+          <PopUp
+            service={chosenTime.service}
+            specialistId={chosenTime.person.proffesional.specialistId}
+            serviceId={chosenTime.person.proffesional.serviceId}
+            setPopupOpened={setPopupOpened}
+            chosenDate={chosenTime.date}
+            chosenTime={chosenTime.time}
+            name={chosenTime.person.title}
+            specialistData={chosenTime.person}
+          />
+        )}
+      </AnimatePresence>
     </section>
   )
 }

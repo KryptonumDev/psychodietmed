@@ -40,7 +40,7 @@ export default function Cart() {
           <motion.div className={styles.content} key='three' initial={{ opacity: needAnimation ? 0 : 1 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <h1 className={styles.margin}>Twój koszyk</h1>
             <Process needsShippingAddress={cart?.needsShippingAddress} step={1} />
-            <Content setInnerLoading={setInnerLoading} setCart={setCart} refetch={refetch} cart={cart} />
+            <Content isCartPage={true} setInnerLoading={setInnerLoading} setCart={setCart} refetch={refetch} cart={cart} />
           </motion.div>
         ) : (
           <motion.div className={styles.content} key='four' initial={{ opacity: needAnimation ? 0 : 1 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>

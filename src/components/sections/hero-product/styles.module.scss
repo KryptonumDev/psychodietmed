@@ -3,13 +3,18 @@
   grid-template-columns: 546fr 656fr;
   gap: clamp(24px, calc(24vw/7.68), 72px);
 
+  h1{
+    margin-bottom: 12px;
+  }
+
   .image {
     width: 100% !important;
     height: auto !important;
   }
 
   @media (max-width: 640px) {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column-reverse;
     gap: 36px;
   }
 }
@@ -90,6 +95,8 @@
       border-radius: 10px;
       border: 1px solid #F2DFE3;
       background-color: transparent;
+      opacity: 1;
+      font-weight: 500;
     }
 
     button {

@@ -23,7 +23,7 @@ export default function Hero({ h2, data: { title, specialisations, proffesional:
         <p>{proffesion}</p>
         <div className={styles.rating}>
           <p>Średnia ocena:</p>
-          <span><Star /> 4.5</span>
+          <span><Star /> 5</span>
         </div>
         <div className={styles.specialisations}>
           <p>Specjalizuję się w:</p>
