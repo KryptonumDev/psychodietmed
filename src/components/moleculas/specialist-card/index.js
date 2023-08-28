@@ -39,6 +39,10 @@ export default function Card({ setPopupOpened, setChosenTime, data }) {
             break
           }
         }
+        if(!arr) return {
+          date: null,
+          hours: null
+        }
         setService(service)
         setDate(arr)
       })
@@ -84,14 +88,16 @@ export default function Card({ setPopupOpened, setChosenTime, data }) {
       <div className={styles.flex}>
         <p>Najbliższy termin:</p>
         {date
-          ? <p>{days[date.date.day()]}, {date.date.format('D MMMM')} {date.hours[0]}</p>
+          ? date?.hours
+            ? <p>{days[date.date.day()]}, {date.date.format('D MMMM')} {date.hours[0]}</p>
+            : <p>Brak wolnych terminów</p>
           : <p>Pobieramy dane...</p>
         }
 
       </div>
       <div className={styles.bottom_inform}>
         <div className={styles.flex}>
-          <Button disabled={!date} onClick={() => { clickHandler() }}>Umów wizytę</Button>
+          <Button disabled={!date?.hours} onClick={() => { clickHandler() }}>Umów wizytę</Button>
           <Button theme="secondary" href={`/specjalisci/${slug}#kalendarz`}>Więcej terminów</Button>
         </div>
       </div>
