@@ -24,7 +24,7 @@ export const metadata = {
   openGraph: {
     title: 'Psychodietetyka i Psychoterapia: Zdrowe Relacje z Jedzeniem – Psychodietmed',
     description: 'Odkryj, jak poprawić swoje relacje z jedzeniem dzięki psychodietetyce i psychoterapii. Zdrowa dieta i zdrowe podejście do jedzenia dzięki PsychoDietMed.',
-    url: 'https://www.psychodietmed.pl/',
+    url: 'https://psychodietmed-git-develop-kryptonum.vercel.app/',
     siteName: 'Psychodietmed',
     locale: 'pl-PL',
     type: 'website',

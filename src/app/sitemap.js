@@ -7,7 +7,7 @@ export default async function sitemap() {
   const newArr = (arr, prefix) => {
     let a = arr.map(el => {
       return {
-        url: `https://www.psychodietmed.pl${prefix}/${el.slug}`,
+        url: `https://psychodietmed-git-develop-kryptonum.vercel.app${prefix}/${el.slug}`,
         lastModified: new Date(),
       }
     })
@@ -25,71 +25,71 @@ export default async function sitemap() {
     ...newArr(specjalisci, '/specjalisci'),
     ...newArr(narzedzia, '/narzedzia'),
     {
-      url: 'https://www.psychodietmed.pl/',
+      url: 'https://psychodietmed-git-develop-kryptonum.vercel.app/',
       lastModified: new Date(),
     },
     {
-      url: 'https://www.psychodietmed.pl/o-nas',
+      url: 'https://psychodietmed-git-develop-kryptonum.vercel.app/o-nas',
       lastModified: new Date(),
     },
     {
-      url: 'https://www.psychodietmed.pl/historia-marki',
+      url: 'https://psychodietmed-git-develop-kryptonum.vercel.app/historia-marki',
       lastModified: new Date(),
     },
     {
-      url: 'https://www.psychodietmed.pl/media',
+      url: 'https://psychodietmed-git-develop-kryptonum.vercel.app/media',
       lastModified: new Date(),
     },
     {
-      url: 'https://www.psychodietmed.pl/kontakt',
+      url: 'https://psychodietmed-git-develop-kryptonum.vercel.app/kontakt',
       lastModified: new Date(),
     },
     {
-      url: 'https://www.psychodietmed.pl/wspolpraca',
+      url: 'https://psychodietmed-git-develop-kryptonum.vercel.app/wspolpraca',
       lastModified: new Date(),
     },
     {
-      url: 'https://www.psychodietmed.pl/efekty-wspolpracy',
+      url: 'https://psychodietmed-git-develop-kryptonum.vercel.app/efekty-wspolpracy',
       lastModified: new Date(),
     },
     {
-      url: 'https://www.psychodietmed.pl/narzedzia',
+      url: 'https://psychodietmed-git-develop-kryptonum.vercel.app/narzedzia',
       lastModified: new Date(),
     },
     {
-      url: 'https://www.psychodietmed.pl/oferta',
+      url: 'https://psychodietmed-git-develop-kryptonum.vercel.app/oferta',
       lastModified: new Date(),
     },
     {
-      url: 'https://www.psychodietmed.pl/akademia',
+      url: 'https://psychodietmed-git-develop-kryptonum.vercel.app/akademia',
       lastModified: new Date(),
     },
     {
-      url: 'https://www.psychodietmed.pl/blog',
+      url: 'https://psychodietmed-git-develop-kryptonum.vercel.app/blog',
       lastModified: new Date(),
     },
     {
-      url: 'https://www.psychodietmed.pl/umow-wizyte',
+      url: 'https://psychodietmed-git-develop-kryptonum.vercel.app/umow-wizyte',
       lastModified: new Date(),
     },
     {
-      url: 'https://www.psychodietmed.pl/regulamin',
+      url: 'https://psychodietmed-git-develop-kryptonum.vercel.app/regulamin',
       lastModified: new Date(),
     },
     {
-      url: 'https://www.psychodietmed.pl/polityka-prywatnosci',
+      url: 'https://psychodietmed-git-develop-kryptonum.vercel.app/polityka-prywatnosci',
       lastModified: new Date(),
     },
     {
-      url: 'https://www.psychodietmed.pl/',
+      url: 'https://psychodietmed-git-develop-kryptonum.vercel.app/',
       lastModified: new Date(),
     },
     {
-      url: 'https://www.psychodietmed.pl/',
+      url: 'https://psychodietmed-git-develop-kryptonum.vercel.app/',
       lastModified: new Date(),
     },
     {
-      url: 'https://www.psychodietmed.pl/',
+      url: 'https://psychodietmed-git-develop-kryptonum.vercel.app/',
       lastModified: new Date(),
     },
   ]

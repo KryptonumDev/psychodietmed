@@ -17,7 +17,7 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
   } = useForm()
 
   const onSubmit = (data) => {
-    fetch("https://www.psychodietmed.pl/api/create-booking", {
+    fetch("https://psychodietmed-git-develop-kryptonum.vercel.app/api/create-booking", {
       method: 'POST',
       body: JSON.stringify({
         email: data.email,
@@ -35,14 +35,14 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
       .then(res => {
         debugger
         const session = v4()
-        fetch("https://www.psychodietmed.pl/api/create-transaction", {
+        fetch("https://psychodietmed-git-develop-kryptonum.vercel.app/api/create-transaction", {
           method: 'POST',
           body: JSON.stringify({
             amount: service.price,
             sessionId: session,
             email: data.email,
             description: `Konsultacja online, ${name}`,
-            urlReturn: `https://www.psychodietmed.pl/api/complete-booking/?session=${session}&id=${res[0].id}&amount=${service.price}`,
+            urlReturn: `https://psychodietmed-git-develop-kryptonum.vercel.app/api/complete-booking/?session=${session}&id=${res[0].id}&amount=${service.price}`,
           })
         })
           .then(response => response.json())

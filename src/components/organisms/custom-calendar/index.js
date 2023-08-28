@@ -12,7 +12,7 @@ import Loader from "@/components/sections/loader"
 
 export const CustomCalendar = ({ specialistId, serviceId, specialistData }) => {
   const fetchData = () => {
-    fetch("https://www.psychodietmed.pl/api/get-avaible-dates", {
+    fetch("https://psychodietmed-git-develop-kryptonum.vercel.app/api/get-avaible-dates", {
       method: 'POST',
       body: JSON.stringify({
         employeId: specialistId,
