@@ -1,8 +1,9 @@
 import React from "react"
 import styles from "./styles.module.scss"
 import { Image } from "@/components/atoms/image"
+import Button from "@/components/atoms/button"
 
-export default function FlexAlt({ data: { image, content } }) {
+export default function FlexAlt({ data: { image, content, link } }) {
   return (
     <section className={styles.wrapper}>
       <Image
@@ -13,7 +14,12 @@ export default function FlexAlt({ data: { image, content } }) {
         className={styles.image}
         aspectRatio={true}
       />
-      <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }} />
+      <div className={styles.content} >
+        <div dangerouslySetInnerHTML={{ __html: content }} />
+        {link && (
+          <Button href={link.url}>{link.title}</Button>
+        )}
+      </div>
     </section>
   )
 }

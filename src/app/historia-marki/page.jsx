@@ -8,8 +8,6 @@ import TwoColumnFlex from "@/components/sections/two-column-flex"
 import Metrics from "@/components/sections/case-archive-metrics"
 import OtherPosts from "@/components/sections/other-posts"
 import Newsletter from "@/components/sections/newsletter"
-import CallToAction from "@/components/sections/brand-cta"
-import TwoColumnFlexWithGrid from "@/components/sections/brand-flex-and-grid"
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
 import Breadcrumbs from "@/components/sections/breadcrumbs"
@@ -31,8 +29,8 @@ export default async function Archive() {
       <TwoColumnFlexMultiImages data={data.brandHistory.flexImagesBrand} />
       <TwoColumnFlex data={data.brandHistory.missionBrand} />
       <Metrics data={metrics} />
-      <CallToAction data={data.brandHistory.callToActionBrand} />
-      <TwoColumnFlexWithGrid data={data.brandHistory.flexSecondBrand} />
+      {/* <CallToAction data={data.brandHistory.callToActionBrand} /> */}
+      {/* <TwoColumnFlexWithGrid data={data.brandHistory.flexSecondBrand} /> */}
       <Newsletter data={newsletter} />
       <OtherPosts data={posts} title={blog.title} text={blog.text} />
     </main>
@@ -200,44 +198,6 @@ async function getData() {
             }
             missionBrand{
               content
-              link{
-                title
-                url
-              }
-              image{
-                altText
-                mediaItemUrl
-                mediaDetails{
-                  height
-                  width
-                }
-              }
-            }
-            flexSecondBrand{
-              content
-              image{
-                altText
-                mediaItemUrl
-                mediaDetails{
-                  height
-                  width
-                }
-              }
-              gridKafelkow{
-                content
-                image{
-                  altText
-                  mediaItemUrl
-                  mediaDetails{
-                    height
-                    width
-                  }
-                }
-              }
-            }
-            callToActionBrand{
-              title
-              content : text
               link{
                 title
                 url

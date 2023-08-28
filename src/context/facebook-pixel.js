@@ -13,7 +13,7 @@ export const FacebookPixelEvents = ({fb_id}) => {
         ReactPixel.init(fb_id); //don't forget to change this
         ReactPixel.pageView();
       });
-  }, [pathname, searchParams]);
+  }, [pathname, searchParams, fb_id]);
 
   return null;
 };

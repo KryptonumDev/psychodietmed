@@ -2,12 +2,13 @@ import Link from "next/link"
 import React from "react"
 import styles from "./styles.module.scss"
 import { Image } from "@/components/atoms/image"
-import { RightArrow } from "../../../assets/small-right-arrow"
 import Button from "@/components/atoms/button"
+import { removeWrap } from "../../../utils/title-modification"
 
-export default function Steps({ data: { repeater, titleFirst, linkFirst, titleSecond, gridSecond, linkSecond, titleThird, linkThird, gridThird, titleFourth, gridFourth } }) {
+export default function Steps({ data: { title, repeater, titleFirst, linkFirst, titleSecond, gridSecond, linkSecond, titleThird, linkThird, gridThird, titleFourth, gridFourth } }) {
   return (
     <section className={styles.wrapper}>
+      <h1 dangerouslySetInnerHTML={{ __html: removeWrap(title) }} />
       <div className={styles.step}>
         <div className={`${styles.line} ${styles.first}`}>
           <span className={styles.top} />
@@ -23,7 +24,7 @@ export default function Steps({ data: { repeater, titleFirst, linkFirst, titleSe
                 <details open={!index} key={index}>
                   <summary>
                     <span className={styles.symbol} />
-                      <h3>{el.title}</h3>
+                    <h3>{el.title}</h3>
                   </summary>
                   <div className={styles.wrap}>
                     {el.illnes.map((inEl, index) => (
