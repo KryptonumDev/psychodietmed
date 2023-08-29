@@ -3,6 +3,10 @@ html {
   max-width: 100%;
   font-size: 5.3%;
 
+  @media (max-width: 480px) {
+    font-size: 5.9%;
+  }
+
   @media (max-height: 768px) and (min-width: 1024px){
     zoom: 0.84;
   }

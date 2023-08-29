@@ -17,7 +17,7 @@ const Quote = () => (
   </svg>
 )
 
-export default function Card({ slug, name, avatar, comment, linkText, before, after, differences, problems, result, resultTitle, boldText }) {
+export default function Card({ specialist, slug, name, avatar, comment, linkText, before, after, differences, problems, result, resultTitle, boldText }) {
   return (
     <div className={styles.slide} >
       <Quote />
@@ -35,6 +35,22 @@ export default function Card({ slug, name, avatar, comment, linkText, before, af
                 <Category key={el?.title} name={el?.title} />
               ))}
             </div>
+            {specialist && (
+              <div className={styles.specialistWrap}>
+                <p>Specjalista, z którym współpracowałam:</p>
+                <div className={styles.specialist}>
+                  <Image
+                    quality={100}
+                    src={specialist.proffesional.avatar.mediaItemUrl}
+                    alt={specialist.proffesional.avatar.altText}
+                    width={specialist.proffesional.avatar.mediaDetails.width}
+                    height={specialist.proffesional.avatar.mediaDetails.height}
+                    className={styles.avatar}
+                  />
+                  <p>{specialist.title}</p>
+                </div>
+              </div>
+            )}
           </div>
           <div className={styles.differences}>
             {differences && (

@@ -46,6 +46,22 @@ export default function Content({ podopieczni }) {
           slug
           histori {
             information {
+              specialist {
+                ... on Specjalista {
+                  title
+                  slug
+                  proffesional {
+                    avatar {
+                      altText
+                      mediaItemUrl
+                      mediaDetails{
+                        width
+                        height
+                      }
+                    }
+                  }
+                }
+              }
               resultTitle
               result
               text
@@ -146,6 +162,7 @@ export default function Content({ podopieczni }) {
             result={el.histori.information.result}
             problems={el.histori.information.problems}
             boldText={el.histori.information.boldText}
+            specialist={el.histori.information.specialist}
           />
         ))}
       </div>

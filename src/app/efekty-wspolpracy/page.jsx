@@ -79,6 +79,22 @@ async function getData(props) {
                       width
                     }
                   }
+                  specialist {
+                    ... on Specjalista {
+                      title
+                      slug
+                      proffesional {
+                        avatar {
+                          altText
+                          mediaItemUrl
+                          mediaDetails{
+                            width
+                            height
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
                 caseStudyCard {
                   name
