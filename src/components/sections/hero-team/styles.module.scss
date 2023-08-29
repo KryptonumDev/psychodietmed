@@ -25,40 +25,11 @@
     position: relative;
     width: 100%;
 
-    .logo {
-      width: clamp(87px, calc(87vw/7.68), 130px) !important;
-      height: clamp(87px, calc(87vw/7.68), 130px) !important;
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      transform: translate(-50%, 50%);
-
-      @media (max-width: 640px) {
-        left: 37px;
-        bottom: 14px;
-      }
-
-      img {
-        border-radius: 50%;
-        box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
-      }
-    }
-
     .image {
       width: 100% !important;
       height: auto !important;
 
       @media (max-width: 640px) {
-        height: clamp(320px, calc(350vw/3.75), 440px) !important;
-        width: calc(100% - 37px) !important;
-        margin-left: 37px;
-        margin-bottom: 14px;
-      }
-
-      img {
-        border-radius: 20px;
-        box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
-        object-position: top;
       }
 
       @media (max-width: 640px) {

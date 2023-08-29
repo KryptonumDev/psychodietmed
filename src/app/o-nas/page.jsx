@@ -117,14 +117,6 @@ async function getData() {
                 width
               }
             }
-            logo{
-              altText
-              mediaItemUrl
-              mediaDetails{
-                height
-                width
-              }
-            }
             grid{
               text
               icon{
