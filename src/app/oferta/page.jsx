@@ -422,7 +422,6 @@ async function getData(params) {
         revalidate: 600
       }
     });
-
     const { data } = await result.json()
 
     return {

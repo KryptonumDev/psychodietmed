@@ -1,6 +1,5 @@
 import React from "react"
 import styles from './styles.module.scss'
-import Head from "next/head"
 
 export default function FAQ({ data: { title, text, qa } }) {
 
@@ -29,13 +28,11 @@ export default function FAQ({ data: { title, text, qa } }) {
 
   return (
     <section className={styles.wrapper}>
-      <Head>
-        <script
-          key={`faq`}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-      </Head>
+      <script
+        key={`faq`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <h2>{title}</h2>
       <div className={styles.text} dangerouslySetInnerHTML={{ __html: text }} />
       <div className={styles.grid}>

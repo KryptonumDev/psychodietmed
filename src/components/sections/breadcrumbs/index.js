@@ -1,7 +1,6 @@
 import React from "react"
 import Link from "next/link"
 import styles from './styles.module.scss'
-import Head from "next/head"
 
 const createBreadcrumbs = (breadCrumbs) => {
   const items = [
@@ -36,13 +35,11 @@ export default function Breadcrumbs({ data }) {
 
   return (
     <div className={styles.wrapper}>
-      <Head>
-        <script
-          key={`breadcrumbs`}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-      </Head>
+      <script
+        key={`breadcrumbs`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <div className={styles.ul}>
         <Link className={styles.item} href="/">Strona główna</Link>
         <Arrow />
