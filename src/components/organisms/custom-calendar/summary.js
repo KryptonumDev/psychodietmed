@@ -23,7 +23,7 @@ export const CalendarSummary = ({ setPopupOpened, service, chosenTime, chosenDat
       </div>
       <div>
         <p>{(service.price/100)}&nbsp;zł / sesja {service.duration} minut</p>
-        <Button onClick={() => {setPopupOpened(true)}}>Umawiam wizytę</Button>
+        <Button disabled={!chosenTime || !chosenDate} onClick={() => {setPopupOpened(true)}}>Umawiam wizytę</Button>
       </div>
     </div>
   )

@@ -9,7 +9,7 @@ import Button from "@/components/atoms/button";
 
 export default function Card({ chosenTime, setChosenTime, data }) {
   const fetchData = () => {
-    fetch("https://psychodietmed-git-develop-kryptonum.vercel.app/api/get-avaible-dates", {
+    fetch("http://localhost:8000/api/get-avaible-dates", {
       method: 'POST',
       body: JSON.stringify({
         employeId: data.proffesional.specialistId,
@@ -59,15 +59,18 @@ export default function Card({ chosenTime, setChosenTime, data }) {
       </div>
       <div className={styles.dates}>
         <p className={styles.title}>Najbliższe terminy</p>
-        <div className={styles.buttons}>
-          {dates?.map(el => (
-            <button onClick={() => { setChosenTime({ service: service, person: data, date: el.date, time: el.hours[0] }) }} key={el.date} className={(chosenTime?.person.title === data.title && chosenTime?.date === el.date) ? styles.active : ''}>
-              <p>{el.date.format('DD MMMM')}</p>
-              <p><Clock />{el.hours[0]}</p>
-            </button>
-          ))}
-          {loading && <p>Pobieramy dane...</p>}
-        </div>
+        {dates?.length > 0 && (
+          <div className={styles.buttons}>
+            {dates?.map(el => (
+              <button onClick={() => { setChosenTime({ service: service, person: data, date: el.date, time: el.hours[0] }) }} key={el.date} className={(chosenTime?.person.title === data.title && chosenTime?.date === el.date) ? styles.active : ''}>
+                <p>{el.date.format('DD MMMM')}</p>
+                <p><Clock />{el.hours[0]}</p>
+              </button>
+            ))}
+          </div>
+        )}
+        {loading && <p>Pobieramy dane...</p>}
+        {dates?.length === 0 && <p>Brak wolnych terminów</p>}
         <Button href={`/specjalisci/${data.slug}#kalendarz`} className={styles.button} theme="secondary" >Więcej terminów</Button>
       </div>
     </div>

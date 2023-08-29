@@ -3,7 +3,7 @@ import React from "react"
 import { RightArrow } from "../../../assets/small-right-arrow";
 import Link from "next/link";
 
-const Button = ({ theme="primary", href, className, children, ...props }) => {
+const Button = ({ theme = "primary", href, className, children, ...props }) => {
   return (
     href ? (
       theme === 'primary' ? (
@@ -20,8 +20,9 @@ const Button = ({ theme="primary", href, className, children, ...props }) => {
           href={href}
           {...props}
         >
+          {theme === 'reversed' && <RightArrow />}
           <span>{children}</span>
-          <RightArrow />
+          {theme !== 'reversed' && <RightArrow />}
         </Link>
       )
     ) : (
@@ -37,8 +38,9 @@ const Button = ({ theme="primary", href, className, children, ...props }) => {
           className={`link-secondary ${className || ''}`}
           {...props}
         >
+          {theme === 'reversed' && <RightArrow />}
           <span>{children}</span>
-          <RightArrow />
+          {theme !== 'reversed' && <RightArrow />}
         </button>
       )
     )

@@ -9,10 +9,11 @@ import { CalendarSummary } from "./summary"
 import { PopUp } from "./pop-up"
 import { AnimatePresence } from "framer-motion"
 import Loader from "@/components/sections/loader"
+import Button from "@/components/atoms/button"
 
 export const CustomCalendar = ({ specialistId, serviceId, specialistData }) => {
   const fetchData = () => {
-    fetch("https://psychodietmed-git-develop-kryptonum.vercel.app/api/get-avaible-dates", {
+    fetch("http://localhost:8000/api/get-avaible-dates", {
       method: 'POST',
       body: JSON.stringify({
         employeId: specialistId,
@@ -37,9 +38,11 @@ export const CustomCalendar = ({ specialistId, serviceId, specialistData }) => {
 
   useEffect(() => {
     if (data) {
+      let chosenDate = false
       for (const [key, value] of Object.entries(data)) {
         if (value.length > 0) {
           setChosenDate(dayjs(key).locale('pl'))
+          chosenDate = true
           break
         }
       }
@@ -91,6 +94,10 @@ export const CustomCalendar = ({ specialistId, serviceId, specialistData }) => {
               chosenTime={chosenTime}
               setPopupOpened={setPopupOpened}
             />
+            <div className={styles.inform}>
+              <p>Nie możesz znaleźć pasującego Ci terminu?</p>
+              <Button href='/kontakt'>Napisz do nas</Button>
+            </div>
             <AnimatePresence>
               {popupOpened && (
                 <PopUp

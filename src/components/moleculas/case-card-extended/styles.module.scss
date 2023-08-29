@@ -67,7 +67,7 @@
       margin: unset;
       margin-top: 24px;
       max-height: unset;
-      
+
     }
   }
 
@@ -94,6 +94,9 @@
       flex-wrap: wrap;
       gap: 8px 12px;
       margin-top: 12px;
+
+      max-height: clamp(72px, calc(90vw/7.68), 90px);
+      overflow: hidden;
     }
   }
 

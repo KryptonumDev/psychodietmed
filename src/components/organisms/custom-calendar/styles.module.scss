@@ -19,7 +19,8 @@
   grid-template-columns: 1fr auto;
   grid-template-areas:
     'calendar time'
-    'summary summary';
+    'summary summary'
+    'info info';
   grid-template-rows: 1fr auto;
 
   @media (max-width: 640px) {
@@ -31,7 +32,8 @@
     grid-template-areas:
       'calendar'
       'time'
-      'summary';
+      'summary'
+      'info';
   }
 
   h2 {
@@ -392,7 +394,7 @@
       align-items: center;
       gap: clamp(4px, calc(8vw/7.68), 8px);
 
-      svg{
+      svg {
         width: clamp(20px, calc(23vw/7.68), 26px) !important;
         height: fit-content;
       }
@@ -444,5 +446,26 @@
         }
       }
     }
+  }
+}
+
+.inform {
+  margin-top: clamp(48px, calc(48vw/7.68), 64px);
+  grid-area: info;
+  width: 100%;
+  border-radius: 20px;
+  border: 2px solid var(--primary-800, #194574);
+  background: var(--neutrals-50, #FFF);
+  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+  padding: clamp(16px, calc(20vw/7.68), 20px) clamp(16px, calc(28vw/7.68), 36px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+
+  p{
+    text-align: center;
+    color: #194574;
   }
 }
