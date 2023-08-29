@@ -1,5 +1,5 @@
 User-Agent: *
-Disallow: /
+Allow: /
 Disallow: /logowanie
 Disallow: /zmiana-hasla
 Disallow: /moje-kursy
