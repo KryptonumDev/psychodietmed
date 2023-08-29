@@ -2,10 +2,46 @@ import React from "react"
 import Link from "next/link"
 import styles from './styles.module.scss'
 
+const createBreadcrumbs = (breadCrumbs) => {
+  const items = [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": 'PsychoDietMed',
+      "item": 'https://www.psychodietmed.pl/'
+    }
+  ]
+  breadCrumbs.forEach((el, index) => {
+    items.push({
+      "@type": "ListItem",
+      "position": index + 2,
+      "name": el.name,
+      "item": `https://www.psychodietmed.pl/${el.url}`
+    })
+  });
+
+  return items
+}
+
 export default function Breadcrumbs({ data }) {
   if (!data) return null
+
+  const breadCrumbsItems = createBreadcrumbs(data);
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": breadCrumbsItems
+  };
+
   return (
     <div className={styles.wrapper}>
+      <Head>
+        <script
+          key={`breadcrumbs`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      </Head>
       <div className={styles.ul}>
         <Link className={styles.item} href="/">Strona główna</Link>
         <Arrow />
