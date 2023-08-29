@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import styles from './styles.module.scss'
 import Input from "@/components/atoms/input"
 import { emailPattern } from "../../../constants/patterns"
@@ -51,12 +51,12 @@ export default function Login() {
       setLoginStatus({ sending: false });
     },
     onError: (error) => {
-      setLoginStatus({ sending: false, error: 'Nieprawidłowy adres e-mail' });
       if (error.message === "invalid_email") {
         setLoginStatus({ sending: false, error: 'Nieprawidłowy adres e-mail' });
-      }
-      if (error.message === "invalid_password") {
+      } else if (error.message === "invalid_password") {
         setLoginStatus({ sending: false, error: 'Nieprawidłowe hasło' });
+      } else {
+        setLoginStatus({ sending: false, error: 'Błąd serwera, spóbuj póżniej lub skontaktuj się z obsługą sklepu.' });
       }
     }
   });

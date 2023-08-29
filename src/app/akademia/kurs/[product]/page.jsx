@@ -1,15 +1,15 @@
-// import { generetaSeo } from "../../../utils/genereate-seo";
-// import { GET_SEO_PAGE } from "../../../queries/page-seo";
 import { notFound, redirect } from "next/navigation";
 import Hero from "@/components/sections/hero-course";
 import Content from "@/components/sections/course-content";
 import { cookies } from "next/headers";
 import Breadcrumbs from "@/components/sections/breadcrumbs";
 import { Fetch } from "../../../../utils/fetch-query";
+import { generetaSeo } from "../../../../utils/genereate-seo";
+import { GET_SEO_PRODUCT } from "../../../../queries/product-seo";
 
-// export async function generateMetadata() {
-//   return await generetaSeo('cG9zdDoxODY4', '/akademia', GET_SEO_PAGE)
-// }
+export async function generateMetadata({ params }) {
+  return await generetaSeo(params.product, '/akademia', GET_SEO_PRODUCT, 'post')
+}
 
 export default async function Courses({ params }) {
   const { product } = await getData(params)

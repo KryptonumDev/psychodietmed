@@ -22,11 +22,11 @@ export const generetaSeo = async (id, url, query, type = 'page') => {
       }
     }
 
-    // if(opengraphImage?.mediaItemUrl){
-    //   data.openGraph.images = [
-    //     opengraphImage?.mediaItemUrl
-    //   ]
-    // }
+    if(opengraphImage?.mediaItemUrl){
+      data.openGraph.images = [
+        opengraphImage?.mediaItemUrl
+      ]
+    }
 
     return data
   } catch (error) {

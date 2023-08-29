@@ -66,7 +66,7 @@ export default function CartItem({
           <Minus />
         </button>
         <input
-          disabled={true}
+          readOnly={true}
           value={productCount}
           min="1"
           onChange={(event) => handleQtyChange(event, item.cartKey)}

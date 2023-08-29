@@ -1,15 +1,16 @@
-// import { generetaSeo } from "../../../utils/genereate-seo";
-// import { GET_SEO_PAGE } from "../../../queries/page-seo";
+
 import { notFound } from "next/navigation";
 import Hero from "@/components/sections/hero-course";
 import Content from "@/components/sections/course-content";
 import { getUser } from "../../../utils/check-authorisation";
 import Breadcrumbs from "@/components/sections/breadcrumbs";
 import { Fetch } from "../../../utils/fetch-query";
+import { generetaSeo } from "../../../utils/genereate-seo";
+import { GET_SEO_COURSE } from "../../../queries/course-seo";
 
-// export async function generateMetadata() {
-//   return await generetaSeo('cG9zdDoxODY4', '/akademia', GET_SEO_PAGE)
-// }
+export async function generateMetadata({ params }) {
+  return await generetaSeo(params.course, '/moje-kursy', GET_SEO_COURSE, 'post')
+}
 
 export default async function Courses({ params }) {
   const { course } = await getData(params)
@@ -44,7 +45,7 @@ export default async function Courses({ params }) {
 async function getData(params) {
   try {
     const { body: { data: { course } } } = await Fetch({
-      query:`
+      query: `
       query Pages($id: ID!) {
         course(id: $id, idType: SLUG) {
           databaseId
@@ -119,21 +120,3 @@ async function getData(params) {
     notFound()
   }
 }
-
-// export async function generateStaticParams() {
-//   const { data: { courses } } = await getClient().query({
-//     query: gql`
-//     query PostStaticParams {
-//       courses(first: 100) {
-//         nodes {
-//           slug
-//         }
-//       }
-//     }
-//   `
-//   })
-
-//   return courses.nodes.map(({ slug }) => ({
-//     course: slug
-//   }))
-// }

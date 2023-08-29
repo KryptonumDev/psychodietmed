@@ -1,14 +1,15 @@
-// import { generetaSeo } from "../../../utils/genereate-seo";
-// import { GET_SEO_PAGE } from "../../../queries/page-seo";
+
 import { notFound } from "next/navigation";
 import Content from "@/components/sections/lesson-content";
 import { getUser } from "../../../../utils/check-authorisation";
 import Breadcrumbs from "@/components/sections/breadcrumbs";
 import { Fetch } from "../../../../utils/fetch-query";
+import { GET_SEO_LESSON } from "../../../../queries/lesson-seo";
+import { generetaSeo } from "../../../../utils/genereate-seo";
 
-// export async function generateMetadata() {
-//   return await generetaSeo('cG9zdDoxODY4', '/akademia', GET_SEO_PAGE)
-// }
+export async function generateMetadata({ params }) {
+  return await generetaSeo(params.lesson, `/moje-kursy/${params.course}`, GET_SEO_LESSON, 'post')
+}
 
 export default async function Courses({ params }) {
   const { lesson } = await getData(params)
@@ -87,29 +88,3 @@ async function getData(params) {
     notFound()
   }
 }
-
-// export async function generateStaticParams() {
-//   const { data: { lessons } } = await getClient().query({
-//     query: gql`
-//     query PostStaticParams {
-//       lessons(first: 100) {
-//         nodes {
-//           slug
-//           lesson {
-//             course {
-//               ... on Course {
-//                 slug
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
-//   `
-//   })
-
-//   return lessons.nodes.map(({ lesson, slug }) => ({
-//     lesson: slug,
-//     course: lesson.course.slug
-//   }))
-// }

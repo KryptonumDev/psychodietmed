@@ -37,11 +37,24 @@ export const metadata = {
   }
 }
 
+// const schema = {
+//   "@context": "https://schema.org",
+//   "@type": "FAQPage",
+//   "mainEntity": arrays
+// };
+
 export const revalidate = 600
 
 export default function RootLayout({ children }) {
   return (
     <html lang="pl">
+      {/* <Head>
+        <script
+          key={`faq`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      </Head> */}
       <body className={`body ${Satoshi.variable}`}>
         <ApolloWrapper>
           <AppProvider>
