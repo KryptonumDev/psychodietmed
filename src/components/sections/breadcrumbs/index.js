@@ -1,6 +1,7 @@
 import React from "react"
 import Link from "next/link"
 import styles from './styles.module.scss'
+import Head from "next/head"
 
 const createBreadcrumbs = (breadCrumbs) => {
   const items = [
