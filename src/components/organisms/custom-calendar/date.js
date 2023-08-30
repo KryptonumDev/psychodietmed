@@ -6,17 +6,19 @@ import styles from './styles.module.scss'
 import { AngleLeft } from "../../../assets/angle-left";
 import { AngleRight } from "../../../assets/angle-right";
 
-function getWeekDays({ short = false }) {
-  const formatter = new Intl.DateTimeFormat('pl-PL', { weekday: 'narrow' })
-
-  return Array.from(Array(7).keys())
+function getWeekDays() {
+  const formatter = new Intl.DateTimeFormat('pl-PL', { weekday: 'short' })
+  let arr = Array.from(Array(7).keys())
     .map((day) => formatter.format(new Date(Date.UTC(2021, 5, day))))
     .map((weekDay) => {
-      if (short) {
-        return weekDay.substring(0, 3).toUpperCase()
-      }
-      return weekDay.substring(0, 1).toUpperCase().concat(weekDay.substring(1))
+      let word = weekDay.substring(0, 1).toUpperCase().concat(weekDay.substring(1, 3))
+      if (word[word.length - 1] !== '.')
+        word = word.concat('.')
+
+      return word
     })
+  arr.unshift(arr.pop());
+  return arr
 }
 
 export const CalendarDate = ({ data, today, setChosenDate, chosenDate }) => {
@@ -50,8 +52,8 @@ export const CalendarDate = ({ data, today, setChosenDate, chosenDate }) => {
       return currentDate.set('date', i + 1)
     })
 
-    const firstWeekDay = 1
-    
+    const firstWeekDay = dayjs(daysInMonthArray[0]).get('day')
+
     const previousMonthFillArray = Array.from({
       length: firstWeekDay,
     })
