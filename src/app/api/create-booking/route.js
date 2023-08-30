@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server"
 
+export const dynamic = 'force-dynamic'
+
 export async function POST(req) {
   let { email, name, surname, phone, message, employeId, serviceId, date, time } = await req.json()
 
