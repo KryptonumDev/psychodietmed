@@ -159,7 +159,7 @@
 
       svg {
         width: clamp(18px, calc(24vw/7.68), 24px) !important;
-        height: fit-content;
+        height: auto;
       }
 
       p {
