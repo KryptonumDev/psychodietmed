@@ -18,7 +18,7 @@ export const generetaSeo = async (id, url, query, type = 'page') => {
         url: canonical,
       },
       robots: {
-        index: false,
+        index: true,
       }
     }
 
