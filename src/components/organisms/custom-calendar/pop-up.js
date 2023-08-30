@@ -33,7 +33,6 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
         name: data.name.split(' ')[0],
         surname: data.name.split(' ')[1],
         phone: formatPhoneNumber(data.phone),
-        message: data.message,
         employeId: specialistId,
         serviceId: serviceId,
         date: chosenDate.format('YYYY-MM-DD'),
@@ -139,14 +138,6 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
               name='phone'
               placeholder="Telefon"
               error="Proszę wpisać numer telefonu w formacie +48 123 456 789"
-            />
-            <Input
-              register={register('message')}
-              rows={3}
-              errors={errors}
-              label="Dodatkowe informacje"
-              name='message'
-              placeholder="Dodatkowe informacje"
             />
           </div>
         </div>

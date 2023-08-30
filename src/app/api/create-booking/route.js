@@ -3,7 +3,7 @@ import { NextResponse } from "next/server"
 export const dynamic = 'force-dynamic'
 
 export async function POST(req) {
-  let { email, name, surname, phone, message, employeId, serviceId, date, time } = await req.json()
+  let { email, name, surname, phone, employeId, serviceId, date, time } = await req.json()
 
   try {
     const headers = new Headers();
@@ -26,7 +26,6 @@ export async function POST(req) {
           "service_id": serviceId,
           "start_date": date,
           "start_time": time,
-          "description": message
         }
       ]
     });
