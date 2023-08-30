@@ -8,4 +8,4 @@ Disallow: /koszyk
 Disallow: /podsumowanie
 Disallow: /zamowienie
 Disallow: /api/*
-Sitemap: https://psychodietmed-git-develop-kryptonum.vercel.app/sitemap.xml
+Sitemap: https://www.psychodietmed.pl/sitemap.xml

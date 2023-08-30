@@ -6,7 +6,7 @@ export const generetaSeo = async (id, url, query, type = 'page') => {
     const canonical = url + (type !== 'page' ? `/${id}` : '')
 
     const data = {
-      metadataBase: new URL('https://psychodietmed-git-develop-kryptonum.vercel.app'),
+      metadataBase: new URL('https://www.psychodietmed.pl'),
       title: title,
       description: metaDesc,
       alternates: {

@@ -13,7 +13,7 @@ import Button from "@/components/atoms/button"
 
 export const CustomCalendar = ({ specialistId, serviceId, specialistData }) => {
   const fetchData = () => {
-    fetch("https://psychodietmed-git-develop-kryptonum.vercel.app/api/get-avaible-dates", {
+    fetch("https://www.psychodietmed.pl/api/get-avaible-dates", {
       method: 'POST',
       body: JSON.stringify({
         employeId: specialistId,

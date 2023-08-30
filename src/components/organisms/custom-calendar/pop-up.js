@@ -26,7 +26,7 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
   } = useForm()
 
   const onSubmit = (data) => {
-    fetch("https://psychodietmed-git-develop-kryptonum.vercel.app/api/create-booking", {
+    fetch("https://www.psychodietmed.pl/api/create-booking", {
       method: 'POST',
       body: JSON.stringify({
         email: data.email,
@@ -46,14 +46,14 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
         if (!res[0]?.id) throw new Error('Nie udało się stworzyć rezerwacji, spróbuj ponownie później.')
 
         const session = v4()
-        fetch("https://psychodietmed-git-develop-kryptonum.vercel.app/api/create-transaction", {
+        fetch("https://www.psychodietmed.pl/api/create-transaction", {
           method: 'POST',
           body: JSON.stringify({
             amount: service.price,
             sessionId: session,
             email: data.email,
             description: `Konsultacja online, ${specialistData.title}`,
-            urlReturn: `https://psychodietmed-git-develop-kryptonum.vercel.app/api/complete-booking/?session=${session}&id=${res[0].id}&amount=${service.price}`,
+            urlReturn: `https://www.psychodietmed.pl/api/complete-booking/?session=${session}&id=${res[0].id}&amount=${service.price}`,
           })
         })
           .then(response => response.json())

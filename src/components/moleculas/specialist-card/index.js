@@ -20,7 +20,7 @@ const days = [
 export default function Card({ setPopupOpened, setChosenTime, data }) {
   const { specialisations, proffesional, slug, title } = data
   const fetchData = () => {
-    fetch("https://psychodietmed-git-develop-kryptonum.vercel.app/api/get-avaible-dates", {
+    fetch("https://www.psychodietmed.pl/api/get-avaible-dates", {
       method: 'POST',
       body: JSON.stringify({
         employeId: proffesional.specialistId,
