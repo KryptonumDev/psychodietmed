@@ -10,6 +10,7 @@ import { ApolloWrapper } from '../context/apolo-provider'
 import GlobalScript from '../utils/global.js';
 // import { Suspense } from 'react'
 import { FacebookPixelEvents } from '../context/facebook-pixel'
+import { Suspense } from 'react'
 
 const Satoshi = localFont({
   src: '../assets/fonts/satoshi.woff2',
@@ -19,17 +20,18 @@ const Satoshi = localFont({
 })
 
 export const metadata = {
+  metadataBase: new URL('https://www.psychodietmed.pl'),
   title: 'Psychodietetyka i Psychoterapia: Zdrowe Relacje z Jedzeniem – Psychodietmed',
   description: 'Odkryj, jak poprawić swoje relacje z jedzeniem dzięki psychodietetyce i psychoterapii. Zdrowa dieta i zdrowe podejście do jedzenia dzięki PsychoDietMed.',
   openGraph: {
     title: 'Psychodietetyka i Psychoterapia: Zdrowe Relacje z Jedzeniem – Psychodietmed',
     description: 'Odkryj, jak poprawić swoje relacje z jedzeniem dzięki psychodietetyce i psychoterapii. Zdrowa dieta i zdrowe podejście do jedzenia dzięki PsychoDietMed.',
-    url: 'https://www.psychodietmed.pl/',
+    url: '/',
     siteName: 'Psychodietmed',
     locale: 'pl-PL',
     type: 'website',
     images: [
-      'https://www.psychodietmed.pl/opengraph-image.jpg'
+      '/opengraph-image.jpg'
     ]
   },
   robots: {

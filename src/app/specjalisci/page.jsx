@@ -10,6 +10,8 @@ export async function generateMetadata({ params }) {
   return await generetaSeo('cG9zdDoxODcz', '', GET_SEO_PAGE)
 }
 
+export const dynamic = 'force-dynamic'
+
 export default async function Specjalista({ params }) {
   const { specialists } = await getData(params)
   return (
