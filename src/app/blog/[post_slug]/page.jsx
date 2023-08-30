@@ -14,8 +14,44 @@ export async function generateMetadata({ params }) {
 export default async function Post({ params }) {
   const { data, posts } = await getData(params)
 
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://www.psychodietmed.pl/${data.slug}`
+    },
+    "headline": data.title,
+    "description": data.excerpt,
+    "datePublished": data.dateGmt,
+    "dateModified": data.dateGmt,
+    "author": {
+      "@type": "Person",
+      "name": data.postAuthor.author.title
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Psychodietmed",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.psychodietmed.pl/icon.jpg"
+      }
+    },
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://www.psychodietmed.pl/opengraph-image.jpg",
+      "width": 800,
+      "height": 600
+    }
+  }
+
   return (
     <main id="main">
+      <script
+        key={`article`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <Breadcrumbs data={[{ page: 'Blog', url: `/blog` }, { page: data.title, url: `/blog/${params.post_slug}` }]} />
       <Hero data={data} />
       <Content next={data.next} prev={data.previous} author={data.postAuthor.author} data={data.content} title={data.title} excerpt={data.excerpt} />
@@ -56,7 +92,6 @@ async function getData(params) {
           }
         }
         post(id:  $slug, idType: SLUG){
-          dateGmt
           readingTime
           id
           title

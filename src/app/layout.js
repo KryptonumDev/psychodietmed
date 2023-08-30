@@ -44,7 +44,6 @@ const schema = {
   "description": "Psychodietetyka i Psychoterapia: Zdrowe Relacje z Jedzeniem - Psychodietmed",
   "url": "https://www.psychodietmed.pl",
   "logo": "https://www.psychodietmed.pl/icon.jpg",
-  "foundingDate": "yyyy-mm-dd",
   "founders": [
     {
       "@type": "Person",

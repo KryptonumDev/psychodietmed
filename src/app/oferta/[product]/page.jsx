@@ -15,8 +15,34 @@ export async function generateMetadata({ params }) {
 
 export default async function Post({ params }) {
   const { data, global, specialists } = await getData(params)
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": data.title,
+    "description": data.description,
+    "image": [
+      data.featuredImage.node.mediaItemUrl
+    ],
+    "offers": {
+      "@type": "Offer",
+      "price": data.price,
+      "priceCurrency": "PLN",
+      "availability": "https://schema.org/InStock",
+      "seller": {
+        "@type": "Organization",
+        "name": "Psychodietmed"
+      }
+    }
+  }
+
   return (
     <main id="main">
+      <script
+        key={`product`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <Breadcrumbs data={[{ page: 'Cennik', url: `/oferta` }, { page: data.title, url: `/oferta/${params.product}` }]} />
       <Hero data={data} />
       <FlexibleContent productId={data.productId} data={data.product.additionalSectionsProduct} />

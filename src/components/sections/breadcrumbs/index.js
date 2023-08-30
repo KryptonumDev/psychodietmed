@@ -8,15 +8,15 @@ const createBreadcrumbs = (breadCrumbs) => {
       "@type": "ListItem",
       "position": 1,
       "name": 'PsychoDietMed',
-      "item": 'https://www.psychodietmed.pl/'
+      "item": 'https://www.psychodietmed.pl'
     }
   ]
   breadCrumbs.forEach((el, index) => {
     items.push({
       "@type": "ListItem",
       "position": index + 2,
-      "name": el.name,
-      "item": `https://www.psychodietmed.pl/${el.url}`
+      "name": el.page,
+      "item": `https://www.psychodietmed.pl${el.url}`
     })
   });
 
