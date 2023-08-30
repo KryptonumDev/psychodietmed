@@ -11,7 +11,7 @@ import Breadcrumbs from "@/components/sections/breadcrumbs"
 import { Fetch } from "../../../utils/fetch-query"
 
 export async function generateMetadata({ params }) {
-  return await generetaSeo(params.specjalista, '', GET_SEO_SPECIALIST, 'post')
+  return await generetaSeo(params.specjalista, '/specjalisci', GET_SEO_SPECIALIST, 'post')
 }
 
 export default async function Specjalista({ params }) {

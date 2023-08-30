@@ -53,7 +53,7 @@
 
 .image {
   width: 100% !important;
-  height: auto !important;
+  height: fit-content !important;
   grid-area: image;
 
   img {
