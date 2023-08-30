@@ -80,21 +80,8 @@ export default async function sitemap() {
       url: 'https://psychodietmed-git-develop-kryptonum.vercel.app/polityka-prywatnosci',
       lastModified: new Date(),
     },
-    {
-      url: 'https://psychodietmed-git-develop-kryptonum.vercel.app/',
-      lastModified: new Date(),
-    },
-    {
-      url: 'https://psychodietmed-git-develop-kryptonum.vercel.app/',
-      lastModified: new Date(),
-    },
-    {
-      url: 'https://psychodietmed-git-develop-kryptonum.vercel.app/',
-      lastModified: new Date(),
-    },
   ]
 }
-
 
 async function getData() {
   const { body: { data } } = await Fetch({
