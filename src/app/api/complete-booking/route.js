@@ -8,7 +8,7 @@ export async function GET(req) {
     const amount = searchParams.get('amount')
     const session = searchParams.get('session')
 
-    if (!bookingId || !session || !amount) return NextResponse.redirect('https://psychodietmed-git-develop-kryptonum.vercel.app/podsumowanie?status=error')
+    if (!bookingId || !session || !amount) return NextResponse.redirect(`https://psychodietmed-git-develop-kryptonum.vercel.app/podsumowanie?status=error&bookingId=${bookingId}&session=${session}&amount=${amount}`)
 
     const transactionHeaders = new Headers();
     transactionHeaders.append("Content-Type", "application/json");
@@ -62,6 +62,6 @@ export async function GET(req) {
     else if (err.message === 'failed')
       return NextResponse.redirect('https://psychodietmed-git-develop-kryptonum.vercel.app/podsumowanie?status=failed')
     else
-      return NextResponse.redirect('https://psychodietmed-git-develop-kryptonum.vercel.app/podsumowanie?status=error')
-   }
+      return NextResponse.redirect(`https://psychodietmed-git-develop-kryptonum.vercel.app/podsumowanie?status=error&error=${err.message}`)
+  }
 }
