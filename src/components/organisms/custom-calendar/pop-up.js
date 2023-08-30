@@ -3,11 +3,20 @@ import React, { useEffect } from "react"
 import styles from './styles.module.scss'
 import Input from "@/components/atoms/input"
 import { useForm } from "react-hook-form"
-import { emailPattern, phonePattern } from "../../../constants/patterns"
+import { altPhonePattern, emailPattern, phonePattern } from "../../../constants/patterns"
 import Button from "@/components/atoms/button"
 import { motion } from "framer-motion"
 import { v4 } from "uuid"
 import { Image } from "@/components/atoms/image"
+import { Cross } from "../../../assets/cross"
+
+function formatPhoneNumber(input) {
+  const digitsOnly = input.replace(/\D/g, '');
+
+  if (input.includes('+')) return `+${digitsOnly}`
+
+  return `+48${digitsOnly}`
+}
 
 export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosenDate, chosenTime, specialistData }) => {
   const {
@@ -23,7 +32,7 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
         email: data.email,
         name: data.name.split(' ')[0],
         surname: data.name.split(' ')[1],
-        phone: data.phone,
+        phone: formatPhoneNumber(data.phone),
         message: data.message,
         employeId: specialistId,
         serviceId: serviceId,
@@ -33,6 +42,10 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
     })
       .then(response => response.json())
       .then(res => {
+        if (res.errors) throw new Error(res.message)
+        if (res.code === "FORBIDDEN") throw new Error('Ten termin jest już w trakcie rezerwacji przez kogoś innego. Wybierz inny termin.')
+        if (!res[0]?.id) throw new Error('Nie udało się stworzyć rezerwacji, spróbuj ponownie później.')
+
         const session = v4()
         fetch("https://psychodietmed-git-develop-kryptonum.vercel.app/api/create-transaction", {
           method: 'POST',
@@ -40,7 +53,7 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
             amount: service.price,
             sessionId: session,
             email: data.email,
-            description: `Konsultacja online, ${name}`,
+            description: `Konsultacja online, ${specialistData.title}`,
             urlReturn: `https://psychodietmed-git-develop-kryptonum.vercel.app/api/complete-booking/?session=${session}&id=${res[0].id}&amount=${service.price}`,
           })
         })
@@ -77,6 +90,9 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className={styles.popup}>
       <div onClick={() => { setPopupOpened(false) }} className={styles.overlay} />
       <form onSubmit={handleSubmit(onSubmit)}>
+        <button className={styles.close} onClick={() => { setPopupOpened(false) }}>
+          <Cross />
+        </button>
         <h3>Uzupełnij dane w celu umówienia wizyty</h3>
         <div className={styles.flex}>
           <div className={styles.info}>
@@ -93,7 +109,10 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
                 <p>{specialistData.proffesional?.proffesion}</p>
               </div>
             </div>
-            <div className={styles.wrap}><p><IconCalendar /> {chosenDate.format('DD MMMM YYYY')}, {chosenTime}</p> <Button theme='secondary' onClick={() => { setPopupOpened(false) }}>Zmień termin</Button></div>
+            <div className={styles.wrap}>
+              <p><IconCalendar /> {chosenDate.format('DD MMMM YYYY')}, {chosenTime}</p>
+              <Button theme='secondary' href={specialistData.slug ? `/specjalisci/${specialistData.slug}#kalendarz` : null} onClick={() => { setPopupOpened(false) }}>Zmień termin</Button>
+            </div>
             <p><IconMark /> Konsultacja online</p>
             <p><IconMoney /> {(service.price / 100)}&nbsp;zł / <small>sesja 50&nbsp;min</small></p>
           </div>
@@ -114,11 +133,12 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
             />
             <Input
               className={styles.phone}
-              register={register('phone', { required: true, pattern: phonePattern })}
+              register={register('phone', { required: true, pattern: altPhonePattern })}
               errors={errors}
               label="Telefon"
               name='phone'
               placeholder="Telefon"
+              error="Proszę wpisać numer telefonu w formacie +48 123 456 789"
             />
             <Input
               register={register('message')}

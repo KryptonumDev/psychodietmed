@@ -52,7 +52,6 @@
   .grid {
     margin-top: clamp(32px, calc(54vw/7.68), 128px);
     display: grid;
-    grid-auto-rows: 1fr;
     gap: clamp(16px, calc(16vw/7.68), 24px) clamp(16px, calc(24vw/7.68), 32px);
     grid-template-columns: 1fr 1fr;
 
@@ -71,6 +70,7 @@
       box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
 
       .icon {
+        min-width: clamp(28px, calc(32vw/7.68), 34px) !important;
         width: clamp(28px, calc(32vw/7.68), 34px) !important;
         height: auto !important;
       }

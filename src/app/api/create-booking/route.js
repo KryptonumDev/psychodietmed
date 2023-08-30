@@ -14,7 +14,7 @@ export async function POST(req) {
       "user": {
         "email": email,
         "name": name,
-        "phone": phone,
+        "default_phone": phone,
         "surname": surname,
         "send_reset_password": false
       },

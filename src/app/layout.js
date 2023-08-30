@@ -37,24 +37,37 @@ export const metadata = {
   }
 }
 
-// const schema = {
-//   "@context": "https://schema.org",
-//   "@type": "FAQPage",
-//   "mainEntity": arrays
-// };
+const schema = {
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "Psychodietmed",
+  "description": "Psychodietetyka i Psychoterapia: Zdrowe Relacje z Jedzeniem - Psychodietmed",
+  "url": "https://www.psychodietmed.pl",
+  "logo": "https://www.psychodietmed.pl/icon.jpg",
+  "foundingDate": "yyyy-mm-dd",
+  "founders": [
+    {
+      "@type": "Person",
+      "name": "Mgr. Sylwia Prawdzik",
+      "jobTitle": "Founder & CEO"
+    }
+  ],
+  "sameAs": [
+    "https://www.instagram.com/psychodietmed/",
+    "https://www.facebook.com/strefapsychodietetyki",
+  ],
+};
 
 export const revalidate = 600
 
 export default function RootLayout({ children }) {
   return (
     <html lang="pl">
-      {/* <Head>
-        <script
-          key={`faq`}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-      </Head> */}
+      <script
+        key={`faq`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <body className={`body ${Satoshi.variable}`}>
         <ApolloWrapper>
           <AppProvider>
