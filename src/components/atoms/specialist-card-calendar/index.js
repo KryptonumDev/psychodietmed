@@ -152,8 +152,8 @@ export default function Calendar({ service, clickDate, dates, data }) {
       <Button theme="secondary" href={`/specjalisci/${data.slug}#kalendarz`}>Więcej terminów</Button>
       <div className={styles.mobile}>
         <p>Najbliższy termin: <span>{(() => {
-          let day = firstDay.date.format('DD MM YYYY') === dayjs().format('DD MM YYYY') ? 'Dziś' : getWeekDays()[firstDay.date.day()]
           if (firstDay) {
+            let day = firstDay.date.format('DD MM YYYY') === dayjs().format('DD MM YYYY') ? 'Dziś' : getWeekDays()[firstDay.date.day()]
             return `${day} ${firstDay.date.format('DD MMMM')}`
           }
           return 'Brak terminów'

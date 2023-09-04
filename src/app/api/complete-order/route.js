@@ -22,7 +22,7 @@ export async function GET(req) {
       .then(res => res.json())
       .then(async (res) => {
         console.log(res)
-        if (res.data.status < 1 || res.data.status > 2)
+        if (res.data.status < 1 || res.data.status > 2) // TODO: 1 transaction verify https://developers.przelewy24.pl/index.php?pl#tag/Transaction-service-API/paths/~1api~1v1~1transaction~1verify/put
           throw new Error('failed')
 
         await fetch('https://psychodietmed.headlesshub.com/graphql', {
