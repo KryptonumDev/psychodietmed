@@ -158,19 +158,21 @@ export default function Calendar({ service, clickDate, dates, data }) {
           }
           return 'Brak terminów'
         })()}</span></p>
-        <div className={styles.grid}>
-          {firstDay.hours.map((el, index) => {
-            if (index > 1) return null
-            return (
-              <button key={index} onClick={() => { clickDate(firstDay.date, el, data, service) }} className={styles.hour}>
-                {el}
-              </button>
-            )
-          })}
-          <Link className={styles.hour} href={`/specjalisci/${data.slug}#kalendarz`}>
-            więcej <AngleRight />
-          </Link>
-        </div>
+        {firstDay && (
+          <div className={styles.grid}>
+            {firstDay?.hours?.map((el, index) => {
+              if (index > 1) return null
+              return (
+                <button key={index} onClick={() => { clickDate(firstDay.date, el, data, service) }} className={styles.hour}>
+                  {el}
+                </button>
+              )
+            })}
+            <Link className={styles.hour} href={`/specjalisci/${data.slug}#kalendarz`}>
+              więcej <AngleRight />
+            </Link>
+          </div>
+        )}
       </div>
     </>
   )
