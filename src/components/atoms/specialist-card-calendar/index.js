@@ -128,7 +128,7 @@ export default function Calendar({ service, clickDate, dates, data }) {
                     <span>{date.format('DD MMM')}</span>
                   </div>
                   <div className={styles.subgrid}>
-                    {hours.map(({ hour, avaible }) => {
+                    {hours?.map(({ hour, avaible }) => {
                       if (avaible)
                         return (
                           <button key={hour + avaible} onClick={() => { clickDate(date, hour, data, service) }} className={styles.hour}>
