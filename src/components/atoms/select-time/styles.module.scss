@@ -15,14 +15,15 @@
   }
   cursor: pointer;
   .placeholder {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto;
     align-items: center;
     justify-content: space-between;
     gap: 24px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       color: var(--neutrals-400);
       &.isValue{
         color: var(--primary-800);
@@ -35,12 +36,14 @@
   position: relative;
   &:focus,
   &:focus-within {
+    pointer-events: none;
     .placeholder {
       svg {
         transform: rotateX(180deg);
       }
     }
     .dropdown {
+      pointer-events: all;
       opacity: 1;
       visibility: visible;
       transform: translateY(0);

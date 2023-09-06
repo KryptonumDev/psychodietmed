@@ -3,16 +3,18 @@ import { generetaSeo } from "../../../utils/genereate-seo"
 import { Fetch } from "../../../utils/fetch-query"
 import { GET_SEO_LANDING } from "../../../queries/landing-seo"
 import Hero from "@/components/sections/LandingPage/Hero"
+import Flex from "@/components/sections/LandingPage/Flex"
 
 export async function generateMetadata({ params }) {
   return await generetaSeo(params.landing, '/landing', GET_SEO_LANDING, 'post')
 }
 
 export default async function Landing({ params }) {
-  const { data: { landingPlates, landingForm, landingFlex } } = await getData(params);
+  const { data: { landingForm, landingFlex, landingPlates } } = await getData(params);
   return (
     <main id="main">
       <Hero data={landingForm} />
+      <Flex data={landingFlex} />
     </main>
   )
 }

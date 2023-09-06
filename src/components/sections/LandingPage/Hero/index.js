@@ -24,6 +24,7 @@ const Hero = ({
             alt={image.altText}
             aspectRatio={true}
             className={styles.image}
+            loading='eager'
           />
           <div>
             <p className={styles.author}>{blueText}</p>
