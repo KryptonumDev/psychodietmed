@@ -13,7 +13,7 @@ const Hero = ({
   }
 }) => {
   return (
-    <section className={styles.wrapper}>
+    <section className={styles.wrapper} id='formularz'>
       <header dangerouslySetInnerHTML={{ __html: title }} />
       <div className={styles.column}>
         <div className={styles.info}>
@@ -35,7 +35,7 @@ const Hero = ({
             </a>
           </div>
         </div>
-        <Form />
+        <Form id={formId} />
       </div>
     </section>
   );

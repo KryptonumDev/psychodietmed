@@ -10,6 +10,7 @@ html {
   @media (max-height: 768px) and (min-width: 1024px){
     zoom: 0.84;
   }
+  scroll-behavior: smooth;
 }
 
 :root {
@@ -222,6 +223,9 @@ p+p {
 }
 
 h1 em {
+  font-style: normal;
+}
+h2 em {
   font-style: normal;
 }
 

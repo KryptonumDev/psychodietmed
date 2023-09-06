@@ -1,4 +1,3 @@
-import Form from '@/components/moleculas/landing-page-form';
 import styles from './styles.module.scss';
 import { Image } from '@/components/atoms/image';
 

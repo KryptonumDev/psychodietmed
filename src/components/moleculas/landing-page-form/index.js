@@ -1,40 +1,59 @@
 'use client'
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import styles from './styles.module.scss'
 import Checkbox from "@/components/atoms/checkbox"
 import Input from "@/components/atoms/input"
 import axios from "axios"
 import Button from "@/components/atoms/button"
+import SelectTime from "@/components/atoms/select-time"
 import { AnimatePresence, motion } from 'framer-motion';
 import { emailPattern, phonePattern } from "../../../constants/patterns"
-import SelectTime from "@/components/atoms/select-time"
+import { LANDINGPAGE_GROUPID } from "../../../constants/mailerLite"
 
-const Form = () => {
+const Form = ({ id }) => {
+  const url = `https://psychodietmed.headlesshub.com/wp-json/contact-form-7/v1/contact-forms/${id}/feedback`;
   const [ sentStatus, setSentStatus ] = useState({ sent: false });
   const { register, handleSubmit, reset, formState: { errors }, watch } = useForm();
   const selectTimeWatch = watch([ "date", "time" ]);
 
   const onSubmit = data => {
     setSentStatus({ sent: true });
+
+    const datePreference = (data.date || data.time)
+    ? `Preferencja co do czasu kontaktu: ${data?.date ? `${data?.date}` : ''} ${data?.time ? `, ${data?.time}` : ''}`
+    : 'Bez preferencji co do czasu kontaktu';
+
     let body = new FormData()
+
     body.append('fullname', data.fullname)
     body.append('email', data.email)
     body.append('tel', data.tel)
-    body.append('date', data.date)
-    body.append('time', data.time)
+    body.append('datePreference', datePreference)
 
     axios.post(url, body)
-      .then((res) => {
-        if (res.status === 200) {
-          setSentStatus(prevStatus => ({ ...prevStatus, success: true }));
-          reset()
-        } else {
-          setSentStatus(prevStatus => ({ ...prevStatus, success: false }));
-        }
-      }).catch(() => {
+    .then((res) => {
+      if (res.status === 200) {
+        setSentStatus(prevStatus => ({ ...prevStatus, success: true }));
+        reset();
+        fetch('/api/newsletter', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: data.fullname.split(' ')[0],
+            email: data.email,
+            group_id: LANDINGPAGE_GROUPID
+          }),
+        })
+          .then(response => response.json())
+          .then()
+          .catch();
+      } else {
         setSentStatus(prevStatus => ({ ...prevStatus, success: false }));
-      })
+      }
+    }).catch(() => {
+      setSentStatus(prevStatus => ({ ...prevStatus, success: false }));
+    })
   };
   
   return (

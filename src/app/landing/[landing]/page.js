@@ -4,6 +4,7 @@ import { Fetch } from "../../../utils/fetch-query"
 import { GET_SEO_LANDING } from "../../../queries/landing-seo"
 import Hero from "@/components/sections/LandingPage/Hero"
 import Flex from "@/components/sections/LandingPage/Flex"
+import Benefits from "@/components/sections/LandingPage/Benefits"
 
 export async function generateMetadata({ params }) {
   return await generetaSeo(params.landing, '/landing', GET_SEO_LANDING, 'post')
@@ -15,6 +16,7 @@ export default async function Landing({ params }) {
     <main id="main">
       <Hero data={landingForm} />
       <Flex data={landingFlex} />
+      <Benefits data={landingPlates} />
     </main>
   )
 }
