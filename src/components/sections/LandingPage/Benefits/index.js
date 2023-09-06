@@ -1,4 +1,3 @@
-'use client';
 import { Image } from '@/components/atoms/image';
 import styles from './styles.module.scss';
 import Button from '@/components/atoms/button';

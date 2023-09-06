@@ -100,6 +100,17 @@
         background-color: var(--primary-50);
       }
     }
+    input {
+      &:focus {
+        + label {
+          background-color: var(--primary-50);
+        }
+      }
+      &:not(:hover):focus + label {
+        outline: 2px solid #A0636F;
+        outline-offset: 2px;
+      }
+    }
     input:checked + label {
       background: var(--primary-800);
       border-color: var(--primary-800);
