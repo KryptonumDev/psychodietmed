@@ -39,12 +39,12 @@ export default function Card({ setPopupOpened, setChosenTime, data }) {
             break
           }
         }
-        if(!arr) return {
-          date: null,
-          hours: null
-        }
         setService(service)
-        setDate(arr)
+        if (!arr) {
+          setDate({ date: null, hours: null })
+        } else {
+          setDate(arr)
+        }
       })
   }
 
