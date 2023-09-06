@@ -103,6 +103,7 @@ const Form = ({ id }) => {
           error="Proszę poprawnie uzupełnić to pole"
         />
         <Input
+          type="number"
           name={'tel'}
           register={register('tel', { required: true, pattern: phonePattern })}
           placeholder='Numer telefonu'
