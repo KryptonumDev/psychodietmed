@@ -119,7 +119,7 @@ export default function Footer() {
       </div>
       <div className={styles.inform}>
         <div className={styles.flex}>
-          <h3>Ⓒ Stworzone przez <a href="https://kryptonum.eu" target="_blank">Kryptonum</a></h3>
+          <h3>Ⓒ Stworzone przez <a href="https://kryptonum.eu/pl" target="_blank" rel="noopener">Kryptonum</a></h3>
           <Link className={styles.link} href='/regulamin'>Regulamin</Link>
           <Link className={styles.link} href='/polityka-prywatnosci'>Polityka prywatności</Link>
         </div>

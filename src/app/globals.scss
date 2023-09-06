@@ -15,6 +15,7 @@ html {
 :root {
   --animation: .3s ease-out;
   --neutrals-50: #fff;
+  --neutrals-400: #8A8A8A;
   --neutrals-800: #181818;
   --background-50: #FFFEFE;
   --secondary-100: #F5E7EA;
@@ -89,6 +90,10 @@ summary {
 
 :focus {
   outline: none;
+}
+
+::placeholder {
+  color: var(--neutrals-400);
 }
 
 .tabbing :focus-visible,

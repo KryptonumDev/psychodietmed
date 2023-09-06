@@ -10,7 +10,9 @@ export default function Input({ type = 'text', className = '', rows, placeholder
 
   return (
     <label className={`${styles.wrapper} ${className}`}>
-      <span>{title}</span>
+      {title && (
+        <span>{title}</span>
+      )}
       {rows
         ? <textarea rows={rows} placeholder={placeholder} className={errors[name] ? `${styles.errored} ${styles.input}` : styles.input} {...register} />
         : <div className={styles.inputWrap}>

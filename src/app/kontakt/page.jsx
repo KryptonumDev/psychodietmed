@@ -6,7 +6,7 @@ import Breadcrumbs from "@/components/sections/breadcrumbs";
 import { Fetch } from "../../utils/fetch-query";
 
 export async function generateMetadata() {
-  return await generetaSeo('cG9zdDo3MjQ=', '/koszyk', GET_SEO_PAGE)
+  return await generetaSeo('cG9zdDo3MjQ=', '/kontakt', GET_SEO_PAGE)
 }
 
 export default async function Specialist() {
