@@ -20,7 +20,7 @@ export async function POST(req) {
         "surname": surname,
         "send_reset_password": false,
         "default_address": {
-          "name": name + ' ' + surname,
+          "name": name + ' ' + (surname ? surname : ''),
           "street": "ul. 26 Kwietnia 35/36",
           "city": "Szczecin",
           "postal_code": "71-126",
