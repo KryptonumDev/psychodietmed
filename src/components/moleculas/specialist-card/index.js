@@ -67,7 +67,7 @@ export default function Card({ setPopupOpened, setChosenTime, data }) {
 
   return (
     <div className={styles.item}>
-      <Link href={`/specjalisci/${slug}`} tabIndex={-1} className={styles.link} />
+      <Link href={`/specjalisci/${slug}`} tabIndex={-1} className={styles.link} aria-label={`Sprawdź specjalistę ${title}`} />
       <div>
         <Image
           className={styles.image}

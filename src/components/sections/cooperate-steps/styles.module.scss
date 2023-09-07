@@ -250,8 +250,8 @@
   }
 
   .number {
-    color: var(--secondary-500);
-    font-size: clamp(24rem, calc(36vw/7.68), 48rem);
+    color: var(--primary-800);
+    font-size: clamp(24rem, calc(28vw/7.68), 40rem);
 
     @media (max-width: 370px) {
       font-size: clamp(0rem, calc(24vw/3.7), 24rem);
