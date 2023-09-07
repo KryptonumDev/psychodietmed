@@ -126,11 +126,10 @@ main {
 
   @media (max-width: 1439px) {
     padding: 0 clamp(16px, calc(32vw/7.68), 80px);
-    padding-top: clamp(130px, calc(200vw/7.68), 200px);
+    padding-top: clamp(128px, calc(172vw/7.68), 172px);
   }
-
   @media (max-height: 768px) and (min-width: 1024px){
-    padding-top: clamp(130px, calc(130vw/7.68), 130px);
+    padding-top: clamp(112px, calc(128vw/7.68), 128px);
   }
 }
 
