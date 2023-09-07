@@ -21,7 +21,7 @@ export const generetaSeo = async (id, url, query, type = 'page') => {
         index: true,
       }
     }
-    console.log(opengraphImage?.mediaItemUrl)
+
     if (opengraphImage?.mediaItemUrl) {
       data.openGraph.images = [
         opengraphImage?.mediaItemUrl

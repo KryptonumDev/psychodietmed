@@ -19,9 +19,16 @@
   grid-template-columns: 1fr auto;
   grid-template-areas:
     'calendar time'
-    'summary summary'
-    'info info';
-  grid-template-rows: 1fr auto;
+    'calendar info'
+    'summary summary';
+  grid-template-rows: 1fr auto auto;
+
+  @media (max-width: 720px) {
+    grid-template-areas:
+      'calendar time'
+      'summary summary'
+      'info info';
+  }
 
   @media (max-width: 640px) {
     width: 100%;
@@ -37,7 +44,7 @@
   }
 
   h2 {
-    font-size: clamp(32rem, calc(36vw/7.68), 48rem);
+    font-size: clamp(24rem, calc(28vw/7.68), 40rem);
     margin-bottom: 36px;
     text-align: center;
 
@@ -55,7 +62,7 @@
   padding: clamp(24px, calc(24vw/7.68), 36px) clamp(16px, calc(24vw/7.68), 36px);
   box-sizing: border-box;
   position: relative;
-  z-index: 1;
+  z-index: 3;
   box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
 
   @media (max-width: 940px) {
@@ -79,7 +86,7 @@
       border-radius: 50px;
       border: 2px solid var(--primary-800, #194574);
       background: var(--background-50, #FFFEFE);
-      padding: 14px 28px 16px 28px;
+      padding: 9px 28px 10px 28px;
       display: block;
       width: 100%;
       font-size: clamp(16px, calc(16vw/7.68), 20px);
@@ -120,7 +127,7 @@
   z-index: 2;
 
   header {
-    margin: 36px 0 24px 0;
+    margin: 36px 0 8px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -159,7 +166,7 @@
       font-size: clamp(20rem, calc(24vw/7.68), 24rem);
       width: 46px;
       height: 46px;
-      margin: 4px auto;
+      margin: 1px auto;
       aspect-ratio: 1;
 
       @media (max-width: 564px) {
@@ -459,7 +466,6 @@
 }
 
 .inform {
-  margin-top: clamp(48px, calc(48vw/7.68), 64px);
   grid-area: info;
   width: 100%;
   border-radius: 20px;
@@ -467,11 +473,18 @@
   background: var(--neutrals-50, #FFF);
   box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
   padding: clamp(16px, calc(20vw/7.68), 20px) clamp(16px, calc(28vw/7.68), 36px);
+  position: relative;
+  z-index: 2;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 28px;
+
+  @media (max-width: 720px) {
+    box-shadow: none;
+    margin-top: 12px;
+  }
 
   p{
     text-align: center;

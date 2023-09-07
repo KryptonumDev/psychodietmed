@@ -68,21 +68,22 @@
       strong {
         display: block;
         color: #194574;
-        font-size: 24rem;
+        font-size: 20rem;
         text-align: center;
         margin-bottom: 4px;
       }
 
       span {
         display: block;
-        font-size: 20rem;
+        font-size: 18rem;
         text-align: center;
+        min-width: fit-content;
       }
     }
 
     .subgrid {
       display: grid;
-      gap: 16px;
+      gap: 10px;
       grid-auto-rows: 1fr;
 
       span {
