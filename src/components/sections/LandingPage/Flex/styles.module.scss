@@ -1,0 +1,25 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 36px clamp(24px, calc(36vw/7.68), 48px);
+  align-items: center;
+  header {
+    font-size: clamp(16px, calc(20vw/7.68), 24px);
+    svg {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      margin-bottom: clamp(24px, calc(36vw/7.68), 64px);
+    }
+  }
+  .image {
+    width: 100% !important;
+    height: auto !important;
+  }
+  @media (max-width: 949px){
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 549px){
+    grid-template-columns: 1fr;
+  }
+}

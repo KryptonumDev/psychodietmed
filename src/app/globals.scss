@@ -10,11 +10,13 @@ html {
   @media (max-height: 768px) and (min-width: 1024px){
     zoom: 0.84;
   }
+  scroll-behavior: smooth;
 }
 
 :root {
   --animation: .3s ease-out;
   --neutrals-50: #fff;
+  --neutrals-400: #8A8A8A;
   --neutrals-800: #181818;
   --background-50: #FFFEFE;
   --secondary-100: #F5E7EA;
@@ -23,6 +25,7 @@ html {
   --secondary-600: #C996A0;
   --primary-50: #F1F6FB;
   --primary-500: #76A2D6;
+  --primary-700: #3A69A0;
   --primary-800: #194574;
   --easing: cubic-bezier(0, .8, 0.62, 1);
 }
@@ -91,8 +94,13 @@ summary {
   outline: none;
 }
 
+::placeholder {
+  color: var(--neutrals-400);
+}
+
 .tabbing :focus-visible,
-.tabbing input[type="checkbox"]:focus-visible+span {
+.tabbing input[type="checkbox"]:focus-visible + span,
+.tabbing .selectPreferedDate input:focus:checked + label {
   outline: 2px solid #A0636F;
   outline-offset: 2px;
 }
@@ -217,6 +225,9 @@ p+p {
 }
 
 h1 em {
+  font-style: normal;
+}
+h2 em {
   font-style: normal;
 }
 
