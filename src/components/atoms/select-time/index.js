@@ -24,7 +24,7 @@ const SelectTime = ({ placeholder, registerTime, registerDate, errors, watch, se
   }
 
   return (
-    <div className={styles.wrapper} tabIndex={0} ref={selectRef}>
+    <div className={`${styles.wrapper} selectPreferedDate`} tabIndex={0} ref={selectRef}>
       <div className={styles.placeholder}>
         <span className={label.preferencedDate || label.preferencedTime ? styles.isValue : ''}>
           {label.preferencedDate || label.preferencedTime ? `${label.preferencedDate || ''}${label.preferencedDate ? ', ' : ''}${label.preferencedTime || ''}` : placeholder}

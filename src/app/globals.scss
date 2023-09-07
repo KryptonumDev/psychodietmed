@@ -98,7 +98,8 @@ summary {
 }
 
 .tabbing :focus-visible,
-.tabbing input[type="checkbox"]:focus-visible+span {
+.tabbing input[type="checkbox"]:focus-visible + span,
+.tabbing .selectPreferedDate input:focus:checked + label {
   outline: 2px solid #A0636F;
   outline-offset: 2px;
 }
