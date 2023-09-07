@@ -9,7 +9,7 @@ import Button from "@/components/atoms/button"
 export default function Card({ data, myCourse = false }) {
   return (
     <div className={styles.wrapper}>
-      <Link className={styles.link} href={myCourse ? `/moje-kursy/${data.product.course.slug}` : `/akademia/kurs/${data.product.course.slug}`} />
+      <Link className={styles.link} href={myCourse ? `/moje-kursy/${data.product.course.slug}` : `/akademia/kurs/${data.product.course.slug}`} aria-label={data.name} />
       <div>
         <Image
           className={styles.image}

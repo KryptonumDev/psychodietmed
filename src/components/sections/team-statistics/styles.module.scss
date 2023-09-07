@@ -34,12 +34,12 @@
   }
 
   .counters {
-    left: clamp(36px, calc(70vw/7.68), 230px);
+    left: clamp(36px, calc(50vw/7.68), 180px);
     top: 0;
     position: absolute;
     display: flex;
     gap: 32px;
-    max-width: 520px;
+    max-width: 580px;
     padding: clamp(20px, calc(20vw/7.68), 24px) 28px;
     background: #FFFFFF;
     box-shadow: 0px 3px 7px rgba(179, 179, 179, 0.4);
@@ -63,7 +63,7 @@
       gap: 8px;
 
       span {
-        font-size: clamp(24rem, calc(36vw/7.68), 48rem);
+        font-size: clamp(24rem, calc(36vw/7.68), 38rem);
         color: var(--primary-800);
       }
 
