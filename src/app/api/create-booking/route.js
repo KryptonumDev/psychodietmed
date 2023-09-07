@@ -21,9 +21,9 @@ export async function POST(req) {
         "send_reset_password": false,
         "default_address": {
           "name": name + ' ' + surname,
-          "street": "string",
-          "city": "string",
-          "postal_code": "string",
+          "street": "ul. 26 Kwietnia 35/36",
+          "city": "Szczecin",
+          "postal_code": "71-126",
           "country_iso_code": "pl"
         }
       },
