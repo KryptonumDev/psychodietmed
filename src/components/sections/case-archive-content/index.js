@@ -119,6 +119,7 @@ export default function Content({ podopieczni }) {
       setCases(data?.podopieczni)
     },
     onError: (error) => {
+      console.log(error)
       throw new Error(error)
     }
   })

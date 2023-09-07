@@ -16,6 +16,7 @@ export default function Slider({ items }) {
       spaceBetween={50}
       slidesPerView={1}
       loop={true}
+      autoHeight={true}
       onSlideChange={(swiper) => {
         setActiveIndex(swiper.realIndex);
       }}

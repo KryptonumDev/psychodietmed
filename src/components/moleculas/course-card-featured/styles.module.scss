@@ -16,28 +16,36 @@
 
   @media (max-width: 640px) {
     grid-template-columns: 1fr;
+    gap: 8px
   }
 
-  .stars{
+  .text {
+    p {
+      margin-top: clamp(16px, calc(20vw/7.68), 24px);
+    }
+  }
+
+  .stars {
+    margin-top: clamp(8px, calc(16vw/7.68), 16px);
     display: flex;
     align-items: center;
     gap: 8px;
     font-weight: 500;
 
-    svg{
-      max-height: 25px;
+    svg {
+      max-height: clamp(20px, calc(22vw/7.68), 25px);
       width: fit-content;
     }
   }
 
-  .priceflex{
+  .priceflex {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 16px;
     flex-wrap: wrap;
 
-    p{
+    p {
       margin-top: 0;
     }
   }
@@ -54,21 +62,20 @@
     height: auto !important;
   }
 
-  h3{
-    margin-top: 16px;
-    font-size: clamp(24rem, calc(32vw/7.68), 48rem);
+  h3 {
+    font-size: clamp(24rem, calc(28vw/7.68), 40rem);
 
     @media (max-width: 370px) {
       font-size: clamp(0rem, calc(20vw/3.7), 20rem);
     }
   }
 
-  p{
+  p {
     margin-top: 24px;
   }
 
-  .control{
-    margin-top: 36px;
+  .control {
+    margin-top: clamp(24px, calc(28vw/7.68), 36px);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -80,12 +87,12 @@
       justify-content: center;
     }
 
-    button{
+    button {
       position: relative;
       z-index: 3;
     }
 
-    >a{
+    >a {
       position: relative;
       z-index: 2;
     }

@@ -23,12 +23,17 @@
 
   .middle {
     margin-top: 28px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 482px 686fr;
     justify-content: space-between;
     gap: 32px;
 
     @media (max-width: 976px) {
-      flex-direction: column;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
     }
   }
 
@@ -147,6 +152,14 @@
   }
 
   .differences {
+    max-width: 584px;
+    width: 100%;
+    margin: 0 auto;
+
+    @media (max-width: 976px) {
+      margin: 0;
+    }
+    
     svg {
       width: 26px;
       min-width: 26px;
@@ -193,7 +206,7 @@
 
     @media (max-width: 976px) {
       margin: unset;
-      margin-top: 32px;
+      margin-top: clamp(16px, calc(32vw/9.76), 32px);
     }
 
     svg {

@@ -21,10 +21,14 @@ export const generetaSeo = async (id, url, query, type = 'page') => {
         index: true,
       }
     }
-
-    if(opengraphImage?.mediaItemUrl){
+    console.log(opengraphImage?.mediaItemUrl)
+    if (opengraphImage?.mediaItemUrl) {
       data.openGraph.images = [
         opengraphImage?.mediaItemUrl
+      ]
+    } else {
+      data.openGraph.images = [
+        '/opengraph-image.jpg'
       ]
     }
 

@@ -25,6 +25,9 @@ export default function Cart() {
       // Update cart data in React Context.
       setNeedAnimation(true)
       setCart(updatedCart || null);
+    },
+    onError: (error) => {
+      console.log(error);
     }
   });
 

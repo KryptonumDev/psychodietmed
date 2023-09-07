@@ -24,7 +24,6 @@ export const middleware = new ApolloLink(async (operation, forward) => {
   if (authToken) {
     newHeaders['Authorization'] = `Bearer ${authToken}`
   }
-
   if (session) {
     operation.setContext(({ headers = {} }) => ({
       headers: newHeaders

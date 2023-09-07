@@ -2,15 +2,15 @@ import React from "react"
 import styles from './styles.module.scss'
 import { Image } from "@/components/atoms/image"
 import Price from "@/components/atoms/price"
-import AddToCart from "@/components/atoms/add-to-cart-button" 
+// import AddToCart from "@/components/atoms/add-to-cart-button" 
 import Link from "next/link"
 
 export default function Hero({ hero, data }) {
   return (
     <section className={styles.wrapper}>
-      <h1>Nasz topowy produkt</h1>
+      <h1>Nasza topowa usługa</h1>
       <div className={styles.product}>
-      <Link href={`/oferta/${data.slug}`} className={styles.link} />
+        <Link href={`/oferta/${data.slug}`} className={styles.link} />
         <Image loading='eager' className={styles.image} aspectRatio={true} src={data.image?.mediaItemUrl} alt={data.title} width={data.image.mediaDetails.width} height={data.image.mediaDetails.height} />
         <div>
           <p className={styles.name}>{data.name}</p>
@@ -28,7 +28,10 @@ export default function Hero({ hero, data }) {
           </ul>
           <div className={styles.flex}>
             <Price salesPrice={data.price} regularPrice={data.regularPrice} />
-            <AddToCart product={data} />
+            <Link className='link' href={`/oferta/${data.slug}`} >
+              Przejdź do usługi
+            </Link>
+            {/* <AddToCart product={data} /> */}
           </div>
         </div>
       </div>

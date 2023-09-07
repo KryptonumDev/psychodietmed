@@ -63,7 +63,7 @@
     max-width: 532px;
 
     * {
-      font-size: clamp(16rem, 1.3366666667vw, 19rem);
+      font-size: clamp(16rem, calc(14vw/7.68), 22rem);
     }
   }
 
@@ -75,7 +75,7 @@
     color: var(--primary-800);
     padding-bottom: 80px;
 
-    @media (max-width: 380px) {
+    @media (max-width: 740px) {
       padding-bottom: 0;
     }
 
@@ -137,7 +137,7 @@
   }
 
   .after {
-    margin-bottom: 120px;
+    margin-bottom: 60px;
 
     @media (max-width: 740px) {
       margin-bottom: 0;
@@ -145,7 +145,7 @@
   }
 
   .before {
-    margin-top: 120px;
+    margin-top: 60px;
 
     @media (max-width: 740px) {
       margin-top: 0;

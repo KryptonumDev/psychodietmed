@@ -18,7 +18,7 @@ export default function Steps({ data: { title, repeater, titleFirst, linkFirst, 
         <div className={styles.content}>
           <span className={styles.number}>01</span>
           <div className={styles.inner}>
-            <h2>{titleFirst}</h2>
+            <div dangerouslySetInnerHTML={{__html: titleFirst}}/>
             <div className={styles.chose}>
               {repeater.map((el, index) => (
                 <details open={!index} key={index}>
@@ -52,7 +52,7 @@ export default function Steps({ data: { title, repeater, titleFirst, linkFirst, 
         <div className={styles.content}>
           <span className={styles.number}>02</span>
           <div className={styles.inner}>
-            <h2>{titleSecond}</h2>
+            <div dangerouslySetInnerHTML={{__html: titleSecond}}/>
             <div className={styles.grid}>
               {gridSecond.map((el, index) => (
                 <div key={index} className={styles.itemBlue}>
@@ -79,7 +79,7 @@ export default function Steps({ data: { title, repeater, titleFirst, linkFirst, 
         <div className={styles.content}>
           <span className={styles.number}>03</span>
           <div className={styles.inner}>
-            <h2>{titleThird}</h2>
+            <div dangerouslySetInnerHTML={{__html: titleThird}}/>
             <div className={styles.grid}>
               {gridThird.map((el, index) => (
                 <div key={index} className={styles.itemPink}>
@@ -102,7 +102,7 @@ export default function Steps({ data: { title, repeater, titleFirst, linkFirst, 
         <div className={styles.content}>
           <span className={styles.number}>04</span>
           <div className={styles.inner}>
-            <h2>{titleFourth}</h2>
+            <div dangerouslySetInnerHTML={{__html: titleFourth}}/>
             <div className={styles.grid}>
               {gridFourth.map((el, index) => (
                 <div key={index} className={styles.itemExtended}>
