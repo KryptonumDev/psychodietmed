@@ -10,7 +10,7 @@ import { FiveStars } from "../../../assets/five-stars"
 export default function CardFeatured({ data, myCourse = false }) {
   return (
     <div className={styles.wrapper}>
-      <Link className={styles.link} href={myCourse ? `/moje-kursy/${data.product.course.slug}` : `/akademia/kurs/${data.product.course.slug}`} />
+      <Link className={styles.link} href={myCourse ? `/moje-kursy/${data.product.course.slug}` : `/akademia/kurs/${data.product.course.slug}`} aria-label={data.name} />
       <Image
         className={styles.image}
         src={data?.image.mediaItemUrl}

@@ -37,7 +37,7 @@ export default function Bundle({ data: { addons, variations, slug, image, name, 
 
   return (
     <div className={styles.wrapper}>
-      <Link href={`/oferta/${slug}`} className={styles.link}></Link>
+      <Link href={`/oferta/${slug}`} className={styles.link} aria-label={name}></Link>
       <Image
         width="259"
         height="259"
