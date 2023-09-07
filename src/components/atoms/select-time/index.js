@@ -2,6 +2,7 @@
 import { useEffect, useState, useRef } from 'react';
 import styles from './styles.module.scss';
 import { AnimatePresence, motion } from 'framer-motion';
+import Button from '../button';
 
 const SelectTime = ({ placeholder, registerTime, registerDate, errors, watch, selectTimeWatch }) => {
   const selectRef = useRef(null);
@@ -122,6 +123,7 @@ const SelectTime = ({ placeholder, registerTime, registerDate, errors, watch, se
           />
           <label htmlFor='time3'>16:00 - 20:00</label>
         </div>
+        <button type="button" className={`${styles.confirm} link`} onClick={() => { document.activeElement.blur(); }}>Zatwierdź</button>
       </div>
     </div>
   );
