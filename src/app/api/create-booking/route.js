@@ -18,7 +18,14 @@ export async function POST(req) {
         "name": name,
         "default_phone": phone,
         "surname": surname,
-        "send_reset_password": false
+        "send_reset_password": false,
+        "default_address": {
+          "name": name + ' ' + surname,
+          "street": "string",
+          "city": "string",
+          "postal_code": "string",
+          "country_iso_code": "pl"
+        }
       },
       "bookings": [
         {
@@ -26,6 +33,7 @@ export async function POST(req) {
           "service_id": serviceId,
           "start_date": date,
           "start_time": time,
+          "service_location_id": 1
         }
       ]
     });
