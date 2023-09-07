@@ -1,24 +1,38 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styles from './styles.module.scss';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const SelectTime = ({ placeholder, registerTime, registerDate, errors, watch, selectTimeWatch }) => {
-  const [ label, setLabel ] = useState({ 'date': null, 'time': null });
+  const selectRef = useRef(null);
+
+  const [ label, setLabel ] = useState({ 'preferencedDate': null, 'preferencedTime': null });
   useEffect(() => {
-    setLabel({ "date": selectTimeWatch[0], "time": selectTimeWatch[1] })
+    setLabel({ "preferencedDate": selectTimeWatch[0], "preferencedTime": selectTimeWatch[1] })
   }, [watch, selectTimeWatch]);
 
+  useEffect(() => {
+    document.addEventListener("keydown", handleEscapeKey);
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey)
+    }
+  }, []);
+  const handleEscapeKey = (e) => {
+    if (e.key === "Escape") {
+      (document.activeElement === selectRef.current || selectRef.current.contains(document.activeElement)) && document.activeElement.blur();
+    }
+  }
+
   return (
-    <div className={styles.wrapper} tabIndex={0}>
+    <div className={styles.wrapper} tabIndex={0} ref={selectRef}>
       <div className={styles.placeholder}>
-        <span className={label.date || label.time ? styles.isValue : ''}>
-          {label.date || label.time ? `${label.date || ''}${label.date ? ', ' : ''}${label.time || ''}` : placeholder}
+        <span className={label.preferencedDate || label.preferencedTime ? styles.isValue : ''}>
+          {label.preferencedDate || label.preferencedTime ? `${label.preferencedDate || ''}${label.preferencedDate ? ', ' : ''}${label.preferencedTime || ''}` : placeholder}
         </span>
         <ChevronDown />
       </div>
       <div className={styles.dropdown}>
-        <div className={styles.date}>
+        <div className={styles.preferencedDate}>
           <AnimatePresence mode="wait">
             {errors[registerDate.name] && <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className={styles.error}>Uzupełnij termin</motion.span>}
           </AnimatePresence>
@@ -80,7 +94,7 @@ const SelectTime = ({ placeholder, registerTime, registerDate, errors, watch, se
           />
           <label htmlFor='day7'>Niedziela</label>
         </div>
-        <div className={styles.time}>
+        <div className={styles.preferencedTime}>
           {errors[registerTime.name] && <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className={styles.error}>Uzupełnij godzinę</motion.span>}
           <p>Która godzina pasuje Ci najbardziej?</p>
           <input
@@ -90,47 +104,23 @@ const SelectTime = ({ placeholder, registerTime, registerDate, errors, watch, se
             name={registerTime.name}
             {...registerTime}
           />
-          <label htmlFor='time1'>8:00-10:00</label>
+          <label htmlFor='time1'>8:00 - 10:00</label>
           <input
             type="radio"
             id='time2'
-            value="10:00 - 12:00"
+            value="11:00 - 15:00"
             name={registerTime.name}
             {...registerTime}
           />
-          <label htmlFor='time2'>10:00-12:00</label>
+          <label htmlFor='time2'>11:00 - 15:00</label>
           <input
             type="radio"
             id='time3'
-            value="12:00 - 14:00"
+            value="16:00 - 20:00"
             name={registerTime.name}
             {...registerTime}
           />
-          <label htmlFor='time3'>12:00-14:00</label>
-          <input
-            type="radio"
-            id='time4'
-            value="14:00 - 16:00"
-            name={registerTime.name}
-            {...registerTime}
-          />
-          <label htmlFor='time4'>14:00-16:00</label>
-          <input
-            type="radio"
-            id='time5'
-            value="16:00 - 18:00"
-            name={registerTime.name}
-            {...registerTime}
-          />
-          <label htmlFor='time5'>16:00-18:00</label>
-          <input
-            type="radio"
-            id='time6'
-            value="18:00 - 20:00"
-            name={registerTime.name}
-            {...registerTime}
-          />
-          <label htmlFor='time6'>18:00-20:00</label>
+          <label htmlFor='time3'>16:00 - 20:00</label>
         </div>
       </div>
     </div>

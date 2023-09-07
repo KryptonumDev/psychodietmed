@@ -15,20 +15,22 @@ const Form = ({ id }) => {
   const url = `https://psychodietmed.headlesshub.com/wp-json/contact-form-7/v1/contact-forms/${id}/feedback`;
   const [ sentStatus, setSentStatus ] = useState({ sent: false });
   const { register, handleSubmit, reset, formState: { errors }, watch } = useForm();
-  const selectTimeWatch = watch([ "date", "time" ]);
+  const selectTimeWatch = watch([ "preferencedDate", "preferencedTime" ]);
 
   const onSubmit = data => {
     setSentStatus({ sent: true });
 
-    const datePreference = (data.date || data.time)
-    ? `Preferencja co do czasu kontaktu: ${data?.date ? `${data?.date}` : ''} ${data?.time ? `, ${data?.time}` : ''}`
+    const { name, surname, email, tel, preferencedDate, preferencedTime } = data;
+
+    const datePreference = (preferencedDate || preferencedTime)
+      ? `Preferencja co do czasu kontaktu: ${preferencedDate ? `${preferencedDate}${preferencedTime ? ', ' : ''}` : ''}${preferencedTime || ''}`
     : 'Bez preferencji co do czasu kontaktu';
 
-    let body = new FormData()
-
-    body.append('fullname', data.fullname)
-    body.append('email', data.email)
-    body.append('tel', data.tel)
+    let body = new FormData();
+    body.append('name', name)
+    body.append('surname', surname)
+    body.append('email', email)
+    body.append('tel', tel)
     body.append('datePreference', datePreference)
 
     axios.post(url, body)
@@ -40,8 +42,8 @@ const Form = ({ id }) => {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            name: data.fullname.split(' ')[0],
-            email: data.email,
+            name: name,
+            email: email,
             group_id: LANDINGPAGE_GROUPID
           }),
         })
@@ -87,13 +89,22 @@ const Form = ({ id }) => {
           )
         )}
       </AnimatePresence>
-      <Input
-        name={'fullname'}
-        register={register('fullname', { required: true })}
-        placeholder='Imię i nazwisko'
-        errors={errors}
-        error="Proszę poprawnie uzupełnić to pole"
-      />
+      <div className={styles.flex}>
+        <Input
+          name={'name'}
+          register={register('name', { required: true, minLength: 3 })}
+          placeholder='Imię'
+          errors={errors}
+          error="Proszę poprawnie uzupełnić to pole"
+        />
+        <Input
+          name={'surname'}
+          register={register('surname', { required: true, minLength: 3 })}
+          placeholder='Nazwisko'
+          errors={errors}
+          error="Proszę poprawnie uzupełnić to pole"
+        />
+      </div>
       <div className={styles.flex}>
         <Input
           name={'email'}
@@ -113,8 +124,8 @@ const Form = ({ id }) => {
       </div>
       <SelectTime
         placeholder='Najdogodniejszy czas na kontakt'
-        registerTime={register('time')}
-        registerDate={register('date')}
+        registerTime={register('preferencedTime')}
+        registerDate={register('preferencedDate')}
         errors={errors}
         watch={watch}
         selectTimeWatch={selectTimeWatch}
