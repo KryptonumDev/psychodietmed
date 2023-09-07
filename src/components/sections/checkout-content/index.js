@@ -84,6 +84,10 @@ export default function CheckoutContent() {
         }
       })
 
+      if (data.checkout.order.total == 0) {
+        window.location.href = `https://www.psychodietmed.pl/podsumowanie?status=success`
+      }
+
       const transaction = axios.post('/api/create-transaction', {
         "amount": data.checkout.order.total * 100,
         "sessionId": data.checkout.order.orderKey,
@@ -97,6 +101,7 @@ export default function CheckoutContent() {
       ])
         .then(function (values) {
           if (values[0].data.link) {
+            localStorage.setItem('payLink', res.link)
             window.location.href = values[0].data.link
           }
           setInnerLoading(false)

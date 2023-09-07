@@ -59,6 +59,7 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
           .then(response => response.json())
           .then(res => {
             if (!res.link) throw new Error('Nie udało się stwozryć płatnośći')
+            localStorage.setItem('payLink', res.link)
             window.location.href = res.link
           })
           .catch(err => {

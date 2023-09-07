@@ -15,7 +15,7 @@ export default function Success() {
       <h1>Dziękujemy za złożenie zamówienia</h1>
       <p>To Twój pierwszy krok na drodze do dobrej zmiany.</p>
       <p>Informacje dotyczące zamówienia oraz dalsze zalecenia, zostaną wysłane na adres mailowy podany przy składaniu zamówienia.</p>
-      <p>W razie problemów kontakt pod adresem e-mail: <a href="mailto:psychodietmed@gmail.com">psychodietmed@gmail.com</a></p>
+      <p>W razie problemów kontakt pod adresem e-mail: <a href="mailto:biuro@psychodietmed.pl">biuro@psychodietmed.pl</a></p>
     </section>
   )
 }
