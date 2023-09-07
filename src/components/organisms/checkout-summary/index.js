@@ -15,7 +15,7 @@ export default function Summary({ submit, needsShippingAddress, setStep, input }
   const onSubmit = (data) => {
     submit(data)
   }
-  
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={`${styles.wrapper} ${needsShippingAddress ? '' : styles.altGrid}`}>
       <h2>Kupujesz jako</h2>
@@ -67,7 +67,9 @@ export default function Summary({ submit, needsShippingAddress, setStep, input }
               <p>{input.billing.firstName} {input.billing.lastName}</p>
               <div className={styles.params}>
                 <p>{input.billing.email}</p>
-                <p>tel. {input.billing.phone}</p>
+                {input.billing.phone && (
+                  <p>tel. {input.billing.phone}</p>
+                )}
               </div>
             </>
           )}
@@ -94,7 +96,7 @@ export default function Summary({ submit, needsShippingAddress, setStep, input }
         </label>
       </div>
       <div className={styles.control}>
-        <label className={`${styles.check} ${errors.check ? styles.error : ''}`}>
+        <label style={{ cursor: 'pointer' }} className={`${styles.check} ${errors.check ? styles.error : ''}`}>
           <input type="checkbox" {...register("check", { required: true })} />
           <span />
           <div dangerouslySetInnerHTML={{ __html: "<p>Akceptuję <a href='/regulamin'>regulamin</a> sklepu</p>" }} />

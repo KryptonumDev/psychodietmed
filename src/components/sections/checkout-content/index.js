@@ -85,7 +85,7 @@ export default function CheckoutContent() {
       })
 
       if (data.checkout.order.total == 0) {
-        window.location.href = `https://www.psychodietmed.pl/podsumowanie?status=success`
+        window.location.href = `https://www.psychodietmed.pl/api/complete-free-order/?id=${data.checkout.order.orderNumber}`
       }
 
       const transaction = axios.post('/api/create-transaction', {
