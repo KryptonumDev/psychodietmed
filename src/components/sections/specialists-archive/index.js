@@ -75,25 +75,25 @@ export default function Content({ data }) {
   //   }
   // })
 
-  const changePage = useCallback((page) => {
-    setCurrentPage(+page)
-    setInitialLoad(false)
-  }, [setCurrentPage, setInitialLoad])
+  // const changePage = useCallback((page) => {
+  //   setCurrentPage(+page)
+  //   setInitialLoad(false)
+  // }, [setCurrentPage, setInitialLoad])
 
-  useEffect(() => {
-    if (!initialLoad) {
-      refetch()
-      const current = new URLSearchParams(Array.from(searchParams.entries()));
+  // useEffect(() => {
+  //   if (!initialLoad) {
+  //     refetch()
+  //     const current = new URLSearchParams(Array.from(searchParams.entries()));
 
-      if (currentPage === 1) current.delete("strona");
-      else current.set("strona", currentPage);
+  //     if (currentPage === 1) current.delete("strona");
+  //     else current.set("strona", currentPage);
 
-      const search = current.toString();
-      const query = search ? `?${search}` : "";
-      // router.push(`${pathname}${query}`, { shallow: true });  Currently not working. TODO: after next update, rework - https://github.com/vercel/next.js/discussions/48110#discussioncomment-6481618
-      history.replaceState(null, null, `${pathname}${query}`)
-    }
-  }, [currentPage])
+  //     const search = current.toString();
+  //     const query = search ? `?${search}` : "";
+  //     // router.push(`${pathname}${query}`, { shallow: true });  Currently not working. TODO: after next update, rework - https://github.com/vercel/next.js/discussions/48110#discussioncomment-6481618
+  //     history.replaceState(null, null, `${pathname}${query}`)
+  //   }
+  // }, [currentPage])
 
   const [popupOpened, setPopupOpened] = useState(false)
   const [chosenTime, setChosenTime] = useState(null)

@@ -11,6 +11,10 @@
     grid-template-columns: 1fr;
   }
 
+  p{
+    font-size: clamp(17rem, calc(18vw/7.68), 20rem);
+  }
+
   .relative {
     display: flex;
     flex-direction: column;
@@ -40,13 +44,13 @@
     display: block;
 
     >p {
-      margin-top: 24px;
+      margin-top: 16px;
     }
   }
 
   .image {
-    width: clamp(74px, calc(83vw/7.68), 124px) !important;
-    min-width: clamp(74px, calc(83vw/7.68), 124px) !important;
+    width: clamp(74px, calc(83vw/7.68), 112px) !important;
+    min-width: clamp(74px, calc(83vw/7.68), 112px) !important;
     height: fit-content !important;
     border-radius: 50%;
     aspect-ratio: 1/1;
