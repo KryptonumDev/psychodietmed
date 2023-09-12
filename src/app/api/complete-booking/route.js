@@ -50,13 +50,15 @@ export async function GET(req) {
             }
           )
 
-          p24.verifyTransaction({
+          const response = await p24.verifyTransaction({
             amount: res.data.amount,
             currency: res.data.currency,
             orderId: res.data.orderId,
             sessionId: res.data.sessionId,
-          }).then(async response => {
-            if (!response) throw new Error('Verification failed')
+          })
+          if (!response) throw new Error('Verification failed')
+
+          if (response) {
             await fetch(`https://api.calendesk.com/api/admin/payments/bookings`, {
               method: 'POST',
               headers: headers,
@@ -73,7 +75,7 @@ export async function GET(req) {
                 else
                   throw new Error('error')
               })
-          })
+          }
         } else if (res.data.status == 2) {
           await fetch(`https://api.calendesk.com/api/admin/payments/bookings`, {
             method: 'POST',

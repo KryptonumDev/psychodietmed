@@ -22,61 +22,59 @@ export async function GET(req) {
     })
       .then(res => res.json())
       .then(async (res) => {
-        -console.log(res)
         if (res.data.status == 1) {
-          const p24 = new P24(
-            Number(process.env.P24_MERCHANT_ID),
-            Number(process.env.P24_POS_ID),
-            process.env.P24_REST_API_KEY,
-            process.env.P24_CRC,
-            {
-              sandbox: false
-            }
-          )
+        const p24 = new P24(
+          Number(process.env.P24_MERCHANT_ID),
+          Number(process.env.P24_POS_ID),
+          process.env.P24_REST_API_KEY,
+          process.env.P24_CRC,
+          {
+            sandbox: false
+          }
+        )
 
-          p24.verifyTransaction({
-            amount: res.data.amount,
-            currency: res.data.currency,
-            orderId: res.data.orderId,
-            sessionId: res.data.sessionId,
-          }).then(async response => {
-            console.log(response)
-            if (!response) throw new Error('Verification failed')
-            await fetch('https://psychodietmed.headlesshub.com/graphql', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Basic ${btoa(`${process.env.AUTHORISE_USERNAME}:${process.env.AUTHORISE_PASSWORD}`)}`
-              },
-              body: JSON.stringify({
-                query: `
+        const response = await p24.verifyTransaction({
+          amount: res.data.amount,
+          currency: res.data.currency,
+          orderId: res.data.orderId,
+          sessionId: res.data.sessionId,
+        })
+        if (!response) throw new Error('Verification failed')
+
+        if (response) {
+          await fetch('https://psychodietmed.headlesshub.com/graphql', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Basic ${btoa(`${process.env.AUTHORISE_USERNAME}:${process.env.AUTHORISE_PASSWORD}`)}`
+            },
+            body: JSON.stringify({
+              query: `
                   mutation UPDATE_ORDER( $input: UpdateOrderInput! ) {
                     updateOrder(input: $input) {
                       clientMutationId
                     }
                   }
                 `,
-                variables: {
-                  input: {
-                    clientMutationId: v4(),
-                    orderId: Number(id),
-                    status: "COMPLETED",
-                  },
-                }
-              }),
-              cache: 'no-cache',
-            })
-              .then(result => result.json())
-              .then(result => {
-                console.log(result)
-                if (result.data?.updateOrder?.clientMutationId)
-                  throw new Error('complete')
-                else
-                  throw new Error('error')
-              })
-          }).catch(err => {
-            console.log(err)
+              variables: {
+                input: {
+                  clientMutationId: v4(),
+                  orderId: Number(id),
+                  status: "COMPLETED",
+                },
+              }
+            }),
+            cache: 'no-cache',
           })
+            .then(result => result.json())
+            .then(result => {
+              console.log(result)
+              if (result.data?.updateOrder?.clientMutationId)
+                throw new Error('complete')
+              else
+                throw new Error('error')
+            })
+        }
         } else if (res.data.status == 2) {
           await fetch('https://psychodietmed.headlesshub.com/graphql', {
             method: 'POST',
