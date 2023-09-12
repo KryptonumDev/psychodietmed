@@ -3,16 +3,6 @@ import { P24 } from "@ingameltd/node-przelewy24";
 
 export const dynamic = 'force-dynamic'
 
-const p24 = new P24(
-  Number(process.env.P24_MERCHANT_ID),
-  Number(process.env.P24_POS_ID),
-  process.env.P24_REST_API_KEY,
-  process.env.P24_CRC,
-  {
-    sandbox: false
-  }
-);
-
 export async function GET(req) {
   try {
     const { searchParams } = new URL(req.url)
@@ -49,14 +39,25 @@ export async function GET(req) {
       .then(async (res) => {
         console.log(res)
         if (res.data.status == 1) {
+
+          const p24 = new P24(
+            Number(process.env.P24_MERCHANT_ID),
+            Number(process.env.P24_POS_ID),
+            process.env.P24_REST_API_KEY,
+            process.env.P24_CRC,
+            {
+              sandbox: false
+            }
+          )
+
           p24.verifyTransaction({
             amount: res.data.amount,
             currency: res.data.currency,
             orderId: res.data.orderId,
             sessionId: res.data.sessionId,
-          }).then(response => {
+          }).then(async response => {
             if (!response) throw new Error('Verification failed')
-            fetch(`https://api.calendesk.com/api/admin/payments/bookings`, {
+            await fetch(`https://api.calendesk.com/api/admin/payments/bookings`, {
               method: 'POST',
               headers: headers,
               body: body,
@@ -74,7 +75,7 @@ export async function GET(req) {
               })
           })
         } else if (res.data.status == 2) {
-          fetch(`https://api.calendesk.com/api/admin/payments/bookings`, {
+          await fetch(`https://api.calendesk.com/api/admin/payments/bookings`, {
             method: 'POST',
             headers: headers,
             body: body,
