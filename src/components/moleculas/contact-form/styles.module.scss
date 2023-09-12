@@ -6,6 +6,17 @@
   .input .react-select__control {
     border-color: var(--primary-800) !important;
   }
+
+  .columns{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+
+    @media (max-width: 420px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .status {
     position: absolute;
     inset: -10px;

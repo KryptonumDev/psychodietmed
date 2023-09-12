@@ -36,31 +36,31 @@ const url = `https://psychodietmed.headlesshub.com/wp-json/contact-form-7/v1/con
 export default function Form({ subjects }) {
 
   const [subject, setSubject] = useState('')
-  const [ sentStatus, setSentStatus ] = useState({ sent: false })
+  const [sentStatus, setSentStatus] = useState({ sent: false })
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
   const onSubmit = data => {
     setSentStatus({ sent: true });
     let body = new FormData()
     body.append('mail', data.email)
-    body.append('fname', data.name)
+    body.append('fname', data.name + ' ' + data.surname)
     body.append('message', data.text)
     body.append('subject', subject)
     body.append('tel', data.tel)
 
     axios.post(url, body)
-    .then((res) => {
-      console.log(res)
-      if (res.status === 200) {
-        setSentStatus(prevStatus => ({ ...prevStatus, success: true }));
-        reset()
-      } else {
+      .then((res) => {
+        console.log(res)
+        if (res.status === 200) {
+          setSentStatus(prevStatus => ({ ...prevStatus, success: true }));
+          reset()
+        } else {
+          setSentStatus(prevStatus => ({ ...prevStatus, success: false }));
+        }
+      }).catch(() => {
         setSentStatus(prevStatus => ({ ...prevStatus, success: false }));
-      }
-    }).catch(() => {
-      setSentStatus(prevStatus => ({ ...prevStatus, success: false }));
-      reset()
-    })
+        reset()
+      })
   };
 
   return (
@@ -94,14 +94,24 @@ export default function Form({ subjects }) {
           )
         )}
       </AnimatePresence>
-      <Input
-        name={'name'}
-        register={register('name', { required: true, pattern: namePattern })}
-        placeholder='Imię'
-        title={'Imię'}
-        errors={errors}
-        error="Proszę poprawnie uzupełnić to pole"
-      />
+      <div className={styles.columns}>
+        <Input
+          name={'name'}
+          register={register('name', { required: true, pattern: namePattern })}
+          placeholder='Imię'
+          title={'Imię'}
+          errors={errors}
+          error="Proszę poprawnie uzupełnić to pole"
+        />
+        <Input
+          name={'surname'}
+          register={register('surname', { required: true, pattern: namePattern })}
+          placeholder='Nazwisko'
+          title={'Nazwisko'}
+          errors={errors}
+          error="Proszę poprawnie uzupełnić to pole"
+        />
+      </div>
       <Input
         name={'email'}
         register={register('email', { required: true, pattern: emailPattern })}
