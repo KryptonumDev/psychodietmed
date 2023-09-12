@@ -33,7 +33,7 @@ export async function GET(req) {
               sandbox: false
             }
           )
-            console.log(p24)
+
           p24.verifyTransaction({
             amount: res.data.amount,
             currency: res.data.currency,
@@ -74,6 +74,8 @@ export async function GET(req) {
                 else
                   throw new Error('error')
               })
+          }).catch(err => {
+            console.log(err)
           })
         } else if (res.data.status == 2) {
           await fetch('https://psychodietmed.headlesshub.com/graphql', {
