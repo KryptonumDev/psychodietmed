@@ -18,7 +18,7 @@ export default async function Specjalista({ params }) {
     <main className="overflow" id="main">
       <Breadcrumbs data={[{ page: 'Specjaliści', url: `/specjalisci` }]} />
       <Content data={specialists} />
-      <CallToActionGray data={{ content: "<h2>Masz problem z podjęciem decyzji?</h2><p>Napisz do nas – wskażemy Ci odpowiedni kierunek leczenia. </p>", link: { url: '/konatkt', title: 'Skontaktuj się' } }} />
+      <CallToActionGray data={{ content: "<h2>Masz problem z podjęciem decyzji?</h2><p>Napisz do nas – wskażemy Ci odpowiedni kierunek leczenia. </p>", link: { url: '/kontakt', title: 'Skontaktuj się' } }} />
     </main>
   )
 }
