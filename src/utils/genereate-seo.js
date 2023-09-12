@@ -16,36 +16,33 @@ export const generetaSeo = async (id, url, query, type = 'page') => {
         title: title,
         description: metaDesc,
         url: canonical,
+        images: [
+          '/opengraph-image.jpg'
+        ]
       },
       robots: {
         index: true,
-      }
+      },
     }
 
-    if (opengraphImage?.mediaItemUrl) {
-      data.openGraph.images = [
-        opengraphImage?.mediaItemUrl
-      ]
-    } else {
-      data.openGraph.images = [
-        '/opengraph-image.jpg'
-      ]
-    }
+    if (opengraphImage?.mediaItemUrl) 
+      data.openGraph.images.push(opengraphImage?.mediaItemUrl)
 
-    return data
-  } catch (error) {
-    console.log(error)
+
+      return data
+    } catch (error) {
+      console.log(error)
+    }
   }
-}
 
 async function getSeo(id, query) {
-  const { body: { data } } = await Fetch({
-    query: query,
-    variables: {
-      id: id
-    },
-    revalidate: 600
-  })
+    const { body: { data } } = await Fetch({
+      query: query,
+      variables: {
+        id: id
+      },
+      revalidate: 600
+    })
 
-  return data.page.seo
-}
+    return data.page.seo
+  }
