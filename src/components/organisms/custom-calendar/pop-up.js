@@ -26,7 +26,7 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
   } = useForm()
 
   const onSubmit = (data) => {
-    fetch("https://www.psychodietmed.pl/api/create-booking", {
+    fetch("/api/create-booking", {
       method: 'POST',
       body: JSON.stringify({
         email: data.email,
@@ -46,7 +46,7 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
         if (!res[0]?.id) throw new Error('Nie udało się stworzyć rezerwacji, spróbuj ponownie później.')
 
         const session = v4()
-        fetch("https://www.psychodietmed.pl/api/create-transaction", {
+        fetch("/api/create-transaction", {
           method: 'POST',
           body: JSON.stringify({
             amount: service.price,

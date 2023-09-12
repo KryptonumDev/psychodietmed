@@ -86,6 +86,7 @@ export default function CheckoutContent() {
 
       if (data.checkout.order.total == 0) {
         window.location.href = `https://www.psychodietmed.pl/api/complete-free-order/?id=${data.checkout.order.orderNumber}`
+        return;
       }
 
       const transaction = axios.post('/api/create-transaction', {
@@ -100,8 +101,9 @@ export default function CheckoutContent() {
         mailerlite,
       ])
         .then(function (values) {
+          debugger
           if (values[0].data.link) {
-            localStorage.setItem('payLink', res.link)
+            localStorage.setItem('payLink', values[0].data.link)
             window.location.href = values[0].data.link
           }
           setInnerLoading(false)
@@ -109,7 +111,6 @@ export default function CheckoutContent() {
         .catch(error => {
           setInnerLoading(false)
           alert(error)
-          throw new Error(error)
         });
     },
     onError: (error) => {
