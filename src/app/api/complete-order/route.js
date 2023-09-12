@@ -22,7 +22,7 @@ export async function GET(req) {
     })
       .then(res => res.json())
       .then(async (res) => {
-        console.log(res)
+        -console.log(res)
         if (res.data.status == 1) {
           const p24 = new P24(
             Number(process.env.P24_MERCHANT_ID),
@@ -33,7 +33,7 @@ export async function GET(req) {
               sandbox: false
             }
           )
-
+            console.log(p24)
           p24.verifyTransaction({
             amount: res.data.amount,
             currency: res.data.currency,
