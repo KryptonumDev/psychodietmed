@@ -37,12 +37,12 @@ export async function GET(req) {
       .then(res => res.json())
       .then(async (res) => {
         console.log(res)
-        if (response.data.status == 1) {
+        if (res.data.status == 1) {
           p24.verifyTransaction({
-            amount: response.data.amount,
-            currency: response.data.currency,
-            orderId: response.data.orderId,
-            sessionId: response.data.sessionId,
+            amount: res.data.amount,
+            currency: res.data.currency,
+            orderId: res.data.orderId,
+            sessionId: res.data.sessionId,
           }).then(response => {
             if (!response) throw new Error('Verification failed')
             fetch(`https://api.calendesk.com/api/admin/payments/bookings`, {
@@ -62,7 +62,7 @@ export async function GET(req) {
                   throw new Error('error')
               })
           })
-        } else if (response.data.status == 2) {
+        } else if (res.data.status == 2) {
           fetch(`https://api.calendesk.com/api/admin/payments/bookings`, {
             method: 'POST',
             headers: headers,
