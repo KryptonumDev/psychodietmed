@@ -363,6 +363,12 @@
       max-height: calc(100vh - 32px);
     }
 
+    .columns{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
     .phone {
       max-width: 310px;
     }

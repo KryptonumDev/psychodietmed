@@ -30,8 +30,8 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
       method: 'POST',
       body: JSON.stringify({
         email: data.email,
-        name: data.name.split(' ')[0],
-        surname: data.name.split(' ')[1],
+        name: data.name,
+        surname: data.surname,
         phone: formatPhoneNumber(data.phone),
         employeId: specialistId,
         serviceId: serviceId,
@@ -117,13 +117,22 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
             <p><IconMoney /> {(service.price / 100)}&nbsp;zł / <small>sesja 50&nbsp;min</small></p>
           </div>
           <div>
-            <Input
-              register={register('name', { required: true, minLength: 3 })}
-              errors={errors}
-              label="Imię i nazwisko"
-              name='name'
-              placeholder="Imię i nazwisko"
-            />
+            <div className={styles.columns}>
+              <Input
+                register={register('name', { required: true, minLength: 3 })}
+                errors={errors}
+                label="Imię"
+                name='name'
+                placeholder="Imię"
+              />
+              <Input
+                register={register('surname', { required: true, minLength: 3 })}
+                errors={errors}
+                label="Nazwisko"
+                name='surname'
+                placeholder="Nazwisko"
+              />
+            </div>
             <Input
               register={register('email', { required: true, pattern: emailPattern })}
               errors={errors}

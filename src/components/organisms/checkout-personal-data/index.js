@@ -8,10 +8,10 @@ import axios from "axios";
 import Checkbox from "@/components/atoms/checkbox";
 
 export default function Personaldata({ input, setStep, setInput }) {
-  const { setValue, register, watch, handleSubmit, formState: { errors } } = useForm({ 
-    mode: "onBlur", 
-    defaultValues: { 
-      type: input?.firmOrder ? 'firm' : 'person', 
+  const { setValue, register, watch, handleSubmit, formState: { errors } } = useForm({
+    mode: "onBlur",
+    defaultValues: {
+      type: input?.firmOrder ? 'firm' : 'person',
       shipping_same_as_billing: !input?.billingDifferentThanShipping,
       billing_nip: input?.metaData?.find(el => el.key === '_billing_nip')?.value || '',
       billing_firmName: input?.billing?.company || '',
@@ -20,13 +20,14 @@ export default function Personaldata({ input, setStep, setInput }) {
       billing_postalCode: input?.billing?.postcode || '',
       billing_city: input?.billing?.city || '',
       billing_phone: input?.billing?.phone || '',
-      shipping_name: (input?.shipping?.firstName || input?.shipping?.lastName) ? `${input?.shipping?.firstName} ${input?.shipping?.lastName}` : '',
+      shipping_name: input?.shipping?.firstName || '',
+      shipping_surname: input?.shipping?.lastName || '',
       shipping_address: input?.shipping?.address1 || '',
       shipping_postalCode: input?.shipping?.postcode || '',
       shipping_city: input?.shipping?.city || '',
       shipping_phone: input?.shipping?.phone || '',
       shipping_email: input?.shipping?.email || '',
-    } 
+    }
   });
 
   const [nipValue, setNipValue] = useState(false)
@@ -63,12 +64,13 @@ export default function Personaldata({ input, setStep, setInput }) {
     setValue('shipping_same_as_billing', !input?.billingDifferentThanShipping)
     setValue('billing_nip', input?.metaData?.find(el => el.key === '_billing_nip')?.value || '')
     setValue('billing_firmName', input?.billing?.company || '')
-    setValue('billing_email', input?.billing?.email || '')  
+    setValue('billing_email', input?.billing?.email || '')
     setValue('billing_address', input?.billing?.address1 || '')
     setValue('billing_postalCode', input?.billing?.postcode || '')
     setValue('billing_city', input?.billing?.city || '')
     setValue('billing_phone', input?.billing?.phone || '')
-    setValue('shipping_name', (input?.shipping?.firstName || input?.shipping?.lastName) ? `${input?.shipping?.firstName} ${input?.shipping?.lastName}` : '')
+    setValue('shipping_name', input?.shipping?.firstName || '')
+    setValue('shipping_surname', input?.shipping?.lastName || '')
     setValue('shipping_address', input?.shipping?.address1 || '')
     setValue('shipping_postalCode', input?.shipping?.postcode || '')
     setValue('shipping_city', input?.shipping?.city || '')
@@ -83,8 +85,8 @@ export default function Personaldata({ input, setStep, setInput }) {
       firmOrder: data.type === 'firm',
       billingDifferentThanShipping: !data.shipping_same_as_billing,
       shipping: {
-        firstName: data.type === 'person' ? data.shipping_name.split(' ')[0] : data.shipping_same_as_billing ? data.billing_firmName : data.shipping_name.split(' ')[0],
-        lastName: data.type === 'person' ? data.shipping_name.split(' ')[1] : data.shipping_same_as_billing ? '' : data.shipping_name.split(' ')[1],
+        firstName: data.type === 'person' ? data.shipping_name : data.shipping_same_as_billing ? data.billing_firmName : data.shipping_name,
+        lastName: data.type === 'person' ? data.shipping_surname : data.shipping_same_as_billing ? '' : data.shipping_surname,
         address1: data.type === 'person' ? data.shipping_address : data.shipping_same_as_billing ? data.billing_address : data.shipping_address,
         address2: '',
         city: data.type === 'person' ? data.shipping_city : data.shipping_same_as_billing ? data.billing_city : data.shipping_city,
@@ -96,8 +98,8 @@ export default function Personaldata({ input, setStep, setInput }) {
         company: data.type === 'person' ? '' : data.billing_firmName,
       },
       billing: {
-        firstName: data.type === 'person' ? data.shipping_name.split(' ')[0] : data.billing_firmName,
-        lastName: data.type === 'person' ? data.shipping_name.split(' ')[1] : '',
+        firstName: data.type === 'person' ? data.shipping_name : data.billing_firmName,
+        lastName: data.type === 'person' ? data.shipping_surname : '',
         address1: data.type === 'person' ? data.shipping_address : data.billing_address,
         address2: '',
         city: data.type === 'person' ? data.shipping_city : data.billing_city,
@@ -200,12 +202,20 @@ export default function Personaldata({ input, setStep, setInput }) {
 
         {(watchType === 'person' || !watchShippingSameAsBilling) && (
           <>
-            <Input
-              placeholder='Imię i nazwisko'
-              name='shipping_name'
-              register={register('shipping_name', { required: true, minLength: 3 })}
-              errors={errors}
-            />
+            <div className={styles.columns}>
+              <Input
+                placeholder='Imię'
+                name='shipping_name'
+                register={register('shipping_name', { required: true, minLength: 3 })}
+                errors={errors}
+              />
+              <Input
+                placeholder='Nazwisko'
+                name='shipping_surname'
+                register={register('shipping_surname', { required: true, minLength: 3 })}
+                errors={errors}
+              />
+            </div>
             <Input
               placeholder='Adres e-mail'
               name='shipping_email'
