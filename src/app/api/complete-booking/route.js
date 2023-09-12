@@ -12,6 +12,20 @@ export async function GET(req) {
 
     if (!bookingId || !session || !amount) return NextResponse.redirect(`https://www.psychodietmed.pl/podsumowanie?status=error&bookingId=${bookingId}&session=${session}&amount=${amount}`)
 
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("X-Requested-With", "XMLHttpRequest");
+    headers.append("X-Tenant", process.env.CALENDESK_TENANT_NAME);
+    headers.append("X-Api-Key", process.env.CALENDESK_API_KEY);
+
+    var body = JSON.stringify({
+      "payment_method": "other",
+      "booking_id": bookingId,
+      "amount": amount,
+      "status": "approved",
+      "is_paid": true,
+    });
+
     const transactionHeaders = new Headers();
     transactionHeaders.append("Content-Type", "application/json");
     transactionHeaders.append("Authorization", `Basic ${btoa(`${Number(process.env.P24_POS_ID)}:${process.env.P24_REST_API_KEY}`)}`);
@@ -23,39 +37,51 @@ export async function GET(req) {
       .then(res => res.json())
       .then(async (res) => {
         console.log(res)
-        if (res.data.status < 1 || res.data.status > 2)
-          throw new Error('failed')
+        if (response.data.status == 1) {
+          p24.verifyTransaction({
+            amount: response.data.amount,
+            currency: response.data.currency,
+            orderId: response.data.orderId,
+            sessionId: response.data.sessionId,
+          }).then(response => {
+            if (!response) throw new Error('Verification failed')
+            fetch(`https://api.calendesk.com/api/admin/payments/bookings`, {
+              method: 'POST',
+              headers: headers,
+              body: body,
+              redirect: 'follow',
+              cache: 'no-cache'
+            })
+              .then(data => data.json())
+              .then(data => {
+                console.log(data)
 
-        const headers = new Headers();
-        headers.append("Content-Type", "application/json");
-        headers.append("X-Requested-With", "XMLHttpRequest");
-        headers.append("X-Tenant", process.env.CALENDESK_TENANT_NAME);
-        headers.append("X-Api-Key", process.env.CALENDESK_API_KEY);
-
-        var body = JSON.stringify({
-          "payment_method": "other",
-          "booking_id": bookingId,
-          "amount": amount,
-          "status": "approved",
-          "is_paid": true,
-        });
-
-        await fetch(`https://api.calendesk.com/api/admin/payments/bookings`, {
-          method: 'POST',
-          headers: headers,
-          body: body,
-          redirect: 'follow',
-          cache: 'no-cache'
-        })
-          .then(data => data.json())
-          .then(data => {
-            console.log(data)
-
-            if (data.id && data.status === 'paid')
-              throw new Error('complete')
-            else
-              throw new Error('error')
+                if (data.id && data.status === 'paid')
+                  throw new Error('complete')
+                else
+                  throw new Error('error')
+              })
           })
+        } else if (response.data.status == 2) {
+          fetch(`https://api.calendesk.com/api/admin/payments/bookings`, {
+            method: 'POST',
+            headers: headers,
+            body: body,
+            redirect: 'follow',
+            cache: 'no-cache'
+          })
+            .then(data => data.json())
+            .then(data => {
+              console.log(data)
+
+              if (data.id && data.status === 'paid')
+                throw new Error('complete')
+              else
+                throw new Error('error')
+            })
+        } else {
+          throw new Error('failed')
+        }
       })
   } catch (err) {
     console.log(err)

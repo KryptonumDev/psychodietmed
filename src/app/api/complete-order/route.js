@@ -22,41 +22,83 @@ export async function GET(req) {
       .then(res => res.json())
       .then(async (res) => {
         console.log(res)
-        if (res.data.status < 1 || res.data.status > 2) // TODO: 1 transaction verify https://developers.przelewy24.pl/index.php?pl#tag/Transaction-service-API/paths/~1api~1v1~1transaction~1verify/put
-          throw new Error('failed')
-
-        await fetch('https://psychodietmed.headlesshub.com/graphql', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Basic ${btoa(`${process.env.AUTHORISE_USERNAME}:${process.env.AUTHORISE_PASSWORD}`)}`
-          },
-          body: JSON.stringify({
-            query: `
-              mutation UPDATE_ORDER( $input: UpdateOrderInput! ) {
-                updateOrder(input: $input) {
-                  clientMutationId
-                }
-              }
-            `,
-            variables: {
-              input: {
-                clientMutationId: v4(),
-                orderId: Number(id),
-                status: "COMPLETED",
+        if (response.data.status == 1) {
+          p24.verifyTransaction({
+            amount: response.data.amount,
+            currency: response.data.currency,
+            orderId: response.data.orderId,
+            sessionId: response.data.sessionId,
+          }).then(response => {
+            if (!response) throw new Error('Verification failed')
+            fetch('https://psychodietmed.headlesshub.com/graphql', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Basic ${btoa(`${process.env.AUTHORISE_USERNAME}:${process.env.AUTHORISE_PASSWORD}`)}`
               },
-            }
-          }),
-          cache: 'no-cache',
-        })
-          .then(result => result.json())
-          .then(result => {
-            console.log(result)
-            if (result.data?.updateOrder?.clientMutationId)
-              throw new Error('complete')
-            else
-              throw new Error('error')
+              body: JSON.stringify({
+                query: `
+                  mutation UPDATE_ORDER( $input: UpdateOrderInput! ) {
+                    updateOrder(input: $input) {
+                      clientMutationId
+                    }
+                  }
+                `,
+                variables: {
+                  input: {
+                    clientMutationId: v4(),
+                    orderId: Number(id),
+                    status: "COMPLETED",
+                  },
+                }
+              }),
+              cache: 'no-cache',
+            })
+              .then(result => result.json())
+              .then(result => {
+                console.log(result)
+                if (result.data?.updateOrder?.clientMutationId)
+                  throw new Error('complete')
+                else
+                  throw new Error('error')
+              })
           })
+        } else if (response.data.status == 2) {
+          fetch('https://psychodietmed.headlesshub.com/graphql', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Basic ${btoa(`${process.env.AUTHORISE_USERNAME}:${process.env.AUTHORISE_PASSWORD}`)}`
+            },
+            body: JSON.stringify({
+              query: `
+                mutation UPDATE_ORDER( $input: UpdateOrderInput! ) {
+                  updateOrder(input: $input) {
+                    clientMutationId
+                  }
+                }
+              `,
+              variables: {
+                input: {
+                  clientMutationId: v4(),
+                  orderId: Number(id),
+                  status: "COMPLETED",
+                },
+              }
+            }),
+            cache: 'no-cache',
+          })
+            .then(result => result.json())
+            .then(result => {
+              console.log(result)
+              if (result.data?.updateOrder?.clientMutationId)
+                throw new Error('complete')
+              else
+                throw new Error('error')
+            })
+        } else {
+          throw new Error('failed')
+        }
       })
   } catch (err) {
     console.log(err)
