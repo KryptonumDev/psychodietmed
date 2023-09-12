@@ -1,7 +1,18 @@
 import { NextResponse } from 'next/server';
 import { v4 } from 'uuid';
+import { P24 } from "@ingameltd/node-przelewy24";
 
 export const dynamic = 'force-dynamic'
+
+const p24 = new P24(
+  Number(process.env.P24_MERCHANT_ID),
+  Number(process.env.P24_POS_ID),
+  process.env.P24_REST_API_KEY,
+  process.env.P24_CRC,
+  {
+    sandbox: false
+  }
+);
 
 export async function GET(req) {
   try {
