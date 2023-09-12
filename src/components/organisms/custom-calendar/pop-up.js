@@ -36,7 +36,10 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
         employeId: specialistId,
         serviceId: serviceId,
         date: chosenDate.format('YYYY-MM-DD'),
-        time: chosenTime
+        time: chosenTime,
+        adres: data.adres,
+        city: data.city,
+        postalcode: data.postalcode,
       })
     })
       .then(response => response.json())
@@ -149,6 +152,30 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
               placeholder="Telefon"
               error="Proszę wpisać numer telefonu w formacie +48 123 456 789"
             />
+            <Input
+              register={register('adres', { required: true })}
+              errors={errors}
+              label="Adres"
+              name='adres'
+              placeholder="Adres"
+            />
+            <div className={styles.columns}>
+              <Input
+                register={register('city', { required: true, minLength: 3 })}
+                errors={errors}
+                label="Miasto"
+                name='city'
+                placeholder="Miasto"
+              />
+              <Input
+                register={register('postalcode', { required: true, pattern: /^[0-9]{2}-[0-9]{3}$/i })} // patter 00-000
+                errors={errors}
+                label="Kod pocztowy"
+                name='postalcode'
+                placeholder="Kod pocztowy"
+                error="Proszę wpisać kod pocztowy w formacie 00-000"
+              />
+            </div>
           </div>
         </div>
         <Button type="submit">Przechodzę do płatności</Button>
