@@ -15,9 +15,11 @@
     background: linear-gradient(270deg, #FFFEFE 13.93%, rgba(255, 254, 254, 0.00) 71.97%);
     opacity: 0;
     transition: opacity .3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    pointer-events: none;
 
     &.active{
       opacity: 1;
+      pointer-events: all;
     }
 
     @media (max-width: 1140px) {
@@ -35,9 +37,11 @@
     background: linear-gradient(90deg, #FFFEFE 13.93%, rgba(255, 254, 254, 0.00) 71.97%);
     opacity: 0;
     transition: opacity .3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    pointer-events: none;
 
     &.active{
       opacity: 1;
+      pointer-events: all;
     }
 
     @media (max-width: 1140px) {
