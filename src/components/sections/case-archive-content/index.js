@@ -1,30 +1,18 @@
 'use client'
 import Card from "@/components/moleculas/case-card-extended"
-import Pagination from "@/components/organisms/pagination-client-side"
 import React, { useCallback, useEffect, useState } from "react"
 import styles from './styles.module.scss'
 import { PAGE_ITEM_COUNT } from "../../../constants/case"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { gql } from "@apollo/client"
 import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr"
 import Loader from "../loader"
 
 export default function Content({ podopieczni }) {
-
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  const [cases, setCases] = useState(podopieczni)
+  const [cases, setCases] = useState(podopieczni.nodes)
   const [initialLoad, setInitialLoad] = useState(true)
-  const [currentPage, setCurrentPage] = useState(() => {
-    const page = searchParams.get("strona");
-    if (!page) return 1;
+  const [currentPage, setCurrentPage] = useState(1)
 
-    return +page;
-  })
-
-  const { refetch, loading } = useQuery(
+  const { loading, fetchMore } = useQuery(
     gql`query Specialists($count: Int, $offset: Int) {
       podopieczni(
         where: 
@@ -115,12 +103,12 @@ export default function Content({ podopieczni }) {
       offset: PAGE_ITEM_COUNT * (currentPage - 1)
     },
     onCompleted: (data) => {
-      document.getElementById('content').scrollIntoView({ behavior: 'smooth' })
-      setCases(data?.podopieczni)
-    },
+      // add only unique cases
+      const newCases = data?.podopieczni.nodes.filter(el => !cases.find(el2 => el2.id === el.id))
+      setCases([...cases, ...newCases])
+    }, 
     onError: (error) => {
       console.log(error)
-      throw new Error(error)
     }
   })
 
@@ -131,16 +119,12 @@ export default function Content({ podopieczni }) {
 
   useEffect(() => {
     if (!initialLoad) {
-      refetch()
-      const current = new URLSearchParams(Array.from(searchParams.entries()));
-
-      if (currentPage === 1) current.delete("strona");
-      else current.set("strona", currentPage);
-
-      const search = current.toString();
-      const query = search ? `?${search}` : "";
-      // router.push(`${pathname}${query}`, { shallow: true });  Currently not working. TODO: after next update, rework - https://github.com/vercel/next.js/discussions/48110#discussioncomment-6481618
-      history.replaceState(null, null, `${pathname}${query}`)
+      fetchMore({
+        variables: {
+          count: PAGE_ITEM_COUNT,
+          offset: PAGE_ITEM_COUNT * (currentPage)
+        },
+      })
     }
   }, [currentPage])
 
@@ -148,13 +132,13 @@ export default function Content({ podopieczni }) {
     <section className={styles.wrapper} id='content'>
       <Loader show={loading} />
       <div className={styles.grid}>
-        {cases.nodes.map(el => (
+        {cases.map(el => (
           <Card
             key={el.id}
             slug={el.slug}
             name={el.histori.caseStudyCard.name}
             avatar={el.histori.caseStudyCard.avatar}
-            comment={el.histori.information.text}
+            // comment={el.histori.information.text}
             linkText={el.histori.caseStudyCard.linkText}
             differences={el.histori.caseStudyCard.differences}
             before={el.histori.information.beforeImage}
@@ -162,12 +146,20 @@ export default function Content({ podopieczni }) {
             resultTitle={el.histori.information.resultTitle}
             result={el.histori.information.result}
             problems={el.histori.information.problems}
-            boldText={el.histori.information.boldText}
+            // boldText={el.histori.information.boldText}
             specialist={el.histori.information.specialist}
           />
         ))}
       </div>
-      <Pagination changePage={changePage} currentPage={currentPage} itemCount={podopieczni.pageInfo.offsetPagination.total} PAGE_ITEM_COUNT={PAGE_ITEM_COUNT} />
+      <div className={styles.loadMore}>
+        <p>{cases.length} z {podopieczni.pageInfo.offsetPagination.total} opinii</p>
+        <span>
+          <span style={{ width: (100 / podopieczni.pageInfo.offsetPagination.total) * cases.length + '%' }} />
+        </span>
+        {cases.length < podopieczni.pageInfo.offsetPagination.total && (
+          <button className="link" onClick={() => { changePage(currentPage + 1) }}>Pokaż więcej</button>
+        )}
+      </div>
     </section>
   )
 }

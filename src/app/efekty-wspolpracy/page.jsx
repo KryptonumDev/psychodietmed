@@ -10,14 +10,12 @@ import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
 import Breadcrumbs from "@/components/sections/breadcrumbs"
 
-export const dynamic = 'force-dynamic'
+export async function generateMetadata() {
+  return await generetaSeo('cG9zdDo5MzM=', `/historia-marki`, GET_SEO_PAGE)
+} 
 
-export async function generateMetadata({ searchParams }) {
-  return await generetaSeo('cG9zdDo5MzM=', `/historia-marki${searchParams.strona ? `?strona=${searchParams.strona}` : ''}`, GET_SEO_PAGE)
-}
-
-export default async function Archive(props) {
-  const { data, faq, metrics, podopieczni } = await getData(props)
+export default async function Archive() {
+  const { data, faq, metrics, podopieczni } = await getData()
   return (
     <main className="overflow" id="main">
       <Breadcrumbs data={[{ page: 'Efekty współpracy', url: `/efekty-wspolpracy` }]} />
@@ -31,10 +29,8 @@ export default async function Archive(props) {
   )
 }
 
-async function getData(props) {
+async function getData() {
   try {
-    let currentPage = props?.searchParams?.strona || 1
-
     const result = await fetch('https://psychodietmed.headlesshub.com/graphql', {
       method: 'POST',
       headers: {
@@ -193,7 +189,7 @@ async function getData(props) {
         }
       ` ,
         variables: {
-          offset: (currentPage - 1) * PAGE_ITEM_COUNT,
+          offset: 0,
           size: PAGE_ITEM_COUNT,
         }
       }),

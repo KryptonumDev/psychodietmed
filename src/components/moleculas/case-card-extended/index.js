@@ -20,11 +20,13 @@ const Quote = () => (
 export default function Card({ specialist, slug, name, avatar, comment, linkText, before, after, differences, problems, result, resultTitle, boldText }) {
   return (
     <div className={styles.slide} >
-      <Quote />
       <div className={styles.content}>
-        <div className={styles.slideAuthor}>
-          <Image aspectRatio={true} quality='90' src={avatar.mediaItemUrl} alt={avatar.altText} width={avatar.mediaDetails.width} height={avatar.mediaDetails.height} className={styles.slideAuthorImage} />
-          <div className={styles.slideAuthorName}>{name}</div>
+        <div className={styles.flex}>
+          <div className={styles.slideAuthor}>
+            <Image aspectRatio={true} quality='90' src={avatar.mediaItemUrl} alt={avatar.altText} width={avatar.mediaDetails.width} height={avatar.mediaDetails.height} className={styles.slideAuthorImage} />
+            <div className={styles.slideAuthorName}>{name}</div>
+          </div>
+          <Quote />
         </div>
         <div className={styles.middle}>
           <div className={styles.info}>
@@ -52,16 +54,6 @@ export default function Card({ specialist, slug, name, avatar, comment, linkText
               </div>
             )}
           </div>
-          <div className={styles.differences}>
-            {differences && (
-              <>
-                <div className={styles.differences_title}>Co się zmieniło?</div>
-                {differences?.map(el => (
-                  <p key={el.difference}><Butterfly />{el.difference}</p>
-                ))}
-              </>
-            )}
-          </div>
         </div>
         <div className={styles.bottom}>
           {after?.mediaItemUrl && before?.mediaItemUrl ? (
@@ -82,9 +74,17 @@ export default function Card({ specialist, slug, name, avatar, comment, linkText
               </div>
             </div>
           ) : (
-            <div className={styles.slideBoldText} dangerouslySetInnerHTML={{ __html: removeWrap(boldText) }} />
+            <div className={styles.differences}>
+              {differences && (
+                <>
+                  <div className={styles.differences_title}>Co się zmieniło?</div>
+                  {differences?.map(el => (
+                    <p key={el.difference}><Butterfly />{el.difference}</p>
+                  ))}
+                </>
+              )}
+            </div>
           )}
-          <div className={styles.slideText} dangerouslySetInnerHTML={{ __html: comment }} />
         </div>
       </div>
       {after?.mediaItemUrl && before?.mediaItemUrl && (
