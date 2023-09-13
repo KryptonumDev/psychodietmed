@@ -25,6 +25,9 @@ export default function Specialists({ data, title = 'Wybierz specjalistę' }) {
   const [chosenTime, setChosenTime] = useState(null);
   const [popupOpened, setPopupOpened] = useState(false);
 
+  const [EndShadow, setEndShadow] = useState(true);
+  const [StartShadow, setStartShadow] = useState(false);
+
   return (
     <section id='zespol' className={styles.wrapper}>
       <header className={styles.header}>
@@ -44,19 +47,11 @@ export default function Specialists({ data, title = 'Wybierz specjalistę' }) {
         ref={sliderRef}
         modules={[A11y]}
         className={styles.wrapper}
-        spaceBetween={28}
+        spaceBetween={16}
         slidesPerView={1}
         breakpoints={{
-          1366: {
+          1140: {
             slidesPerView: 2.5,
-          },
-
-          1024: {
-            slidesPerView: 3,
-          },
-          768: {
-            slidesPerView: 2.5,
-            spaceBetween: 48
           },
           640: {
             slidesPerView: 2,
@@ -65,12 +60,22 @@ export default function Specialists({ data, title = 'Wybierz specjalistę' }) {
             slidesPerView: 1.5,
           }
         }}
+        onSwiper={(e) => {
+          setStartShadow(!e.isBeginning)
+          setEndShadow(!e.isEnd)
+        }}
+        onSlideChange={(e) => {
+          setStartShadow(!e.isBeginning)
+          setEndShadow(!e.isEnd)
+        }}
       >
         {data?.map((el, index) => (
           <SwiperSlide key={index}>
             <Card setPopupOpened={setPopupOpened} setChosenTime={setChosenTime} data={el} />
           </SwiperSlide>
         ))}
+        <div onClick={handleNext} className={`${styles.overlayRight} ${EndShadow ? styles.active : ''}`} />
+        <div onClick={handlePrev} className={`${styles.overlayLeft} ${StartShadow ? styles.active : ''}`} />
       </Swiper>
       <AnimatePresence mode="wait">
         {popupOpened && (
