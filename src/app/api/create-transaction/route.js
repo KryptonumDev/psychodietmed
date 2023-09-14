@@ -32,7 +32,7 @@ export async function POST(req) {
       country: Country.Poland,
       language: Language.PL,
       urlReturn: 'https://www.psychodietmed.pl', // URL address to which customer will be redirected when transaction is complete
-      urlStatus: 'https://www.psychodietmed.pl/api/complete-order/',
+      urlStatus: urlReturn,
       timeLimit: 60,
       encoding: Encoding.UTF8,
     }

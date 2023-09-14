@@ -8,6 +8,9 @@ export async function POST(req) {
   try {
     const { merchantId, posId, sessionId, amount, originAmount, currency, orderId, methodId, statement, sign } = await req.json()
     console.log({ merchantId, posId, sessionId, amount, originAmount, currency, orderId, methodId, statement, sign })
+    
+    const { searchParams } = new URL(req.url)
+    const id = searchParams.get('id')
 
     const p24 = new P24(
       Number(process.env.P24_MERCHANT_ID),
