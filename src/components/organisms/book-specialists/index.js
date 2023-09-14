@@ -1,14 +1,9 @@
-import React, { useMemo, useState } from "react"
+import React, { useMemo } from "react"
 import styles from './styles.module.scss'
-import { A11y } from "swiper"
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/scss';
-import Card from "@/components/moleculas/specialist-card-short";
+import Specialists from "@/components/sections/specialists-slider";
 import Button from "@/components/atoms/button";
-import { PopUp } from "../custom-calendar/pop-up";
-import { AnimatePresence } from "framer-motion";
 
-export default function Specialists({ chosenSpecialisations, specialists }) {
+export default function Specialistss({ chosenSpecialisations, specialists }) {
 
 
   const filtredSpecialists = useMemo(() => {
@@ -39,51 +34,12 @@ export default function Specialists({ chosenSpecialisations, specialists }) {
 
   }, [specialists, chosenSpecialisations])
 
-  const [chosenTime, setChosenTime] = useState(null)
-  const [popupOpened, setPopupOpened] = useState(false)
-
   return (
     <section className={styles.wrapper}>
       <h1 dangerouslySetInnerHTML={{ __html: 'Wybierz <span class="underline-third">specjalistę</span>, który wesprze Cię na drodze do dobrej zmiany' }} />
       <p>Jaki jest Twój problem?</p>
-
-      <Swiper
-        modules={[A11y]}
-        className={styles.grid}
-        spaceBetween={0}
-        slidesPerView={1}
-        breakpoints={{
-          520: {
-            slidesPerView: 2,
-            spaceBetween: 28
-          },
-          1024: {
-            slidesPerView: 3,
-            spaceBetween: 50
-          },
-        }}
-      >
-        {filtredSpecialists.map((el, index) => (
-          <SwiperSlide key={index}>
-            <Card chosenTime={chosenTime} setChosenTime={setChosenTime} data={el} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      <Button onClick={() => { setPopupOpened(true) }} disabled={!chosenTime}>Wybieram termin</Button>
-      <AnimatePresence mode="wait">
-        {popupOpened && (
-          <PopUp
-            service={chosenTime.service}
-            specialistId={chosenTime.person.proffesional.specialistId}
-            serviceId={chosenTime.person.proffesional.serviceId}
-            setPopupOpened={setPopupOpened}
-            chosenDate={chosenTime.date}
-            chosenTime={chosenTime.time}
-            name={chosenTime.person.title}
-            specialistData={chosenTime.person}
-          />
-        )}
-      </AnimatePresence>
+      <Specialists data={filtredSpecialists} />
+      <Button theme='secondary' href='/specjalisci'>Wszyscy specjaliści</Button>
     </section>
   )
 }

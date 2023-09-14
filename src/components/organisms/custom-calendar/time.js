@@ -14,18 +14,22 @@ export const CalendarTime = ({ data, setChosenTime, chosenTime, chosenDate }) =>
         <h3>Wolne terminy</h3>
       </header>
       <div>
-        <ul>
-          {availability.map(el => (
-            <li key={el} className={chosenTime === el ? styles.active : ''}>
-              <button
-                type='button'
-                onClick={() => setChosenTime(el)}
-              >
-                {el}
-              </button>
-            </li>
-          ))}
-        </ul>
+        {availability.length > 0 ? (
+          <ul>
+            {availability.map(el => (
+              <li key={el} className={chosenTime === el ? styles.active : ''}>
+                <button
+                  type='button'
+                  onClick={() => setChosenTime(el)}
+                >
+                  {el}
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Brak wolnych terminów</p>
+        )}
       </div>
     </div>
   )

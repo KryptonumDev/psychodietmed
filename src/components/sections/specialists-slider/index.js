@@ -33,14 +33,18 @@ export default function Specialists({ data, title = 'Wybierz specjalistę' }) {
       <header className={styles.header}>
         <h2>{title}</h2>
         <div className={styles.control}>
-          <ArrowLeft
-            onClick={() => { handlePrev() }}
-            aria-label='Poprzedni specjalista'
-          />
-          <ArrowRight
-            onClick={() => { handleNext() }}
-            aria-label='Następny specjalista'
-          />
+          {(!sliderRef?.current?.swiper?.isBeginning || !sliderRef?.current?.swiper?.isEnd) && (
+            <>
+              <ArrowLeft
+                onClick={() => { handlePrev() }}
+                aria-label='Poprzedni specjalista'
+              />
+              <ArrowRight
+                onClick={() => { handleNext() }}
+                aria-label='Następny specjalista'
+              />
+            </>
+          )}
         </div>
       </header>
       <Swiper
