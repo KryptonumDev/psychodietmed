@@ -7,6 +7,7 @@ export const dynamic = 'force-dynamic'
 export async function POST(req) {
   try {
     const { merchantId, posId, sessionId, amount, originAmount, currency, orderId, methodId, statement, sign } = await req.json()
+    console.log({ merchantId, posId, sessionId, amount, originAmount, currency, orderId, methodId, statement, sign })
 
     const p24 = new P24(
       Number(process.env.P24_MERCHANT_ID),
@@ -60,12 +61,13 @@ export async function POST(req) {
       return NextResponse.json({ res: response }, { status: 500 })
     }
 
-
+    console.log({ res: response, order: order })
     return NextResponse.json({
       res: response,
       order: order
     })
   } catch (err) {
+    console.log(err)
     return NextResponse.json({ res: err }, { status: 500 })
   }
 }
