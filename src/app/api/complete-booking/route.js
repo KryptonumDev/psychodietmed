@@ -5,9 +5,9 @@ export const dynamic = 'force-dynamic'
 
 export async function POST(req) {
   try {
-    const { merchantId, posId, sessionId, originAmount, currency, orderId, methodId, statement, sign } = await req.json()
+    const { merchantId, posId, sessionId, amount, originAmount, currency, orderId, methodId, statement, sign } = await req.json()
     const { searchParams } = new URL(req.url)
-    const amount = searchParams.get('amount')
+    const ParamAmount = searchParams.get('amount')
     const bookingId = searchParams.get('id')
 
     const headers = new Headers();
@@ -19,7 +19,7 @@ export async function POST(req) {
     var body = JSON.stringify({
       "payment_method": "other",
       "booking_id": bookingId,
-      "amount": amount,
+      "amount": ParamAmount,
       "status": "approved",
       "is_paid": true,
     });
