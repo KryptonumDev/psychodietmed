@@ -31,7 +31,8 @@ export async function POST(req) {
       email: email,
       country: Country.Poland,
       language: Language.PL,
-      urlReturn: urlReturn, // URL address to which customer will be redirected when transaction is complete
+      urlReturn: 'https://www.psychodietmed.pl/podsumowanie', // URL address to which customer will be redirected when transaction is complete
+      urlStatus: urlReturn,
       timeLimit: 60,
       encoding: Encoding.UTF8,
     }
