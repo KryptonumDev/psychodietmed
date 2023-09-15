@@ -29,6 +29,16 @@
     font-weight: 500;
     padding: 0 16px;
 
+    transition: background-color .2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
+    &:hover {
+      background: var(--secondary-200, #F2DFE3);
+    }
+
+    &:active {
+      background: var(--secondary-500, #DEAFB8);
+    }
+
     @media (max-width: 380px) {
       padding: 0;
       width: 100%;
@@ -107,6 +117,16 @@
         font-size: 20rem;
         font-weight: 500;
         min-width: 52px;
+
+        transition: background-color .2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    
+        &:hover {
+          background: var(--secondary-200, #F2DFE3);
+        }
+    
+        &:active {
+          background: var(--secondary-500, #DEAFB8);
+        }
       }
     }
   }

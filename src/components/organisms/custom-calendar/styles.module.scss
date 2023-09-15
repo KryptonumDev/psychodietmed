@@ -167,14 +167,29 @@
       }
 
       transition: background-color .2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    
+      &:hover {
+        background: var(--secondary-200, #F2DFE3);
+      }
 
       &.active {
+        background-color: var(--secondary-500, #DEAFB8);
+      }
+
+      &:active {
         background-color: var(--secondary-500, #DEAFB8);
       }
 
       button {
         color: #181818;
         font-weight: 500;
+        width: 46px;
+        height: 46px;
+
+        @media (max-width: 564px) {
+          width: 40px;
+          height: 40px;
+        }
 
         &:disabled {
           color: #CFCFCF;
@@ -184,6 +199,7 @@
       }
 
       &.noTimes {
+        background: transparent !important  ;
         button {
           color: #8A8A8A;
           text-decoration: line-through;
@@ -258,6 +274,16 @@
       transition: background-color .3s var(--easing);
       background-color: var(--primary-50, #F1F6FB);
       border-radius: 10px;
+
+      transition: background-color .2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    
+      &:hover {
+        background: var(--secondary-200, #F2DFE3);
+      }
+
+      &:active {
+        background-color: var(--secondary-500, #DEAFB8);
+      }
 
       &.active {
         background-color: #DEAFB8;

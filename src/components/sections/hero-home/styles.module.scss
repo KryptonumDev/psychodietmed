@@ -30,6 +30,8 @@
     height: auto;
     width: 100%;
     min-width: 340px;
+    max-width: 500px;
+    margin: 0 auto;
 
     @media (max-width: 640px) {
       min-width: unset;
@@ -105,6 +107,9 @@
 
   a {
     margin-top: clamp(36px, calc(48vw/7.68), 48px);
+    @media (max-width: 640px) {
+      margin-top: 0;
+    }
   }
 }
 

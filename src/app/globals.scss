@@ -1,7 +1,7 @@
 html {
   /* overflow-x: hidden; */
   max-width: 100%;
-  font-size: 5.3%;
+  font-size: 4.7%;
 
   @media (max-width: 480px) {
     font-size: 5.9%;
@@ -169,7 +169,7 @@ legend {
 h2 {
   scroll-margin-top: 120px;
   font-weight: 500;
-  font-size: clamp(32rem, calc(32vw / 7.68), 64rem);
+  font-size: clamp(32rem, calc(36vw / 7.68), 48rem);
   line-height: 124%;
   font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
   color: var(--primary-800);
