@@ -80,7 +80,7 @@ export default function RootLayout({ children }) {
         </ApolloWrapper>
         <GlobalScript />
         <Suspense fallback={null}>
-          <FacebookPixelEvents fb_id={'1012098603578460'} />
+          <FacebookPixelEvents fb_id={'616809410630433'} />
         </Suspense>
         {/* <GoogleAnalytics ga_id={''} /> */}
       </body>
