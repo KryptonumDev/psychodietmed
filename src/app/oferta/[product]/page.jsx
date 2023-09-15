@@ -269,7 +269,7 @@ export async function generateStaticParams() {
       }
     }
   `,
-    revalidate: 0
+  cache: 'no-cache'
   })
 
   return data.products.nodes.map(({ slug }) => ({

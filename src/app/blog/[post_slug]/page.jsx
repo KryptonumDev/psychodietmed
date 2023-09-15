@@ -175,7 +175,7 @@ export async function generateStaticParams() {
         }
       }
     `,
-    revalidate: 0,
+    cache: 'no-cache'
   })
 
   return posts.nodes.map(({ slug }) => ({

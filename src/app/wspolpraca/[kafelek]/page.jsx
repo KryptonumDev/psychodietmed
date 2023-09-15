@@ -208,7 +208,7 @@ export async function generateStaticParams() {
         }
       }
     `,
-    revalidate: 0
+    cache: 'no-cache'
   })
 
   return obszaryDzialania.nodes.filter(el => !!el.acf.heroKafelek.title).map(({ slug }) => ({
