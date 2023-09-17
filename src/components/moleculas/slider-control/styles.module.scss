@@ -1,12 +1,28 @@
 .control {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 32px;
   margin-top: 48px;
 
+  &.arrowless{
+    justify-content: center;
+
+    .dots{
+      .dot{
+        height: 5px;
+        width: 80px;
+        display: block;
+      }
+    }
+  }
+
   @media (max-width: 640px) {
     justify-content: space-between;
+
+    &.arrowless{
+      justify-content: center;
+    }
   }
 
   button{
@@ -22,17 +38,17 @@
     display: none;
   }
   .dot {
-    width: 80px;
-    height: 5px;
+    width: 16px;
+    height: 16px;
     border-radius: 50px;
     cursor: pointer;
     background-color: var(--secondary-100);
     transition: background-color .3s;
     &:hover {
-      background-color: var(--secondary-200);
+      background-color: var(--secondary-500);
     }
     &.active {
-      background-color: var(--secondary-500);
+      background-color: var(--secondary-600);
     }
   }
 }

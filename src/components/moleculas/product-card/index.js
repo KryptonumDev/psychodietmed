@@ -8,7 +8,6 @@ import Price from "@/components/atoms/price"
 import { CheckMark } from "../../../assets/check-mark"
 
 export const Card = ({ offer = true, product }) => {
-  debugger
   const [chosenVariation, setChosenVariation] = useState(product?.variations?.nodes[0] || null)
   const [chosenAddon, setChosenAddon] = useState(null)
 

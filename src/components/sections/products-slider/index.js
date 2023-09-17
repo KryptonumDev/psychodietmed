@@ -24,13 +24,15 @@ export default function Slider({ products, title = 'Może Cię zainteresować' }
 
   return (
     <section className={styles.wrapper}>
-      <h2>{title}</h2>
       <div className={`${styles.control} ${styles.desctop}`}>
         <ArrowLeft
+          className={styles.left}
           onClick={() => { handlePrev() }}
           aria-label='Poprzedni produkt'
         />
+        <h2>{title}</h2>
         <ArrowRight
+          className={styles.right}
           onClick={() => { handleNext() }}
           aria-label='Następny produkt'
         />
@@ -41,12 +43,15 @@ export default function Slider({ products, title = 'Może Cię zainteresować' }
         className={styles.wrapper}
         spaceBetween={16}
         slidesPerView={1}
+        autoHeight={true}
         breakpoints={{
           1025: {
+            autoHeight: false,  
             slidesPerView: 3,
             spaceBetween: 32
           },
           641: {
+            autoHeight: false,  
             slidesPerView: 2,
             spaceBetween: 24
           }
@@ -54,19 +59,9 @@ export default function Slider({ products, title = 'Może Cię zainteresować' }
       >
         {products?.map((el, index) => (
           <SwiperSlide key={index}>
-            <Card product={el}/>
+            <Card product={el} />
           </SwiperSlide>
         ))}
-        <div className={`${styles.control} ${styles.mobile}`}>
-          <ArrowLeft
-            onClick={() => { handlePrev() }}
-            aria-label='Poprzedni produkt'
-          />
-          <ArrowRight
-            onClick={() => { handleNext() }}
-            aria-label='Następny produkt'
-          />
-        </div>
       </Swiper>
     </section>
   )
