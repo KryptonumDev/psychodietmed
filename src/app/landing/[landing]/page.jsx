@@ -106,9 +106,8 @@ export async function generateStaticParams() {
       }
     }
   `,
-    revalidate: 0
+  cache: 'no-cache'
   })
-
   return landingPages.nodes.map(({ slug }) => ({
     landing: slug
   }))

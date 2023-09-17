@@ -188,7 +188,7 @@ export async function generateStaticParams() {
         }
       }
     `,
-    revalidate: 0,
+    cache: 'no-cache'
   })
 
   return products.nodes.map(({ slug }) => ({

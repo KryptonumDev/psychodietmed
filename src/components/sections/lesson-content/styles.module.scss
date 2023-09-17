@@ -161,6 +161,11 @@
   .content {
     grid-area: content;
 
+    a{
+      text-decoration: underline;
+      color: var(--primary-800);
+    }
+
     h2 {
       margin-bottom: 28px;
       font-size: clamp(28rem, calc(36vw/7.68), 48rem);

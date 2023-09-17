@@ -8,7 +8,7 @@ import Price from "@/components/atoms/price"
 import { CheckMark } from "../../../assets/check-mark"
 
 export const Card = ({ offer = true, product }) => {
-
+  debugger
   const [chosenVariation, setChosenVariation] = useState(product?.variations?.nodes[0] || null)
   const [chosenAddon, setChosenAddon] = useState(null)
 
@@ -37,7 +37,12 @@ export const Card = ({ offer = true, product }) => {
 
   return (
     <div className={styles.wrapper}>
-      <Link className={styles.link} href={offer ? `/oferta/${product?.slug}` : `/akademia/${product?.slug}`} aria-label={product.name} />
+      <Link
+        className={styles.link}
+        href={offer
+          ? `/oferta/${product.productCategories.nodes[0].slug === "program" ? `${product.productCategories.nodes[0].slug}/` : ''}${product?.slug}`
+          : `/akademia/${product?.slug}`} aria-label={product.name}
+      />
       <div>
         <Image
           width={product.image.mediaDetails.width}

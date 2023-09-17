@@ -84,6 +84,11 @@ export default function Content({ prices, orders, productCategories, defaultData
           productId: databaseId
           slug
           name
+          productCategories{
+            nodes{
+              slug
+            }
+          }
           image {
             id
             altText

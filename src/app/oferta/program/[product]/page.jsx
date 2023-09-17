@@ -37,7 +37,7 @@ export default async function Courses({ params }) {
 
   return (
     <main>
-      <Breadcrumbs data={[{ page: 'Akademia', url: `/akademia` }, { page: product.title, url: `/akademia/kurs/${params.product}` }]} />
+      <Breadcrumbs data={[{ page: 'Sklep', url: `/oferta` }, { page: product.title, url: `/oferta/kurs/${params.product}` }]} />
       <Hero regularPrice={product.regularPrice} price={product.price} lessonSlug={firstLessonSlug} slug={product.product.course.slug} databaseId={product.databaseId} title={product.product.course.title} image={product.product.course.featuredImage} time={totalTime} count={lessonsCount} />
       <Content disabled={true} slug={product.product.course.slug} content={product.product.course.content} chapters={product.product.course.course.chapters} author={product.product.course.course.author} />
       <FlexibleContent productId={product.productId} data={product.product.additionalSectionsProduct} />
@@ -233,7 +233,7 @@ export async function generateStaticParams() {
       query PostStaticParams {
         products(
           first: 100,
-          where: {categoryIn: ["kurs"]}
+          where: {categoryIn: ["program"]}
         ) {
           nodes {
             slug
