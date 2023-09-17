@@ -47,6 +47,11 @@ async function getData() {
       }
       products(first: 5, where: {categoryNotIn: ["ebook", "kurs", "bundle"]} ) {
         nodes {
+          productCategories{
+            nodes{
+              slug
+            }
+          }
           product {
             discount
             bundleItems {

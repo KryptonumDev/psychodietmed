@@ -11,6 +11,7 @@ import GlobalScript from '../utils/global.js';
 // import { Suspense } from 'react'
 import { FacebookPixelEvents } from '../context/facebook-pixel'
 import { Suspense } from 'react'
+import Script from 'next/script'
 
 const Satoshi = localFont({
   src: '../assets/fonts/satoshi.woff2',
@@ -64,12 +65,12 @@ export const revalidate = 600
 export default function RootLayout({ children }) {
   return (
     <html lang="pl">
-      <script
-        key={`faq`}
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      />
       <body className={`body ${Satoshi.variable}`}>
+        <Script
+          id={`organisation`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
         <ApolloWrapper>
           <AppProvider>
             <Header />

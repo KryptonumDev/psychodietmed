@@ -130,7 +130,7 @@ export default function CheckoutContent() {
   }, [checkout, orderData]);
 
   const handleSubmit = (props) => {
-    const needAccount = cart.products.some((item) => item.categories.some((category) => category.slug === 'kurs'))
+    const needAccount = cart.products.some((item) => item.categories.some((category) => category.slug === 'kurs' || category.slug === 'program'))
     const formattedInput = { ...input, comment: props.comment, needAccount: needAccount }
     setOrderData(createCheckoutData(formattedInput, false))
     setInput(formattedInput)

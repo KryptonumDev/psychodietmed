@@ -148,6 +148,11 @@ async function getData(params) {
                   width
                 }
               }
+              productCategories{
+                nodes{
+                  slug
+                }
+              }
               ... on SimpleProduct {
                 id
                 price
@@ -178,6 +183,11 @@ async function getData(params) {
           }
           bundles: products(where: {categoryIn: "bundle"}, first: 50) {
             nodes {
+              productCategories{
+                nodes{
+                  slug
+                }
+              }
               addons {
                 name
                 ... on AddonMultipleChoice {
@@ -265,6 +275,11 @@ async function getData(params) {
               }
             }
             nodes {
+              productCategories{
+                nodes{
+                  slug
+                }
+              }
               addons {
                 name
                 ... on AddonMultipleChoice {
