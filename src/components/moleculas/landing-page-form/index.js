@@ -36,7 +36,6 @@ const Form = ({ landing, id }) => {
 
     axios.post(url, body)
       .then((res) => {
-        debugger
         if (res.status === 200) {
           setSentStatus(prevStatus => ({ ...prevStatus, success: true }));
           reset();
