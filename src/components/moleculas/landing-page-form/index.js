@@ -10,12 +10,13 @@ import SelectTime from "@/components/atoms/select-time"
 import { AnimatePresence, motion } from 'framer-motion';
 import { emailPattern, phonePattern } from "../../../constants/patterns"
 import { LANDINGPAGE_GROUPID } from "../../../constants/mailerLite"
+import { redirect } from "next/navigation"
 
-const Form = ({ id }) => {
+const Form = ({ landing, id }) => {
   const url = `https://psychodietmed.headlesshub.com/wp-json/contact-form-7/v1/contact-forms/${id}/feedback`;
-  const [ sentStatus, setSentStatus ] = useState({ sent: false });
+  const [sentStatus, setSentStatus] = useState({ sent: false });
   const { register, handleSubmit, reset, formState: { errors }, watch } = useForm();
-  const selectTimeWatch = watch([ "preferencedDate", "preferencedTime" ]);
+  const selectTimeWatch = watch(["preferencedDate", "preferencedTime"]);
 
   const onSubmit = data => {
     setSentStatus({ sent: true });
@@ -24,7 +25,7 @@ const Form = ({ id }) => {
 
     const datePreference = (preferencedDate || preferencedTime)
       ? `Preferencja co do czasu kontaktu: ${preferencedDate ? `${preferencedDate}${preferencedTime ? ', ' : ''}` : ''}${preferencedTime || ''}`
-    : 'Bez preferencji co do czasu kontaktu';
+      : 'Bez preferencji co do czasu kontaktu';
 
     let body = new FormData();
     body.append('name', name)
@@ -34,30 +35,33 @@ const Form = ({ id }) => {
     body.append('datePreference', datePreference)
 
     axios.post(url, body)
-    .then((res) => {
-      if (res.status === 200) {
-        setSentStatus(prevStatus => ({ ...prevStatus, success: true }));
-        reset();
-        fetch('/api/newsletter', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: name,
-            email: email,
-            group_id: LANDINGPAGE_GROUPID
-          }),
-        })
-          .then(response => response.json())
-          .then()
-          .catch();
-      } else {
+      .then((res) => {
+        debugger
+        if (res.status === 200) {
+          setSentStatus(prevStatus => ({ ...prevStatus, success: true }));
+          reset();
+          fetch('/api/newsletter', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: name,
+              email: email,
+              group_id: LANDINGPAGE_GROUPID
+            }),
+          })
+            .then(response => response.json())
+            .then(() => { })
+            .catch();
+
+          window.location.href = `/landing/${landing}/dziekuje-za-zapis`
+        } else {
+          setSentStatus(prevStatus => ({ ...prevStatus, success: false }));
+        }
+      }).catch(() => {
         setSentStatus(prevStatus => ({ ...prevStatus, success: false }));
-      }
-    }).catch(() => {
-      setSentStatus(prevStatus => ({ ...prevStatus, success: false }));
-    })
+      })
   };
-  
+
   return (
     <form className={styles.wrapper} onSubmit={handleSubmit(onSubmit)}>
       <AnimatePresence mode="wait">

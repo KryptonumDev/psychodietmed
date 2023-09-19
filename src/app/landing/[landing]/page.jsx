@@ -14,7 +14,7 @@ export default async function Landing({ params }) {
   const { data: { landingForm, landingFlex, landingPlates } } = await getData(params);
   return (
     <main id="main">
-      <Hero data={landingForm} />
+      <Hero landing={params.landing} data={landingForm} />
       <Flex data={landingFlex} />
       <Benefits data={landingPlates} />
     </main>
