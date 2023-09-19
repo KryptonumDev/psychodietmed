@@ -31,7 +31,6 @@ export default function Personaldata({ input, setStep, setInput }) {
   });
 
   const [nipValue, setNipValue] = useState(false)
-  const [isTrueNip, setIsTrueNip] = useState(false)
   const watchType = watch('type')
   const watchShippingSameAsBilling = watch('shipping_same_as_billing')
 
@@ -40,22 +39,28 @@ export default function Personaldata({ input, setStep, setInput }) {
     if (nipValue?.length === 10) {
       axios.get(`https://wl-api.mf.gov.pl/api/search/nip/${nipValue}?date=${date}`)
         .then(res => {
-          if (res.data.result.subject) {
-            const [sentence, address, postcode, city] = res.data.result.subject.workingAddress.match(/^([^,]+),\s*([^,]+)\s([^,]+)$/);
+          if (res.result?.subject) {
+            let adress = res.result?.subject?.residenceAddress || res.result?.subject?.workingAddress
+
+            if (!adress) {
+              return null
+            }
+
+            const arr = adress.match(/^([^,]+)\s+([^,]+)?,\s*(\d{2}-\d{3})\s*([^,]+)$/)
+
+            if (!arr) {
+              return null
+            }
+
+            const [sentence, address, houseApart, postcode, city] = arr;
 
             setValue('billing_firmName', res.data.result.subject.name)
-            setValue('billing_address', address)
+            setValue('billing_address', address + " " + houseApart)
             setValue('billing_postalCode', postcode)
             setValue('billing_city', city)
 
-            setIsTrueNip(true)
           } else {
-            // toast.warn('Brak informacji w bazie NIP')
-            setIsTrueNip(false)
           }
-        })
-        .catch(err => {
-          // toast.error(err.response.data.message)
         })
     }
   }, [nipValue, setValue])
@@ -143,7 +148,7 @@ export default function Personaldata({ input, setStep, setInput }) {
           <Input
             placeholder='NIP'
             name='billing_nip'
-            register={register('billing_nip', { required: true, minLength: 10, maxLength: 10, onChange: (e) => { setNipValue(e.currentTarget.value) }, validate: () => isTrueNip })}
+            register={register('billing_nip', { required: true, minLength: 10, maxLength: 10, onChange: (e) => { setNipValue(e.currentTarget.value) } })}
             errors={errors}
           />
           <Input
