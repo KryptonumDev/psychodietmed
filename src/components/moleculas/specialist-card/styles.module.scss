@@ -64,10 +64,10 @@
       color: #3A69A0;
       border: 2px solid #3A69A0;
       border-radius: 50px;
-      font-size: 14rem;
+      font-size: clamp(16rem, calc(14vw/7.68), 20rem);
       line-height: 124%;
       @media (max-width: 370px) {
-        font-size: clamp(0rem, calc(14vw/3.7), 14rem);
+        font-size: clamp(0rem, calc(16vw/3.7), 16rem);
         padding:
           clamp(0px, calc(8vw/3.7), 8px) clamp(0px, calc(8vw/3.7), 8px) clamp(0px, calc(8vw/3.7), 8px) clamp(0px, calc(8vw/3.7), 8px);
       }

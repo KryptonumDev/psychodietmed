@@ -56,7 +56,8 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
             sessionId: session,
             email: data.email,
             description: `Konsultacja online, ${specialistData.title}`,
-            urlReturn: `https://www.psychodietmed.pl/api/complete-booking/?session=${session}&id=${res[0].id}&amount=${service.price}`,
+            "urlReturn": `https://www.psychodietmed.pl/api/verify-transaction-status/&session=${session}&id=${data.checkout.order.orderNumber}`,
+            "urlStatus": `https://www.psychodietmed.pl/api/complete-booking/?session=${session}&id=${res[0].id}&amount=${service.price}`,
           })
         })
           .then(response => response.json())

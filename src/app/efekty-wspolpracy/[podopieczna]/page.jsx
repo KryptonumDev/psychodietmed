@@ -16,9 +16,9 @@ export default async function Post({ params }) {
   return (
     <main id="main">
     <Breadcrumbs data={[{ page: 'Efekty współpracy', url: `/efekty-wspolpracy` }, { page: data.title, url: `/efekty-wspolpracy/${params.podopieczna}` }]} />
-      <Hero data={data.histori.information} />
+      <Hero comment={data.histori.caseStudyCard.comment} data={data.histori.information} />
       <Cards data={data.histori.resultsSection} />
-      <ReviewsSlider data={{ title: 'Poznaj inne historie', text: 'Dowiedz się, jaka zmiana zaszła w życiu naszych pacjentek', comments: other }} />
+      <ReviewsSlider data={{ title: 'Poznaj inne historie', text: '<p>Dowiedz się, jaka zmiana zaszła w życiu naszych pacjentek</p>', comments: other }} />
     </main>
   )
 }
@@ -74,7 +74,6 @@ async function getData(params) {
           title
           histori {
             resultsSection {
-              title
               leftColumnTitle
               leftColumnList {
                 text
@@ -83,6 +82,9 @@ async function getData(params) {
               rightColumnList {
                 text
               }
+            }
+            caseStudyCard {
+              comment
             }
             information {
               title

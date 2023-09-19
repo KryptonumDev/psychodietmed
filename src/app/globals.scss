@@ -223,7 +223,7 @@ p strong {
 }
 
 p+p {
-  margin-top: clamp(12px, calc(16vw/7.68), 20px);
+  margin-top: clamp(8px, calc(16vw/7.68), 16px);
 }
 
 @media (max-width: 370px) {
@@ -376,7 +376,7 @@ p em {
   font-size: clamp(16rem, calc(20vw / 7.68), 20rem);
   line-height: 25px;
   color: var(--neutrals-800);
-  padding: clamp(10px, calc(10vw/7.68), 14px) clamp(28px, calc(28vw/7.68), 36px) clamp(12px, calc(10vw/7.68), 16px) clamp(28px, calc(28vw/7.68), 36px);
+  padding: clamp(10px, calc(10vw/7.68), 10px) clamp(28px, calc(28vw/7.68), 36px) clamp(12px, calc(10vw/7.68), 13px) clamp(28px, calc(28vw/7.68), 36px);
   border-radius: 50px;
   display: block;
   width: fit-content;
@@ -429,7 +429,7 @@ p em {
 
 
 .input .react-select__control {
-  padding: 12px 28px;
+  padding: 3.5px 28px;
   background: #FFFFFF;
   border: 2px solid var(--secondary-500);
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
@@ -651,3 +651,7 @@ blockquote {
 .react-select__single-value{
   font-size: clamp(16px, calc(20vw/7.68), 24rem) !important;
 } 
+
+.swiper-notification{
+  display: none !important;
+}

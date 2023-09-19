@@ -93,7 +93,8 @@ export default function CheckoutContent() {
         "amount": data.checkout.order.total * 100,
         "sessionId": data.checkout.order.orderKey,
         "email": data.checkout.customer.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
-        "urlReturn": `https://www.psychodietmed.pl/api/complete-order/?amount=${data.checkout.order.total * 100}&session=${data.checkout.order.orderKey}&id=${data.checkout.order.orderNumber}`,
+        "urlReturn": `https://www.psychodietmed.pl/api/verify-transaction-status/&session=${data.checkout.order.orderKey}&id=${data.checkout.order.orderNumber}`,
+        "urlStatus": `https://www.psychodietmed.pl/api/complete-order/?amount=${data.checkout.order.total * 100}&session=${data.checkout.order.orderKey}&id=${data.checkout.order.orderNumber}`,
       })
 
       Promise.all([

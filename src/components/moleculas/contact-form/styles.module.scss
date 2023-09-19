@@ -38,18 +38,6 @@
   }
   label {
     position: relative;
-    input,
-    textarea {
-      padding: 14px 28px;
-      background: #FFFFFF;
-      border: 2px solid var(--primary-800);
-      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
-      border-radius: 50px;
-      width: 100%;
-      line-height: 33px;
-      font-size: clamp(16rem, calc(20vw/7.68), 24rem);
-      font-weight: 500;
-    }
 
     textarea {
       border-radius: 20px;
