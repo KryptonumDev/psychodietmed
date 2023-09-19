@@ -3,11 +3,11 @@ import React from "react"
 import { useForm } from "react-hook-form"
 import styles from './styles.module.scss'
 import { emailPattern } from "../../../constants/patterns";
-import { NEWSLETTER_GROUPID } from "../../../constants/mailerLite";
+import { NEWSLETTER_SPECIALIST_GROUPID, NEWSLETTER_CLIENT_GROUPID } from "../../../constants/mailerLite";
 import Button from "@/components/atoms/button";
 import { AnimatePresence, motion } from "framer-motion";
 
-export default function Form({ consent, sentStatus, setSentStatus }) {
+export default function Form({ specialist, consent, sentStatus, setSentStatus }) {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = (data) => {
@@ -18,7 +18,7 @@ export default function Form({ consent, sentStatus, setSentStatus }) {
       body: JSON.stringify({
         name: data.name,
         email: data.email,
-        group_id: NEWSLETTER_GROUPID
+        group_id: specialist ? NEWSLETTER_SPECIALIST_GROUPID : NEWSLETTER_CLIENT_GROUPID
       }),
     })
       .then(response => response.json())

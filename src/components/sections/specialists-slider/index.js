@@ -78,8 +78,8 @@ export default function Specialists({ data, title = 'Wybierz specjalistę' }) {
             <Card setPopupOpened={setPopupOpened} setChosenTime={setChosenTime} data={el} />
           </SwiperSlide>
         ))}
-        <div onClick={handleNext} className={`${styles.overlayRight} ${EndShadow ? styles.active : ''}`} />
-        <div onClick={handlePrev} className={`${styles.overlayLeft} ${StartShadow ? styles.active : ''}`} />
+        <div className={`${styles.overlayRight} ${EndShadow ? styles.active : ''}`} />
+        <div className={`${styles.overlayLeft} ${StartShadow ? styles.active : ''}`} />
       </Swiper>
       <AnimatePresence mode="wait">
         {popupOpened && (

@@ -21,6 +21,14 @@
     font-size: clamp(12px, calc(16vw/7.68), 16px);
   }
 
+  &.specialst::after{
+    content: 'Dla specjalisty';
+  }
+
+  &.client::after{
+    content: 'Dla pacjenta';
+  }
+
   .text {
     margin-top: 20px;
     max-width: 660px;

@@ -48,7 +48,7 @@ export default async function Home() {
       <Citate data={citate} />
       {/* <Academy data={academy} /> */}
       <OtherPosts data={posts} title={blog.title} text={blog.text} />
-      <Newsletter data={newsletter} />
+      <Newsletter specialist={false} data={newsletter} />
     </main>
   )
 }
@@ -60,7 +60,7 @@ async function getData() {
       global : page(id: "cG9zdDo3Nzk=") {
         id
         global {
-          newsletterGlobal{
+          newsletterClientGlobal{
             title
             text
             consent
@@ -418,7 +418,7 @@ async function getData() {
     citate: homepage.sekcjaZCytatemKopia,
     blog: global.global.blogGlobal,
     posts: posts.nodes,
-    newsletter: global.global.newsletterGlobal,
+    newsletter: global.global.newsletterClientGlobal,
     compare: homepage.compare,
     academy: homepage.academy,
   }

@@ -102,8 +102,8 @@ export default function CheckoutContent() {
         mailerlite,
       ])
         .then(function (values) {
-          debugger
           if (values[0].data.link) {
+            localStorage.setItem('woo-next-cart', null);
             localStorage.setItem('payLink', values[0].data.link)
             window.location.href = values[0].data.link
           }

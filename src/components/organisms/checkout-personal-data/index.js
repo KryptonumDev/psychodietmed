@@ -39,8 +39,9 @@ export default function Personaldata({ input, setStep, setInput }) {
     if (nipValue?.length === 10) {
       axios.get(`https://wl-api.mf.gov.pl/api/search/nip/${nipValue}?date=${date}`)
         .then(res => {
-          if (res.result?.subject) {
-            let adress = res.result?.subject?.residenceAddress || res.result?.subject?.workingAddress
+          debugger
+          if (res.data.result?.subject) {
+            let adress = res.data.result?.subject?.residenceAddress || res.data.result?.subject?.workingAddress
 
             if (!adress) {
               return null
@@ -54,10 +55,10 @@ export default function Personaldata({ input, setStep, setInput }) {
 
             const [sentence, address, houseApart, postcode, city] = arr;
 
-            setValue('billing_firmName', res.data.result.subject.name)
-            setValue('billing_address', address + " " + houseApart)
-            setValue('billing_postalCode', postcode)
-            setValue('billing_city', city)
+            setValue('billing_firmName', res.data.result.subject.name, { shouldValidate: true })
+            setValue('billing_address', address + " " + houseApart, { shouldValidate: true })
+            setValue('billing_postalCode', postcode, { shouldValidate: true })
+            setValue('billing_city', city, { shouldValidate: true })
 
           } else {
           }
