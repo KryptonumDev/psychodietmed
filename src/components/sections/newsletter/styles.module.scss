@@ -27,6 +27,8 @@
 
   &.client::after{
     content: 'Dla pacjenta';
+    color: var(--neutrals-800, #181818);
+    background-color: var(--secondary-500);
   }
 
   .text {
