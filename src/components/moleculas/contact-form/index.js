@@ -112,22 +112,25 @@ export default function Form({ subjects }) {
           error="Proszę poprawnie uzupełnić to pole"
         />
       </div>
-      <Input
-        name={'email'}
-        register={register('email', { required: true, pattern: emailPattern })}
-        placeholder='Adres e-mail'
-        title={'Adres e-mail'}
-        errors={errors}
-        error="Proszę poprawnie uzupełnić to pole"
-      />
-      <Input
-        name={'tel'}
-        register={register('tel', { required: true, pattern: phonePattern })}
-        placeholder='Numer telefonu'
-        title={'Numer telefonu'}
-        errors={errors}
-        error="Proszę poprawnie uzupełnić to pole"
-      />
+      <div className={styles.columnsEmail}>
+        <Input
+          name={'email'}
+          register={register('email', { required: true, pattern: emailPattern })}
+          placeholder='Adres e-mail'
+          title={'Adres e-mail'}
+          errors={errors}
+          error="Proszę poprawnie uzupełnić to pole"
+        />
+        <Input
+          name={'tel'}
+          register={register('tel', { required: true, pattern: phonePattern })}
+          placeholder='Numer telefonu'
+          title={'Numer telefonu'}
+          errors={errors}
+          type="number"
+          error="Proszę poprawnie uzupełnić to pole"
+        />
+      </div>
       <label>
         <span>Temat wiadomości</span>
         <Select

@@ -17,6 +17,16 @@
     }
   }
 
+  .columnsEmail{
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 24px;
+
+    @media (max-width: 420px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .status {
     position: absolute;
     inset: -10px;

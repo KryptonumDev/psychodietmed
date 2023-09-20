@@ -31,6 +31,7 @@
       'summary'
       'info';
   }
+  
   @media (max-width: 760px) {
     width: 100%;
   }
@@ -51,11 +52,10 @@
   grid-area: calendar;
   border-radius: 20px;
   background: var(--primary-50, #F1F6FB);
-  padding: clamp(24px, calc(24vw/7.68), 36px) clamp(16px, calc(24vw/7.68), 36px);
+  padding: clamp(24px, calc(24vw/7.68), 24px) clamp(16px, calc(24vw/7.68), 36px);
   box-sizing: border-box;
   position: relative;
   z-index: 3;
-  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
 
   @media (max-width: 1240px) {
     width: 100%;
@@ -167,6 +167,10 @@
       }
 
       transition: background-color .2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
+      &.day{
+        background-color: transparent !important;
+      }
     
       &:hover {
         background: var(--secondary-200, #F2DFE3);

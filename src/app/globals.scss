@@ -1,7 +1,7 @@
 html {
   /* overflow-x: hidden; */
   max-width: 100%;
-  font-size: 4.7% !important;
+  font-size: 4.9% !important;
 
   @media (max-width: 480px) {
     font-size: 5.9% !important;
@@ -130,7 +130,7 @@ main {
 
   display: grid !important;
   grid-template-columns: 100%;
-  grid-gap: clamp(64px, calc(96vw/12.4), 120px);
+  grid-gap: clamp(64px, calc(144vw/12.4), 180px);
   position: relative;
 
   @media (max-width: 1439px) {
@@ -508,6 +508,10 @@ p em {
   border-radius: 20px;
   padding: 0;
   z-index: 5;
+}
+
+.react-select__menu {
+  background-color: #FFFEFE !important;
 }
 
 .input .react-select__menu-list {

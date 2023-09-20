@@ -1,6 +1,9 @@
 .wrapper {
   margin: -20px;
   padding: 20px;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 20px;
 
   @media (max-width: 640px) {
     margin: -10px;
@@ -19,26 +22,5 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
-  }
-
-  @media (max-width: 365px) {
-    display: grid;
-    grid-template-areas: 
-    'title title'
-    'left right';
-    gap: 10px;
-
-    .left{
-      grid-area: left;
-    }
-
-    .right{
-      grid-area: right;
-      margin-left: auto;
-    }
-
-    h2{
-      grid-area: title;
-    }
   }
 }

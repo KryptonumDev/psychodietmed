@@ -27,19 +27,7 @@ export default function Slider({ title, data }) {
 
   return (
     <>
-      <div className={`${styles.control} ${styles.desctop}`}>
-        <ArrowLeft
-          className={styles.left}
-          onClick={() => { handlePrev() }}
-          aria-label='Poprzedni produkt'
-        />
-        <h2 dangerouslySetInnerHTML={{ __html: removeWrap(title) }} />
-        <ArrowRight
-          className={styles.right}
-          onClick={() => { handleNext() }}
-          aria-label='Następny produkt'
-        />
-      </div>
+    <h2 dangerouslySetInnerHTML={{ __html: removeWrap(title) }} />
       <Swiper
         ref={sliderRef}
         modules={[A11y]}
@@ -68,9 +56,9 @@ export default function Slider({ title, data }) {
             <Card product={el} key={index}/>
           </SwiperSlide>
         ))}
-        {/* {data.length > 1 && (
-          <Control disabelArrows={true} items={data} activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
-        )} */}
+        {data.length > 1 && (
+          <Control disabelArrows={false} items={data} activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
+        )}
       </Swiper >
     </>
   )

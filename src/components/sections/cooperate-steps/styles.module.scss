@@ -12,10 +12,11 @@
     }
   }
 
-  h3{
+  h3 {
     @media (max-width: 380px) {
       font-size: 18rem;
     }
+
     @media (max-width: 350px) {
       font-size: 16rem;
     }
@@ -37,7 +38,7 @@
 
       details {
         padding:
-          clamp(16px, calc(16vw/7.68), 22px) clamp(12px, calc(36vw/7.68), 64px) clamp(16px, calc(16vw/7.68), 22px) clamp(12px, calc(20vw/7.68), 32px);
+          0 0 clamp(16px, calc(16vw/7.68), 22px) 0;
         border-radius: 16px;
         background: #FFF;
         box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
@@ -57,6 +58,33 @@
               bottom: 50%;
             }
           }
+
+          summary {
+            padding: clamp(16px, calc(16vw/7.68), 22px) clamp(12px, calc(36vw/7.68), 64px) clamp(12px, calc(16vw/7.68), 24px) clamp(12px, calc(20vw/7.68), 32px) !important;
+          }
+        }
+      }
+
+      summary {
+        cursor: pointer;
+        padding:
+          clamp(16px, calc(16vw/7.68), 22px) clamp(12px, calc(36vw/7.68), 64px) 0 clamp(12px, calc(20vw/7.68), 32px);
+        display: grid;
+        grid-template-columns: 28px 1fr;
+        gap: 16px;
+        word-break: break-word;
+        align-items: center;
+
+        h3{
+          min-height: 30px;
+        }
+
+        &:hover {
+          .symbol {
+            width: 23px;
+            height: 23px;
+            transform: translate(2px, 0);
+          }
         }
       }
 
@@ -65,6 +93,7 @@
         height: 28px;
         margin-top: clamp(0px, calc(1vw/7.68), 5px);
         position: relative;
+        transition: all .12s cubic-bezier(0.755, 0.05, 0.855, 0.06);
 
         &::after {
           content: "";
@@ -108,20 +137,11 @@
         }
       }
 
-      summary {
-        display: grid;
-        grid-template-columns: 28px 1fr;
-        gap: 16px;
-        word-break: break-word;
-        align-items: center;
-      }
-
       .wrap {
         margin-left: 44px;
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
-        margin-top: clamp(12px, calc(16vw/7.68), 24px);
 
         @media (max-width: 1024px) {
           margin-left: 0;
