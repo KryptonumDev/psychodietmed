@@ -56,7 +56,7 @@ export const CustomCalendar = ({ specialistId, serviceId, specialistData }) => {
     if (data) {
       setChosenTime(data[chosenDate.format('YYYY-MM-DD')][0])
     }
-  }, [chosenDate])
+  }, [chosenDate, data])
 
   return (
     <div className={styles.box}>

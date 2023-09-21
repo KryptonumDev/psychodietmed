@@ -87,7 +87,7 @@
 
   svg {
     width: clamp(24px, calc(26vw/7.68), 32px);
-    height: fit-content;
+    height: auto;
 
     @media (max-width: 640px) {
       path {

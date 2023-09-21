@@ -54,9 +54,9 @@
         margin: 0 auto;
       }
 
-      img {
-        width: clamp(30px, calc(45vw/7.68), 60px);
-        height: clamp(30px, calc(45vw/7.68), 60px);
+      .icon {
+        width: clamp(30px, calc(45vw/7.68), 60px) !important;
+        height: clamp(30px, calc(45vw/7.68), 60px) !important;
       }
 
       &:last-child:nth-child(odd) {

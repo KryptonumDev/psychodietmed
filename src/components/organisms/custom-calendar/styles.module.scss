@@ -458,7 +458,7 @@
 
       svg {
         width: clamp(20px, calc(23vw/7.68), 26px) !important;
-        height: fit-content;
+        height: auto;
       }
     }
 
