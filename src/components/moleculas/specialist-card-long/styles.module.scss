@@ -85,12 +85,7 @@
     flex-wrap: wrap;
     gap: clamp(5px, calc(8vw/7.68), 8px);
     margin-top: 16px;
-
     flex-wrap: wrap;
-<<<<<<< Updated upstream
-    height: 43px;
-    overflow: hidden;
-=======
     overflow: hidden;
     
     @media (max-width: 370px) {
@@ -108,11 +103,9 @@
       height: fit-content;
 
       @media (max-width: 370px) {
-        padding:
-          clamp(0px, calc(8vw/3.7), 8px) clamp(0px, calc(8vw/3.7), 8px) clamp(0px, calc(8vw/3.7), 8px) clamp(0px, calc(8vw/3.7), 8px);
+        padding: clamp(0px, calc(8vw/3.7), 8px) clamp(0px, calc(8vw/3.7), 8px) clamp(0px, calc(8vw/3.7), 8px) clamp(0px, calc(8vw/3.7), 8px);
       }
     }
->>>>>>> Stashed changes
   }
 }
 
