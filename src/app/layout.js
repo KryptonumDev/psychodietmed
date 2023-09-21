@@ -12,6 +12,7 @@ import GlobalScript from '../utils/global.js';
 import { FacebookPixelEvents } from '../context/facebook-pixel'
 import { Suspense } from 'react'
 import Script from 'next/script'
+import Analytics from '../context/google-tag-manager'
 
 const Satoshi = localFont({
   src: '../assets/fonts/satoshi.woff2',
@@ -82,6 +83,9 @@ export default function RootLayout({ children }) {
         <GlobalScript />
         <Suspense fallback={null}>
           <FacebookPixelEvents fb_id={'616809410630433'} />
+        </Suspense>
+        <Suspense fallback={null}>
+          <Analytics gtm_id={'GTM-5Q76LFDW'}/>
         </Suspense>
         {/* <GoogleAnalytics ga_id={''} /> */}
       </body>
