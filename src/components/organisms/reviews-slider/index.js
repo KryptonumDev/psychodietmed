@@ -15,7 +15,7 @@ export default function Slider({ items }) {
       className={styles.wrapper}
       spaceBetween={50}
       slidesPerView={1}
-      loop={true}
+      loop={false}
       autoHeight={true}
       onSlideChange={(swiper) => {
         setActiveIndex(swiper.realIndex);
@@ -35,6 +35,7 @@ export default function Slider({ items }) {
             before={el.histori.information.beforeImage}
             after={el.histori.information.afterImage}
             boldText={el.histori.information.boldText}
+            specialist={el.histori.information.specialist}
           />
         </SwiperSlide>
       ))}

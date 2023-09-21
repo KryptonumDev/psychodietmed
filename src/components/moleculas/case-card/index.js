@@ -2,10 +2,9 @@ import React from "react"
 import styles from './styles.module.scss';
 import { Image } from "@/components/atoms/image";
 import { removeWrap } from "../../../utils/title-modification";
-import { RightArrow } from "../../../assets/small-right-arrow";
 import Button from "@/components/atoms/button";
 
-export default function Card({ slug, name, avatar, comment, linkText, before, after, boldText }) {
+export default function Card({ specialist, slug, name, avatar, comment, linkText, before, after, boldText }) {
   return (
     <div className={(after?.mediaItemUrl && before?.mediaItemUrl) ? `${styles.slide}` : `${styles.wide} ${styles.slide}`} >
       <div className={styles.slideAuthor}>
@@ -19,6 +18,22 @@ export default function Card({ slug, name, avatar, comment, linkText, before, af
         </svg>
       </div>
       <div className={styles.slideText} dangerouslySetInnerHTML={{ __html: comment }} />
+      {specialist && (
+        <div className={styles.specialistWrap}>
+          <p>Specjalista, z którym współpracowałam:</p>
+          <div className={styles.specialist}>
+            <Image
+              quality={100}
+              src={specialist.proffesional.avatar.mediaItemUrl}
+              alt={specialist.proffesional.avatar.altText}
+              width={specialist.proffesional.avatar.mediaDetails.width}
+              height={specialist.proffesional.avatar.mediaDetails.height}
+              className={styles.avatar}
+            />
+            <p>{specialist.title}</p>
+          </div>
+        </div>
+      )}
       {after?.mediaItemUrl && before?.mediaItemUrl && (
         <Button theme="secondary" href={`/efekty-wspolpracy/${slug}`} className={styles.slideLink}>{linkText}</Button>
       )}

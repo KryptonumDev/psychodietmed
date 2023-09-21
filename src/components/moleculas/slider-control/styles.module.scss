@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 32px;
+  gap: clamp(12px, calc(22vw/7.68), 32px);
   margin-top: 48px;
 
   &.arrowless {

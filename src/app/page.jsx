@@ -98,6 +98,22 @@ async function getData() {
           slug
           histori {
             information {
+              specialist {
+                ... on Specjalista {
+                  title
+                  slug
+                  proffesional {
+                    avatar {
+                      altText
+                      mediaItemUrl
+                      mediaDetails{
+                        width
+                        height
+                      }
+                    }
+                  }
+                }
+              }
               boldText
               beforeImage {
                 altText
@@ -278,6 +294,22 @@ async function getData() {
                 slug
                 histori {
                   information {
+                    specialist {
+                      ... on Specjalista {
+                        title
+                        slug
+                        proffesional {
+                          avatar {
+                            altText
+                            mediaItemUrl
+                            mediaDetails{
+                              width
+                              height
+                            }
+                          }
+                        }
+                      }
+                    }
                     boldText
                     beforeImage {
                       altText
