@@ -7,8 +7,8 @@ export default function GridTextImagePlates({ grid }) {
     <div className={styles.grid}>
       {grid?.map((item, index) => (
         <div key={index} className={styles.item}>
-          <div className={styles.text} dangerouslySetInnerHTML={{ __html: item.content }} />
           <Image className={styles.image} src={item.image.mediaItemUrl} alt={item.image.altText} width={item.image.mediaDetails.width} height={item.image.mediaDetails.height} />
+          <div className={styles.text} dangerouslySetInnerHTML={{ __html: item.content }} />
         </div>
       ))}
     </div>

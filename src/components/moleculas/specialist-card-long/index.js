@@ -62,6 +62,7 @@ export default function Card({ clickDate, data }) {
         </div>
         <div className={styles.list}>
           {specialisations?.nodes.map(({ title }, index) => {
+            if(index > 5) return null
             return <Category key={index} name={title}></Category>
           })}
         </div>

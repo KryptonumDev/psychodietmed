@@ -176,18 +176,9 @@ async function getData() {
               }
             }
             flexImagesBrand{
-              contentFirst
-              contentSecond
-              contentThird
+              content
+              contenSecond
               imageFirst{
-                altText
-                mediaItemUrl
-                mediaDetails{
-                  height
-                  width
-                }
-              }
-              imageSecond{
                 altText
                 mediaItemUrl
                 mediaDetails{

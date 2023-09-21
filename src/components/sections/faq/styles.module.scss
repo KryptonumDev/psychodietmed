@@ -14,7 +14,7 @@
   details {
     background: #FFFFFF;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
+    border-radius: clamp(10px, calc(15vw/7.68), 20px);
 
     summary {
       font-size: clamp(16rem, 3vw, 26rem);

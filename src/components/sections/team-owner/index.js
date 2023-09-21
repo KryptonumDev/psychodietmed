@@ -15,6 +15,7 @@ export default function Owner({ data: { link, title, text, owner, image, repeate
             width={img.mediaDetails.width}
             height={img.mediaDetails.height}
             src={img.mediaItemUrl}
+            quality={100}
             alt={img.altText} className={styles.image}
           />
           <div>

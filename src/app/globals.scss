@@ -130,7 +130,7 @@ main {
 
   display: grid !important;
   grid-template-columns: 100%;
-  grid-gap: clamp(64px, calc(144vw/12.4), 180px);
+  grid-gap: clamp(96px, calc(144vw/12.4), 180px);
   position: relative;
 
   @media (max-width: 1439px) {
@@ -430,7 +430,7 @@ p em {
 
 .input .react-select__control {
   padding: 3.5px 28px;
-  background: #FFFFFF;
+  background: #FFFEFE;
   border: 2px solid var(--secondary-500);
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
   border-radius: 50px;

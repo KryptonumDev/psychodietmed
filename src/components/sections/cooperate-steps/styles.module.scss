@@ -142,6 +142,7 @@
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
+        padding: 0 clamp(12px,4.6875vw,64px) 0 clamp(12px,2.6041666667vw,32px)!important;
 
         @media (max-width: 1024px) {
           margin-left: 0;
