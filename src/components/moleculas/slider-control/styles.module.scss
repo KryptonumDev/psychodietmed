@@ -5,11 +5,11 @@
   gap: 32px;
   margin-top: 48px;
 
-  &.arrowless{
+  &.arrowless {
     justify-content: center;
 
-    .dots{
-      .dot{
+    .dots {
+      .dot {
         height: 5px;
         width: 80px;
         display: block;
@@ -20,12 +20,12 @@
   @media (max-width: 640px) {
     justify-content: space-between;
 
-    &.arrowless{
+    &.arrowless {
       justify-content: center;
     }
   }
 
-  button{
+  button {
     border: none;
     background-color: transparent;
   }
@@ -33,26 +33,27 @@
 
 .dots {
   display: flex;
-  gap: 24px;
+  flex-wrap: wrap;
+  gap: clamp(16px, calc(20vw/7.68), 24px);
   align-items: center;
-  @media (max-width: 640px) {
-    display: none;
-  }
+
   .dot {
-    width: 12px;
-    height: 12px;
+    width: clamp(6px, calc(8vw/7.68), 12px);
+    height: clamp(6px, calc(8vw/7.68), 12px);
     border-radius: 50px;
     cursor: pointer;
     background-color: var(--secondary-100);
     transition: all .3s;
     transform-origin: 50% 50%;
+
     &:hover {
       background-color: var(--secondary-500);
     }
+
     &.active {
       background-color: var(--secondary-600);
-      width: 16px;
-      height: 16px;
+      width: clamp(10px, calc(12vw/7.68), 16px);
+      height: clamp(10px, calc(12vw/7.68), 16px);
     }
   }
 }
