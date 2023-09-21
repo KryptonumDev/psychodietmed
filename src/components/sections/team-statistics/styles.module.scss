@@ -16,7 +16,7 @@
   .image {
     margin-top: clamp(35px, calc(25vw/7.68), 75px);
     width: 100% !important;
-    height: calc(100% - clamp(35px, calc(25vw/7.68), 75px)) !important;
+    height: auto !important;
     aspect-ratio: unset;
 
     @media (max-width: 640px) {
@@ -30,6 +30,7 @@
     img {
       border-radius: 20px;
       box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+      object-position: top;
     }
   }
 

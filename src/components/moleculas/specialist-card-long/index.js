@@ -5,8 +5,6 @@ import { Image } from "@/components/atoms/image"
 import Link from "next/link"
 import Calendar from "@/components/atoms/specialist-card-calendar"
 import Loader from "@/components/sections/loader"
-import { AnimatePresence } from "framer-motion"
-import Button from "@/components/atoms/button"
 import { Star } from "../../../assets/star"
 import Category from "@/components/atoms/category-pill"
 
