@@ -85,13 +85,10 @@
     flex-wrap: wrap;
     gap: clamp(5px, calc(8vw/7.68), 8px);
     margin-top: 16px;
-    flex-wrap: wrap;
-    overflow: hidden;
     
     @media (max-width: 370px) {
       font-size: clamp(0rem, calc(14vw/3.7), 14rem);
     }
-    height: calc(24px + 1em);
 
     li {
       padding: 8px clamp(8px, calc(12vw/7.68), 12px);

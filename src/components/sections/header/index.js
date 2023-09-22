@@ -139,7 +139,7 @@ export default function Header() {
                     {item.name}
                   </Link>
                 ) : (
-                  <span>
+                  <span className={item.subpages.some(el => el.url == pathname) ? styles.active : ''}>
                     {item.name}
                   </span>
                 )}
