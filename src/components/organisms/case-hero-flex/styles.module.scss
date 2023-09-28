@@ -117,8 +117,8 @@
       width: clamp(80px, calc(80vw/7.68), 109px);
       height: auto;
 
-      @media (max-width: 370px) {
-        width: clamp(60px, calc(80vw/3.7), 109px);
+      @media (max-width: 768px) {
+        display: none;
       }
     }
   }

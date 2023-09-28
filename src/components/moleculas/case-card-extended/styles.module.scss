@@ -124,8 +124,8 @@
 
       svg {
         position: absolute;
-        top: 0;
-        right: 0;
+        bottom: 0;
+        left: 0;
         width: clamp(80px, calc(80vw/7.68), 109px);
         height: auto;
 
