@@ -49,6 +49,7 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
         if (!res[0]?.id) throw new Error('Nie udało się stworzyć rezerwacji, spróbuj ponownie później.')
 
         const session = v4()
+        debugger
         fetch("/api/create-transaction", {
           method: 'POST',
           body: JSON.stringify({
@@ -56,7 +57,7 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
             sessionId: session,
             email: data.email,
             description: `Konsultacja online, ${specialistData.title}`,
-            "urlReturn": `https://www.psychodietmed.pl/api/verify-transaction-status/?session=${session}&id=${data.checkout.order.orderNumber}`,
+            "urlReturn": `https://www.psychodietmed.pl/api/verify-transaction-status/?session=${session}`,
             "urlStatus": `https://www.psychodietmed.pl/api/complete-booking/?session=${session}&id=${res[0].id}&amount=${service.price}`,
           })
         })
