@@ -11,13 +11,14 @@ import { generetaSeo } from "../../../utils/genereate-seo"
 import { GET_SEO_KAFELEK } from "../../../queries/kafelek-seo"
 import Breadcrumbs from "@/components/sections/breadcrumbs"
 import { Fetch } from "../../../utils/fetch-query"
+import Specialists from "@/components/sections/specialists-slider"
 
 export async function generateMetadata({ params }) {
   return await generetaSeo(params.kafelek, '/wspolpraca', GET_SEO_KAFELEK, 'post')
 }
 
 export default async function Post({ params }) {
-  const { data } = await getData(params)
+  const { data, specialists } = await getData(params)
   return (
     <main className="overflow" id="main">
       <Breadcrumbs data={[{ page: 'Współpraca', url: '/wspolpraca' }, { page: data.title, url: `/wspolpraca/${params.kafelek}` }]} />
@@ -29,18 +30,52 @@ export default async function Post({ params }) {
       <Prediction data={data.acf.predictionKafelek} />
       <TwoColumnFlex data={data.acf.flexAltKafelek} />
       <CallToAction data={data.acf.ctaKafelek} />
+      {specialists.length > 0 && (
+        <Specialists data={specialists} />
+      )}
     </main>
   )
 }
 
 async function getData(params) {
   try {
-    const { body: { data: { obszarDzilaniaBy } } } = await Fetch({
+    const { body: { data: { specjalisci, obszarDzilaniaBy } } } = await Fetch({
       query: `
       query Pages($slug: String) {
+        specjalisci(first: 100) {
+          nodes {
+            title
+            slug
+            specialisations {
+              nodes {
+                id : databaseId
+                title : name
+              }
+            }
+            proffesional {
+              proffesion
+              specialistId
+              serviceId
+              personImage {
+                altText
+                mediaItemUrl
+                mediaDetails {
+                  height
+                  width
+                }
+              }
+            }
+          }
+        }
         obszarDzilaniaBy(uri: $slug){
           id
           title
+          specialisations {
+            nodes {
+              id : databaseId
+              title : name
+            }
+          }
           acf : obszar_dzialania {
             heroKafelek {
               title
@@ -184,6 +219,16 @@ async function getData(params) {
 
     return {
       data: obszarDzilaniaBy,
+      specialists: specjalisci.nodes.filter(el => {
+        let someSpecialisation = false
+        el.specialisations.nodes.forEach(inEl => {
+          obszarDzilaniaBy.specialisations.nodes.forEach(specialisation => {
+            if (specialisation.id === inEl.id)
+              someSpecialisation = true
+          })
+        })
+        return someSpecialisation
+      })
     }
   } catch (error) {
     console.log(error)
