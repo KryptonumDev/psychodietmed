@@ -85,7 +85,7 @@ export default function RootLayout({ children }) {
           <FacebookPixelEvents fb_id={'616809410630433'} />
         </Suspense>
         <Suspense fallback={null}>
-          <Analytics gtm_id={'GTM-5Q76LFDW'}/>
+          <Analytics gtm_id={'GTM-KWLN9N8V'}/>
         </Suspense>
         {/* <GoogleAnalytics ga_id={''} /> */}
       </body>
