@@ -23,6 +23,7 @@ export async function POST(req) {
       }
     );
 
+    // zip, city, adress, client - (imię nazwisko) 10-2000 zł
     const order = {
       sessionId: sessionId,
       amount: Number(amount),
