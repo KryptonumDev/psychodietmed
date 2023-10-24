@@ -99,6 +99,10 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
         fetch("/api/create-transaction", {
           method: 'POST',
           body: JSON.stringify({
+            "client": data.name + ' ' + data.surname,
+            "address": data.adres,
+            "zip": data.postalcode,
+            "city": data.city,
             amount: calculatePrice(service.price, discount),
             sessionId: session,
             email: data.email,

@@ -75,12 +75,16 @@ export default function CheckoutContent() {
       input: orderData
     },
     onCompleted: (data) => {
+      const email = data.checkout.customer?.email || data.checkout.order.billing.email || data.checkout.order.shipping.email
+      const firstName = data.checkout.customer?.firstName || data.checkout.order.billing.firstName || data.checkout.order.shipping.firstName
+      const lastName = data.checkout.customer?.lastName || data.checkout.order.billing.lastName || data.checkout.order.shipping.lastName
+
       const mailerlite = axios.post('/api/mailer-lite-register', {
-        email: data.checkout.customer?.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
+        email: email,
         type: 'active',
         fields: {
           marketing_permissions: '1',
-          name: data.checkout.customer?.firstName || data.checkout.order.billing.firstName || data.checkout.order.shipping.firstName,
+          name: firstName,
         }
       })
 
@@ -90,6 +94,10 @@ export default function CheckoutContent() {
       }
 
       const transaction = axios.post('/api/create-transaction', {
+        "client": firstName + ' ' + lastName,
+        "address": orderData.billing.address1,
+        "zip": orderData.billing.postcode,
+        "city": orderData.billing.city,
         "amount": data.checkout.order.total * 100,
         "sessionId": data.checkout.order.orderKey,
         "email": data.checkout.customer.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,

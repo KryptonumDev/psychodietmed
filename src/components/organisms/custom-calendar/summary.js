@@ -14,6 +14,7 @@ const days = [
 ]
 
 export const CalendarSummary = ({ setPopupOpened, service, chosenTime, chosenDate }) => {
+  debugger
   return (
     <div className={styles.summary}>
       <div className={styles.left}>
