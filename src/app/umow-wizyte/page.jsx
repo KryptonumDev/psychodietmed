@@ -28,7 +28,7 @@ async function getData() {
         nodes {
           title
           slug
-          specialisations {
+          specialisations(first: 100) {
             nodes {
               id : databaseId
               title : name
