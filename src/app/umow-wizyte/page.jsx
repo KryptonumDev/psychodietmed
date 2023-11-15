@@ -8,13 +8,12 @@ export async function generateMetadata() {
   return await generetaSeo('cG9zdDoxNzg2', '/umow-wizyte', GET_SEO_PAGE)
 }
 
-export default async function Home() {
+export default async function Home({ searchParams }) {
   const { specialists } = await getData()
-
   return (
     <main className="overflow" id="main">
       <Breadcrumbs data={[{ page: 'Umów wizytę', url: '/umow-wizyte' }]} />
-      <Content specialists={specialists}/>
+      <Content searchParams={searchParams} specialists={specialists} />
     </main>
   )
 }

@@ -4,7 +4,7 @@ import { removeWrap } from "../../../utils/title-modification";
 import { Image } from "@/components/atoms/image";
 import Link from "next/link";
 
-export default function Prediction({ data: { title, text, illnes, image, grid, cta, link } }) {
+export default function Prediction({ params, data: { title, text, illnes, image, grid, cta, link } }) {
   return (
     <section className={styles.wrapper}>
       <div className={styles.flex}>
@@ -28,8 +28,12 @@ export default function Prediction({ data: { title, text, illnes, image, grid, c
         ))}
       </div>
       <div className={styles.cta}>
-        <div className={styles.text} dangerouslySetInnerHTML={{__html: cta}}/>
-        <Link className="link" href={link.url}>{link.title}</Link>
+        <div className={styles.text} dangerouslySetInnerHTML={{ __html: cta }} />
+        <Link className={`link `}
+          href={{
+            pathname: link.url,
+            query: ((params && link.url.includes('umow-wizyte')) ? { tags: params.map(el => el.id) } : null)
+          }}>{link.title}</Link>
       </div>
     </section>
   )

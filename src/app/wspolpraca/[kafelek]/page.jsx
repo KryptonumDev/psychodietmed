@@ -25,11 +25,11 @@ export default async function Post({ params }) {
       <Hero data={data.acf.heroKafelek} />
       <SliderIllnes data={data.acf.illnesSliderKafelek} />
       <SliderSymptoms data={data.acf.symptomsSliderKafelek} />
-      <CallToActionGray data={data.acf.greyCtaKafelek} />
+      <CallToActionGray data={data.acf.greyCtaKafelek} params={data.specialisations.nodes} />
       <FlexDoubled data={data.acf.flexKafelek} />
-      <Prediction data={data.acf.predictionKafelek} />
-      <TwoColumnFlex data={data.acf.flexAltKafelek} />
-      <CallToAction data={data.acf.ctaKafelek} />
+      <Prediction data={data.acf.predictionKafelek} params={data.specialisations.nodes}/>
+      <TwoColumnFlex data={data.acf.flexAltKafelek} params={data.specialisations.nodes}/>
+      <CallToAction data={data.acf.ctaKafelek} params={data.specialisations.nodes}/>
       {specialists.length > 0 && (
         <Specialists data={specialists} />
       )}

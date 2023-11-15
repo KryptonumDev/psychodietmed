@@ -4,10 +4,7 @@ import Specialisations from "@/components/organisms/book-specialisations"
 import Specialists from "@/components/organisms/book-specialists"
 import React, { useEffect, useMemo, useState } from "react"
 
-export default function Content({ specialists }) {
-
-  const [currentStep, setCurrentStep] = useState(1)
-  const [chosenSpecialisations, setChosenSpecialisations] = useState(null)
+export default function Content({ specialists, searchParams }) {
   const specializations = useMemo(() => {
     let arr = []
 
@@ -21,6 +18,17 @@ export default function Content({ specialists }) {
 
     return arr
   }, [specialists])
+
+  const [chosenSpecialisations, setChosenSpecialisations] = useState(() => {
+    if (!searchParams.tags) return null
+
+    const tags = JSON.parse(searchParams.tags)
+    let specialisationsArr = specializations.filter(el => tags.includes(el.id))
+
+    return specialisationsArr.map(el => el.title)
+  })
+
+  const [currentStep, setCurrentStep] = useState(() => chosenSpecialisations ? 2 : 1)
 
   useEffect(() => {
     window.scrollTo(0, 0)
