@@ -32,7 +32,7 @@ export default function Prediction({ params, data: { title, text, illnes, image,
         <Link className={`link `}
           href={{
             pathname: link.url,
-            query: ((params && link.url.includes('umow-wizyte')) ? { tags: params.map(el => el.id) } : null)
+            query: ((params && link.url.includes('umow-wizyte')) ? { tags: JSON.stringify(params.map(el => el.id)) } : null),
           }}>{link.title}</Link>
       </div>
     </section>

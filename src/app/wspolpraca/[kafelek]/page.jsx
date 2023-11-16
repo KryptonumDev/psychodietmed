@@ -27,9 +27,9 @@ export default async function Post({ params }) {
       <SliderSymptoms data={data.acf.symptomsSliderKafelek} />
       <CallToActionGray data={data.acf.greyCtaKafelek} params={data.specialisations.nodes} />
       <FlexDoubled data={data.acf.flexKafelek} />
-      <Prediction data={data.acf.predictionKafelek} params={data.specialisations.nodes}/>
-      <TwoColumnFlex data={data.acf.flexAltKafelek} params={data.specialisations.nodes}/>
-      <CallToAction data={data.acf.ctaKafelek} params={data.specialisations.nodes}/>
+      <Prediction data={data.acf.predictionKafelek} params={data.specialisations.nodes} />
+      <TwoColumnFlex data={data.acf.flexAltKafelek} params={data.specialisations.nodes} />
+      <CallToAction data={data.acf.ctaKafelek} params={data.specialisations.nodes} />
       {specialists.length > 0 && (
         <Specialists data={specialists} />
       )}
@@ -46,7 +46,7 @@ async function getData(params) {
           nodes {
             title
             slug
-            specialisations {
+            specialisations(first: 100) {
               nodes {
                 id : databaseId
                 title : name
@@ -220,14 +220,16 @@ async function getData(params) {
     return {
       data: obszarDzilaniaBy,
       specialists: specjalisci.nodes.filter(el => {
-        let someSpecialisation = false
-        el.specialisations.nodes.forEach(inEl => {
-          obszarDzilaniaBy.specialisations.nodes.forEach(specialisation => {
-            if (specialisation.id === inEl.id)
-              someSpecialisation = true
-          })
+
+        const filtredSpecialisations = el.specialisations.nodes.filter(specialisation => {
+          let arr = obszarDzilaniaBy.specialisations.nodes.map(e => e.title)
+          let include = arr.includes(specialisation.title)
+
+          return include
         })
-        return someSpecialisation
+        console.log('a', filtredSpecialisations)
+        console.log('b', obszarDzilaniaBy.specialisations.nodes)
+        return filtredSpecialisations.length === obszarDzilaniaBy.specialisations.nodes.length
       })
     }
   } catch (error) {

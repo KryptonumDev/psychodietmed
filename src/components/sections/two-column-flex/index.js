@@ -12,7 +12,7 @@ export default function TwoColumnFlex({ params, data: { content, link, image } }
           <Link className={`link ${styles.link}`}
             href={{
               pathname: link.url,
-              query: (params ? { tags: params.map(el => el.id) } : null)
+              query: (params ? { tags: JSON.stringify(params.map(el => el.id)) } : null)
             }}>{link.title}</Link>
         )}
       </div>

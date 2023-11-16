@@ -3,12 +3,11 @@ import styles from './styles.module.scss'
 import Specialists from "@/components/sections/specialists-slider";
 import Button from "@/components/atoms/button";
 
-export default function Specialistss({ chosenSpecialisations, specialists }) {
-
-
+export default function Specialistss({ chosenSpecialisations, specialists, setCurrentStep }) {
   const filtredSpecialists = useMemo(() => {
     if (!chosenSpecialisations) return specialists
-    // filter specialists by specialisations
+
+    // filter specialists by specialisations show only specialist that have all chosen specialisations
     const filtredSpecialists = specialists.filter(specialist => {
       if (!specialist.specialisations.nodes) return false
 
@@ -16,18 +15,7 @@ export default function Specialistss({ chosenSpecialisations, specialists }) {
         return chosenSpecialisations.includes(specialisation.title)
       })
 
-      return filtredSpecialisations.length > 0
-    })
-
-    // sort specialists by number of specialisations
-    filtredSpecialists.sort((a, b) => {
-      const aSpecialisations = a.specialisations.nodes.filter(specialisation => {
-        return chosenSpecialisations.includes(specialisation.title)
-      })
-      const bSpecialisations = b.specialisations.nodes.filter(specialisation => {
-        return chosenSpecialisations.includes(specialisation.title)
-      })
-      return bSpecialisations.length - aSpecialisations.length
+      return filtredSpecialisations.length === chosenSpecialisations.length
     })
 
     //sort specialisations in specialists by chosenSpecialisations (first chosenSpecialisations, then rest)
@@ -47,9 +35,18 @@ export default function Specialistss({ chosenSpecialisations, specialists }) {
 
   return (
     <section className={styles.wrapper}>
-      <h1 dangerouslySetInnerHTML={{ __html: 'Wybierz <span class="underline-third">specjalistę</span>, który wesprze Cię na drodze do dobrej zmiany' }} />
-      <p>Jaki jest Twój problem?</p>
-      <Specialists data={filtredSpecialists} />
+      {filtredSpecialists.length > 0 ? (
+        <>
+          <h1 dangerouslySetInnerHTML={{ __html: 'Wybierz <span class="underline-third">specjalistę</span>, który wesprze Cię na drodze do dobrej zmiany' }} />
+          <p>Jaki jest Twój problem?</p>
+          <Specialists data={filtredSpecialists} />
+        </>
+      ) : (
+        <>
+          <h1>Nie możemy dobrać odpowiedniego specjalisty. Sprawdź wszystkich specjalistów lub wybierz mniej specjalizacji.</h1>
+          <Button onClick={() => { setCurrentStep(1) }}>Wybierz inne specjalizacje</Button>
+        </>
+      )}
       <Button theme='secondary' href='/specjalisci'>Wszyscy specjaliści</Button>
     </section>
   )

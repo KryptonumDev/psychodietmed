@@ -16,7 +16,7 @@ export default function CallToAction({ params, data: { title, content, link, ima
           <Link className="link"
             href={{
               pathname: link.url,
-              query: ((params && link.url.includes('umow-wizyte'))  ? { tags: params.map(el => el.id) } : null),
+              query: ((params && link.url.includes('umow-wizyte'))  ? { tags: JSON.stringify(params.map(el => el.id)) } : null),
             }}>{link.title}</Link>
         )}
       </div>

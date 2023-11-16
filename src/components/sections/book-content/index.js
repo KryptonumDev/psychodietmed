@@ -40,7 +40,7 @@ export default function Content({ specialists, searchParams }) {
         <Specialisations setCurrentStep={setCurrentStep} chosenSpecialisations={chosenSpecialisations} setChosenSpecialisations={setChosenSpecialisations} specializations={specializations} />
       )}
       {currentStep === 2 && (
-        <Specialists specialists={specialists} chosenSpecialisations={chosenSpecialisations} />
+        <Specialists setCurrentStep={setCurrentStep} specialists={specialists} chosenSpecialisations={chosenSpecialisations} />
       )}
       {/* {currentStep === 3 && (
         <Calendar chosenSpecialist={chosenSpecialist} />
