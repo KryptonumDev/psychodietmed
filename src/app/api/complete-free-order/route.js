@@ -10,7 +10,7 @@ export async function GET(req) {
 
     if (!id) return NextResponse.redirect('https://www.psychodietmed.pl/podsumowanie?status=error')
 
-    await fetch('https://psychodietmed.headlesshub.com/graphql', {
+    await fetch('https://wp.psychodietmed.pl/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

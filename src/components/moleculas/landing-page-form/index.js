@@ -13,7 +13,7 @@ import { LANDINGPAGE_GROUPID } from "../../../constants/mailerLite"
 import { redirect } from "next/navigation"
 
 const Form = ({ landing, id }) => {
-  const url = `https://psychodietmed.headlesshub.com/wp-json/contact-form-7/v1/contact-forms/${id}/feedback`;
+  const url = `https://wp.psychodietmed.pl/wp-json/contact-form-7/v1/contact-forms/${id}/feedback`;
   const [sentStatus, setSentStatus] = useState({ sent: false });
   const { register, handleSubmit, reset, formState: { errors }, watch } = useForm();
   const selectTimeWatch = watch(["preferencedDate", "preferencedTime"]);

@@ -75,7 +75,7 @@ async function getData(params) {
   const orderDirection = params.searchParams?.sortowanie ? params.searchParams?.sortowanie.split('-')[1] : 'ASC'
 
   try {
-    const result = await fetch('https://psychodietmed.headlesshub.com/graphql', {
+    const result = await fetch('https://wp.psychodietmed.pl/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

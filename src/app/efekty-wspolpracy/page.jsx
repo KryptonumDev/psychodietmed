@@ -31,7 +31,7 @@ export default async function Archive() {
 
 async function getData() {
   try {
-    const result = await fetch('https://psychodietmed.headlesshub.com/graphql', {
+    const result = await fetch('https://wp.psychodietmed.pl/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
