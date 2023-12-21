@@ -29,7 +29,7 @@ export async function POST(req) {
       sessionId: sessionId,
     })
 
-    const order = await fetch('https://psychodietmed.headlesshub.com/graphql', {
+    const order = await fetch('https://wp.psychodietmed.pl/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

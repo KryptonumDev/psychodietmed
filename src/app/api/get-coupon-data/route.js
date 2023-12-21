@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic'
 export async function POST(req) {
   const { code } = await req.json()
 
-  return await fetch('https://psychodietmed.headlesshub.com/graphql', {
+  return await fetch('https://wp.psychodietmed.pl/graphql', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
