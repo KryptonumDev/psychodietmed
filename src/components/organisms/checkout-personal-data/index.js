@@ -68,7 +68,7 @@ export default function Personaldata({ input, setStep, setInput }) {
 
   useEffect(() => {
     setValue('shipping_same_as_billing', !input?.billingDifferentThanShipping)
-    setValue('billing_nip', input?.metaData?.find(el => el.key === '_billing_nip')?.value || '')
+    setValue('billing_nip', input?.metaData?.find(el => el.key === 'billing_tax_no')?.value || '')
     setValue('billing_firmName', input?.billing?.company || '')
     setValue('billing_email', input?.billing?.email || '')
     setValue('billing_address', input?.billing?.address1 || '')
@@ -118,7 +118,7 @@ export default function Personaldata({ input, setStep, setInput }) {
       },
       metaData: [
         {
-          key: '_billing_nip',
+          key: 'billing_tax_no',
           value: data.billing_nip || '',
         }
       ]

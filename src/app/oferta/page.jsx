@@ -42,6 +42,7 @@ const orders = [
 
 export default async function Shop(params) {
   const { productCategories, featured, cases, data, products, bundles } = await getData(params)
+  console.log(data)
   const locReviews = { ...data.reviewsAcademy }
 
   if (!locReviews.comments) {
@@ -469,6 +470,7 @@ async function getData(params) {
       }
     });
     const { data } = await result.json()
+
     return {
       productCategories: data?.productCategories?.nodes,
       featured: data?.featured?.nodes[0],

@@ -269,10 +269,13 @@ export async function generateStaticParams() {
       }
     }
   `,
-  cache: 'no-cache'
+    cache: 'no-cache'
   })
 
-  return data.products.nodes.map(({ slug }) => ({
+  if (!data.products?.nodes)
+    return []
+
+  return data.products?.nodes?.map(({ slug }) => ({
     product: slug
   }))
 }
