@@ -3,7 +3,7 @@ import styles from "./styles.module.scss"
 import Link from "next/link"
 import { Image } from "@/components/atoms/image"
 
-export default function TwoColumnFlex({ params, data: { content, link, image } }) {
+export default function TwoColumnFlex({ shadow, params, data: { content, link, image } }) {
   return (
     <section className={styles.wrapper}>
       <div className={styles.content}>
@@ -16,7 +16,7 @@ export default function TwoColumnFlex({ params, data: { content, link, image } }
             }}>{link.title}</Link>
         )}
       </div>
-      <Image className={styles.image} src={image.mediaItemUrl} alt={image.altText} width={image.mediaDetails.width} height={image.mediaDetails.height} />
+      <Image className={`${styles.image} ${shadow ? '' : styles.shadowless}`} src={image.mediaItemUrl} alt={image.altText} width={image.mediaDetails.width} height={image.mediaDetails.height} />
     </section>
   )
 }

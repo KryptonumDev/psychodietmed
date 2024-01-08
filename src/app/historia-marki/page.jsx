@@ -27,7 +27,7 @@ export default async function Archive() {
       <Name data={data.brandHistory.nameBrand} />
       <TwoColumnFlexMultiText data={data.brandHistory.flexBrand} />
       <TwoColumnFlexMultiImages data={data.brandHistory.flexImagesBrand} />
-      <TwoColumnFlex data={data.brandHistory.missionBrand} />
+      <TwoColumnFlex shadow={false} data={data.brandHistory.missionBrand} />
       <Metrics data={metrics} />
       {/* <CallToAction data={data.brandHistory.callToActionBrand} /> */}
       {/* <TwoColumnFlexWithGrid data={data.brandHistory.flexSecondBrand} /> */}
