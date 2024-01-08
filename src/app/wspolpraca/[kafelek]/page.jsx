@@ -227,9 +227,8 @@ async function getData(params) {
 
           return include
         })
-        console.log('a', filtredSpecialisations)
-        console.log('b', obszarDzilaniaBy.specialisations.nodes)
-        return filtredSpecialisations.length === obszarDzilaniaBy.specialisations.nodes.length
+
+        return filtredSpecialisations.length > 0
       })
     }
   } catch (error) {
