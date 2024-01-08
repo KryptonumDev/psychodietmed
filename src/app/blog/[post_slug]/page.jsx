@@ -65,8 +65,83 @@ async function getData(params) {
     const { body: { data: { post, posts } } } = await Fetch({
       query: `
       query BlogPost($slug: ID!) {
+        posts(first: 4) {
+          nodes {
+            id
+            dateGmt
+            featuredImage {
+              node {
+                altText
+                mediaItemUrl
+                mediaDetails {
+                  height
+                  width
+                }
+              }
+            }
+            slug
+            title
+            excerpt
+            categories {
+              nodes {
+                name
+                slug
+                id
+              }
+            }
+          }
+        }
         post(id:  $slug, idType: SLUG){
+          readingTime
           id
+          title
+          slug
+          dateGmt
+          excerpt
+          content
+          featuredImage {
+            node {
+              altText
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
+            }
+          }
+          categories {
+            nodes {
+              name
+              slug
+              id
+            }
+          }
+          postAuthor {
+            author {
+              ... on Specjalista {
+                title
+                proffesional {
+                  proffesion
+                  specialistId
+                  serviceId
+                  personImage {
+                    altText
+                    mediaItemUrl
+                  }
+                }
+              }
+            }
+          }
+          next {
+            id
+            title
+            slug
+          }
+          previous {
+            id
+            title
+            slug
+          }
         }
       }
     `,
