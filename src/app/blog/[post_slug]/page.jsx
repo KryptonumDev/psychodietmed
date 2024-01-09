@@ -121,6 +121,7 @@ async function getData(params) {
               ... on Specjalista {
                 title
                 proffesional {
+                  index
                   proffesion
                   specialistId
                   serviceId

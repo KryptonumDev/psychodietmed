@@ -54,6 +54,7 @@ async function getData(params) {
               }
             }
             proffesional {
+              index
               proffesion
               specialistId
               serviceId
@@ -91,6 +92,7 @@ async function getData(params) {
             }
           }
           proffesional {
+            index
             proffesion
             pacientsAge
             excerpt

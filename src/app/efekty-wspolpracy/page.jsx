@@ -80,6 +80,7 @@ async function getData() {
                       title
                       slug
                       proffesional {
+                        index
                         avatar {
                           altText
                           mediaItemUrl

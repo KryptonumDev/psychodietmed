@@ -39,6 +39,7 @@ export default function Content({ podopieczni }) {
                   title
                   slug
                   proffesional {
+                    index
                     avatar {
                       altText
                       mediaItemUrl

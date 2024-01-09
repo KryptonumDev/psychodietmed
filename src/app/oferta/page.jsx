@@ -103,6 +103,7 @@ async function getData(params) {
                       title
                       slug
                       proffesional {
+                        index
                         avatar {
                           altText
                           mediaItemUrl
@@ -406,6 +407,7 @@ async function getData(params) {
                             title
                             slug
                             proffesional {
+                              index
                               avatar {
                                 altText
                                 mediaItemUrl

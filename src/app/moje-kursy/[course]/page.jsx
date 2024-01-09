@@ -69,6 +69,7 @@ async function getData(params) {
                 id
                 title
                 proffesional {
+                  index
                   courseExcerpt
                   specialistId
                   serviceId

@@ -103,6 +103,7 @@ async function getData() {
                   title
                   slug
                   proffesional {
+                    index
                     avatar {
                       altText
                       mediaItemUrl
@@ -210,6 +211,7 @@ async function getData() {
             }
           }
           proffesional {
+            index
             proffesion
             specialistId
             serviceId
@@ -299,6 +301,7 @@ async function getData() {
                         title
                         slug
                         proffesional {
+                          index
                           avatar {
                             altText
                             mediaItemUrl

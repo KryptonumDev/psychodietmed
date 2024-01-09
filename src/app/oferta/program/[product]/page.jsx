@@ -171,6 +171,7 @@ async function getData(params) {
                       id
                       title
                       proffesional {
+                        index
                         courseExcerpt
                         proffesion
                         specialistId
