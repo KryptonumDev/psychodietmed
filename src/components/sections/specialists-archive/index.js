@@ -100,7 +100,7 @@ export default function Content({ data }) {
     let aIndex = a.proffesional.index || 0;
     let bIndex = b.proffesional.index || 0;
 
-    return bIndex - aIndex;
+    return aIndex - bIndex;
   });
 
   const clickDate = useCallback((date, hour, data, service) => {

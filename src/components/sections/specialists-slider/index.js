@@ -28,6 +28,14 @@ export default function Specialists({ data, title = 'Wybierz specjalistę' }) {
   const [EndShadow, setEndShadow] = useState(true);
   const [StartShadow, setStartShadow] = useState(false);
 
+  
+  const sortedPosts = data.sort((a, b) => {
+    let aIndex = a.proffesional.index || 0;
+    let bIndex = b.proffesional.index || 0;
+
+    return aIndex - bIndex;
+  });
+
   return (
     <section id='zespol' className={styles.wrapper}>
       <header className={styles.header}>
@@ -73,7 +81,7 @@ export default function Specialists({ data, title = 'Wybierz specjalistę' }) {
           setEndShadow(!e.isEnd)
         }}
       >
-        {data?.map((el, index) => (
+        {sortedPosts?.map((el, index) => (
           <SwiperSlide key={index}>
             <Card setPopupOpened={setPopupOpened} setChosenTime={setChosenTime} data={el} />
           </SwiperSlide>
