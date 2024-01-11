@@ -8,6 +8,7 @@ import { generetaSeo } from "../../../../utils/genereate-seo";
 import { GET_SEO_PRODUCT } from "../../../../queries/product-seo";
 import FlexibleContent from "@/components/sections/product-flexible-content";
 import BundleContains from "@/components/sections/product-bundle-contains";
+import { isEnrolled } from "../../../../utils/check-enrollment";
 
 export async function generateMetadata({ params }) {
   return await generetaSeo(params.product, '/akademia', GET_SEO_PRODUCT, 'post')
@@ -17,7 +18,7 @@ export default async function Courses({ params }) {
   const { product } = await getData(params)
   const { user } = await getUser()
 
-  if (!!user?.courses?.nodes?.find((el) => el.databaseId === product.product.course.databaseId)) redirect(`/moje-kursy/${product?.product?.course?.slug}`)
+  if (user?.databaseId && await isEnrolled(product.product.course.databaseId, user.databaseId)) redirect(`/moje-kursy/${product?.product?.course?.slug}`)
   let totalTime = 0
   let lessonsCount = 0
   let firstLessonSlug = product.product.course.course.chapters[0].lessons[0].lesson.slug
@@ -56,11 +57,7 @@ async function getUser() {
         query Viewer {
           viewer {
             username
-            courses {
-              nodes {
-                databaseId
-              }
-            }
+            databaseId
           }
         }
       `,

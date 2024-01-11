@@ -42,7 +42,7 @@ const orders = [
 
 export default async function Shop(params) {
   const { productCategories, featured, cases, data, products, bundles } = await getData(params)
-  console.log(data)
+
   const locReviews = { ...data.reviewsAcademy }
 
   if (!locReviews.comments) {
