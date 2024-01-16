@@ -35,7 +35,7 @@ export default function StepsToConsultation({ data, specialists }) {
     <section className={styles.wrapper}>
       <h2 dangerouslySetInnerHTML={{ __html: removeWrap(title) }} />
       <div className={styles.grid}>
-        <Image aspectRatio={true} className={styles.image} src={image.mediaItemUrl} alt={image.altText} width={image.mediaDetails.width} height={image.mediaDetails.height} />
+        <Image aspectRatio={false} className={styles.image} src={image.mediaItemUrl} alt={image.altText} width={image.mediaDetails.width} height={image.mediaDetails.height} />
         <div className={styles.sub_grid}>
           <details open={step === 1} className={styles.item} style={step !== 1 ? { cursor: 'pointer' } : {}}>
             <summary onClick={(e) => { detailsClickHandler(e, 1) }}  className={styles.step_flex}>

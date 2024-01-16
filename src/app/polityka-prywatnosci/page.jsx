@@ -62,6 +62,7 @@ async function getData() {
             }
           }
           proffesional {
+            index
             proffesion
             specialistId
             serviceId

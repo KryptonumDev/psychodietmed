@@ -8,13 +8,12 @@ export async function generateMetadata() {
   return await generetaSeo('cG9zdDoxNzg2', '/umow-wizyte', GET_SEO_PAGE)
 }
 
-export default async function Home() {
+export default async function Home({ searchParams }) {
   const { specialists } = await getData()
-
   return (
     <main className="overflow" id="main">
       <Breadcrumbs data={[{ page: 'Umów wizytę', url: '/umow-wizyte' }]} />
-      <Content specialists={specialists}/>
+      <Content searchParams={searchParams} specialists={specialists} />
     </main>
   )
 }
@@ -28,13 +27,14 @@ async function getData() {
         nodes {
           title
           slug
-          specialisations {
+          specialisations(first: 100) {
             nodes {
               id : databaseId
               title : name
             }
           }
           proffesional {
+            index
             specialistId
             serviceId
             proffesion

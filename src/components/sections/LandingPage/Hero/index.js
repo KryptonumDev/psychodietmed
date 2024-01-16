@@ -3,6 +3,7 @@ import styles from './styles.module.scss';
 import { Image } from '@/components/atoms/image';
 
 const Hero = ({
+  landing,
   data: {
     title,
     blueText,
@@ -35,7 +36,7 @@ const Hero = ({
             </a>
           </div>
         </div>
-        <Form id={formId} />
+        <Form landing={landing} id={formId} />
       </div>
     </section>
   );

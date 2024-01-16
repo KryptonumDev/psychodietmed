@@ -6,6 +6,9 @@ import Breadcrumbs from "@/components/sections/breadcrumbs";
 import { Fetch } from "../../../../utils/fetch-query";
 import { generetaSeo } from "../../../../utils/genereate-seo";
 import { GET_SEO_PRODUCT } from "../../../../queries/product-seo";
+import FlexibleContent from "@/components/sections/product-flexible-content";
+import BundleContains from "@/components/sections/product-bundle-contains";
+import { isEnrolled } from "../../../../utils/check-enrollment";
 
 export async function generateMetadata({ params }) {
   return await generetaSeo(params.product, '/akademia', GET_SEO_PRODUCT, 'post')
@@ -15,7 +18,8 @@ export default async function Courses({ params }) {
   const { product } = await getData(params)
   const { user } = await getUser()
 
-  if (!!user?.courses?.nodes?.find((el) => el.databaseId === product.product.course.databaseId)) redirect(`/moje-kursy/${product?.product?.course?.slug}`)
+  if (user?.databaseId && await isEnrolled(product.product.course.databaseId, user.databaseId)) redirect(`/moje-kursy/${product?.product?.course?.slug}`)
+
   let totalTime = 0
   let lessonsCount = 0
   let firstLessonSlug = product.product.course.course.chapters[0].lessons[0].lesson.slug
@@ -38,6 +42,10 @@ export default async function Courses({ params }) {
       <Breadcrumbs data={[{ page: 'Akademia', url: `/akademia` }, { page: product.title, url: `/akademia/kurs/${params.product}` }]} />
       <Hero regularPrice={product.regularPrice} price={product.price} lessonSlug={firstLessonSlug} slug={product.product.course.slug} databaseId={product.databaseId} title={product.product.course.title} image={product.product.course.featuredImage} time={totalTime} count={lessonsCount} />
       <Content disabled={true} slug={product.product.course.slug} content={product.product.course.content} chapters={product.product.course.course.chapters} author={product.product.course.course.author} />
+      <FlexibleContent productId={product.productId} data={product.product.additionalSectionsProduct} />
+      {product.product.bundleItems?.length > 0 && (
+        <BundleContains productId={product.productId} data={product.product.bundleItems} />
+      )}
     </main>
   )
 }
@@ -50,11 +58,7 @@ async function getUser() {
         query Viewer {
           viewer {
             username
-            courses {
-              nodes {
-                databaseId
-              }
-            }
+            databaseId
           }
         }
       `,
@@ -89,6 +93,59 @@ async function getData(params) {
             regularPrice(format: RAW)
           }
           product {
+            importantInformation{
+              title
+              list{
+                text
+              }
+            }
+            bundleItems {
+              text
+            }
+            additionalSectionsProduct {
+              ... on Product_Product_AdditionalSectionsProduct_TwoColumnFlex {
+                content
+                fieldGroupName
+                image {
+                  altText
+                  mediaItemUrl
+                  mediaDetails {
+                    height
+                    width
+                  }
+                }
+              }
+              ... on Product_Product_AdditionalSectionsProduct_TwoColumnGrid {
+                fieldGroupName
+                title
+                grid {
+                  text
+                  icon {
+                    altText
+                    mediaItemUrl
+                    mediaDetails {
+                      height
+                      width
+                    }
+                  }
+                }
+              }
+              ... on Product_Product_AdditionalSectionsProduct_TwoColumnList {
+                fieldGroupName
+                title
+                lista {
+                  text
+                  icon {
+                    altText
+                    mediaItemUrl
+                    mediaDetails {
+                      height
+                      width
+                    }
+                  }
+                }
+              }
+            }
             course {
               ... on Course {
                 databaseId
@@ -112,6 +169,7 @@ async function getData(params) {
                       id
                       title
                       proffesional {
+                        index
                         courseExcerpt
                         proffesion
                         specialistId
@@ -182,7 +240,7 @@ export async function generateStaticParams() {
         }
       }
     `,
-    revalidate: 0,
+    cache: 'no-cache'
   })
 
   return products.nodes.map(({ slug }) => ({

@@ -1,12 +1,12 @@
-import { Fetch } from "./fetch-query"
+import { Fetch } from "./fetch-query";
 
-export const generetaSeo = async (id, url, query, type = 'page') => {
+export const generetaSeo = async (id, url, query, type = "page") => {
   try {
-    const { title, metaDesc, opengraphImage } = await getSeo(id, query)
-    const canonical = url + (type !== 'page' ? `/${id}` : '')
+    const { title, metaDesc, opengraphImage } = await getSeo(id, query);
+    const canonical = url + (type !== "page" ? `/${id}` : "");
 
-    const data = {
-      metadataBase: new URL('https://www.psychodietmed.pl'),
+    let data = {
+      metadataBase: new URL("https://www.psychodietmed.pl"),
       title: title,
       description: metaDesc,
       alternates: {
@@ -16,36 +16,32 @@ export const generetaSeo = async (id, url, query, type = 'page') => {
         title: title,
         description: metaDesc,
         url: canonical,
+        images: ["/opengraph-image.jpg"],
       },
       robots: {
         index: true,
-      }
-    }
+      },
+    };
 
-    if (opengraphImage?.mediaItemUrl) {
-      data.openGraph.images = [
-        opengraphImage?.mediaItemUrl
-      ]
-    } else {
-      data.openGraph.images = [
-        '/opengraph-image.jpg'
-      ]
-    }
+    if (opengraphImage?.mediaItemUrl)
+      data.openGraph.images = [opengraphImage?.mediaItemUrl];
 
-    return data
+    return data;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
 async function getSeo(id, query) {
-  const { body: { data } } = await Fetch({
+  const {
+    body: { data },
+  } = await Fetch({
     query: query,
     variables: {
-      id: id
+      id: id,
     },
-    revalidate: 600
-  })
+    revalidate: 600,
+  });
 
-  return data.page.seo
+  return data.page.seo;
 }

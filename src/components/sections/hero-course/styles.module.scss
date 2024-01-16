@@ -7,6 +7,24 @@
     grid-template-columns: 1fr;
   }
 
+  .paymentInfo{
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    width: fit-content;
+    margin-left: auto;
+    color: #606060;
+    font-size: clamp(14px, calc(16vw/7.68), 16px);
+    font-weight: 500;
+    line-height: 140.5%;
+  
+    @media (max-width: 768px) {
+      margin-left: 0;
+    }
+  }
+
   .priecflex{
     display: flex;
     align-items: center;

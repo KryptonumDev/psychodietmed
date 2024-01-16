@@ -131,7 +131,7 @@ export const CalendarDate = ({ data, today, setChosenDate, chosenDate }) => {
       <div>
         <ul className={styles.grid}>
           {shortWeekDays.map((weekDay) => (
-            <li key={weekDay}>{weekDay}</li>
+            <li className={styles.day} key={weekDay}>{weekDay}</li>
           ))}
         </ul>
         <ul >

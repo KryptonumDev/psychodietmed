@@ -59,7 +59,9 @@ export default function Summary({ submit, needsShippingAddress, setStep, input }
               </div>
               <div className={styles.params}>
                 <p title={input.billing.email}>{input.billing.email}</p>
-                <p>tel. {input.billing.phone}</p>
+                {input.billing.phone && (
+                  <p>tel. {input.billing.phone}</p>
+                )}
               </div>
             </>
           ) : (

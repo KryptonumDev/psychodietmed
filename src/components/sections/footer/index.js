@@ -124,10 +124,10 @@ export default function Footer() {
           <Link className={styles.link} href='/polityka-prywatnosci'>Polityka prywatności</Link>
         </div>
         <div className={`${styles.flex} ${styles.social}`}>
-          <a href="https://www.instagram.com/psychodietmed/" aria-label="instagram">
+          <a target="__blank" rel="noopener noreferer" href="https://www.instagram.com/psychodietmed/" aria-label="instagram">
             <Instagram />
           </a>
-          <a href="https://www.facebook.com/strefapsychodietetyki" aria-label="facebook">
+          <a target="__blank" rel="noopener noreferer" href="https://www.facebook.com/psychodietmed" aria-label="facebook">
             <Facebook />
           </a>
         </div>

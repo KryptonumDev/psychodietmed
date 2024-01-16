@@ -27,7 +27,7 @@
       }
     }
 
-    >div {
+    > div {
       border-radius: 20px;
       border: 1px solid var(--secondary-500, var(--secondary-500));
       background: #FFF;
@@ -35,15 +35,14 @@
       box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
       display: grid;
       gap: clamp(28px, calc(36vw/7.68), 64px);
-      grid-template-columns: 620fr 430fr;
-
-      @media (max-width: 640px) {
-        grid-template-columns: 1fr;
+      
+      @media (min-width: 700px) {
+        grid-template-columns: 620fr 430fr;
       }
 
       .image {
         width: 100% !important;
-        height: 100% !important;
+        height: auto !important;
         img {
           border-radius: 20px;
         }

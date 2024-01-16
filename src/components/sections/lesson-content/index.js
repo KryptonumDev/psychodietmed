@@ -45,7 +45,7 @@ export default function Content({ course, title, chapters, content, databaseId, 
     <section className={styles.wrapper}>
       <div className={styles.title}>
         <h1>{currentChapter.title}</h1>
-        <p>Rozdział {currentLesson}: {title}</p>
+        <p>Lekcja {currentLesson}: {title}</p>
       </div>
       <div className={styles.video}>
         <iframe className={styles.frame} frameBorder="0" src={video} title='Filmik' />

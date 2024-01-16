@@ -13,7 +13,7 @@ export async function generateMetadata({ params }) {
 
 export default async function Courses({ params }) {
   const { lesson } = await getData(params)
-  const { } = await getUser()
+  const { } = await getUser(lesson.lesson.course.databaseId)
 
   return (
     <main>

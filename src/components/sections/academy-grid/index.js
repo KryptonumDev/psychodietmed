@@ -1,7 +1,8 @@
-import React from "react"
-import styles from './styles.module.scss'
-import Course from "@/components/moleculas/course-card-product"
-import { Card } from "@/components/moleculas/product-card"
+import React from "react";
+import styles from "./styles.module.scss";
+import Course from "@/components/moleculas/course-card-product";
+import { Card } from "@/components/moleculas/product-card";
+import { isEnrolled } from "../../../utils/check-enrollment";
 
 export default function Grid({ user, courses, ebooks }) {
   return (
@@ -11,9 +12,23 @@ export default function Grid({ user, courses, ebooks }) {
         <>
           <h2>Nasze kursy</h2>
           <div className={styles.grid}>
-            {courses.nodes.map((item, index) => (
-              <Course myCourse={!!user?.courses?.nodes?.find((el) => el.databaseId === item.product.course.databaseId)} data={item} key={index} />
-            ))}
+            {courses.nodes.map(async (item, index) => {
+              let isFeaturedMyProduct = user?.databaseId
+                ? await isEnrolled(
+                    item.product.course.databaseId,
+                    user?.databaseId
+                  )
+                : null;
+
+                console.log(isFeaturedMyProduct)
+              return (
+                <Course
+                  myCourse={isFeaturedMyProduct}
+                  data={item}
+                  key={index}
+                />
+              );
+            })}
           </div>
         </>
       )}
@@ -28,5 +43,5 @@ export default function Grid({ user, courses, ebooks }) {
         </>
       )}
     </section>
-  )
+  );
 }

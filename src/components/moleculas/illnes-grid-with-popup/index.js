@@ -17,7 +17,7 @@ export default function IllnesGrid({ problems, active, setActive }) {
         ))}
       </div>
       <div className={styles.popup_wrap}>
-        <AnimatePresence mode="wait">
+        <AnimatePresence initial={false} mode="wait">
           {problems.map((el, index) => {
             if (active !== index) return null
             return (

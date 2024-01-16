@@ -57,7 +57,7 @@ export default function AddToCart({ children, chosenAddon, variationId, quantity
   };
 
   return (
-    <div >
+    <>
       {showViewCart ? (
         <Link style={{ position: "relative", zIndex: 3 }} className="link" href="/koszyk">
           Pokaż koszyk
@@ -72,6 +72,6 @@ export default function AddToCart({ children, chosenAddon, variationId, quantity
           {addToCartLoading ? 'Dodaje do koszyka...' : children ? children : 'Dodaj do koszyka'}
         </button>
       )}
-    </div>
+    </>
   );
 };

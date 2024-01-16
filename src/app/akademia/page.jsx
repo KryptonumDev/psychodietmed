@@ -11,66 +11,82 @@ import GridTextImagePlates from "@/components/organisms/grid-text-image-plates";
 import TwoColumnFlex from "@/components/sections/two-column-flex";
 import Hero from "@/components/sections/hero-academy";
 import Featured from "@/components/sections/academy-featured";
+import { isEnrolled } from "../../utils/check-enrollment";
 
 export async function generateMetadata() {
-  return await generetaSeo('cG9zdDoyMDM3', '/akademia', GET_SEO_PAGE)
+  return await generetaSeo("cG9zdDoyMDM3", "/akademia", GET_SEO_PAGE);
 }
 
 export default async function Courses() {
-  const { newsletter, courses, page, ebooks } = await getData()
-  const { user } = await getUser()
+  const { newsletter, courses, page, ebooks } = await getData();
+  const { user } = await getUser();
+  let isFeaturedMyProduct = user?.databaseId
+    ? await isEnrolled(
+        courses.nodes[0].product.course.databaseId,
+        user.databaseId
+      )
+    : false;
 
   return (
     <main className="overflow">
-      <Breadcrumbs data={[{ page: 'Akademia', url: `/akademia` }]} />
-      <Hero data={page.akademia.heroAcademy}/>
-      <Featured user={user} post={courses.nodes[0]} data={page.akademia.featuredAcademy} />
+      <Breadcrumbs data={[{ page: "Akademia", url: `/akademia` }]} />
+      <Hero data={page.akademia.heroAcademy} />
+      <Featured
+        isFeaturedMyProduct={isFeaturedMyProduct}
+        post={courses.nodes[0]}
+        data={page.akademia.featuredAcademy}
+      />
       <Grid user={user} courses={courses} ebooks={ebooks} />
       <GridTextImagePlates grid={page.akademia.gridAcademy} />
-      <TwoColumnFlex data={page.akademia.flexAcademy}/>
+      <TwoColumnFlex data={page.akademia.flexAcademy} />
       <Owner data={page.akademia.ownerAcademy} />
       <Recruitment data={page.akademia.specialistGridTeam} />
       <Newsletter data={newsletter} />
     </main>
-  )
+  );
 }
 
 async function getUser() {
   try {
-    const authToken = cookies().get('authToken')?.value
+    const authToken = cookies().get("authToken")?.value;
 
-    const { body: { data: { viewer } } } = await Fetch({
+    const {
+      body: {
+        data: { viewer },
+      },
+    } = await Fetch({
       query: `
         query Viewer {
           viewer {
+            databaseId
             username
-            courses {
-              nodes {
-                databaseId
-              }
-            }
           }
         }
       `,
       revalidate: 0,
       headers: {
-        "Authorization": `Bearer ${authToken}`
-      }
-    })
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
 
     return {
-      user: viewer
-    }
+      user: viewer,
+    };
   } catch (error) {
+    console.log("error", error);
     return {
-      user: null
-    }
+      user: null,
+    };
   }
 }
 
 async function getData() {
   try {
-    const { body: { data: { global, page, courses, ebooks } } } = await Fetch({
+    const {
+      body: {
+        data: { global, page, courses, ebooks },
+      },
+    } = await Fetch({
       query: `
       query Pages {
         global : page(id: "cG9zdDo3Nzk=") {
@@ -167,6 +183,7 @@ async function getData() {
                   id
                   title
                   proffesional {
+                    index
                     proffesion
                     specialistId
                     serviceId
@@ -303,15 +320,15 @@ async function getData() {
       }
     `,
       revalidate: 600,
-    })
+    });
 
     return {
       courses: courses,
       page: page,
       ebooks: ebooks,
-      newsletter: global.global.newsletterGlobal
-    }
+      newsletter: global.global.newsletterGlobal,
+    };
   } catch (err) {
-    throw new Error(err)
+    throw new Error(err);
   }
 }

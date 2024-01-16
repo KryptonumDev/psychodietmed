@@ -4,7 +4,6 @@ import Flex from "@/components/sections/specialist-flex"
 import FAQ from "@/components/sections/faq"
 import Reviews from "@/components/sections/specialist-reviews"
 import Specialists from "@/components/sections/specialists-slider"
-import Calendar from "@/components/sections/calendar-widget"
 import { GET_SEO_SPECIALIST } from "../../../queries/specialist-seo"
 import { generetaSeo } from "../../../utils/genereate-seo"
 import Breadcrumbs from "@/components/sections/breadcrumbs"
@@ -19,17 +18,16 @@ export default async function Specjalista({ params }) {
   return (
     <main className="overflow" id="main">
       <Breadcrumbs data={[{ page: 'Specjaliści', url: `/specjalisci` }, { page: data.title, url: `/specjalisci/${params.specjalista}` }]} />
-      <Hero data={data} />
+      <Hero
+        data={data}
+        specialistId={data.proffesional.specialistId}
+        serviceId={data.proffesional.serviceId}
+      />
       <Flex
         content={data.proffesional.excerpt}
         diploms={data.proffesional.diploms}
         courses={data.proffesional.courses}
         certificates={data.proffesional.certificates}
-      />
-      <Calendar
-        data={data}
-        specialistId={data.proffesional.specialistId}
-        serviceId={data.proffesional.serviceId}
       />
       {data.proffesional.reviews && (
         <Reviews data={data.proffesional.reviews} />
@@ -56,6 +54,7 @@ async function getData(params) {
               }
             }
             proffesional {
+              index
               proffesion
               specialistId
               serviceId
@@ -93,6 +92,7 @@ async function getData(params) {
             }
           }
           proffesional {
+            index
             proffesion
             pacientsAge
             excerpt
@@ -169,7 +169,7 @@ export async function generateStaticParams() {
       }
     }
   `,
-    revalidate: 0
+  cache: 'no-cache'
   })
 
   return specjalisci.nodes.map(({ slug }) => ({

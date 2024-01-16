@@ -135,7 +135,6 @@ export default function Calendar({ service, clickDate, dates, data }) {
                             {hour}
                           </button>
                         )
-
                       return <span key={hour + avaible} >-</span>
                     })}
                   </div>

@@ -99,5 +99,12 @@
       border-radius: 20px 0px;
       box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
     }
+
+    &.shadowless {
+      img {
+        box-shadow: none;
+        border-radius: none;
+      }
+    }
   }
 }

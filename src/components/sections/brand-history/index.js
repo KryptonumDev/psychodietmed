@@ -11,7 +11,7 @@ export default function History({ data: { title, text, grid } }) {
       <div className={styles.grid}>
         {grid.map(el => (
           <div key={el.text} className={styles.item}>
-            <Image aspectRatio={true} quality='90' src={el.icon.mediaItemUrl} alt={el.icon.altText || ''} width={el.icon.mediaDetails.width} height={el.icon.mediaDetails.height} />
+            <Image aspectRatio={true} quality='90' src={el.icon.mediaItemUrl} alt={el.icon.altText || ''} width={el.icon.mediaDetails.width} height={el.icon.mediaDetails.height} className={styles.icon} />
             <p>{el.text}</p>
           </div>
         ))}

@@ -3,7 +3,7 @@ import { NextResponse } from "next/server"
 export const dynamic = 'force-dynamic'
 
 export async function POST(req) {
-  let { email, name, surname, phone, employeId, serviceId, date, time } = await req.json()
+  let { email, name, surname, phone, employeId, serviceId, date, time, adres, city, postalcode } = await req.json()
 
   try {
     const headers = new Headers();
@@ -21,9 +21,9 @@ export async function POST(req) {
         "send_reset_password": false,
         "default_address": {
           "name": name + ' ' + (surname ? surname : ''),
-          "street": "ul. 26 Kwietnia 35/36",
-          "city": "Szczecin",
-          "postal_code": "71-126",
+          "street": adres,
+          "city": city,
+          "postal_code": postalcode,
           "country_iso_code": "pl"
         }
       },

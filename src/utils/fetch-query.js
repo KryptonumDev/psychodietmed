@@ -1,5 +1,5 @@
 export async function Fetch({
-  cache = 'force-cache',
+  cache,
   headers,
   query,
   tags,
@@ -17,7 +17,8 @@ export async function Fetch({
         ...(query && { query }),
         ...(variables && { variables })
       }),
-      ...(revalidate && { next: { revalidate: revalidate } })
+      ...(revalidate && { next: { revalidate: revalidate } }),
+      ...(cache && { cache: cache })
     });
 
     const body = await result.json();

@@ -31,6 +31,11 @@ async function getData() {
               text
             }
           }
+          productCategories{
+            nodes{
+              slug
+            }
+          }
           id
           productId: databaseId
           slug
