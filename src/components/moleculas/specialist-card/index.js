@@ -8,13 +8,13 @@ import dayjs from "dayjs";
 import 'dayjs/locale/pl';
 
 const days = [
+  'Niedz.',
   'Pon.',
   'Wt.',
   'Śr.',
   'Czw.',
   'Pt.',
   'Sob.',
-  'Niedz.'
 ]
 
 export default function Card({ setPopupOpened, setChosenTime, data }) {
