@@ -16,7 +16,7 @@
   grid-template-columns: 659fr 547fr;
   gap: clamp(24px, calc(32vw/7.68), 48px);
 
-  @media (max-width: 640px) {
+  @media (max-width: 840px) {
     display: flex;
     flex-direction: column-reverse;
   }
@@ -29,10 +29,7 @@
       width: 100% !important;
       height: auto !important;
 
-      @media (max-width: 640px) {
-      }
-
-      @media (max-width: 640px) {
+      @media (max-width: 840px) {
         min-width: unset;
       }
     }
