@@ -33,7 +33,7 @@ export default async function Specjalista({ params }) {
         <Reviews data={data.proffesional.reviews} />
       )}
       <Specialists data={other} title={'Podobni specjaliści'} />
-      <FAQ data={faq} />
+      <FAQ data={data.proffesional.faqSpecialist} />
     </main>
   )
 }
@@ -69,19 +69,6 @@ async function getData(params) {
             }
           }
         }
-        page(id: "cG9zdDo3Nzk=") {
-          id
-          global {
-            faq {
-              title
-              text
-              qa {
-                answer
-                question
-              }
-            }
-          }
-        }
         specjalistaBy(uri:  $uri) {
           id
           title
@@ -92,6 +79,14 @@ async function getData(params) {
             }
           }
           proffesional {
+            faqSpecialist {
+              title
+              text
+              qa {
+                answer
+                question
+              }
+            }
             index
             proffesion
             pacientsAge
@@ -150,7 +145,6 @@ async function getData(params) {
 
     return {
       data: specjalistaBy,
-      faq: page.global.faq,
       other: specjalisci.nodes.filter(item => item.slug !== params.specjalista)
     }
   } catch (error) {

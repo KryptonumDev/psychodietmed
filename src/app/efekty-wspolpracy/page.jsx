@@ -15,7 +15,7 @@ export async function generateMetadata() {
 } 
 
 export default async function Archive() {
-  const { data, faq, metrics, podopieczni } = await getData()
+  const { data, metrics, podopieczni } = await getData()
   return (
     <main className="overflow" id="main">
       <Breadcrumbs data={[{ page: 'Efekty współpracy', url: `/efekty-wspolpracy` }]} />
@@ -24,7 +24,7 @@ export default async function Archive() {
       <Tiles data={data.historyArchive.servicesHistoryArchive} />
       <CallToActionTransparent data={data.historyArchive.ctaHistoryArchive} />
       <Content podopieczni={podopieczni} />
-      <FAQ data={faq} />
+      <FAQ data={data.historyArchive.faqCases} />
     </main>
   )
 }
@@ -120,14 +120,6 @@ async function getData() {
                 happyPacientPercent
                 goopReviewsCount
               }
-              faq {
-                title
-                text
-                qa {
-                  answer
-                  question
-                }
-              }
             }
           }
           page(id: "cG9zdDo5MzM=") {
@@ -185,6 +177,14 @@ async function getData() {
                   title
                 }
               }
+              faqCases {
+                title
+                text
+                qa {
+                  answer
+                  question
+                }
+              }
             }
           }
         }
@@ -203,7 +203,6 @@ async function getData() {
 
     return {
       data: page,
-      faq: global.global.faq,
       metrics: global.global.metricsGlobal,
       podopieczni: podopieczni
     }
