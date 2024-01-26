@@ -28,7 +28,7 @@ export default async function Team() {
       <Flowers data={page.team.flowersTeam} />
       <RepeaterFlex data={page.team.repeaterFlexTeam} />
       {/* <CombinedSpecialisations data={page.team.combinedSpecialisationsTeam} /> */}
-      page.team.mixSpecialisations
+      {/* page.team.mixSpecialisations */}
       <CallToActionGray data={page.team.greyCtaTeam} />
       <Statistics data={page.team.statisticsTeam} />
       <OtherPosts data={posts} title={blog.title} text={blog.text} />
