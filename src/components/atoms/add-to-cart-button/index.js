@@ -60,7 +60,6 @@ export default function AddToCart({
   });
 
   const handleAddToCartClick = async () => {
-    setRequestError(null);
     addToCart();
   };
 
