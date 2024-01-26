@@ -50,7 +50,11 @@ export default function AddToCart({
       setShowViewCart(true);
     },
     onError: (error) => {
-      if (!clearCart) {
+      if (
+        error.message === "Przepraszamy, ten produkt nie może zostać kupiony."
+      ) {
+        alert("Przepraszamy, ten produkt nie może zostać kupiony.");
+      } else if (!clearCart) {
         window.localStorage.clear();
         setClearCart(true);
         addToCart();

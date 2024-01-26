@@ -5,7 +5,7 @@
 
   @media (max-width: 1120px) {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 }
 
@@ -101,23 +101,9 @@
 }
 
 .image {
-  margin-left: auto;
-  margin-top: -29px;
-  max-width: calc(100% - 48px);
+  max-width: 100%;
   width: 100% !important;
   height: auto !important;
-
-  @media (max-width: 1120px) {
-    width: calc(100% - 68px);
-  }
-
-  @media (max-width: 680px) {
-    width: calc(100% - 46px);
-  }
-
-  @media (max-width: 380px) {
-    width: calc(100% - 33px);
-  }
 
   img {
     object-position: 50% 20%;

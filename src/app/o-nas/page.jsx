@@ -11,6 +11,7 @@ import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
 import Breadcrumbs from "@/components/sections/breadcrumbs";
 import { Fetch } from "../../utils/fetch-query";
+import CombinedSpecializations from "@/components/sections/combined-specializations";
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDoxMTc2', '/o-nas', GET_SEO_PAGE)
@@ -27,8 +28,7 @@ export default async function Team() {
       <Owner data={page.team.ownerTeam} />
       <Flowers data={page.team.flowersTeam} />
       <RepeaterFlex data={page.team.repeaterFlexTeam} />
-      {/* <CombinedSpecialisations data={page.team.combinedSpecialisationsTeam} /> */}
-      {/* page.team.mixSpecialisations */}
+      <CombinedSpecializations data={page.team.mixSpecialisations} />
       <CallToActionGray data={page.team.greyCtaTeam} />
       <Statistics data={page.team.statisticsTeam} />
       <OtherPosts data={posts} title={blog.title} text={blog.text} />
