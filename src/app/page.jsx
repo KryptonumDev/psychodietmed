@@ -255,18 +255,6 @@ async function getData() {
               }
             }
           }
-          compare: sekcjaZPorownaniem{
-            title
-            text
-            psychoterapeuta
-            psychodietyk
-            psychoterapeutaPsychodietetyk
-            cta
-            link{
-              title
-              url
-            }
-          }
           specialisations : sekcjaZSiatkaSpecjalizacjiKopia {
             text
             title

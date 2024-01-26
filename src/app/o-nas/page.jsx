@@ -90,20 +90,6 @@ async function getData() {
               }
             }
           }
-          combinedSpecialisationsTeam{
-            title
-            combinedCards{
-              text
-              image{
-                altText
-                mediaItemUrl
-                mediaDetails{
-                  height
-                  width
-                }
-              }
-            }
-          }
           statisticsTeam{
             title
             text
