@@ -16,6 +16,34 @@
 
 .content {
 
+  a{
+    color: var(--primary-800);
+    font-weight: 700;
+    break-inside: avoid;
+    width: fit-content;
+    position: relative;
+    font-size: clamp(20rem, calc(20vw/7.68), 24rem);
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 100%;
+      height: 3px;
+      z-index: -1;
+      border-radius: 6px;
+      background-color: var(--secondary-600);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .4s var(--easing);
+    }
+
+    &:hover::before {
+      transform: scaleX(1);
+    }
+  }
+
   .wp-block-columns {
     display: grid;
     grid-template-columns: 1fr 1fr;
