@@ -10,6 +10,8 @@
   .grid {
     grid-template-columns: 1fr 1fr;
     display: grid;
+    max-width: 1120px;
+    margin: 0 auto;
 
     @media (max-width: 1240px) {
       grid-template-columns: 1fr;
