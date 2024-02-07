@@ -24,6 +24,8 @@ export default function Login() {
 
   const [loginStatus, setLoginStatus] = useState({ sending: false });
   const [renewPass, setRenewPass] = useState(false);
+  const [clearTried, setClearTried] = useState(false);
+  const [input, setInput] = useState(null);
 
   const loginSumbit = (data) => {
     setLoginStatus({ sending: true });
@@ -32,6 +34,7 @@ export default function Login() {
       username: data.email,
       password: data.password,
     };
+    setInput(Input);
     login({ variables: { input: Input } });
   };
 
@@ -59,12 +62,19 @@ export default function Login() {
         setLoginStatus({ sending: false, error: "Nieprawidłowe hasło" });
       } else {
         console.error(error);
-        localStorage.clear();
-        setCookie("authToken", "");
-        setLoginStatus({
-          sending: false,
-          error: `Błąd serwera, spóbuj póżniej lub skontaktuj się z obsługą sklepu. Błąd do przekazania dla obsługi - ${error.message}`,
-        });
+        if (clearTried) {
+          setLoginStatus({
+            sending: false,
+            error: `Błąd serwera, spóbuj póżniej lub skontaktuj się z obsługą sklepu. Błąd do przekazania dla obsługi - ${error.message}`,
+          });
+        } else {
+          localStorage.clear();
+          setCookie("authToken", "");
+          setClearTried(true);
+          login({
+            variables: { input: { ...input, clientMutationId: v4() } },
+          });
+        }
       }
     },
   });
