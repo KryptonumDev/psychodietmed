@@ -18,10 +18,9 @@
 
 .image {
   width: 100% !important;
-  height: auto !important;
+  height: 600px !important;
 
   @media (max-width: 1024px) {
-    aspect-ratio: unset !important;
     height: 330px !important;
   }
 

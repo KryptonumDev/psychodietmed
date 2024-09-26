@@ -11,31 +11,32 @@ import Breadcrumbs from "@/components/sections/breadcrumbs";
 import { Fetch } from "../../utils/fetch-query";
 
 export async function generateMetadata() {
-  return await generetaSeo('cG9zdDoxMzM4', '/wspolpraca', GET_SEO_PAGE)
+  return await generetaSeo("cG9zdDoxMzM4", "/wspolpraca", GET_SEO_PAGE);
 }
 
 export default async function Wspolpraca() {
-  const { data, faq, metrics } = await getData()
+  const { data, metrics } = await getData();
 
   return (
     <main id="main">
-      <Breadcrumbs data={[{ page: 'Współpraca', url: '/wspolpraca' }]} />
-      {/* <Hero data={data.cooperate.heroCooperate} /> */}
+      <Breadcrumbs data={[{ page: "Współpraca", url: "/wspolpraca" }]} />
       <Steps data={data.cooperate.stepsCooperate} />
       <CallToAction data={data.cooperate.ctaCooperate} />
-      {/* <Specialisations data={data.cooperate.specialisationsCooperate} activities={activities} /> */}
       <TwoColumnFlex data={data.cooperate.flexCooperate} />
       <Metrics data={metrics} />
       <Grid data={data.cooperate.gridCooperate} />
       <FlexAlt data={data.cooperate.flexAltCooperate} />
-      {/* <DigitalSlider data={products} title={'Co oferujemy?'} /> */}
-      <FAQ data={faq} />
+      <FAQ data={data.cooperate.faqCooperation} />
     </main>
-  )
+  );
 }
 
 async function getData() {
-  const { body: { data: { global, page, obszaryDzialania } } } = await Fetch({
+  const {
+    body: {
+      data: { global, page },
+    },
+  } = await Fetch({
     query: `
     query Pages {
       global : page(id: "cG9zdDo3Nzk=") {
@@ -46,7 +47,12 @@ async function getData() {
             happyPacientPercent
             goopReviewsCount
           }
-          faq {
+        }
+      }
+      page(id: "cG9zdDoxMzM4") {
+        id
+        cooperate {
+          faqCooperation{
             title
             text
             qa {
@@ -54,11 +60,6 @@ async function getData() {
               question
             }
           }
-        }
-      }
-      page(id: "cG9zdDoxMzM4") {
-        id
-        cooperate {
           ctaCooperate{
             content
             link{
@@ -183,12 +184,11 @@ async function getData() {
       }
     }
   `,
-    revalidate: 600
-  })
+    revalidate: 600,
+  });
 
   return {
     data: page,
-    faq: global.global.faq,
     metrics: global.global.metricsGlobal,
-  }
+  };
 }

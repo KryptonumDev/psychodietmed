@@ -10,14 +10,12 @@ import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
 import Breadcrumbs from "@/components/sections/breadcrumbs"
 
-export const dynamic = 'force-dynamic'
+export async function generateMetadata() {
+  return await generetaSeo('cG9zdDo5MzM=', `/historia-marki`, GET_SEO_PAGE)
+} 
 
-export async function generateMetadata({ searchParams }) {
-  return await generetaSeo('cG9zdDo5MzM=', `/historia-marki${searchParams.strona ? `?strona=${searchParams.strona}` : ''}`, GET_SEO_PAGE)
-}
-
-export default async function Archive(props) {
-  const { data, faq, metrics, podopieczni } = await getData(props)
+export default async function Archive() {
+  const { data, metrics, podopieczni } = await getData()
   return (
     <main className="overflow" id="main">
       <Breadcrumbs data={[{ page: 'Efekty współpracy', url: `/efekty-wspolpracy` }]} />
@@ -26,16 +24,14 @@ export default async function Archive(props) {
       <Tiles data={data.historyArchive.servicesHistoryArchive} />
       <CallToActionTransparent data={data.historyArchive.ctaHistoryArchive} />
       <Content podopieczni={podopieczni} />
-      <FAQ data={faq} />
+      <FAQ data={data.historyArchive.faqCases} />
     </main>
   )
 }
 
-async function getData(props) {
+async function getData() {
   try {
-    let currentPage = props?.searchParams?.strona || 1
-
-    const result = await fetch('https://psychodietmed.headlesshub.com/graphql', {
+    const result = await fetch('https://wp.psychodietmed.pl/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -84,6 +80,7 @@ async function getData(props) {
                       title
                       slug
                       proffesional {
+                        index
                         avatar {
                           altText
                           mediaItemUrl
@@ -122,14 +119,6 @@ async function getData(props) {
                 terapyTime
                 happyPacientPercent
                 goopReviewsCount
-              }
-              faq {
-                title
-                text
-                qa {
-                  answer
-                  question
-                }
               }
             }
           }
@@ -188,12 +177,20 @@ async function getData(props) {
                   title
                 }
               }
+              faqCases {
+                title
+                text
+                qa {
+                  answer
+                  question
+                }
+              }
             }
           }
         }
       ` ,
         variables: {
-          offset: (currentPage - 1) * PAGE_ITEM_COUNT,
+          offset: 0,
           size: PAGE_ITEM_COUNT,
         }
       }),
@@ -206,7 +203,6 @@ async function getData(props) {
 
     return {
       data: page,
-      faq: global.global.faq,
       metrics: global.global.metricsGlobal,
       podopieczni: podopieczni
     }

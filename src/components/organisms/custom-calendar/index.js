@@ -13,7 +13,7 @@ import Button from "@/components/atoms/button"
 
 export const CustomCalendar = ({ specialistId, serviceId, specialistData }) => {
   const fetchData = () => {
-    fetch("http://www.psychodietmed.pl/api/get-avaible-dates", {
+    fetch("/api/get-avaible-dates", {
       method: 'POST',
       body: JSON.stringify({
         employeId: specialistId,
@@ -56,7 +56,7 @@ export const CustomCalendar = ({ specialistId, serviceId, specialistData }) => {
     if (data) {
       setChosenTime(data[chosenDate.format('YYYY-MM-DD')][0])
     }
-  }, [chosenDate])
+  }, [chosenDate, data])
 
   return (
     <div className={styles.box}>

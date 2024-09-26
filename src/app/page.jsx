@@ -9,7 +9,6 @@ import Citate from "@/components/sections/citate";
 import OtherPosts from "@/components/sections/other-posts";
 import Newsletter from "@/components/sections/newsletter";
 import StepsToConsultation from "@/components/sections/steps-to-consultation";
-// import Compare from "@/components/sections/pdm-compare";
 // import Academy from "@/components/sections/academy";
 import { generetaSeo } from "../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../queries/page-seo";
@@ -41,14 +40,13 @@ export default async function Home() {
       <CallToActionTransparent data={cta} />
       <Specialists data={specialists} />
       <StepsToConsultation data={stepsToConsultation} specialists={specialists} />
-      {/* <Compare data={compare} /> */}
       <ReviewsSlider data={locReviews} />
       <CallToActionGray data={ctaGray} />
       <StatisticsFlex data={statistics} />
       <Citate data={citate} />
       {/* <Academy data={academy} /> */}
       <OtherPosts data={posts} title={blog.title} text={blog.text} />
-      <Newsletter data={newsletter} />
+      <Newsletter specialist={false} data={newsletter} />
     </main>
   )
 }
@@ -60,7 +58,7 @@ async function getData() {
       global : page(id: "cG9zdDo3Nzk=") {
         id
         global {
-          newsletterGlobal{
+          newsletterClientGlobal{
             title
             text
             consent
@@ -98,6 +96,23 @@ async function getData() {
           slug
           histori {
             information {
+              specialist {
+                ... on Specjalista {
+                  title
+                  slug
+                  proffesional {
+                    index
+                    avatar {
+                      altText
+                      mediaItemUrl
+                      mediaDetails{
+                        width
+                        height
+                      }
+                    }
+                  }
+                }
+              }
               boldText
               beforeImage {
                 altText
@@ -194,6 +209,7 @@ async function getData() {
             }
           }
           proffesional {
+            index
             proffesion
             specialistId
             serviceId
@@ -239,18 +255,6 @@ async function getData() {
               }
             }
           }
-          compare: sekcjaZPorownaniem{
-            title
-            text
-            psychoterapeuta
-            psychodietyk
-            psychoterapeutaPsychodietetyk
-            cta
-            link{
-              title
-              url
-            }
-          }
           specialisations : sekcjaZSiatkaSpecjalizacjiKopia {
             text
             title
@@ -278,6 +282,23 @@ async function getData() {
                 slug
                 histori {
                   information {
+                    specialist {
+                      ... on Specjalista {
+                        title
+                        slug
+                        proffesional {
+                          index
+                          avatar {
+                            altText
+                            mediaItemUrl
+                            mediaDetails{
+                              width
+                              height
+                            }
+                          }
+                        }
+                      }
+                    }
                     boldText
                     beforeImage {
                       altText
@@ -418,7 +439,7 @@ async function getData() {
     citate: homepage.sekcjaZCytatemKopia,
     blog: global.global.blogGlobal,
     posts: posts.nodes,
-    newsletter: global.global.newsletterGlobal,
+    newsletter: global.global.newsletterClientGlobal,
     compare: homepage.compare,
     academy: homepage.academy,
   }

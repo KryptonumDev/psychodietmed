@@ -2,14 +2,12 @@ import React from "react"
 import styles from "./styles.module.scss"
 import { Butterfly } from "../../../assets/butterfly"
 import { Diamond } from "../../../assets/diamond"
-import { removeWrap } from "../../../utils/title-modification"
 
-export default function Cards({ data: { title, leftColumnTitle, leftColumnList, rightColumnTitle, rightColumnList } }) {
+export default function Cards({ data: { leftColumnTitle, leftColumnList, rightColumnTitle, rightColumnList } }) {
   if (!leftColumnList || !rightColumnList) return null
 
   return (
     <section className={styles.wrapper}>
-      <h2 dangerouslySetInnerHTML={{ __html: removeWrap(title) }} />
       <div className={styles.grid}>
         {leftColumnList && (
           <div className={styles.left}>

@@ -40,7 +40,7 @@
   }
 
   .excerpt {
-    margin-bottom: clamp(16rem, calc(24vw/7.68), 32rem);
+    margin-bottom: clamp(16px, calc(24vw/7.68), 32px);
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;

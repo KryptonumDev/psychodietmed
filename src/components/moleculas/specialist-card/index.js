@@ -8,19 +8,19 @@ import dayjs from "dayjs";
 import 'dayjs/locale/pl';
 
 const days = [
+  'Niedz.',
   'Pon.',
   'Wt.',
   'Śr.',
   'Czw.',
   'Pt.',
   'Sob.',
-  'Niedz.'
 ]
 
 export default function Card({ setPopupOpened, setChosenTime, data }) {
   const { specialisations, proffesional, slug, title } = data
   const fetchData = () => {
-    fetch("https://www.psychodietmed.pl/api/get-avaible-dates", {
+    fetch("/api/get-avaible-dates", {
       method: 'POST',
       body: JSON.stringify({
         employeId: proffesional.specialistId,
@@ -69,33 +69,37 @@ export default function Card({ setPopupOpened, setChosenTime, data }) {
     <div className={styles.item}>
       <Link href={`/specjalisci/${slug}`} tabIndex={-1} className={styles.link} aria-label={`Sprawdź specjalistę ${title}`} />
       <div>
-        <Image
-          className={styles.image}
-          src={proffesional?.personImage?.mediaItemUrl}
-          alt={proffesional?.personImage?.altText}
-          width={proffesional?.personImage.mediaDetails.width}
-          height={proffesional?.personImage.mediaDetails.height}
-        />
-        <h3>{title}</h3>
-        <p>{proffesional?.proffesion}</p>
+        <div className={styles.grid}>
+          <Image
+            className={styles.image}
+            src={proffesional?.personImage?.mediaItemUrl}
+            alt={proffesional?.personImage?.altText}
+            width={proffesional?.personImage.mediaDetails.width}
+            height={proffesional?.personImage.mediaDetails.height}
+          />
+          <div>
+            <h3>{title}</h3>
+            <p>{proffesional?.proffesion}</p>
+          </div>
+        </div>
         <ul>
           {specialisations?.nodes.map(({ title }, index) => {
             if (index > 4) return null
             return <li key={index}>{title}</li>
           })}
+          <li>&nbsp;&nbsp;...&nbsp;&nbsp;</li>
         </ul>
       </div>
-      <div className={styles.flex}>
-        <p>Najbliższy termin:</p>
-        {date
-          ? date?.hours
-            ? <p>{days[date.date.day()]}, {date.date.format('D MMMM')} {date.hours[0]}</p>
-            : <p>Brak wolnych terminów</p>
-          : <p>Pobieramy dane...</p>
-        }
-
-      </div>
-      <div className={styles.bottom_inform}>
+      <div>
+        <div className={styles.flex}>
+          <p>Najbliższy termin:</p>
+          {date
+            ? date?.hours
+              ? <p>{days[date.date.day()]}, {date.date.format('D MMMM')} {date.hours[0]}</p>
+              : <p>Brak wolnych terminów</p>
+            : <p>Pobieramy dane...</p>
+          }
+        </div>
         <div className={styles.flex}>
           <Button disabled={!date?.hours} onClick={() => { clickHandler() }}>Umów wizytę</Button>
           <Button theme="secondary" href={`/specjalisci/${slug}#kalendarz`}>Więcej terminów</Button>

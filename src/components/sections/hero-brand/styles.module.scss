@@ -42,8 +42,6 @@
 
     @media (max-width: 1048px) {
       min-width: unset;
-      min-height: clamp(270px, calc(330vw/3.7), 500px);
-      aspect-ratio: unset !important;
     }
 
     img{

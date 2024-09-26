@@ -36,7 +36,7 @@ export default async function Blog({ searchParams }) {
 
 async function getData(currentPage = 1, kategoria) {
   try {
-    const result = await fetch('https://psychodietmed.headlesshub.com/graphql', {
+    const result = await fetch('https://wp.psychodietmed.pl/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

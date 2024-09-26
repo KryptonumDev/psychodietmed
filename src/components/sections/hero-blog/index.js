@@ -10,7 +10,6 @@ export default function Hero({ data, posts }) {
     <section className={styles.wrapper}>
       <h1 dangerouslySetInnerHTML={{ __html: removeWrap(pageTitle) }} />
       <div dangerouslySetInnerHTML={{ __html: text }} />
-      <h2 className={styles.sub_title}>Najnowsze artykuły</h2>
       <Slider items={posts} />
     </section>
   )

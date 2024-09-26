@@ -121,6 +121,7 @@ async function getData(params) {
               ... on Specjalista {
                 title
                 proffesional {
+                  index
                   proffesion
                   specialistId
                   serviceId
@@ -175,7 +176,7 @@ export async function generateStaticParams() {
         }
       }
     `,
-    revalidate: 0,
+    cache: 'no-cache'
   })
 
   return posts.nodes.map(({ slug }) => ({

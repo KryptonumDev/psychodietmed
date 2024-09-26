@@ -14,7 +14,7 @@ export async function generateMetadata({ params }) {
 
 export default async function Courses({ params }) {
   const { course } = await getData(params)
-  const { } = await getUser()
+  const { } = await getUser(course.databaseId)
 
   let totalTime = 0
   let lessonsCount = 0
@@ -69,6 +69,7 @@ async function getData(params) {
                 id
                 title
                 proffesional {
+                  index
                   courseExcerpt
                   specialistId
                   serviceId

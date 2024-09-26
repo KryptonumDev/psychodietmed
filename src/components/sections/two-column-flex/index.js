@@ -3,16 +3,20 @@ import styles from "./styles.module.scss"
 import Link from "next/link"
 import { Image } from "@/components/atoms/image"
 
-export default function TwoColumnFlex({ data: { content, link, image } }) {
+export default function TwoColumnFlex({ shadow, params, data: { content, link, image } }) {
   return (
     <section className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles.text} dangerouslySetInnerHTML={{ __html: content }} />
         {link && (
-          <Link className={`link ${styles.link}`} href={link.url}>{link.title}</Link>
+          <Link className={`link ${styles.link}`}
+            href={{
+              pathname: link.url,
+              query: (params ? { tags: JSON.stringify(params.map(el => el.id)) } : null)
+            }}>{link.title}</Link>
         )}
       </div>
-      <Image className={styles.image} src={image.mediaItemUrl} alt={image.altText} width={image.mediaDetails.width} height={image.mediaDetails.height} />
+      <Image className={`${styles.image} ${shadow ? '' : styles.shadowless}`} src={image.mediaItemUrl} alt={image.altText} width={image.mediaDetails.width} height={image.mediaDetails.height} />
     </section>
   )
 }

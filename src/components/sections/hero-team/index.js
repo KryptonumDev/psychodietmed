@@ -16,7 +16,7 @@ export default function Hero({ data: { title, text, link, image, grid } }) {
           </Link>
         </div>
         <div className={styles.imageWrap}>
-          <Image quality={80} aspectRatio={true} loading="eager" className={styles.image} src={image.mediaItemUrl} alt={image.altText} width={image.mediaDetails.width} height={image.mediaDetails.height} />
+          <Image quality={90} aspectRatio={true} loading="eager" className={styles.image} src={image.mediaItemUrl} alt={image.altText} width={image.mediaDetails.width} height={image.mediaDetails.height} />
         </div>
       </div>
       <div className={styles.grid}>

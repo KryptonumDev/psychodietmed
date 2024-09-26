@@ -18,7 +18,7 @@ export default function ImportantInformation({ data: { title, list } }) {
           </li>
         ))}
       </ul>
-      <Link className="link" href='#zakup'>Chce ten produkt!</Link>
+      <Link className="link" href='#zakup'>Chcę ten produkt!</Link>
     </section>
   )
 }

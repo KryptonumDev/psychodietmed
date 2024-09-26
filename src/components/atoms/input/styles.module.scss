@@ -34,10 +34,10 @@
     background: #FFFEFE;
     border: 2px solid var(--primary-800);
     border-radius: 50px;
-    line-height: 23px;
-    padding: clamp(10px, calc(10vw/7.68), 20px) 28px;
+    line-height: 100%;
+    padding: 11px 28px;
     color: var(--primary-800);
-    font-size: clamp(16px, calc(20vw/7.68), 24rem) !important;
+    font-size: clamp(16px, calc(20vw/7.68), 20rem) !important;
     font-weight: 500;
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
     transition: border-color .3s;
@@ -46,6 +46,11 @@
       border-color: var(--primary-500);
     }
   }
+
+  textarea{
+    padding: 14px 28px;
+  }
+
   input[type=number] {
     appearance: textfield;
     -moz-appearance: textfield;

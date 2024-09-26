@@ -15,7 +15,7 @@ export default function Failed() {
     <section className={styles.wrapper}>
       <h1>Ups! Wystąpił błąd płatności.</h1>
       {payLink
-        ? <a className="link" href={resLink}>Spróbuj ponownie</a>
+        ? <a className="link" href={payLink}>Spróbuj ponownie</a>
         : <Link className="link" href='/koszyk'>Wróć do koszyka</Link>
       }
     </section>

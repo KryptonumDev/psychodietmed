@@ -11,36 +11,72 @@ import { generetaSeo } from "../../../utils/genereate-seo"
 import { GET_SEO_KAFELEK } from "../../../queries/kafelek-seo"
 import Breadcrumbs from "@/components/sections/breadcrumbs"
 import { Fetch } from "../../../utils/fetch-query"
+import Specialists from "@/components/sections/specialists-slider"
 
 export async function generateMetadata({ params }) {
   return await generetaSeo(params.kafelek, '/wspolpraca', GET_SEO_KAFELEK, 'post')
 }
 
 export default async function Post({ params }) {
-  const { data } = await getData(params)
+  const { data, specialists } = await getData(params)
   return (
     <main className="overflow" id="main">
       <Breadcrumbs data={[{ page: 'Współpraca', url: '/wspolpraca' }, { page: data.title, url: `/wspolpraca/${params.kafelek}` }]} />
       <Hero data={data.acf.heroKafelek} />
       <SliderIllnes data={data.acf.illnesSliderKafelek} />
       <SliderSymptoms data={data.acf.symptomsSliderKafelek} />
-      <CallToActionGray data={data.acf.greyCtaKafelek} />
+      <CallToActionGray data={data.acf.greyCtaKafelek} params={data.specialisations.nodes} />
       <FlexDoubled data={data.acf.flexKafelek} />
-      <Prediction data={data.acf.predictionKafelek} />
-      <TwoColumnFlex data={data.acf.flexAltKafelek} />
-      <CallToAction data={data.acf.ctaKafelek} />
+      <Prediction data={data.acf.predictionKafelek} params={data.specialisations.nodes} />
+      <TwoColumnFlex data={data.acf.flexAltKafelek} params={data.specialisations.nodes} />
+      <CallToAction data={data.acf.ctaKafelek} params={data.specialisations.nodes} />
+      {specialists.length > 0 && (
+        <Specialists data={specialists} />
+      )}
     </main>
   )
 }
 
 async function getData(params) {
   try {
-    const { body: { data: { obszarDzilaniaBy } } } = await Fetch({
+    const { body: { data: { specjalisci, obszarDzilaniaBy } } } = await Fetch({
       query: `
       query Pages($slug: String) {
+        specjalisci(first: 100) {
+          nodes {
+            title
+            slug
+            specialisations(first: 100) {
+              nodes {
+                id : databaseId
+                title : name
+              }
+            }
+            proffesional {
+              index
+              proffesion
+              specialistId
+              serviceId
+              personImage {
+                altText
+                mediaItemUrl
+                mediaDetails {
+                  height
+                  width
+                }
+              }
+            }
+          }
+        }
         obszarDzilaniaBy(uri: $slug){
           id
           title
+          specialisations {
+            nodes {
+              id : databaseId
+              title : name
+            }
+          }
           acf : obszar_dzialania {
             heroKafelek {
               title
@@ -184,6 +220,17 @@ async function getData(params) {
 
     return {
       data: obszarDzilaniaBy,
+      specialists: specjalisci.nodes.filter(el => {
+
+        const filtredSpecialisations = el.specialisations.nodes.filter(specialisation => {
+          let arr = obszarDzilaniaBy.specialisations.nodes.map(e => e.title)
+          let include = arr.includes(specialisation.title)
+
+          return include
+        })
+
+        return filtredSpecialisations.length > 0
+      })
     }
   } catch (error) {
     console.log(error)
@@ -208,7 +255,7 @@ export async function generateStaticParams() {
         }
       }
     `,
-    revalidate: 0
+    cache: 'no-cache'
   })
 
   return obszaryDzialania.nodes.filter(el => !!el.acf.heroKafelek.title).map(({ slug }) => ({

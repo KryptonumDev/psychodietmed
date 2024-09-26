@@ -27,11 +27,11 @@ export default async function Archive() {
       <Name data={data.brandHistory.nameBrand} />
       <TwoColumnFlexMultiText data={data.brandHistory.flexBrand} />
       <TwoColumnFlexMultiImages data={data.brandHistory.flexImagesBrand} />
-      <TwoColumnFlex data={data.brandHistory.missionBrand} />
+      <TwoColumnFlex shadow={false} data={data.brandHistory.missionBrand} />
       <Metrics data={metrics} />
       {/* <CallToAction data={data.brandHistory.callToActionBrand} /> */}
       {/* <TwoColumnFlexWithGrid data={data.brandHistory.flexSecondBrand} /> */}
-      <Newsletter data={newsletter} />
+      <Newsletter specialist={false} data={newsletter} />
       <OtherPosts data={posts} title={blog.title} text={blog.text} />
     </main>
   )
@@ -76,7 +76,7 @@ async function getData() {
               happyPacientPercent
               goopReviewsCount
             }
-            newsletterGlobal{
+            newsletterClientGlobal{
               title
               text
               consent
@@ -176,18 +176,9 @@ async function getData() {
               }
             }
             flexImagesBrand{
-              contentFirst
-              contentSecond
-              contentThird
+              content
+              contenSecond
               imageFirst{
-                altText
-                mediaItemUrl
-                mediaDetails{
-                  height
-                  width
-                }
-              }
-              imageSecond{
                 altText
                 mediaItemUrl
                 mediaDetails{
@@ -221,7 +212,7 @@ async function getData() {
     return {
       data: page,
       metrics: global.global.metricsGlobal,
-      newsletter: global.global.newsletterGlobal,
+      newsletter: global.global.newsletterClientGlobal,
       posts: posts.nodes,
       blog: global.global.blogGlobal
     }

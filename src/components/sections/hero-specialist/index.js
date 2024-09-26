@@ -4,28 +4,33 @@ import { Image } from "@/components/atoms/image"
 import { Star } from "../../../assets/star"
 import Link from "next/link"
 import Button from "@/components/atoms/button"
+import Calendar from "@/components/sections/calendar-widget"
 
-export default function Hero({ h2, data: { title, specialisations, proffesional: { personImage, proffesion, pacientsAge } } }) {
+export default function Hero({ specialistId, serviceId, h2, data, data: { title, specialisations, proffesional: { personImage, proffesion, pacientsAge } } }) {
   return (
     <section className={styles.wrapper}>
       <Button theme='reversed' className={styles.back} href='/specjalisci'>
         Wróć do listy specjalistów
       </Button>
       <div className={styles.grid}>
-        <Image
-          loading='eager'
-          className={styles.image}
-          width={personImage.mediaDetails.width}
-          height={personImage.mediaDetails.height}
-          src={personImage.mediaItemUrl}
-          alt={personImage.altText}
-          aspectRatio={true}
-        />
-        <div className={styles.info}>
-          {h2
-            ? <h2 className={styles.title}>{title}</h2>
-            : <h1 className={styles.title}>{title}</h1>}
-          <p>{proffesion}</p>
+        <div>
+          <div className={styles.mobileFlex}>
+            <Image
+              loading='eager'
+              className={styles.image}
+              width={personImage.mediaDetails.width}
+              height={personImage.mediaDetails.height}
+              src={personImage.mediaItemUrl}
+              alt={personImage.altText}
+              aspectRatio={true}
+            />
+            <div className={styles.info}>
+              {h2
+                ? <h2 className={styles.title}>{title}</h2>
+                : <h1 className={styles.title}>{title}</h1>}
+              <p>{proffesion}</p>
+            </div>
+          </div>
           <div className={styles.rating}>
             <p>Średnia ocena:</p>
             <span><Star /> 5</span>
@@ -47,9 +52,11 @@ export default function Hero({ h2, data: { title, specialisations, proffesional:
             </div>
           )}
         </div>
-        {!h2 && (
-          <Link href='#kalendarz' className={`${styles.button} link`}>Umów wizytę online</Link>
-        )}
+        <Calendar
+          data={data}
+          specialistId={specialistId}
+          serviceId={serviceId}
+        />
       </div>
     </section>
   )
