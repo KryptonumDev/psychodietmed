@@ -27,9 +27,9 @@ export default function Steps({ data: { title, repeater, titleFirst, linkFirst, 
                     <h3>{el.title}</h3>
                   </summary>
                   <div className={styles.wrap}>
-                    {el.illnes.map((inEl, index) => (
+                    {el.illnes.filter(inEl => !!inEl?.title).map((inEl, index) => (
                       <span key={index} className={styles.illnes}>
-                        {inEl.title}
+                        {inEl?.title}
                       </span>
                     ))}
                   </div>

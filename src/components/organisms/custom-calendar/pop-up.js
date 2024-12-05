@@ -10,7 +10,6 @@ import { v4 } from "uuid"
 import { Image } from "@/components/atoms/image"
 import { Cross } from "../../../assets/cross"
 import Checkbox from "@/components/atoms/checkbox"
-import { useQuery } from "@apollo/client"
 import axios from "axios"
 
 function formatPhoneNumber(input) {
