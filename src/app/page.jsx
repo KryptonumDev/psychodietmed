@@ -36,9 +36,9 @@ export default async function Home() {
   return (
     <main className="overflow" id="main">
       <Hero data={hero} />
-      <Specialisations data={specialisationsSection} activities={activities} />
-      <CallToActionTransparent data={cta} />
       <Specialists data={specialists} />
+      <CallToActionTransparent data={cta} />
+      <Specialisations data={specialisationsSection} activities={activities} />
       <StepsToConsultation data={stepsToConsultation} specialists={specialists} />
       <ReviewsSlider data={locReviews} />
       <CallToActionGray data={ctaGray} />
