@@ -8,11 +8,9 @@ import Loader from "@/components/sections/loader"
 import { Star } from "../../../assets/star"
 import Category from "@/components/atoms/category-pill"
 
-const regex = /<[^>]+>([^<]*)<\/[^>]+>/;
-
 export default function Card({ clickDate, data }) {
   const { slug, title, proffesional, specialisations } = data
-  const excerpt = proffesional.excerpt.match(regex);
+  const excerpt = proffesional.course_excerpt;
 
   const fetchData = () => {
     fetch("/api/get-avaible-dates", {
@@ -64,7 +62,7 @@ export default function Card({ clickDate, data }) {
             return <Category key={index} name={title}></Category>
           })}
         </div>
-        <p>{excerpt[1]}</p>
+        <p>{excerpt}</p>
       </Link>
       <div className={styles.relative}>
         <Loader show={!dates} className={styles.loader} />
