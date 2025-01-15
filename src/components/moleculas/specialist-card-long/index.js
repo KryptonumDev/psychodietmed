@@ -10,7 +10,7 @@ import Category from "@/components/atoms/category-pill"
 
 export default function Card({ clickDate, data }) {
   const { slug, title, proffesional, specialisations } = data
-  const excerpt = proffesional.course_excerpt;
+  const excerpt = proffesional.courseExcerpt;
 
   const fetchData = () => {
     fetch("/api/get-avaible-dates", {
