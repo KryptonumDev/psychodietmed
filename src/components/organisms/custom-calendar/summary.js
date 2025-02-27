@@ -4,13 +4,13 @@ import styles from './styles.module.scss'
 import Button from "@/components/atoms/button"
 
 const days = [
+  'Niedziela',
   'Poniedziałek',
   'Wtorek',
   'Środa',
   'Czwartek',
   'Piątek',
-  'Sobota',
-  'Niedziela'
+  'Sobota'
 ]
 
 export const CalendarSummary = ({ setPopupOpened, service, chosenTime, chosenDate }) => {
@@ -23,8 +23,8 @@ export const CalendarSummary = ({ setPopupOpened, service, chosenTime, chosenDat
         <p>godzina {chosenTime}</p>
       </div>
       <div>
-        <p>{(service.price/100)}&nbsp;zł / sesja {service.duration} minut</p>
-        <Button disabled={!chosenTime || !chosenDate} onClick={() => {setPopupOpened(true)}}>Umawiam wizytę</Button>
+        <p>{(service.price / 100)}&nbsp;zł / sesja {service.duration} minut</p>
+        <Button disabled={!chosenTime || !chosenDate} onClick={() => { setPopupOpened(true) }}>Umawiam wizytę</Button>
       </div>
     </div>
   )
