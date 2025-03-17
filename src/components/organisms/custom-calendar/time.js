@@ -1,5 +1,4 @@
 import React, { useMemo } from "react"
-import dayjs from "dayjs"
 import styles from './styles.module.scss'
 
 export const CalendarTime = ({ data, setChosenTime, chosenTime, chosenDate }) => {
@@ -14,7 +13,7 @@ export const CalendarTime = ({ data, setChosenTime, chosenTime, chosenDate }) =>
         <h3>Wolne terminy</h3>
       </header>
       <div>
-        {availability.length > 0 ? (
+        {availability?.length > 0 ? (
           <ul>
             {availability.map(el => (
               <li key={el} className={chosenTime === el ? styles.active : ''}>
