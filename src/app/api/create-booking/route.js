@@ -33,7 +33,7 @@ export async function POST(req) {
           "service_id": serviceId,
           "start_date": date,
           "start_time": time,
-          "service_location_id": 1
+          "service_location_id": 3
         }
       ]
     });
@@ -46,7 +46,7 @@ export async function POST(req) {
       cache: 'no-cache'
     })
     const data = await res.json()
-    
+
     return NextResponse.json(data)
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 })

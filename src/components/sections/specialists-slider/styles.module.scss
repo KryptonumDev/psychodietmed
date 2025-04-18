@@ -6,19 +6,19 @@
   position: relative;
   overflow: hidden !important;
 
-  .overlayRight{
+  .overlayRight {
     z-index: 4;
     top: 0;
     bottom: 0;
     right: -4px;
     width: 30%;
     position: absolute;
-    background: linear-gradient(270deg, #FFFEFE 13.93%, rgba(255, 254, 254, 0.00) 71.97%);
+    background: linear-gradient(270deg, #fffefe 13.93%, rgba(255, 254, 254, 0) 71.97%);
     opacity: 0;
-    transition: opacity .3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    transition: opacity 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
     pointer-events: none;
 
-    &.active{
+    &.active {
       opacity: 1;
     }
 
@@ -27,19 +27,19 @@
     }
   }
 
-  .overlayLeft{
+  .overlayLeft {
     z-index: 4;
     top: 0;
     bottom: 0;
     left: -4px;
     width: 30%;
     position: absolute;
-    background: linear-gradient(90deg, #FFFEFE 13.93%, rgba(255, 254, 254, 0.00) 71.97%);
+    background: linear-gradient(90deg, #fffefe 13.93%, rgba(255, 254, 254, 0) 71.97%);
     opacity: 0;
-    transition: opacity .3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    transition: opacity 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
     pointer-events: none;
 
-    &.active{
+    &.active {
       opacity: 1;
     }
 
@@ -62,10 +62,9 @@
   gap: 24px;
   align-items: center;
   margin-bottom: 32px;
-  
 
-  h2{
-    font-size: clamp(24px, calc(32vw/7.68), 42px);
+  h2 {
+    font-size: clamp(24px, calc(32vw / 7.68), 42px);
     @media (max-width: 768px) {
       text-align: center;
     }
@@ -83,7 +82,7 @@
 .control {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(8px, calc(16vw/7.68), 24px);
+  gap: clamp(8px, calc(16vw / 7.68), 24px);
 
   @media (max-width: 768px) {
     position: absolute;
@@ -94,7 +93,7 @@
     display: flex;
     justify-content: space-between;
 
-    svg{
+    svg {
       width: 28px;
       height: 28px;
     }

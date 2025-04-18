@@ -1,36 +1,53 @@
-import Hero from "@/components/sections/hero-home";
-import Specialisations from "@/components/sections/specialisations";
-import CallToActionTransparent from "@/components/sections/call-to-action-tranparent";
-import Specialists from "@/components/sections/specialists-slider";
-import CallToActionGray from "@/components/sections/call-to-action-gray";
-import ReviewsSlider from "@/components/sections/reviews-slider";
-import StatisticsFlex from "@/components/sections/statistics-flex";
-import Citate from "@/components/sections/citate";
-import OtherPosts from "@/components/sections/other-posts";
-import Newsletter from "@/components/sections/newsletter";
-import StepsToConsultation from "@/components/sections/steps-to-consultation";
+import Hero from '@/components/sections/hero-home';
+import Specialisations from '@/components/sections/specialisations';
+import CallToActionTransparent from '@/components/sections/call-to-action-tranparent';
+import Specialists from '@/components/sections/specialists-slider';
+import CallToActionGray from '@/components/sections/call-to-action-gray';
+import ReviewsSlider from '@/components/sections/reviews-slider';
+import StatisticsFlex from '@/components/sections/statistics-flex';
+import Citate from '@/components/sections/citate';
+import OtherPosts from '@/components/sections/other-posts';
+import Newsletter from '@/components/sections/newsletter';
+import StepsToConsultation from '@/components/sections/steps-to-consultation';
 // import Academy from "@/components/sections/academy";
-import { generetaSeo } from "../utils/genereate-seo";
-import { GET_SEO_PAGE } from "../queries/page-seo";
-import { Fetch } from "../utils/fetch-query";
+import { generetaSeo } from '../utils/genereate-seo';
+import { GET_SEO_PAGE } from '../queries/page-seo';
+import { Fetch } from '../utils/fetch-query';
 
 export async function generateMetadata() {
-  return await generetaSeo('cG9zdDo5', '', GET_SEO_PAGE)
+  return await generetaSeo('cG9zdDo5', '', GET_SEO_PAGE);
 }
 
 export default async function Home() {
-  const { academy, compare, hero, specialisationsSection, activities, cta, specialists, stepsToConsultation, newsletter, ctaGray, reviews, newReviews, statistics, citate, blog, posts } = await getData()
+  const {
+    academy,
+    compare,
+    hero,
+    specialisationsSection,
+    activities,
+    cta,
+    specialists,
+    stepsToConsultation,
+    newsletter,
+    ctaGray,
+    reviews,
+    newReviews,
+    statistics,
+    citate,
+    blog,
+    posts,
+  } = await getData();
 
-  const locReviews = { ...reviews }
+  const locReviews = { ...reviews };
 
   if (!locReviews.comments) {
-    locReviews.comments = [...newReviews]
+    locReviews.comments = [...newReviews];
   } else if (locReviews.comments.length < 4) {
-    newReviews.forEach(podopieczny => {
-      if (!locReviews.comments.find(comment => comment.id === podopieczny.id) && locReviews.comments.length < 4) {
-        locReviews.comments = [...locReviews.comments, podopieczny]
+    newReviews.forEach((podopieczny) => {
+      if (!locReviews.comments.find((comment) => comment.id === podopieczny.id) && locReviews.comments.length < 4) {
+        locReviews.comments = [...locReviews.comments, podopieczny];
       }
-    })
+    });
   }
 
   return (
@@ -48,11 +65,22 @@ export default async function Home() {
       <OtherPosts data={posts} title={blog.title} text={blog.text} />
       <Newsletter specialist={false} data={newsletter} />
     </main>
-  )
+  );
 }
 
 async function getData() {
-  const { body: { data: { global, podopieczni, posts, obszaryDzialania, specjalisci, page: { homepage } } } } = await Fetch({
+  const {
+    body: {
+      data: {
+        global,
+        podopieczni,
+        posts,
+        obszaryDzialania,
+        specjalisci,
+        page: { homepage },
+      },
+    },
+  } = await Fetch({
     query: `
     query Pages {
       global : page(id: "cG9zdDo3Nzk=") {
@@ -422,8 +450,8 @@ async function getData() {
       }
     }
   `,
-    revalidate: 600
-  })
+    revalidate: 600,
+  });
 
   return {
     hero: homepage.hero,
@@ -442,5 +470,5 @@ async function getData() {
     newsletter: global.global.newsletterClientGlobal,
     compare: homepage.compare,
     academy: homepage.academy,
-  }
+  };
 }

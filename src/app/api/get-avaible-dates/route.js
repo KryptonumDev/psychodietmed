@@ -7,7 +7,10 @@ export async function POST(req) {
 
   const days = 60
   const date = new Date()
-  const formatedDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
+  const formatedDate = date.getFullYear() + '-' +
+    String(date.getMonth() + 1).padStart(2, '0') + '-' +
+    String(date.getDate()).padStart(2, '0')
+
   try {
     const headers = {
       'X-Tenant': process.env.CALENDESK_TENANT_NAME,

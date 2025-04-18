@@ -4,6 +4,7 @@ import styles from './styles.module.scss';
 import Card from "@/components/moleculas/specialist-card";
 import { A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import 'swiper/scss';
 import ArrowLeft from "@/components/atoms/ArrowLeft";
 import ArrowRight from "@/components/atoms/ArrowRight";
 import { AnimatePresence } from "framer-motion";
@@ -28,7 +29,7 @@ export default function Specialists({ data, title = 'Wybierz specjalistę' }) {
   const [EndShadow, setEndShadow] = useState(true);
   const [StartShadow, setStartShadow] = useState(false);
 
-  
+
   const sortedPosts = data.sort((a, b) => {
     let aIndex = a.proffesional.index || 0;
     let bIndex = b.proffesional.index || 0;
