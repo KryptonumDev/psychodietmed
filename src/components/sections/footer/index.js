@@ -25,6 +25,10 @@ const urlSystem = [
       {
         name: 'Kontakt',
         url: '/kontakt'
+      },
+      {
+        name: 'Opinie',
+        url: '/opinie'
       }
     ]
   },
