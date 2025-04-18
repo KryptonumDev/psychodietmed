@@ -43,6 +43,7 @@ async function getData(params) {
               specialistId
               serviceId
               proffesion
+              courseExcerpt
               excerpt
               personImage {
                 altText
