@@ -2,7 +2,6 @@ import React from 'react';
 import { generetaSeo } from '../../utils/genereate-seo';
 import { GET_SEO_PAGE } from '../../queries/page-seo';
 import Breadcrumbs from '@/components/sections/breadcrumbs';
-import ReviewsHero from '@/components/sections/reviews-hero';
 import ReviewsListing from '@/components/sections/reviews-listing';
 import { Fetch } from '../../utils/fetch-query';
 
@@ -16,7 +15,6 @@ export default async function Reviews() {
   return (
     <main className="overflow" id="main">
       <Breadcrumbs data={[{ page: 'Opinie', url: `/opinie` }]} />
-      <ReviewsHero data={page.reviews.reviewsHero} />
       <ReviewsListing data={page.reviews.reviewsListing} />
     </main>
   );
@@ -33,22 +31,6 @@ async function getData() {
       page(id: "cG9zdDozOTYx") {
         id
         reviews {
-          reviewsHero {
-            title
-            text
-            link {
-              title
-              url
-            }
-            image {
-              altText
-              mediaItemUrl
-              mediaDetails {
-                height
-                width
-              }
-            }
-          }
           reviewsListing {
             heading
             paragraph
