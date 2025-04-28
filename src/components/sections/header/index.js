@@ -31,10 +31,6 @@ const urlSystem = [
         name: 'Kontakt',
         url: '/kontakt'
       },
-      {
-        name: 'Opinie',
-        url: '/opinie'
-      }
     ]
   },
   {
@@ -76,6 +72,10 @@ const urlSystem = [
         url: '/moje-kursy'
       }
     ]
+  },
+  {
+    name: 'Opinie',
+    url: '/opinie'
   },
   {
     name: 'Blog',

@@ -14,7 +14,7 @@ export default function ReviewsListing({ data }) {
   return (
     <section className={styles.wrapper}>
       <header className={styles.header}>
-        <h2 className={styles.heading} dangerouslySetInnerHTML={{ __html: removeWrap(heading) }} />
+        <h1 className={styles.heading} dangerouslySetInnerHTML={{ __html: removeWrap(heading) }} />
         <div className={styles.paragraph} dangerouslySetInnerHTML={{ __html: paragraph }} />
       </header>
       <div
