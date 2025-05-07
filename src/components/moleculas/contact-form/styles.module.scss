@@ -6,6 +6,27 @@
   .input .react-select__control {
     border-color: var(--primary-800) !important;
   }
+
+  .columns{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+
+    @media (max-width: 420px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .columnsEmail{
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 24px;
+
+    @media (max-width: 420px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .status {
     position: absolute;
     inset: -10px;
@@ -27,18 +48,6 @@
   }
   label {
     position: relative;
-    input,
-    textarea {
-      padding: 14px 28px;
-      background: #FFFFFF;
-      border: 2px solid var(--primary-800);
-      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
-      border-radius: 50px;
-      width: 100%;
-      line-height: 33px;
-      font-size: clamp(16rem, calc(20vw/7.68), 24rem);
-      font-weight: 500;
-    }
 
     textarea {
       border-radius: 20px;

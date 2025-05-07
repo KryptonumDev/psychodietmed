@@ -1,66 +1,92 @@
-import Hero from "@/components/sections/hero-home";
-import Specialisations from "@/components/sections/specialisations";
-import CallToActionTransparent from "@/components/sections/call-to-action-tranparent";
-import Specialists from "@/components/sections/specialists-slider";
-import CallToActionGray from "@/components/sections/call-to-action-gray";
-import ReviewsSlider from "@/components/sections/reviews-slider";
-import StatisticsFlex from "@/components/sections/statistics-flex";
-import Citate from "@/components/sections/citate";
-import OtherPosts from "@/components/sections/other-posts";
-import Newsletter from "@/components/sections/newsletter";
-import StepsToConsultation from "@/components/sections/steps-to-consultation";
-// import Compare from "@/components/sections/pdm-compare";
+import Hero from '@/components/sections/hero-home';
+import Specialisations from '@/components/sections/specialisations';
+import CallToActionTransparent from '@/components/sections/call-to-action-tranparent';
+import Specialists from '@/components/sections/specialists-slider';
+import CallToActionGray from '@/components/sections/call-to-action-gray';
+import ReviewsSlider from '@/components/sections/reviews-slider';
+import StatisticsFlex from '@/components/sections/statistics-flex';
+import Citate from '@/components/sections/citate';
+import OtherPosts from '@/components/sections/other-posts';
+import Newsletter from '@/components/sections/newsletter';
+import StepsToConsultation from '@/components/sections/steps-to-consultation';
 // import Academy from "@/components/sections/academy";
-import { generetaSeo } from "../utils/genereate-seo";
-import { GET_SEO_PAGE } from "../queries/page-seo";
-import { Fetch } from "../utils/fetch-query";
+import { generetaSeo } from '../utils/genereate-seo';
+import { GET_SEO_PAGE } from '../queries/page-seo';
+import { Fetch } from '../utils/fetch-query';
 
 export async function generateMetadata() {
-  return await generetaSeo('cG9zdDo5', '', GET_SEO_PAGE)
+  return await generetaSeo('cG9zdDo5', '', GET_SEO_PAGE);
 }
 
 export default async function Home() {
-  const { academy, compare, hero, specialisationsSection, activities, cta, specialists, stepsToConsultation, newsletter, ctaGray, reviews, newReviews, statistics, citate, blog, posts } = await getData()
+  const {
+    academy,
+    compare,
+    hero,
+    specialisationsSection,
+    activities,
+    cta,
+    specialists,
+    stepsToConsultation,
+    newsletter,
+    ctaGray,
+    reviews,
+    newReviews,
+    statistics,
+    citate,
+    blog,
+    posts,
+  } = await getData();
 
-  const locReviews = { ...reviews }
+  const locReviews = { ...reviews };
 
   if (!locReviews.comments) {
-    locReviews.comments = [...newReviews]
+    locReviews.comments = [...newReviews];
   } else if (locReviews.comments.length < 4) {
-    newReviews.forEach(podopieczny => {
-      if (!locReviews.comments.find(comment => comment.id === podopieczny.id) && locReviews.comments.length < 4) {
-        locReviews.comments = [...locReviews.comments, podopieczny]
+    newReviews.forEach((podopieczny) => {
+      if (!locReviews.comments.find((comment) => comment.id === podopieczny.id) && locReviews.comments.length < 4) {
+        locReviews.comments = [...locReviews.comments, podopieczny];
       }
-    })
+    });
   }
 
   return (
     <main className="overflow" id="main">
       <Hero data={hero} />
-      <Specialisations data={specialisationsSection} activities={activities} />
-      <CallToActionTransparent data={cta} />
       <Specialists data={specialists} />
+      <CallToActionTransparent data={cta} />
+      <Specialisations data={specialisationsSection} activities={activities} />
       <StepsToConsultation data={stepsToConsultation} specialists={specialists} />
-      {/* <Compare data={compare} /> */}
       <ReviewsSlider data={locReviews} />
       <CallToActionGray data={ctaGray} />
       <StatisticsFlex data={statistics} />
       <Citate data={citate} />
       {/* <Academy data={academy} /> */}
       <OtherPosts data={posts} title={blog.title} text={blog.text} />
-      <Newsletter data={newsletter} />
+      <Newsletter specialist={false} data={newsletter} />
     </main>
-  )
+  );
 }
 
 async function getData() {
-  const { body: { data: { global, podopieczni, posts, obszaryDzialania, specjalisci, page: { homepage } } } } = await Fetch({
+  const {
+    body: {
+      data: {
+        global,
+        podopieczni,
+        posts,
+        obszaryDzialania,
+        specjalisci,
+        page: { homepage },
+      },
+    },
+  } = await Fetch({
     query: `
     query Pages {
       global : page(id: "cG9zdDo3Nzk=") {
         id
         global {
-          newsletterGlobal{
+          newsletterClientGlobal{
             title
             text
             consent
@@ -98,6 +124,23 @@ async function getData() {
           slug
           histori {
             information {
+              specialist {
+                ... on Specjalista {
+                  title
+                  slug
+                  proffesional {
+                    index
+                    avatar {
+                      altText
+                      mediaItemUrl
+                      mediaDetails{
+                        width
+                        height
+                      }
+                    }
+                  }
+                }
+              }
               boldText
               beforeImage {
                 altText
@@ -194,6 +237,7 @@ async function getData() {
             }
           }
           proffesional {
+            index
             proffesion
             specialistId
             serviceId
@@ -239,18 +283,6 @@ async function getData() {
               }
             }
           }
-          compare: sekcjaZPorownaniem{
-            title
-            text
-            psychoterapeuta
-            psychodietyk
-            psychoterapeutaPsychodietetyk
-            cta
-            link{
-              title
-              url
-            }
-          }
           specialisations : sekcjaZSiatkaSpecjalizacjiKopia {
             text
             title
@@ -278,6 +310,23 @@ async function getData() {
                 slug
                 histori {
                   information {
+                    specialist {
+                      ... on Specjalista {
+                        title
+                        slug
+                        proffesional {
+                          index
+                          avatar {
+                            altText
+                            mediaItemUrl
+                            mediaDetails{
+                              width
+                              height
+                            }
+                          }
+                        }
+                      }
+                    }
                     boldText
                     beforeImage {
                       altText
@@ -401,8 +450,8 @@ async function getData() {
       }
     }
   `,
-    revalidate: 600
-  })
+    revalidate: 600,
+  });
 
   return {
     hero: homepage.hero,
@@ -418,8 +467,8 @@ async function getData() {
     citate: homepage.sekcjaZCytatemKopia,
     blog: global.global.blogGlobal,
     posts: posts.nodes,
-    newsletter: global.global.newsletterGlobal,
+    newsletter: global.global.newsletterClientGlobal,
     compare: homepage.compare,
     academy: homepage.academy,
-  }
+  };
 }

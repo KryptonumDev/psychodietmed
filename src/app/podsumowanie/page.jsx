@@ -1,6 +1,6 @@
 import Newsletter from "@/components/sections/newsletter";
 import Success from "@/components/sections/result-success";
-import { notFound } from "next/navigation";
+// import { notFound } from "next/navigation";
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
 import Failed from "@/components/sections/result-failed";
@@ -14,7 +14,7 @@ export async function generateMetadata() {
 export default async function Home(params) {
   const { newsletter } = await getData()
 
-  if (params.searchParams.status !== 'success' && params.searchParams.status !== 'failed' && params.searchParams.status !== 'error') return notFound()
+  // if (params.searchParams.status !== 'success' && params.searchParams.status !== 'failed' && params.searchParams.status !== 'error') return notFound()
 
   return (
     <main >

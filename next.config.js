@@ -477,7 +477,6 @@ const nextConfig = {
     ]
   },
   experimental: {
-    appDir: true,
     serverActions: true,
   },
   sassOptions: {
@@ -487,7 +486,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'psychodietmed.headlesshub.com',
+        hostname: 'wp.psychodietmed.pl',
         port: '',
         pathname: '/wp-content/uploads/**',
       },

@@ -9,7 +9,7 @@ export default function Flex({ productId, data: { content, link, image } }) {
     <section className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles.text} dangerouslySetInnerHTML={{ __html: content }} />
-        <Link  className="link" href='#zakup'>Chce ten produkt!</Link>
+        <Link  className="link" href='#zakup'>Chcę ten produkt!</Link>
         {/* <AddToCart product={{ productId: productId }} /> */}
       </div>
       <Image className={styles.image} src={image.mediaItemUrl} alt={image.altText} width={image.mediaDetails.width} height={image.mediaDetails.height} />

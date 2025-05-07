@@ -71,6 +71,7 @@ async function getData(params) {
               }
             }
             proffesional {
+              index
               proffesion
               specialistId
               serviceId
@@ -241,7 +242,7 @@ async function getData(params) {
       revalidate: 600
     })
 
-    if (!product.id || product.productCategories.nodes.some(({ slug }) => slug === 'ebook' || slug === 'kurs'))
+    if (!product.id || product.productCategories.nodes.some(({ slug }) => slug === 'ebook' || slug === 'kurs' || slug === 'program'))
       notFound()
 
     return {
@@ -261,7 +262,7 @@ export async function generateStaticParams() {
     query PostStaticParams {
       products(
         first: 100,
-        where: {categoryNotIn: ["ebook", "kurs"]}
+        where: {categoryNotIn: ["ebook", "kurs", "program"]}
       ) {
         nodes {
           slug
@@ -269,10 +270,13 @@ export async function generateStaticParams() {
       }
     }
   `,
-    revalidate: 0
+    cache: 'no-cache'
   })
 
-  return data.products.nodes.map(({ slug }) => ({
+  if (!data.products?.nodes)
+    return []
+
+  return data.products?.nodes?.map(({ slug }) => ({
     product: slug
   }))
 }

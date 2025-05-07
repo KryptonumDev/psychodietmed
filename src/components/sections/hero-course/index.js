@@ -6,6 +6,7 @@ import { Clock } from "../../../assets/clock"
 import { Graduate } from "../../../assets/graduate"
 import AddToCart from "@/components/atoms/add-to-cart-button"
 import Price from "@/components/atoms/price"
+import { PayPo } from "../../../assets/payPo"
 
 export default function Hero({ regularPrice, price, lessonSlug, slug, databaseId, accessToCourse, title, image, time, count }) {
   return (
@@ -31,6 +32,9 @@ export default function Hero({ regularPrice, price, lessonSlug, slug, databaseId
             ) : (
               <AddToCart className="link" product={{ productId: databaseId }}>Zakup dostęp do kursu</AddToCart>
             )}
+          </div>
+          <div className={styles.paymentInfo}>
+            <PayPo /> Kup dzisiaj i zapłać za 30 dni z PayPo
           </div>
         </div>
         <div className={styles.flex}>

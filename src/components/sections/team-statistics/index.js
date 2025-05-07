@@ -11,41 +11,41 @@ const totalFrames = Math.round(animationDuration / frameDuration);
 const easeCustom = t => t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
 
 export default function Statistics({ data: { title, text, link, counters, image } }) {
-  useEffect(() => {
-    const counters = document.querySelectorAll('.counter');
-    const animateCounter = (el) => {
-      let frame = 0;
-      const countTo = parseInt(el.textContent.replace(/ /g, ''), 10);
-      el.parentElement.style.width = `${el.parentElement.getBoundingClientRect().width}px`;
-      const counter = setInterval(() => {
-        frame++;
-        var progress = easeCustom(frame / totalFrames);
-        var currentCount = Math.round(countTo * progress);
-        if (parseInt(el.textContent, 10) !== currentCount) {
-          el.textContent = currentCount.toLocaleString();
-        }
-        if (frame === totalFrames) {
-          el.parentElement.style = null;
-          clearInterval(counter);
-        }
-      }, frameDuration);
-    };
+  // useEffect(() => {
+  //   const counters = document.querySelectorAll('.counter');
+  //   const animateCounter = (el) => {
+  //     let frame = 0;
+  //     const countTo = parseInt(el.textContent.replace(/ /g, ''), 10);
+  //     el.parentElement.style.width = `${el.parentElement.getBoundingClientRect().width}px`;
+  //     const counter = setInterval(() => {
+  //       frame++;
+  //       var progress = easeCustom(frame / totalFrames);
+  //       var currentCount = Math.round(countTo * progress);
+  //       if (parseInt(el.textContent, 10) !== currentCount) {
+  //         el.textContent = currentCount.toLocaleString();
+  //       }
+  //       if (frame === totalFrames) {
+  //         el.parentElement.style = null;
+  //         clearInterval(counter);
+  //       }
+  //     }, frameDuration);
+  //   };
 
-    const handleScrollCountup = () => {
-      counters.forEach(counter => {
-        const { top } = counter.getBoundingClientRect();
-        if (top < window.innerHeight && counter.classList.contains('counter') && counter.parentElement) {
-          animateCounter(counter);
-          counter.classList.remove('counter');
-        }
-      });
-    };
+  //   const handleScrollCountup = () => {
+  //     counters.forEach(counter => {
+  //       const { top } = counter.getBoundingClientRect();
+  //       if (top < window.innerHeight && counter.classList.contains('counter') && counter.parentElement) {
+  //         animateCounter(counter);
+  //         counter.classList.remove('counter');
+  //       }
+  //     });
+  //   };
 
-    document.addEventListener('scroll', handleScrollCountup)
-    return () => {
-      document.removeEventListener('scroll', handleScrollCountup);
-    };
-  }, [])
+  //   document.addEventListener('scroll', handleScrollCountup)
+  //   return () => {
+  //     document.removeEventListener('scroll', handleScrollCountup);
+  //   };
+  // }, [])
   return (
     <section className={styles.wrapper}>
       <div className={styles.counters}>

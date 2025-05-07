@@ -1,14 +1,16 @@
 'use client'
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import styles from './styles.module.scss'
 import Input from "@/components/atoms/input"
 import { useForm } from "react-hook-form"
 import { altPhonePattern, emailPattern, phonePattern } from "../../../constants/patterns"
 import Button from "@/components/atoms/button"
-import { motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import { v4 } from "uuid"
 import { Image } from "@/components/atoms/image"
 import { Cross } from "../../../assets/cross"
+import Checkbox from "@/components/atoms/checkbox"
+import axios from "axios"
 
 function formatPhoneNumber(input) {
   const digitsOnly = input.replace(/\D/g, '');
@@ -18,25 +20,72 @@ function formatPhoneNumber(input) {
   return `+48${digitsOnly}`
 }
 
+const calculatePrice = (price, discount) => {
+  if (!price) return null
+  if (!discount) return price
+
+  if (discount.type === 'PERCENT')
+    return (price / 100) * (100 - discount.amount)
+
+  return price - (discount.amount * 100)
+}
+
 export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosenDate, chosenTime, specialistData }) => {
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm()
 
+  const [discount, setDiscount] = useState(null)
+  const [couponStatus, setCouponStatus] = useState(null)
+  const hasCoupon = watch('has_coupon')
+  const coupon = watch('coupon')
+
+  const validateCoupon = () => {
+    axios.post('/api/get-coupon-data', { code: coupon })
+      .then(({ data }) => {
+        if (data?.coupon) {
+          setDiscount({
+            code: data.coupon.code,
+            type: data.coupon.discountType === "PERCENT" ? 'PERCENT' : 'AMOUNT',
+            amount: data.coupon.amount
+          })
+          setCouponStatus(null)
+        } else {
+          setCouponStatus('Nie znaleziono takiego kuponu')
+          setDiscount(null)
+        }
+      }).catch(err => {
+        debugger
+        setDiscount(null)
+      })
+  }
+
+  const removeDiscount = () => {
+    setDiscount(null)
+    setCouponStatus(null)
+    setValue('has_coupon', false)
+    setValue('coupon', '')
+  }
+
   const onSubmit = (data) => {
-    fetch("https://www.psychodietmed.pl/api/create-booking", {
+    fetch("/api/create-booking", {
       method: 'POST',
       body: JSON.stringify({
         email: data.email,
-        name: data.name.split(' ')[0],
-        surname: data.name.split(' ')[1],
+        name: data.name,
+        surname: data.surname,
         phone: formatPhoneNumber(data.phone),
         employeId: specialistId,
         serviceId: serviceId,
         date: chosenDate.format('YYYY-MM-DD'),
-        time: chosenTime
+        time: chosenTime,
+        adres: data.adres,
+        city: data.city,
+        postalcode: data.postalcode,
       })
     })
       .then(response => response.json())
@@ -46,14 +95,19 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
         if (!res[0]?.id) throw new Error('Nie udało się stworzyć rezerwacji, spróbuj ponownie później.')
 
         const session = v4()
-        fetch("https://www.psychodietmed.pl/api/create-transaction", {
+        fetch("/api/create-transaction", {
           method: 'POST',
           body: JSON.stringify({
-            amount: service.price,
+            "client": data.name + ' ' + data.surname,
+            "address": data.adres,
+            "zip": data.postalcode,
+            "city": data.city,
+            amount: calculatePrice(service.price, discount),
             sessionId: session,
             email: data.email,
             description: `Konsultacja online, ${specialistData.title}`,
-            urlReturn: `https://www.psychodietmed.pl/api/complete-booking/?session=${session}&id=${res[0].id}&amount=${service.price}`,
+            "urlReturn": `https://www.psychodietmed.pl/api/verify-transaction-status/?session=${session}`,
+            "urlStatus": `https://www.psychodietmed.pl/api/complete-booking/?session=${session}&id=${res[0].id}&amount=${calculatePrice(service.price, discount)}`,
           })
         })
           .then(response => response.json())
@@ -96,34 +150,91 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
         <h3>Uzupełnij dane w celu umówienia wizyty</h3>
         <div className={styles.flex}>
           <div className={styles.info}>
-            <div className={styles.specialist}>
-              <Image
-                className={styles.image}
-                src={specialistData.proffesional?.personImage?.mediaItemUrl}
-                alt={specialistData.proffesional?.personImage?.altText}
-                width={specialistData.proffesional?.personImage.mediaDetails.width}
-                height={specialistData.proffesional?.personImage.mediaDetails.height}
-              />
-              <div>
-                <h3>{specialistData.title}</h3>
-                <p>{specialistData.proffesional?.proffesion}</p>
+            <div>
+              <div className={styles.specialist}>
+                <Image
+                  className={styles.image}
+                  src={specialistData.proffesional?.personImage?.mediaItemUrl}
+                  alt={specialistData.proffesional?.personImage?.altText}
+                  width={specialistData.proffesional?.personImage.mediaDetails.width}
+                  height={specialistData.proffesional?.personImage.mediaDetails.height}
+                />
+                <div>
+                  <h3>{specialistData.title}</h3>
+                  <p>{specialistData.proffesional?.proffesion}</p>
+                </div>
               </div>
+              <div className={styles.wrap}>
+                <p><IconCalendar /> {chosenDate.format('DD MMMM YYYY')}, {chosenTime}</p>
+                <Button theme='secondary' href={specialistData.slug ? `/specjalisci/${specialistData.slug}#kalendarz` : null} onClick={() => { setPopupOpened(false) }}>Zmień termin</Button>
+              </div>
+              <p><IconMark /> Konsultacja online</p>
+              <p><IconMoney /> {(service.price / 100)}&nbsp;zł / <small>sesja 50&nbsp;min</small></p>
             </div>
-            <div className={styles.wrap}>
-              <p><IconCalendar /> {chosenDate.format('DD MMMM YYYY')}, {chosenTime}</p>
-              <Button theme='secondary' href={specialistData.slug ? `/specjalisci/${specialistData.slug}#kalendarz` : null} onClick={() => { setPopupOpened(false) }}>Zmień termin</Button>
+            <div className={styles.relative}>
+              <div className={styles.toast}>
+                {couponStatus}
+              </div>
+              <AnimatePresence mode="wait" initial={false}>
+                {discount ? (
+                  <motion.div key='result' className={styles.discount} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                    <p>Zastosowano kod rabatowy:</p>
+                    <p className={styles.removeButton}>
+                      <button type="button" onClick={() => { removeDiscount() }}><Cross /></button><span>{coupon}:</span> <b>-{discount.amount}{discount.type === 'PERCENT' ? '%' : ' zł'}</b>
+                    </p>
+                  </motion.div>
+                ) : (
+                  <>
+                    {hasCoupon ? (
+                      <motion.div key='input' className={styles.coupon} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                        <Input
+                          register={register('coupon')}
+                          errors={errors}
+                          label="Kupon"
+                          name='coupon'
+                          placeholder={'Kod kuponu'}
+                        />
+                        <button onClick={() => { validateCoupon() }} type="button" className="link">
+                          Aktywuj
+                        </button>
+                      </motion.div>
+                    ) : (
+                      <motion.div key='box' className={styles.coupon} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                        <Checkbox
+                          register={register('has_coupon')}
+                          errors={errors}
+                          name={'has_coupon'}
+                          text={'Mam kod rabatowy'}
+                        />
+                      </motion.div>
+                    )}
+                  </>
+                )}
+              </AnimatePresence>
             </div>
-            <p><IconMark /> Konsultacja online</p>
-            <p><IconMoney /> {(service.price / 100)}&nbsp;zł / <small>sesja 50&nbsp;min</small></p>
+            {/* <AnimatePresence mode="wait">
+              {couponError && (
+                <motion.span className={styles.error} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>{couponError}</motion.span>
+              )}
+            </AnimatePresence> */}
           </div>
           <div>
-            <Input
-              register={register('name', { required: true, minLength: 3 })}
-              errors={errors}
-              label="Imię i nazwisko"
-              name='name'
-              placeholder="Imię i nazwisko"
-            />
+            <div className={styles.columns}>
+              <Input
+                register={register('name', { required: true, minLength: 3 })}
+                errors={errors}
+                label="Imię"
+                name='name'
+                placeholder="Imię"
+              />
+              <Input
+                register={register('surname', { required: true, minLength: 3 })}
+                errors={errors}
+                label="Nazwisko"
+                name='surname'
+                placeholder="Nazwisko"
+              />
+            </div>
             <Input
               register={register('email', { required: true, pattern: emailPattern })}
               errors={errors}
@@ -138,8 +249,32 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
               label="Telefon"
               name='phone'
               placeholder="Telefon"
-              error="Proszę wpisać numer telefonu w formacie +48 123 456 789"
+              error="Proszę wpisać telefon w formacie +48 123 456 789"
             />
+            <Input
+              register={register('adres', { required: true })}
+              errors={errors}
+              label="Adres"
+              name='adres'
+              placeholder="Adres"
+            />
+            <div className={styles.columns}>
+              <Input
+                register={register('city', { required: true, minLength: 3 })}
+                errors={errors}
+                label="Miasto"
+                name='city'
+                placeholder="Miasto"
+              />
+              <Input
+                register={register('postalcode', { required: true, pattern: /^[0-9]{2}-[0-9]{3}$/i })} // patter 00-000
+                errors={errors}
+                label="Kod pocztowy"
+                name='postalcode'
+                placeholder="Kod pocztowy"
+                error="Proszę wpisać kod w formacie 00-000"
+              />
+            </div>
           </div>
         </div>
         <Button type="submit">Przechodzę do płatności</Button>

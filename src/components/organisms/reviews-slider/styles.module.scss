@@ -1,4 +1,7 @@
 .wrapper {
   margin: 0 -20px;
   padding: 0 20px;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 36px;
 }

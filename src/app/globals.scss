@@ -1,10 +1,10 @@
 html {
   /* overflow-x: hidden; */
   max-width: 100%;
-  font-size: 5.3%;
+  font-size: 4.9% !important;
 
   @media (max-width: 480px) {
-    font-size: 5.9%;
+    font-size: 5.9% !important;
   }
 
   @media (max-height: 768px) and (min-width: 1024px){
@@ -91,6 +91,10 @@ summary {
   margin: -20px;
 }
 
+.swiper-wrapper{
+  padding-bottom: 20px;
+}
+
 .swiper-slide {
   height: auto !important;
 }
@@ -126,7 +130,7 @@ main {
 
   display: grid !important;
   grid-template-columns: 100%;
-  grid-gap: clamp(64px, calc(64vw/7.68), 180px);
+  grid-gap: clamp(96px, calc(144vw/12.4), 180px);
   position: relative;
 
   @media (max-width: 1439px) {
@@ -169,7 +173,7 @@ legend {
 h2 {
   scroll-margin-top: 120px;
   font-weight: 500;
-  font-size: clamp(32rem, calc(32vw / 7.68), 64rem);
+  font-size: clamp(32rem, calc(36vw / 7.68), 48rem);
   line-height: 124%;
   font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
   color: var(--primary-800);
@@ -219,7 +223,7 @@ p strong {
 }
 
 p+p {
-  margin-top: clamp(12px, calc(16vw/7.68), 20px);
+  margin-top: clamp(8px, calc(16vw/7.68), 16px);
 }
 
 @media (max-width: 370px) {
@@ -372,7 +376,7 @@ p em {
   font-size: clamp(16rem, calc(20vw / 7.68), 20rem);
   line-height: 25px;
   color: var(--neutrals-800);
-  padding: clamp(10px, calc(10vw/7.68), 14px) clamp(28px, calc(28vw/7.68), 36px) clamp(12px, calc(10vw/7.68), 16px) clamp(28px, calc(28vw/7.68), 36px);
+  padding: clamp(10px, calc(10vw/7.68), 10px) clamp(28px, calc(28vw/7.68), 36px) clamp(12px, calc(10vw/7.68), 13px) clamp(28px, calc(28vw/7.68), 36px);
   border-radius: 50px;
   display: block;
   width: fit-content;
@@ -425,8 +429,8 @@ p em {
 
 
 .input .react-select__control {
-  padding: 12px 28px;
-  background: #FFFFFF;
+  padding: 3.5px 28px;
+  background: #FFFEFE;
   border: 2px solid var(--secondary-500);
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
   border-radius: 50px;
@@ -504,6 +508,10 @@ p em {
   border-radius: 20px;
   padding: 0;
   z-index: 5;
+}
+
+.react-select__menu {
+  background-color: #FFFEFE !important;
 }
 
 .input .react-select__menu-list {
@@ -646,4 +654,8 @@ blockquote {
 
 .react-select__single-value{
   font-size: clamp(16px, calc(20vw/7.68), 24rem) !important;
+} 
+
+.swiper-notification{
+  display: none !important;
 }

@@ -1,4 +1,26 @@
 .wrapper {
-  margin: -40px;
-  padding: 40px;
+  margin: -20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 20px;
+
+  @media (max-width: 640px) {
+    margin: -10px;
+    padding: 10px;
+  }
+}
+
+.control {
+  margin-top: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding-bottom: 36px;
+  button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
 }

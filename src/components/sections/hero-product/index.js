@@ -5,6 +5,7 @@ import { Image } from "@/components/atoms/image"
 import { removeWrap } from "../../../utils/title-modification"
 import AddToCart from "@/components/atoms/add-to-cart-button"
 import Price from "@/components/atoms/price"
+import { PayPo } from "../../../assets/payPo"
 
 export default function Hero({ data: { addons, variations, productId, title, description, featuredImage, price, regularPrice } }) {
 
@@ -97,6 +98,9 @@ export default function Hero({ data: { addons, variations, productId, title, des
           <div className={styles.addToCart}>
             <Price quantity={productCount} salesPrice={prices.price} regularPrice={prices.regularPrice} />
             <AddToCart chosenAddon={chosenAddon} quantity={productCount} variationId={chosenVariation?.productId} product={{ productId: productId }} />
+          </div>
+          <div className={styles.paymentInfo}>
+              <PayPo/> Kup dzisiaj i zapłać za 30 dni z PayPo
           </div>
         </div>
       </div>

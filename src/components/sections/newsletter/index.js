@@ -6,10 +6,10 @@ import Form from "@/components/moleculas/newsletter-form"
 import Button from "@/components/atoms/button"
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function Newsletter({ data: { title, text, consent } }) {
+export default function Newsletter({ specialist = true, data: { title, text, consent } }) {
   const [ sentStatus, setSentStatus ] = useState({ sent: false })
   return (
-    <section className={styles.wrapper}>
+    <section className={`${specialist ? styles.specialst : styles.client} ${styles.wrapper}`}>
       <AnimatePresence mode="wait">
         {sentStatus.success !== undefined && (
           sentStatus.success ? (
@@ -40,7 +40,7 @@ export default function Newsletter({ data: { title, text, consent } }) {
       </AnimatePresence>
       <h2 dangerouslySetInnerHTML={{ __html: htmlDelete(title) }} />
       <div className={styles.text} dangerouslySetInnerHTML={{ __html: text }} />
-      <Form consent={consent} sentStatus={sentStatus} setSentStatus={setSentStatus} />
+      <Form specialist={specialist} consent={consent} sentStatus={sentStatus} setSentStatus={setSentStatus} />
     </section>
   )
 }

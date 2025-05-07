@@ -1,21 +1,7 @@
-.wrapper {
-  h2 {
-    text-align: center;
-    font-size: clamp(24rem, calc(32vw/7.68), 40rem);
-    max-width: 804px;
-    margin: 0 auto;
-
-    @media (max-width: 370px) {
-      font-size: clamp(0rem, calc(24vw/3.7), 24rem);
-    }
-  }
-}
-
 .grid {
   gap: clamp(16px, calc(24vw/7.68), 32px);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin-top: clamp(36px, calc(52vw/7.68), 128px);
 
   @media (max-width: 640px) {
     grid-template-columns: 1fr;
