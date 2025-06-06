@@ -33,9 +33,7 @@ export async function POST(req) {
           "service_id": serviceId,
           "start_date": date,
           "start_time": time,
-          // "service_location_id": 3, // Commented out because the specified location caused a "SERVICE_LOCATION_NOT_ASSOCIATED" error.
-          // It's likely that the service or employee is not assigned to this location, or the location ID is incorrect.
-          // Omitting this field allows Calendesk to automatically assign the appropriate location if only one is available.
+          "service_location_id": 3,
         }
       ]
     });
