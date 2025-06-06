@@ -33,7 +33,7 @@ export async function POST(req) {
           "service_id": serviceId,
           "start_date": date,
           "start_time": time,
-          "service_location_id": 3,
+          "service_location_id": 8,
         }
       ]
     });
