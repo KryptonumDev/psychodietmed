@@ -29,11 +29,11 @@ export async function POST(req) {
       },
       "bookings": [
         {
-          "employee_id": employeId,
-          "service_id": serviceId,
+          "employee_id": parseInt(employeId),
+          "service_id": parseInt(serviceId),
           "start_date": date,
           "start_time": time,
-          "service_location_id": 8,
+          "service_location_id": 8
         }
       ]
     });
