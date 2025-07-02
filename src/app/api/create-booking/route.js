@@ -47,6 +47,8 @@ export async function POST(req) {
     })
     const data = await res.json()
 
+    console.log("Response:", data);
+
     return NextResponse.json(data)
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 })
