@@ -12,6 +12,15 @@ export async function POST(req) {
     headers.append("X-Tenant", process.env.CALENDESK_TENANT_NAME);
     headers.append("X-Api-Key", process.env.CALENDESK_API_KEY);
 
+    const service_data_response = await fetch(`https://api.calendesk.com/api/admin/services/${serviceId}`, {
+      method: 'GET',
+      headers: headers,
+      redirect: 'follow',
+      cache: 'no-cache'
+    })
+    const service_data = await service_data_response.json()
+    const location_id = service_data.locations[0].id;
+
     var body = JSON.stringify({
       "user": {
         "email": email,
@@ -33,7 +42,7 @@ export async function POST(req) {
           "service_id": parseInt(serviceId),
           "start_date": date,
           "start_time": time,
-          "service_location_id": 16
+          "service_location_id": location_id
         }
       ]
     });
