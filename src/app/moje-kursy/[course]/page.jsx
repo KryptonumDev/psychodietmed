@@ -18,12 +18,17 @@ export default async function Courses({ params }) {
 
   let totalTime = 0
   let lessonsCount = 0
-  let firstLessonSlug = course.course.chapters[0].lessons[0].lesson.slug
+  let firstLessonSlug = null
 
-  course.course.chapters.forEach(chapter => {
-    chapter.lessons.forEach(el => {
-      totalTime += Number(el.lesson.lesson.time)
-      lessonsCount++
+  // Calculate total time and lessons count from the 3-level structure
+  // Modules → Chapters → Lessons
+  course.course.modules?.forEach(module => {
+    module.chapters?.forEach(chapter => {
+      chapter.lessons?.forEach(lessonWrapper => {
+        if (!firstLessonSlug) firstLessonSlug = lessonWrapper.lesson?.slug
+        totalTime += Number(lessonWrapper.lesson?.lesson?.time || 0)
+        lessonsCount++
+      })
     })
   })
 
@@ -37,7 +42,7 @@ export default async function Courses({ params }) {
     <main>
       <Breadcrumbs data={[{ page: 'Moje kursy', url: `/moje-kursy` }, { page: course.title, url: `/moje-kursy/${params.course}` }]} />
       <Hero accessToCourse={true} lessonSlug={firstLessonSlug} slug={course.slug} title={course.title} image={course.featuredImage} time={totalTime} count={lessonsCount} />
-      <Content slug={course.slug} content={course.content} chapters={course.course.chapters} author={course.course.author} />
+      <Content slug={course.slug} content={course.content} modules={course.course.modules} author={course.course.author} />
     </main>
   )
 }
@@ -85,17 +90,23 @@ async function getData(params) {
                 }
               }
             }
-            chapters {
+            modules {
               title
-              lessons {
-                lesson {
-                  ... on Lesson {
-                    id
-                    title
-                    slug
-                    databaseId
-                    lesson {
-                      time
+              description
+              chapters {
+                title
+                description
+                lessons {
+                  lesson {
+                    ... on Lesson {
+                      id
+                      title
+                      slug
+                      databaseId
+                      lesson {
+                        time
+                        video
+                      }
                     }
                   }
                 }
