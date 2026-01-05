@@ -23,8 +23,38 @@
   .title {
     grid-area: title;
 
+    .breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      font-size: clamp(14rem, calc(14vw/7.68), 16rem);
+      color: #666;
+
+      @media (max-width: 370px) {
+        font-size: clamp(0rem, calc(14vw/3.7), 14rem);
+      }
+
+      .separator {
+        color: #999;
+      }
+
+      span {
+        &:first-child {
+          color: var(--primary-800);
+          font-weight: 600;
+        }
+      }
+    }
+
     h1 {
       margin-bottom: 12px;
+      font-size: clamp(24rem, calc(32vw/7.68), 40rem);
+
+      @media (max-width: 370px) {
+        font-size: clamp(0rem, calc(24vw/3.7), 24rem);
+      }
     }
   }
 
@@ -107,7 +137,13 @@
       justify-content: space-between;
       gap: 4px;
       margin-top: 4px;
-      padding: 8px 0 12px;
+      padding: 8px 8px 12px;
+      border-radius: 8px;
+      transition: background 0.15s ease;
+
+      &:hover {
+        background: #f8f8f8;
+      }
 
       &.active {
         border-bottom: 1px solid var(--secondary-500, #DEAFB8);
@@ -129,20 +165,27 @@
       }
 
       >h4 {
-        // margin-left: 35px;
         color: var(--primary-800);
         font-size: 16rem;
         display: grid;
         align-items: center;
-        grid-template-columns: 36px auto;
+        grid-template-columns: 50px auto;
+        gap: 4px;
 
         @media (max-width: 370px) {
           font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+          grid-template-columns: 40px auto;
         }
 
         strong {
           text-align: center;
           font-weight: 500;
+          font-size: 13rem;
+          color: #888;
+
+          @media (max-width: 370px) {
+            font-size: clamp(0rem, calc(13vw/3.7), 13rem);
+          }
         }
 
         span {
@@ -152,6 +195,103 @@
 
           @media (max-width: 370px) {
             font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+          }
+        }
+      }
+    }
+
+    // Other modules section
+    .otherModules {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+
+      .otherModulesTitle {
+        font-weight: 700;
+        color: var(--primary-800);
+        margin-bottom: 12px;
+        font-size: clamp(14rem, calc(14vw/7.68), 16rem);
+
+        @media (max-width: 370px) {
+          font-size: clamp(0rem, calc(14vw/3.7), 14rem);
+        }
+      }
+
+      .otherModule {
+        margin-bottom: 8px;
+
+        .moduleToggle {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px 12px;
+          background: #f5f5f5;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          font-size: clamp(13rem, calc(13vw/7.68), 14rem);
+          color: #333;
+          text-align: left;
+          transition: background 0.15s ease;
+
+          @media (max-width: 370px) {
+            font-size: clamp(0rem, calc(13vw/3.7), 13rem);
+          }
+
+          &:hover {
+            background: #ebebeb;
+          }
+
+          .toggleIcon {
+            font-size: 18px;
+            font-weight: 300;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #ddd;
+            color: #666;
+            flex-shrink: 0;
+          }
+        }
+
+        .moduleLessons {
+          padding: 8px 12px;
+
+          .otherLesson {
+            display: flex;
+            gap: 8px;
+            padding: 6px 0;
+            font-size: clamp(12rem, calc(12vw/7.68), 13rem);
+            color: #555;
+            text-decoration: none;
+            transition: color 0.15s ease;
+
+            @media (max-width: 370px) {
+              font-size: clamp(0rem, calc(12vw/3.7), 12rem);
+            }
+
+            &:hover {
+              color: var(--primary-800);
+            }
+
+            span:first-child {
+              color: #999;
+              min-width: 40px;
+            }
+          }
+
+          .moreLink {
+            font-size: clamp(12rem, calc(12vw/7.68), 13rem);
+            color: var(--primary-800);
+            margin-top: 4px;
+
+            @media (max-width: 370px) {
+              font-size: clamp(0rem, calc(12vw/3.7), 12rem);
+            }
           }
         }
       }

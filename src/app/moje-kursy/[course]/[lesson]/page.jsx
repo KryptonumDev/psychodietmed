@@ -1,4 +1,3 @@
-
 import { notFound } from "next/navigation";
 import Content from "@/components/sections/lesson-content";
 import { getUser } from "../../../../utils/check-authorisation";
@@ -12,19 +11,24 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Courses({ params }) {
-  const { lesson } = await getData(params)
+  const { lesson, courseData } = await getData(params)
   const { } = await getUser(lesson.lesson.course.databaseId)
 
   return (
     <main>
-      <Breadcrumbs data={[{ page: 'Moje kursy', url: `/moje-kursy` }, { page: lesson.lesson.course.title, url: `/moje-kursy/${params.course}` }, { page: lesson.title, url: `/moje-kursy/${params.course}/${params.lesson}` }]} />
+      <Breadcrumbs data={[
+        { page: 'Moje kursy', url: `/moje-kursy` },
+        { page: lesson.lesson.course.title, url: `/moje-kursy/${params.course}` },
+        { page: lesson.title, url: `/moje-kursy/${params.course}/${params.lesson}` }
+      ]} />
       <Content
         course={lesson.lesson.course.slug}
         title={lesson.title}
         databaseId={lesson.databaseId}
         content={lesson.content}
         video={lesson.lesson.video}
-        chapters={lesson.lesson.course.course.chapters}
+        modules={courseData.modules}
+        currentLessonId={lesson.databaseId}
         params={params}
       />
     </main>
@@ -33,6 +37,7 @@ export default async function Courses({ params }) {
 
 async function getData(params) {
   try {
+    // Fetch the lesson
     const { body: { data: { lesson } } } = await Fetch({
       query: `
       query Pages($id: ID!) {
@@ -42,24 +47,46 @@ async function getData(params) {
           databaseId
           lesson {
             video
+            time
             course {
               ... on Course {
                 databaseId
                 slug
                 title
-                course {
-                  chapters {
-                    title
-                    lessons {
+              }
+            }
+          }
+        }
+      }
+    `,
+      revalidate: 600,
+      variables: {
+        id: params.lesson
+      }
+    })
+
+    if (!lesson?.databaseId) notFound()
+    if (lesson.lesson.course.slug !== params.course) notFound()
+
+    // Fetch the course with full module structure for navigation
+    const { body: { data: { course } } } = await Fetch({
+      query: `
+      query CourseModules($id: ID!) {
+        course(id: $id, idType: SLUG) {
+          course {
+            modules {
+              title
+              chapters {
+                title
+                lessons {
+                  lesson {
+                    ... on Lesson {
+                      id
+                      title
+                      slug
+                      databaseId
                       lesson {
-                        ... on Lesson {
-                          title
-                          slug
-                          databaseId
-                          lesson {
-                            time
-                          }
-                        }
+                        time
                       }
                     }
                   }
@@ -72,19 +99,16 @@ async function getData(params) {
     `,
       revalidate: 600,
       variables: {
-        id: params.lesson,
-        course: params.course
+        id: params.course
       }
     })
 
-    if (!lesson?.databaseId) notFound()
-    if (lesson.lesson.course.slug !== params.course) notFound()
-
-    return {
-      lesson: lesson,
+    return { 
+      lesson,
+      courseData: course?.course || { modules: [] }
     }
   } catch (error) {
-    console.log(error)
+    console.log('Lesson fetch error:', error)
     notFound()
   }
 }

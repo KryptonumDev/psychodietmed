@@ -28,6 +28,339 @@
     }
   }
 
+  // About course section
+  .aboutCourse {
+    margin-top: clamp(48px, calc(64vw/7.68), 96px);
+  }
+
+  // New 3-level structure: Modules → Chapters → Lessons
+  .modules {
+    .module {
+      margin-bottom: 24px;
+      border-radius: 20px;
+      background: #FFF;
+      box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+      overflow: hidden;
+
+      .moduleHeader {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: clamp(20px, calc(24vw/7.68), 28px) clamp(20px, calc(28vw/7.68), 36px);
+        background: var(--primary-800);
+        color: white;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        transition: background 0.2s ease;
+
+        &:hover {
+          background: var(--primary-700, #3a3a6d);
+        }
+
+        .moduleInfo {
+          flex: 1;
+
+          h3 {
+            color: white;
+            font-weight: 700;
+            font-size: clamp(20rem, calc(24vw/7.68), 28rem);
+            margin-bottom: 8px;
+
+            @media (max-width: 370px) {
+              font-size: clamp(0rem, calc(20vw/3.7), 20rem);
+            }
+
+            span {
+              color: white;
+              font-weight: 500;
+              display: block;
+              margin-top: 4px;
+            }
+          }
+
+          .moduleStats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: clamp(14rem, calc(14vw/7.68), 16rem);
+            color: rgba(255, 255, 255, 0.9);
+
+            @media (max-width: 370px) {
+              font-size: clamp(0rem, calc(14vw/3.7), 14rem);
+            }
+
+            span {
+              display: flex;
+              align-items: center;
+              gap: 6px;
+
+              svg {
+                width: 18px;
+                height: auto;
+              }
+            }
+          }
+        }
+
+        .toggleIcon {
+          font-size: 28px;
+          font-weight: 300;
+          width: 36px;
+          height: 36px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.15);
+          color: white;
+          flex-shrink: 0;
+        }
+      }
+
+      .moduleContent {
+        padding: clamp(16px, calc(20vw/7.68), 24px);
+
+        .moduleDescription {
+          margin-bottom: 20px;
+          padding: 12px 16px;
+          background: #f9f9f9;
+          border-radius: 8px;
+          font-size: clamp(13rem, calc(13vw/7.68), 14rem);
+          color: #666;
+
+          @media (max-width: 370px) {
+            font-size: clamp(0rem, calc(13vw/3.7), 13rem);
+          }
+
+          p {
+            margin-bottom: 6px;
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+
+    .chapter {
+      margin-bottom: 16px;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      overflow: hidden;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .chapterHeader {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: clamp(16px, calc(18vw/7.68), 20px) clamp(16px, calc(20vw/7.68), 24px);
+        background: #f8f8f8;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        transition: background 0.2s ease;
+
+        &:hover {
+          background: #f0f0f0;
+        }
+
+        .chapterInfo {
+          flex: 1;
+
+          h4 {
+            font-weight: 600;
+            font-size: clamp(16rem, calc(18vw/7.68), 20rem);
+            color: var(--primary-800);
+            margin-bottom: 6px;
+
+            @media (max-width: 370px) {
+              font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+            }
+
+            span {
+              font-weight: 500;
+              color: #333;
+            }
+          }
+
+          .chapterStats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: clamp(13rem, calc(13vw/7.68), 14rem);
+            color: #666;
+
+            @media (max-width: 370px) {
+              font-size: clamp(0rem, calc(13vw/3.7), 13rem);
+            }
+
+            span {
+              display: flex;
+              align-items: center;
+              gap: 5px;
+
+              svg {
+                width: 16px;
+                height: auto;
+              }
+            }
+          }
+        }
+
+        .toggleIcon {
+          font-size: 22px;
+          font-weight: 300;
+          width: 28px;
+          height: 28px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          background: #e0e0e0;
+          color: #666;
+          flex-shrink: 0;
+        }
+      }
+
+      .chapterContent {
+        padding: clamp(12px, calc(16vw/7.68), 20px) clamp(16px, calc(20vw/7.68), 24px);
+        background: white;
+
+        .chapterDescriptionWrapper {
+          margin-bottom: 16px;
+          padding-bottom: 14px;
+          border-bottom: 1px solid #eee;
+        }
+
+        .chapterDescription {
+          font-size: clamp(14rem, calc(15vw/7.68), 16rem);
+          color: #555;
+          line-height: 1.5;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+
+          @media (max-width: 370px) {
+            font-size: clamp(0rem, calc(14vw/3.7), 14rem);
+          }
+
+          &.expanded {
+            display: block;
+            -webkit-line-clamp: unset;
+            overflow: visible;
+          }
+        }
+
+        .expandDescriptionBtn {
+          background: none;
+          border: none;
+          color: var(--primary-800);
+          font-size: clamp(13rem, calc(13vw/7.68), 14rem);
+          font-weight: 500;
+          cursor: pointer;
+          padding: 4px 0;
+          margin-top: 4px;
+          
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    .lesson {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+      transition: background 0.15s ease;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        background: #fafafa;
+        margin: 0 -12px;
+        padding: 12px;
+        border-radius: 8px;
+      }
+
+      > span {
+        min-width: clamp(85px, calc(85vw/7.68), 110px);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--primary-800);
+        font-weight: 700;
+        font-size: clamp(14rem, calc(14vw/7.68), 16rem);
+        flex-shrink: 0;
+
+        @media (max-width: 370px) {
+          font-size: clamp(0rem, calc(14vw/3.7), 14rem);
+          min-width: clamp(75px, calc(85vw/3.7), 85px);
+        }
+
+        svg {
+          width: 16px;
+          height: auto;
+        }
+      }
+
+      > h5 {
+        flex: 1;
+        color: var(--primary-800);
+        display: grid;
+        align-items: center;
+        grid-template-columns: 50px auto;
+        font-size: clamp(15rem, calc(16vw/7.68), 18rem);
+        gap: 8px;
+
+        @media (max-width: 370px) {
+          font-size: clamp(0rem, calc(15vw/3.7), 15rem);
+          grid-template-columns: 40px auto;
+        }
+
+        strong {
+          text-align: center;
+          font-weight: 500;
+          font-size: clamp(13rem, calc(13vw/7.68), 14rem);
+          color: #888;
+
+          @media (max-width: 370px) {
+            font-size: clamp(0rem, calc(13vw/3.7), 13rem);
+          }
+        }
+
+        span {
+          color: #333;
+          font-weight: 500;
+        }
+      }
+    }
+
+    // Link styling for lessons
+    a.lesson {
+      text-decoration: none;
+      
+      &:hover {
+        > h5 span {
+          color: var(--primary-800);
+        }
+      }
+    }
+  }
+
+  // Legacy support for old 2-level structure
   .chapters {
     margin-top: clamp(64px, calc(64vw/7.68), 180px);
 
@@ -60,7 +393,6 @@
         }
 
         >h4 {
-          // margin-left: 35px;
           color: var(--primary-800);
           display: grid;
           align-items: center;

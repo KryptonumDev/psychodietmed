@@ -19,14 +19,20 @@ export default async function Courses({ params }) {
   const { user } = await getUser()
 
   if (user?.databaseId && await isEnrolled(product.product.course.databaseId, user.databaseId)) redirect(`/moje-kursy/${product?.product?.course?.slug}`)
+  
   let totalTime = 0
   let lessonsCount = 0
-  let firstLessonSlug = product.product.course.course.chapters[0].lessons[0].lesson.slug
+  let firstLessonSlug = null
 
-  product.product.course.course.chapters.forEach(chapter => {
-    chapter.lessons.forEach(el => {
-      totalTime += Number(el.lesson.lesson.time)
-      lessonsCount++
+  // Calculate total time and lessons count from the 3-level structure
+  // Modules → Chapters → Lessons
+  product.product.course.course.modules?.forEach(module => {
+    module.chapters?.forEach(chapter => {
+      chapter.lessons?.forEach(lessonWrapper => {
+        if (!firstLessonSlug) firstLessonSlug = lessonWrapper.lesson?.slug
+        totalTime += Number(lessonWrapper.lesson?.lesson?.time || 0)
+        lessonsCount++
+      })
     })
   })
 
@@ -40,7 +46,7 @@ export default async function Courses({ params }) {
     <main>
       <Breadcrumbs data={[{ page: 'Sklep', url: `/oferta` }, { page: product.title, url: `/oferta/kurs/${params.product}` }]} />
       <Hero regularPrice={product.regularPrice} price={product.price} lessonSlug={firstLessonSlug} slug={product.product.course.slug} databaseId={product.databaseId} title={product.product.course.title} image={product.product.course.featuredImage} time={totalTime} count={lessonsCount} />
-      <Content disabled={true} slug={product.product.course.slug} content={product.product.course.content} chapters={product.product.course.course.chapters} author={product.product.course.course.author} />
+      <Content disabled={true} slug={product.product.course.slug} content={product.product.course.content} modules={product.product.course.course.modules} author={product.product.course.course.author} />
       <FlexibleContent productId={product.productId} data={product.product.additionalSectionsProduct} />
       {product.product.bundleItems?.length > 0 && (
         <BundleContains productId={product.productId} data={product.product.bundleItems} />
@@ -184,17 +190,23 @@ async function getData(params) {
                       }
                     }
                   }
-                  chapters {
+                  modules {
                     title
-                    lessons {
-                      lesson {
-                        ... on Lesson {
-                          id
-                          title
-                          slug
-                          databaseId
-                          lesson {
-                            time
+                    description
+                    chapters {
+                      title
+                      description
+                      lessons {
+                        lesson {
+                          ... on Lesson {
+                            id
+                            title
+                            slug
+                            databaseId
+                            lesson {
+                              time
+                              video
+                            }
                           }
                         }
                       }
