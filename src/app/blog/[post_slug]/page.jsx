@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import { notFound } from 'next/navigation';
 import Hero from '@/components/sections/hero-post';
 import Content from '@/components/sections/content-post';
@@ -6,7 +7,11 @@ import { generetaSeo } from '../../../utils/genereate-seo';
 import { GET_SEO_POST } from '../../../queries/post-seo';
 import Breadcrumbs from '@/components/sections/breadcrumbs';
 import { Fetch } from '../../../utils/fetch-query';
-import Specialists from '@/components/sections/specialists-slider';
+
+const Specialists = dynamic(() => import('@/components/sections/specialists-slider'), {
+  ssr: false,
+  loading: () => <div style={{ minHeight: '400px' }} />
+});
 
 export async function generateMetadata({ params }) {
   return await generetaSeo(params.post_slug, '/blog', GET_SEO_POST, 'post');

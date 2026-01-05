@@ -1,10 +1,9 @@
+import dynamic from "next/dynamic";
 import OtherPosts from "@/components/sections/other-posts";
 import Hero from "@/components/sections/hero-team";
-import Slider from "@/components/sections/team-slider";
 import Owner from "@/components/sections/team-owner";
 import Flowers from "@/components/sections/team-flowers";
 import RepeaterFlex from "@/components/sections/team-repeater-flex";
-import Specialists from "@/components/sections/specialists-slider";
 import CallToActionGray from "@/components/sections/call-to-action-gray";
 import Statistics from "@/components/sections/team-statistics";
 import { generetaSeo } from "../../utils/genereate-seo";
@@ -12,6 +11,16 @@ import { GET_SEO_PAGE } from "../../queries/page-seo";
 import Breadcrumbs from "@/components/sections/breadcrumbs";
 import { Fetch } from "../../utils/fetch-query";
 import CombinedSpecializations from "@/components/sections/combined-specializations";
+
+const Slider = dynamic(() => import("@/components/sections/team-slider"), {
+  ssr: false,
+  loading: () => <div style={{ minHeight: '400px' }} />
+});
+
+const Specialists = dynamic(() => import("@/components/sections/specialists-slider"), {
+  ssr: false,
+  loading: () => <div style={{ minHeight: '400px' }} />
+});
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDoxMTc2', '/o-nas', GET_SEO_PAGE)

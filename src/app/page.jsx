@@ -1,7 +1,7 @@
+import dynamic from 'next/dynamic';
 import Hero from '@/components/sections/hero-home';
 import Specialisations from '@/components/sections/specialisations';
 import CallToActionTransparent from '@/components/sections/call-to-action-tranparent';
-import Specialists from '@/components/sections/specialists-slider';
 import CallToActionGray from '@/components/sections/call-to-action-gray';
 import ReviewsSlider from '@/components/sections/reviews-slider';
 import StatisticsFlex from '@/components/sections/statistics-flex';
@@ -13,6 +13,11 @@ import StepsToConsultation from '@/components/sections/steps-to-consultation';
 import { generetaSeo } from '../utils/genereate-seo';
 import { GET_SEO_PAGE } from '../queries/page-seo';
 import { Fetch } from '../utils/fetch-query';
+
+const Specialists = dynamic(() => import('@/components/sections/specialists-slider'), {
+  ssr: false,
+  loading: () => <div style={{ minHeight: '400px' }} />
+});
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDo5', '', GET_SEO_PAGE);

@@ -1,5 +1,44 @@
 .wrapper {
 
+  .error {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    color: #991b1b;
+
+    p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    button {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: #991b1b;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: #fee2e2;
+      }
+    }
+  }
+
   h1{
     text-align: center;
     margin-bottom: clamp(20px, calc(48vw/7.68), 64px);

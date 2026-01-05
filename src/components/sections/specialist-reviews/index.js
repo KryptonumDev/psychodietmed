@@ -1,6 +1,11 @@
 import React from "react"
+import dynamic from "next/dynamic"
 import styles from "./styles.module.scss"
-import Slider from "@/components/organisms/specialist-reviews-slider"
+
+const Slider = dynamic(() => import("@/components/organisms/specialist-reviews-slider"), {
+  ssr: false,
+  loading: () => <div style={{ minHeight: '300px' }} />
+});
 
 export default function Reviews({ data }) {
   return (

@@ -1,5 +1,5 @@
 'use client'
-import React, { useCallback, useRef, useState } from "react"
+import React, { useCallback, useRef, useState, useEffect } from "react"
 import styles from './styles.module.scss';
 import Card from "@/components/moleculas/specialist-card";
 import { A11y } from "swiper";
@@ -25,10 +25,32 @@ export default function Specialists({ data, title = 'Wybierz specjalistę' }) {
 
   const [chosenTime, setChosenTime] = useState(null);
   const [popupOpened, setPopupOpened] = useState(false);
+  const [allDates, setAllDates] = useState({});
 
   const [EndShadow, setEndShadow] = useState(true);
   const [StartShadow, setStartShadow] = useState(false);
 
+  // Batch fetch all specialists' dates in one request
+  useEffect(() => {
+    const specialists = data
+      .filter(s => s.proffesional?.specialistId && s.proffesional?.serviceId)
+      .map(s => ({
+        specialistId: s.proffesional.specialistId,
+        serviceId: s.proffesional.serviceId
+      }));
+
+    if (specialists.length === 0) return;
+
+    fetch("/api/get-all-specialists-dates", {
+      method: 'POST',
+      body: JSON.stringify({ specialists })
+    })
+      .then(response => response.json())
+      .then(data => {
+        setAllDates(data);
+      })
+      .catch(err => console.error('Failed to fetch specialists dates:', err));
+  }, [data]);
 
   const sortedPosts = data.sort((a, b) => {
     let aIndex = a.proffesional.index || 0;
@@ -84,7 +106,12 @@ export default function Specialists({ data, title = 'Wybierz specjalistę' }) {
       >
         {sortedPosts?.map((el, index) => (
           <SwiperSlide key={index}>
-            <Card setPopupOpened={setPopupOpened} setChosenTime={setChosenTime} data={el} />
+            <Card 
+              setPopupOpened={setPopupOpened} 
+              setChosenTime={setChosenTime} 
+              data={el} 
+              prefetchedDates={allDates[el.proffesional?.specialistId]}
+            />
           </SwiperSlide>
         ))}
         <div className={`${styles.overlayRight} ${EndShadow ? styles.active : ''}`} />

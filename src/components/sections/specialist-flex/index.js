@@ -1,9 +1,14 @@
 import React from "react"
+import dynamic from "next/dynamic"
 import { Diplom } from "../../../assets/diplom"
 import styles from './styles.module.scss'
 import { Badge } from "../../../assets/badge"
 import { CursorFinger } from "../../../assets/cursor-finger"
-import Slider from "@/components/organisms/certificates-slider"
+
+const Slider = dynamic(() => import("@/components/organisms/certificates-slider"), {
+  ssr: false,
+  loading: () => <div style={{ minHeight: '200px' }} />
+});
 
 export default function Flex({ content, diploms, courses, certificates }) {
   return (

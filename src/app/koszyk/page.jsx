@@ -1,8 +1,13 @@
+import dynamic from "next/dynamic";
 import Content from "@/components/sections/cart";
-import Slider from "@/components/sections/products-slider";
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
 import { Fetch } from "../../utils/fetch-query";
+
+const Slider = dynamic(() => import("@/components/sections/products-slider"), {
+  ssr: false,
+  loading: () => <div style={{ minHeight: '400px' }} />
+});
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDoxODcw', '/koszyk', GET_SEO_PAGE)

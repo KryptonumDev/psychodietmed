@@ -4,7 +4,7 @@ import styles from "./styles.module.scss"
 import { AnimatePresence, motion } from "framer-motion"
 import { Eye } from "../../../assets/eye"
 
-export default function Input({ type = 'text', className = '', rows, placeholder, title, name, register, errors, error = 'To pole jest wymagane' }) {
+export default function Input({ type = 'text', className = '', rows, placeholder, title, name, register, errors, error = 'To pole jest wymagane', disabled = false }) {
 
   const [curType, setCurType] = useState(type)
 
@@ -14,11 +14,11 @@ export default function Input({ type = 'text', className = '', rows, placeholder
         <span>{title}</span>
       )}
       {rows
-        ? <textarea rows={rows} placeholder={placeholder} className={errors[name] ? `${styles.errored} ${styles.input}` : styles.input} {...register} />
+        ? <textarea rows={rows} placeholder={placeholder} className={errors[name] ? `${styles.errored} ${styles.input}` : styles.input} disabled={disabled} {...register} />
         : <div className={styles.inputWrap}>
-          <input type={curType} placeholder={placeholder} className={errors[name] ? `${styles.errored} ${styles.input}` : styles.input} {...register} />
+          <input type={curType} placeholder={placeholder} className={errors[name] ? `${styles.errored} ${styles.input}` : styles.input} disabled={disabled} {...register} />
           {type === 'password' && (
-            <button type="button" onClick={() => { setCurType(curType === 'text' ? type : 'text') }}><Eye /></button>
+            <button type="button" onClick={() => { setCurType(curType === 'text' ? type : 'text') }} disabled={disabled}><Eye /></button>
           )}
         </div>
       }

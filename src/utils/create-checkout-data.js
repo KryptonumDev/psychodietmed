@@ -1,5 +1,13 @@
 import { v4 } from 'uuid';
 
+// WordPress doesn't allow certain characters in usernames (like +)
+// This function sanitizes the email to create a valid username
+const sanitizeUsername = (email) => {
+  if (!email) return email;
+  // Replace + with _ and remove any other invalid characters
+  return email.toLowerCase().replace(/\+/g, '_').replace(/[^a-z0-9_@.-]/g, '');
+};
+
 export const createCheckoutData = (order, registred) => {
   // Set the billing Data to shipping, if applicable.
   const billingData = order.billingDifferentThanShipping ? order.billing : order.shipping;
@@ -55,7 +63,7 @@ export const createCheckoutData = (order, registred) => {
 
   if (order.needAccount && !registred) {
     checkoutData.account = {
-      username: billingData?.email,
+      username: sanitizeUsername(billingData?.email),
       password: v4(),
     }
   }

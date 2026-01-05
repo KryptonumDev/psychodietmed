@@ -1,13 +1,18 @@
+import dynamic from 'next/dynamic';
 import { notFound } from 'next/navigation';
 import Hero from '@/components/sections/hero-specialist';
 import Flex from '@/components/sections/specialist-flex';
 import FAQ from '@/components/sections/faq';
 import Reviews from '@/components/sections/specialist-reviews';
-import Specialists from '@/components/sections/specialists-slider';
 import { GET_SEO_SPECIALIST } from '../../../queries/specialist-seo';
 import { generetaSeo } from '../../../utils/genereate-seo';
 import Breadcrumbs from '@/components/sections/breadcrumbs';
 import { Fetch } from '../../../utils/fetch-query';
+
+const Specialists = dynamic(() => import('@/components/sections/specialists-slider'), {
+  ssr: false,
+  loading: () => <div style={{ minHeight: '400px' }} />
+});
 
 export async function generateMetadata({ params }) {
   return await generetaSeo(params.specjalista, '/specjalisci', GET_SEO_SPECIALIST, 'post');
