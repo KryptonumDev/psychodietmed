@@ -17,43 +17,33 @@ const days = [
   'Sob.',
 ]
 
-export default function Card({ setPopupOpened, setChosenTime, data }) {
-  const { specialisations, proffesional, slug, title } = data
-  const fetchData = () => {
-    fetch("/api/get-avaible-dates", {
-      method: 'POST',
-      body: JSON.stringify({
-        employeId: proffesional.specialistId,
-        serviceId: proffesional.serviceId
-      })
-    })
-      .then(response => response.json())
-      .then(({ service, dates: data }) => {
-        let arr = null
-        for (const [key, value] of Object.entries(data)) {
-          if (value.length > 0) {
-            arr = {
-              date: dayjs(key).locale('pl'),
-              hours: value
-            }
-            break
-          }
-        }
-        setService(service)
-        if (!arr) {
-          setDate({ date: null, hours: null })
-        } else {
-          setDate(arr)
-        }
-      })
+// Helper to process dates data
+const processDateData = (datesData) => {
+  if (!datesData) return null;
+  for (const [key, value] of Object.entries(datesData)) {
+    if (value && value.length > 0) {
+      return {
+        date: dayjs(key).locale('pl'),
+        hours: value
+      }
+    }
   }
+  return { date: null, hours: null }
+}
 
-  const [service, setService] = useState()
-  const [date, setDate] = useState()
+export default function Card({ setPopupOpened, setChosenTime, data, prefetchedDates }) {
+  const { specialisations, proffesional, slug, title } = data
 
+  const [service, setService] = useState(prefetchedDates?.service || null)
+  const [date, setDate] = useState(() => processDateData(prefetchedDates?.dates))
+
+  // Use prefetched data when it becomes available
   useEffect(() => {
-    fetchData()
-  }, [])
+    if (prefetchedDates) {
+      setService(prefetchedDates.service)
+      setDate(processDateData(prefetchedDates.dates))
+    }
+  }, [prefetchedDates])
 
   const clickHandler = () => {
     setChosenTime({

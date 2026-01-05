@@ -22,13 +22,13 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
-  const [loginStatus, setLoginStatus] = useState({ sending: false });
+  const [loginStatus, setLoginStatus] = useState({ sending: false, success: false });
   const [renewPass, setRenewPass] = useState(false);
   const [clearTried, setClearTried] = useState(false);
   const [input, setInput] = useState(null);
 
   const loginSumbit = (data) => {
-    setLoginStatus({ sending: true });
+    setLoginStatus({ sending: true, success: false, error: null });
     const Input = {
       clientMutationId: v4(),
       username: data.email,
@@ -39,7 +39,7 @@ export default function Login() {
   };
 
   const resetSubmit = (data) => {
-    setLoginStatus({ sending: true });
+    setLoginStatus({ sending: true, success: false, error: null });
     const Input = {
       clientMutationId: v4(),
       username: data.email,
@@ -49,22 +49,26 @@ export default function Login() {
 
   const [login, { loading: loginLoading }] = useMutation(LOGIN, {
     ignoreResults: true,
-    onCompleted: (res) => {
-      setCookie("authToken", res.login.authToken);
+    onCompleted: async (res) => {
+      setLoginStatus({ sending: false, success: true, error: null });
+      await setCookie("authToken", res.login.authToken);
       localStorage.setItem("authToken", res.login.authToken);
-      push("/moje-kursy");
-      setLoginStatus({ sending: false });
+      // Small delay to show success message before redirect
+      setTimeout(() => {
+        push("/moje-kursy");
+      }, 1000);
     },
     onError: (error) => {
       if (error.message === "invalid_email") {
-        setLoginStatus({ sending: false, error: "Nieprawidłowy adres e-mail" });
+        setLoginStatus({ sending: false, success: false, error: "Nieprawidłowy adres e-mail" });
       } else if (error.message === "invalid_password") {
-        setLoginStatus({ sending: false, error: "Nieprawidłowe hasło" });
+        setLoginStatus({ sending: false, success: false, error: "Nieprawidłowe hasło" });
       } else {
         console.error(error);
         if (clearTried) {
           setLoginStatus({
             sending: false,
+            success: false,
             error: `Błąd serwera, spóbuj póżniej lub skontaktuj się z obsługą sklepu. Błąd do przekazania dla obsługi - ${error.message}`,
           });
         } else {
@@ -81,20 +85,27 @@ export default function Login() {
 
   const [reset, { loading: resetLoading }] = useMutation(SEND_RESET, {
     onCompleted: (res) => {
-      setRenewPass(false);
-      setLoginStatus({ sending: false });
+      setLoginStatus({ sending: false, success: true, error: null });
+      // Keep the reset form visible to show success message, then switch after delay
+      setTimeout(() => {
+        setRenewPass(false);
+        setLoginStatus({ sending: false, success: false, error: null });
+      }, 3000);
     },
     onError: () => {
       setLoginStatus({
         sending: false,
+        success: false,
         error: "Coś poszło nie tak. Spróbuj ponownie później.",
       });
     },
   });
 
+  const isLoading = loginLoading || resetLoading || loginStatus.sending;
+
   return (
     <section className={styles.wrapper}>
-      <Loader show={loginLoading || resetLoading} />
+      <Loader show={isLoading} />
       {renewPass ? (
         <>
           <h2>Nie pamiętasz hasła?</h2>
@@ -112,29 +123,42 @@ export default function Login() {
               name="email"
               title="E-mail"
               placeholder="E-mail"
+              disabled={isLoading}
             />
             <AnimatePresence mode="wait">
               {loginStatus.error && (
                 <motion.p
                   className={styles.error}
-                  initial={{ height: 0 }}
-                  animate={{ height: "auto" }}
-                  exit={{ height: 0 }}
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
                 >
                   {loginStatus.error}
                 </motion.p>
               )}
+              {loginStatus.success && (
+                <motion.p
+                  className={styles.success}
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                >
+                  Link do resetowania hasła został wysłany na Twój adres e-mail.
+                </motion.p>
+              )}
             </AnimatePresence>
-            <Button type="submit" disabled={loginStatus.sending}>
-              Zresetuj hasło
+            <Button type="submit" disabled={isLoading}>
+              {isLoading ? "Wysyłanie..." : "Zresetuj hasło"}
             </Button>
           </form>
           <button
             onClick={() => {
               setRenewPass(false);
+              setLoginStatus({ sending: false, success: false, error: null });
               window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
             }}
             className={styles.button}
+            disabled={isLoading}
           >
             Zaloguj się
           </button>
@@ -152,6 +176,7 @@ export default function Login() {
               name="email"
               title="E-mail"
               placeholder="E-mail"
+              disabled={isLoading}
             />
             <Input
               register={register("password", { required: true, minLength: 12 })}
@@ -160,29 +185,42 @@ export default function Login() {
               title="Hasło"
               placeholder="Hasło"
               type="password"
+              disabled={isLoading}
             />
             <AnimatePresence mode="wait">
               {loginStatus.error && (
                 <motion.p
                   className={styles.error}
-                  initial={{ height: 0 }}
-                  animate={{ height: "auto" }}
-                  exit={{ height: 0 }}
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
                 >
                   {loginStatus.error}
                 </motion.p>
               )}
+              {loginStatus.success && (
+                <motion.p
+                  className={styles.success}
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                >
+                  Logowanie pomyślne! Przekierowywanie...
+                </motion.p>
+              )}
             </AnimatePresence>
-            <Button type="submit" disabled={loginStatus.sending}>
-              Zaloguj się
+            <Button type="submit" disabled={isLoading}>
+              {isLoading ? "Logowanie..." : "Zaloguj się"}
             </Button>
           </form>
           <button
             onClick={() => {
               setRenewPass(true);
+              setLoginStatus({ sending: false, success: false, error: null });
               window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
             }}
             className={styles.button}
+            disabled={isLoading}
           >
             Nie pamiętam hasła
           </button>

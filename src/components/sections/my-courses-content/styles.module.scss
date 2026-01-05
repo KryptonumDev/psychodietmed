@@ -12,4 +12,21 @@
       grid-template-columns: 1fr;
     }
   }
+
+  .empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: clamp(32px, calc(48vw/7.68), 64px) 24px;
+    text-align: center;
+    background: #f8f8f8;
+    border-radius: 8px;
+
+    p {
+      font-size: clamp(16px, calc(18vw/7.68), 20px);
+      color: #666;
+    }
+  }
 }

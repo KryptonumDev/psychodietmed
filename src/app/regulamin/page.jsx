@@ -1,9 +1,14 @@
-import Slider from "@/components/sections/products-slider";
+import dynamic from "next/dynamic";
 import Hero from "@/components/sections/hero-statute";
 import { generetaSeo } from "../../utils/genereate-seo";
 import { GET_SEO_PAGE } from "../../queries/page-seo";
 import Breadcrumbs from "@/components/sections/breadcrumbs";
 import { Fetch } from "../../utils/fetch-query";
+
+const Slider = dynamic(() => import("@/components/sections/products-slider"), {
+  ssr: false,
+  loading: () => <div style={{ minHeight: '400px' }} />
+});
 
 export async function generateMetadata() {
   return await generetaSeo('cG9zdDoxNjMw', '/regulamin', GET_SEO_PAGE)

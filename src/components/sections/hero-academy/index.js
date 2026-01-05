@@ -18,7 +18,6 @@ export default function Hero({ data: { image, content, grid } }) {
                 height={'28'}
                 quality={100}
                 aspectRatio={true}
-                loading="eager"
               />
               <p>{item.text}</p>
             </div>
@@ -33,7 +32,8 @@ export default function Hero({ data: { image, content, grid } }) {
         height={image.mediaDetails.height}
         quality={100}
         aspectRatio={true}
-        loading="eager"
+        priority
+        sizes="(max-width: 768px) 100vw, 50vw"
       />
     </section>
   )
