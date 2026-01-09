@@ -1,0 +1,227 @@
+.wrapper {
+  .header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto clamp(36px, calc(56vw/7.68), 72px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(16px, calc(24vw/7.68), 28px);
+  }
+
+  .title {
+    font-size: clamp(32rem, calc(42vw/7.68), 48rem);
+    color: var(--primary-800);
+
+    strong, em {
+      font-style: normal;
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 2px;
+        left: 0;
+        right: 0;
+        height: 8px;
+        background: var(--secondary-500);
+        opacity: 0.4;
+        z-index: -1;
+        border-radius: 4px;
+      }
+    }
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(32vw/3.7), 32rem);
+    }
+  }
+
+  .text {
+    font-size: clamp(18rem, calc(22vw/7.68), 24rem);
+    line-height: 1.6;
+    color: var(--neutrals-800);
+
+    p {
+      font-size: inherit;
+    }
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(18vw/3.7), 18rem);
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, calc(28vw/7.68), 32px);
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.card {
+  /* Theme variables - defaults */
+  --card-accent: var(--primary-500);
+  --card-accent-light: var(--primary-50);
+  --card-accent-bg: #f8fafc;
+
+  &.themeMint {
+    --card-accent: var(--method-pdw-primary);
+    --card-accent-light: var(--method-pdw-light);
+    --card-accent-bg: var(--method-pdw-bg);
+  }
+
+  &.themeYellow {
+    --card-accent: var(--method-pdr-primary);
+    --card-accent-light: var(--method-pdr-light);
+    --card-accent-bg: var(--method-pdr-bg);
+  }
+
+  &.themePurple {
+    --card-accent: var(--method-cbt-primary);
+    --card-accent-light: var(--method-cbt-light);
+    --card-accent-bg: var(--method-cbt-bg);
+  }
+
+  &.themeBlue {
+    --card-accent: var(--primary-500);
+    --card-accent-light: var(--primary-50);
+    --card-accent-bg: #f1f6fb;
+  }
+
+  position: relative;
+  display: block;
+  text-decoration: none;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.4s var(--easing), box-shadow 0.4s var(--easing);
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 8px 12px 30px rgba(0, 0, 0, 0.12);
+
+    .cardBg {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .cardLink {
+      svg {
+        transform: translateX(6px);
+      }
+    }
+
+    .iconWrapper {
+      transform: scale(1.1) rotate(5deg);
+    }
+  }
+
+  .cardInner {
+    position: relative;
+    z-index: 1;
+    padding: clamp(28px, calc(36vw/7.68), 40px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(16px, calc(20vw/7.68), 20px);
+    min-height: 280px;
+  }
+
+  .cardBg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--card-accent-bg) 0%, var(--card-accent-light) 100%);
+    transform: scale(0);
+    transform-origin: bottom right;
+    opacity: 0;
+    transition: transform 0.5s var(--easing), opacity 0.4s var(--easing);
+    border-radius: 20px;
+    z-index: 0;
+  }
+
+  .iconWrapper {
+    width: 72px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-accent-light);
+    border-radius: 16px;
+    transition: transform 0.4s var(--easing);
+
+    @media (max-width: 640px) {
+      width: 56px;
+      height: 56px;
+    }
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+
+    @media (max-width: 640px) {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  .cardTitle {
+    font-size: clamp(22rem, calc(26vw/7.68), 28rem);
+    font-weight: 600;
+    color: var(--primary-800);
+    line-height: 1.3;
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(22vw/3.7), 22rem);
+    }
+  }
+
+  .cardDescription {
+    font-size: clamp(16rem, calc(18vw/7.68), 18rem);
+    line-height: 1.6;
+    color: var(--neutrals-800);
+    flex-grow: 1;
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+    }
+  }
+
+  .cardLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: clamp(16rem, calc(18vw/7.68), 18rem);
+    font-weight: 600;
+    color: var(--primary-800);
+    margin-top: auto;
+
+    svg {
+      transition: transform 0.3s var(--easing);
+    }
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+    }
+  }
+
+  /* Border accent on left */
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--card-accent);
+    z-index: 2;
+  }
+}
+

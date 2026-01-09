@@ -1,0 +1,16 @@
+.wrapper {
+  /* Default theme: PDW (Mint) */
+  --method-accent: var(--method-pdw-primary);
+  --method-accent-light: var(--method-pdw-light);
+  --method-accent-bg: var(--method-pdw-bg);
+
+  &.themePdr {
+    --method-accent: var(--method-pdr-primary);
+    --method-accent-light: var(--method-pdr-light);
+    --method-accent-bg: var(--method-pdr-bg);
+  }
+
+  /* Slightly reduced gap for landing pages */
+  grid-gap: clamp(64px, calc(96vw/7.68), 128px);
+}
+

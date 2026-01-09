@@ -28,6 +28,21 @@ html {
   --primary-700: #3A69A0;
   --primary-800: #194574;
   --easing: cubic-bezier(0, .8, 0.62, 1);
+
+  /* Method Colors - PsychoDietWay (Mint) */
+  --method-pdw-primary: #7fc9b4;
+  --method-pdw-light: #c4f7e6;
+  --method-pdw-bg: #f0faf7;
+
+  /* Method Colors - PsychoDietRecovery (Yellow) */
+  --method-pdr-primary: #f4c237;
+  --method-pdr-light: #fcdb70;
+  --method-pdr-bg: #fff9e6;
+
+  /* Method Colors - CBT (Purple) */
+  --method-cbt-primary: #bbb8e3;
+  --method-cbt-light: #dcdcf4;
+  --method-cbt-bg: #f5f5fc;
 }
 
 body {

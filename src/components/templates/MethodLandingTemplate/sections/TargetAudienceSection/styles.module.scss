@@ -1,0 +1,122 @@
+.wrapper {
+  --target-accent: var(--method-pdw-primary);
+  --target-accent-light: var(--method-pdw-light);
+
+  &.pdr {
+    --target-accent: var(--method-pdr-primary);
+    --target-accent-light: var(--method-pdr-light);
+  }
+
+  h2 {
+    color: var(--primary-800);
+    text-align: center;
+    font-size: clamp(28rem, calc(36vw/7.68), 48rem);
+
+    em {
+      font-style: normal;
+      color: var(--target-accent);
+    }
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(28vw/3.7), 28rem);
+    }
+  }
+
+  .text {
+    text-align: center;
+    margin: clamp(16px, calc(28vw/7.68), 28px) auto clamp(32px, calc(48vw/7.68), 48px) auto;
+    max-width: 870px;
+    font-size: clamp(16rem, calc(18vw/7.68), 20rem);
+    line-height: 1.6;
+    color: var(--neutrals-700);
+
+    p {
+      font-size: inherit;
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(12px, calc(16vw/7.68), 20px);
+
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
+
+    .item {
+      padding: clamp(20px, calc(28vw/7.68), 36px) clamp(16px, calc(20vw/7.68), 24px);
+      border-radius: 20px;
+      box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      text-align: center;
+      min-height: clamp(120px, calc(160vw/7.68), 180px);
+
+      img {
+        width: clamp(36px, calc(48vw/7.68), 56px);
+        height: auto;
+        aspect-ratio: 1;
+        object-fit: contain;
+      }
+
+      p {
+        font-size: clamp(14rem, calc(18vw / 7.68), 20rem);
+        font-weight: 500;
+        line-height: 1.4;
+        margin: 0;
+
+        @media (max-width: 370px) {
+          font-size: clamp(0rem, calc(14vw / 3.7), 14rem);
+        }
+      }
+
+      /* Theme-aware tile colors */
+      &:nth-child(1) {
+        background: var(--target-accent-light);
+      }
+
+      &:nth-child(2) {
+        background: #F1F6FB;
+      }
+
+      &:nth-child(3) {
+        background: var(--primary-800);
+        p {
+          color: #FFFFFF;
+        }
+      }
+
+      &:nth-child(4) {
+        background: #ffffff;
+      }
+
+      /* If more than 4 tiles, cycle colors */
+      &:nth-child(5) {
+        background: #ffffff;
+      }
+
+      &:nth-child(6) {
+        background: var(--target-accent-light);
+      }
+
+      &:nth-child(7) {
+        background: var(--primary-800);
+        p {
+          color: #FFFFFF;
+        }
+      }
+
+      &:nth-child(8) {
+        background: #F1F6FB;
+      }
+    }
+  }
+}
