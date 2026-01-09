@@ -1,0 +1,116 @@
+.cta {
+  --cta-accent: var(--method-pdw-primary);
+  --cta-accent-light: var(--method-pdw-light);
+  --cta-accent-bg: var(--method-pdw-bg);
+
+  &.pdr {
+    --cta-accent: var(--method-pdr-primary);
+    --cta-accent-light: var(--method-pdr-light);
+    --cta-accent-bg: var(--method-pdr-bg);
+  }
+
+  .inner {
+    background: linear-gradient(135deg, var(--cta-accent-bg) 0%, var(--cta-accent-light) 100%);
+    border-radius: 24px;
+    padding: clamp(40px, calc(64vw/7.68), 80px);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(24px, calc(36vw/7.68), 40px);
+    position: relative;
+    overflow: hidden;
+
+    // Decorative circle
+    &::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 60%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--cta-accent);
+      opacity: 0.1;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 40%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--cta-accent);
+      opacity: 0.08;
+    }
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+
+    h2, h3 {
+      font-size: clamp(28rem, calc(40vw/7.68), 48rem);
+      color: var(--primary-800);
+      margin-bottom: clamp(16px, calc(20vw/7.68), 24px);
+
+      @media (max-width: 370px) {
+        font-size: clamp(0rem, calc(28vw/3.7), 28rem);
+      }
+    }
+
+    p {
+      font-size: clamp(18rem, calc(22vw/7.68), 24rem);
+      line-height: 1.6;
+      color: var(--neutrals-800);
+
+      @media (max-width: 370px) {
+        font-size: clamp(0rem, calc(18vw/3.7), 18rem);
+      }
+    }
+
+    strong {
+      color: var(--primary-800);
+    }
+  }
+
+  .buttons {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(16px, calc(20vw/7.68), 24px);
+    justify-content: center;
+  }
+
+  .primaryButton {
+    background-color: var(--cta-accent);
+    font-size: clamp(18rem, calc(20vw/7.68), 22rem);
+    padding: clamp(14px, calc(16vw/7.68), 18px) clamp(32px, calc(40vw/7.68), 48px);
+
+    &::after {
+      background-color: var(--primary-800);
+    }
+
+    &:hover {
+      color: #fff;
+    }
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(18vw/3.7), 18rem);
+    }
+  }
+
+  .secondaryButton {
+    font-size: clamp(16rem, calc(18vw/7.68), 20rem);
+    color: var(--primary-800);
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+    }
+  }
+}
+

@@ -1,0 +1,42 @@
+.wrapper {
+  padding: clamp(60px, 8vw, 100px) 0;
+  background-color: white;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 4vw, 40px);
+}
+
+/* Theme-specific styling for the section header */
+.themePdw {
+  h2 {
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: var(--method-pdw-primary, #7fc9b4);
+      border-radius: 50%;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+  }
+}
+
+.themePdr {
+  h2 {
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: var(--method-pdr-primary, #f4c237);
+      border-radius: 50%;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+  }
+}
+

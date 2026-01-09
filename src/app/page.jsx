@@ -1,6 +1,8 @@
 import dynamic from 'next/dynamic';
 import Hero from '@/components/sections/hero-home';
-import Specialisations from '@/components/sections/specialisations';
+import MethodsGrid from '@/components/sections/methods-grid';
+import ResearchBanner from '@/components/sections/research-banner';
+// import Specialisations from '@/components/sections/specialisations'; // HIDDEN per client request
 import CallToActionTransparent from '@/components/sections/call-to-action-tranparent';
 import CallToActionGray from '@/components/sections/call-to-action-gray';
 import ReviewsSlider from '@/components/sections/reviews-slider';
@@ -8,7 +10,7 @@ import StatisticsFlex from '@/components/sections/statistics-flex';
 import Citate from '@/components/sections/citate';
 import OtherPosts from '@/components/sections/other-posts';
 import Newsletter from '@/components/sections/newsletter';
-import StepsToConsultation from '@/components/sections/steps-to-consultation';
+// import StepsToConsultation from '@/components/sections/steps-to-consultation'; // HIDDEN per client request
 // import Academy from "@/components/sections/academy";
 import { generetaSeo } from '../utils/genereate-seo';
 import { GET_SEO_PAGE } from '../queries/page-seo';
@@ -28,6 +30,8 @@ export default async function Home() {
     academy,
     compare,
     hero,
+    methods,
+    researchBanner,
     specialisationsSection,
     activities,
     cta,
@@ -57,17 +61,46 @@ export default async function Home() {
 
   return (
     <main className="overflow" id="main">
+      {/* 1. Hero + Logos */}
       <Hero data={hero} />
+      
+      {/* 2. Nasze Metody (PDW, PDR, CBT) */}
+      {methods && <MethodsGrid data={methods} />}
+      
+      {/* 3. Baner "Badania pokazują..." */}
+      {researchBanner && <ResearchBanner data={researchBanner} />}
+      
+      {/* 4. Specialists Slider */}
       <Specialists data={specialists} />
+      
+      {/* 5. CTA */}
       <CallToActionTransparent data={cta} />
-      <Specialisations data={specialisationsSection} activities={activities} />
-      <StepsToConsultation data={stepsToConsultation} specialists={specialists} />
+      
+      {/* HIDDEN: Specialisations ("W czym możemy pomóc?") */}
+      {/* <Specialisations data={specialisationsSection} activities={activities} /> */}
+      
+      {/* HIDDEN: StepsToConsultation ("Jak umówić konsultację?") */}
+      {/* <StepsToConsultation data={stepsToConsultation} specialists={specialists} /> */}
+      
+      {/* 6. Reviews */}
       <ReviewsSlider data={locReviews} />
+      
+      {/* 7. CTA Gray */}
       <CallToActionGray data={ctaGray} />
+      
+      {/* 8. Statistics */}
       <StatisticsFlex data={statistics} />
+      
+      {/* 9. Citate */}
       <Citate data={citate} />
+      
+      {/* HIDDEN: Academy */}
       {/* <Academy data={academy} /> */}
+      
+      {/* 10. Blog Posts */}
       <OtherPosts data={posts} title={blog.title} text={blog.text} />
+      
+      {/* 11. Newsletter */}
       <Newsletter specialist={false} data={newsletter} />
     </main>
   );
@@ -288,6 +321,35 @@ async function getData() {
               }
             }
           }
+          methods : sekcjaMetody {
+            title
+            text
+            methods {
+              title
+              themeColor
+              description
+              icon {
+                altText
+                mediaItemUrl
+                mediaDetails {
+                  height
+                  width
+                }
+              }
+              link {
+                url
+                title
+              }
+            }
+          }
+          researchBanner : sekcjaBanerBadania {
+            content
+            style
+            link {
+              url
+              title
+            }
+          }
           specialisations : sekcjaZSiatkaSpecjalizacjiKopia {
             text
             title
@@ -460,6 +522,8 @@ async function getData() {
 
   return {
     hero: homepage.hero,
+    methods: homepage.methods,
+    researchBanner: homepage.researchBanner,
     specialisationsSection: homepage.specialisations,
     cta: homepage.cta,
     stepsToConsultation: global.global.bookGlobal,
