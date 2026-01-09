@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import Hero from '@/components/sections/hero-home';
-import MethodsGrid from '@/components/sections/methods-grid';
-import ResearchBanner from '@/components/sections/research-banner';
+// import MethodsGrid from '@/components/sections/methods-grid'; // TODO: Enable after ACF is set up
+// import ResearchBanner from '@/components/sections/research-banner'; // TODO: Enable after ACF is set up
 // import Specialisations from '@/components/sections/specialisations'; // HIDDEN per client request
 import CallToActionTransparent from '@/components/sections/call-to-action-tranparent';
 import CallToActionGray from '@/components/sections/call-to-action-gray';
@@ -30,8 +30,8 @@ export default async function Home() {
     academy,
     compare,
     hero,
-    methods,
-    researchBanner,
+    // methods, // TODO: Enable after ACF is set up
+    // researchBanner, // TODO: Enable after ACF is set up
     specialisationsSection,
     activities,
     cta,
@@ -64,11 +64,13 @@ export default async function Home() {
       {/* 1. Hero + Logos */}
       <Hero data={hero} />
       
+      {/* TODO: Enable after ACF is set up */}
       {/* 2. Nasze Metody (PDW, PDR, CBT) */}
-      {methods && <MethodsGrid data={methods} />}
+      {/* {methods && <MethodsGrid data={methods} />} */}
       
+      {/* TODO: Enable after ACF is set up */}
       {/* 3. Baner "Badania pokazują..." */}
-      {researchBanner && <ResearchBanner data={researchBanner} />}
+      {/* {researchBanner && <ResearchBanner data={researchBanner} />} */}
       
       {/* 4. Specialists Slider */}
       <Specialists data={specialists} />
@@ -319,35 +321,6 @@ async function getData() {
                   width
                 }
               }
-            }
-          }
-          methods : sekcjaMetody {
-            title
-            text
-            methods {
-              title
-              themeColor
-              description
-              icon {
-                altText
-                mediaItemUrl
-                mediaDetails {
-                  height
-                  width
-                }
-              }
-              link {
-                url
-                title
-              }
-            }
-          }
-          researchBanner : sekcjaBanerBadania {
-            content
-            style
-            link {
-              url
-              title
             }
           }
           specialisations : sekcjaZSiatkaSpecjalizacjiKopia {
