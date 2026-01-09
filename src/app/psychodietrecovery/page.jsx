@@ -232,7 +232,7 @@ async function getData() {
           }
         }
       `,
-      revalidate: 600,
+      revalidate: 0, // No cache for dev - change to 600 for production
       variables: {
         uri: SLUG,
       },
