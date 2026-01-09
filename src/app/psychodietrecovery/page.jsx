@@ -4,6 +4,10 @@ import { generetaSeo } from '@/utils/genereate-seo';
 import { GET_SEO_METHOD_LANDING } from '@/queries/method-landing-seo';
 import MethodLandingTemplate from '@/components/templates/MethodLandingTemplate';
 
+// Disable all caching for dev - remove for production
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 const SLUG = 'psychodietrecovery';
 const THEME = 'pdr';
 
