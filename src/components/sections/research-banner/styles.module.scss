@@ -2,37 +2,45 @@
   /* Full-width background for visual separation */
   position: relative;
   overflow: hidden;
+  /* Border radius */
+  border-radius: clamp(24px, calc(40vw/7.68), 48px);
+  margin: 0 clamp(16px, calc(24vw/7.68), 32px);
   
-  /* Default: Primary Blue (Granat) with white text */
-  --banner-bg: var(--primary-800);
+  /* Default: Uplifting teal/mint gradient */
+  --banner-bg: linear-gradient(135deg, #0d9488 0%, #14b8a6 50%, #2dd4bf 100%);
   --banner-text: #ffffff;
-  --banner-accent: var(--secondary-500);
-  --banner-decor: rgba(255, 255, 255, 0.08);
+  --banner-accent: #fef3c7;
+  --banner-decor: rgba(255, 255, 255, 0.12);
 
   &.styleHighlight {
-    --banner-bg: var(--primary-800);
+    --banner-bg: linear-gradient(135deg, #0d9488 0%, #14b8a6 50%, #2dd4bf 100%);
     --banner-text: #ffffff;
-    --banner-accent: var(--secondary-400);
-    --banner-decor: rgba(255, 255, 255, 0.08);
+    --banner-accent: #fef3c7;
+    --banner-decor: rgba(255, 255, 255, 0.12);
   }
 
   &.styleSubtle {
-    --banner-bg: #f5f7fa;
+    --banner-bg: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
     --banner-text: var(--primary-800);
-    --banner-accent: var(--primary-500);
-    --banner-decor: rgba(0, 0, 0, 0.03);
+    --banner-accent: #0d9488;
+    --banner-decor: rgba(13, 148, 136, 0.08);
   }
 
   &.styleAccent {
-    --banner-bg: linear-gradient(135deg, var(--primary-700) 0%, var(--primary-900) 100%);
+    --banner-bg: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a78bfa 100%);
     --banner-text: #ffffff;
-    --banner-accent: var(--secondary-400);
+    --banner-accent: #fef3c7;
     --banner-decor: rgba(255, 255, 255, 0.1);
   }
 
   background: var(--banner-bg);
   /* Generous vertical padding */
-  padding: clamp(64px, calc(96vw/7.68), 120px) 0;
+  padding: clamp(56px, calc(88vw/7.68), 100px) 0;
+
+  @media (max-width: 768px) {
+    margin: 0;
+    border-radius: 0;
+  }
 }
 
 /* Background decorative pattern */
@@ -53,15 +61,15 @@
 .circle1 {
   width: clamp(200px, 30vw, 400px);
   height: clamp(200px, 30vw, 400px);
-  top: -10%;
-  left: -5%;
+  top: -15%;
+  left: -8%;
 }
 
 .circle2 {
   width: clamp(150px, 25vw, 350px);
   height: clamp(150px, 25vw, 350px);
-  bottom: -15%;
-  right: -3%;
+  bottom: -20%;
+  right: -5%;
 }
 
 .container {
@@ -77,42 +85,30 @@
   gap: clamp(24px, calc(36vw/7.68), 40px);
 }
 
-/* Quote icon decorator */
-.quoteIcon {
-  color: var(--banner-accent);
-  opacity: 0.6;
-  margin-bottom: -8px;
-
-  svg {
-    width: clamp(36px, calc(48vw/7.68), 56px);
-    height: clamp(36px, calc(48vw/7.68), 56px);
-  }
-}
-
 /* Main content styling */
 .content {
   /* Larger text for statement impact */
   h2, h3 {
-    font-size: clamp(28rem, calc(40vw/7.68), 48rem);
+    font-size: clamp(26rem, calc(38vw/7.68), 44rem);
     font-weight: 600;
     line-height: 1.35;
     color: var(--banner-text);
     margin-bottom: clamp(16px, calc(24vw/7.68), 28px);
 
     @media (max-width: 370px) {
-      font-size: clamp(0rem, calc(28vw/3.7), 28rem);
+      font-size: clamp(0rem, calc(26vw/3.7), 26rem);
     }
   }
 
   p {
-    font-size: clamp(20rem, calc(26vw/7.68), 30rem);
+    font-size: clamp(18rem, calc(24vw/7.68), 28rem);
     font-weight: 400;
     line-height: 1.6;
     color: var(--banner-text);
     opacity: 0.95;
 
     @media (max-width: 370px) {
-      font-size: clamp(0rem, calc(20vw/3.7), 20rem);
+      font-size: clamp(0rem, calc(18vw/3.7), 18rem);
     }
 
     &:not(:last-child) {
@@ -155,7 +151,7 @@
 /* CTA Button - inverted colors for dark background */
 .button {
   background: var(--banner-accent) !important;
-  color: var(--primary-900) !important;
+  color: #0d9488 !important;
   border-color: var(--banner-accent) !important;
   font-weight: 600 !important;
   
@@ -167,24 +163,26 @@
 
   /* For subtle style (light bg) */
   .styleSubtle & {
-    background: var(--primary-800) !important;
+    background: #0d9488 !important;
     color: #fff !important;
-    border-color: var(--primary-800) !important;
+    border-color: #0d9488 !important;
 
     &:hover {
-      background: var(--primary-700) !important;
-      border-color: var(--primary-700) !important;
+      background: #0f766e !important;
+      border-color: #0f766e !important;
+    }
+  }
+
+  /* For accent style (purple) */
+  .styleAccent & {
+    background: var(--banner-accent) !important;
+    color: #7c3aed !important;
+    border-color: var(--banner-accent) !important;
+
+    &:hover {
+      background: #fff !important;
+      color: #7c3aed !important;
+      border-color: #fff !important;
     }
   }
 }
-
-/* Decorative line at bottom */
-.decorLine {
-  width: 80px;
-  height: 3px;
-  background: var(--banner-accent);
-  border-radius: 2px;
-  opacity: 0.5;
-  margin-top: 8px;
-}
-

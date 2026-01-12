@@ -8,13 +8,8 @@ import styles from './styles.module.scss';
  * Features carousel on mobile, grid on desktop, subtle hover effects
  */
 export default function MethodsGrid({ data }) {
-  if (!data) return null;
-
-  const { title, text, methods } = data;
-
-  if (!methods?.length) return null;
-
   const sliderRef = useRef(null);
+  const [mounted, setMounted] = useState(false);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
@@ -26,6 +21,7 @@ export default function MethodsGrid({ data }) {
   };
 
   useEffect(() => {
+    setMounted(true);
     checkScroll();
     const slider = sliderRef.current;
     if (slider) {
@@ -38,7 +34,7 @@ export default function MethodsGrid({ data }) {
         window.removeEventListener('resize', checkScroll);
       }
     };
-  }, [methods]);
+  }, []);
 
   const scroll = (direction) => {
     if (!sliderRef.current) return;
@@ -49,6 +45,12 @@ export default function MethodsGrid({ data }) {
       behavior: 'smooth'
     });
   };
+
+  if (!data) return null;
+
+  const { title, text, methods } = data;
+
+  if (!methods?.length) return null;
 
   return (
     <section className={styles.wrapper}>
@@ -69,8 +71,8 @@ export default function MethodsGrid({ data }) {
         </div>
 
         <div className={styles.sliderWrapper}>
-          {/* Navigation arrows - only show if scrollable */}
-          {canScrollLeft && (
+          {/* Navigation arrows - only show after mount and if scrollable */}
+          {mounted && canScrollLeft && (
             <button 
               className={`${styles.navButton} ${styles.navLeft}`}
               onClick={() => scroll('left')}
@@ -82,7 +84,7 @@ export default function MethodsGrid({ data }) {
             </button>
           )}
           
-          {canScrollRight && (
+          {mounted && canScrollRight && (
             <button 
               className={`${styles.navButton} ${styles.navRight}`}
               onClick={() => scroll('right')}
@@ -96,7 +98,7 @@ export default function MethodsGrid({ data }) {
 
           <div className={styles.slider} ref={sliderRef}>
             {methods.map((method, index) => (
-              <MethodCard key={index} method={method} index={index} />
+              <MethodCard key={index} method={method} />
             ))}
           </div>
         </div>
@@ -105,7 +107,7 @@ export default function MethodsGrid({ data }) {
   );
 }
 
-function MethodCard({ method, index }) {
+function MethodCard({ method }) {
   const { title, description, icon, link, themeColor } = method;
   
   // Map theme colors to CSS class

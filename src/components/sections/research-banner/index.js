@@ -28,20 +28,6 @@ export default function ResearchBanner({ data }) {
       </div>
 
       <div className={styles.container}>
-        {/* Decorative quote icon */}
-        <div className={styles.quoteIcon} aria-hidden="true">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-            <path 
-              d="M14 24H8C8 15.163 15.163 8 24 8V14C18.477 14 14 18.477 14 24ZM34 24H28C28 15.163 35.163 8 44 8V14C38.477 14 34 18.477 34 24Z" 
-              fill="currentColor"
-            />
-            <path 
-              d="M14 24C14 29.523 9.523 34 4 34V40C12.837 40 20 32.837 20 24H14ZM34 24C34 29.523 29.523 34 24 34V40C32.837 40 40 32.837 40 24H34Z" 
-              fill="currentColor"
-            />
-          </svg>
-        </div>
-
         <div 
           className={styles.content}
           dangerouslySetInnerHTML={{ __html: content }} 
@@ -52,9 +38,6 @@ export default function ResearchBanner({ data }) {
             {link.title || 'Dowiedz się więcej'}
           </Link>
         )}
-
-        {/* Decorative line */}
-        <div className={styles.decorLine} aria-hidden="true" />
       </div>
     </section>
   );
