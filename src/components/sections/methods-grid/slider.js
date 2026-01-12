@@ -51,22 +51,6 @@ export default function MethodsSlider({ methods }) {
 
   return (
     <>
-      {/* Navigation arrows - in header area */}
-      {showArrows && methods.length > 1 && (
-        <div className={styles.control}>
-          <ArrowLeft
-            onClick={handlePrev}
-            aria-label="Poprzednia metoda"
-            className={isBeginning ? styles.disabled : ''}
-          />
-          <ArrowRight
-            onClick={handleNext}
-            aria-label="Następna metoda"
-            className={isEnd ? styles.disabled : ''}
-          />
-        </div>
-      )}
-
       <div className={styles.sliderWrapper}>
         <Swiper
           ref={sliderRef}
@@ -110,6 +94,22 @@ export default function MethodsSlider({ methods }) {
           ))}
         </Swiper>
       </div>
+
+      {/* Navigation arrows - below slider, centered */}
+      {showArrows && methods.length > 1 && (
+        <div className={styles.control}>
+          <ArrowLeft
+            onClick={handlePrev}
+            aria-label="Poprzednia metoda"
+            className={isBeginning ? styles.disabled : ''}
+          />
+          <ArrowRight
+            onClick={handleNext}
+            aria-label="Następna metoda"
+            className={isEnd ? styles.disabled : ''}
+          />
+        </div>
+      )}
     </>
   );
 }
