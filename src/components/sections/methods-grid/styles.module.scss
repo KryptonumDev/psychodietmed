@@ -29,12 +29,11 @@
 }
 
 .title {
-  /* Bigger header as requested */
-  font-size: clamp(32rem, calc(48vw/7.68), 56rem);
+  font-size: clamp(28rem, calc(40vw/7.68), 44rem);
   font-weight: 700;
   color: var(--primary-800);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 
   strong, em {
     font-style: normal;
@@ -42,7 +41,7 @@
   }
 
   @media (max-width: 370px) {
-    font-size: clamp(0rem, calc(32vw/3.7), 32rem);
+    font-size: clamp(0rem, calc(28vw/3.7), 28rem);
   }
 }
 
