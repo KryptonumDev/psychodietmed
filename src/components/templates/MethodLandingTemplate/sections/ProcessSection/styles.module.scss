@@ -10,8 +10,8 @@
   }
 
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(32px, calc(64vw/7.68), 80px);
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(32px, calc(32vw/7.68), 48px);
   align-items: start;
 
   @media (max-width: 999px) {
@@ -39,7 +39,7 @@
 .stickyWrapper {
   background: var(--process-accent-bg);
   border-radius: 24px;
-  padding: clamp(20px, calc(32vw/7.68), 40px);
+  padding: clamp(12px, calc(24vw/7.68), 32px);
 }
 
 .processImage {
