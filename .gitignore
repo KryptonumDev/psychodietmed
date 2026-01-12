@@ -38,4 +38,7 @@ yarn.lock
 package-lock.json
 !/yarn.lock
 # IDE specific
-.vscode/acf-exports/
+.vscode/
+
+# ACF exports (local only)
+acf-exports/
