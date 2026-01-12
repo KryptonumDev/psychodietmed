@@ -288,7 +288,7 @@ async function getData() {
             }
           }
         }
-        courses: products(where: {categoryIn: "kurs"}) {
+        courses: products(where: {categoryIn: "kurs", categoryNotIn: "ukryty"}) {
           nodes {
             productId: databaseId
             slug
