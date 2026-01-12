@@ -1,132 +1,190 @@
 .wrapper {
-  /* Default: highlight style */
-  --banner-bg: linear-gradient(135deg, #f1f6fb 0%, #dce8f5 100%);
-  --banner-accent: var(--primary-500);
-  --banner-text: var(--primary-800);
+  /* Full-width background for visual separation */
+  position: relative;
+  overflow: hidden;
+  
+  /* Default: Primary Blue (Granat) with white text */
+  --banner-bg: var(--primary-800);
+  --banner-text: #ffffff;
+  --banner-accent: var(--secondary-500);
+  --banner-decor: rgba(255, 255, 255, 0.08);
 
   &.styleHighlight {
-    --banner-bg: linear-gradient(135deg, var(--primary-50) 0%, #d4e4f4 100%);
-    --banner-accent: var(--primary-700);
+    --banner-bg: var(--primary-800);
+    --banner-text: #ffffff;
+    --banner-accent: var(--secondary-400);
+    --banner-decor: rgba(255, 255, 255, 0.08);
   }
 
   &.styleSubtle {
-    --banner-bg: linear-gradient(135deg, #f8f8f8 0%, #f0f0f0 100%);
-    --banner-accent: var(--neutrals-400);
+    --banner-bg: #f5f7fa;
+    --banner-text: var(--primary-800);
+    --banner-accent: var(--primary-500);
+    --banner-decor: rgba(0, 0, 0, 0.03);
   }
 
   &.styleAccent {
-    --banner-bg: linear-gradient(135deg, var(--secondary-100) 0%, var(--secondary-200) 100%);
-    --banner-accent: var(--secondary-500);
+    --banner-bg: linear-gradient(135deg, var(--primary-700) 0%, var(--primary-900) 100%);
+    --banner-text: #ffffff;
+    --banner-accent: var(--secondary-400);
+    --banner-decor: rgba(255, 255, 255, 0.1);
   }
 
-  .inner {
-    background: var(--banner-bg);
-    border-radius: 24px;
-    padding: clamp(40px, calc(56vw/7.68), 72px) clamp(32px, calc(64vw/7.68), 80px);
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: clamp(24px, calc(32vw/7.68), 36px);
+  background: var(--banner-bg);
+  /* Generous vertical padding */
+  padding: clamp(64px, calc(96vw/7.68), 120px) 0;
+}
+
+/* Background decorative pattern */
+.bgPattern {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.circle1,
+.circle2 {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--banner-decor);
+}
+
+.circle1 {
+  width: clamp(200px, 30vw, 400px);
+  height: clamp(200px, 30vw, 400px);
+  top: -10%;
+  left: -5%;
+}
+
+.circle2 {
+  width: clamp(150px, 25vw, 350px);
+  height: clamp(150px, 25vw, 350px);
+  bottom: -15%;
+  right: -3%;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, calc(48vw/7.68), 64px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(24px, calc(36vw/7.68), 40px);
+}
+
+/* Quote icon decorator */
+.quoteIcon {
+  color: var(--banner-accent);
+  opacity: 0.6;
+  margin-bottom: -8px;
+
+  svg {
+    width: clamp(36px, calc(48vw/7.68), 56px);
+    height: clamp(36px, calc(48vw/7.68), 56px);
   }
+}
 
-  .decorLeft,
-  .decorRight {
-    position: absolute;
-    color: var(--banner-accent);
-    opacity: 0.5;
+/* Main content styling */
+.content {
+  /* Larger text for statement impact */
+  h2, h3 {
+    font-size: clamp(28rem, calc(40vw/7.68), 48rem);
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--banner-text);
+    margin-bottom: clamp(16px, calc(24vw/7.68), 28px);
 
-    svg {
-      width: clamp(32px, calc(48vw/7.68), 64px);
-      height: clamp(32px, calc(48vw/7.68), 64px);
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(28vw/3.7), 28rem);
     }
   }
 
-  .decorLeft {
-    top: 20%;
-    left: 5%;
-    transform: rotate(-15deg);
+  p {
+    font-size: clamp(20rem, calc(26vw/7.68), 30rem);
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--banner-text);
+    opacity: 0.95;
 
-    @media (max-width: 768px) {
-      display: none;
-    }
-  }
-
-  .decorRight {
-    bottom: 20%;
-    right: 5%;
-    transform: rotate(15deg);
-
-    @media (max-width: 768px) {
-      display: none;
-    }
-  }
-
-  .content {
-    position: relative;
-    z-index: 1;
-    max-width: 900px;
-
-    h2, h3, p {
-      color: var(--banner-text);
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(20vw/3.7), 20rem);
     }
 
-    h2, h3 {
-      font-size: clamp(24rem, calc(32vw/7.68), 40rem);
-      font-weight: 500;
-      line-height: 1.4;
+    &:not(:last-child) {
       margin-bottom: clamp(12px, calc(16vw/7.68), 20px);
-
-      @media (max-width: 370px) {
-        font-size: clamp(0rem, calc(24vw/3.7), 24rem);
-      }
-    }
-
-    p {
-      font-size: clamp(18rem, calc(22vw/7.68), 26rem);
-      line-height: 1.5;
-
-      @media (max-width: 370px) {
-        font-size: clamp(0rem, calc(18vw/3.7), 18rem);
-      }
-    }
-
-    strong {
-      color: var(--primary-800);
-      font-weight: 700;
-    }
-
-    em {
-      font-style: normal;
-      position: relative;
-      
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: 2px;
-        left: -4px;
-        right: -4px;
-        height: 10px;
-        background: var(--banner-accent);
-        opacity: 0.25;
-        z-index: -1;
-        border-radius: 4px;
-      }
-    }
-
-    // Support for inline numbers/statistics
-    span[data-stat] {
-      font-size: 1.2em;
-      font-weight: 700;
-      color: var(--primary-800);
     }
   }
 
-  .button {
+  strong {
+    font-weight: 700;
+    color: var(--banner-accent);
+  }
+
+  em {
+    font-style: normal;
     position: relative;
-    z-index: 1;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: -4px;
+      right: -4px;
+      height: 10px;
+      background: var(--banner-accent);
+      opacity: 0.35;
+      z-index: -1;
+      border-radius: 4px;
+    }
   }
+
+  /* Statistics numbers */
+  span[data-stat],
+  .stat {
+    font-size: 1.15em;
+    font-weight: 700;
+    color: var(--banner-accent);
+  }
+}
+
+/* CTA Button - inverted colors for dark background */
+.button {
+  background: var(--banner-accent) !important;
+  color: var(--primary-900) !important;
+  border-color: var(--banner-accent) !important;
+  font-weight: 600 !important;
+  
+  &:hover {
+    background: #fff !important;
+    color: var(--primary-800) !important;
+    border-color: #fff !important;
+  }
+
+  /* For subtle style (light bg) */
+  .styleSubtle & {
+    background: var(--primary-800) !important;
+    color: #fff !important;
+    border-color: var(--primary-800) !important;
+
+    &:hover {
+      background: var(--primary-700) !important;
+      border-color: var(--primary-700) !important;
+    }
+  }
+}
+
+/* Decorative line at bottom */
+.decorLine {
+  width: 80px;
+  height: 3px;
+  background: var(--banner-accent);
+  border-radius: 2px;
+  opacity: 0.5;
+  margin-top: 8px;
 }
 
