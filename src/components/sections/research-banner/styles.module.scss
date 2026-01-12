@@ -6,17 +6,17 @@
   border-radius: clamp(16px, calc(32vw/7.68), 48px);
   margin: 0 clamp(12px, calc(20vw/7.68), 32px);
   
-  /* Default: Uplifting teal/mint gradient */
-  --banner-bg: linear-gradient(135deg, #0d9488 0%, #14b8a6 50%, #2dd4bf 100%);
+  /* Default: Deeper teal for better white text contrast */
+  --banner-bg: linear-gradient(135deg, #0f766e 0%, #0d9488 50%, #14b8a6 100%);
   --banner-text: #ffffff;
-  --banner-accent: #fef3c7;
-  --banner-decor: rgba(255, 255, 255, 0.12);
+  --banner-accent: #fef08a;
+  --banner-decor: rgba(255, 255, 255, 0.1);
 
   &.styleHighlight {
-    --banner-bg: linear-gradient(135deg, #0d9488 0%, #14b8a6 50%, #2dd4bf 100%);
+    --banner-bg: linear-gradient(135deg, #0f766e 0%, #0d9488 50%, #14b8a6 100%);
     --banner-text: #ffffff;
-    --banner-accent: #fef3c7;
-    --banner-decor: rgba(255, 255, 255, 0.12);
+    --banner-accent: #fef08a;
+    --banner-decor: rgba(255, 255, 255, 0.1);
   }
 
   &.styleSubtle {
