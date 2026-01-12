@@ -1,10 +1,8 @@
 import React from 'react';
 import styles from './styles.module.scss';
 import HeroMethod from './sections/HeroMethod';
-// import IntroductionSection from './sections/IntroductionSection'; // REMOVED: Content moved to Homepage
 import ProcessSection from './sections/ProcessSection';
 import TargetAudienceSection from './sections/TargetAudienceSection';
-// import MethodAccordion from '@/components/sections/method-accordion'; // REMOVED: Merged into ProcessSection
 import FeaturesGrid from './sections/FeaturesGrid';
 import FounderSection from './sections/FounderSection';
 import BenefitsTiles from './sections/BenefitsTiles';
@@ -23,7 +21,6 @@ export default function MethodLandingTemplate({ data, theme = 'pdw', slug, speci
   const {
     methodName,
     hero,
-    // introduction, // REMOVED: Content moved to Homepage
     process,
     targetAudience,
     accordion,
@@ -50,11 +47,6 @@ export default function MethodLandingTemplate({ data, theme = 'pdw', slug, speci
         <HeroMethod data={hero} theme={theme} methodName={methodName} />
       )}
 
-      {/* REMOVED: Introduction section - content moved to Homepage */}
-      {/* {introduction && (
-        <IntroductionSection data={introduction} theme={theme} />
-      )} */}
-
       {/* 2. Process + Accordion - 2 columns: Image left, Accordion right */}
       {(process || accordion?.items?.length > 0) && (
         <ProcessSection data={process} accordion={accordion} theme={theme} />
@@ -64,11 +56,6 @@ export default function MethodLandingTemplate({ data, theme = 'pdw', slug, speci
       {targetAudience && (
         <TargetAudienceSection data={targetAudience} theme={theme} />
       )}
-
-      {/* REMOVED: Standalone Accordion - now merged into ProcessSection */}
-      {/* {accordion?.items?.length > 0 && (
-        <MethodAccordion data={accordion} theme={theme} />
-      )} */}
 
       {/* 4. Features - 2 columns: Text left, 2x2 tiles right (zig-zag pattern) */}
       {features && (
