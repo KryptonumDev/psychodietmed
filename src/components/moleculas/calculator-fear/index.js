@@ -111,7 +111,7 @@ export default function CalculatorFear() {
               Pamiętaj nie jest to diagnoza, a tylko narzędzie do wskazania problemu. Jest to bezpłatny i automatyczny test, który może pomóc odpowiedzieć na pytania dotyczące Twojego zdrowia. Nie zastąpi on jednak konsultacji z lekarzem psychiatrą lub psychologiem
             </p>
             {result > 10 && (
-              <Button className={styles.button} href="/umow-wizyte">Umów wizytę</Button>
+              <Button className={styles.button} href="/specjalisci">Umów wizytę</Button>
             )}
           </motion.div>
         }

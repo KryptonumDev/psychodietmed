@@ -1,7 +1,11 @@
-import dynamic from 'next/dynamic';
+import dynamicImport from 'next/dynamic';
 import Hero from '@/components/sections/hero-home';
-// import MethodsGrid from '@/components/sections/methods-grid'; // TODO: Enable after ACF is set up
-// import ResearchBanner from '@/components/sections/research-banner'; // TODO: Enable after ACF is set up
+import MethodsGrid from '@/components/sections/methods-grid';
+import ResearchBanner from '@/components/sections/research-banner';
+
+// Disable all caching for dev - remove for production
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 // import Specialisations from '@/components/sections/specialisations'; // HIDDEN per client request
 import CallToActionTransparent from '@/components/sections/call-to-action-tranparent';
 import CallToActionGray from '@/components/sections/call-to-action-gray';
@@ -16,7 +20,7 @@ import { generetaSeo } from '../utils/genereate-seo';
 import { GET_SEO_PAGE } from '../queries/page-seo';
 import { Fetch } from '../utils/fetch-query';
 
-const Specialists = dynamic(() => import('@/components/sections/specialists-slider'), {
+const Specialists = dynamicImport(() => import('@/components/sections/specialists-slider'), {
   ssr: false,
   loading: () => <div style={{ minHeight: '400px' }} />
 });
@@ -30,8 +34,8 @@ export default async function Home() {
     academy,
     compare,
     hero,
-    // methods, // TODO: Enable after ACF is set up
-    // researchBanner, // TODO: Enable after ACF is set up
+    methods,
+    researchBanner,
     specialisationsSection,
     activities,
     cta,
@@ -64,13 +68,11 @@ export default async function Home() {
       {/* 1. Hero + Logos */}
       <Hero data={hero} />
       
-      {/* TODO: Enable after ACF is set up */}
       {/* 2. Nasze Metody (PDW, PDR, CBT) */}
-      {/* {methods && <MethodsGrid data={methods} />} */}
+      {methods && <MethodsGrid data={methods} />}
       
-      {/* TODO: Enable after ACF is set up */}
       {/* 3. Baner "Badania pokazują..." */}
-      {/* {researchBanner && <ResearchBanner data={researchBanner} />} */}
+      {researchBanner && <ResearchBanner data={researchBanner} />}
       
       {/* 4. Specialists Slider */}
       <Specialists data={specialists} />
@@ -321,6 +323,35 @@ async function getData() {
                   width
                 }
               }
+            }
+          }
+          methods : sekcjaMetody {
+            title
+            text
+            methods {
+              title
+              themeColor
+              description
+              icon {
+                altText
+                mediaItemUrl
+                mediaDetails {
+                  height
+                  width
+                }
+              }
+              link {
+                url
+                title
+              }
+            }
+          }
+          researchBanner : sekcjaBanerBadania {
+            content
+            style
+            link {
+              url
+              title
             }
           }
           specialisations : sekcjaZSiatkaSpecjalizacjiKopia {
