@@ -1,65 +1,67 @@
+'use client';
 import React from 'react';
 import Link from 'next/link';
 import { Image } from '@/components/atoms/image';
 import styles from './styles.module.scss';
 
-export default function ProcessSection({ data, theme }) {
-  const { title, description, processImage, items, ctaButton } = data || {};
+/**
+ * ProcessSection - 2-column layout:
+ * Left: Process Image (sticky on desktop)
+ * Right: Accordion items + CTA button
+ */
+export default function ProcessSection({ data, accordion, theme }) {
+  const { title, processImage, ctaButton } = data || {};
+  const accordionItems = accordion?.items || [];
 
-  // Don't render if no image and no items
-  if (!processImage?.mediaItemUrl && !items?.length) return null;
+  // Don't render if no image and no accordion items
+  if (!processImage?.mediaItemUrl && !accordionItems.length) return null;
 
   return (
     <section className={`${styles.process} ${styles[theme]}`}>
-      {/* Left side - Process graphic */}
+      {/* Left side - Process graphic (sticky) */}
       {processImage?.mediaItemUrl && (
         <div className={styles.imageContainer}>
-          <Image
-            src={processImage.mediaItemUrl}
-            alt={processImage.altText || 'Schemat procesu'}
-            width={processImage.mediaDetails?.width || 600}
-            height={processImage.mediaDetails?.height || 500}
-            aspectRatio={true}
-            className={styles.processImage}
-          />
+          <div className={styles.stickyWrapper}>
+            <Image
+              src={processImage.mediaItemUrl}
+              alt={processImage.altText || 'Schemat procesu'}
+              width={processImage.mediaDetails?.width || 600}
+              height={processImage.mediaDetails?.height || 500}
+              aspectRatio={true}
+              className={styles.processImage}
+            />
+          </div>
         </div>
       )}
 
-      {/* Right side - Items list + CTA */}
+      {/* Right side - Accordion + CTA */}
       <div className={styles.contentSide}>
         {title && (
-          <p 
+          <h2 
             className={styles.title}
             dangerouslySetInnerHTML={{ __html: title }} 
           />
         )}
-        
-        {description && (
-          <div 
-            className={styles.description}
-            dangerouslySetInnerHTML={{ __html: description }} 
-          />
-        )}
 
-        {items?.length > 0 && (
-          <ul className={styles.itemsList}>
-            {items.map((item, index) => (
-              <li key={index} className={styles.item}>
-                {item.icon?.mediaItemUrl && (
-                  <Image
-                    src={item.icon.mediaItemUrl}
-                    alt={item.icon.altText || ''}
-                    width={item.icon.mediaDetails?.width || 32}
-                    height={item.icon.mediaDetails?.height || 32}
-                    className={styles.itemIcon}
-                  />
-                )}
-                <p>{item.text}</p>
-              </li>
+        {/* Accordion items */}
+        {accordionItems.length > 0 && (
+          <div className={styles.accordionList}>
+            {accordionItems.map((item, index) => (
+              <details key={index} className={styles.accordionItem}>
+                <summary className={styles.accordionHeader}>
+                  <span className={styles.accordionIcon} aria-hidden="true" />
+                  <span className={styles.accordionTitle}>{item.title}</span>
+                </summary>
+                <div 
+                  className={styles.accordionContent}
+                  dangerouslySetInnerHTML={{ __html: item.content }}
+                />
+              </details>
             ))}
-          </ul>
+          </div>
         )}
 
+        {/* CTA Button below accordion */}
         {ctaButton?.url && (
           <Link href={ctaButton.url} className={`link ${styles.ctaButton}`}>
             {ctaButton.title || 'Umów wizytę'}

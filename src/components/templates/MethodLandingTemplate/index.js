@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './styles.module.scss';
 import HeroMethod from './sections/HeroMethod';
-import IntroductionSection from './sections/IntroductionSection';
+// import IntroductionSection from './sections/IntroductionSection'; // REMOVED: Content moved to Homepage
 import ProcessSection from './sections/ProcessSection';
 import TargetAudienceSection from './sections/TargetAudienceSection';
-import MethodAccordion from '@/components/sections/method-accordion';
+// import MethodAccordion from '@/components/sections/method-accordion'; // REMOVED: Merged into ProcessSection
 import FeaturesGrid from './sections/FeaturesGrid';
 import FounderSection from './sections/FounderSection';
 import BenefitsTiles from './sections/BenefitsTiles';
@@ -23,7 +23,7 @@ export default function MethodLandingTemplate({ data, theme = 'pdw', slug, speci
   const {
     methodName,
     hero,
-    introduction,
+    // introduction, // REMOVED: Content moved to Homepage
     process,
     targetAudience,
     accordion,
@@ -50,42 +50,42 @@ export default function MethodLandingTemplate({ data, theme = 'pdw', slug, speci
         <HeroMethod data={hero} theme={theme} methodName={methodName} />
       )}
 
-      {/* 2. Introduction - centered text */}
-      {introduction && (
+      {/* REMOVED: Introduction section - content moved to Homepage */}
+      {/* {introduction && (
         <IntroductionSection data={introduction} theme={theme} />
+      )} */}
+
+      {/* 2. Process + Accordion - 2 columns: Image left, Accordion right */}
+      {(process || accordion?.items?.length > 0) && (
+        <ProcessSection data={process} accordion={accordion} theme={theme} />
       )}
 
-      {/* 3. Process - image left, items list + CTA right */}
-      {process && (
-        <ProcessSection data={process} theme={theme} />
-      )}
-
-      {/* 4. Target Audience - heading, text, colorful tiles */}
+      {/* 3. Target Audience - heading, text, colorful tiles */}
       {targetAudience && (
         <TargetAudienceSection data={targetAudience} theme={theme} />
       )}
 
-      {/* 5. Accordion - expandable content sections */}
-      {accordion?.items?.length > 0 && (
+      {/* REMOVED: Standalone Accordion - now merged into ProcessSection */}
+      {/* {accordion?.items?.length > 0 && (
         <MethodAccordion data={accordion} theme={theme} />
-      )}
+      )} */}
 
-      {/* 6. Features - 2x2 tiles left, heading/text/CTA right */}
+      {/* 4. Features - 2 columns: Text left, 2x2 tiles right (zig-zag pattern) */}
       {features && (
         <FeaturesGrid data={features} theme={theme} />
       )}
 
-      {/* 6. Founder - team-owner style card */}
+      {/* 5. Founder - team-owner style card */}
       {founderSection && (
         <FounderSection data={founderSection} theme={theme} />
       )}
 
-      {/* 7. Benefits Tiles - team-flowers style 8 tiles + CTA */}
+      {/* 6. Benefits Tiles - team-flowers style 8 tiles + CTA */}
       {benefitsTiles?.items?.length > 0 && (
         <BenefitsTiles data={benefitsTiles} theme={theme} />
       )}
 
-      {/* 8. Specialists Carousel (optional) */}
+      {/* 7. Specialists Carousel (optional) */}
       {showSpecialistsCarousel && specialists?.length > 0 && (
         <SpecialistsSection 
           title={specialistsSectionTitle || 'Poznaj naszych specjalistów'} 
@@ -94,7 +94,7 @@ export default function MethodLandingTemplate({ data, theme = 'pdw', slug, speci
         />
       )}
 
-      {/* 9. Final CTA */}
+      {/* 8. Final CTA */}
       {ctaSection && (
         <CtaSection data={ctaSection} theme={theme} />
       )}

@@ -18,75 +18,7 @@
   }
 }
 
-/* Left side - 2x2 tiles grid (like team-flowers) */
-.tilesGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: clamp(12px, calc(20vw/7.68), 28px);
-
-  @media (max-width: 999px) {
-    order: 2;
-  }
-
-  @media (max-width: 480px) {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-  }
-}
-
-.tile {
-  min-height: clamp(140px, calc(180vw/7.68), 200px);
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: clamp(16px, calc(24vw/7.68), 28px);
-  font-size: clamp(16rem, calc(20vw/7.68), 22rem);
-  line-height: 1.4;
-  font-weight: 500;
-
-  p {
-    margin: 0;
-  }
-
-  @media (max-width: 370px) {
-    min-height: clamp(100px, calc(120vw/3.7), 140px);
-    font-size: clamp(0rem, calc(14vw/3.7), 14rem);
-  }
-
-  /* Colorful tile styles like team-flowers */
-  &:nth-child(1) {
-    border-radius: 0px 64px;
-    background: #FFF;
-    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
-  }
-
-  &:nth-child(2) {
-    border-radius: 64px 0px;
-    border: 2px solid var(--features-accent);
-    background: transparent;
-  }
-
-  &:nth-child(3) {
-    border-radius: 64px 0px;
-    background: var(--features-accent-light);
-    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
-  }
-
-  &:nth-child(4) {
-    border-radius: 0px 64px;
-    background: var(--primary-800);
-    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
-    color: #FFFEFE;
-
-    p {
-      color: #FFFEFE !important;
-    }
-  }
-}
-
-/* Right side - content */
+/* Left side - content (now first in order) */
 .contentSide {
   display: flex;
   flex-direction: column;
@@ -148,5 +80,76 @@
 
   @media (max-width: 999px) {
     align-self: center;
+  }
+}
+
+/* Right side - 2x2 tiles grid (like team-flowers) */
+.tilesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: clamp(12px, calc(20vw/7.68), 28px);
+
+  @media (max-width: 999px) {
+    order: 2;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+}
+
+.tile {
+  min-height: clamp(140px, calc(180vw/7.68), 200px);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(16px, calc(24vw/7.68), 28px);
+  font-size: clamp(16rem, calc(20vw/7.68), 22rem);
+  line-height: 1.4;
+  font-weight: 500;
+
+  p {
+    margin: 0;
+  }
+
+  @media (max-width: 370px) {
+    min-height: clamp(100px, calc(120vw/3.7), 140px);
+    font-size: clamp(0rem, calc(14vw/3.7), 14rem);
+  }
+
+  /* Colorful tile styles like team-flowers */
+  &:nth-child(1) {
+    border-radius: 0px 64px;
+    background: #FFF;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+  }
+
+  &:nth-child(2) {
+    border-radius: 64px 0px;
+    border: 2px solid var(--features-accent);
+    background: transparent;
+  }
+
+  &:nth-child(3) {
+    border-radius: 64px 0px;
+    background: var(--features-accent-light);
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+  }
+
+  &:nth-child(4) {
+    border-radius: 0px 64px;
+    background: var(--primary-800);
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+    color: #FFFEFE;
+
+    p {
+      color: #FFFEFE !important;
+    }
   }
 }

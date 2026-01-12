@@ -10,25 +10,36 @@
   }
 
   display: grid;
-  grid-template-columns: 6fr 4fr;
-  gap: clamp(32px, calc(48vw/7.68), 64px);
-  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, calc(64vw/7.68), 80px);
+  align-items: start;
 
-  @media (max-width: 900px) {
+  @media (max-width: 999px) {
     grid-template-columns: 1fr;
+    gap: clamp(32px, calc(48vw/7.68), 56px);
   }
 }
 
+/* Left column - Image */
 .imageContainer {
-  background: var(--process-accent-bg);
-  border-radius: 16px;
-  padding: clamp(16px, calc(24vw/7.68), 32px);
-
-  @media (max-width: 900px) {
+  @media (max-width: 999px) {
     order: 1;
-    max-width: 600px;
+    max-width: 500px;
     margin: 0 auto;
     width: 100%;
+  }
+}
+
+.stickyWrapper {
+  position: sticky;
+  top: 120px;
+  background: var(--process-accent-bg);
+  border-radius: 24px;
+  padding: clamp(20px, calc(32vw/7.68), 40px);
+
+  @media (max-width: 999px) {
+    position: relative;
+    top: 0;
   }
 }
 
@@ -37,8 +48,9 @@
   height: auto !important;
 }
 
+/* Right column - Accordion + CTA */
 .contentSide {
-  @media (max-width: 900px) {
+  @media (max-width: 999px) {
     order: 2;
     max-width: 600px;
     margin: 0 auto;
@@ -48,91 +60,163 @@
 
 .title {
   color: var(--primary-800);
-  font-size: clamp(18rem, calc(22vw/7.68), 26rem);
-  font-weight: 500;
-  margin-bottom: clamp(16px, calc(20vw/7.68), 24px);
-
-  @media (max-width: 1120px) {
-    text-align: center;
-  }
-
-  @media (max-width: 420px) {
-    text-align: left;
-  }
+  font-size: clamp(26rem, calc(34vw/7.68), 40rem);
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: clamp(24px, calc(32vw/7.68), 40px);
 
   @media (max-width: 370px) {
-    font-size: clamp(0rem, calc(18vw/3.7), 18rem);
+    font-size: clamp(0rem, calc(24vw/3.7), 24rem);
   }
 }
 
-.description {
-  font-size: clamp(16rem, calc(17vw/7.68), 18rem);
-  line-height: 1.6;
-  color: var(--neutrals-700);
-  margin-bottom: clamp(20px, calc(24vw/7.68), 28px);
-
-  p {
-    font-size: inherit;
-  }
-
-  @media (max-width: 1120px) {
-    text-align: center;
-  }
-
-  @media (max-width: 420px) {
-    text-align: left;
-  }
-
-  @media (max-width: 370px) {
-    font-size: clamp(0rem, calc(15vw/3.7), 15rem);
-  }
-}
-
-/* Items list - matching pinkList from statistics-flex */
-.itemsList {
-  display: grid;
-  grid-gap: 16px;
-}
-
-.item {
-  padding: 14px 18px;
+/* Accordion styles */
+.accordionList {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  border-radius: 20px 20px 20px 0px;
-  border: 2px solid var(--process-accent);
-  background: #FFF;
-  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
+  flex-direction: column;
+  gap: clamp(12px, calc(16vw/7.68), 20px);
+}
 
-  p {
-    font-size: clamp(16rem, calc(18vw/7.68), 20rem);
-    color: var(--primary-800);
-    font-weight: 500;
-    margin: 0;
+.accordionItem {
+  border: 1px solid var(--neutrals-200);
+  border-radius: 16px;
+  background: #fff;
+  overflow: hidden;
+  transition: border-color 0.3s var(--easing), box-shadow 0.3s var(--easing);
 
-    @media (max-width: 370px) {
-      font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+  &[open] {
+    border-color: var(--process-accent);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+    .accordionIcon {
+      &::after {
+        transform: rotate(0deg);
+      }
     }
   }
 }
 
-.itemIcon {
-  width: 28px !important;
-  height: 28px !important;
-  flex-shrink: 0;
-}
+.accordionHeader {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, calc(16vw/7.68), 20px);
+  padding: clamp(16px, calc(20vw/7.68), 24px);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: background-color 0.3s var(--easing);
 
-.ctaButton {
-  margin-top: clamp(20px, calc(28vw/7.68), 36px);
-  display: inline-block;
-  background-color: var(--process-accent-light);
-  color: var(--primary-800);
-
-  &::after {
-    background-color: var(--process-accent);
+  &::-webkit-details-marker {
+    display: none;
   }
 
-  @media (max-width: 1120px) {
+  &:hover {
+    background-color: var(--process-accent-bg);
+  }
+}
+
+.accordionIcon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--process-accent-light);
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    background: var(--process-accent);
+    border-radius: 2px;
+  }
+
+  /* Horizontal line */
+  &::before {
+    width: 12px;
+    height: 2px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Vertical line (rotates on open) */
+  &::after {
+    width: 2px;
+    height: 12px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+    transition: transform 0.3s var(--easing);
+  }
+}
+
+.accordionTitle {
+  font-size: clamp(17rem, calc(20vw/7.68), 22rem);
+  font-weight: 600;
+  color: var(--primary-800);
+  line-height: 1.4;
+
+  @media (max-width: 370px) {
+    font-size: clamp(0rem, calc(16vw/3.7), 16rem);
+  }
+}
+
+.accordionContent {
+  padding: 0 clamp(16px, calc(20vw/7.68), 24px) clamp(16px, calc(20vw/7.68), 24px);
+  padding-left: calc(clamp(16px, calc(20vw/7.68), 24px) + 28px + clamp(12px, calc(16vw/7.68), 20px));
+  font-size: clamp(15rem, calc(17vw/7.68), 18rem);
+  line-height: 1.7;
+  color: var(--neutrals-700);
+
+  p {
+    font-size: inherit;
+    margin-bottom: 1em;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  ul, ol {
+    margin: 1em 0;
+    padding-left: 1.5em;
+  }
+
+  li {
+    margin-bottom: 0.5em;
+  }
+
+  strong {
+    color: var(--primary-800);
+  }
+
+  a {
+    color: var(--process-accent);
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  @media (max-width: 370px) {
+    font-size: clamp(0rem, calc(14vw/3.7), 14rem);
+  }
+}
+
+/* CTA Button */
+.ctaButton {
+  margin-top: clamp(28px, calc(40vw/7.68), 48px);
+  display: inline-block;
+  background-color: var(--process-accent);
+  color: #fff;
+
+  &::after {
+    background-color: var(--process-accent-light);
+  }
+
+  @media (max-width: 999px) {
     display: block;
     text-align: center;
   }
