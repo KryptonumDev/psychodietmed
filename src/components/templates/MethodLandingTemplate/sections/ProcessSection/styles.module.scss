@@ -216,7 +216,11 @@
   margin-top: clamp(28px, calc(40vw/7.68), 48px);
   display: inline-block;
   background-color: var(--process-accent);
-  color: #fff;
+  color: var(--primary-800) !important;
+
+  &:hover {
+    color: var(--primary-800) !important;
+  }
 
   &::after {
     background-color: var(--process-accent-light);
