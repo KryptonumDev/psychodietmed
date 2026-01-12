@@ -1,50 +1,31 @@
 'use client';
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import Link from 'next/link';
+import { A11y } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/scss';
 import styles from './styles.module.scss';
+import ArrowLeft from '@/components/atoms/ArrowLeft';
+import ArrowRight from '@/components/atoms/ArrowRight';
 
 /**
  * MethodsGrid - Homepage section displaying methodology cards (PDW, PDR, CBT)
- * Features carousel on mobile, grid on desktop, subtle hover effects
+ * Uses Swiper for consistent carousel behavior across devices
  */
 export default function MethodsGrid({ data }) {
   const sliderRef = useRef(null);
-  const [mounted, setMounted] = useState(false);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
 
-  const checkScroll = () => {
+  const handlePrev = useCallback(() => {
     if (!sliderRef.current) return;
-    const { scrollLeft, scrollWidth, clientWidth } = sliderRef.current;
-    setCanScrollLeft(scrollLeft > 10);
-    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
-  };
-
-  useEffect(() => {
-    setMounted(true);
-    checkScroll();
-    const slider = sliderRef.current;
-    if (slider) {
-      slider.addEventListener('scroll', checkScroll);
-      window.addEventListener('resize', checkScroll);
-    }
-    return () => {
-      if (slider) {
-        slider.removeEventListener('scroll', checkScroll);
-        window.removeEventListener('resize', checkScroll);
-      }
-    };
+    sliderRef.current.swiper.slidePrev();
   }, []);
 
-  const scroll = (direction) => {
+  const handleNext = useCallback(() => {
     if (!sliderRef.current) return;
-    const cardWidth = sliderRef.current.querySelector('[data-card]')?.offsetWidth || 340;
-    const gap = 24;
-    sliderRef.current.scrollBy({
-      left: direction === 'left' ? -(cardWidth + gap) : (cardWidth + gap),
-      behavior: 'smooth'
-    });
-  };
+    sliderRef.current.swiper.slideNext();
+  }, []);
 
   if (!data) return null;
 
@@ -56,51 +37,74 @@ export default function MethodsGrid({ data }) {
     <section className={styles.wrapper}>
       <div className={styles.container}>
         <div className={styles.header}>
-          {title && (
-            <h2 
-              className={styles.title}
-              dangerouslySetInnerHTML={{ __html: title }} 
-            />
-          )}
-          {text && (
-            <div 
-              className={styles.text}
-              dangerouslySetInnerHTML={{ __html: text }} 
-            />
+          <div className={styles.headerContent}>
+            {title && (
+              <h2 
+                className={styles.title}
+                dangerouslySetInnerHTML={{ __html: title }} 
+              />
+            )}
+            {text && (
+              <div 
+                className={styles.text}
+                dangerouslySetInnerHTML={{ __html: text }} 
+              />
+            )}
+          </div>
+          
+          {/* Navigation arrows */}
+          {methods.length > 1 && (
+            <div className={styles.control}>
+              <ArrowLeft
+                onClick={handlePrev}
+                aria-label="Poprzednia metoda"
+                className={isBeginning ? styles.disabled : ''}
+              />
+              <ArrowRight
+                onClick={handleNext}
+                aria-label="Następna metoda"
+                className={isEnd ? styles.disabled : ''}
+              />
+            </div>
           )}
         </div>
 
         <div className={styles.sliderWrapper}>
-          {/* Navigation arrows - only show after mount and if scrollable */}
-          {mounted && canScrollLeft && (
-            <button 
-              className={`${styles.navButton} ${styles.navLeft}`}
-              onClick={() => scroll('left')}
-              aria-label="Poprzednia metoda"
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-          )}
-          
-          {mounted && canScrollRight && (
-            <button 
-              className={`${styles.navButton} ${styles.navRight}`}
-              onClick={() => scroll('right')}
-              aria-label="Następna metoda"
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-          )}
-
-          <div className={styles.slider} ref={sliderRef}>
+          <Swiper
+            ref={sliderRef}
+            modules={[A11y]}
+            className={styles.slider}
+            spaceBetween={24}
+            slidesPerView={1.15}
+            breakpoints={{
+              1140: {
+                slidesPerView: 3,
+                spaceBetween: 24,
+              },
+              768: {
+                slidesPerView: 2.2,
+                spaceBetween: 20,
+              },
+              480: {
+                slidesPerView: 1.3,
+                spaceBetween: 16,
+              },
+            }}
+            onSwiper={(swiper) => {
+              setIsBeginning(swiper.isBeginning);
+              setIsEnd(swiper.isEnd);
+            }}
+            onSlideChange={(swiper) => {
+              setIsBeginning(swiper.isBeginning);
+              setIsEnd(swiper.isEnd);
+            }}
+          >
             {methods.map((method, index) => (
-              <MethodCard key={index} method={method} />
+              <SwiperSlide key={index}>
+                <MethodCard method={method} />
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
         </div>
       </div>
     </section>
@@ -125,7 +129,6 @@ function MethodCard({ method }) {
     <CardWrapper 
       className={`${styles.card} ${themeClass}`}
       {...cardProps}
-      data-card
     >
       {/* Colored accent bar on top */}
       <div className={styles.accentBar} aria-hidden="true" />
