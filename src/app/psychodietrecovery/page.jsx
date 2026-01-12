@@ -90,10 +90,6 @@ async function getData() {
                   }
                 }
               }
-              introduction {
-                title
-                content
-              }
               process {
                 title
                 description
