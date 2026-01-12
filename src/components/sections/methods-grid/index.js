@@ -1,6 +1,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import styles from './styles.module.scss';
+import { removeWrap } from '@/utils/title-modification';
 
 // Dynamic import with SSR disabled to prevent hydration mismatch
 const MethodsSlider = dynamic(() => import('./slider'), {
@@ -27,7 +28,7 @@ export default function MethodsGrid({ data }) {
             {title && (
               <h2 
                 className={styles.title}
-                dangerouslySetInnerHTML={{ __html: title }} 
+                dangerouslySetInnerHTML={{ __html: removeWrap(title) }} 
               />
             )}
             {text && (
