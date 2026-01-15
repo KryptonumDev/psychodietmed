@@ -30,9 +30,11 @@
   }
 
   h2 {
-    font-size: clamp(28rem, calc(36vw/7.68), 44rem);
+    font-weight: 500;
+    font-size: clamp(32rem, calc(36vw / 7.68), 48rem);
+    line-height: 124%;
+    font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
     color: var(--primary-800);
-    line-height: 1.2;
 
     em {
       font-style: normal;
@@ -40,22 +42,30 @@
     }
 
     @media (max-width: 370px) {
-      font-size: clamp(0rem, calc(28vw/3.7), 28rem);
+      font-size: clamp(0rem, calc(32vw/3.7), 32rem);
     }
   }
 }
 
 .text {
-  font-size: clamp(16rem, calc(18vw/7.68), 20rem);
-  line-height: 1.6;
-  color: var(--neutrals-700);
-
   p {
-    font-size: inherit;
+    font-weight: 500;
+    font-size: clamp(20rem, calc(24vw / 14.40), 24rem);
+    line-height: 140.5%;
+    font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
+    color: var(--neutrals-800);
     margin-bottom: 1em;
 
     &:last-child {
       margin-bottom: 0;
+    }
+
+    @media (max-width: 768px) {
+      font-size: clamp(16rem, calc(20vw / 7.68), 24rem);
+    }
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(16vw / 3.7), 16rem);
     }
   }
 
@@ -110,17 +120,25 @@
   justify-content: center;
   align-items: center;
   padding: clamp(16px, calc(24vw/7.68), 28px);
-  font-size: clamp(16rem, calc(20vw/7.68), 22rem);
-  line-height: 1.4;
-  font-weight: 500;
 
   p {
     margin: 0;
+    font-weight: 500;
+    font-size: clamp(20rem, calc(24vw / 14.40), 24rem);
+    line-height: 140.5%;
+    font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
+
+    @media (max-width: 768px) {
+      font-size: clamp(16rem, calc(20vw / 7.68), 24rem);
+    }
+
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(16vw / 3.7), 16rem);
+    }
   }
 
   @media (max-width: 370px) {
     min-height: clamp(100px, calc(120vw/3.7), 140px);
-    font-size: clamp(0rem, calc(14vw/3.7), 14rem);
   }
 
   /* Colorful tile styles like team-flowers */
