@@ -7,7 +7,7 @@ import ResearchBanner from '@/components/sections/research-banner';
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 // import Specialisations from '@/components/sections/specialisations'; // HIDDEN per client request
-import CallToActionTransparent from '@/components/sections/call-to-action-tranparent';
+// import CallToActionTransparent from '@/components/sections/call-to-action-tranparent'; // HIDDEN per client request
 import CallToActionGray from '@/components/sections/call-to-action-gray';
 import ReviewsSlider from '@/components/sections/reviews-slider';
 import StatisticsFlex from '@/components/sections/statistics-flex';
@@ -77,8 +77,8 @@ export default async function Home() {
       {/* 4. Specialists Slider */}
       <Specialists data={specialists} />
       
-      {/* 5. CTA */}
-      <CallToActionTransparent data={cta} />
+      {/* HIDDEN: CTA Transparent ("Wezwanie do działania bez tła") */}
+      {/* <CallToActionTransparent data={cta} /> */}
       
       {/* HIDDEN: Specialisations ("W czym możemy pomóc?") */}
       {/* <Specialisations data={specialisationsSection} activities={activities} /> */}

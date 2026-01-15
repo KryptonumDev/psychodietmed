@@ -1,17 +1,19 @@
 .wrapper {
-  /* Full-width background for visual separation */
+  /* Full-width with negative margin for edge-to-edge */
+  --section-px: clamp(16px, calc(32vw/7.68), 48px);
+  
   background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-  padding: clamp(48px, calc(80vw/7.68), 96px) 0;
+  padding: clamp(48px, calc(80vw/7.68), 96px) var(--section-px);
   overflow: hidden;
   /* Border radius for section */
   border-radius: clamp(16px, calc(32vw/7.68), 48px);
+  /* Negative margin to extend to edges, then padding brings content back */
   margin: 0 clamp(12px, calc(20vw/7.68), 32px);
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 clamp(16px, calc(32vw/7.68), 48px);
 }
 
 .header {
@@ -78,11 +80,11 @@
 
 /* Slider wrapper */
 .sliderWrapper {
-  /* Negative margin + padding for full-bleed on mobile/tablet */
-  margin-left: calc(-1 * clamp(16px, calc(32vw/7.68), 48px));
-  margin-right: calc(-1 * clamp(16px, calc(32vw/7.68), 48px));
-  padding-left: clamp(16px, calc(32vw/7.68), 48px);
-  padding-right: clamp(16px, calc(32vw/7.68), 48px);
+  /* Negative margin + padding for full-bleed slider effect */
+  margin-left: calc(-1 * var(--section-px));
+  margin-right: calc(-1 * var(--section-px));
+  padding-left: var(--section-px);
+  padding-right: var(--section-px);
 }
 
 .slider {
@@ -181,26 +183,30 @@
   flex: 1;
 }
 
-/* Logo wrapper - horizontal logo display */
+/* Logo wrapper - fixed size for consistency */
 .logoWrapper {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  min-height: 60px;
+  /* Fixed height for all logos */
+  height: 60px;
   margin-bottom: 8px;
+
+  @media (max-width: 640px) {
+    height: 50px;
+  }
 }
 
 .logo {
-  max-width: 200px;
-  max-height: 70px;
+  /* Fixed height for consistent sizing across all cards */
+  height: 100%;
   width: auto;
-  height: auto;
+  max-width: 180px;
   object-fit: contain;
   object-position: left center;
 
   @media (max-width: 640px) {
-    max-width: 180px;
-    max-height: 60px;
+    max-width: 160px;
   }
 }
 
