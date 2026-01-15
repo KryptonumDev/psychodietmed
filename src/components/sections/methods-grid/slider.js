@@ -56,20 +56,20 @@ export default function MethodsSlider({ methods }) {
           ref={sliderRef}
           modules={[A11y]}
           className={styles.slider}
-          spaceBetween={24}
+          spaceBetween={12}
           slidesPerView={1.15}
           breakpoints={{
             1140: {
               slidesPerView: 3,
-              spaceBetween: 24,
+              spaceBetween: 20,
             },
             768: {
               slidesPerView: 2.2,
-              spaceBetween: 20,
+              spaceBetween: 16,
             },
             480: {
               slidesPerView: 1.3,
-              spaceBetween: 16,
+              spaceBetween: 12,
             },
           }}
           onSwiper={(swiper) => {

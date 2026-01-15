@@ -8,10 +8,10 @@ import styles from './styles.module.scss';
  * ProcessSection - 2-column layout:
  * Left: Process Image (sticky on desktop)
  * Right: Accordion items + CTA button
- * Title: Large centered heading above the whole section
+ * Title + Description: Large centered heading above the whole section
  */
 export default function ProcessSection({ data, accordion, theme }) {
-  const { title, processImage, ctaButton } = data || {};
+  const { title, description, processImage, ctaButton } = data || {};
   const accordionItems = accordion?.items || [];
 
   // Don't render if no image and no accordion items
@@ -19,12 +19,22 @@ export default function ProcessSection({ data, accordion, theme }) {
 
   return (
     <section className={`${styles.wrapper} ${styles[theme]}`}>
-      {/* Large centered heading above the section */}
-      {title && (
-        <h2 
-          className={styles.sectionTitle}
-          dangerouslySetInnerHTML={{ __html: title }} 
-        />
+      {/* Large centered heading + description above the section */}
+      {(title || description) && (
+        <div className={styles.sectionHeader}>
+          {title && (
+            <h2 
+              className={styles.sectionTitle}
+              dangerouslySetInnerHTML={{ __html: title }} 
+            />
+          )}
+          {description && (
+            <div 
+              className={styles.sectionDescription}
+              dangerouslySetInnerHTML={{ __html: description }} 
+            />
+          )}
+        </div>
       )}
 
       <div className={styles.process}>

@@ -27,14 +27,14 @@
 .logo {
   width: auto;
   /* Fixed height for consistent sizing across PDW/PDR */
-  height: 72px;
-  max-width: 260px;
+  height: 90px;
+  max-width: 300px;
   object-fit: contain;
   object-position: left center;
 
   @media (max-width: 999px) {
-    height: 56px;
-    max-width: 200px;
+    height: 70px;
+    max-width: 240px;
     margin: 0 auto;
     display: block;
     object-position: center;
