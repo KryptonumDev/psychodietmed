@@ -22,7 +22,7 @@ export default function ProcessSection({ data, accordion, theme }) {
       {(title || description) && (
         <div className={styles.sectionHeader}>
           {title && (
-            <h2 
+            <div 
               className={styles.sectionTitle}
               dangerouslySetInnerHTML={{ __html: title }} 
             />

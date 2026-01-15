@@ -21,20 +21,22 @@
 }
 
 .sectionTitle {
-  font-weight: 500;
-  font-size: clamp(32rem, calc(36vw / 7.68), 48rem);
-  line-height: 124%;
-  font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
-  color: var(--primary-800);
-  font-style: italic;
+  h2 {
+    font-weight: 500;
+    font-size: clamp(32rem, calc(36vw / 7.68), 48rem);
+    line-height: 124%;
+    font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
+    color: var(--primary-800);
+    font-style: italic;
 
-  strong, em {
-    color: var(--process-accent);
-    font-style: normal;
-  }
+    strong, em {
+      color: var(--process-accent);
+      font-style: normal;
+    }
 
-  @media (max-width: 370px) {
-    font-size: clamp(0rem, calc(32vw/3.7), 32rem);
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(32vw/3.7), 32rem);
+    }
   }
 }
 
@@ -59,6 +61,11 @@
 
   strong {
     color: var(--primary-800);
+  }
+
+  em {
+    font-style: normal;
+    color: var(--process-accent-dark);
   }
 }
 
