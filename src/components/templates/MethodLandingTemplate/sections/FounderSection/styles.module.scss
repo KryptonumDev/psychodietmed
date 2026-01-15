@@ -1,5 +1,6 @@
 .wrapper {
   --founder-accent: var(--method-pdw-primary);
+  --founder-accent-dark: var(--method-pdw-dark);
   --founder-accent-light: var(--method-pdw-light);
 
   display: grid;
@@ -14,6 +15,7 @@
 
 .pdr {
   --founder-accent: var(--method-pdr-primary);
+  --founder-accent-dark: var(--method-pdr-dark);
   --founder-accent-light: var(--method-pdr-light);
 }
 
@@ -202,7 +204,7 @@
 
   em {
     font-style: normal;
-    color: var(--founder-accent);
+    color: var(--founder-accent-dark);
     font-weight: 700;
   }
 

@@ -1,9 +1,11 @@
 .wrapper {
   --target-accent: var(--method-pdw-primary);
+  --target-accent-dark: var(--method-pdw-dark);
   --target-accent-light: var(--method-pdw-light);
 
   &.pdr {
     --target-accent: var(--method-pdr-primary);
+    --target-accent-dark: var(--method-pdr-dark);
     --target-accent-light: var(--method-pdr-light);
   }
 
@@ -17,7 +19,7 @@
 
     em {
       font-style: normal;
-      color: var(--target-accent);
+      color: var(--target-accent-dark);
     }
 
     @media (max-width: 370px) {

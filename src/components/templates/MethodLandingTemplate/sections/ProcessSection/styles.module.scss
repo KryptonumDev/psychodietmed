@@ -1,11 +1,13 @@
 /* Wrapper for theme variables */
 .wrapper {
   --process-accent: var(--method-pdw-primary);
+  --process-accent-dark: var(--method-pdw-dark);
   --process-accent-light: var(--method-pdw-light);
   --process-accent-bg: var(--method-pdw-bg);
 
   &.pdr {
     --process-accent: var(--method-pdr-primary);
+    --process-accent-dark: var(--method-pdr-dark);
     --process-accent-light: var(--method-pdr-light);
     --process-accent-bg: var(--method-pdr-bg);
   }
@@ -27,7 +29,7 @@
   font-style: italic;
 
   strong, em {
-    color: var(--process-accent);
+    color: var(--process-accent-dark);
     font-style: normal;
   }
 
@@ -200,13 +202,13 @@
 
 .accordionTitle {
   font-weight: 500;
-  font-size: clamp(20rem, calc(24vw/7.68), 28rem);
+  font-size: clamp(18rem, calc(20vw/7.68), 24rem);
   line-height: 124%;
   font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
   color: var(--primary-800);
 
   @media (max-width: 370px) {
-    font-size: clamp(0rem, calc(20vw/3.7), 20rem);
+    font-size: clamp(0rem, calc(18vw/3.7), 18rem);
   }
 }
 
@@ -216,18 +218,14 @@
 
   p {
     font-weight: 500;
-    font-size: clamp(20rem, calc(24vw / 14.40), 24rem);
-    line-height: 140.5%;
+    font-size: clamp(16rem, calc(18vw / 7.68), 20rem);
+    line-height: 150%;
     font-feature-settings: 'pnum' on, 'lnum' on, 'ordn' on, 'salt' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on;
     color: var(--neutrals-800);
     margin-bottom: 1em;
 
     &:last-child {
       margin-bottom: 0;
-    }
-
-    @media (max-width: 768px) {
-      font-size: clamp(16rem, calc(20vw / 7.68), 24rem);
     }
 
     @media (max-width: 370px) {
@@ -238,12 +236,8 @@
   ul, ol {
     margin: 1em 0;
     padding-left: 1.5em;
-    font-size: clamp(20rem, calc(24vw / 14.40), 24rem);
-    line-height: 140.5%;
-    
-    @media (max-width: 768px) {
-      font-size: clamp(16rem, calc(20vw / 7.68), 24rem);
-    }
+    font-size: clamp(16rem, calc(18vw / 7.68), 20rem);
+    line-height: 150%;
   }
 
   li {
@@ -255,7 +249,7 @@
   }
 
   a {
-    color: var(--process-accent);
+    color: var(--process-accent-dark);
     text-decoration: underline;
 
     &:hover {
