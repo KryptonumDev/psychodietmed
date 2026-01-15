@@ -249,7 +249,7 @@ export const PopUp = ({ service, specialistId, serviceId, setPopupOpened, chosen
               label="Telefon"
               name='phone'
               placeholder="Telefon"
-              error="Proszę wpisać telefon w formacie +48 123 456 789"
+              error="Proszę wpisać numer telefonu (dla Polski można pominąć +48)"
             />
             <Input
               register={register('adres', { required: true })}
