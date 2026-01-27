@@ -23,6 +23,17 @@
     @media (max-width: 768px) {
       margin-left: 0;
     }
+
+    svg {
+      width: auto;
+      height: clamp(20px, calc(24vw/7.68), 28px);
+      flex-shrink: 0;
+    }
+
+    strong {
+      font-weight: 700;
+      color: var(--primary-800);
+    }
   }
 
   .priecflex{
