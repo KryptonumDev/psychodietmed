@@ -163,7 +163,7 @@ export default function Header() {
           </ul>
           <Link
             className={`${styles.link} link`}
-            href='/umow-wizyte'
+            href='/specjalisci'
             onClick={() => { setIsMenuOpened(false); setItemOpened(false) }}
           >
             Umów się

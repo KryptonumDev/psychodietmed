@@ -44,6 +44,8 @@ export default function Content({ disabled, slug, content, modules, author }) {
   return (
     <section className={styles.wrapper}>
       <div>
+        {/* Hide curriculum for guests - protect Know-How */}
+        {!disabled && (
         <div className={styles.modules}>
           <h2>Program</h2>
           {modules?.map((module, moduleIndex) => {
@@ -175,6 +177,7 @@ export default function Content({ disabled, slug, content, modules, author }) {
             )
           })}
         </div>
+        )}
         <div className={styles.aboutCourse}>
           <h2>O kursie</h2>
           <div className='gutenberg' dangerouslySetInnerHTML={{ __html: content }} />

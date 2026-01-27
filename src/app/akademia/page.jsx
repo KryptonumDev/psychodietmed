@@ -315,6 +315,11 @@ async function getData() {
                 }
               }
             }
+            productCategories {
+              nodes {
+                slug
+              }
+            }
           }
         }
       }
@@ -322,8 +327,16 @@ async function getData() {
       revalidate: 600,
     });
 
+    // Filter out hidden courses (with "ukryty" category)
+    const filteredCourses = {
+      ...courses,
+      nodes: courses.nodes.filter(course => 
+        !course.productCategories?.nodes?.some(cat => cat.slug === 'ukryty')
+      )
+    };
+
     return {
-      courses: courses,
+      courses: filteredCourses,
       page: page,
       ebooks: ebooks,
       newsletter: global.global.newsletterGlobal,

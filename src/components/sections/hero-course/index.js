@@ -6,7 +6,7 @@ import { Clock } from "../../../assets/clock"
 import { Graduate } from "../../../assets/graduate"
 import AddToCart from "@/components/atoms/add-to-cart-button"
 import Price from "@/components/atoms/price"
-import { PayPo } from "../../../assets/payPo"
+import { P24Raty } from "../../../assets/p24-raty"
 
 export default function Hero({ regularPrice, price, lessonSlug, slug, databaseId, accessToCourse, title, image, time, count }) {
   return (
@@ -33,14 +33,19 @@ export default function Hero({ regularPrice, price, lessonSlug, slug, databaseId
               <AddToCart className="link" product={{ productId: databaseId }}>Zakup dostęp do kursu</AddToCart>
             )}
           </div>
-          <div className={styles.paymentInfo}>
-            <PayPo /> Kup dzisiaj i zapłać za 30 dni z PayPo
+          {!accessToCourse && (
+            <div className={styles.paymentInfo}>
+              <P24Raty /> 10 rat <strong>0%</strong>
+            </div>
+          )}
+        </div>
+        {/* Hide time and lesson count for guests (non-purchased) */}
+        {accessToCourse && (
+          <div className={styles.flex}>
+            <p><Clock /> Łączny czas: <span>{time}</span></p>
+            <p><Graduate /> Liczba lekcji: <span>{count}</span></p>
           </div>
-        </div>
-        <div className={styles.flex}>
-          <p><Clock /> Łączny czas: <span>{time}</span></p>
-          <p><Graduate /> Liczba lekcji: <span>{count}</span></p>
-        </div>
+        )}
       </div>
     </section>
   )

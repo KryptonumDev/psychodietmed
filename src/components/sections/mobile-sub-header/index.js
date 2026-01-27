@@ -9,7 +9,7 @@ export default function SubHeader() {
   const [cart] = useContext(AppContext);
   return (
     <aside className={styles.wrapper}>
-      <Link className={`${styles.link} link`} href='/umow-wizyte'>
+      <Link className={`${styles.link} link`} href='/specjalisci'>
         Umów się!
       </Link>
       <Cart

@@ -3,7 +3,9 @@
     "paths": {
       "@/app/*": ["./src/app/*"],
       "@/components/*": ["./src/components/*"],
-      "@/schemas/*": ["./src/schemas/*"]
+      "@/schemas/*": ["./src/schemas/*"],
+      "@/utils/*": ["./src/utils/*"],
+      "@/queries/*": ["./src/queries/*"]
     }
   }
 }
