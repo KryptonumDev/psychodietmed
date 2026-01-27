@@ -505,13 +505,12 @@
 
     @media (max-width: 1024px) {
       display: grid;
-      grid-template-columns: 112px 1fr;
-      gap: 0 28px;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
       grid-template-areas:
-        'title title'
-        'image name'
-        'image proffesion'
-        'image excerpt';
+        'title image'
+        'content content';
+      align-items: center;
     }
 
     .image {
@@ -521,6 +520,7 @@
 
       @media (max-width: 1024px) {
         grid-area: image;
+        width: 88px !important;
         margin: 0;
       }
     }
@@ -533,11 +533,17 @@
       @media (max-width: 1024px) {
         grid-area: title;
         text-align: left;
-        margin-bottom: 24px;
+        align-self: center;
       }
 
       @media (max-width: 370px) {
         font-size: clamp(0rem, calc(28vw/3.7), 28rem);
+      }
+    }
+
+    .authorContent {
+      @media (max-width: 1024px) {
+        grid-area: content;
       }
     }
 
@@ -546,7 +552,6 @@
       color: var(--primary-800);
 
       @media (max-width: 1024px) {
-        grid-area: name;
         text-align: left;
       }
     }
@@ -560,7 +565,6 @@
       font-size: clamp(14rem, calc(14vw/7.68), 16rem);
 
       @media (max-width: 1024px) {
-        grid-area: proffesion;
         text-align: left;
       }
 
@@ -572,12 +576,11 @@
     .excerpt {
       text-align: center;
       margin-top: 16px;
-      font-size: 20rem;
       font-size: clamp(16rem, calc(16vw/7.68), 20rem);
 
       @media (max-width: 1024px) {
-        grid-area: excerpt;
         text-align: left;
+        margin-top: 12px;
       }
 
       @media (max-width: 370px) {

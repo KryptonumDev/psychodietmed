@@ -194,11 +194,13 @@ export default function Content({ disabled, slug, content, modules, author }) {
             aspectRatio={true}
             className={styles.image}
           />
-          <p className={styles.name}>{author?.title}</p>
-          <small>{author?.proffesional?.proffesion}</small>
-          {author?.proffesional?.courseExcerpt && (
-            <p className={styles.excerpt}>{author.proffesional.courseExcerpt}</p>
-          )}
+          <div className={styles.authorContent}>
+            <p className={styles.name}>{author?.title}</p>
+            <small>{author?.proffesional?.proffesion}</small>
+            {author?.proffesional?.courseExcerpt && (
+              <p className={styles.excerpt}>{author.proffesional.courseExcerpt}</p>
+            )}
+          </div>
         </div>
       </aside>
     </section>
