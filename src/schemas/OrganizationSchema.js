@@ -9,7 +9,7 @@ export default function OrganizationSchema() {
         "@id": "https://www.psychodietmed.pl/?utm_source=google&utm_medium=organic&utm_campaign=gmf",
         "url": "https://www.psychodietmed.pl/?utm_source=google&utm_medium=organic&utm_campaign=gmf",
         "description": "Klinika Psychodietetyki i Psychoterapii Online – Terapia Zaburzeń Odżywiania | Leczenie Otyłości | Psychodietetyka Warszawa",
-        "disambiguatingDescription": "PsychoDietMed to klinika oferująca kompleksową pomoc w zakresie psychoterapii i psychodietetyki online. Specjalizujemy się w terapii zaburzeń odżywiania takich jak anoreksja, bulimia czy EDNOS, a także w leczeniu otyłości. Jako doświadczeni psychoterapeuci i psychodietetycy, pomagamy pacjentom na każdym etapie leczenia, łącząc psychoterapię poznawczo-behawioralną z dietoterapią i farmakologią. Dla osób po operacjach bariatrycznych oferujemy specjalistyczne wsparcie w zakresie psychodietetyki, pomagając im w adaptacji do nowego stylu życia. Nasze podejście jest holistyczne i dostosowane do indywidualnych potrzeb. Skontaktuj się z nami i rozpocznij swoją drogę w kierunku dobrego i zdrowego życia już dziś!",
+        "disambiguatingDescription": "PsychoDietMed to klinika z Warszawy oferująca kompleksową pomoc w zakresie psychoterapii i psychodietetyki online. Specjalizujemy się w terapii zaburzeń odżywiania, a także w leczeniu otyłości. Jako doświadczeni psychoterapeuci i psychodietetycy pomagamy pacjentom łącząc psychoterapię poznawczo-behawioralną z dietoterapią i farmakologią. Pracujemy w oparciu o autorskie metodologie, takie jak PsychoDietWay, która koncentruje się na trwałym utrzymaniu efektów odchudzania, oraz PsychoDietRecovery – metodę zwiększającą skuteczność leczenia zaburzeń odżywiania. Dla osób po operacjach bariatrycznych oferujemy specjalistyczne wsparcie, pomagając w adaptacji do nowego stylu życia. Skontaktuj się z nami i rozpocznij swoją drogę do zdrowego życia.",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Warszawa",
@@ -78,6 +78,8 @@ export default function OrganizationSchema() {
           "https://www.cylex-polska.pl/firmy/psychodietmed---klinika-psychodietetyki-i-psychoterapii-online-14194490.html",
           "https://firmania.pl/warszawa/psychodietmed-klinika-psychodietetyki-i-psychoterapii-online-1203066",
           "https://teraz-otwarte.pl/warszawa/psychodietmed-klinika-psychodietetyki-i-psychoterapii-online-4166620",
+          "https://honaro.pl/pl/about/90809,Klinika-Psychodietetyki-i-Psychoterapii-Online,Psycholodzy",
+          "https://www.brownbook.net/business/54767053/klinika-psychodietetyki-i-psychoterapii-online",
           "https://i.pl/klinika-psychodietetyki-i-psychoterapii-online-terapia-zaburzen-odzywiania-leczenie-otylosci-psychodietetyka-warszawa/kf/653983",
           "https://stronakobiet.pl/klinika-psychodietetyki-i-psychoterapii-online-terapia-zaburzen-odzywiania-leczenie-otylosci-psychodietetyka-warszawa/kf/653983",
           "https://dzienniklodzki.pl/klinika-psychodietetyki-i-psychoterapii-online-terapia-zaburzen-odzywiania-leczenie-otylosci-psychodietetyka-warszawa/kf/653983",
