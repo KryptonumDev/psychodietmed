@@ -9,7 +9,7 @@ import Button from "@/components/atoms/button";
 
 export default function Card({ chosenTime, setChosenTime, data }) {
   const fetchData = () => {
-    fetch("https://www.psychodietmed.pl/api/get-avaible-dates", {
+    fetch("/api/get-avaible-dates", {
       method: 'POST',
       body: JSON.stringify({
         employeId: data.proffesional.specialistId,

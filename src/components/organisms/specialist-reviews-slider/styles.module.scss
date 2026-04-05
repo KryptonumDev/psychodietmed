@@ -1,7 +1,13 @@
 .wrapper {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 36px;
 
+  @media (max-width: 1440px) {
+    overflow: visible !important;
+  }
   .buttons {
-
+    margin-top: 0;
     button {
       @media (min-width: 972px) {
         &:last-child {

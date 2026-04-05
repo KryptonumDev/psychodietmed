@@ -1,15 +1,11 @@
 'use client'
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import styles from "./styles.module.scss"
 import { AnimatePresence, motion } from "framer-motion"
 
 export default function Loader({ className = '', show }) {
 
   const [needAnimation, setNeedAnimation] = useState(false);
-
-  useEffect(() => {
-    setNeedAnimation(true)
-  }, [])
 
   return (
     <AnimatePresence mode="wait">

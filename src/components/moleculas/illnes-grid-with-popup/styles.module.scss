@@ -33,8 +33,9 @@
 }
 
 .popup_wrap {
+  position: absolute;
+  z-index: 2;
   @media (max-width: 1024px) {
-    position: absolute;
     right: 0;
     bottom: 0;
     transform: translateY(100%) !important;

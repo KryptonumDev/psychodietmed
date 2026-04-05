@@ -1,15 +1,31 @@
 .control {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 32px;
+  justify-content: space-between;
+  gap: clamp(12px, calc(22vw/7.68), 32px);
   margin-top: 48px;
+
+  &.arrowless {
+    justify-content: center;
+
+    .dots {
+      .dot {
+        height: 5px;
+        width: 80px;
+        display: block;
+      }
+    }
+  }
 
   @media (max-width: 640px) {
     justify-content: space-between;
+
+    &.arrowless {
+      justify-content: center;
+    }
   }
 
-  button{
+  button {
     border: none;
     background-color: transparent;
   }
@@ -17,22 +33,27 @@
 
 .dots {
   display: flex;
-  gap: 24px;
-  @media (max-width: 640px) {
-    display: none;
-  }
+  flex-wrap: wrap;
+  gap: clamp(16px, calc(20vw/7.68), 24px);
+  align-items: center;
+
   .dot {
-    width: 80px;
-    height: 5px;
+    width: clamp(6px, calc(8vw/7.68), 12px);
+    height: clamp(6px, calc(8vw/7.68), 12px);
     border-radius: 50px;
     cursor: pointer;
     background-color: var(--secondary-100);
-    transition: background-color .3s;
+    transition: all .3s;
+    transform-origin: 50% 50%;
+
     &:hover {
-      background-color: var(--secondary-200);
-    }
-    &.active {
       background-color: var(--secondary-500);
+    }
+
+    &.active {
+      background-color: var(--secondary-600);
+      width: clamp(10px, calc(12vw/7.68), 16px);
+      height: clamp(10px, calc(12vw/7.68), 16px);
     }
   }
 }

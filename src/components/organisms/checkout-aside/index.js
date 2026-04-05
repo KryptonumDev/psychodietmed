@@ -19,7 +19,7 @@ export default function Aside({ data }) {
 
       <div className={styles.sum}>
         Razem:
-        <strong dangerouslySetInnerHTML={{ __html: data?.totalProductsPrice }} />
+        <strong>{data?.totalProductsPrice}&nbsp;zł</strong>
       </div>
     </aside>
   )

@@ -16,14 +16,14 @@ export async function POST(req) {
       body: JSON.stringify(requestBody),
       cache: 'no-cache',
     });
-
+    console.log(response);
     if (response.ok) {
       return NextResponse.json({ success: true });
     } else {
-      return NextResponse.json({ success: false }, { status: 500 });
+      return NextResponse.json({ response: response.json(), success: true });
     }
   } catch(err) {
     console.log(err);
-    return NextResponse.json({ success: false }, { status: 500 });
+    return NextResponse.json({ error: err, success: false }, { status: 500 });
   }
 }

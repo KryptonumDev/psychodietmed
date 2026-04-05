@@ -59,7 +59,7 @@
   top: 28px;
 }
 .gutenberg blockquote p {
-  font-size: 32rem;
+  font-size: clamp(18rem, calc(20vw/7.68), 24rem);
   color: var(--primary-800);
   font-weight: 500;
 }

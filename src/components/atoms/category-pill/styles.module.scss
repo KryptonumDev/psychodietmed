@@ -1,16 +1,17 @@
 .category {
   padding: clamp(6px, calc(8vw/7.68), 10px) clamp(8px, calc(12vw/7.68), 16px);
-  color: var(--primary-800);
-  border: 2px solid var(--primary-800);
+  color: #3A69A0;
+  border: 2px solid #3A69A0;
   border-radius: 50px;
   position: relative;
   z-index: 4;
-  font-size: clamp(14rem, calc(16vw/7.68), 16rem);
+  font-size: clamp(14px, calc(16vw/7.68), 16px);
   display: block;
   background-color: transparent;
   text-align: center;
   &.active {
     background-color: var(--primary-800);
+    border-color: var(--primary-800);
     color: #fff;
   }
   @media (max-width: 370px) {

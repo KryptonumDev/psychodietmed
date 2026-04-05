@@ -33,8 +33,8 @@
     font-weight: 500;
 
     svg {
-      max-height: clamp(20px, calc(22vw/7.68), 25px);
-      width: fit-content;
+      height: clamp(22px, calc(22vw/7.68), 25px);
+      width: auto;
     }
   }
 

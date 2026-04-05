@@ -13,7 +13,7 @@ export default function Hero({ data }) {
           <h1 className={styles.title} dangerouslySetInnerHTML={{ __html: removeWrap(title) }} />
           <div className={styles.text} dangerouslySetInnerHTML={{ __html: text }} />
         </div>
-        <Image loading="eager" className={styles.image} src={image.mediaItemUrl} alt={image.altText} width={image.mediaDetails.width} height={image.mediaDetails.height} />
+        <Image priority className={styles.image} src={image.mediaItemUrl} alt={image.altText} width={image.mediaDetails.width} height={image.mediaDetails.height} sizes="(max-width: 768px) 100vw, 50vw" />
       </div>
     </section>
   )

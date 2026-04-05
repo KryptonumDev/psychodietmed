@@ -5,18 +5,15 @@ import { Image } from "@/components/atoms/image"
 import Link from "next/link"
 import Calendar from "@/components/atoms/specialist-card-calendar"
 import Loader from "@/components/sections/loader"
-import { AnimatePresence } from "framer-motion"
-import Button from "@/components/atoms/button"
 import { Star } from "../../../assets/star"
-
-const regex = /<[^>]+>([^<]*)<\/[^>]+>/;
+import Category from "@/components/atoms/category-pill"
 
 export default function Card({ clickDate, data }) {
   const { slug, title, proffesional, specialisations } = data
-  const excerpt = proffesional.excerpt.match(regex);
+  const excerpt = proffesional.courseExcerpt;
 
   const fetchData = () => {
-    fetch("http://localhost:8000/api/get-avaible-dates", {
+    fetch("/api/get-avaible-dates", {
       method: 'POST',
       body: JSON.stringify({
         employeId: proffesional.specialistId,
@@ -59,12 +56,13 @@ export default function Card({ clickDate, data }) {
             </div>
           </div>
         </div>
-        <ul>
+        <div className={styles.list}>
           {specialisations?.nodes.map(({ title }, index) => {
-            return <li key={index}>{title}</li>
+            if(index > 5) return null
+            return <Category key={index} name={title}></Category>
           })}
-        </ul>
-        <p>{excerpt[1]}</p>
+        </div>
+        <p>{excerpt}</p>
       </Link>
       <div className={styles.relative}>
         <Loader show={!dates} className={styles.loader} />

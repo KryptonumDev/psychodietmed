@@ -2,7 +2,7 @@
   background: #F1F6FB;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
-  padding: clamp(36px, calc(36vw/7.68), 64px) 24px;
+  padding: clamp(20px, calc(28vw/7.68), 36px) clamp(16px, calc(48vw/7.68), 48px);
 
   h2 {
     font-size: clamp(28rem, calc(36vw / 7.68), 48rem);

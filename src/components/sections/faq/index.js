@@ -3,6 +3,8 @@ import styles from './styles.module.scss'
 
 export default function FAQ({ data: { title, text, qa } }) {
 
+  if (!qa) return null
+
   const arrays = (() => {
     const arr = []
 

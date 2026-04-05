@@ -9,13 +9,14 @@ import 'swiper/scss';
 
 export default function Slider({ items }) {
   const [activeIndex, setActiveIndex] = useState(0);
+
   return (
     <Swiper
       modules={[A11y]}
       className={styles.wrapper}
       spaceBetween={24}
       slidesPerView={1}
-      loop={true}
+      loop={false}
       onSlideChange={(swiper) => {
         setActiveIndex(swiper.realIndex);
       }}

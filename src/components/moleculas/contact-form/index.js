@@ -31,36 +31,37 @@ const NoOptionsMessage = props => {
   );
 };
 
-const url = `https://psychodietmed.headlesshub.com/wp-json/contact-form-7/v1/contact-forms/2317/feedback`;
+const url = `https://wp.psychodietmed.pl/wp-json/contact-form-7/v1/contact-forms/2317/feedback`;
 
 export default function Form({ subjects }) {
 
   const [subject, setSubject] = useState('')
-  const [ sentStatus, setSentStatus ] = useState({ sent: false })
+  const [sentStatus, setSentStatus] = useState({ sent: false })
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
   const onSubmit = data => {
     setSentStatus({ sent: true });
     let body = new FormData()
     body.append('mail', data.email)
-    body.append('fname', data.name)
+    body.append('fname', data.name + ' ' + data.surname)
     body.append('message', data.text)
     body.append('subject', subject)
     body.append('tel', data.tel)
+    body.append("_wpcf7_unit_tag", "469a0c2");
 
     axios.post(url, body)
-    .then((res) => {
-      console.log(res)
-      if (res.status === 200) {
-        setSentStatus(prevStatus => ({ ...prevStatus, success: true }));
-        reset()
-      } else {
+      .then((res) => {
+        console.log(res)
+        if (res.status === 200) {
+          setSentStatus(prevStatus => ({ ...prevStatus, success: true }));
+          reset()
+        } else {
+          setSentStatus(prevStatus => ({ ...prevStatus, success: false }));
+        }
+      }).catch(() => {
         setSentStatus(prevStatus => ({ ...prevStatus, success: false }));
-      }
-    }).catch(() => {
-      setSentStatus(prevStatus => ({ ...prevStatus, success: false }));
-      reset()
-    })
+        reset()
+      })
   };
 
   return (
@@ -94,30 +95,43 @@ export default function Form({ subjects }) {
           )
         )}
       </AnimatePresence>
-      <Input
-        name={'name'}
-        register={register('name', { required: true, pattern: namePattern })}
-        placeholder='Imię'
-        title={'Imię'}
-        errors={errors}
-        error="Proszę poprawnie uzupełnić to pole"
-      />
-      <Input
-        name={'email'}
-        register={register('email', { required: true, pattern: emailPattern })}
-        placeholder='Adres e-mail'
-        title={'Adres e-mail'}
-        errors={errors}
-        error="Proszę poprawnie uzupełnić to pole"
-      />
-      <Input
-        name={'tel'}
-        register={register('tel', { required: true, pattern: phonePattern })}
-        placeholder='Numer telefonu'
-        title={'Numer telefonu'}
-        errors={errors}
-        error="Proszę poprawnie uzupełnić to pole"
-      />
+      <div className={styles.columns}>
+        <Input
+          name={'name'}
+          register={register('name', { required: true, pattern: namePattern })}
+          placeholder='Imię'
+          title={'Imię'}
+          errors={errors}
+          error="Proszę poprawnie uzupełnić to pole"
+        />
+        <Input
+          name={'surname'}
+          register={register('surname', { required: true, pattern: namePattern })}
+          placeholder='Nazwisko'
+          title={'Nazwisko'}
+          errors={errors}
+          error="Proszę poprawnie uzupełnić to pole"
+        />
+      </div>
+      <div className={styles.columnsEmail}>
+        <Input
+          name={'email'}
+          register={register('email', { required: true, pattern: emailPattern })}
+          placeholder='Adres e-mail'
+          title={'Adres e-mail'}
+          errors={errors}
+          error="Proszę poprawnie uzupełnić to pole"
+        />
+        <Input
+          name={'tel'}
+          register={register('tel', { required: true, pattern: phonePattern })}
+          placeholder='Numer telefonu'
+          title={'Numer telefonu'}
+          errors={errors}
+          type="number"
+          error="Proszę poprawnie uzupełnić to pole"
+        />
+      </div>
       <label>
         <span>Temat wiadomości</span>
         <Select

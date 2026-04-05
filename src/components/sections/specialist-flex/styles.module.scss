@@ -17,7 +17,7 @@
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
     display: grid;
-    gap: clamp(16rem, calc(16vw/7.68), 24rem);
+    gap: clamp(16px, calc(16vw/7.68), 24px);
 
     .item {
       display: grid;

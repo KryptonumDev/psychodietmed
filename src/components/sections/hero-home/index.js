@@ -19,7 +19,7 @@ export default function Hero({ data }) {
           <div className={styles.text} dangerouslySetInnerHTML={{ __html: content }} />
           <Button href={link.url}>{link.title}</Button>
         </div>
-        <Image loading="eager" className={styles.image} src={image.mediaItemUrl} alt={image.altText} width={image.mediaDetails.width} height={image.mediaDetails.height} />
+        <Image priority className={styles.image} src={image.mediaItemUrl} alt={image.altText} width={image.mediaDetails.width} height={image.mediaDetails.height} sizes="(max-width: 768px) 100vw, 50vw" />
       </div>
       <motion.div dragConstraints={constraintsRef} drag="x" className={styles.logos_wrapper}>
         {logos.map(({ logo, link }, index) => (

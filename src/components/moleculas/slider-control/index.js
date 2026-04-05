@@ -4,7 +4,7 @@ import { useSwiper } from "swiper/react";
 import ArrowLeft from "@/components/atoms/ArrowLeft";
 import ArrowRight from "@/components/atoms/ArrowRight";
 
-export default function Control({ className = '', activeIndex, setActiveIndex, items }) {
+export default function Control({ disabelArrows, className = '', activeIndex, setActiveIndex, items }) {
   const swiper = useSwiper();
 
   const handlePrev = useCallback(() => {
@@ -24,8 +24,10 @@ export default function Control({ className = '', activeIndex, setActiveIndex, i
   }, [setActiveIndex, swiper]);
 
   return (
-    <div className={`${styles.control}`} >
-      <ArrowLeft onClick={handlePrev} aria-label="Przesuń w lewą" />
+    <div className={`${styles.control} ${disabelArrows ? styles.arrowless : ''}`} >
+      {!disabelArrows && (
+        <ArrowLeft onClick={handlePrev} aria-label="Przesuń w lewą" />
+      )}
       <div className={`${styles.dots} ${className}`}>
         {items.map((el, index) => (
           <button
@@ -35,7 +37,9 @@ export default function Control({ className = '', activeIndex, setActiveIndex, i
           />
         ))}
       </div>
-      <ArrowRight onClick={handleNext} aria-label="Przesuń w prawo"  />
+      {!disabelArrows && (
+      <ArrowRight onClick={handleNext} aria-label="Przesuń w prawo" />
+      )}
     </div >
   )
 }

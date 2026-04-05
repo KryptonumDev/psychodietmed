@@ -13,3 +13,7 @@ export async function setCookie(name, value) {
 export async function getCookie(name) {
   return cookies().get(name)
 }
+
+export async function deleteCookie(name) {
+  cookies().delete(name)
+}

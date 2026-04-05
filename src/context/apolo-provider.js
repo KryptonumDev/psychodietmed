@@ -71,7 +71,7 @@ export const afterware = new ApolloLink((operation, forward) => {
 
 function makeClient() {
   const httpLink = middleware.concat(afterware.concat(new HttpLink({
-    uri: "https://psychodietmed.headlesshub.com/graphql",
+    uri: "https://wp.psychodietmed.pl/graphql",
   })));
 
   return new NextSSRApolloClient({

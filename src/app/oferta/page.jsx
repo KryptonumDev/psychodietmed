@@ -76,7 +76,7 @@ async function getData(params) {
   const orderDirection = params.searchParams?.sortowanie ? params.searchParams?.sortowanie.split('-')[1] : 'ASC'
 
   try {
-    const result = await fetch('https://psychodietmed.headlesshub.com/graphql', {
+    const result = await fetch('https://wp.psychodietmed.pl/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -98,6 +98,23 @@ async function getData(params) {
               slug
               histori {
                 information {
+                  specialist {
+                    ... on Specjalista {
+                      title
+                      slug
+                      proffesional {
+                        index
+                        avatar {
+                          altText
+                          mediaItemUrl
+                          mediaDetails{
+                            width
+                            height
+                          }
+                        }
+                      }
+                    }
+                  }
                   boldText
                   beforeImage {
                     altText
@@ -148,6 +165,11 @@ async function getData(params) {
                   width
                 }
               }
+              productCategories{
+                nodes{
+                  slug
+                }
+              }
               ... on SimpleProduct {
                 id
                 price
@@ -178,6 +200,11 @@ async function getData(params) {
           }
           bundles: products(where: {categoryIn: "bundle"}, first: 50) {
             nodes {
+              productCategories{
+                nodes{
+                  slug
+                }
+              }
               addons {
                 name
                 ... on AddonMultipleChoice {
@@ -265,6 +292,11 @@ async function getData(params) {
               }
             }
             nodes {
+              productCategories{
+                nodes{
+                  slug
+                }
+              }
               addons {
                 name
                 ... on AddonMultipleChoice {
@@ -370,6 +402,23 @@ async function getData(params) {
                     slug
                     histori {
                       information {
+                        specialist {
+                          ... on Specjalista {
+                            title
+                            slug
+                            proffesional {
+                              index
+                              avatar {
+                                altText
+                                mediaItemUrl
+                                mediaDetails{
+                                  width
+                                  height
+                                }
+                              }
+                            }
+                          }
+                        }
                         boldText
                         beforeImage {
                           altText

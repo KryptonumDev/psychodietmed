@@ -3,9 +3,9 @@
   border: 1.5px solid var(--secondary-500);
   background: #FFF;
   box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);
-  padding: clamp(32px, calc(32vw/7.68), 48px) clamp(20px, calc(20vw/7.68), 36px) clamp(36px, calc(36vw/7.68), 48px) clamp(20px, calc(20vw/7.68), 36px);
+  padding: clamp(20px, calc(24vw/7.68), 32px) clamp(16px, calc(20vw/7.68), 36px) clamp(20px, calc(24vw/7.68), 32px) clamp(16px, calc(20vw/7.68), 36px);
   display: grid;
-  gap: clamp(28px, calc(36vw/7.68), 40px);
+  gap: clamp(16px, calc(24vw/7.68), 32px);
 
   .result {
     width: fit-content;
@@ -42,7 +42,7 @@
     span {
       color: var(--primary-800);
       font-weight: 700;
-      font-size: clamp(16rem, calc(16vw/7.68), 24rem);
+      font-size: clamp(20rem, calc(22vw/7.68), 28rem);
       white-space: nowrap;
 
       @media (max-width: 370px) {
@@ -54,8 +54,8 @@
       background: #FFFEFE;
       border: 2px solid var(--secondary-500);
       border-radius: 50px;
-      line-height: 23px;
-      padding: clamp(10px, calc(10vw/7.68), 20px) 28px clamp(10px, calc(10vw/7.68), 20px) 6px;
+      line-height: 24px;
+      padding: 10px 28px 10px 6px;
       color: var(--primary-800);
       font-weight: 500;
       box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.10);

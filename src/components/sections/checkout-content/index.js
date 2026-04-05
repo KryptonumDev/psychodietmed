@@ -17,12 +17,16 @@ import { useQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import axios from "axios";
 import Loader from "../loader";
 
+// Strip HTML tags from error messages
+const stripHtml = (html) => html?.replace(/<[^>]*>/g, '') || '';
+
 export default function CheckoutContent() {
   const [cart, setCart] = useContext(AppContext);
   const [input, setInput] = useState({});
   const [orderData, setOrderData] = useState(null);
   const [step, setStep] = useState(2);
   const [innerLoading, setInnerLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if ((cart && cart?.products?.length === 0)) {
@@ -75,24 +79,34 @@ export default function CheckoutContent() {
       input: orderData
     },
     onCompleted: (data) => {
+      const email = data.checkout.customer?.email || data.checkout.order.billing.email || data.checkout.order.shipping.email
+      const firstName = data.checkout.customer?.firstName || data.checkout.order.billing.firstName || data.checkout.order.shipping.firstName
+      const lastName = data.checkout.customer?.lastName || data.checkout.order.billing.lastName || data.checkout.order.shipping.lastName
+
       const mailerlite = axios.post('/api/mailer-lite-register', {
-        email: data.checkout.customer?.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
+        email: email,
         type: 'active',
         fields: {
           marketing_permissions: '1',
-          name: data.checkout.customer?.firstName || data.checkout.order.billing.firstName || data.checkout.order.shipping.firstName,
+          name: firstName,
         }
       })
 
       if (data.checkout.order.total == 0) {
         window.location.href = `https://www.psychodietmed.pl/api/complete-free-order/?id=${data.checkout.order.orderNumber}`
+        return;
       }
 
       const transaction = axios.post('/api/create-transaction', {
+        "client": firstName + ' ' + lastName,
+        "address": orderData.billing.address1,
+        "zip": orderData.billing.postcode,
+        "city": orderData.billing.city,
         "amount": data.checkout.order.total * 100,
         "sessionId": data.checkout.order.orderKey,
         "email": data.checkout.customer.email || data.checkout.order.billing.email || data.checkout.order.shipping.email,
-        "urlReturn": `https://www.psychodietmed.pl/api/complete-order/?amount=${data.checkout.order.total * 100}&session=${data.checkout.order.orderKey}&id=${data.checkout.order.orderNumber}`,
+        "urlReturn": `https://www.psychodietmed.pl/api/verify-transaction-status/?session=${data.checkout.order.orderKey}&id=${data.checkout.order.orderNumber}`,
+        "urlStatus": `https://www.psychodietmed.pl/api/complete-order/?amount=${data.checkout.order.total * 100}&session=${data.checkout.order.orderKey}&id=${data.checkout.order.orderNumber}`,
       })
 
       Promise.all([
@@ -101,23 +115,23 @@ export default function CheckoutContent() {
       ])
         .then(function (values) {
           if (values[0].data.link) {
-            localStorage.setItem('payLink', res.link)
+            localStorage.setItem('woo-next-cart', null);
+            localStorage.setItem('payLink', values[0].data.link)
             window.location.href = values[0].data.link
           }
           setInnerLoading(false)
         })
-        .catch(error => {
+        .catch(err => {
           setInnerLoading(false)
-          alert(error)
-          throw new Error(error)
+          setError(err?.message || 'Wystąpił błąd podczas przetwarzania płatności. Spróbuj ponownie.')
         });
     },
-    onError: (error) => {
-      if (error.message === 'Konto z Twoim adresem e-mail jest już zarejestrowane. <a href="#" class="showlogin">Zaloguj się.</a>') {
+    onError: (err) => {
+      if (err.message === 'Konto z Twoim adresem e-mail jest już zarejestrowane. <a href="#" class="showlogin">Zaloguj się.</a>') {
         setOrderData(createCheckoutData(input, true))
       } else {
         setInnerLoading(false)
-        alert(error)
+        setError(stripHtml(err?.message) || 'Wystąpił błąd podczas składania zamówienia. Spróbuj ponownie.')
       }
     }
   });
@@ -129,7 +143,8 @@ export default function CheckoutContent() {
   }, [checkout, orderData]);
 
   const handleSubmit = (props) => {
-    const needAccount = cart.products.some((item) => item.categories.some((category) => category.slug === 'kurs'))
+    setError(null) // Clear any previous errors
+    const needAccount = cart.products.some((item) => item.categories.some((category) => category.slug === 'kurs' || category.slug === 'program'))
     const formattedInput = { ...input, comment: props.comment, needAccount: needAccount }
     setOrderData(createCheckoutData(formattedInput, false))
     setInput(formattedInput)
@@ -139,6 +154,12 @@ export default function CheckoutContent() {
   return (
     <section className={styles.wrapper}>
       <Loader show={loading || innerLoading || checkoutLoad} />
+      {error && (
+        <div className={styles.error}>
+          <p>{error}</p>
+          <button onClick={() => setError(null)} aria-label="Zamknij komunikat">×</button>
+        </div>
+      )}
       <h1>
         {step === 2 && 'Dane osobowe'}
         {(step === 3 && cart?.needsShippingAddress) && 'Dostawa'}

@@ -1,69 +1,74 @@
 import { NextResponse } from "next/server"
+import { P24 } from "@ingameltd/node-przelewy24";
 
 export const dynamic = 'force-dynamic'
 
-export async function GET(req) {
+export async function POST(req) {
   try {
+    const { merchantId, posId, sessionId, amount, originAmount, currency, orderId, methodId, statement, sign } = await req.json()
     const { searchParams } = new URL(req.url)
-
+    const ParamAmount = searchParams.get('amount')
     const bookingId = searchParams.get('id')
-    const amount = searchParams.get('amount')
-    const session = searchParams.get('session')
 
-    if (!bookingId || !session || !amount) return NextResponse.redirect(`https://www.psychodietmed.pl/podsumowanie?status=error&bookingId=${bookingId}&session=${session}&amount=${amount}`)
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("X-Requested-With", "XMLHttpRequest");
+    headers.append("X-Tenant", process.env.CALENDESK_TENANT_NAME);
+    headers.append("X-Api-Key", process.env.CALENDESK_API_KEY);
 
-    const transactionHeaders = new Headers();
-    transactionHeaders.append("Content-Type", "application/json");
-    transactionHeaders.append("Authorization", `Basic ${btoa(`${Number(process.env.P24_POS_ID)}:${process.env.P24_REST_API_KEY}`)}`);
+    var body = JSON.stringify({
+      "payment_method": "other",
+      "booking_id": bookingId,
+      "amount": ParamAmount,
+      "status": "approved",
+      "is_paid": true,
+    });
 
-    await fetch(`https://secure.przelewy24.pl/api/v1/transaction/by/sessionId/${session}`, {
-      method: 'GET',
-      headers: transactionHeaders,
+    const p24 = new P24(
+      Number(process.env.P24_MERCHANT_ID),
+      Number(process.env.P24_POS_ID),
+      process.env.P24_REST_API_KEY,
+      process.env.P24_CRC,
+      {
+        sandbox: false
+      }
+    )
+
+    const response = await p24.verifyTransaction({
+      amount: amount,
+      currency: currency,
+      orderId: orderId,
+      sessionId: sessionId,
     })
-      .then(res => res.json())
-      .then(async (res) => {
-        console.log(res)
-        if (res.data.status < 1 || res.data.status > 2)
-          throw new Error('failed')
+    if (!response) throw new Error('Verification failed')
 
-        const headers = new Headers();
-        headers.append("Content-Type", "application/json");
-        headers.append("X-Requested-With", "XMLHttpRequest");
-        headers.append("X-Tenant", process.env.CALENDESK_TENANT_NAME);
-        headers.append("X-Api-Key", process.env.CALENDESK_API_KEY);
+    const booking = await fetch(`https://api.calendesk.com/api/admin/payments/bookings`, {
+      method: 'POST',
+      headers: headers,
+      body: body,
+      redirect: 'follow',
+      cache: 'no-cache'
+    })
 
-        var body = JSON.stringify({
-          "payment_method": "other",
-          "booking_id": bookingId,
-          "amount": amount,
-          "status": "approved",
-          "is_paid": true,
-        });
+    if (booking.status !== 200) {
+      console.log(booking)
+      return NextResponse.json({ res: booking }, { status: 500 })
+    }
 
-        await fetch(`https://api.calendesk.com/api/admin/payments/bookings`, {
-          method: 'POST',
-          headers: headers,
-          body: body,
-          redirect: 'follow',
-          cache: 'no-cache'
-        })
-          .then(data => data.json())
-          .then(data => {
-            console.log(data)
+    if (response.status !== 200) {
+      console.log(response)
+      return NextResponse.json({ res: response }, { status: 500 })
+    }
 
-            if (data.id && data.status === 'paid')
-              throw new Error('complete')
-            else
-              throw new Error('error')
-          })
-      })
+    console.log({ res: response, booking: booking })
+    return NextResponse.json({
+      res: response,
+      booking: booking
+    })
+
+
   } catch (err) {
     console.log(err)
-    if (err.message === 'complete')
-      return NextResponse.redirect('https://www.psychodietmed.pl/podsumowanie?status=success')
-    else if (err.message === 'failed')
-      return NextResponse.redirect('https://www.psychodietmed.pl/podsumowanie?status=failed')
-    else
-      return NextResponse.redirect(`https://www.psychodietmed.pl/podsumowanie?status=error&error=${err.message}`)
+    return NextResponse.json({ res: err }, { status: 500 })
   }
 }

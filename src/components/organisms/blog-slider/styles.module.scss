@@ -1,4 +1,42 @@
 .wrapper {
   padding: 16px;
   margin: -16px;
+  // display: flex;
+  // flex-direction: column-reverse;
+  // gap: 28px;
+}
+
+.control {
+  margin-top: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding-bottom: 36px;
+  button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  @media (max-width: 365px) {
+    display: grid;
+    grid-template-areas: 
+    'title title'
+    'left right';
+    gap: 10px;
+
+    .left{
+      grid-area: left;
+    }
+
+    .right{
+      grid-area: right;
+      margin-left: auto;
+    }
+
+    h2{
+      grid-area: title;
+    }
+  }
 }

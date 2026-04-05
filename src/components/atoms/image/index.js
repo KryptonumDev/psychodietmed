@@ -2,7 +2,7 @@ import React from "react"
 import styles from './styles.module.scss'
 import NextImage from "next/image"
 
-export const Image = ({ loading = 'lazy', quality, width, height, src, alt, className, aspectRatio = false }) => (
+export const Image = ({ loading = 'lazy', priority = false, quality, width, height, src, alt, className, aspectRatio = false, sizes }) => (
   <div
     style={{
       width: `${width}px`,
@@ -13,6 +13,15 @@ export const Image = ({ loading = 'lazy', quality, width, height, src, alt, clas
     }}
     className={`${styles.wrapper} ${className}`}
   >
-    <NextImage loading={loading} quality={quality ? quality : '70'} src={src} alt={alt || ''} width={width} height={height} />
+    <NextImage 
+      loading={priority ? undefined : loading} 
+      priority={priority}
+      quality={quality ? quality : '70'} 
+      src={src} 
+      alt={alt || ''} 
+      width={width} 
+      height={height}
+      sizes={sizes}
+    />
   </div>
 )

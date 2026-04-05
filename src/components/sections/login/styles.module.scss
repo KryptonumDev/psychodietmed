@@ -42,6 +42,18 @@
         font-size: clamp(0rem, calc(12vw/3.7), 12rem);
       }
     }
+
+    .success {
+      color: #0A7C3A;
+      width: max-content;
+      font-size: clamp(12rem, calc(14vw/7.68), 16rem);
+      margin-top: 21px;
+      overflow: hidden;
+      font-weight: 500;
+      @media (max-width: 370px) {
+        font-size: clamp(0rem, calc(12vw/3.7), 12rem);
+      }
+    }
     .support{
       text-align: right;
       color: #535353;

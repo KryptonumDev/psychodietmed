@@ -79,6 +79,7 @@ export default function Content({ isCartPage, delivery = {}, setCart, setInnerLo
       // By passing the newQty to 0 in updateCart Mutation, it will remove the item.
       const newQty = 0;
       const updatedItems = getUpdatedItems(products, newQty, cartKey);
+      debugger
       setInnerLoading(true)
       updateCart({
         variables: {

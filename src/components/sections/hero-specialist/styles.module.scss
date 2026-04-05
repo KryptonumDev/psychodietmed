@@ -1,5 +1,17 @@
 .wrapper {
 
+  @media (max-width: 876px) {
+    margin-top: 20px;
+  }
+
+  .mobileFlex{
+    @media (max-width: 876px) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+  }
+
   >a{
     padding: 0;
     margin-bottom: 20px;
@@ -22,28 +34,17 @@
     gap: 0 clamp(24px, calc(26vw/7.68), 64px);
     grid-template-columns: 514fr 687fr;
     grid-template-rows: 1fr auto;
-    grid-template-areas:
-      'image info'
-      'image button';
-
-      @media (max-width: 768px) {
-        grid-template-areas:
-          'image info'
-          'button info';
-      }
-    
-      @media (max-width: 640px) {
-        grid-template-areas:
-          'image'
-          'info'
-          'button';
-        grid-template-columns: 1fr;
-        gap: clamp(24px, calc(26vw/7.68), 64px);
-      }
+    @media (max-width: 940px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 760px) {
+      grid-template-columns: 1fr;
+      gap: clamp(24px, calc(26vw/7.68), 64px);
+    }
   }
 
   .title {
-    font-size: clamp(32rem, calc(36vw/7.68), 48rem);
+    font-size: clamp(24rem, calc(24vw/7.68), 42rem);
 
     @media (max-width: 370px) {
       font-size: clamp(0rem, calc(32vw/3.7), 32rem);
@@ -54,7 +55,11 @@
 .image {
   width: 100% !important;
   height: fit-content !important;
-  grid-area: image;
+  margin-bottom: 36px;
+
+  @media (max-width: 876px) {
+    margin-bottom: 0;
+  }
 
   img {
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
@@ -63,7 +68,6 @@
 }
 
 .button {
-  grid-area: button;
 
   @media (max-width: 768px) {
     margin-top: 24px;
@@ -74,12 +78,8 @@
   }
 }
 
-.info {
-  grid-area: info;
-}
-
 .rating {
-  margin-top: clamp(36px, calc(36vw/7.68), 48px);
+  margin-top: clamp(20px, calc(20vw/7.68), 32px);
   margin-bottom: clamp(12px, calc(16vw/7.68), 24px);
   display: flex;
   align-items: center;
@@ -87,7 +87,7 @@
 
   svg {
     width: clamp(24px, calc(26vw/7.68), 32px);
-    height: fit-content;
+    height: auto;
 
     @media (max-width: 640px) {
       path {
@@ -137,15 +137,11 @@
     flex-wrap: wrap;
 
     span {
-      padding: 10px 24px 12px 24px;
+      padding: clamp(6px, calc(8vw/7.68), 10px) clamp(8px, calc(12vw/7.68), 16px);
       color: #6085B1;
       border: 2px solid #6085B1;
       border-radius: 50px;
       font-size: clamp(14rem, calc(16vw/7.68), 16rem);
-
-      @media (max-width: 640px) {
-        padding: 10px 12px 12px 12px;
-      }
 
       @media (max-width: 370px) {
         font-size: clamp(0rem, calc(14vw/3.7), 14rem);

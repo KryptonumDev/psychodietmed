@@ -80,15 +80,15 @@
     }
   }
 
-  ul {
+  .list {
     display: flex;
     flex-wrap: wrap;
     gap: clamp(5px, calc(8vw/7.68), 8px);
     margin-top: 16px;
-
-    flex-wrap: wrap;
-    height: 40px;
-    overflow: hidden;
+    
+    @media (max-width: 370px) {
+      font-size: clamp(0rem, calc(14vw/3.7), 14rem);
+    }
 
     li {
       padding: 8px clamp(8px, calc(12vw/7.68), 12px);
@@ -100,9 +100,7 @@
       height: fit-content;
 
       @media (max-width: 370px) {
-        font-size: clamp(0rem, calc(14vw/3.7), 14rem);
-        padding:
-          clamp(0px, calc(8vw/3.7), 8px) clamp(0px, calc(8vw/3.7), 8px) clamp(0px, calc(8vw/3.7), 8px) clamp(0px, calc(8vw/3.7), 8px);
+        padding: clamp(0px, calc(8vw/3.7), 8px) clamp(0px, calc(8vw/3.7), 8px) clamp(0px, calc(8vw/3.7), 8px) clamp(0px, calc(8vw/3.7), 8px);
       }
     }
   }
@@ -120,7 +118,7 @@
 
   svg {
     width: clamp(24px, calc(26vw/7.68), 32px);
-    height: fit-content;
+    height: auto;
 
     @media (max-width: 640px) {
       path {

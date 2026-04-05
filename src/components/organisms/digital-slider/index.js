@@ -1,37 +1,65 @@
 'use client'
-import React, { useState } from "react"
+import React, { useCallback, useRef, useState } from "react"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { A11y } from 'swiper';
 import Control from "@/components/moleculas/slider-control";
 import styles from './styles.module.scss';
 import 'swiper/scss';
-import Bundle from "@/components/moleculas/product-bundle";
+import ArrowLeft from "@/components/atoms/ArrowLeft";
+import ArrowRight from "@/components/atoms/ArrowRight";
+import { removeWrap } from "../../../utils/title-modification";
+import { Card } from "@/components/moleculas/product-card";
 
-export default function Slider({ data }) {
+export default function Slider({ title, data }) {
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const sliderRef = useRef(null);
+
+  const handlePrev = useCallback(() => {
+    if (!sliderRef.current) return;
+    sliderRef.current.swiper.slidePrev();
+  }, []);
+
+  const handleNext = useCallback(() => {
+    if (!sliderRef.current) return;
+    sliderRef.current.swiper.slideNext();
+  }, []);
+
   return (
-    <Swiper
-      modules={[A11y]}
-      className={styles.wrapper}
-      spaceBetween={50}
-      slidesPerView={1}
-      loop={true}
-      onSlideChange={(swiper) => {
-        setActiveIndex(swiper.realIndex);
-      }}
-    >
-      {data.map((el, index) => (
-        <SwiperSlide key={index}>
-          <div>
-            {el.map((item, index) => (
-              <Bundle key={index} data={item} />
-          ))}
-          </div>
-        </SwiperSlide>
-      ))}
-      {data.length > 1 && (
-        <Control items={data} activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
-      )}
-    </Swiper >
+    <>
+    <h2 dangerouslySetInnerHTML={{ __html: removeWrap(title) }} />
+      <Swiper
+        ref={sliderRef}
+        modules={[A11y]}
+        className={styles.wrapper}
+        spaceBetween={16}
+        slidesPerView={1}
+        autoHeight={true}
+        breakpoints={{
+          1025: {
+            autoHeight: false,
+            slidesPerView: 3,
+            spaceBetween: 32
+          },
+          641: {
+            autoHeight: false,
+            slidesPerView: 2,
+            spaceBetween: 24
+          }
+        }}
+        onSlideChange={(swiper) => {
+          setActiveIndex(swiper.realIndex);
+        }}
+      >
+        {data.map((el, index) => (
+          <SwiperSlide key={index}>
+            <Card product={el} key={index}/>
+          </SwiperSlide>
+        ))}
+        {data.length > 1 && (
+          <Control disabelArrows={false} items={data} activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
+        )}
+      </Swiper >
+    </>
   )
 }
